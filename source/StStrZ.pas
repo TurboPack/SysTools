@@ -478,6 +478,8 @@ function WordPosZ(S, WordDelims, AWord : PAnsiChar;
 
 implementation
 
+uses
+  AnsiStrings;
 
 function HexBZ(Dest : PAnsiChar; B : Byte) : PAnsiChar;
     {-Return hex string for byte}
@@ -523,8 +525,8 @@ function HexLZ(Dest : PAnsiChar; L : LongInt) : PAnsiChar;
 var
   T2 : Array[0..4] of AnsiChar;
 begin
-//  Result := StrCat(HexWZ(Dest, LH(L).H), HexWZ(T2, LH(L).L));        {!!.02}
-  Result := StrCat(HexWZ(Dest, HiWord(DWORD(L))),                      {!!.02}
+//  Result := AnsiStrings.StrCat(HexWZ(Dest, LH(L).H), HexWZ(T2, LH(L).L));        {!!.02}
+  Result := AnsiStrings.StrCat(HexWZ(Dest, HiWord(DWORD(L))),                      {!!.02}
     HexWZ(T2, LoWord(DWORD(L))));                                      {!!.02}
 end;
 
@@ -533,8 +535,8 @@ function HexPtrZ(Dest : PAnsiChar; P : Pointer) : PAnsiChar;
 var
   T2 : array[0..8] of AnsiChar;
 begin
-  StrCopy(Dest, ':');
-  Result := StrCat(Dest, HexLZ(T2, LongInt(P)));
+  AnsiStrings.StrCopy(Dest, ':');
+  Result := AnsiStrings.StrCat(Dest, HexLZ(T2, LongInt(P)));
 end;
 
 function BinaryBZ(Dest : PAnsiChar; B : Byte) : PAnsiChar;
@@ -729,28 +731,28 @@ end;
 function PadChZ(Dest, S : PAnsiChar; C : AnsiChar; Len : Cardinal) : PAnsiChar;
   {-Return a PChar right-padded to length Len with C}
 begin
-  StrCopy(Dest, S);
+  AnsiStrings.StrCopy(Dest, S);
   Result := PadChPrimZ(Dest, C, Len);
 end;
 
 function PadZ(Dest, S : PAnsiChar; Len : Cardinal) : PAnsiChar;
   {-Return a string right-padded to length len with blanks}
 begin
-  StrCopy(Dest, S);
+  AnsiStrings.StrCopy(Dest, S);
   Result := PadPrimZ(Dest, Len);
 end;
 
 function LeftPadChZ(Dest, S : PAnsiChar; C : AnsiChar; Len : Cardinal) : PAnsiChar;
   {-Return a string left-padded to length len with C}
 begin
-  StrCopy(Dest, S);
+  AnsiStrings.StrCopy(Dest, S);
   Result := LeftPadChPrimZ(Dest, C, Len);
 end;
 
 function LeftPadZ(Dest, S : PAnsiChar; Len : Cardinal) : PAnsiChar;
   {-Return a string left-padded to length len with blanks}
 begin
-  StrCopy(Dest, S);
+  AnsiStrings.StrCopy(Dest, S);
   Result := LeftPadPrimZ(Dest, Len);
 end;
 
@@ -791,7 +793,7 @@ end;
 function TrimLeadZ(Dest, S : PAnsiChar) : PAnsiChar;
   {-Return a string with leading white space removed}
 begin
-  StrCopy(Dest, S);
+  AnsiStrings.StrCopy(Dest, S);
   Result := TrimLeadPrimZ(Dest);
 end;
 
@@ -871,7 +873,7 @@ end;
 function TrimTrailZ(Dest, S : PAnsiChar) : PAnsiChar;
   {-Return a string with trailing white space removed}
 begin
-  StrCopy(Dest, S);
+  AnsiStrings.StrCopy(Dest, S);
   Result := TrimTrailPrimZ(Dest);
 end;
 
@@ -884,7 +886,7 @@ end;
 function TrimZ(Dest, S : PAnsiChar) : PAnsiChar;
   {-Return a string with leading and trailing white space removed}
 begin
-  StrCopy(Dest, S);
+  AnsiStrings.StrCopy(Dest, S);
   Result := TrimPrimZ(Dest);
 end;
 
@@ -894,7 +896,7 @@ var
   I, SLen : Cardinal;
 begin
   Result := S;
-  SLen := StrLen(S);
+  SLen := AnsiStrings.StrLen(S);
   while (SLen > 0) and (S[SLen-1] = ' ') do
     Dec(SLen);
   S[SLen] := #0;
@@ -927,7 +929,7 @@ end;
 function TrimSpacesZ(Dest, S : PAnsiChar) : PAnsiChar;
   {-Return a string with leading and trailing spaces removed}
 begin
-  StrCopy(Dest, S);
+  AnsiStrings.StrCopy(Dest, S);
   Result := TrimSpacesPrimZ(Dest);
 end;
 
@@ -996,7 +998,7 @@ end;
 function CenterChZ(Dest, S : PAnsiChar; C : AnsiChar; Len : Cardinal) : PAnsiChar;
   {-Return a string centered in a string of C with specified width}
 begin
-  StrCopy(Dest, S);
+  AnsiStrings.StrCopy(Dest, S);
   Result := CenterChPrimZ(Dest, C, Len);
 end;
 
@@ -1009,7 +1011,7 @@ end;
 function CenterZ(Dest, S : PAnsiChar; Len : Cardinal) : PAnsiChar;
   {-Return a string centered in a blank string of specified width}
 begin
-  StrCopy(Dest, S);
+  AnsiStrings.StrCopy(Dest, S);
   Result := CenterPrimZ(Dest, Len);
 end;
 
@@ -1023,7 +1025,7 @@ begin
   if Key^ = #0 then Exit;
   if S^ = #0 then Exit;
   SPtr := S;
-  EndPtr := StrEnd(Key);
+  EndPtr := AnsiStrings.StrEnd(Key);
   Dec(EndPtr);
   KPtr := EndPtr;
   while SPtr^ <> #0 do begin
@@ -1039,7 +1041,7 @@ end;
 function ScrambleZ(Dest, S, Key : PAnsiChar) : PAnsiChar;
   {-Encrypt / Decrypt string with enhanced XOR encryption.}
 begin
-  StrCopy(Dest, S);
+  AnsiStrings.StrCopy(Dest, S);
   Result := ScramblePrimZ(Dest, Key);
 end;
 
@@ -1051,9 +1053,9 @@ var
   P : Cardinal;
   L : Cardinal;
 begin
-  StrCopy(Dest, Src);
-  if StrLen(FromStr) = StrLen(ToStr) then begin
-    L := StrLen(Dest);
+  AnsiStrings.StrCopy(Dest, Src);
+  if AnsiStrings.StrLen(FromStr) = AnsiStrings.StrLen(ToStr) then begin
+    L := AnsiStrings.StrLen(Dest);
     if L > 0 then
       for I := 0 to L-1 do begin
         if StrChPosZ(FromStr, Dest[I], P) then
@@ -1071,9 +1073,9 @@ var
   L : Cardinal;
 begin
   Result := Dest;
-  StrCopy(Dest, Src);
+  AnsiStrings.StrCopy(Dest, Src);
   Len := 0;
-  L := StrLen(Dest);
+  L := AnsiStrings.StrLen(Dest);
   if L > 0 then
     for I := 0 to L-1 do
       if not CharExistsZ(Filters, Dest[I]) then begin
@@ -1228,7 +1230,7 @@ begin
   I := -1;
   DotPos := Cardinal(I);
   Result := False;
-  L := StrLen(Name);
+  L := AnsiStrings.StrLen(Name);
   if L = 0 then
     Exit;
   for I := L-1 downto 0 do
@@ -1267,13 +1269,13 @@ var
   DotPos : Cardinal;
 begin
   if HasExtensionZ(Name, DotPos) then
-    StrCopy(Dest, Name)
-  else if StrLen(Name) = 0 then
+    AnsiStrings.StrCopy(Dest, Name)
+  else if AnsiStrings.StrLen(Name) = 0 then
     Dest[0] := #0
   else begin
-    StrCopy(Dest, Name);
-    StrCat(Dest, '.');
-    StrCat(Dest, Ext);
+    AnsiStrings.StrCopy(Dest, Name);
+    AnsiStrings.StrCat(Dest, '.');
+    AnsiStrings.StrCat(Dest, Ext);
   end;
   Result := Dest;
 end;
@@ -1284,13 +1286,13 @@ var
   DotPos : Cardinal;
 begin
   if HasExtensionZ(Name, DotPos) then
-    Dest := StrCat(StrStCopyZ(Dest, Name, 0, Succ(DotPos)), Ext)
-  else if StrLen(Name) = 0 then
+    Dest := AnsiStrings.StrCat(StrStCopyZ(Dest, Name, 0, Succ(DotPos)), Ext)
+  else if AnsiStrings.StrLen(Name) = 0 then
     Dest[0] := #0
   else begin
-    Dest := StrCopy(Dest, Name);
-    Dest := StrCat(Dest, '.');
-    Dest := StrCat(Dest, Ext);
+    Dest := AnsiStrings.StrCopy(Dest, Name);
+    Dest := AnsiStrings.StrCat(Dest, '.');
+    Dest := AnsiStrings.StrCat(Dest, Ext);
   end;
   Result := Dest;
 end;
@@ -1312,7 +1314,7 @@ function JustFilenameZ(Dest : PAnsiChar; PathName : PAnsiChar) : PAnsiChar;
 var
   I : Integer;
 begin
-  I := StrLen(PathName);
+  I := AnsiStrings.StrLen(PathName);
   while (I > 0) and (not (PathName[I-1] in DosDelimSet)) do
     Dec(I);
   Dest := StrStCopyZ(Dest, PathName, I, StMaxFileLen);
@@ -1344,7 +1346,7 @@ begin
   if HasExtensionZ(T, DotPos) then
     Dest := StrStCopyZ(Dest, T, 0, DotPos)
   else
-    StrCopy(Dest, T);
+    AnsiStrings.StrCopy(Dest, T);
   Result := Dest;
 end;
 
@@ -1353,7 +1355,7 @@ function JustPathnameZ(Dest : PAnsiChar; PathName : PAnsiChar) : PAnsiChar;
 var
   I : Longint;
 begin
-  I := StrLen(PathName);
+  I := AnsiStrings.StrLen(PathName);
   repeat
     Dec(I);
   until (I = -1) or (PathName[I] in DosDelimSet);
@@ -1385,8 +1387,8 @@ var
   L : Integer;
 begin
   Result := Dest;
-  StrCopy(Dest, DirName);
-  L := StrLen(DirName);
+  AnsiStrings.StrCopy(Dest, DirName);
+  L := AnsiStrings.StrLen(DirName);
   if (L > 0) then begin
     if ((L = 2) and (Dest[1] = ':')) or
        ((L > 2) and (Dest[L-1] <> '\')) then begin
@@ -1409,7 +1411,7 @@ begin
     if NameLen > 8 then
       NameLen := 8;
     StrStCopyZ(Dest, FileName, 0, NameLen);
-    StrCat(Dest, StrStCopyZ(P2, FileName, DotPos, 4));
+    AnsiStrings.StrCat(Dest, StrStCopyZ(P2, FileName, DotPos, 4));
   end else
     {Take the first 8 chars of name}
     StrStCopyZ(Dest, FileName, 0, 8);
@@ -1423,8 +1425,8 @@ var
   S1, S, OName : TSmallArrayA;
 begin
   Result := Dest;
-  StrCopy(Dest, PathName);
-  I := StrLen(PathName);
+  AnsiStrings.StrCopy(Dest, PathName);
+  I := AnsiStrings.StrLen(PathName);
   OName[0] := #0;
   while I > 0 do begin
     Dec(I);
@@ -1433,7 +1435,7 @@ begin
         if (Dest[I-2] <> ':') then
           StrChDeletePrimZ(Dest, I);
   end;
-  I := StrLen(Dest);
+  I := AnsiStrings.StrLen(Dest);
   while I > 0 do begin
     Dec(I);
     {Get the next directory or drive portion of pathname}
@@ -1441,17 +1443,17 @@ begin
       Dec(I);
     {Clean it up and prepend it to output string}
     StrStCopyZ(S1, Dest, I + 1, StMaxFileLen);
-    StrCopy(S, OName);
+    AnsiStrings.StrCopy(S, OName);
     CleanFileNameZ(OName, S1);
-    StrCat(OName, S);
+    AnsiStrings.StrCat(OName, S);
     {if I >= 0 then begin}
-      StrCopy(S, OName);
+      AnsiStrings.StrCopy(S, OName);
       StrStCopyZ(OName, Dest, I, 1);
-      StrCat(OName, S);
+      AnsiStrings.StrCat(OName, S);
       StrStDeletePrimZ(Dest, I, 255);
     {end;}
   end;
-  StrCopy(Dest, OName);
+  AnsiStrings.StrCopy(Dest, OName);
 end;
 
 function ConvertToShortString(S : PAnsiChar; var SS : ShortString) : integer;
@@ -1466,7 +1468,7 @@ begin
     Result := 1;
   end
   else begin
-    LenS := StrLen(S);
+    LenS := AnsiStrings.StrLen(S);
     if (LenS > 255) then begin
       Result := 2;
     end
@@ -1496,7 +1498,7 @@ begin
           else begin
             Result := false;
             if (ec < 0) then
-              I := StrLen(S)
+              I := AnsiStrings.StrLen(S)
             else
               I := pred(ec); {null terminated strings are zero-based}
           end;
@@ -1529,7 +1531,7 @@ begin
           else begin
             Result := false;
             if (ec < 0) then
-              I := StrLen(S)
+              I := AnsiStrings.StrLen(S)
             else
               I := pred(ec); {null terminated strings are zero-based}
           end;
@@ -1562,7 +1564,7 @@ begin
           else begin
             Result := false;
             if (ec < 0) then
-              I := StrLen(S)
+              I := AnsiStrings.StrLen(S)
             else
               I := pred(ec); {null terminated strings are zero-based}
           end;
@@ -1611,12 +1613,12 @@ var
   Code : Integer;
   P : TSmallArrayA;
 begin
-  if StrLen(S)+1 > SizeOf(P) then begin
+  if AnsiStrings.StrLen(S)+1 > SizeOf(P) then begin
     Result := False;
     R := -1;
     Exit;
   end;
-  StrCopy(P, S);
+  AnsiStrings.StrCopy(P, S);
   TrimTrailPrimZ(P);
   Val(ValPrepZ(P), R, Code);
   if Code <> 0 then begin
@@ -1664,10 +1666,10 @@ var
   P : Cardinal;
 begin
   Result := TrimSpacesPrimZ(S);
-  if StrLen(Result) <> 0 then begin
+  if AnsiStrings.StrLen(Result) <> 0 then begin
     if StrChPosZ(Result, AnsiChar({$IFDEF DELPHIXE2}FormatSettings.{$ENDIF}DecimalSeparator), P) then begin
       Result[P] := '.';
-      if Succ(P) = StrLen(Result) then
+      if Succ(P) = AnsiStrings.StrLen(Result) then
         Result[P] := #0;
     end;
   end else begin
@@ -1828,7 +1830,7 @@ var
 begin
   Count := 0;
   I := 0;
-  SLen := StrLen(S);
+  SLen := AnsiStrings.StrLen(S);
   while I < SLen do begin
     {skip over delimiters}
     while (I < SLen) and (CharExistsZ(WordDelims, S^)) do begin
@@ -1859,7 +1861,7 @@ begin
   Count := 0;
   Pos := 0;
   Result := False;
-  SLen := StrLen(S);
+  SLen := AnsiStrings.StrLen(S);
 
   while (Pos < SLen) and (Count <> N) do begin
     {skip over delimiters}
@@ -1891,7 +1893,7 @@ var
   SLen : Cardinal;
 begin
   Result := Dest;
-  SLen := StrLen(Src);
+  SLen := AnsiStrings.StrLen(Src);
   if WordPositionZ(N, Src, WordDelims, I) then begin
     Inc(Src, I);
     {find the end of the current word}
@@ -1917,7 +1919,7 @@ begin
   Count := 0;
   I := 1;
   InQuote := False;
-  SLen := StrLen(S);
+  SLen := AnsiStrings.StrLen(S);
   while I <= SLen do begin
     {skip over delimiters}
     while (I <= SLen) and (S^ <> Quote) and CharExistsZ(WordDelims, S^) do begin
@@ -1951,7 +1953,7 @@ begin
   Pos := 0;
   InQuote := False;
   Result := False;
-  SLen := StrLen(S);
+  SLen := AnsiStrings.StrLen(S);
   while (Pos < SLen) and (Count <= N) do begin
    {skip over delimiters}
     while (Pos < SLen) and (S^ <> Quote) and CharExistsZ(WordDelims, S^) do begin
@@ -1991,7 +1993,7 @@ begin
   InQuote := False;
   Dest[0] := #0;
   Result := Dest;
-  SLen := StrLen(Src);
+  SLen := AnsiStrings.StrLen(Src);
   if AsciiPositionZ(N, Src, WordDelims, Quote, I) then
     {find the end of the current word}
     while (I < SLen) and ((InQuote) or (not CharExistsZ(WordDelims, Src[I]))) do begin
@@ -2017,7 +2019,7 @@ var
   EOS, BOS : Cardinal;
 begin
   OutStLen := 0;
-  InStLen := StrLen(InSt);
+  InStLen := AnsiStrings.StrLen(InSt);
 
 {!!.02 - Added }
   { handle empty string on input }                  
@@ -2656,7 +2658,7 @@ var
 begin
   Result := Dest;
   Long2StrZ(Dest, L);
-  Len := StrLen(Dest);
+  Len := AnsiStrings.StrLen(Dest);
   NumCommas := (Len - 1) div 3;
   for I := 1 to NumCommas do
     StrChInsertPrimZ(Dest, Ch, Len - (I * 3));
@@ -2711,11 +2713,11 @@ label
 begin
   {assume decimal point at end?}
   Result := Dest;
-  StrCopy(Result, Mask);
+  AnsiStrings.StrCopy(Result, Mask);
   if (not AssumeDP) and (not CharExistsZ(Result, '.')) then
     AssumeDP := true;
   if AssumeDP and (Result^ <> #0) then
-    StrCat(Result, '.');
+    AnsiStrings.StrCat(Result, '.');
 
   RtChars := 0;
   LtChars := 0;
@@ -2738,7 +2740,7 @@ begin
   R := Abs(R);
 
   {strip and count c's}
-  Temp := StrEnd(Result);
+  Temp := AnsiStrings.StrEnd(Result);
   Dec(Temp);
   while Temp >= Result do begin
     if Temp^ = 'C' then begin
@@ -2757,7 +2759,7 @@ begin
     Inc(StartF);
     Inc(Temp);
   end;
-  if Succ(StartF) > StrLen(Result) then
+  if Succ(StartF) > AnsiStrings.StrLen(Result) then
     goto Done;
 
   {find the end point for the field}
@@ -2817,9 +2819,9 @@ EndFound:
 
   {add zeros that Str may have left out}
   if Places > MaxPlaces then begin
-    Temp := StrEnd(S);
+    Temp := AnsiStrings.StrEnd(S);
     CharStrZ(Temp, '0', Places-MaxPlaces);
-    while (StrLen(S) > Digits) and (S[0] = ' ') do
+    while (AnsiStrings.StrLen(S) > Digits) and (S[0] = ' ') do
       StrChDeletePrimZ(S, 0);
   end;
 
@@ -2831,7 +2833,7 @@ EndFound:
 
   {the number won't fit if (a) S is longer than Digits or (b) the number of
    initial blanks is less than Extras}
-  WontFit := (StrLen(S) > Digits) or (Blanks < Extras);
+  WontFit := (AnsiStrings.StrLen(S) > Digits) or (Blanks < Extras);
 
   {if it won't fit, fill decimal slots with '*'}
   if WontFit then begin
@@ -2860,7 +2862,7 @@ EndFound:
   end;
 
   {put in the digits / signs}
-  Temp := StrEnd(S);
+  Temp := AnsiStrings.StrEnd(S);
   Dec(Temp);
   for I := EndF downto StartF do begin
 RedoCase:
@@ -2897,14 +2899,14 @@ RedoCase:
 
 Done:
   if AssumeDP then
-    Result[Pred(StrLen(Result))] := #0;
+    Result[Pred(AnsiStrings.StrLen(Result))] := #0;
   if RtChars > 0 then begin
-    StrLCopy(S, RtCurr, RtChars);
+    AnsiStrings.StrLCopy(S, RtCurr, RtChars);
     LeftPadPrimZ(S, RtChars);
-    StrCat(Result, S);
+    AnsiStrings.StrCat(Result, S);
   end;
   if LtChars > 0 then begin
-    StrLCopy(S, LtCurr, LtChars);
+    AnsiStrings.StrLCopy(S, LtCurr, LtChars);
     PadPrimZ(S, LtChars);
     StrStInsertPrimZ(Result, S, 0);
   end;
@@ -2930,7 +2932,7 @@ var
   Temp : PAnsiChar;
 begin
   Result := False;
-  Temp := StrScan(P, C);
+  Temp := AnsiStrings.StrScan(P, C);
   if Temp <> nil then begin
     Pos := Temp - P;
     Result := True;
@@ -2958,7 +2960,7 @@ var
   Temp : PAnsiChar;
 begin
   Result := False;
-  Temp := StrPos(P, S);
+  Temp := AnsiStrings.StrPos(P, S);
   if Temp <> nil then begin
     Pos := Temp - P;
     Result := True;
@@ -2987,7 +2989,7 @@ asm
   add    esi, ecx
   dec    esi             {point to end of source string}
   sub    ecx, edx        {calculate number to do}
-  jae    @@1             {set ECX to 1 if Pos greater than strlen + 1}
+  jae    @@1             {set ECX to 1 if Pos greater than AnsiStrings.StrLen + 1}
   mov    ecx, 1
 
 @@1:
@@ -3064,7 +3066,7 @@ function StrStCopyZ(Dest : PAnsiChar; S : PAnsiChar; Pos, Count : Cardinal) : PA
 var
   Len : Cardinal;
 begin
-  Len := StrLen(S);
+  Len := AnsiStrings.StrLen(S);
   if Pos < Len then begin
     if (Len-Pos) < Count then
       Count := Len-Pos;
@@ -3110,7 +3112,7 @@ asm
   or     ecx, ecx
   jz     @@ExitPoint
   sub    ecx, edx        { Calc number to move }
-  jb     @@ExitPoint     { Exit if Pos > StrLen }
+  jb     @@ExitPoint     { Exit if Pos > AnsiStrings.StrLen }
 
   mov    edi, ebx
   add    edi, edx        { Point to position to adjust }
@@ -3221,25 +3223,25 @@ end;
 
 function StrChDeleteZ(Dest, S : PAnsiChar; Pos : Cardinal) : PAnsiChar;
 begin
-  StrCopy(Dest, S);
+  AnsiStrings.StrCopy(Dest, S);
   Result := StrChDeletePrimZ(Dest, Pos);
 end;
 
 function StrStDeleteZ(Dest, S : PAnsiChar; Pos, Count : Cardinal) : PAnsiChar;
 begin
-  StrCopy(Dest, S);
+  AnsiStrings.StrCopy(Dest, S);
   Result := StrStDeletePrimZ(Dest, Pos, Count);
 end;
 
 function StrChInsertZ(Dest, S : PAnsiChar; C : AnsiChar; Pos : Cardinal) : PAnsiChar;
 begin
-  StrCopy(Dest, S);
+  AnsiStrings.StrCopy(Dest, S);
   Result := StrChInsertPrimZ(Dest, C, Pos);
 end;
 
 function StrStInsertZ(Dest : PAnsiChar; S1, S2 : PAnsiChar; Pos : Cardinal) : PAnsiChar;
 begin
-  StrCopy(Dest, S1);
+  AnsiStrings.StrCopy(Dest, S1);
   Result := StrStInsertPrimZ(Dest, S2, Pos);
 end;
 
@@ -3261,7 +3263,7 @@ end;
 function CopyMidZ(Dest, S : PAnsiChar; First, Len : Cardinal) : PAnsiChar;
   {-Return the mid part of a string}
 begin
-  if (First >= StrLen(S)) or (LongInt(Len) < 1) or (S[0] = #0) then
+  if (First >= AnsiStrings.StrLen(S)) or (LongInt(Len) < 1) or (S[0] = #0) then
     Dest[0] := #0
   else
     Dest := StrStCopyZ(Dest, S, First, Len);
@@ -3273,10 +3275,10 @@ end;
 function CopyRightZ(Dest, S : PAnsiChar; First : Cardinal) : PAnsiChar;
   {-Return the right characters of a string}
 begin
-  if (First >= StrLen(Dest)) or (S[0] = #0) then
+  if (First >= AnsiStrings.StrLen(Dest)) or (S[0] = #0) then
     Dest[0] := #0
   else
-    Dest := StrStCopyZ(Dest, S, First, StrLen(S)-First+1);
+    Dest := StrStCopyZ(Dest, S, First, AnsiStrings.StrLen(S)-First+1);
   Result := Dest;
 end;
 
@@ -3286,8 +3288,8 @@ function CopyRightAbsZ(Dest, S : PAnsiChar; NumChars : Cardinal) : PAnsiChar;
 var
   I : Cardinal;
 begin
-  if (StrLen(S) > NumChars) then begin
-    I := StrLen(S) - NumChars;
+  if (AnsiStrings.StrLen(S) > NumChars) then begin
+    I := AnsiStrings.StrLen(S) - NumChars;
     Dest := StrStCopyZ(Dest, S, I, NumChars)
   end else
     Dest := S;
@@ -3308,7 +3310,7 @@ var
   P2      : Cardinal;
 begin
   if (S[0] = #0) or (AWord[0] = #0) or
-     (StrPos(S, AWord) = nil) or (N < 1) then begin
+     (AnsiStrings.StrPos(S, AWord) = nil) or (N < 1) then begin
     Result := False;
     Position := 0;
     Exit;
@@ -3317,15 +3319,15 @@ begin
   Result := False;
   Position := 0;
 
-  GetMem(TmpStr, StrLen(S)+1);
+  GetMem(TmpStr, AnsiStrings.StrLen(S)+1);
   try
-    StrCopy(TmpStr, S);
+    AnsiStrings.StrCopy(TmpStr, S);
     I      := 0;
-    Len    := StrLen(AWord);
-    P  := StrPos(TmpStr, AWord);
+    Len    := AnsiStrings.StrLen(AWord);
+    P  := AnsiStrings.StrPos(TmpStr, AWord);
     P1 := P - TmpStr;
 
-    while (StrLen(TmpStr) > 0) do begin
+    while (AnsiStrings.StrLen(TmpStr) > 0) do begin
       P2 := P1 + pred(Len);
       if (P1 = 0) then begin
         if (CharExistsZ(WordDelims, TmpStr[P2+1])) then begin
@@ -3333,9 +3335,9 @@ begin
         end else
           StrStDeleteZ(TmpStr, TmpStr, 0, P2);
       end else if (CharExistsZ(WordDelims, TmpStr[P1-1])) and
-                  ((CharExistsZ(WordDelims, TmpStr[P2+1])) or (P2+1 = StrLen(TmpStr))) then begin
+                  ((CharExistsZ(WordDelims, TmpStr[P2+1])) or (P2+1 = AnsiStrings.StrLen(TmpStr))) then begin
         Inc(I);
-      end else if ((P1 + pred(Len)) = StrLen(TmpStr)) then begin
+      end else if ((P1 + pred(Len)) = AnsiStrings.StrLen(TmpStr)) then begin
         if (CharExistsZ(WordDelims, TmpStr[P1-1])) then
           Inc(I);
       end;
@@ -3347,14 +3349,14 @@ begin
       end;
       StrStDeletePrimZ(TmpStr, 0, P2+1);
       Position := Position + P2+1;
-      P := StrPos(TmpStr, AWord);
+      P := AnsiStrings.StrPos(TmpStr, AWord);
       if (P <> nil) then
         P1 := P - TmpStr
       else
         break;
     end;
   finally
-    FreeMem(TmpStr, StrLen(S)+1);
+    FreeMem(TmpStr, AnsiStrings.StrLen(S)+1);
   end;
 end;
 
@@ -3367,7 +3369,7 @@ var
   P      : Cardinal;
 begin
   if (WordPosZ(S, WordDelims, AWord, N, P)) then begin
-    StrStCopyZ(Dest, S, P, StrLen(S)-P+1);
+    StrStCopyZ(Dest, S, P, AnsiStrings.StrLen(S)-P+1);
     Result := True;
   end else begin
     Dest[0] := #0;
@@ -3384,7 +3386,7 @@ var
   P : Cardinal;
 begin
   if (WordPosZ(S, WordDelims, AWord, N, P)) then begin
-    StrStDeleteZ(Dest, S, P, StrLen(S)-P+1);
+    StrStDeleteZ(Dest, S, P, AnsiStrings.StrLen(S)-P+1);
     Result := False;
   end else begin
     Dest[0] := #0;
@@ -3458,21 +3460,21 @@ var
   TmpStr : PAnsiChar;
 begin
   if (S[0] = #0) or (Delimiter[0] = #0) or
-     (StrPos(S, Delimiter) = nil) then begin
+     (AnsiStrings.StrPos(S, Delimiter) = nil) then begin
     Dest[0] := #0;
     Result := Dest;
   end else begin
     if (StrStPosZ(S, Delimiter, P1)) then begin
-      L := StrLen(S) - (P1 + StrLen(Delimiter)) + 1;
+      L := AnsiStrings.StrLen(S) - (P1 + AnsiStrings.StrLen(Delimiter)) + 1;
       GetMem(TmpStr, L);
       try
-        StrStCopyZ(TmpStr, S, P1 + StrLen(Delimiter), StrLen(S));
+        StrStCopyZ(TmpStr, S, P1 + AnsiStrings.StrLen(Delimiter), AnsiStrings.StrLen(S));
         if (StrStPosZ(TmpStr, Delimiter, P2)) then begin
           StrStCopyZ(Dest, TmpStr, 0, P2);
           if (not Strip) then
-            StrCat(StrStInsertZ(Dest, Dest, Delimiter, 0), Delimiter)
+            AnsiStrings.StrCat(StrStInsertZ(Dest, Dest, Delimiter, 0), Delimiter)
         end else begin
-          StrCopy(Dest, TmpStr);
+          AnsiStrings.StrCopy(Dest, TmpStr);
           if (not Strip) then
             StrStInsertZ(Dest, Dest, Delimiter, 0);
         end;
@@ -3494,19 +3496,19 @@ var
   TmpStr : PAnsiChar;
 begin
   if (S[0] = #0) or (Delimiter[0] = #0) or
-     (StrPos(S, Delimiter) = nil) then begin
+     (AnsiStrings.StrPos(S, Delimiter) = nil) then begin
     Dest[0] := #0;
     Result := Dest;
   end else begin
     if (StrStPosZ(S, Delimiter, P1)) then begin
-      L := StrLen(S) - (P1 + StrLen(Delimiter)) + 1;
+      L := AnsiStrings.StrLen(S) - (P1 + AnsiStrings.StrLen(Delimiter)) + 1;
       GetMem(TmpStr, L);
       try
-        StrStCopyZ(TmpStr, S, P1 + StrLen(Delimiter), StrLen(S));
+        StrStCopyZ(TmpStr, S, P1 + AnsiStrings.StrLen(Delimiter), AnsiStrings.StrLen(S));
         if not (StrStPosZ(TmpStr, Delimiter, P2)) then
           StrStCopyZ(Dest, S, 0, P1)
         else begin
-          P2 := P2 + (2*StrLen(Delimiter));
+          P2 := P2 + (2*AnsiStrings.StrLen(Delimiter));
           StrStDeleteZ(Dest, S, P1, P2);
         end;
       finally
@@ -3528,21 +3530,21 @@ var
   P1  : Cardinal;
 begin
   if (S[0] = #0) or (WordDelims[0] = #0) or (OldWord[0] = #0) or
-     (StrPos(S, OldWord) = nil) then begin
-    StrCopy(Dest, S);
+     (AnsiStrings.StrPos(S, OldWord) = nil) then begin
+    AnsiStrings.StrCopy(Dest, S);
     Replacements := 0;
     Result := Dest;
   end else begin
     if (WordPosZ(S, WordDelims, OldWord, N, P1)) then begin
-      StrCopy(Dest, S);
-      StrStDeleteZ(Dest, Dest, P1, StrLen(OldWord));
+      AnsiStrings.StrCopy(Dest, S);
+      StrStDeleteZ(Dest, Dest, P1, AnsiStrings.StrLen(OldWord));
 
       C := 0;
       for I := 1 to Replacements do begin
-        if (StrLen(NewWord) + 1 + StrLen(Dest)) < High(Cardinal) then begin
+        if (AnsiStrings.StrLen(NewWord) + 1 + AnsiStrings.StrLen(Dest)) < High(Cardinal) then begin
           Inc(C);
           StrStInsertZ(Dest, Dest, NewWord, P1);
-          Inc(P1, StrLen(NewWord) + 1);
+          Inc(P1, AnsiStrings.StrLen(NewWord) + 1);
         end else begin
           Replacements := C;
           Result := Dest;
@@ -3566,17 +3568,17 @@ var
   P1  : Cardinal;
 begin
   if (S[0] = #0) or (WordDelims[0] = #0) or (OldWord[0] = #0) or
-     (StrPos(S, OldWord) = nil) then begin
+     (AnsiStrings.StrPos(S, OldWord) = nil) then begin
     Replacements := 0;
-    StrCopy(Dest, S);
+    AnsiStrings.StrCopy(Dest, S);
     Result := Dest;
   end else begin
-    StrCopy(Dest, S);
+    AnsiStrings.StrCopy(Dest, S);
     C := 0;
     while (WordPosZ(Dest, WordDelims, OldWord, 1, P1)) do begin
-      StrStDeleteZ(Dest, Dest, P1, StrLen(OldWord));
+      StrStDeleteZ(Dest, Dest, P1, AnsiStrings.StrLen(OldWord));
       for I := 1 to Replacements do begin
-        if ((StrLen(NewWord) + 1 + StrLen(Dest)) < High(Cardinal)) then begin
+        if ((AnsiStrings.StrLen(NewWord) + 1 + AnsiStrings.StrLen(Dest)) < High(Cardinal)) then begin
           Inc(C);
           StrStInsertZ(Dest, Dest, NewWord, P1);
         end else begin
@@ -3603,38 +3605,38 @@ var
   TmpStr : PAnsiChar;
 begin
   if (S[0] = #0) or (OldString[0] = #0) or
-     (StrPos(S, OldString) = nil) then begin
-    StrCopy(Dest, S);
+     (AnsiStrings.StrPos(S, OldString) = nil) then begin
+    AnsiStrings.StrCopy(Dest, S);
     Replacements := 0;
     Result := Dest;
     Exit;
   end;
 
-  L := StrLen(S) + 1;
+  L := AnsiStrings.StrLen(S) + 1;
   GetMem(TmpStr, L);
   try
-    StrCopy(TmpStr, S);
+    AnsiStrings.StrCopy(TmpStr, S);
 
     I  := 1;
     StrStPosZ(TmpStr, OldString, P1);
     C  := P1;
-    while (I < N) and (C < StrLen(TmpStr)) do begin
+    while (I < N) and (C < AnsiStrings.StrLen(TmpStr)) do begin
       Inc(I);
-      StrStDeleteZ(TmpStr, TmpStr, P1, P1 + StrLen(OldString));
-      Inc(C, P1 + StrLen(OldString));
+      StrStDeleteZ(TmpStr, TmpStr, P1, P1 + AnsiStrings.StrLen(OldString));
+      Inc(C, P1 + AnsiStrings.StrLen(OldString));
     end;
   finally
     FreeMem(TmpStr, L);
   end;
-  StrCopy(Dest, S);
-  StrStDeleteZ(Dest, Dest, C, StrLen(OldString));
+  AnsiStrings.StrCopy(Dest, S);
+  StrStDeleteZ(Dest, Dest, C, AnsiStrings.StrLen(OldString));
 
   C := 0;
   for I := 1 to Replacements do begin
-    if ((StrLen(NewString) + 1 + StrLen(Dest)) < High(Cardinal)) then begin
+    if ((AnsiStrings.StrLen(NewString) + 1 + AnsiStrings.StrLen(Dest)) < High(Cardinal)) then begin
       Inc(C);
       StrStInsertZ(Dest, Dest, NewString, P1);
-      Inc(P1, StrLen(NewString) + 1);
+      Inc(P1, AnsiStrings.StrLen(NewString) + 1);
     end else begin
       Replacements := C;
       Result := Dest;
@@ -3652,17 +3654,17 @@ var
   C,
   P1 : Cardinal;
 begin
-  if (S[0] = #0) or (OldString[0] = #0) or (StrPos(S, OldString) = nil) then begin
-    StrCopy(Dest, S);
+  if (S[0] = #0) or (OldString[0] = #0) or (AnsiStrings.StrPos(S, OldString) = nil) then begin
+    AnsiStrings.StrCopy(Dest, S);
     Result := Dest;
     Replacements := 0;
   end else begin
-    StrCopy(Dest, S);
+    AnsiStrings.StrCopy(Dest, S);
     C  := 0;
     while StrStPosZ(Dest, OldString, P1) do begin
-      StrStDeleteZ(Dest, Dest, P1, StrLen(OldString));
+      StrStDeleteZ(Dest, Dest, P1, AnsiStrings.StrLen(OldString));
       for I := 1 to Replacements do begin
-        if (LongInt((StrLen(NewString) + 1 + StrLen(Dest))) < MaxLongInt) then begin
+        if (LongInt((AnsiStrings.StrLen(NewString) + 1 + AnsiStrings.StrLen(Dest))) < MaxLongInt) then begin
           Inc(C);
           StrStInsertZ(Dest, Dest, NewString, P1);
         end else begin
@@ -3686,39 +3688,39 @@ var
   TmpStr2 : PAnsiChar;
 begin
   if (S[0] = #0) or (WordDelims[0] = #0) or
-     (AWord[0] = #0) or (StrPos(S, AWord) = nil) then begin
+     (AWord[0] = #0) or (AnsiStrings.StrPos(S, AWord) = nil) then begin
     Result := False;
     Position := 0;
     Exit;
   end;
 
-  GetMem(TmpStr1, StrLen(S) + 1);
-  GetMem(TmpStr2, StrLen(AWord) + 1);
+  GetMem(TmpStr1, AnsiStrings.StrLen(S) + 1);
+  GetMem(TmpStr2, AnsiStrings.StrLen(AWord) + 1);
   try
-    StrCopy(TmpStr1, S);
-    Position := StrLen(TmpStr1)-1;
+    AnsiStrings.StrCopy(TmpStr1, S);
+    Position := AnsiStrings.StrLen(TmpStr1)-1;
     while (CharExistsZ(WordDelims, TmpStr1[Position])) do
       Dec(Position);
 
-    Position := StrLen(TmpStr1)-1;
+    Position := AnsiStrings.StrLen(TmpStr1)-1;
     repeat
       while (not CharExistsZ(WordDelims, TmpStr1[Position])) and (Position > 0) do
         Dec(Position);
       if (CompStringZ(
-            StrStCopyZ(TmpStr2, TmpStr1, Position+1, StrLen(AWord)),
+            StrStCopyZ(TmpStr2, TmpStr1, Position+1, AnsiStrings.StrLen(AWord)),
             AWord) = 0) then begin
         Inc(Position);
         Result := True;
         Exit;
       end;
-      StrStDeleteZ(TmpStr1, TmpStr1, Position, StrLen(TmpStr1));
-      Position := StrLen(TmpStr1)-1;
+      StrStDeleteZ(TmpStr1, TmpStr1, Position, AnsiStrings.StrLen(TmpStr1));
+      Position := AnsiStrings.StrLen(TmpStr1)-1;
     until (Position = 0);
     Result := False;
     Position := 0;
   finally
-    FreeMem(TmpStr1, StrLen(S)+1);
-    FreeMem(TmpStr2, StrLen(AWord)+1);
+    FreeMem(TmpStr1, AnsiStrings.StrLen(S)+1);
+    FreeMem(TmpStr2, AnsiStrings.StrLen(AWord)+1);
   end;
 end;
 
@@ -3734,7 +3736,7 @@ begin
   end;
 
 {find first non-delimiter character, if any. If not, it's a "one word wonder"}
-  Position := StrLen(S)-1;
+  Position := AnsiStrings.StrLen(S)-1;
   while (Position > 0) and (CharExistsZ(WordDelims, S[Position])) do
     Dec(Position);
 
@@ -3772,27 +3774,27 @@ var
   TmpStr : PAnsiChar;
   I, C   : Cardinal;
 begin
-  if (S[0] = #0) or (StrPos(S, AString) = nil) then begin
+  if (S[0] = #0) or (AnsiStrings.StrPos(S, AString) = nil) then begin
     Result := False;
     Position := 0;
     Exit;
   end;
 
-  GetMem(TmpStr, StrLen(S)+1);
+  GetMem(TmpStr, AnsiStrings.StrLen(S)+1);
   try
-    StrCopy(TmpStr, S);
+    AnsiStrings.StrCopy(TmpStr, S);
     C := 0;
     while (StrStPosZ(TmpStr, AString, I)) do begin
-      Inc(C, I + StrLen(AString));
-      StrStDeleteZ(TmpStr, TmpStr, 0, I + StrLen(AString));
+      Inc(C, I + AnsiStrings.StrLen(AString));
+      StrStDeleteZ(TmpStr, TmpStr, 0, I + AnsiStrings.StrLen(AString));
     end;
 
   {Go back the length of AString since the while loop deletes the last instance}
-    Dec(C, StrLen(AString));
+    Dec(C, AnsiStrings.StrLen(AString));
     Position := C;
     Result := True;
   finally
-    FreeMem(TmpStr, StrLen(S)+1);
+    FreeMem(TmpStr, AnsiStrings.StrLen(S)+1);
   end;
 end;
 
@@ -3826,7 +3828,7 @@ var
 begin
   Result := Dest;
   Result^ := #0;
-  Len := StrLen(RepeatString);
+  Len := AnsiStrings.StrLen(RepeatString);
   if (MaxLen <> 0) and
      (Repetitions <> 0) and
      (Len <> 0) then begin
@@ -3861,12 +3863,12 @@ var
   EndS : PAnsiChar;
 begin
   Result := Dest;
-  EndS := StrEnd(S);
+  EndS := AnsiStrings.StrEnd(S);
   while (EndS <> S) do begin
     dec(EndS);
     if not CharExistsZ(Chars, EndS^) then begin
       if (Dest <> S) then
-        StrLCopy(Dest, S, succ(EndS - S))
+        AnsiStrings.StrLCopy(Dest, S, succ(EndS - S))
       else begin
         inc(EndS);
         EndS^ := #0;
@@ -3886,7 +3888,7 @@ begin
   while (S^ <> #0) and CharExistsZ(Chars, S^) do
     inc(S);
   if (S^ <> #0) then
-    StrCopy(Result, S)
+    AnsiStrings.StrCopy(Result, S)
   else
     Result^ := #0;
 end;
@@ -3946,7 +3948,7 @@ begin
     Exit;
 
   {allocate ourselves some scratch space for temporary tokens}
-  SLen := StrLen(S);
+  SLen := AnsiStrings.StrLen(S);
   GetMem(TempStr, SLen+1);
   try
 
@@ -4021,8 +4023,8 @@ begin
               {else output the token without the quotes}
               else begin
                 inc(TokenStart);
-                StrLCopy(TempStr, TokenStart, CurChar - TokenStart - 1);
-                Tokens.Add(StrPas(TempStr));
+                AnsiStrings.StrLCopy(TempStr, TokenStart, CurChar - TokenStart - 1);
+                Tokens.Add(AnsiStrings.StrPas(TempStr));
                 inc(Result);
               end;
 
@@ -4050,8 +4052,8 @@ begin
 
             {if the current char is a delimiter, output the token}
             else if CharExistsZ(Delims, CurChar^) then begin
-              StrLCopy(TempStr, TokenStart, CurChar - TokenStart);
-              Tokens.Add(StrPas(TempStr));
+              AnsiStrings.StrLCopy(TempStr, TokenStart, CurChar - TokenStart);
+              Tokens.Add(AnsiStrings.StrPas(TempStr));
               inc(Result);
 
               {set the start of the next token to be one character
@@ -4094,8 +4096,8 @@ begin
 
     {if the final token is not empty, output the token}
     if (TokenStart < CurChar) then begin
-      StrLCopy(TempStr, TokenStart, CurChar - TokenStart);
-      Tokens.Add(StrPas(TempStr));
+      AnsiStrings.StrLCopy(TempStr, TokenStart, CurChar - TokenStart);
+      Tokens.Add(AnsiStrings.StrPas(TempStr));
       inc(Result);
     end
     {otherwise the final token is empty, so output a null token if
@@ -4248,16 +4250,16 @@ function StrWithinZ(S, SearchStr : PAnsiChar;
 var
   TmpStr : PAnsiChar;
 begin
-  GetMem(TmpStr, StrLen(S) + 1);
+  GetMem(TmpStr, AnsiStrings.StrLen(S) + 1);
   try
-    StrCopy(TmpStr, S);
+    AnsiStrings.StrCopy(TmpStr, S);
     if (Start > 0) then
       StrStDeleteZ(TmpStr, TmpStr, 0, Start);
     Result := StrStPosZ(TmpStr, SearchStr, Position);
     if (Result) then
       Position := Position + Start;
   finally
-    FreeMem(TmpStr, StrLen(S) + 1);
+    FreeMem(TmpStr, AnsiStrings.StrLen(S) + 1);
   end;
 end;
 

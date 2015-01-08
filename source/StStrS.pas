@@ -321,8 +321,8 @@ function CopyWithinS(const S, Delimiter : ShortString;
 
 function DeleteWithinS(const S, Delimiter : ShortString) : ShortString;
 
-function ExtractTokensS(const S, Delims  : ShortString;
-                              QuoteChar  : AnsiChar;
+function ExtractTokensS(const S, Delims  : string;
+                              QuoteChar  : Char;
                               AllowNulls : Boolean;
                               Tokens     : TStrings) : Cardinal;
 
@@ -332,7 +332,7 @@ function IsChAlphaS(C : Char) : Boolean;
 function IsChNumericS(C : AnsiChar; const Numbers : ShortString) : Boolean;
  {-Returns true if Ch in numeric set}
 
-function IsChAlphaNumericS(C : Char; const Numbers : ShortString) : Boolean;
+function IsChAlphaNumericS(C : Char; const Numbers : string) : Boolean;
   {-Returns true if Ch is an alpha or numeric}
 
 function IsStrAlphaS(const S : string) : Boolean;
@@ -372,8 +372,8 @@ function ReplaceStringS(const S, OldString, NewString : ShortString;
                         var Replacements : Cardinal) : ShortString;
   {-replaces a substring with up to Replacements instances of a string}
 
-function ReplaceStringAllS(const S, OldString, NewString : ShortString;
-                        var Replacements : Cardinal) : ShortString;
+function ReplaceStringAllS(const S, OldString, NewString : string;
+                        var Replacements : Cardinal) : string;
   {-replaces all instances of a substring with one or more instances of a string}
 
 function ReplaceWordS(const S, WordDelims, OldWord, NewWord : ShortString;
@@ -2716,12 +2716,12 @@ begin
 end;
 
 
-function ReplaceStringAllS(const S, OldString, NewString : ShortString;
-                           var Replacements : Cardinal) : ShortString;
+function ReplaceStringAllS(const S, OldString, NewString : string;
+                           var Replacements : Cardinal) : string;
 var
   I,
   C,
-  P1 : Cardinal;
+  P1 : Integer;
   Tmp: String;
 begin
   Result := S;
@@ -2957,8 +2957,8 @@ end;
 
 
 
-function ExtractTokensS(const S, Delims  : ShortString;
-                              QuoteChar  : AnsiChar;
+function ExtractTokensS(const S, Delims  : string;
+                              QuoteChar  : Char;
                               AllowNulls : Boolean;
                               Tokens     : TStrings) : Cardinal;
 var
@@ -2967,7 +2967,7 @@ var
            ScanQuotedTokenEnd,
            ScanNormalToken,
            ScanNormalTokenWithQuote);
-  CurChar    : AnsiChar;
+  CurChar    : Char;
   TokenStart : integer;
   Inx        : integer;
 begin
@@ -3219,7 +3219,7 @@ begin
 end;
 
 
-function IsChAlphaNumericS(C : Char; const Numbers : ShortString) : Boolean;
+function IsChAlphaNumericS(C : Char; const Numbers : string) : Boolean;
   {-Returns true if Ch is an alpha or numeric}
 begin
   Result := Windows.IsCharAlpha(C) or CharExistsS(Numbers, C);

@@ -102,7 +102,7 @@ function Str2RealL(const S : string; var R : Double) : Boolean;
 function Str2ExtL(const S : string; var R : Extended) : Boolean;
   {-Convert a string to an extended.}
 
-function Long2StrL(L : LongInt) : String;
+function Long2StrL(L : LongInt) : String; inline;
   {-Convert an integer type to a string.}
 
 function Real2StrL(R : Double; Width : Byte; Places : ShortInt) : String;
@@ -119,13 +119,13 @@ function ValPrepL(const S : String) : String;
 function CharStrL(C : Char; Len : Cardinal) : String;
   {-Return a string filled with the specified character.}
 
-function PadChL(const S : String; C : Char; Len : Cardinal) : String;
+function PadChL(const S : String; C : Char; Len : Integer) : String;
   {-Pad a string on the right with a specified character.}
 
 function PadL(const S : String; Len : Cardinal) : String;
   {-Pad a string on the right with spaces.}
 
-function LeftPadChL(const S : String; C : Char; Len : Cardinal) : String;
+function LeftPadChL(const S : String; C : Char; Len : Integer) : String;
   {-Pad a string on the left with a specified character.}
 
 function LeftPadL(const S : String; Len : Cardinal) : String;
@@ -197,7 +197,7 @@ function ExtractAsciiL(N : Cardinal; const S, WordDelims : String;
     text within Quote characters is counted as one word.}
 
 procedure WordWrapL(const InSt : String; var OutSt, Overlap : String;
-                   Margin : Cardinal; PadToMargin : Boolean);
+                   Margin : Integer; PadToMargin : Boolean);
   {-Wrap a text string at a specified margin.}
 
   {--------------- String comparison and searching -----------------}
@@ -622,19 +622,25 @@ end;
 function Long2StrL(L : LongInt) : String;
   {-Convert an integer type to a string.}
 begin
-  Str(L, Result);
+  Result := L.ToString;
 end;
 
 function Real2StrL(R : Double; Width : Byte; Places : ShortInt) : String;
   {-Convert a real to a string.}
+var
+  sBuffer: ShortString;
 begin
-  Str(R:Width:Places, Result);
+  Str(R:Width:Places, sBuffer);
+  Result := string(sBuffer);
 end;
 
 function Ext2StrL(R : Extended; Width : Byte; Places : ShortInt) : String;
   {-Convert an extended to a string.}
+var
+  sBuffer: ShortString;
 begin
-  Str(R:Width:Places, Result);
+  Str(R:Width:Places, sBuffer);
+  Result := string(sBuffer);
 end;
 
 function ValPrepL(const S : String) : String;
@@ -663,29 +669,13 @@ begin
   Result := StringOfChar(C, Len)
 end;
 
-function PadChL(const S : String; C : Char; Len : Cardinal) : String;
+function PadChL(const S : String; C : Char; Len : Integer) : String;
   {-Pad a string on the right with a specified character.}
-{$IFDEF UNICODE}
 begin
   Result := S;
   if Length(Result) < Len then
     Result := Result + StringOfChar(C, Len - Length(Result));
 end;
-{$ELSE}
-begin
-  if Length(S) >= LongInt(Len) then
-    Result := S
-  else begin
-    SetLength(Result, Len);
-    { copy current contents (if any) of S to Result }
-    if (Length(S) > 0) then                                              {!!.01}
-      Move(S[1], Result[1], Length(S));
-
-    { add pad chars }
-    FillChar(Result[Succ(Length(S))], LongInt(Len)-Length(S), C);
-  end;
-end;
-{$ENDIF}
 
 function PadL(const S : String; Len : Cardinal) : String;
   {-Pad a string on the right with spaces.}
@@ -693,28 +683,13 @@ begin
   Result := PadChL(S, ' ', Len);
 end;
 
-function LeftPadChL(const S : String; C : Char; Len : Cardinal) : String;
+function LeftPadChL(const S : String; C : Char; Len : Integer) : String;
   {-Pad a string on the left with a specified character.}
 begin
-  {$IFDEF UNICODE}
   if Length(S) > Len then
     Result := S
   else
     Result := StringOfChar(C, Len - Length(S)) + S;
-  {$ELSE}
-  if Length(S) >= LongInt(Len) then
-    Result := S
-  else if Length(S) < MaxLongInt then begin
-    SetLength(Result, Len);
-
-    { copy current contents (if any) of S to Result }
-    if (Length(S) > 0) then                                              {!!.01}
-      Move(S[1], Result[Succ(Word(Len))-Length(S)], Length(S));
-
-    { add pad chars }
-    FillChar(Result[1], LongInt(Len)-Length(S), C);
-  end;
-  {$ENDIF}
 end;
 
 function LeftPadL(const S : String; Len : Cardinal) : String;
@@ -1326,7 +1301,7 @@ begin
 end;
 
 procedure WordWrapL(const InSt : String; var OutSt, Overlap : String;
-                   Margin : Cardinal; PadToMargin : Boolean);
+                   Margin : Integer; PadToMargin : Boolean);
   {-Wrap a text string at a specified margin.}
 var
   InStLen  : Cardinal;

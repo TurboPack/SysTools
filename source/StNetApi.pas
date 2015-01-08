@@ -3035,7 +3035,7 @@ type
 
 implementation
 
-uses SysUtils, StUtils;
+uses SysUtils, StUtils, AnsiStrings;
 
 var
   {LMACCESS}
@@ -4736,7 +4736,7 @@ begin
         { call the API }
         Result := _NetGetAnyDCName(S.Value, D.Value, B);
         if Result = NERR_SUCCESS then begin
-          Buffer := StrPas(PAnsiChar(B));
+          Buffer := AnsiStrings.StrPas(PAnsiChar(B));
           StNetApiBufferFree(B);
         end;
       finally

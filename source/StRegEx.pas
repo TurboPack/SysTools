@@ -499,6 +499,7 @@ type
 implementation
 
 uses
+  AnsiStrings,
   StStrL,
   StStrS;
 
@@ -824,16 +825,16 @@ begin
   FNodes := nil;
 
   if (Assigned(FMatchPatStr)) then begin
-    FreeMem(FMatchPatStr, StrLen(FMatchPatStr) + 1);
+    FreeMem(FMatchPatStr, AnsiStrings.StrLen(FMatchPatStr) + 1);
     FMatchPatStr := nil;
   end;
 
   if (Assigned(FReplacePatStr)) then
-    FreeMem(FReplacePatStr, StrLen(FReplacePatStr) + 1);
+    FreeMem(FReplacePatStr, AnsiStrings.StrLen(FReplacePatStr) + 1);
   FReplacePatStr := nil;
 
   if (Assigned(FSelAvoidPatStr)) then
-    FreeMem(FSelAvoidPatStr, StrLen(FSelAvoidPatStr) + 1);
+    FreeMem(FSelAvoidPatStr, AnsiStrings.StrLen(FSelAvoidPatStr) + 1);
   FSelAvoidPatStr := nil;
 
   FMatchPatSL.Free;
@@ -856,9 +857,9 @@ var
   I         : Cardinal;
 begin
   Result := Dest;
-  I := StrLen(S1);
+  I := AnsiStrings.StrLen(S1);
   Remaining := MaxLineLength - I;
-  if (Remaining < StrLen(S2)) then
+  if (Remaining < AnsiStrings.StrLen(S2)) then
     Count := Remaining;
   Move(S1[0], Dest[0], I);
   Move(S2[0], Dest[I], Count);
@@ -945,7 +946,7 @@ begin
     Result := True
   else begin
     if Assigned(PStr) then
-      FreeMem(PStr, StrLen(PStr)+1);
+      FreeMem(PStr, AnsiStrings.StrLen(PStr)+1);
     GetMem(PStr, Len+1);
     PStr[Len] := EndStr;
     J := 0;
@@ -1042,7 +1043,7 @@ var
         GetMem(TmpBuf, MaxLineLength+1);
         GetMem(ABuf, L);
         try
-          StrPCopy(ABuf, S);
+          AnsiStrings.StrPCopy(ABuf, S);
           if (FSelAvoidPatPtr <> nil) then begin
             Result := False;
             if (not Avoid) then
@@ -1060,7 +1061,7 @@ var
               if Result then begin
                 TmpBuf[0] := #0;
                 SubLine(ABuf);
-                S := StrPas(FOutLineBuf);
+                S := AnsiStrings.StrPas(FOutLineBuf);
               end;
             end;
           end;
@@ -1316,7 +1317,7 @@ begin
         SetLength(FFoundText, REPosition.Length);
         Src := FInLineBuf;
         Inc(Src, REPosition.StartPos);
-        StrMove(PAnsiChar(FFoundText), Src, REPosition.Length);
+        AnsiStrings.StrMove(PAnsiChar(FFoundText), Src, REPosition.Length);
 {!!!}
 
         if (FInFileSize > 0) then begin
@@ -1841,7 +1842,7 @@ var
   SI    : string[8];
 begin
   Dest[0] := #0;
-  Count := StrLen(S);
+  Count := AnsiStrings.StrLen(S);
   if (Count > MaxLineLength - 8) then
     Count := MaxLineLength - 8;
   SI := LeftPadS(IntToStr(LineNum), 6) + '  ';
@@ -1887,8 +1888,8 @@ begin
             if (LineNumbers) then
               InsertLineNumber(Tmp, FOutlineBuf, LineNum)
             else
-              StrCopy(Tmp, FOutlineBuf);
-            Tmp[StrLen(Tmp)-2] := #0;
+              AnsiStrings.StrCopy(Tmp, FOutlineBuf);
+            Tmp[AnsiStrings.StrLen(Tmp)-2] := #0;
             FOutTextStream.WriteLineZ(Tmp);
           end;
           {subline keeps a count of matched lines and replaced patterns}
@@ -1904,8 +1905,8 @@ begin
               if (LineNumbers) then
                 InsertLineNumber(Tmp, Buf, LineNum)
               else
-                StrCopy(Tmp, Buf);
-              Tmp[StrLen(Tmp)] := #0;
+                AnsiStrings.StrCopy(Tmp, Buf);
+              Tmp[AnsiStrings.StrLen(Tmp)] := #0;
               FOutTextStream.WriteLineZ(Tmp);
             end;
           end;
@@ -1919,8 +1920,8 @@ begin
             if (LineNumbers) then
               InsertLineNumber(Tmp, Buf, LineNum)
             else
-              StrCopy(Tmp, Buf);
-            Tmp[StrLen(Tmp)] := #0;
+              AnsiStrings.StrCopy(Tmp, Buf);
+            Tmp[AnsiStrings.StrLen(Tmp)] := #0;
             FOutTextStream.WriteLineZ(Tmp);
           end;
         end;
@@ -1933,8 +1934,8 @@ begin
         if (LineNumbers) then
           InsertLineNumber(Tmp, Buf, LineNum)
         else
-          StrCopy(Tmp, Buf);
-        Tmp[StrLen(Tmp)] := #0;
+          AnsiStrings.StrCopy(Tmp, Buf);
+        Tmp[AnsiStrings.StrLen(Tmp)] := #0;
         FOutTextStream.WriteLineZ(Tmp);
       end;
     end;
@@ -2253,7 +2254,7 @@ begin
 
         SubLineWrite(Buf, ALine, FReplacePatPtr, I, M, Flags);
         LastM := M;
-        AppendS(FOutLineBuf, FOutLineBuf, ALine, StrLen(ALine));
+        AppendS(FOutLineBuf, FOutLineBuf, ALine, AnsiStrings.StrLen(ALine));
       end;
 
       if (M = -1) or (M = I) then begin
