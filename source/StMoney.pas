@@ -185,7 +185,7 @@ date=<date>
     procedure Assign(ARate : TStExchangeRate);
     procedure Clear;
     procedure Convert(Amount, Result: TStDecimal);
-    function Equals(aRate : TStExchangeRate) : Boolean;
+    function EqualsRate(aRate : TStExchangeRate) : Boolean;
     function IsValid : Boolean;
     function SameSourceAndTarget(aRate : TStExchangeRate) : Boolean;
     procedure Update;
@@ -942,7 +942,7 @@ begin
   end; { case }
 end;
 
-function TStExchangeRate.Equals(aRate: TStExchangeRate): Boolean;
+function TStExchangeRate.EqualsRate(aRate: TStExchangeRate): Boolean;
 {
 Returns true if this exchange rate and specified exchange rate have
 identical Exchange types, Source currencies, Target currencies,

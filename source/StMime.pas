@@ -277,6 +277,9 @@ type
 
 implementation
 
+uses
+  AnsiStrings;
+
 const
   StUUTable : array[0..63] of AnsiChar = (#96, #33, #34, #35, #36, #37,
         #38, #39, #40, #41, #42, #43, #44, #45, #46, #47, #48, #49,
@@ -828,8 +831,8 @@ begin
   until Count < SizeOf(InBuf);
 
   { Add terminating end }
-  StrCopy(StrECopy(OutBuf, '`'#13#10), 'end'#13#10);
-  OutStream.Write(OutBuf, StrLen(OutBuf));
+  AnsiStrings.StrCopy(AnsiStrings.StrECopy(OutBuf, '`'#13#10), 'end'#13#10);
+  OutStream.Write(OutBuf, AnsiStrings.StrLen(OutBuf));
 end;
 
 { TStBase64Stream }
@@ -994,8 +997,8 @@ begin
 
   { Add terminating end if necessary }
   if not FOwner.MimeHeaders then begin
-    StrCopy(OutBuf, 'end'#13#10);
-    OutStream.Write(OutBuf, StrLen(OutBuf));
+    AnsiStrings.StrCopy(OutBuf, 'end'#13#10);
+    OutStream.Write(OutBuf, AnsiStrings.StrLen(OutBuf));
   end;
 end;
 
@@ -1478,7 +1481,7 @@ begin
       end;
     end;
   end else begin
-    Ptr := StrPos(TempBuf, #13#10#13#10'');
+    Ptr := AnsiStrings.StrPos(TempBuf, #13#10#13#10'');
     Stream.Position := (Att.atStreamOffset + (Ptr - TempBuf));
   end;
 end;
@@ -1556,10 +1559,10 @@ begin
 
     { If we have a boundary, use it -- if not, look for one }
     if FBoundary = '' then
-      StrCopy(SearchString, #13#10'--')
+      AnsiStrings.StrCopy(SearchString, #13#10'--')
     else begin
       FBoundaryUsed := True;
-      StrPCopy(SearchString, '--' + Boundary);
+      AnsiStrings.StrPCopy(SearchString, '--' + Boundary);
     end;
     BMMakeTableZ(SearchString, BMT);
     ScanStream.Position := 0;
@@ -1568,7 +1571,7 @@ begin
       { Look for a Mime boundary -- process appropriately }
       if BMSearchZ(ScanStream.Memory^, ScanSize, BMT, SearchString, FoundPos) then begin
 
-        Pos := FoundPos + StrLen(SearchString);
+        Pos := FoundPos + AnsiStrings.StrLen(SearchString);
 
         { Add add'l checks here -- look for the Boundary header entry first }
         { if that method fails, beef up this method against false positives a bit }
@@ -1584,8 +1587,8 @@ begin
             end;
             TempBuf[I] := MemArray(ScanStream.Memory^)[Pos+I];
           end;
-          Boundary := StrPas(TempBuf);
-          StrCopy(StrECopy(SearchString, '--'), TempBuf);
+          Boundary := AnsiStrings.StrPas(TempBuf);
+          AnsiStrings.StrCopy(AnsiStrings.StrECopy(SearchString, '--'), TempBuf);
 
           { Adjust to account for CR/LF searched on this go around }
           Inc(FoundPos, 2);
@@ -1617,7 +1620,7 @@ begin
         end;
 
         { Init for token search }
-        OStr := TStString.CreateZ(StrLCopy(TempBuf, ScanStream.Memory, SizeOf(TempBuf)-1));
+        OStr := TStString.CreateZ(AnsiStrings.StrLCopy(TempBuf, ScanStream.Memory, SizeOf(TempBuf)-1));
         try
           with OStr do begin
             { Check for another boundary in buffer }
@@ -1698,7 +1701,7 @@ begin
 
       end else begin
         if (ScanSize < StmSize) then Exit;
-        Stream.Seek(-StrLen(SearchString), soFromCurrent);
+        Stream.Seek(-AnsiStrings.StrLen(SearchString), soCurrent);
         StmOffset := Stream.Position;
         ScanStream.Position := 0;
         ScanSize := ScanStream.CopyFrom(Stream,

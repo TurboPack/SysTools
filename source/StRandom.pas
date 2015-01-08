@@ -397,9 +397,7 @@ begin
   d := aShape - (1.0 / 3.0);
   c := 1.0 / sqrt(9.0 * d);
   Done := false;
-  {$IFDEF SuppressWarnings}
   v := 0.0;
-  {$ENDIF}
 
   while not Done do begin
     repeat

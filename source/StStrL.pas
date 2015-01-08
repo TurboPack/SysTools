@@ -2061,7 +2061,7 @@ begin
   I := Succ(Cardinal(Length(PathName)));
   repeat
     Dec(I);
-  until (I = 0) or (PathName[I] in DosDelimSet);                         {!!.01}
+  until (I = 0) or CharInSet(PathName[I], DosDelimSet);                         {!!.01}
   Result := System.Copy(PathName, Succ(I), StMaxFileLen);
 end;
 
@@ -2098,7 +2098,7 @@ begin
   I := Succ(Cardinal(Length(PathName)));
   repeat
     Dec(I);
-  until (I = 0) or (PathName[I] in DosDelimSet);                         {!!.01}
+  until (I = 0) or CharInSet(PathName[I], DosDelimSet);                         {!!.01}
 
   if I = 0 then
     {Had no drive or directory name}
@@ -2169,7 +2169,7 @@ begin
     {Get the next directory or drive portion of pathname}
     repeat
       Dec(I);
-    until (I = 0) or (S[I] in DosDelimSet);                            {!!.02}
+    until (I = 0) or CharInSet(S[I], DosDelimSet);                            {!!.02}
 
     {Clean it up and prepend it to output string}
     Result := CleanFileNameL(System.Copy(S, Succ(I), StMaxFileLen)) + Result;
@@ -2376,7 +2376,7 @@ EndFound:
 
   {add zeros that Str may have left out}
   if Places > MaxPlaces then begin
-    I := Length(S);
+//    I := Length(S);
 //    SetLength(S, LongInt(I) + (Places-MaxPlaces));
 //    FillChar(S[Succ(I)], Places-MaxPlaces, '0');
     S := StringOfChar('0', Places-MaxPlaces) + S;

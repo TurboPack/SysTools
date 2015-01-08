@@ -206,7 +206,7 @@ begin
   {strip non-numerics}
   I := 1;
   repeat
-    if not (Local[I] in ['0'..'9']) then
+    if not CharInSet(Local[I], ['0'..'9']) then
       System.Delete(Local, I, 1)
     else
       Inc(I);

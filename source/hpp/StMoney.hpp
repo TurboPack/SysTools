@@ -124,7 +124,7 @@ public:
 	void __fastcall Assign(TStExchangeRate* ARate);
 	void __fastcall Clear(void);
 	void __fastcall Convert(Stdecmth::TStDecimal* Amount, Stdecmth::TStDecimal* Result);
-	HIDESBASE bool __fastcall Equals(TStExchangeRate* aRate);
+	bool __fastcall EqualsRate(TStExchangeRate* aRate);
 	bool __fastcall IsValid(void);
 	bool __fastcall SameSourceAndTarget(TStExchangeRate* aRate);
 	void __fastcall Update(void);

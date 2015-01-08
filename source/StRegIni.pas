@@ -2411,7 +2411,6 @@ procedure TStRegIni.UnLoadKey(const SubKey : string);
   {-remove a section from Ini file or subkey from registry}
   {Registry only: SubKey must have been loaded with LoadKey}
 var
-  PSKey      : PChar;
   ECode      : LongInt;
   HoldKey    : HKey;
 

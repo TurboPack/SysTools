@@ -1361,11 +1361,11 @@ begin
             {end of string}
             eToken := ssEol;
             Done := true;
-          end else if (eCurChar in Alpha) then begin
+          end else if CharInSet(eCurChar, Alpha) then begin
             {start of identifier}
             eTokenStr := eTokenStr + LowerCase(eCurChar);
             eToken := ssInIdent;
-          end else if (eCurChar in Numeric) then begin
+          end else if CharInSet(eCurChar, Numeric) then begin
             {start of value}
             eTokenStr := eTokenStr + eCurChar;
             eToken := ssInNum;
@@ -1392,7 +1392,7 @@ begin
           end;
         end;
       ssInIdent :
-        if (eCurChar in AlphaNumeric) then
+        if CharInSet(eCurChar, AlphaNumeric) then
           {continuing in identifier}
           eTokenStr := eTokenStr + LowerCase(eCurChar)
         else begin
@@ -1401,7 +1401,7 @@ begin
           Done := True;
         end;
       ssInNum :
-        if (eCurChar in Numeric) then
+        if CharInSet(eCurChar, Numeric) then
           {continuing in number}
           eTokenStr := eTokenStr + eCurChar
         else if (LowerCase(eCurChar) = 'e') then begin
@@ -1414,7 +1414,7 @@ begin
           Done := True;
         end;
       ssInSign :
-        if (eCurChar in ['-', '+']) or (eCurChar in Numeric) then begin
+        if CharInSet(eCurChar, ['-', '+']) or CharInSet(eCurChar, Numeric) then begin
           {have exponent sign or start of number}
           eTokenStr := eTokenStr + eCurChar;
           eToken := ssInExp;
@@ -1423,7 +1423,7 @@ begin
           RaiseExprError(stscExprBadNum, FErrorPos);
         end;
       ssInExp :
-        if (eCurChar in Numeric) then
+        if CharInSet(eCurChar, Numeric) then
           {continuing in number}
           eTokenStr := eTokenStr + eCurChar
         else begin

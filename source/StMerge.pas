@@ -125,6 +125,9 @@ type
 
 implementation
 
+uses
+  AnsiStrings;
+
 { TStTextMerge }
 
 constructor TStTextMerge.Create;
@@ -201,9 +204,9 @@ const
     Len := Length(Delim);
     GetMem(Match, Len + 1);
     FillChar(Match^, Len + 1, #0);
-    StrLCopy(Match, PC, Len);
+    AnsiStrings.StrLCopy(Match, PC, Len);
 
-    Result := StrPas(Match) = Delim;
+    Result := AnsiStrings.StrPas(Match) = Delim;
     if Result then
       Inc(PC, Len);  {advance past Tag delimiter }
 

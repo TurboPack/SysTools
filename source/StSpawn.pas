@@ -322,7 +322,7 @@ begin
     FWaitThread := TStWaitThread.Create(FInstance, FCancelEvent, FTimeOut);
     FWaitThread.OnTerminate := DoOnThreadEnd;
     FWaitThread.FreeOnTerminate := True;
-    FWaitThread.Resume;
+    FWaitThread.Start;
   end;
 end;
 

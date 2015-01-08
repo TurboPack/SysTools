@@ -921,7 +921,7 @@ begin
     bcCode128 :
       begin
         {add start code}
-        if not (C[1] in [#136, #137, #138]) then
+        if not CharInSet(C[1], [#136, #137, #138]) then
           case FCode128Subset of
             csCodeA : C := #136 + C;
             csCodeB : C := #137 + C;
@@ -1452,7 +1452,7 @@ begin
               C[I] := ' ';
             if (i < Length (C)) and (ExtendedSyntax) then begin
               if (C[I] = '\') and
-                 (C[I + 1] in ['A', 'B', 'C', 'a', 'b', 'c']) then begin
+                 CharInSet(C[I + 1], ['A', 'B', 'C', 'a', 'b', 'c']) then begin
                 C[I] := ' ';
                 C[I + 1] := ' ';
                 Inc (I);
@@ -2412,13 +2412,13 @@ begin
       bcCodabar :
         begin
           for I := 1 to Length(Code) do
-            if not (Code[I] in ['0'..'9', '-', '$', ':', '/', '.', '+', 'a'..'d', 'A'..'D']) then
+            if not CharInSet(Code[I], ['0'..'9', '-', '$', ':', '/', '.', '+', 'a'..'d', 'A'..'D']) then
               RaiseStError(EStBarCodeError, stscInvalidCharacter);
         end;
       bcCode11 :
         begin
           for I := 1 to Length(Code) do
-            if not (Code[I] in ['0'..'9', '-']) then
+            if not CharInSet(Code[I], ['0'..'9', '-']) then
               RaiseStError(EStBarCodeError, stscInvalidCharacter);
           {test check characters}
           if not FAddCheckChar then begin
@@ -2431,7 +2431,7 @@ begin
       bcCode39 :
         begin
           for I := 1 to Length(Code) do
-            if not (Code[I] in ['0'..'9', 'A'..'Z', 'a'..'z',
+            if not CharInSet(Code[I], ['0'..'9', 'A'..'Z', 'a'..'z',
             '-', '.', ' ', '$', '/', '+', '%', '*']) then
               RaiseStError(EStBarCodeError, stscInvalidCharacter);
           {check for embedded guard character}

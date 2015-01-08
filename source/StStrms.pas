@@ -208,6 +208,9 @@ type
 
 implementation
 
+uses
+  AnsiStrings;
+
 const
   LineTerm : array [TStLineTerminator] of
                array [0..1] of AnsiChar =
@@ -1149,7 +1152,7 @@ begin
   if (aSt = nil) then
     LenSt := 0
   else
-    LenSt := StrLen(aSt);
+    LenSt := AnsiStrings.StrLen(aSt);
   WriteLineArray(aSt, LenSt);
 end;
 

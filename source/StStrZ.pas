@@ -1328,7 +1328,7 @@ var
   I : Integer;
 begin
   I := StrLen(PathName);
-  while (I > 0) and (not (PathName[I-1] in DosDelimSet)) do
+  while (I > 0) and (not CharInSet(PathName[I-1], DosDelimSet)) do
     Dec(I);
   Dest := StrStCopyZ(Dest, PathName, I, StMaxFileLen);
   Result := Dest;

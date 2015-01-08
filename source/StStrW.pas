@@ -1378,7 +1378,7 @@ begin
     {Get the next directory or drive portion of pathname}
     repeat
       Dec(I);
-    until (I = 0) or (S[I] in DosDelimSet);                            {!!.02}
+    until (I = 0) or CharInSet(S[I], DosDelimSet);                            {!!.02}
 
     {Clean it up and prepend it to output string}
     Result := CleanFileNameW(System.Copy(S, Succ(I), StMaxFileLen)) + Result;

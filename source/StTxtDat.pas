@@ -831,7 +831,7 @@ function StDoEscape(Delim : Char): String;
 Escapes non-printable characters to Borlandish Pascal "#nnn" constants
 }
 begin
-  if Delim in [#33..#126, #128..#255] then
+  if CharInSet(Delim, [#33..#126, #128..#255]) then
     Result := Delim
   else
     Result := '#' + IntToStr(Ord(Delim));
@@ -874,7 +874,7 @@ begin
   case S[1] of
     '#':begin
       ChrVal := StrToIntDef(Copy(S, 2,Length(S)-1), Ord(StDefaultDelim));
-      if Chr(ChrVal) in [#1..#126] then
+      if CharInSet(Chr(ChrVal), [#1..#126]) then
         Result := Chr(ChrVal)
       else
         Result := StDefaultDelim;
@@ -882,7 +882,7 @@ begin
 
     '^': begin { control character format }
       C := Chr(Ord(S[2]) - $40);
-      if C in [^A..^_] then
+      if CharInSet(C, [^A..^_]) then
         Result := C
       else
         Result := StDefaultDelim;

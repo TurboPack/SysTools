@@ -424,9 +424,9 @@ var
   TempDir : String;
 begin
   TempDir := aFolder;
-  if not DirectoryExists(TempDir) then
+  if not SysUtils.DirectoryExists(TempDir) then
     TempDir := GetTempFolder(True);
-  if not DirectoryExists(TempDir) then
+  if not SysUtils.DirectoryExists(TempDir) then
     TempDir := GetWorkingFolder(True);
 
   if (GetTempFileName(PChar(TempDir), PChar(aPrefix), 0,

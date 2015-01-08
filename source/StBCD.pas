@@ -1640,7 +1640,7 @@ Restart:
             StoreChar(Ch);
       else
         {these characters are automatically inserted in StoreDigit};
-        if not (Ch in [{$IFDEF DELPHIXE2}FormatSettings.{$ENDIF}ThousandSeparator, {$IFDEF DELPHIXE2}FormatSettings.{$ENDIF}DecimalSeparator]) then
+        if not CharInSet(Ch, [FormatSettings.ThousandSeparator, FormatSettings.DecimalSeparator]) then
           StoreChar(Ch);
       end;
 

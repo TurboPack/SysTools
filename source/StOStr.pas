@@ -226,6 +226,9 @@ type
 
 implementation
 
+uses
+  AnsiStrings;
+
 {$IFNDEF UNICODE}
 function AnsiStrAlloc(Size: Cardinal): PAnsiChar;
 begin
@@ -276,7 +279,7 @@ begin
   FString := AnsiStrAlloc(SuggestSize(Len));
   if Assigned(FString) then begin
     FAlloc := SuggestSize(Len);
-    StrCopy(FString, PAnsiChar(Temp));
+    AnsiStrings.StrCopy(FString, PAnsiChar(Temp));
   end;
   ResetCursor;
 end;
@@ -288,7 +291,7 @@ begin
   FString := AnsiStrAlloc(SuggestSize(System.Length(S)));
   if Assigned(FString) then begin
     FAlloc := SuggestSize(System.Length(S));
-    StrPCopy(FString, S);
+    AnsiStrings.StrPCopy(FString, S);
   end;
   ResetCursor;
 end;
@@ -297,10 +300,10 @@ constructor TStString.CreateZ(const S : PAnsiChar);
 {- Create string object and copy PChar into it. }
 begin
   Create;
-  FString := AnsiStrAlloc(SuggestSize(StrLen(S)));
+  FString := AnsiStrAlloc(SuggestSize(AnsiStrings.StrLen(S)));
   if Assigned(FString) then begin
-    StrCopy(FString, S);
-    FAlloc := SuggestSize(StrLen(S));
+    AnsiStrings.StrCopy(FString, S);
+    FAlloc := SuggestSize(AnsiStrings.StrLen(S));
   end;
   ResetCursor;
 end;
@@ -309,9 +312,9 @@ destructor TStString.Destroy;
 {- Dispose string object. }
 begin
   FItems.Free;
-  StrDispose(FBMString);
-  StrDispose(FDelimiters);
-  StrDispose(FString);
+  AnsiStrings.StrDispose(FBMString);
+  AnsiStrings.StrDispose(FDelimiters);
+  AnsiStrings.StrDispose(FString);
   inherited Destroy;
 end;
 
@@ -320,9 +323,9 @@ procedure TStString.AppendPChar(S : PAnsiChar);
 var
   Temp : PAnsiChar;
 begin
-  CheckAlloc(StrLen(S) + GetLength);
-  Temp := StrEnd(FString);
-  StrCopy(Temp, S);
+  CheckAlloc(AnsiStrings.StrLen(S) + GetLength);
+  Temp := AnsiStrings.StrEnd(FString);
+  AnsiStrings.StrCopy(Temp, S);
 end;
 
 procedure TStString.AppendString(S : AnsiString);
@@ -331,8 +334,8 @@ var
   Temp : PAnsiChar;
 begin
   CheckAlloc(System.Length(S) + LongInt(GetLength));                   
-  Temp := StrEnd(FString);
-  StrPCopy(Temp, S);
+  Temp := AnsiStrings.StrEnd(FString);
+  AnsiStrings.StrPCopy(Temp, S);
 end;
 
 function TStString.AsciiPosition(N : Cardinal; var Pos : Cardinal) : Boolean;
@@ -367,10 +370,10 @@ begin
   ClearItems;
   Temp := AnsiStrAlloc(Succ(System.Length(S)));
   try
-    StrPCopy(Temp, S);
+    AnsiStrings.StrPCopy(Temp, S);
     BMMakeTable(Temp);
     for I := 1 to FRepeatValue do begin
-      if BMSearchZ(DesiredCursor^, StrLen(DesiredCursor), FBM, Temp, Pos) then begin
+      if BMSearchZ(DesiredCursor^, AnsiStrings.StrLen(DesiredCursor), FBM, Temp, Pos) then begin
         Result := True;
         Pos := GetRelativePos(Pos);
         UpdateCursor(Pos);
@@ -381,7 +384,7 @@ begin
     end;
     if Result then Dec(FCursor);                                       
   finally
-    StrDispose(Temp);
+    AnsiStrings.StrDispose(Temp);
   end;
 end;
 
@@ -395,11 +398,11 @@ begin
   ClearItems;
   Temp := AnsiStrAlloc(Succ(System.Length(S)));
   try
-    StrPCopy(Temp, S);
-    StrUpper(Temp);
+    AnsiStrings.StrPCopy(Temp, S);
+    AnsiStrings.StrUpper(Temp);
     BMMakeTable(Temp);
     for I := 1 to FRepeatValue do begin
-      if BMSearchUCZ(DesiredCursor^, StrLen(DesiredCursor), FBM, Temp, Pos) then begin
+      if BMSearchUCZ(DesiredCursor^, AnsiStrings.StrLen(DesiredCursor), FBM, Temp, Pos) then begin
         Result := True;
         Pos := GetRelativePos(Pos);
         UpdateCursor(Pos);
@@ -410,7 +413,7 @@ begin
     end;
     if Result then Dec(FCursor);                                       
   finally
-    StrDispose(Temp);
+    AnsiStrings.StrDispose(Temp);
   end;
 end;
 
@@ -467,9 +470,9 @@ procedure TStString.BMMakeTable(S : PAnsiChar);
 {- Checks whether table needs to be made -- and makes it. }
 begin
   if Assigned(FBMString) then
-    if StrComp(S, FBMString) = 0 then Exit;
-  StrDispose(FBMString);
-  FBMString := StrNew(S);
+    if AnsiStrings.StrComp(S, FBMString) = 0 then Exit;
+  AnsiStrings.StrDispose(FBMString);
+  FBMString := AnsiStrings.StrNew(S);
   BMMakeTableZ(FBMString, FBM);
 end;
 
@@ -556,7 +559,7 @@ end;
 procedure TStString.CursorToEnd;
 {- Set cursor to null terminator at the end of string. }
 begin
-  FCursor := StrEnd(FString);
+  FCursor := AnsiStrings.StrEnd(FString);
 end;
 
 procedure TStString.DeleteAsciiAtCursor;
@@ -674,7 +677,7 @@ begin
     GetWordAtCursorZ(Temp);
     Result := MakeLetterSetZ(Temp);
   finally
-    StrDispose(Temp);
+    AnsiStrings.StrDispose(Temp);
   end;
 end;
 
@@ -715,7 +718,7 @@ function TStString.GetAsPChar(Dest : PAnsiChar) : PAnsiChar;
 {- Exports string as a null-terminated string. }
 begin
   Result := Dest;
-  StrCopy(Result, FString);
+  AnsiStrings.StrCopy(Result, FString);
 end;
 
 function TStString.GetWordAtCursor : AnsiString;
@@ -769,8 +772,8 @@ begin
        Result := 2;
        GetMem(Terminator, Result);
        case LineTerminator of
-         ltCR    : StrCopy(Terminator, #13);
-         ltLF    : StrCopy(Terminator, #10);
+         ltCR    : AnsiStrings.StrCopy(Terminator, #13);
+         ltLF    : AnsiStrings.StrCopy(Terminator, #10);
          ltOther : begin
            Terminator[0] := FLineTermChar;
            Terminator[1] := #0;
@@ -780,7 +783,7 @@ begin
      ltCRLF : begin
        Result := 3;
        GetMem(Terminator, Result);
-       StrCopy(Terminator, #13#10);
+       AnsiStrings.StrCopy(Terminator, #13#10);
      end;
   end;
 end;
@@ -822,7 +825,7 @@ procedure TStString.InsertPCharAtCursor(S : PAnsiChar);
 var
   Len, Pos : Cardinal;
 begin
-  Len := StrLen(S);
+  Len := AnsiStrings.StrLen(S);
   Pos := FCursor - FString;
   CheckAlloc(GetLength + Len);
   StrStInsertPrimZ(FString, S, Pos);
@@ -838,11 +841,11 @@ begin
   Len := System.Length(S);
   Temp := AnsiStrAlloc(Succ(Len));
   try
-    StrPCopy(Temp, S);
+    AnsiStrings.StrPCopy(Temp, S);
     CheckAlloc(GetLength + Len);
     StrStInsertPrimZ(FString, Temp, Pos);
   finally
-    StrDispose(Temp);
+    AnsiStrings.StrDispose(Temp);
   end;
 end;
 
@@ -892,18 +895,18 @@ var
 begin
   Temp := AnsiStrAlloc(Succ(System.Length(Key)));
   try
-    StrPCopy(Temp, Key);
+    AnsiStrings.StrPCopy(Temp, Key);
     ScramblePrimZ(FString, Temp);
   finally
-    StrDispose(Temp);
+    AnsiStrings.StrDispose(Temp);
   end;
 end;
 
 procedure TStString.SetAsPChar(S : PAnsiChar);
 {- Sets string to PChar. }
 begin
-  CheckAlloc(StrLen(S));
-  StrCopy(FString, S);
+  CheckAlloc(AnsiStrings.StrLen(S));
+  AnsiStrings.StrCopy(FString, S);
   ResetCursor;
 end;
 
@@ -1038,12 +1041,12 @@ begin
   Len := System.Length(S);
   Temp := AnsiStrAlloc(Succ(Len));
   try
-    StrPCopy(Temp, S);
+    AnsiStrings.StrPCopy(Temp, S);
     if FOneBased then Dec(AdjPos);
     CheckAlloc(GetLength + Len);
     StrStInsertPrimZ(FString, Temp, AdjPos);
   finally
-    StrDispose(Temp);
+    AnsiStrings.StrDispose(Temp);
   end;
   FixCursor(AdjPos, Len, False);
 end;
@@ -1058,7 +1061,7 @@ begin
   ClearItems;
   Temp := AnsiStrAlloc(Succ(System.Length(S)));
   try
-    StrPCopy(Temp, S);
+    AnsiStrings.StrPCopy(Temp, S);
     for I := 1 to FRepeatValue do begin
       if StrStPosZ(DesiredCursor, Temp, Pos) then begin
         Result := True;
@@ -1071,7 +1074,7 @@ begin
     end;
     if Result then Dec(FCursor);
   finally
-    StrDispose(Temp);
+    AnsiStrings.StrDispose(Temp);
   end;
 end;
 
@@ -1153,8 +1156,8 @@ begin
   Terminator := nil;
   TermSiz := MakeTerminator(Terminator);
   GetMem(TermPlusSpace, TermSiz + 1);
-  StrCopy(TermPlusSpace, Terminator);
-  StrCat(TermPlusSpace, ' ');
+  AnsiStrings.StrCopy(TermPlusSpace, Terminator);
+  AnsiStrings.StrCat(TermPlusSpace, ' ');
 
   if GetLength > FWrap then begin
     EndFound := False;
@@ -1184,13 +1187,13 @@ begin
         EndFound := True;
         J := I;
       end;
-      EndTemp := StrEnd(FTemp);
+      EndTemp := AnsiStrings.StrEnd(FTemp);
       if InWord and (J = 0) then
         J := FWrap;
-      StrLCopy(EndTemp, Anchor, J);
+      AnsiStrings.StrLCopy(EndTemp, Anchor, J);
       if not EndFound then begin
 //        StrCat(FTemp, #13#10);
-        StrCat(FTemp, Terminator);
+        AnsiStrings.StrCat(FTemp, Terminator);
         Anchor := Anchor + J;
         while Anchor^ = ' ' do
           Inc(Anchor);
@@ -1204,7 +1207,7 @@ begin
       end;
     until EndFound;
     FItems.Text := FTemp;
-    StrDispose(FTemp);
+    AnsiStrings.StrDispose(FTemp);
   end else begin
     StringToItems;
   end;
@@ -1245,7 +1248,7 @@ end;
 function TStString.GetAsShortStr : ShortString;
 {- Provide short string output. }
 begin
-  Result := StrPas(FString);
+  Result := AnsiStrings.StrPas(FString);
 end;
 
 function TStString.GetCursorPos : Cardinal;
@@ -1258,14 +1261,14 @@ end;
 function TStString.GetDelimiters : AnsiString;
 {- Return string with current delimiters. }
 begin
-  Result := StrPas(FDelimiters);
+  Result := AnsiStrings.StrPas(FDelimiters);
 end;
 
 function TStString.GetLength : Cardinal;
 {- Return the length of the string. }
 begin
   if Assigned(FString) then
-    Result := StrLen(FString)
+    Result := AnsiStrings.StrLen(FString)
   else
     Result := 0;
 end;
@@ -1293,15 +1296,15 @@ begin
       Temp := AnsiStrAlloc(Succ(SizeWordAtCursor(False)));
       try
         GetWordAtCursorZ(Temp);
-        Result := StrPas(SoundexZ(Dest, Temp));
+        Result := AnsiStrings.StrPas(SoundexZ(Dest, Temp));
         FItems.Add(Result);
       finally
-        StrDispose(Temp);
+        AnsiStrings.StrDispose(Temp);
       end;
       if FRepeatValue > 1 then CursorNextWordPrim;
     end;
   finally
-    StrDispose(Dest);
+    AnsiStrings.StrDispose(Dest);
   end;
 end;
 
@@ -1332,7 +1335,7 @@ begin
     AllocTemp(SuggestSize(Value));
     if Assigned(FTemp) then begin
       if Assigned(FString) then begin
-        StrLCopy(FTemp, FString, Value);
+        AnsiStrings.StrLCopy(FTemp, FString, Value);
       end;
       TempToString;
     end;
@@ -1343,7 +1346,7 @@ procedure TStString.SetAsShortStr(Value : ShortString);
 {- Copy short string into string object. }
 begin
   CheckAlloc(Byte(Value[0]));
-  StrPCopy(FString, Value);
+  AnsiStrings.StrPCopy(FString, Value);
   ResetCursor;
 end;
 
@@ -1357,10 +1360,10 @@ end;
 procedure TStString.SetDelimiters(Value : AnsiString);
 {- Set the delimiters. }
 begin
-  StrDispose(FDelimiters);
+  AnsiStrings.StrDispose(FDelimiters);
   FDelimiters := AnsiStrAlloc(Succ(System.Length(Value)));
   if Assigned(FDelimiters) then
-    StrPCopy(FDelimiters, Value);
+    AnsiStrings.StrPCopy(FDelimiters, Value);
 end;
 
 procedure TStString.SetItems(Value: TStringList);
@@ -1390,7 +1393,7 @@ procedure TStString.TempToString;
 begin
   FAlloc := FTempAlloc;
   FCursor := (FCursor - FString) + FTemp;
-  StrDispose(FString);
+  AnsiStrings.StrDispose(FString);
   FString := FTemp;
   FTemp := nil;
 end;
@@ -1412,14 +1415,14 @@ procedure TStString.SetAsLongStr(Value : AnsiString);
 {- Copy long string into string object. }
 begin
   CheckAlloc(System.Length(Value));
-  StrCopy(FString, PAnsiChar(Value));
+  AnsiStrings.StrCopy(FString, PAnsiChar(Value));
   ResetCursor;
 end;
 
 function TStString.GetAsVariant : Variant;
 {- Provide output as variant. }
 begin
-  Result := StrPas(FString);
+  Result := AnsiStrings.StrPas(FString);
 end;
 
 procedure TStString.SetAsVariant(Value : Variant);
@@ -1429,7 +1432,7 @@ var
 begin
   Temp := Value;
   CheckAlloc(System.Length(Temp));
-  StrCopy(FString, PAnsiChar(Temp));
+  AnsiStrings.StrCopy(FString, PAnsiChar(Temp));
   ResetCursor;
 end;
 

@@ -882,7 +882,7 @@ begin
   Result := False;
   Temp := '';
   for I := 1 to Length(S) do
-    if (S[I] in ['0'..'9']) then
+    if CharInSet(S[I], ['0'..'9']) then
       Temp := Temp + S[I];
   if Temp = '' then
     Exit;
