@@ -88,23 +88,18 @@ function OctalWL(W : Word) : AnsiString;
 function OctalLL(L : LongInt) : AnsiString;
   {-Return an octal string for a long integer.}
 
-function Str2Int16L(const S : AnsiString; var I : SmallInt) : Boolean;
+function Str2Int16L(const S : string; var I : SmallInt) : Boolean;
   {-Convert a string to an SmallInt.}
 
-function Str2WordL(const S : AnsiString; var I : Word) : Boolean;
+function Str2WordL(const S : string; var I : Word) : Boolean;
   {-Convert a string to a word.}
 
-function Str2LongL(const S : AnsiString; var I : LongInt) : Boolean;
+function Str2LongL(const S : string; var I : LongInt) : Boolean;
   {-Convert a string to a long integer.}
 
-{$IFDEF VER93}
-function Str2RealL(const S : AnsiString; var R : Double) : Boolean;
-{$ELSE}
-function Str2RealL(const S : AnsiString; var R : Real) : Boolean;
-  {-Convert a string to a real.}
-{$ENDIF}
+function Str2RealL(const S : string; var R : Double) : Boolean;
 
-function Str2ExtL(const S : AnsiString; var R : Extended) : Boolean;
+function Str2ExtL(const S : string; var R : Extended) : Boolean;
   {-Convert a string to an extended.}
 
 function Long2StrL(L : LongInt) : String;
@@ -533,7 +528,7 @@ begin
   end;
 end;
 
-function Str2Int16L(const S : AnsiString; var I : SmallInt) : Boolean;
+function Str2Int16L(const S : string; var I : SmallInt) : Boolean;
   {-Convert a string to an SmallInt.}
 
 var
@@ -552,7 +547,7 @@ begin
   end;
 end;
 
-function Str2WordL(const S : AnsiString; var I : Word) : Boolean;
+function Str2WordL(const S : string; var I : Word) : Boolean;
   {-Convert a string to a word.}
 
 var
@@ -571,7 +566,7 @@ begin
   end;
 end;
 
-function Str2LongL(const S : AnsiString; var I : LongInt) : Boolean;
+function Str2LongL(const S : string; var I : LongInt) : Boolean;
   {-Convert a string to a long integer.}
 
 var
@@ -590,15 +585,11 @@ begin
   end;
 end;
 
-{$IFDEF VER93}                                                         
-function Str2RealL(const S : AnsiString; var R : Double) : Boolean;
-{$ELSE}                                                                
-function Str2RealL(const S : AnsiString; var R : Real) : Boolean;      
-{$ENDIF}                                                               
+function Str2RealL(const S : string; var R : Double) : Boolean;
   {-Convert a string to a real.}
 var
   Code : Integer;
-  St   : AnsiString;
+  St   : string;
 begin
   Result := False;
   if S = '' then Exit;
@@ -611,11 +602,11 @@ begin
     Result := True;
 end;
 
-function Str2ExtL(const S : AnsiString; var R : Extended) : Boolean;
+function Str2ExtL(const S : string; var R : Extended) : Boolean;
   {-Convert a string to an extended.}
 var
   Code : Integer;
-  P : AnsiString;
+  P : string;
 begin
   Result := False;
   if S = '' then Exit;

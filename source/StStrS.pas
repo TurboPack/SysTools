@@ -74,23 +74,18 @@ function OctalWS(W : Word) : ShortString;
 function OctalLS(L : LongInt) : ShortString;
   {-Return an octal string for a long integer.}
 
-function Str2Int16S(const S : ShortString; var I : SmallInt) : Boolean;
+function Str2Int16S(const S : string; var I : SmallInt) : Boolean;
   {-Convert a string to an SmallInt.}
 
-function Str2WordS(const S : ShortString; var I : Word) : Boolean;
+function Str2WordS(const S : string; var I : Word) : Boolean;
   {-Convert a string to a word.}
 
-function Str2LongS(const S : ShortString; var I : LongInt) : Boolean;
+function Str2LongS(const S : string; var I : LongInt) : Boolean;
   {-Convert a string to a long integer.}
 
-{$IFDEF VER93}                                                         
-function Str2RealS(const S : ShortString; var R : Double) : Boolean;
-{$ELSE}                                                                
-  {-Convert a string to a real.}
-function Str2RealS(const S : ShortString; var R : Real) : Boolean;     
-{$ENDIF}                                                               
+function Str2RealS(const S : string; var R : Double) : Boolean;
 
-function Str2ExtS(const S : ShortString; var R : Extended) : Boolean;
+function Str2ExtS(const S : string; var R : Extended) : Boolean;
   {-Convert a string to an extended.}
 
 function Long2StrS(L : LongInt) : ShortString;
@@ -102,7 +97,7 @@ function Real2StrS(R : Double; Width : Byte; Places : ShortInt) : ShortString;
 function Ext2StrS(R : Extended; Width : Byte; Places : ShortInt) : ShortString;
   {-Convert an extended to a string.}
 
-function ValPrepS(const S : ShortString) : ShortString;
+function ValPrepS(const S : string) : string;
   {-Prepares a string for calling Val.}
 
 
@@ -131,9 +126,6 @@ function TrimTrailS(const S : ShortString) : ShortString;
 
 function TrimS(const S : ShortString) : ShortString;
   {-Return a string with leading and trailing white space removed.}
-
-function TrimSpacesS(const S : ShortString) : ShortString;
-  {-Return a string with leading and trailing spaces removed.}
 
 function CenterChS(const S : ShortString; C : AnsiChar; Len : Cardinal) : ShortString;
   {-Pad a string on the left and right with a specified character.}
@@ -520,7 +512,7 @@ begin
   end;
 end;
 
-function Str2Int16S(const S : ShortString; var I : SmallInt) : Boolean;
+function Str2Int16S(const S : string; var I : SmallInt) : Boolean;
   {-Convert a string to an SmallInt.}
 
 var
@@ -538,7 +530,7 @@ begin
   end;
 end;
 
-function Str2WordS(const S : ShortString; var I : Word) : Boolean;
+function Str2WordS(const S : string; var I : Word) : Boolean;
   {-Convert a string to a word.}
 
 var
@@ -556,7 +548,7 @@ begin
   end;
 end;
 
-function Str2LongS(const S : ShortString; var I : LongInt) : Boolean;
+function Str2LongS(const S : string; var I : LongInt) : Boolean;
   {-Convert a string to a long integer.}
 
 var
@@ -574,22 +566,14 @@ begin
   end;
 end;
 
-{$IFDEF VER93}                                                         
-function Str2RealS(const S : ShortString; var R : Double) : Boolean;
-{$ELSE}                                                                
-  {-Convert a string to a real.}
-function Str2RealS(const S : ShortString; var R : Real) : Boolean;     
-{$ENDIF}                                                               
+function Str2RealS(const S : string; var R : Double) : Boolean;
   {-Convert a string to a real.}
 var
   Code : Integer;
-  St   : ShortString;
-  SLen : Byte absolute St;
+  St   : string;
 begin
-  St := S;
   {trim trailing blanks}
-  while St[SLen] = ' ' do
-    Dec(SLen);
+  St := S.TrimRight;
   Val(ValPrepS(St), R, Code);
   if Code <> 0 then begin
     R := Code;
@@ -598,17 +582,14 @@ begin
     Result := True;
 end;
 
-function Str2ExtS(const S : ShortString; var R : Extended) : Boolean;
+function Str2ExtS(const S : string; var R : Extended) : Boolean;
   {-Convert a string to an extended.}
 var
   Code : Integer;
-  P : ShortString;
-  PLen : Byte absolute P;
+  P : string;
 begin
-  P := S;
   {trim trailing blanks}
-  while P[PLen] = ' ' do
-    Dec(PLen);
+  P := S.TrimRight;
   Val(ValPrepS(P), R, Code);
   if Code <> 0 then begin
     R := Code;
@@ -635,21 +616,23 @@ begin
   Str(R:Width:Places, Result);
 end;
 
-function ValPrepS(const S : ShortString) : ShortString;
+function ValPrepS(const S : string) : string;
   {-Prepares a string for calling Val.}
 var
   P : Cardinal;
 begin
-  Result := TrimSpacesS(S);
-  if Result <> '' then begin
-    if StrChPosS(Result, {$IFDEF DELPHIXE2}FormatSettings.{$ENDIF}DecimalSeparator, P) then begin
+  Result := S.Trim;
+  if Result <> '' then
+  begin
+    if StrChPosS(Result, FormatSettings.DecimalSeparator, P) then
+    begin
       Result[P] := '.';
-      if P = Byte(Result[0]) then
-        Result[0] := AnsiChar(Pred(P));
+      if P = Result.Length then
+        Result.Remove(Result.Length - 1);
     end;
-  end else begin
+  end
+  else
     Result := '0';
-  end;
 end;
 
   {-------- General purpose string manipulation --------}
@@ -744,22 +727,6 @@ begin
 
   I := 1;
   while (I <= SLen) and (Result[I] <= ' ') do
-    Inc(I);
-  Dec(I);
-  if I > 0 then
-    Delete(Result, 1, I);
-end;
-
-function TrimSpacesS(const S : ShortString) : ShortString;
-  {-Return a string with leading and trailing spaces removed.}
-var
-  I    : Word;
-begin
-  Result := S;
-  while (Length(Result) > 0) and (Result[Length(Result)] = ' ') do
-    Dec(Result[0]);
-  I := 1;
-  while (I <= Length(Result)) and (S[I] = ' ') do
     Inc(I);
   Dec(I);
   if I > 0 then

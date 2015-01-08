@@ -500,9 +500,9 @@ procedure StDisposeStr(PS : PShortString);
 
 
 {---primitives for converting strings to integers}
-procedure ValLongInt(S : ShortString; var LI : Longint; var ErrorCode : integer);
-procedure ValSmallint(const S : ShortString; var SI : smallint; var ErrorCode : integer);
-procedure ValWord(const S : ShortString; var Wd : word; var ErrorCode : integer);
+procedure ValLongInt(S :string; var LI : Longint; var ErrorCode : integer);
+procedure ValSmallint(const S : string; var SI : smallint; var ErrorCode : integer);
+procedure ValWord(const S : string; var Wd : word; var ErrorCode : integer);
 
 {.Z+}
 {general routine to raise a specific class of SysTools exception}
@@ -1107,7 +1107,7 @@ asm
 end;
 
 {---primitives for converting strings to integers---}
-procedure ValLongInt(S : ShortString; var LI : Longint; var ErrorCode : integer);
+procedure ValLongInt(S : string; var LI : Longint; var ErrorCode : integer);
 var
   LenS   : byte absolute S;
   Offset : Integer;
@@ -1157,7 +1157,7 @@ begin
   end;
 end;
 
-procedure ValSmallint(const S : ShortString; var SI : smallint; var ErrorCode : integer);
+procedure ValSmallint(const S : string; var SI : smallint; var ErrorCode : integer);
 const
   SmallestInt16 = -32767;
   LargestInt16 = 32767;
@@ -1177,7 +1177,7 @@ begin
   end;
 end;
 
-procedure ValWord(const S : ShortString; var Wd : word; var ErrorCode : integer);
+procedure ValWord(const S : string; var Wd : word; var ErrorCode : integer);
 const
   SmallestWord = 0;
   LargestWord = 65535;
