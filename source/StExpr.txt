@@ -1,0 +1,355 @@
+
+This file documents the TStExpression and TStExpressionEdit components.
+
+
+TStExpression
+=============
+
+TStExpression is a non-visual component that provides expression evaluation
+at several different levels. At the lowest level, simple mathematical
+expressions can be evaluated and the resulting value obtained. On a higher
+level, you can define alpha-numeric constants that can then be used within
+expressions; You can add user-defined functions (and even methods of a class)
+so that the names of these routines can be used in expressions; You can
+define variables that relate directly to variables in your program and even
+use them in expressions.
+
+Note: TStExpression replaces AnalyzeExpr that SysTools version 2.00 provided,
+but a version of that routine is still provided for backward compatibility.
+
+The TStExpression expression parser implements the following grammar, similar
+to a subset of Pascal:
+
+   expression:    term | expression+term | expression-term
+   term:          factor | term*factor | term/factor
+   factor:        base | base^factor
+   base:          unsigned_num | (expression) | sign factor | func_call
+   unsigned_num:  digit_seq | digit_seq.digit_seq | digit_seq scale_fac |
+                  digit_seq.digit_seq scale_fac
+   sign:          + | -
+   func_call:     identifier | identifier(params)
+   params:        expression | params,expression
+   scale_fac:     E digit_seq | E sign digit_seq
+   digit_seq:     digit | digit_seq digit
+   identifier:    starts with A..Z,_ continues with A..Z,_,0..9
+   digit:         0..9
+
+Case is not significant when matching characters.
+
+The grammar follows normal rules of arithmetic precedence, with ^ highest, *
+and / in the middle, and + and - lowest.  Thus, 1+2*3^4 means 1+(2*(3^4)).
+Parentheses can be used to force non-default precedence.
+
+Note that the power operator x^y is right-associative. This means that
+2^0.5^2 is equivalent to 2^(0.5^2). All other arithmetic operators are left
+associative: 1-2-3 is equivalent to (1-2)-3.
+
+The following functions are supported in 16-bit and 32-bit applications:
+
+    abs, arctan, cos, exp, frac, int(trunc), ln, pi, round, sin, sqr,
+    sqrt
+
+If the VCL Math unit is available and you define the "UseMathUnit" define in
+STDEFINE.INC, the following are also available:
+
+    arccos, arcsin, arctan2, tan, cotan, hypot, cosh, sinh, tanh,
+    arccosh, arcsinh, arctanh, lnxp1, log10, log2, logn, ceil, floor
+
+The calling conventions for all functions match those of the VCL runtime
+library or Math unit. The acceptable parameter ranges and output values also
+match thoses of the VCL runtime library or MATH unit.
+
+When the input expression contains an error, TStExpression raises an
+exception of type EStExprError. Its ErrorCode property provides more detail
+about the error. Its ErrorColumn property gives the string index of the start
+of the token where the error was detected.
+
+TStExpression is very flexible. You can add support for your own functions
+easily. For example, to add support for the Sin() function, first write a
+function to provide the proper number and type of parameters (the "far" can
+be omitted with 32-bit compilers):
+
+function _Sin(Value : TStFloat) : TStFloat; far;
+begin
+  Result := Sin(Value);
+end;
+
+and then add it to the TStExpression component:
+
+   MyStExpression.AddFunction1Param('sin', _Sin);
+
+Or, if you wanted to use a method of the form (or any other class) that you
+were working in, you could do the same thing this way:
+
+function MyForm._Sin(Value : TStFloat) : TStFloat;
+begin
+  Result := Sin(Value);
+end;
+
+and then add it to the TStExpression component:
+
+  MyStExpression.AddMethod1Param('sin', _Sin);
+
+TStExpression supports user-defined functions with 0 to 3 parameters. The
+parameters and function result must be the TStFloat type (defined in the
+STBASE unit). In the example above, that's why we didn't just add
+the Sin() function directly, in the call to AddFunction1Param -- The
+TStExpression component must know the data types of parameters and return
+values. If the function you are adding has no parameters, use the
+AddFunction0Parm() method. AddFunction2Param for functions with two
+parameters, etc.
+
+The following function and method types define all possible user-defined
+function and method types accepted by the TStExpression component:
+
+  {user-defined functions with up to 3 parameters}
+  TStFunction0Param =
+    function : TStFloat;
+  TStFunction1Param =
+    function(Value1 : TStFloat) : TStFloat;
+  TStFunction2Param =
+    function(Value1, Value2 : TStFloat) : TStFloat;
+  TStFunction3Param =
+    function(Value1, Value2, Value3 : TStFloat) : TStFloat;
+
+  {user-defined methods with up to 3 parameters}
+  TStMethod0Param =
+    function : TStFloat
+    of object;
+  TStMethod1Param =
+    function(Value1 : TStFloat) : TStFloat
+    of object;
+  TStMethod2Param =
+    function(Value1, Value2 : TStFloat) : TStFloat
+    of object;
+  TStMethod3Param =
+    function(Value1, Value2, Value3 : TStFloat) : TStFloat
+    of object;
+
+Add predefined constant values by using the AddConstant method:
+
+  AddConstant('X', 50)
+
+Then, in any expression that uses the identifier "X", the value 50 will be
+used when the expression is evaluated.
+
+Add references to variables in your program by using the AddVariable method:
+
+  var
+    MyVar : TStFloat;
+
+  AddVariable('MyVar', @MyVar);
+
+Whenever an expression is evaluated that contains the "MyVar" identifier,
+the actual value of the variable (in your program) is retrieved and used
+to compute the expression result. Changes to variable's value in your
+program will be reflected when the expression is next evaluated.
+
+Two things to note: First, the variable must be a TStFloat type and second,
+the variable must remain in "scope". In general, this means that the variable
+must either be defined globally or as a class variable. You normally would not
+use AddVariable for variables defined local to a procedure or function (a
+stack variable).
+
+TStExpression offers a way to dynamically determine the value of an variable
+or function that is being used in an expression -- the OnGetIdentValue event.
+This event is fired if the expression parser is unable to locate the identifier
+in its internal list of identifier names. In response to the event, you should
+assign a value to the Value parameter that corresponds to the identifier name
+passed to the event as the Identifier parameter. If no event handler is
+assigned to this even and the expression parser is unable to locate a match for
+an identifier used in an expression, an exception is raised.
+
+
+Reference Section
+-----------------
+
+methods
+-------
+
+function AnalyzeExpression : TStFloat;
+-> AnalyzeExpression causes the expression contained in the Expression property
+   to be evaluated and returns the resulting value as the function result.
+
+
+procedure AddConstant(const Name : string; Value : TStFloat);
+-> AddConstant adds named constant values for use within expressions.
+
+Example: AddConstant('X', 50)
+
+
+procedure AddFunction0Param(const Name : string; FunctionAddr : TStFunction0Param);
+procedure AddFunction1Param(const Name : string; FunctionAddr : TStFunction1Param);
+procedure AddFunction2Param(const Name : string; FunctionAddr : TStFunction2Param);
+procedure AddFunction3Param(const Name : string; FunctionAddr : TStFunction3Param);
+-> AddFunctionXParam adds support for user-defined functions within expressions.
+
+The four variations allow defining functions with no parameters, or, with one,
+two, or three parameters. Name is the identifier that is entered into the
+expression. The name does not need to be the same as the actual function name.
+
+Parameter and function results must be defined as TStFloat.
+
+
+procedure AddInternalFunctions;
+-> AddInternalFunctions adds support for all of the predefined internal
+   functions.
+
+Since AddInternalFunctions is called by default, calling this routine without
+first calling ClearIdentifiers will result in duplicate identifier exceptions.
+
+
+procedure AddMethod0Param(const Name : string; MethodAddr : TStMethod0Param);
+procedure AddMethod1Param(const Name : string; MethodAddr : TStMethod1Param);
+procedure AddMethod2Param(const Name : string; MethodAddr : TStMethod2Param);
+procedure AddMethod3Param(const Name : string; MethodAddr : TStMethod3Param);
+-> AddMethodXParam adds support for user-defined methods within expressions.
+
+The four variations allow defining methods with no parameters, or, with one,
+two, or three parameters. Name is the identifier that is entered into the
+expression. The name does not need to be the same as the actual method name.
+
+Parameter and function results must be defined as TStFloat.
+
+
+procedure AddVariable(const Name : string; VariableAddr : PStFloat);
+-> Adds Name as a reference to a variable in your program.
+
+Name is the identifier used in expressions.
+
+Example:
+
+  var
+    X : TStFloat;
+  ...
+  AddVariable('X', @X)
+
+
+procedure ClearIdentifiers;
+-> ClearIdentifiers removes all function, method, constant, and variable identifiers.
+
+
+procedure GetIdentList(S : TStrings);
+-> GetIdentList fills S with a list of identifiers current recognized.
+
+
+procedure RemoveIdentifier(const Name : string);
+-> RemoveIdentifier removes support for the identifier Name.
+
+If Name is not found, no action is taken.
+
+
+properties
+----------
+property AsFloat : TStFloat (run-time read-only)
+-> AsFloat evaluates the expression and returns the value as a TStFloat
+   value;
+
+property AsInteger : Integer (run-time read-only)
+-> AsInteger evaluates the expression and returns the value as a whole number
+   using the Round() function to convert the TStFloat value.
+
+property AsString : string (run-time read-only)
+-> AsString evaluates the expression and returns the value as a string using
+   the FloatToStr() function to format the TStFloat value.
+
+property LastError : Integer (run-time read-only)
+-> LastError returns the error code (zero if no error).
+
+property ErrorPosition : Integer (run-time read-only)
+-> ErrorPosition returns the position of the error within the expression.
+
+ErrorPosition is valid only if LastError is non-zero.
+
+property Expression : string (run-time)
+-> Expression defines the expression that should be evaluated.
+
+property AllowEqual : Boolean
+default: True
+-> AllowEqual determines if the use of the "=" symbol in the expression will
+   add constant declarations.
+
+If true, expressions like X = 5 will cause the identifer "X" to be added and
+associated with the value 5. This expression will also return a value of 5
+when analyzed. If false, a bad character exception is raised.
+
+
+events
+------
+property OnAddIdentifier : TNotifyEvent
+-> OnAddIdentifier defines an event that is fired when a new identifier
+   is added.
+
+This event is fired for additions of function, method, constant, and variable
+identifiers.
+
+property OnGetIdentValue : TGetIdentValueEvent
+TGetIdentValueEvent =
+  procedure(Sender : TObject; const Identifier : string; var Value : TStFloat)
+  of object;
+-> OnGetIdentValue defines an event handler that is fired to obtain the value
+for an identifier that was not found in the internal list of known identifiers.
+
+
+TStExpressionEdit
+=================
+The TStExpressionEdit component is a simple descendant of a TEdit component
+that adds one new method, two properties, and two new events.  In all other
+respects, this control is the same as the standard VCL TEdit control.
+
+The TStExpressionEdit uses an instance of the TStExpression component to do
+most of the work. Any expression that is valid for the TStExpression
+component can be entered into the component or assigned to the Text property.
+The expression is evaluated when the component loses the focus (with AutoEval
+true) or when the Evaluate method is called. Also, if AutoEval is true and
+the control loses the focus, the resulting value is displayed in the control.
+
+
+New properties and methods:
+
+function Evaluate : TStFloat;
+
+-> Evaluate evaluates the contents of the Text property as an expression
+using the contained TStExpression component and returns the result of the
+expression as the function result.
+
+If an error occurs an exception is raised unless an event handler for the
+OnError event is assigned. In which case, the event is fired instead.
+
+Note: The AnalyzeExpr function (which is documented in the printed
+manual and on-line help) is obsolete and is provided for backward
+compatibility only.
+
+
+property AutoEval : Boolean
+
+-> AutoEval determines if the entered expression is automatically evaluated
+   when the control loses the focus.
+
+If AutoEval is true, the Evaluate method is called automatically and the
+Text of the edit control is set to the result of evaluating the expression.
+If False, no additional action is taken.
+
+
+property Expr : TStExpression (run-time)
+
+-> Expr provides access to the contained TStExpression component and all of
+   its properties, methods, and events.
+
+
+property OnAddIdentifier : TNotifyEvent
+
+-> OnAddIdentifier defines an event that is fired when an identifier is
+   added to the internal TStExpression component.
+
+This event is fired to notify you that a constant or function identifier has
+been added to the contained TStExpression component.
+
+
+property OnError : TStExprErrorEvent
+
+  TStExprErrorEvent =
+    procedure(Sender : TObject; ErrorNumber : LongInt; const ErrorStr : string)
+    of object;
+
+-> OnError defines an event that is fired when an evaluation error occurs.

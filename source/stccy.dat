@@ -1,0 +1,315 @@
+; World Currency Information
+; ISO 4217-style currency information 
+; Format:
+;[ISOCode]
+;ISOName=<ISO 4217 3 Letter Currency ID>
+;ISOCode=<ISO 4217 3 Digit Currency Number>
+;UnitMajor=<Major Currency Name>
+;UnitMinor=<Minor Currency Name>
+;Ratio=<ratio of minor currency to major>
+;Name=<Country-Currency Name>
+
+[AUD]
+ISOName=AUD
+ISOCode=036
+UnitMajor=dollar
+UnitMinor=cent
+Ratio=100
+Name=Australian Dollar
+
+[ATS]
+ISOName=ATS
+ISOCode=040
+UnitMajor=schilling
+UnitMinor=groschen
+Ratio=100
+Name=Austrian Schilling
+
+[BEF]
+ISOName=BEF
+ISOCode=056
+UnitMajor=franc
+Ratio=100
+UnitMinor=
+Name=Belgium Franc
+
+[BRL]
+ISOName=BRL
+ISOCode=986
+UnitMajor=real
+UnitMinor=centavo
+Ratio=100
+Name=Brazilian Real
+
+[CAD]
+ISOName=CAD
+ISOCode=124
+UnitMajor=dollar
+UnitMinor=cent
+Ratio=100
+Name=Canadian Dollar
+
+[CNY]
+ISOName=CNY
+ISOCode=156
+UnitMajor=yuan renminbi
+UnitMinor=jiao
+Ratio=100
+Name=Chinese Renminbi Yuan
+
+[DKK]
+ISOName=DKK
+ISOCode=208
+UnitMajor=krone
+UnitMinor=øre
+Ratio=100
+Name=Danish Krone
+
+[DEM]
+ISOName=DEM
+ISOCode=276
+UnitMajor=deutsche mark
+UnitMinor=pfennig
+Ratio=100
+Name=Deutsche Mark
+
+[NLG]
+ISOName=NLG
+ISOCode=528
+UnitMajor=gulden
+UnitMinor=cent
+Ratio=100
+Name=Dutch Guilder
+
+[EGP]
+ISOName=EGP
+ISOCode=818
+UnitMajor=pound
+UnitMinor=piaster
+Ratio=100
+Name=Egytian Pound
+
+[EUR]
+ISOName=EUR
+ISOCode=978
+UnitMajor=Euro
+UnitMinor=euro-cent
+Ratio=100
+Name=Euro
+
+[FRF]
+ISOName=FRF
+ISOCode=250
+UnitMajor=franc
+UnitMinor=centime
+Ratio=100
+Name=French Franc
+
+[GRD]
+ISOName=GRD
+ISOCode=300
+UnitMajor=drachma
+UnitMinor=lepta
+Ratio=100
+Name=Greek Drachma
+
+[HKD]
+ISOName=HKD
+ISOCode=344
+UnitMajor=dollar
+UnitMinor=cent
+Ratio=100
+Name=Hong Kong Dollar
+
+[ISK]
+ISOName=ISK
+ISOCode=352
+UnitMajor=króna
+UnitMinor=aurar
+Ratio=100
+Name=Icelandic Króna
+
+[INR]
+ISOName=INR
+ISOCode=356
+UnitMajor=rupee
+UnitMinor=paise
+Ratio=100
+Name=Indian Rupee
+
+[ILS]
+ISOName=ILS
+ISOCode=376
+UnitMajor=new shekel
+UnitMinor=agorot
+Ratio=100
+Name=Israel Shekel
+
+[ITL]
+ISOName=ITL
+ISOCode=380
+UnitMajor=lira
+UnitMinor=ml
+Ratio=100
+Name=Italian Lira
+
+[JPY]
+ISOName=JPY
+ISOCode=392
+UnitMajor=yen
+UnitMinor=sen
+Ratio=100
+Name=Japanese Yen
+
+[MXN]
+ISOName=MXN
+ISOCode=484
+UnitMajor=peso
+UnitMinor=centavo
+Ratio=100
+Name=Mexican Peso
+
+[NZD]
+ISOName=NZD
+ISOCode=554
+UnitMajor=dollar
+UnitMinor=cent
+Ratio=100
+Name=New Zealand Dollar
+
+[NOK]
+ISOName=NOK
+ISOCode=578
+UnitMajor=krone
+UnitMinor=øre
+Ratio=100
+Name=Norwegian Krone
+
+[PLZ]
+ISOName=PLZ
+ISOCode=616
+UnitMajor=zloty
+UnitMinor=groszy
+Ratio=100
+Name=Poland New Zloty
+
+[PTE]
+ISOName=PTE
+ISOCode=620
+UnitMajor=escudo
+UnitMinor=centavo
+Ratio=100
+Name=Portuguese Escudo
+
+[RUR]
+ISOName=RUR
+ISOCode=810
+UnitMajor=ruble
+UnitMinor=kopeck
+Ratio=100
+Name=Russian Federation Rouble
+
+[SGD]
+ISOName=SGD
+ISOCode=702
+UnitMajor=dollar
+UnitMinor=cent
+Ratio=100
+Name=Singapore Dollar
+
+[ESP]
+ISOName=ESP
+ISOCode=724
+UnitMajor=peseta
+UnitMinor=centimo
+Ratio=100
+Name=Spanish Peseta
+
+[GBP]
+ISOName=GBP
+ISOCode=826
+UnitMajor=pound
+UnitMinor=pence
+Ratio=100
+Name=Sterling
+
+[SEK]
+ISOName=SEK
+ISOCode=752
+UnitMajor=krona (pl. kronor)
+UnitMinor=öre
+Ratio=100
+Name=Swedish Krona
+
+[CHF]
+ISOName=CHF
+ISOCode=756
+UnitMajor=franc
+UnitMinor=rappen
+Ratio=100
+Name=Swiss Franc
+
+[USD]
+ISOName=USD
+ISOCode=840
+UnitMajor=dollar
+UnitMinor=cent
+Ratio=100
+Name=US DOLLAR
+
+[DTR]
+ISOName=DTR
+ISOCode=005
+UnitMajor=rex
+UnitMinor=campi
+Ratio=100
+Name=Dinotopia Rex
+
+[ZQP]                    
+ISOName=ZQP
+ISOCode=002
+UnitMajor=pazoor
+UnitMinor=dharma
+Ratio=100
+Name=Zothique Pazoor
+
+[LAM]                   
+ISOName=LAM
+ISOCode=001
+UnitMajor=minim
+UnitMinor=speck
+Ratio=100
+Name=Lilliputia Minim
+
+[BNG]
+ISOName=BNG
+ISOCode=008
+UnitMajor=gargantua
+UnitMinor=bloat
+Ratio=100
+Name=Brobdinagian Gargantua
+
+[ELE]
+ISOName=ELE
+ISOCode=011
+UnitMajor=elbo
+UnitMinor=kni
+Ratio=100
+Name=Elbonia Elbo
+
+[SBD]
+ISOName=SBD
+ISOCode=333
+UnitMajor=dunge
+UnitMinor=slop
+Ratio=100
+Name=Slobovia Dunge
+
+[RYE]
+ISOName=RYE
+ISOCode=666
+UnitMajor=eldritch
+UnitMinor=voor
+Ratio=100
+Name=Rlyeh Eldritch 
+
