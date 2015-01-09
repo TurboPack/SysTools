@@ -219,14 +219,14 @@ var
     {-Return the day of the week specified by WeekDay as a string in Dest.
     Will honor international names}
   begin
-    Result := {$IFDEF DELPHIXE2}FormatSettings.{$ENDIF}LongDayNames[Ord(WeekDay)+1];
+    Result := FormatSettings.LongDayNames[Ord(WeekDay)+1];
   end;
 
   function MonthToString(const Month : Integer) : string;
   {-Return the month as a string. Will honor international names}
   begin
     if (Month >= 1) and (Month <= 12) then
-      Result := {$IFDEF DELPHIXE2}FormatSettings.{$ENDIF}LongMonthNames[Month]
+      Result := FormatSettings.LongMonthNames[Month]
     else
        Result := '';
   end;
@@ -282,7 +282,7 @@ var
     S := S + StringOfChar(' ', Width - Len);
 
     for I := 1 to 12 do begin
-      T := UpperCase({$IFDEF DELPHIXE2}FormatSettings.{$ENDIF}LongMonthNames[I]);
+      T := UpperCase(FormatSettings.LongMonthNames[I]);
       Len := Length(T);
 //      SetLength(T,Width);
 //      if Width > Len then
@@ -474,14 +474,14 @@ var
       if UCh = WeekDayOnlyU then
         case I of
           Ord(Sunday)..Ord(Saturday) :
-            Tmp := {$IFDEF DELPHIXE2}FormatSettings.{$ENDIF}LongDayNames[I+1];
+            Tmp := FormatSettings.LongDayNames[I+1];
           else
             Tmp := '';
         end
       else
         case I of
           1..12 :
-            Tmp := {$IFDEF DELPHIXE2}FormatSettings.{$ENDIF}LongMonthNames[I];
+            Tmp := FormatSettings.LongMonthNames[I];
           else
             Tmp := '';
         end;
@@ -876,7 +876,7 @@ var
     begin
       L := 0;
       for I := 1 to 12 do
-        L := Maxword(L, Length({$IFDEF DELPHIXE2}FormatSettings.{$ENDIF}LongMonthNames[I]));
+        L := Maxword(L, Length(FormatSettings.LongMonthNames[I]));
       LongestMonthName := L;
     end;
 
@@ -887,7 +887,7 @@ var
     begin
       L := 0;
       for D := Sunday to Saturday do
-        L := Maxword(L, Length({$IFDEF DELPHIXE2}FormatSettings.{$ENDIF}LongDayNames[Ord(D)+1]));
+        L := Maxword(L, Length(FormatSettings.LongDayNames[Ord(D)+1]));
       LongestDayName := L;
     end;
 
@@ -1052,11 +1052,11 @@ var
     end;
 
   begin
-    wTLZero := {$IFDEF DELPHIXE2}FormatSettings.{$ENDIF}LongTimeFormat[2] = 'h';
-    w12Hour := {$IFDEF DELPHIXE2}FormatSettings.{$ENDIF}LongTimeFormat[length({$IFDEF DELPHIXE2}FormatSettings.{$ENDIF}LongTimeFormat)] = 'M';
+    wTLZero := FormatSettings.LongTimeFormat[2] = 'h';
+    w12Hour := FormatSettings.LongTimeFormat[length(FormatSettings.LongTimeFormat)] = 'M';
 
-    wColonChar := {$IFDEF DELPHIXE2}FormatSettings.{$ENDIF}TimeSeparator;
-    wSlashChar := {$IFDEF DELPHIXE2}FormatSettings.{$ENDIF}DateSeparator;
+    wColonChar := FormatSettings.TimeSeparator;
+    wSlashChar := FormatSettings.DateSeparator;
 
     GetProfileString('intl','s1159','AM', S, Length(S));
     w1159 := ShortString(StrPas(S));

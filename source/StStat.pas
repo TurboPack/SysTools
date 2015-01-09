@@ -43,11 +43,7 @@ interface
 
 uses
   Windows,
-  {$IFDEF UseMathUnit}
   Math,
-  {$ELSE}
-  StMath,
-  {$ENDIF}
   SysUtils, StConst, StBase;
 
 {AVEDEV}

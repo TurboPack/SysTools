@@ -1176,10 +1176,8 @@ const
 begin
   case Value.VType of
     vtAnsiString: Result := string(Value.VAnsiString);
-    {$IFDEF UNICODE}
-    vtUnicodeString: Result := UnicodeString(Value.VUnicodeString);
+    vtUnicodeString: Result := string(Value.VUnicodeString);
     vtWideString: Result := WideString(Value.VWideString);
-    {$ENDIF}
     vtBoolean:    Result := BoolChars[Value.VBoolean];
     vtChar:       Result := string(Value.VChar);
     vtCurrency:   Result := CurrToStr(Value.VCurrency^);
@@ -1187,9 +1185,7 @@ begin
     vtInteger:    Result := IntToStr(Value.VInteger);
     vtPChar:      Result := string(Value.VPChar);
     vtString:     Result := string(Value.VString^);
-    {$IFDEF VERSION4}
     vtInt64:      Result := IntToStr(Value.VInt64^);
-    {$ENDIF VERSION4}
     else
       raise EStException.CreateResTP(stscTxtDatUnhandledVariant, 0);
   end;
@@ -1200,9 +1196,7 @@ procedure TStTextDataRecord.FillRecordFromArray(Values : array of const);
 var
   i, j : Integer;
 begin
-  {$IFDEF Version4}
   if Length(Values) > 0 then begin
-  {$ENDIF}
     i := 0;
     j := Low(Values);
     while (j <= High(Values)) and (i < Schema.FieldCount) do begin
@@ -1210,9 +1204,7 @@ begin
       Inc(i);
       Inc(j);
     end;
-  {$IFDEF Version4}
   end;
-  {$ENDIF}
 end;
 
 procedure TStTextDataRecord.FillRecordFromList(Items : TStrings);

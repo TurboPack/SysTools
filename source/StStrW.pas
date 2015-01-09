@@ -641,7 +641,7 @@ var
 begin
   Result := TrimSpacesW(S);
   if Result <> '' then begin
-    if StrChPosW(Result, WideChar({$IFDEF DELPHIXE2}FormatSettings.{$ENDIF}DecimalSeparator), P) then begin
+    if StrChPosW(Result, WideChar(FormatSettings.DecimalSeparator), P) then begin
       C := P;
       Result[C] := '.';
       if C = Length(Result) then
@@ -813,11 +813,7 @@ function EntabW(const S : WideString; TabSize : Byte) : WideString;
   {-Convert blanks in a string to tabs.}
 const
   WSpace = WideChar(#32);
-  {$IFNDEF VERSION4}
-  WTab   = string(WideChar(#9));
-  {$ELSE}
   WTab   = WideChar(#9);
-  {$ENDIF}
 var
   Col,
   CP,

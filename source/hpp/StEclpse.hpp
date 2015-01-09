@@ -14,6 +14,7 @@
 #pragma pack(push,8)
 #include <System.hpp>	// Pascal unit
 #include <SysInit.hpp>	// Pascal unit
+#include <System.Math.hpp>	// Pascal unit
 #include <StBase.hpp>	// Pascal unit
 #include <StList.hpp>	// Pascal unit
 #include <StDate.hpp>	// Pascal unit

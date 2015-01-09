@@ -1431,13 +1431,6 @@ begin
 end;
 
 procedure TStNetUserItem.GetLogonHours(var LogonHours: TStNetUserLogonTimes);
-{$IFNDEF VERSION4}
-const
-  TIME_ZONE_ID_INVALID  = DWORD($FFFFFFFF);
-  TIME_ZONE_ID_UNKNOWN  = 0;
-  TIME_ZONE_ID_STANDARD = 1;
-  TIME_ZONE_ID_DAYLIGHT = 2;
-{$ENDIF}
 type
   LHFlags = array[0..167] of Boolean;
   TLHData = array[TStDayType] of array[0..2] of Byte;
@@ -1486,13 +1479,6 @@ begin
 end;
 
 procedure TStNetUserItem.SetLogonHours(LogonHours: TStNetUserLogonTimes);
-{$IFNDEF VERSION4}
-const
-  TIME_ZONE_ID_INVALID  = DWORD($FFFFFFFF);
-  TIME_ZONE_ID_UNKNOWN  = 0;
-  TIME_ZONE_ID_STANDARD = 1;
-  TIME_ZONE_ID_DAYLIGHT = 2;
-{$ENDIF}
 type
   LHFlags = array[0..167] of Boolean;
   TLHData = array[TStDayType] of array[0..2] of Byte;

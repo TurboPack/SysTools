@@ -213,29 +213,15 @@ function SoundexL(const S : AnsiString) : AnsiString;
 function MakeLetterSetL(const S : AnsiString) : Integer;
   {-Return a bit-mapped long storing the individual letters contained in S.}
 
-{$IFDEF UNICODE}
 procedure BMMakeTableL(const MatchString : UnicodeString; var BT : BTable); overload;
-{$ELSE}
-procedure BMMakeTableL(const MatchString : AnsiString; var BT : BTable); overload;
-{$ENDIF}
   {-Build a Boyer-Moore link table}
 
-{$IFDEF UNICODE}
 function BMSearchL(var Buffer; BufLength: Cardinal; var BT: BTable;
                   const MatchString : String; out Pos : Cardinal) : Boolean; overload;
-{$ELSE}
-function BMSearchL(var Buffer; BufLength : Cardinal; var BT : BTable;
-                  const MatchString : AnsiString; var Pos : Cardinal) : Boolean; overload;
-{$ENDIF}
   {-Use the Boyer-Moore search method to search a buffer for a string.}
 
-{$IFDEF UNICODE}
 function BMSearchUCL(var Buffer; BufLength : Cardinal; var BT : BTable;
                     const MatchString : String ; var Pos : Cardinal) : Boolean;
-{$ELSE}
-function BMSearchUCL(var Buffer; BufLength : Cardinal; var BT : BTable;
-                    const MatchString : AnsiString ; var Pos : Cardinal) : Boolean;
-{$ENDIF}
   {-Use the Boyer-Moore search method to search a buffer for a string. This
     search is not case sensitive.}
 
@@ -1000,7 +986,6 @@ end;
 
 function CharExistsL(const S : String; C : Char) : Boolean; register;
   {-Count the number of a given character in a string. }
-{$IFDEF UNICODE}
 var
   I: Integer;
 begin
@@ -1014,67 +999,9 @@ begin
     end;
   end;
 end;
-{$ELSE}
-asm
-  push  ebx
-  xor   ecx, ecx
-  or    eax, eax
-  jz    @@Done
-  mov   ebx, [eax-StrOffset].LStrRec.Length
-  or    ebx, ebx
-  jz    @@Done
-  jmp   @@5
-
-@@Loop:
-  cmp   dl, [eax+3]
-  jne   @@1
-  inc   ecx
-  jmp   @@Done
-
-@@1:
-  cmp   dl, [eax+2]
-  jne   @@2
-  inc   ecx
-  jmp   @@Done
-
-@@2:
-  cmp   dl, [eax+1]
-  jne   @@3
-  inc   ecx
-  jmp   @@Done
-
-@@3:
-  cmp   dl, [eax+0]
-  jne   @@4
-  inc   ecx
-  jmp   @@Done
-
-@@4:
-  add   eax, 4
-  sub   ebx, 4
-
-@@5:
-  cmp   ebx, 4
-  jge   @@Loop
-
-  cmp   ebx, 3
-  je    @@1
-
-  cmp   ebx, 2
-  je    @@2
-
-  cmp   ebx, 1
-  je    @@3
-
-@@Done:
-  mov   eax, ecx
-  pop   ebx
-end;
-{$ENDIF}
 
 function CharCountL(const S : String; C : Char) : Cardinal; register;
   {-Count the number of a given character in a string. }
-{$IFDEF UNICODE}
 var
   I: Integer;
 begin
@@ -1083,59 +1010,6 @@ begin
     if S[I] = C then
       Inc(Result);
 end;
-{$ELSE}
-asm
-  push  ebx
-  xor   ecx, ecx
-  or    eax, eax
-  jz    @@Done
-  mov   ebx, [eax-StrOffset].LStrRec.Length
-  or    ebx, ebx
-  jz    @@Done
-  jmp   @@5
-
-@@Loop:
-  cmp   dl, [eax+3]
-  jne   @@1
-  inc   ecx
-
-@@1:
-  cmp   dl, [eax+2]
-  jne   @@2
-  inc   ecx
-
-@@2:
-  cmp   dl, [eax+1]
-  jne   @@3
-  inc   ecx
-
-@@3:
-  cmp   dl, [eax+0]
-  jne   @@4
-  inc   ecx
-
-@@4:
-  add   eax, 4
-  sub   ebx, 4
-
-@@5:
-  cmp   ebx, 4
-  jge   @@Loop
-
-  cmp   ebx, 3
-  je    @@1
-
-  cmp   ebx, 2
-  je    @@2
-
-  cmp   ebx, 1
-  je    @@3
-
-@@Done:
-  mov   eax, ecx
-  pop   ebx
-end;
-{$ENDIF}
 
 function WordCountL(const S, WordDelims : String) : Cardinal;
   {-Given an array of word delimiters, return the number of words in a string.}
@@ -1383,147 +1257,15 @@ end;
   {--------------- String comparison and searching -----------------}
 function CompStringL(const S1, S2 : String) : Integer; register;
   {-Compare two strings.}
-{$IFDEF UNICODE}
 begin
   Result := AnsiCompareStr(S1, S2);
 end;
-{$ELSE}
-asm
-  push   edi
-  mov    edi, edx           { EDI points to S2 }
-  push   esi
-  mov    esi, eax           { ESI points to S1 }
-
-  xor    edx, edx
-  xor    ecx, ecx
-
-  or     edi, edi
-  jz     @@1
-  mov    edx, [edi-StrOffset].LStrRec.Length
-
-@@1:
-  or     esi, esi
-  jz     @@2
-  mov    ecx, [esi-StrOffset].LStrRec.Length
-
-@@2:
-  or     eax, -1            { EAX holds temporary result }
-
-  cmp    ecx, edx           { Compare lengths }
-  je     @@EqLen            { Lengths equal? }
-  jb     @@Comp             { Jump if S1 shorter than S1 }
-
-  inc    eax                { S1 longer than S2 }
-  mov    ecx, edx           { Length(S2) in CL }
-
-@@EqLen:
-  inc    eax                { Equal or greater }
-
-@@Comp:
-  or     ecx, ecx
-  jz     @@Done             { Done if either is empty }
-
-  repe   cmpsb              { Compare until no match or ECX = 0 }
-  je     @@Done             { If Equal, result ready based on length }
-
-  mov    eax, 1
-  ja     @@Done             { S1 Greater? Return 1 }
-  or     eax, -1            { Else S1 Less, Return -1 }
-
-@@Done:
-  pop    esi
-  pop    edi
-end;
-{$ENDIF}
 
 function CompUCStringL(const S1, S2 : String) : Integer; register;
   {-Compare two strings. This compare is not case sensitive.}
-{$IFDEF UNICODE}
 begin
   Result := AnsiCompareText(S1, S2);
 end;
-{$ELSE}
-asm
-  push   ebx                { Save registers }
-  push   edi
-  push   esi
-
-  mov    edi, edx           { EDI points to S2 }
-  mov    esi, eax           { ESI points to S1 }
-
-  xor    eax, eax
-  xor    ecx, ecx
-  xor    edx, edx           { DL chars from S2 }
-  or     ebx, -1
-
-  or     edi, edi
-  jz     @@1
-  mov    eax, [edi-StrOffset].LStrRec.Length
-
-@@1:
-  or     esi, esi
-  jz     @@2
-  mov    ecx, [esi-StrOffset].LStrRec.Length
-
-@@2:
-  cmp    ecx, eax           { Compare lengths }
-  je     @@EqLen            { Lengths equal? }
-  jb     @@Comp             { Jump if S1 shorter than S1 }
-
-  inc    ebx                { S1 longer than S2 }
-  mov    ecx, eax           { Shorter length in ECX }
-
-@@EqLen:
-  inc    ebx                { Equal or greater }
-
-@@Comp:
-  or     ecx, ecx
-  jz     @@Done             { Done if lesser string is empty }
-
-@@Start:
-  xor    eax, eax           { EAX holds chars from S1 }
-  mov    al, [esi]          { S1[?] into AL }
-  inc    esi
-
-  push   ecx                { Save registers }
-  push   edx
-  push   eax                { Push Char onto stack for CharUpper }
-  call   CharUpper
-  pop    edx                { Restore registers }
-  pop    ecx
-
-  mov    dl, [edi]          { S2[?] into DL }
-  inc    edi                { Point EDI to next char in S2 }
-  mov    dh, al
-  mov    al, dl
-  mov    dl, dh
-
-  push   ecx                { Save registers }
-  push   edx
-  push   eax                { Push Char onto stack for CharUpper }
-  call   CharUpper
-  pop    edx                { Restore registers }
-  pop    ecx
-
-  cmp    dl, al             { Compare until no match }
-  jne    @@Output
-  dec    ecx
-  jnz    @@Start
-
-  je     @@Done             { If Equal, result ready based on length }
-
-@@Output:
-  mov    ebx, 1
-  ja     @@Done             { S1 Greater? Return 1 }
-  or     ebx, -1            { Else S1 Less, Return -1 }
-
-@@Done:
-  mov    eax, ebx           { Result into EAX }
-  pop    esi                { Restore Registers }
-  pop    edi
-  pop    ebx
-end;
-{$ENDIF}
 
 function SoundexL(const S : AnsiString) : AnsiString;
   {-Return 4 character soundex of an input string}
@@ -1673,7 +1415,6 @@ asm
   pop    ebx
 end;
 
-{$IFDEF UNICODE}
 procedure BMMakeTableL(const MatchString : UnicodeString; var BT : BTable);
 begin
   // Do nothing until BMSearchL is fixed
@@ -1689,55 +1430,7 @@ begin
   for I := 1 to Length(MatchString) - 1 do
     BT[Word(MatchString[I])] := Len - I; }
 end;
-{$ELSE}
-procedure BMMakeTableL(const MatchString : AnsiString; var BT : BTable); register;
-  {-Build a Boyer-Moore link table}
-asm
-  push  edi                { Save registers because they will be changed }
-  push  esi
-  mov   esi, eax           { Move EAX to ESI }
-  push  ebx
 
-  or    eax, eax
-  jz    @@MTDone
-
-  xor   eax, eax           { Zero EAX }
-  mov   ecx, [esi-StrOffset].LStrRec.Length
-  cmp   ecx, 0FFh          { If ECX > 255, force to 255 }
-  jbe   @@1
-  mov   ecx, 0FFh
-
-@@1:
-  mov   ch, cl             { Duplicate CL in CH }
-  mov   eax, ecx           { Fill each byte in EAX with length }
-  shl   eax, 16
-  mov   ax, cx
-  mov   edi, edx           { Point to the table }
-  mov   ecx, 64            { Fill table bytes with length }
-  rep   stosd
-  cmp   al, 1              { If length <= 1, we're done }
-  jbe   @@MTDone
-  mov   edi, edx           { Reset EDI to beginning of table }
-  xor   ebx, ebx           { Zero EBX }
-  mov   cl, al             { Restore CL to length of string }
-  dec   ecx
-
-@@MTNext:
-  mov   al, [esi]          { Load table with positions of letters }
-  mov   bl, al             { that exist in the search string }
-  inc   esi
-  mov   [edi+ebx], cl
-  dec   cl
-  jnz   @@MTNext
-
-@@MTDone:
-  pop   ebx                { Restore registers }
-  pop   esi
-  pop   edi
-end;
-{$ENDIF}
-
-{$IFDEF UNICODE}
 function BMSearchL(var Buffer; BufLength: Cardinal; var BT: BTable; // TODO-UNICODE
   const MatchString : String; out Pos : Cardinal) : Boolean;
 var
@@ -1792,108 +1485,7 @@ begin
   end;    *)
 
 end;
-{$ELSE}
-function BMSearchL(var Buffer; BufLength : Cardinal; var BT : BTable;
-  const MatchString : AnsiString; var Pos : Cardinal) : Boolean; register;
-  {-Use the Boyer-Moore search method to search a buffer for a string.}
-var
-  BufPtr : Pointer;
-asm
-  push  edi                 { Save registers since we will be changing }
-  push  esi
-  push  ebx
 
-  mov   BufPtr, eax         { Copy Buffer to local variable and ESI }
-  mov   esi, MatchString    { Set ESI to beginning of MatchString }
-  or    esi, esi
-  jz    @@BMSNotFound
-  mov   edi, eax
-  mov   ebx, ecx            { Copy BT ptr to EBX }
-  mov   ecx, edx            { Length of buffer to ECX }
-  xor   eax, eax            { Zero EAX }
-
-  mov   edx, [esi-StrOffset].LStrRec.Length
-  cmp   edx, 0FFh          { If EDX > 255, force to 255 }
-  jbe   @@1
-  mov   edx, 0FFh
-
-@@1:
-  cmp   dl, 1               { Check to see if we have a trivial case }
-  ja    @@BMSInit           { If Length(MatchString) > 1 do BM search }
-  jb    @@BMSNotFound       { If Length(MatchString) = 0 we're done }
-
-  mov   al,[esi]            { If Length(MatchString) = 1 do a REPNE SCASB }
-  mov   ebx, edi
-  repne scasb
-  jne   @@BMSNotFound       { No match during REP SCASB }
-  mov   esi, Pos            { Set position in Pos }
-  {dec   edi}               { Found, calculate position }              
-  sub   edi, ebx
-  mov   eax, 1              { Set result to True }
-  mov   [esi], edi
-  jmp   @@BMSDone           { We're done }
-
-@@BMSInit:
-  dec   edx                 { Set up for BM Search }
-  add   esi, edx            { Set ESI to end of MatchString }
-  add   ecx, edi            { Set ECX to end of buffer }
-  add   edi, edx            { Set EDI to first check point }
-  std                       { Backward string ops }
-  mov   dh, [esi]           { Set DH to character we'll be looking for }
-  dec   esi                 { Dec ESI in prep for BMSFound loop }
-  jmp   @@BMSComp           { Jump to first comparison }
-
-@@BMSNext:
-  mov   al, [ebx+eax]       { Look up skip distance from table }
-  add   edi, eax            { Skip EDI ahead to next check point }
-
-@@BMSComp:
-  cmp   edi, ecx            { Have we reached end of buffer? }
-  jae   @@BMSNotFound       { If so, we're done }
-  mov   al, [edi]           { Move character from buffer into AL for comparison }
-  cmp   dh, al              { Compare }
-  jne   @@BMSNext           { If not equal, go to next checkpoint }
-
-  push  ecx                 { Save ECX }
-  dec   edi
-  xor   ecx, ecx            { Zero ECX }
-  mov   cl, dl              { Move Length(MatchString) to ECX }
-  repe  cmpsb               { Compare MatchString to buffer }
-  je    @@BMSFound          { If equal, string is found }
-
-  mov   al, dl              { Move Length(MatchString) to AL }
-  sub   al, cl              { Calculate offset that string didn't match }
-  add   esi, eax            { Move ESI back to end of MatchString }
-  add   edi, eax            { Move EDI to pre-string compare location }
-  inc   edi
-  mov   al, dh              { Move character back to AL }
-  pop   ecx                 { Restore ECX }
-  jmp   @@BMSNext           { Do another compare }
-
-@@BMSFound:                 { EDI points to start of match }
-  mov   edx, BufPtr         { Move pointer to buffer into EDX }
-  mov   esi, Pos
-  sub   edi, edx            { Calculate position of match }
-  mov   eax, edi
-  inc   eax
-  inc   eax
-  mov   [esi], eax          { Set Pos to position of match }
-  mov   eax, 1              { Set result to True }
-  pop   ecx                 { Restore ESP }
-  jmp   @@BMSDone
-
-@@BMSNotFound:
-  xor   eax, eax            { Set result to False }
-
-@@BMSDone:
-  cld                       { Restore direction flag }
-  pop   ebx                 { Restore registers }
-  pop   esi
-  pop   edi
-end;
-{$ENDIF}
-
-{$IFDEF UNICODE}
 function BMSearchUCL(var Buffer; BufLength : Cardinal; var BT : BTable;  // TODO-UNICODE
   const MatchString : String ; var Pos : Cardinal) : Boolean; register;
 var
@@ -1903,125 +1495,6 @@ begin
   Pos := System.Pos(AnsiUpperCase(MatchString), AnsiUpperCase(BufPtr));
   Exit(Pos <> 0);
 end;
-{$ELSE}
-
-function BMSearchUCL(var Buffer; BufLength : Cardinal; var BT : BTable;
-  const MatchString : AnsiString ; var Pos : Cardinal) : Boolean; register;
-  {-Use the Boyer-Moore search method to search a buffer for a string. This
-    search is not case sensitive.}
-var
-  BufPtr : Pointer;
-asm
-  push  edi                 { Save registers since we will be changing }
-  push  esi
-  push  ebx
-
-  mov   BufPtr, eax         { Copy Buffer to local variable and ESI }
-  mov   esi, MatchString    { Set ESI to beginning of MatchString }
-  or    esi, esi
-  jz    @@BMSNotFound
-  mov   edi, eax
-  mov   ebx, ecx            { Copy BT ptr to EBX }
-  mov   ecx, edx            { Length of buffer to ECX }
-  xor   eax, eax            { Zero EAX }
-
-  mov   edx, [esi-StrOffset].LStrRec.Length
-  cmp   edx, 0FFh           { If EDX > 255, force to 255 }
-  jbe   @@1
-  mov   edx, 0FFh
-
-@@1:
-  or    dl, dl              { Check to see if we have a trivial case }
-  jz    @@BMSNotFound       { If Length(MatchString) = 0 we're done }
-
-@@BMSInit:
-  dec   edx                 { Set up for BM Search }
-  add   esi, edx            { Set ESI to end of MatchString }
-  add   ecx, edi            { Set ECX to end of buffer }
-  add   edi, edx            { Set EDI to first check point }
-  mov   dh, [esi]           { Set DH to character we'll be looking for }
-  dec   esi                 { Dec ESI in prep for BMSFound loop }
-  jmp   @@BMSComp           { Jump to first comparison }
-
-@@BMSNext:
-  mov   al, [ebx+eax]       { Look up skip distance from table }
-  add   edi, eax            { Skip EDI ahead to next check point }
-
-@@BMSComp:
-  cmp   edi, ecx            { Have we reached end of buffer? }
-  jae   @@BMSNotFound       { If so, we're done }
-
-  push  ebx                 { Save registers }
-  push  ecx
-  push  edx
-  mov   al, [edi]           { Move character from buffer into AL for comparison }
-  push  eax                 { Push Char onto stack for CharUpper }
-  call  CharUpper
-  pop   edx                 { Restore registers }
-  pop   ecx
-  pop   ebx
-
-  cmp   dh, al              { Compare }
-  jne   @@BMSNext           { If not equal, go to next checkpoint }
-
-  push  ecx                 { Save ECX }
-  dec   edi
-  xor   ecx, ecx            { Zero ECX }
-  mov   cl, dl              { Move Length(MatchString) to ECX }
-  jecxz @@BMSFound          { If ECX is zero, string is found }
-
-@@StringComp:
-  xor   eax, eax
-  mov   al, [edi]           { Get char from buffer }
-  dec   edi                 { Dec buffer index }
-
-  push  ebx                 { Save registers }
-  push  ecx
-  push  edx
-  push  eax                 { Push Char onto stack for CharUpper }
-  call  CharUpper
-  pop   edx                 { Restore registers }
-  pop   ecx
-  pop   ebx
-
-  mov   ah, al              { Move buffer char to AH }
-  mov   al, [esi]           { Get MatchString char }
-  dec   esi
-  cmp   ah, al              { Compare }
-  loope @@StringComp        { OK?  Get next character }
-  je    @@BMSFound          { Matched! }
-
-  xor   ah, ah              { Zero AH }
-  mov   al, dl              { Move Length(MatchString) to AL }
-  sub   al, cl              { Calculate offset that string didn't match }
-  add   esi, eax            { Move ESI back to end of MatchString }
-  add   edi, eax            { Move EDI to pre-string compare location }
-  inc   edi
-  mov   al, dh              { Move character back to AL }
-  pop   ecx                 { Restore ECX }
-  jmp   @@BMSNext           { Do another compare }
-
-@@BMSFound:                 { EDI points to start of match }
-  mov   edx, BufPtr         { Move pointer to buffer into EDX }
-  mov   esi, Pos
-  sub   edi, edx            { Calculate position of match }
-  mov   eax, edi
-  inc   eax
-  inc   eax
-  mov   [esi], eax          { Set Pos to position of match }
-  mov   eax, 1              { Set result to True }
-  pop   ecx                 { Restore ESP }
-  jmp   @@BMSDone
-
-@@BMSNotFound:
-  xor   eax, eax            { Set result to False }
-
-@@BMSDone:
-  pop   ebx                 { Restore registers }
-  pop   esi
-  pop   edi
-end;
-{$ENDIF}
 
   {--------------- DOS pathname parsing -----------------}
 
@@ -2497,45 +1970,10 @@ end;
 
 function StrChPosL(const P : String; C : Char; var Pos : Integer) : Boolean;
   {-Return the position of a specified character within a string.}
-{$IFDEF UNICODE}
 begin
   Pos := System.Pos(C, P);
   Result := Pos <> 0;
 end;
-{$ELSE}
-asm
-  push  ebx             { Save registers }
-  push  edi
-
-  or    eax, eax        { Protect against null string }
-  jz    @@NotFound
-
-  xor   edi, edi        { Zero counter }
-  mov   ebx, [eax-StrOffset].LStrRec.Length  { Get input length }
-
-@@Loop:
-  inc   edi             { Increment counter }
-  cmp   [eax], dl       { Did we find it? }
-  jz    @@Found
-  inc   eax             { Increment pointer }
-
-  cmp   edi, ebx        { End of string? }
-  jnz   @@Loop          { If not, loop }
-
-@@NotFound:
-  xor   eax, eax        { Not found, zero EAX for False }
-  mov   [ecx], eax
-  jmp   @@Done
-
-@@Found:
-  mov   [ecx], edi      { Set Pos }
-  mov   eax, 1          { Set EAX to True }
-
-@@Done:
-  pop   edi             { Restore registers }
-  pop   ebx
-end;
-{$ENDIF}
 
 function StrStPosL(const P, S : String; var Pos : Cardinal) : Boolean;
   {-Return the position of a specified substring within a string.}

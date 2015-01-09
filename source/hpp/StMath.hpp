@@ -27,8 +27,6 @@ namespace Stmath
 //-- type declarations -------------------------------------------------------
 //-- var, const, procedure ---------------------------------------------------
 extern DELPHI_PACKAGE double RadCor;
-extern DELPHI_PACKAGE System::Extended __fastcall IntPower(System::Extended Base, int Exponent);
-extern DELPHI_PACKAGE System::Extended __fastcall Power(System::Extended Base, System::Extended Exponent);
 extern DELPHI_PACKAGE double __fastcall StTan(double A);
 extern DELPHI_PACKAGE double __fastcall StInvTan2(double X, double Y);
 extern DELPHI_PACKAGE double __fastcall StInvSin(double Y);

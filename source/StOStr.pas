@@ -229,13 +229,6 @@ implementation
 uses
   AnsiStrings;
 
-{$IFNDEF UNICODE}
-function AnsiStrAlloc(Size: Cardinal): PAnsiChar;
-begin
-  Result := StrAlloc(Size);
-end;
-{$ENDIF}
-
 constructor TStString.Create;
 {- Create nil string object. }
 begin

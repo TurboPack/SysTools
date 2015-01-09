@@ -34,9 +34,6 @@
 {$I StDefine.inc}
 
 {For BCB 3.0 package support.}
-{$IFDEF VER110}
-  {$ObjExportAll On}
-{$ENDIF}
 
 unit StDate;
 

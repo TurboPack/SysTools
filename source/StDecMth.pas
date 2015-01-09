@@ -916,7 +916,7 @@ begin
   end;
 
   {push the radix point}
-  ChStack[ChSP] := AnsiChar({$IFDEF DELPHIXE2}FormatSettings.{$ENDIF}DecimalSeparator);
+  ChStack[ChSP] := AnsiChar(FormatSettings.DecimalSeparator);
   inc(ChSP);
 
   {repeat until the local value is zero}
@@ -1003,7 +1003,7 @@ begin
             IsNeg := true;
             State := ScanSign;
           end
-          else if (Ch = AnsiChar({$IFDEF DELPHIXE2}FormatSettings.{$ENDIF}DecimalSeparator)) then begin
+          else if (Ch = AnsiChar(FormatSettings.DecimalSeparator)) then begin
             State := ScanRadix;
           end
           else if (Ch <> ' ') then
@@ -1015,7 +1015,7 @@ begin
             FInt[0] := ord(Ch) - ord('0');
             State := ScanBefore;
           end
-          else if (Ch = AnsiChar({$IFDEF DELPHIXE2}FormatSettings.{$ENDIF}DecimalSeparator)) then begin
+          else if (Ch = AnsiChar(FormatSettings.DecimalSeparator)) then begin
             State := ScanRadix;
           end
           else
@@ -1038,7 +1038,7 @@ begin
             Int128TimesInt(FInt, 10);
             Int128AddInt(FInt, ord(Ch) - ord('0'));
           end
-          else if (Ch = AnsiChar({$IFDEF DELPHIXE2}FormatSettings.{$ENDIF}DecimalSeparator)) then begin
+          else if (Ch = AnsiChar(FormatSettings.DecimalSeparator)) then begin
             State := ScanAfter;
           end
           else if (Ch = ' ') then

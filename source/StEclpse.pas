@@ -53,8 +53,7 @@ unit StEclpse;
 interface
 
 uses
-  {$IFDEF UseMathUnit} Math, {$ENDIF}
-  StBase, StList, StDate, StAstro, StMath;
+  Math, StBase, StList, StDate, StAstro, StMath;
 
 type
   TStEclipseType = (etLunarPenumbral, etLunarPartial, etLunarTotal,

@@ -81,11 +81,7 @@ function Str2WordZ(S : PAnsiChar; var I : Word) : Boolean;
 function Str2LongZ(S : PAnsiChar; var I : Integer) : Boolean;
   {-Convert a string to a long integer.}
 
-{$IFDEF VER93}
-function Str2RealZ(S : PAnsiChar; var R : Double) : Boolean;
-{$ELSE}
 function Str2RealZ(S : PChar; var R : Real) : Boolean;
-{$ENDIF}
   {-Convert a string to a real.}
 
 function Str2ExtZ(S : PAnsiChar; var R : Extended) : Boolean;
@@ -103,9 +99,7 @@ function Ext2StrZ(Dest : PAnsiChar; R : Extended; Width : Byte;
   {-Convert an extended to a string.}
 
 function ValPrepZ(S : PAnsiChar) : PAnsiChar; overload;
-{$IFDEF UNICODE}
 function ValPrepZ(S : PWideChar) : PWideChar; overload;
-{$ENDIF}
   {-Prepares a string for calling Val.}
 
 
@@ -168,9 +162,7 @@ function TrimPrimZ(S : PAnsiChar) : PAnsiChar;
     primitive version modifies the source string directly.}
 
 function TrimSpacesPrimZ(S : PAnsiChar) : PAnsiChar; overload;
-{$IFDEF UNICODE}
 function TrimSpacesPrimZ(S : PWideChar) : PWideChar; overload;
-{$ENDIF}
   {-Return a string with leading and trailing spaces removed. This primitive
     version modifies the source string directly.}
 
@@ -280,9 +272,7 @@ function ForceExtensionZ(Dest : PAnsiChar; Name, Ext : PAnsiChar) : PAnsiChar;
   {-Force the specified extension onto the file name.}
 
 function JustFilenameZ(Dest : PAnsiChar; PathName : PAnsiChar) : PAnsiChar; overload;
-{$IFDEF UNICODE}
 function JustFilenameZ(Dest : PWideChar; PathName : PWideChar) : PWideChar; overload;
-{$ENDIF}
   {-Return just the filename and extension of a pathname.}
 
 function JustNameZ(Dest : PAnsiChar; PathName : PAnsiChar) : PAnsiChar;
@@ -301,9 +291,7 @@ function CleanPathNameZ(Dest : PAnsiChar; PathName : PAnsiChar) : PAnsiChar;
   {-Return a pathname cleaned up as DOS does it.}
 
 function HasExtensionZ(Name : PAnsiChar; var DotPos : Cardinal) : Boolean; overload;
-{$IFDEF UNICODE}
 function HasExtensionZ(Name : PWideChar; var DotPos : Cardinal) : Boolean; overload;
-{$ENDIF}
   {-Determine if a pathname contains an extension and, if so, return the
     position of the dot in front of the extension.}
 
@@ -324,18 +312,14 @@ function LongIntFormZ(Dest, Mask : PAnsiChar ; L : Integer ; LtCurr,
   {-Return a formatted string with digits from L merged into mask.}
 
 function StrChPosZ(P : PAnsiChar; C : AnsiChar; var Pos : Cardinal) : Boolean; overload;
-{$IFDEF UNICODE}
 function StrChPosZ(P : PWideChar; C : Char; var Pos : Cardinal) : Boolean; overload;
-{$ENDIF}
   {-Return the position of a specified character within a string.}
 
 function StrStPosZ(P, S : PAnsiChar; var Pos : Cardinal) : Boolean;
   {-Return the position of a specified substring within a string.}
 
 function StrStCopyZ(Dest, S : PAnsiChar; Pos, Count : Cardinal) : PAnsiChar; overload;
-{$IFDEF UNICODE}
 function StrStCopyZ(Dest, S : PWideChar; Pos, Count : Cardinal) : PWideChar; overload;
-{$ENDIF}
   {-Copy characters at a specified position in a string.}
 
 function StrChInsertZ(Dest, S : PAnsiChar; C : AnsiChar; Pos : Cardinal) : PAnsiChar;
@@ -907,7 +891,6 @@ begin
     StrStDeletePrimZ(S, 0, I);
 end;
 
-{$IFDEF UNICODE}
 function TrimSpacesPrimZ(S : PWideChar) : PWideChar;
   {-Return a string with leading and trailing spaces removed}
 var
@@ -924,7 +907,6 @@ begin
   if I > 0 then
     StrStDeletePrimZ(S, 0, I);
 end;
-{$ENDIF}
 
 function TrimSpacesZ(Dest, S : PAnsiChar) : PAnsiChar;
   {-Return a string with leading and trailing spaces removed}
@@ -1240,7 +1222,6 @@ begin
     StrChPosZ(StrStCopyZ(P, Name, Succ(DotPos), StMaxFileLen), '\', Pos);
 end;
 
-{$IFDEF UNICODE}
 function HasExtensionZ(Name : PWideChar; var DotPos : Cardinal) : Boolean;
   {-Return whether and position of extension separator dot in a pathname}
 var
@@ -1260,8 +1241,6 @@ begin
   Result := (DotPos <> Cardinal(-1)) and not
     StrChPosZ(StrStCopyZ(P, Name, Succ(DotPos), StMaxFileLen), '\', Pos);
 end;
-{$ENDIF}
-
 
 function DefaultExtensionZ(Dest : PAnsiChar; Name, Ext : PAnsiChar) : PAnsiChar;
   {-Return a pathname with the specified extension attached}
@@ -1321,7 +1300,6 @@ begin
   Result := Dest;
 end;
 
-{$IFDEF UNICODE}
 function JustFilenameZ(Dest : PWideChar; PathName : PWideChar) : PWideChar;
   {-Return just the filename of a pathname}
 var
@@ -1333,8 +1311,6 @@ begin
   Dest := StrStCopyZ(Dest, PathName, I, StMaxFileLen);
   Result := Dest;
 end;
-{$ENDIF}
-
 
 function JustNameZ(Dest : PAnsiChar; PathName : PAnsiChar) : PAnsiChar;
   {-Return just the name (no extension, no path) of a pathname}
@@ -1582,11 +1558,7 @@ begin
   end;
 end;
 
-{$IFDEF VER93}
-function Str2RealZ(S : PAnsiChar; var R : Double) : Boolean;
-{$ELSE}
 function Str2RealZ(S : PChar; var R : Real) : Boolean;
-{$ENDIF}
   {-Convert a string to a real, returning true if successful}
 var
   Code : Integer;
@@ -1667,7 +1639,7 @@ var
 begin
   Result := TrimSpacesPrimZ(S);
   if AnsiStrings.StrLen(Result) <> 0 then begin
-    if StrChPosZ(Result, AnsiChar({$IFDEF DELPHIXE2}FormatSettings.{$ENDIF}DecimalSeparator), P) then begin
+    if StrChPosZ(Result, AnsiChar(FormatSettings.DecimalSeparator), P) then begin
       Result[P] := '.';
       if Succ(P) = AnsiStrings.StrLen(Result) then
         Result[P] := #0;
@@ -1677,7 +1649,6 @@ begin
   end;
 end;
 
-{$IFDEF UNICODE}
 function ValPrepZ(S : PWideChar) : PWideChar;
   {-Prepares a string for calling Val.}
 var
@@ -1685,7 +1656,7 @@ var
 begin
   Result := TrimSpacesPrimZ(S);
   if StrLen(Result) <> 0 then begin
-    if StrChPosZ(Result, {$IFDEF DELPHIXE2}FormatSettings.{$ENDIF}DecimalSeparator, P) then begin
+    if StrChPosZ(Result, FormatSettings.DecimalSeparator, P) then begin
       Result[P] := '.';
       if Succ(P) = StrLen(Result) then
         Result[P] := #0;
@@ -1694,7 +1665,6 @@ begin
     Result := '0';
   end;
 end;
-{$ENDIF}
 
 function CharExistsZ(S : PAnsiChar; C : AnsiChar) : Boolean;
   {-Determine whether the given character exists in a string. }
@@ -2939,7 +2909,6 @@ begin
   end;
 end;
 
-{$IFDEF UNICODE}
 function StrChPosZ(P : PWideChar; C : Char; var Pos : Cardinal): Boolean;
   {-Sets Pos to position of character C within string P returns True if found}
 var
@@ -2952,7 +2921,6 @@ begin
     Result := True;
   end;
 end;
-{$ENDIF}
 
 function StrStPosZ(P, S : PAnsiChar; var Pos : Cardinal) : boolean;
   {-Sets Pos to position of string S within string P returns True if found}
@@ -3077,7 +3045,6 @@ begin
   Result := Dest;
 end;
 
-{$IFDEF UNICODE}
 function StrStCopyZ(Dest : PWideChar; S : PWideChar; Pos, Count : Cardinal) : PWideChar;
 var
   Len : Cardinal;
@@ -3092,7 +3059,6 @@ begin
     Dest[0] := #0;
   Result := Dest;
 end;
-{$ENDIF}
 
 function StrChDeletePrimZ(P : PAnsiChar; Pos : Cardinal) : PAnsiChar;
 register;

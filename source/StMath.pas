@@ -44,14 +44,6 @@ uses
 const
   RadCor : Double = 57.29577951308232;    {number of degrees in a radian}
 
-{$IFNDEF UseMathUnit}
-  function IntPower(Base : Extended; Exponent : Integer): Extended;
-    {-Raise Base to an integral power Exponent}
-
-  function Power(Base, Exponent : Extended) : Extended;
-    {-Raise Base to an arbitrary power Exponent}
-{$ENDIF}
-
 function StInvCos(X : Double): Double;
   {-Returns the ArcCos of Y}
 
@@ -68,40 +60,6 @@ function StTan(A : Double) : Double;
 {-------------------------------------------------------}
 
 implementation
-
-{$IFNDEF UseMathUnit}
-  function IntPower(Base : Extended; Exponent : Integer): Extended;
-  var
-    Y : Integer;
-  begin
-    Y := Abs(Exponent);
-    Result := 1;
-    while (Y > 0) do begin
-      while (not Odd(Y)) do begin
-        Y := Y shr 1;
-        Base := Base * Base;
-      end;
-      Dec(Y);
-      Result := Result * Base;
-    end;
-    if (Exponent < 0) then
-      Result := 1 / Result;
-  end;
-
-  {-------------------------------------------------------}
-
-  function Power(Base, Exponent: Extended): Extended;
-  begin
-    if (Exponent = 0) then
-      Result := 1
-    else if (Base = 0) and (Exponent > 0) then
-      Result := 0
-    else if (Frac(Exponent) = 0) and (Abs(Exponent) <= MaxInt) then
-      Result := IntPower(Base, Trunc(Exponent))
-    else
-      Result := Exp(Exponent * Ln(Base));
-  end;
-{$ENDIF}
 
 {-------------------------------------------------------}
 

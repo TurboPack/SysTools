@@ -143,7 +143,6 @@ var
   eBcd    : TBcd;
   Ln10Bcd : TBcd;
 
-{$IFNDEF CBuilder}
 function AddBcd(const B1, B2 : TBcd) : TBcd;
   {-Return B1+B2}
 function SubBcd(const B1, B2 : TBcd) : TBcd;
@@ -182,7 +181,6 @@ function PowBcd(const B, E : TBcd) : TBcd;
   {-Return B**E}
 function SqrtBcd(const B : TBcd) : TBcd;
   {-Return the square root of B}
-{$ENDIF}
 
 function CmpBcd(const B1, B2 : TBcd) : Integer;
   {-Return <0 if B1<B2, =0 if B1=B2, >0 if B1>B2}
@@ -215,33 +213,10 @@ procedure ConvertBcd(const SrcB; SrcSize : Byte; var DestB; DestSize : Byte);
   {-Convert a BCD of one size to another size}
 
 {the following routines are provided to support C++Builder}
-{$IFDEF CBuilder}
-procedure AddBcd_C(const B1, B2 : TBcd; var Res : TBcd);
-procedure SubBcd_C(const B1, B2 : TBcd; var Res : TBcd);
-procedure MulBcd_C(const B1, B2 : TBcd; var Res : TBcd);
-procedure DivBcd_C(const B1, B2 : TBcd; var Res : TBcd);
-procedure ModBcd_C(const B1, B2 : TBcd; var Res : TBcd);
-procedure NegBcd_C(const B : TBcd; var Res : TBcd);
-procedure AbsBcd_C(const B : TBcd; var Res : TBcd);
-procedure FracBcd_C(const B : TBcd; var Res : TBcd);
-procedure IntBcd_C(const B : TBcd; var Res : TBcd);
-procedure RoundDigitsBcd_C(const B : TBcd; Digits : Cardinal; var Res : TBcd);
-procedure RoundPlacesBcd_C(const B : TBcd; Places : Cardinal; var Res : TBcd);
-procedure ValBcd_C(const S : string; var Res : TBcd);
-procedure LongBcd_C(L : Integer; var Res : TBcd);
-procedure ExtBcd_C(E : Extended; var Res : TBcd);
-procedure ExpBcd_C(const B : TBcd; var Res : TBcd);
-procedure LnBcd_C(const B : TBcd; var Res : TBcd);
-procedure IntPowBcd_C(const B : TBcd; E : Integer; var Res : TBcd);
-procedure PowBcd_C(const B, E : TBcd; var Res : TBcd);
-procedure SqrtBcd_C(const B : TBcd; var Res : TBcd);
-{$ENDIF}
 
 {the following function is interfaced to avoid hints from the compiler}
 {for its non use when the BcdSize constant is set a value less than 11}
-{$IFNDEF CBuilder}
 function LnBcd20(const B : TBcd) : TBcd;
-{$ENDIF}
 
 {=========================================================}
 
@@ -261,35 +236,13 @@ type
   PUnpBcd = ^TUnpBcd;
   TIntBcd = array[0..4*BcdSize-1] of Byte; {double size buffer for mult/div}
 
-{$IFDEF CBuilder}
-function AddBcd(const B1, B2 : TBcd) : TBcd; forward;
-function SubBcd(const B1, B2 : TBcd) : TBcd; forward;
-function MulBcd(const B1, B2 : TBcd) : TBcd; forward;
-function DivBcd(const B1, B2 : TBcd) : TBcd; forward;
-function ModBcd(const B1, B2 : TBcd) : TBcd; forward;
-function NegBcd(const B : TBcd) : TBcd; forward;
-function AbsBcd(const B : TBcd) : TBcd; forward;
-function FracBcd(const B : TBcd) : TBcd; forward;
-function IntBcd(const B : TBcd) : TBcd; forward;
-function RoundDigitsBcd(const B : TBcd; Digits : Cardinal) : TBcd; forward;
-function RoundPlacesBcd(const B : TBcd; Places : Cardinal) : TBcd; forward;
-function ValBcd(const S : string) : TBcd; forward;
-function LongBcd(L : Integer) : TBcd; forward;
-function ExtBcd(E : Extended) : TBcd; forward;
-function ExpBcd(const B : TBcd) : TBcd; forward;
-function LnBcd(const B : TBcd) : TBcd; forward;
-function IntPowBcd(const B : TBcd; E : Integer) : TBcd; forward;
-function PowBcd(const B, E : TBcd) : TBcd; forward;
-function SqrtBcd(const B : TBcd) : TBcd; forward;
-{$ENDIF}
-
 function FastValPrep(S : String) : String;
 var
   I : Integer;
 begin
   I := Pos('.', S);
   if I > 0 then
-    S[I] := {$IFDEF DELPHIXE2}FormatSettings.{$ENDIF}DecimalSeparator;
+    S[I] := FormatSettings.DecimalSeparator;
   Result := S;
 end;
 
@@ -593,9 +546,6 @@ var
 begin
 {$IFDEF UseAsm}
   asm
-    {$IFDEF VER140}
-    push ecx  { get round a compiler bug in D6 }
-    {$ENDIF}
     push esi
     push edi
     mov esi,B
@@ -617,9 +567,6 @@ begin
     mov [edi],al
     pop edi
     pop esi
-    {$IFDEF VER140}
-    pop ecx  { get round a compiler bug in D6 }
-    {$ENDIF}
   end;
 {$ELSE}
   {unpack digits}
@@ -1257,9 +1204,9 @@ var
     I : Integer;
   begin
     I := StartI;
-    while (I > 0) and (Result[I] = '0') and (Result[I] <> {$IFDEF DELPHIXE2}FormatSettings.{$ENDIF}DecimalSeparator) do
+    while (I > 0) and (Result[I] = '0') and (Result[I] <> FormatSettings.DecimalSeparator) do
       dec(I);
-    if Result[I] = {$IFDEF DELPHIXE2}FormatSettings.{$ENDIF}DecimalSeparator then
+    if Result[I] = FormatSettings.DecimalSeparator then
       dec(I);
     Delete(Result, I+1, EndI-I);
   end;
@@ -1423,10 +1370,10 @@ var
             end;
           end;
       else
-        if Ch = {$IFDEF DELPHIXE2}FormatSettings.{$ENDIF}ThousandSeparator then
+        if Ch = FormatSettings.ThousandSeparator then
           ThousandSep := True;
 
-        if Ch = {$IFDEF DELPHIXE2}FormatSettings.{$ENDIF}DecimalSeparator  then
+        if Ch = FormatSettings.DecimalSeparator  then
           if DecimalIndex = -1 then
             DecimalIndex := DigitCount;
       end;
@@ -1472,14 +1419,14 @@ var
       BVal := 0;
 
     if DigitPlace = 0 then begin
-      StoreChar({$IFDEF DELPHIXE2}FormatSettings.{$ENDIF}DecimalSeparator);
+      StoreChar(FormatSettings.DecimalSeparator);
       StoreChar(Char(BVal+Byte('0')));
     end else begin
       StoreChar(Char(BVal+Byte('0')));
       if ThousandSep then
         if DigitPlace > 1 then
           if DigitPlace mod 3 = 1 then
-            StoreChar({$IFDEF DELPHIXE2}FormatSettings.{$ENDIF}ThousandSeparator);
+            StoreChar(FormatSettings.ThousandSeparator);
     end;
 
     dec(DigitPlace);
@@ -2230,10 +2177,6 @@ begin
   {adjust and limit Width}
   if Width = 0 then
     Width := ActWidth;
-{$IFDEF WStrings}
-  if Width > 255 then
-    Width := 255;
-{$ENDIF}
   SetLength(Result, Width);
 
   if Integer(Width) < ActWidth then begin
@@ -2256,7 +2199,7 @@ begin
     {number is less than 1}
     AddChar('0');
     if Exponent <> 0 then begin
-      AddChar({$IFDEF DELPHIXE2}FormatSettings.{$ENDIF}DecimalSeparator);
+      AddChar(FormatSettings.DecimalSeparator);
       for I := 1 to ExpBias-Exponent do
         if O <= Integer(Width) then
           AddChar('0');
@@ -2276,7 +2219,7 @@ begin
       dec(I);
     while (Digits > 0) and (O <= Integer(Width)) do begin
       if O = DecimalPos then
-        AddChar({$IFDEF DELPHIXE2}FormatSettings.{$ENDIF}DecimalSeparator);
+        AddChar(FormatSettings.DecimalSeparator);
       AddChar(Char(UB[I]+Byte('0')));
       dec(I);
       dec(Digits);
@@ -2286,7 +2229,7 @@ begin
   {add trailing zeros, if any}
   while O <= Integer(Width) do begin
     if O = DecimalPos then
-      AddChar({$IFDEF DELPHIXE2}FormatSettings.{$ENDIF}DecimalSeparator);
+      AddChar(FormatSettings.DecimalSeparator);
     if O <= Integer(Width) then
       AddChar('0');
   end;
@@ -2315,10 +2258,6 @@ begin
     Width := MaxWidth
   else if Width < MinWidth then
     Width := MinWidth;
-{$IFDEF WStrings}
-  if Width > 255 then
-    Width := 255;
-{$ENDIF}
   SetLength(Result, Width);
 
   {store leading spaces}
@@ -2353,7 +2292,7 @@ begin
   I := MantissaDigits;
   AddChar(Char(UB[I]+Byte('0')));
   dec(I);
-  AddChar({$IFDEF DELPHIXE2}FormatSettings.{$ENDIF}DecimalSeparator);
+  AddChar(FormatSettings.DecimalSeparator);
   while O < Integer(Width-3) do begin
     AddChar(Char(UB[I]+Byte('0')));
     dec(I);
@@ -2480,7 +2419,7 @@ begin
   end;
 
   {handle first digit}
-  if SChar(I) <> {$IFDEF DELPHIXE2}FormatSettings.{$ENDIF}DecimalSeparator then begin
+  if SChar(I) <> FormatSettings.DecimalSeparator then begin
     if not IsDigit(SChar(I)) then
       RaiseBcdError(stscBcdBadFormat);
 
@@ -2497,7 +2436,7 @@ begin
   end;
 
   {handle dot}
-  if SChar(I) = {$IFDEF DELPHIXE2}FormatSettings.{$ENDIF}DecimalSeparator then begin
+  if SChar(I) = FormatSettings.DecimalSeparator then begin
     inc(I);
     if Digits = 0 then begin
       {no digits before dot, skip zeros after dot}
@@ -2797,109 +2736,11 @@ Done:
 
 end;
 
-{routines to support C++Builder}
-{$IFDEF CBuilder}
-procedure AddBcd_C(const B1, B2 : TBcd; var Res : TBcd);
-begin
-  Res := AddBcd(B1, B2);
-end;
-
-procedure SubBcd_C(const B1, B2 : TBcd; var Res : TBcd);
-begin
-  Res := SubBcd(B1, B2);
-end;
-
-procedure MulBcd_C(const B1, B2 : TBcd; var Res : TBcd);
-begin
-  Res := MulBcd(B1, B2);
-end;
-
-procedure DivBcd_C(const B1, B2 : TBcd; var Res : TBcd);
-begin
-  Res := DivBcd(B1, B2);
-end;
-
-procedure ModBcd_C(const B1, B2 : TBcd; var Res : TBcd);
-begin
-  Res := ModBcd(B1, B2);
-end;
-
-procedure NegBcd_C(const B : TBcd; var Res : TBcd);
-begin
-  Res := NegBcd(B);
-end;
-
-procedure AbsBcd_C(const B : TBcd; var Res : TBcd);
-begin
-  Res := AbsBcd(B);
-end;
-
-procedure FracBcd_C(const B : TBcd; var Res : TBcd);
-begin
-  Res := FracBcd(B);
-end;
-
-procedure IntBcd_C(const B : TBcd; var Res : TBcd);
-begin
-  Res := IntBcd(B);
-end;
-
-procedure RoundDigitsBcd_C(const B : TBcd; Digits : Cardinal; var Res : TBcd);
-begin
-  Res := RoundDigitsBcd(B, Digits);
-end;
-
-procedure RoundPlacesBcd_C(const B : TBcd; Places : Cardinal; var Res : TBcd);
-begin
-  Res := RoundPlacesBcd(B, Places);
-end;
-
-procedure ValBcd_C(const S : string; var Res : TBcd);
-begin
-  Res := ValBcd(S);
-end;
-
-procedure LongBcd_C(L : Integer; var Res : TBcd);
-begin
-  Res := LongBcd(L);
-end;
-
-procedure ExtBcd_C(E : Extended; var Res : TBcd);
-begin
-  Res := ExtBcd(E);
-end;
-
-procedure ExpBcd_C(const B : TBcd; var Res : TBcd);
-begin
-  Res := ExpBcd(B);
-end;
-
-procedure LnBcd_C(const B : TBcd; var Res : TBcd);
-begin
-  Res := LnBcd(B);
-end;
-
-procedure IntPowBcd_C(const B : TBcd; E : Integer; var Res : TBcd);
-begin
-  Res := IntPowBcd(B, E);
-end;
-
-procedure PowBcd_C(const B, E : TBcd; var Res : TBcd);
-begin
-  Res := PowBcd(B, E);
-end;
-
-procedure SqrtBcd_C(const B : TBcd; var Res : TBcd);
-begin
-  Res := SqrtBcd(B);
-end;
-{$ENDIF}
-
 initialization
   ZeroBcd := FastVal('0.0');
-  MinBcd  := ValBcd('-9'+{$IFDEF DELPHIXE2}FormatSettings.{$ENDIF}DecimalSeparator+'9E+63');
+  MinBcd  := ValBcd('-9'+FormatSettings.DecimalSeparator+'9E+63');
   BadBcd  := MinBcd;
-  MaxBcd  := ValBcd('9'+{$IFDEF DELPHIXE2}FormatSettings.{$ENDIF}DecimalSeparator+'9E+63');
+  MaxBcd  := ValBcd('9'+FormatSettings.DecimalSeparator+'9E+63');
   PiBcd   := FastVal('3.1415926535897932384626433832795028841971');
   Ln10Bcd := FastVal('2.3025850929940456840179914546843642076011');
   eBcd    := FastVal('2.7182818284590452353602874713526624977572');

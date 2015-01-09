@@ -39,12 +39,8 @@ interface
 
 uses
   Classes,
-{$IFDEF VERSION6}
   DesignIntf,
   DesignEditors;
-{$ELSE}
-  DsgnIntf;
-{$ENDIF}
 
 procedure Register;
 
@@ -186,9 +182,7 @@ begin
      TStPDF417Barcode,
      TStMaxiCodeBarcode,
      TStGeneralLog,
-{.$IFNDEF BCB} {!!! problem with initialization section in BCB }
      TStExceptionLog,
-{.$ENDIF}
      TStNTEventLog
      ]);
 

@@ -20,6 +20,7 @@
 #include <Winapi.Messages.hpp>	// Pascal unit
 #include <Vcl.StdCtrls.hpp>	// Pascal unit
 #include <System.SysUtils.hpp>	// Pascal unit
+#include <System.Math.hpp>	// Pascal unit
 #include <StBase.hpp>	// Pascal unit
 #include <StConst.hpp>	// Pascal unit
 #include <StMath.hpp>	// Pascal unit

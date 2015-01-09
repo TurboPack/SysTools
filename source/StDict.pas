@@ -191,10 +191,8 @@ function AnsiELFHashStr(const S : AnsiString; Size : Integer) : Integer;
 
 implementation
 
-{$IFDEF UNICODE}
 uses
   AnsiStrings;
-{$ENDIF}
 
 {$IFDEF ThreadSafe}
 var
@@ -237,11 +235,7 @@ end;
 
 function AnsiELFHashText(const S : AnsiString; Size : Integer) : Integer;
 begin
-  {$IFDEF WStrings}
-  Result := AnsiELFHashStr(AnsiUpperCaseShort32(S), Size);
-  {$ELSE}
   Result := AnsiELFHashStr(AnsiUpperCase(S), Size);
-  {$ENDIF}
 end;
 
 function AnsiELFHashStr(const S : AnsiString; Size : Integer) : Integer;
@@ -303,11 +297,7 @@ end;
 
 function AnsiHashText(const S : AnsiString; Size : Integer) : Integer;
 begin
-{$IFDEF WStrings}
-  Result := AnsiHashStr(AnsiUpperCaseShort32(S), Size);
-{$ELSE}
   Result := AnsiHashStr(AnsiUpperCase(S), Size);
-{$ENDIF}
 end;
 
 function FindNodeData(Container : TStContainer;
@@ -443,11 +433,7 @@ constructor TStDictionary.Create(AHashSize : Integer);
 begin
   CreateContainer(TStDictNode, 0);
   {FHashSize := 0;}
-{$IFDEF WStrings}
-  FEqual := AnsiCompareTextShort32;
-{$ELSE}
   FEqual := AnsiCompareText;
-{$ENDIF}
   FHash := AnsiHashText;
   HashSize := AHashSize;
 end;

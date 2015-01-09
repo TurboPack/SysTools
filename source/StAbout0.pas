@@ -37,12 +37,8 @@ interface
 
 uses
   Windows,
-  {$IFDEF VERSION6}
   DesignIntf,
   DesignEditors,
-  {$ELSE}
-  DsgnIntf,
-  {$ENDIF}
   Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
   StdCtrls, ExtCtrls, StConst;
 

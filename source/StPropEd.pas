@@ -37,12 +37,8 @@ interface
 
 uses
   Dialogs,
-{$IFDEF VERSION6}
   DesignIntf,
   DesignEditors,
-{$ELSE}
-  DsgnIntf,
-{$ENDIF}
   Forms,
   Controls;
 

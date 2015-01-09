@@ -40,7 +40,7 @@ interface
 uses
   Windows,
   Classes, Controls, Messages, StdCtrls, SysUtils,
-  {$IFDEF UseMathUnit} Math, {$ENDIF}
+  Math,
   StBase, StConst, StMath;
 
 type
@@ -87,10 +87,6 @@ type
 const
   {Note: see Initialization section!}
   StExprOperators : array[ssLPar..ssPower] of Char = '(),+-*/=^';
-{$IFNDEF VERSION4}
-var
-  ListSeparator : Char;
-{$ENDIF VERSION4}
   {.Z-}
 
 type
@@ -377,7 +373,6 @@ begin
   Result := Sqrt(Value);
 end;
 
-{$IFDEF UseMathUnit}
 function _ArcCos(Value : TStFloat) : TStFloat; far;
 begin
   Result := ArcCos(Value);
@@ -467,7 +462,6 @@ function _Floor(Value : TStFloat) : TStFloat; far;
 begin
   Result := Floor(Value);
 end;
-{$ENDIF}
 
 
 {*** TStExpression ***}
@@ -578,7 +572,6 @@ begin
     AddFunction1Param('sin',     _Sin);
     AddFunction1Param('sqr',     _Sqr);
     AddFunction1Param('sqrt',    _Sqrt);
-    {$IFDEF UseMathUnit}
     AddFunction1Param('arccos',  _ArcCos);
     AddFunction1Param('arcsin',  _ArcSin);
     AddFunction2Param('arctan2', _ArcTan2);
@@ -597,7 +590,6 @@ begin
     AddFunction2Param('logn',    _LogN);
     AddFunction1Param('ceil',    _Ceil);
     AddFunction1Param('floor',   _Floor);
-    {$ENDIF}
   finally
     eBusyFlag := False;
   end;
@@ -853,7 +845,7 @@ or one past the end of the string if it terminates prematurely
   for i := 1 to Length(S) do begin
   case State of
     ncStart : begin
-      if P^ = {$IFDEF DELPHIXE2}FormatSettings.{$ENDIF}DecimalSeparator then begin
+      if P^ = FormatSettings.DecimalSeparator then begin
         State := ncStartDecimal;   { decimal point detected in mantissa }
       end else
 
@@ -888,7 +880,7 @@ or one past the end of the string if it terminates prematurely
     end;
 
     ncSign : begin
-      if P^ = {$IFDEF DELPHIXE2}FormatSettings.{$ENDIF}DecimalSeparator then begin
+      if P^ = FormatSettings.DecimalSeparator then begin
         State := ncDecimal;   { decimal point detected in mantissa }
       end else
 
@@ -909,7 +901,7 @@ or one past the end of the string if it terminates prematurely
     end;
 
     ncWhole : begin
-      if P^ = {$IFDEF DELPHIXE2}FormatSettings.{$ENDIF}DecimalSeparator then begin
+      if P^ = FormatSettings.DecimalSeparator then begin
         State := ncDecimal;   { decimal point detected in mantissa }
       end else
 
@@ -1094,7 +1086,7 @@ begin
     ssNum :
       begin
         {evaluate real number string}
-        if (eTokenStr[1] = {$IFDEF DELPHIXE2}FormatSettings.{$ENDIF}DecimalSeparator{'.'}) then
+        if (eTokenStr[1] = FormatSettings.DecimalSeparator{'.'}) then
           eTokenStr := '0' + eTokenStr;
         {Val(eTokenStr, NumVal, Code);}
         TpVal(eTokenStr, NumVal, Code);
@@ -1620,23 +1612,8 @@ begin
   FExpr.OngetIdentValue := Value;
 end;
 
-{$IFNDEF VERSION4}
-procedure GetListSep;
-var
-  SepBuf : array[0..1] of Char;
-begin
-  if GetLocaleInfo(GetThreadLocale, LOCALE_SLIST, SepBuf, Length(SepBuf)) > 0 then
-    ListSeparator := SepBuf[0]
-  else
-    ListSeparator := ',';
-end;
-{$ENDIF VERSION4}
-
 initialization
-{$IFNDEF VERSION4}
-  GetListSep;
-{$ENDIF VERSION4}
-  Numeric := ['0'..'9', {'.'}{$IFDEF DELPHIXE2}FormatSettings.{$ENDIF}DecimalSeparator];
-  StExprOperators[ssComma] := {$IFDEF DELPHIXE2}FormatSettings.{$ENDIF}ListSeparator;
+  Numeric := ['0'..'9', {'.'}FormatSettings.DecimalSeparator];
+  StExprOperators[ssComma] := FormatSettings.ListSeparator;
 end.
 

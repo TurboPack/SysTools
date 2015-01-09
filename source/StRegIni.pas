@@ -792,9 +792,7 @@ begin
         if (ValType = REG_SZ) OR (ValType = REG_EXPAND_SZ) then
         begin
           Inc(ValSize);
-          {$IFDEF UNICODE}
           ValSize := ValSize * 2;
-          {$ENDIF}
         end;
         GetMem(LResult,ValSize);
         try
@@ -910,9 +908,7 @@ begin
         if (ValType = REG_SZ) OR (ValType = REG_EXPAND_SZ) then
         begin
           Inc(ValSize);
-          {$IFDEF UNICODE}
           ValSize := ValSize * 2;
-          {$ENDIF}
         end;
         GetMem(LResult,ValSize);
         try
@@ -1193,9 +1189,7 @@ begin
         if (ValType = REG_SZ) OR (ValType = REG_EXPAND_SZ)then
         begin
           Inc(ValSize);
-          {$IFDEF UNICODE}
           ValSize := ValSize * 2;
-          {$ENDIF}
         end;
         GetMem(LResult,ValSize);
         try
@@ -1328,9 +1322,7 @@ begin
         if (ValType = REG_SZ) OR (ValType = REG_EXPAND_SZ) then
         begin
           Inc(ValSize);
-          {$IFDEF UNICODE}
           ValSize := ValSize * 2;
-          {$ENDIF}
         end;
 
         GetMem(LResult,ValSize);
@@ -1459,9 +1451,7 @@ begin
         if (ValType = REG_SZ) OR (ValType = REG_EXPAND_SZ) then
         begin
           Inc(ValSize);
-          {$IFDEF UNICODE}
           ValSize := ValSize * 2;
-          {$ENDIF}
         end;
         GetMem(LResult,ValSize);
         try
@@ -2585,11 +2575,7 @@ begin
       if (riWinVer = riWinNT) then begin
         OpenProcessToken(GetCurrentProcess(),
                          TOKEN_ADJUST_PRIVILEGES OR TOKEN_QUERY,
-                         {$IFNDEF VERSION3}
-                         @hToken);
-                         {$ELSE}
                          hToken);
-                         {$ENDIF}
         LookupPrivilegeValue(nil,'SeRestorePrivilege',luid);
         tp.PrivilegeCount     := 1;
         tp.Privileges[0].Luid := luid;

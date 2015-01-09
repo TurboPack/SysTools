@@ -280,15 +280,11 @@ procedure TStDBtoCSVExport.ExportToStream(AStream: TStream);
 var
   TS : TStAnsiTextStream;
   Abort : Boolean;
-  Count : LongInt;
+  Count : Integer;
 begin
   { table must be open and active }
   if not FDataSet.Active then
-    {$IFDEF VERSION4}
     DatabaseError(SDataSetClosed, FDataSet);
-    {$ELSE}
-    DatabaseError(SDataSetClosed);
-    {$ENDIF VERSION4}
 
   TS := TStAnsiTextStream.Create(AStream);
   TS.LineTerminator := FLineTerminator;
@@ -382,7 +378,7 @@ end;
 function GetDecimals(const DataStr : string): Integer;
 { determine decimal places for float formatted string }
 begin
-  Result := Length(DataStr) - Pos({$IFDEF DELPHIXE2}FormatSettings.{$ENDIF}DecimalSeparator, DataStr);
+  Result := Length(DataStr) - Pos(FormatSettings.DecimalSeparator, DataStr);
   try
     StrToFloat(DataStr);
   except
@@ -431,11 +427,7 @@ begin
   { table must be open and active }
 
   if not FDataSet.Active then
-    {$IFDEF VERSION4}
     DatabaseError(SDataSetClosed, FDataSet);
-    {$ELSE}
-    DatabaseError(SDataSetClosed);
-    {$ENDIF VERSION4}
 
   { build field definitions }
   for i := 0 to Pred(FDataSet.FieldCount) do begin

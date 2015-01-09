@@ -58,10 +58,6 @@ type
       FDirty   : boolean;      {has data in buffer been changed?}
       FSize    : Int64;      {size of underlying stream}
       FStream  : TStream;      {underlying stream}
-      {$IFNDEF VERSION3}
-      FOnSetStreamSize : TStSetStreamSize;
-                               {event to set underlying stream's size}
-      {$ENDIF}
     protected
       procedure bsSetStream(aValue : TStream);
 
@@ -70,9 +66,7 @@ type
       procedure bsReadFromStream;
       procedure bsWriteToStream;
 
-      {$IFDEF VERSION3}
       procedure SetSize(NewSize : Integer); override;
-      {$ENDIF}
     public
       constructor Create(aStream : TStream);
       constructor CreateEmpty;
@@ -81,17 +75,10 @@ type
       function Read(var Buffer; Count : Integer) : Integer; override;
       function Seek(Offset : Integer; Origin : word) : Integer; override;
       function Write(const Buffer; Count : Integer) : Integer; override;
-      {$IFNDEF VERSION3}
-      procedure SetSize(NewSize : Integer);
-      {$ENDIF}
 
       property FastSize : Int64 read FSize;
       property Stream : TStream read FStream write bsSetStream;
 
-      {$IFNDEF VERSION3}
-      property OnSetStreamSize : TStSetStreamSize
-                 read FOnSetStreamSize write FOnSetStreamSize;
-      {$ENDIF}
    end;
 
 type

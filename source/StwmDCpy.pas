@@ -86,9 +86,9 @@ begin
   inherited Create(AOwner);
 
   if not (csDesigning in ComponentState) then begin
-{$IFDEF Version6} {$WARN SYMBOL_DEPRECATED OFF} {$ENDIF}
+{$WARN SYMBOL_DEPRECATED OFF}
     NewWndProc := MakeObjectInstance(AppWndProc);
-{$IFDEF Version6} {$WARN SYMBOL_DEPRECATED ON} {$ENDIF}
+{$WARN SYMBOL_DEPRECATED ON}
     HookForm(True);
   end;
 end;
@@ -97,9 +97,9 @@ destructor TStWMDataCopy.Destroy;
 begin
   if Assigned(NewWndProc) then begin
     HookForm(False);
-{$IFDEF Version6} {$WARN SYMBOL_DEPRECATED OFF} {$ENDIF}
+{$WARN SYMBOL_DEPRECATED OFF}
     FreeObjectInstance(NewWndProc);
-{$IFDEF Version6} {$WARN SYMBOL_DEPRECATED ON} {$ENDIF}
+{$WARN SYMBOL_DEPRECATED ON}
   end;
 
   inherited Destroy;

@@ -852,15 +852,9 @@ begin
       FElSize := ElSize;
       FRows := RowCount;
       FCols := ColCount;
-      {$IFDEF VERSION4}
       FCount := RowCount*ColCount;
       lmRowSize := ColCount*ElSize;
       HugeGetMem(lmData, FCount*Integer(ElSize));
-      {$ELSE}
-      FCount := Integer(RowCount)*ColCount;
-      lmRowSize := Integer(ColCount)*ElSize;
-      HugeGetMem(lmData, FCount*ElSize);
-      {$ENDIF}
       Clear;
     end;
 end;

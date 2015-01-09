@@ -6533,11 +6533,7 @@ begin
   Result := False;
   if IsAdvApi32 then begin
     if (@_LookupAccountName = nil) then
-      {$IFDEF UNICODE}
       @_LookupAccountName := GetProcAddress(ADVAPI32, 'LookupAccountNameW');
-      {$ELSE}
-      @_LookupAccountName := GetProcAddress(ADVAPI32, 'LookupAccountNameA');
-      {$ENDIF}
 
     if (@_LookupAccountName <> nil) then begin
       { This just sets up the buffer sizes }
@@ -6588,11 +6584,7 @@ begin
   Result := False;
   if IsAdvApi32 then begin
     if (@_LookupAccountSid = nil) then
-    {$IFDEF UNICODE}
       @_LookupAccountSid := GetProcAddress(ADVAPI32, 'LookupAccountSidW');
-    {$ELSE}
-      @_LookupAccountSid := GetProcAddress(ADVAPI32, 'LookupAccountSidA');
-    {$ENDIF}
 
     if (@_LookupAccountSid <> nil) then begin
       { This just sets up the buffer sizes }

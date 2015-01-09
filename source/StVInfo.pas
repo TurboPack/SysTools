@@ -309,11 +309,7 @@ var
   Data    : Pointer;
   Buffer  : Pointer;
   ErrCode : Integer;
-  {$IFDEF VERSION4}
   Bytes   : Cardinal;
-  {$ELSE}
-  Bytes   : Integer;
-  {$ENDIF}
   TempStr : array [0..259] of Char;
   LangBuff: array [0..259] of Char;
   BaseStr : string;
@@ -340,7 +336,7 @@ var
       if S[I] = '.' then begin
         { Found the first period. Replace it with the DecimalSeparator }
         { constant so that StrToFloat works properly. }
-        S[I] := {$IFDEF DELPHIXE2}FormatSettings.{$ENDIF}DecimalSeparator;
+        S[I] := FormatSettings.DecimalSeparator;
         Inc(Count);
         if (Count = 2) and (I <= Length(Buff)) then begin
           Move(S[1], Buff, (I - 1) * SizeOf(Char));

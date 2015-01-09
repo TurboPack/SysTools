@@ -39,17 +39,11 @@ interface
 
 uses
   Windows, SysUtils, Classes,
-{$IFDEF Version6} {$WARN UNIT_PLATFORM OFF} {$ENDIF}
+{$WARN UNIT_PLATFORM OFF}
   FileCtrl,
-{$IFDEF Version6} {$WARN UNIT_PLATFORM ON} {$ENDIF}
+{$WARN UNIT_PLATFORM ON}
   StConst, StBase, StUtils, StDate, StStrL;
 
-{$IFNDEF VERSION6}
-const
-  PathDelim  =  '\';
-  DriveDelim =  ':';
-  PathSep    =  ';';
-{$ENDIF VERSION6}
 const
   StPathDelim     = PathDelim; { Delphi/Linux constant }
   StPathSep       = PathSep;   { Delphi/Linux constant }
@@ -60,7 +54,7 @@ const
   StUnixPathSep   = ':';
   StDosAnyFile    = '*.*';
   StUnixAnyFile   = '*';
-  StAnyFile       = {$IFDEF LINUX} StUnixAnyFile; {$ELSE} StDosAnyFile; {$ENDIF}
+  StAnyFile       = StDosAnyFile;
   StThisDir       = '.';
   StParentDir     = '..';
 
@@ -154,19 +148,11 @@ function GetDiskInfo(Drive : Char; var ClustersAvailable, TotalClusters,
 {-Return technical information about the specified drive.}
 
 {GetDiskSpace}
-{$IFDEF CBuilder}
-function GetDiskSpace(Drive : Char;
-                  var UserSpaceAvail  : Double;           {space available to user}
-                  var TotalSpaceAvail : Double;           {total space available}
-                  var DiskSize        : Double) : Boolean;{disk size}
-{-Return space information about the drive.}
-{$ELSE}
 function GetDiskSpace(Drive : Char;
                   var UserSpaceAvail  : Comp;           {space available to user}
                   var TotalSpaceAvail : Comp;           {total space available}
                   var DiskSize        : Comp) : Boolean;{disk size}
 {-Return space information about the drive.}
-{$ENDIF}
 
 {GetFileCreateDate}
 function GetFileCreateDate(const FileName : String) :
@@ -187,11 +173,9 @@ function GetFileLastModify(const FileName : String) :
 function GetHomeFolder(aForceSlash : Boolean) : String;
 {-Obtains the "Home Folder" for the current user}
 
-{$IFNDEF CBuilder}
 {GetLongPath}
 function GetLongPath(const APath : String) : String;
 {-Returns the long filename version of a provided path.}
-{$ENDIF}
 
 {GetMachineName}
 function GetMachineName : String;
@@ -324,23 +308,8 @@ const
     (FILE_ANY_ACCESS shl 14) or ($0300 shl 2) or METHOD_BUFFERED);
 
 procedure StChDir(const S: String);                                {!!.02}
-{ wrapper for Delphi ChDir to handle a bug in D6}
-{$IFDEF VER140}
-var
-  Rslt : Integer;
-{$ENDIF}
 begin
-{$IFNDEF VER140}
   Chdir(S);
-{$ELSE}
-{$I-}
-  Chdir(S);
-  if IOResult <> 0 then begin
-    Rslt := GetLastError;
-    SetInOutRes(Rslt);
-  end;
-{$I+}
-{$ENDIF}
 end;
 
 {CopyFile}
@@ -359,7 +328,7 @@ var
   Buffer : Pointer;
 
 begin
-{$IFDEF Version6} {$WARN SYMBOL_PLATFORM OFF} {$ENDIF}
+{$WARN SYMBOL_PLATFORM OFF}
   Src := 0;
   Dest := 0;
   Buffer := nil;
@@ -412,7 +381,7 @@ begin
       if Result <> 0 then SysUtils.DeleteFile(DestPath);
     end;
   end;
-{$IFDEF Version6} {$WARN SYMBOL_PLATFORM ON} {$ENDIF}
+{$WARN SYMBOL_PLATFORM ON}
 end;
 
 {CreateTempFile}
@@ -432,11 +401,7 @@ begin
   if (GetTempFileName(PChar(TempDir), PChar(aPrefix), 0,
     TempFileNameZ) = 0)
   then
-{$IFDEF Version6}
     RaiseLastOSError;
-{$ELSE}
-    RaiseLastWin32Error;
-{$ENDIF}
   Result := TempFileNameZ;
 end;
 
@@ -788,11 +753,7 @@ function FlushOsBuffers(Handle : Integer) : Boolean;
 begin
   Result := FlushFileBuffers(Handle);
   if not Result then
-{$IFDEF Version6}
     RaiseLastOSError;
-{$ELSE}
-    RaiseLastWin32Error;
-{$ENDIF}
 end;
 
 {GetCurrentUser}
@@ -804,11 +765,7 @@ var
 begin
   Size := Length(UserNameZ);
   if not GetUserName(UserNameZ, Size) then
-{$IFDEF Version6}
     RaiseLastOSError;
-{$ELSE}
-    RaiseLastWin32Error;
-{$ENDIF}
 //  SetString(Result, UserNameZ, Size);                      {!!.02}
   SetString(Result, UserNameZ, StrLen(UserNameZ));           {!!.02}
 end;
@@ -938,58 +895,6 @@ end;
 
 
 {GetDiskSpace}
-{$IFDEF CBuilder}
-function GetDiskSpace(Drive : Char;
-                  var UserSpaceAvail  : Double;           {space available to user}
-                  var TotalSpaceAvail : Double;           {total space available}
-                  var DiskSize        : Double) : Boolean;{disk size}
-{-Return space information about the drive.}
-type
-  TGetDiskFreeSpace = function (Drive : PChar;
-                            var UserFreeBytes : Comp;
-                            var TotalBytes : Comp;
-                            var TotalFreeBytes : Comp) : Bool; stdcall;
-  LH = packed record L,H : word; end;
-var
-  UserFree, Total, Size : Comp;
-  VerInfo : TOSVersionInfo;
-  LibHandle : THandle;
-  GDFS : TGetDiskFreeSpace;
-  Root : String;
-begin
-  Result := False;
-  {get the version info}
-  FillChar(VerInfo, SizeOf(TOSVersionInfo), #0);
-  VerInfo.dwOSVersionInfoSize := SizeOf(VerInfo);
-  if GetVersionEx(VerInfo) then begin
-    with VerInfo do begin
-      if ((dwPlatformId = VER_PLATFORM_WIN32_WINDOWS) and
-          (LH(dwBuildNumber).L <> 1000)) or
-         ((dwPlatformId = VER_PLATFORM_WIN32_NT) and
-          (dwMajorVersion >= 4)) then begin
-        LibHandle := LoadLibrary('KERNEL32.DLL');
-        try
-          if (LibHandle <> 0) then begin
-            @GDFS := GetProcAddress(LibHandle, 'GetDiskFreeSpaceEx'+{$IFDEF UNICODE}'W'{$ELSE}'A'{$ENDIF});
-            if Assigned(GDFS) then begin
-              Root := Char(Upcase(Drive)) + ':\';
-              if GDFS(PChar(Root), UserFree, Size, Total) then begin
-                UserSpaceAvail := UserFree;
-                DiskSize := Size;
-                TotalSpaceAvail := Total;
-                Result := true;
-              end;
-            end;
-          end;
-
-        finally
-          FreeLibrary(LibHandle);
-        end;
-      end;
-    end;
-  end;
-end;
-{$ELSE}
 function GetDiskSpace(Drive : Char;
                   var UserSpaceAvail  : Comp;           {space available to user}
                   var TotalSpaceAvail : Comp;           {total space available}
@@ -1021,7 +926,7 @@ begin
         LibHandle := LoadLibrary('KERNEL32.DLL');
         try
           if (LibHandle <> 0) then begin
-            @GDFS := GetProcAddress(LibHandle, 'GetDiskFreeSpaceEx'+{$IFDEF UNICODE}'W'{$ELSE}'A'{$ENDIF});
+            @GDFS := GetProcAddress(LibHandle, 'GetDiskFreeSpaceExW');
             if Assigned(GDFS) then begin
               Root := Char(System.Upcase(Drive)) + ':\';
               if GDFS(PChar(Root), UserSpaceAvail, DiskSize, TotalSpaceAvail) then
@@ -1047,7 +952,6 @@ begin
     end;
   end;
 end;
-{$ENDIF}
 
 function GetFileCreateDate(const FileName : String) :
   TDateTime;
@@ -1061,10 +965,10 @@ begin
   Result := 0.0;
   Rslt := FindFirst(FileName, faAnyFile, SR);
   if Rslt = 0 then begin
-{$IFDEF Version6} {$WARN SYMBOL_PLATFORM OFF} {$ENDIF}
+{$WARN SYMBOL_PLATFORM OFF}
     FileTimeToDosDateTime(SR.FindData.ftCreationTime,
       LongRec(FTime).Hi, LongRec(FTime).Lo);
-{$IFDEF Version6} {$WARN SYMBOL_PLATFORM ON} {$ENDIF}
+{$WARN SYMBOL_PLATFORM ON}
     Result := FileDateToDateTime(FTime);
     FindClose(SR);
   end;
@@ -1084,10 +988,10 @@ begin
   Result := 0.0;
   Rslt := FindFirst(FileName, faAnyFile, SR);
   if Rslt = 0 then begin
-{$IFDEF Version6} {$WARN SYMBOL_PLATFORM OFF} {$ENDIF}
+{$WARN SYMBOL_PLATFORM OFF}
     FileTimeToDosDateTime(SR.FindData.ftLastAccessTime,
       LongRec(FTime).Hi, LongRec(FTime).Lo);
-{$IFDEF Version6} {$WARN SYMBOL_PLATFORM ON} {$ENDIF}
+{$WARN SYMBOL_PLATFORM ON}
     Result := FileDateToDateTime(FTime);
     FindClose(SR);
   end;
@@ -1107,10 +1011,10 @@ begin
   Result := 0.0;
   Rslt := FindFirst(FileName, faAnyFile, SR);
   if Rslt = 0 then begin
-{$IFDEF Version6} {$WARN SYMBOL_PLATFORM OFF} {$ENDIF}
+{$WARN SYMBOL_PLATFORM OFF}
     FileTimeToDosDateTime(SR.FindData.ftLastWriteTime,
       LongRec(FTime).Hi, LongRec(FTime).Lo);
-{$IFDEF Version6} {$WARN SYMBOL_PLATFORM ON} {$ENDIF}
+{$WARN SYMBOL_PLATFORM ON}
     Result := FileDateToDateTime(FTime);
     FindClose(SR);
   end;
@@ -1274,11 +1178,7 @@ var
 begin
   Size := Length(MachineNameZ);
   if not GetComputerName(MachineNameZ, Size) then
-{$IFDEF Version6}
     RaiseLastOSError;
-{$ELSE}
-    RaiseLastWin32Error;
-{$ENDIF}
 //  SetString(Result, MachineNameZ, Size);                            {!!.02}
   SetString(Result, MachineNameZ, StrLen(MachineNameZ));              {!!.02}
 end;
@@ -1328,13 +1228,8 @@ begin
   Result := DirName;
   if Length(DirName) = 0 then
     Exit;
-  {$IFDEF UNICODE}
   if not CharInSet(DirName[Length(DirName)], DelimSet) then
     Result := DirName + StPathDelim;
-  {$ELSE}
-  if not (DirName[Length(DirName)] in DelimSet) then
-    Result := DirName + StPathDelim;
-  {$ENDIF}
 end;
 {!!.02 -- End Added }
 
@@ -1431,13 +1326,6 @@ end;
 {GlobalDateTimeToLocal}
 function GlobalDateTimeToLocal(const UTC: TStDateTimeRec; MinOffset: Integer): TStDateTimeRec; {!!.02}
 {-adjusts a global date/time (UTC) to the local date/time}
-{$IFNDEF VERSION4}
-const
-  TIME_ZONE_ID_INVALID  = DWORD($FFFFFFFF);
-  TIME_ZONE_ID_UNKNOWN  = 0;
-  TIME_ZONE_ID_STANDARD = 1;
-  TIME_ZONE_ID_DAYLIGHT = 2;
-{$ENDIF}
 var
   Minutes : Integer;
   TZ : TTimeZoneInformation;
@@ -1542,60 +1430,53 @@ end;
 function IsFileArchive(const S : String) : Integer;
   {-checks if file's archive attribute is set}
 begin
-{$IFDEF Version6} {$WARN SYMBOL_PLATFORM OFF} {$ENDIF}
+{$WARN SYMBOL_PLATFORM OFF}
   if FileExists(S) then
     Result := Integer((FileGetAttr(S) and faArchive) = faArchive)
   else
     Result := -1;
-{$IFDEF Version6} {$WARN SYMBOL_PLATFORM ON} {$ENDIF}
+{$WARN SYMBOL_PLATFORM ON}
 end;
 
 {IsFileHidden}
 function IsFileHidden(const S : String) : Integer;
   {-checks if file's hidden attribute is set}
 begin
-{$IFDEF Version6} {$WARN SYMBOL_PLATFORM OFF} {$ENDIF}
+{$WARN SYMBOL_PLATFORM OFF}
   if FileExists(S) then
     Result := Integer((FileGetAttr(S) and faHidden) = faHidden)
   else
     Result := -1;
-{$IFDEF Version6} {$WARN SYMBOL_PLATFORM ON} {$ENDIF}
+{$WARN SYMBOL_PLATFORM ON}
 end;
 
 {IsFileReadOnly}
 function IsFileReadOnly(const S : String) : Integer;
   {-checks if file's readonly attribute is set}
 begin
-{$IFDEF Version6} {$WARN SYMBOL_PLATFORM OFF} {$ENDIF}
+{$WARN SYMBOL_PLATFORM OFF}
   if FileExists(S) then
     Result := Integer((FileGetAttr(S) and faReadOnly) = faReadOnly)
   else
     Result := -1;
-{$IFDEF Version6} {$WARN SYMBOL_PLATFORM ON} {$ENDIF}
+{$WARN SYMBOL_PLATFORM ON}
 end;
 
 {IsFileSystem}
 function IsFileSystem(const S : String) : Integer;
   {-checks if file's system attribute is set}
 begin
-{$IFDEF Version6} {$WARN SYMBOL_PLATFORM OFF} {$ENDIF}
+{$WARN SYMBOL_PLATFORM OFF}
   if FileExists(S) then
     Result := Integer((FileGetAttr(S) and faSysFile) = faSysFile)
   else
     Result := -1;
-{$IFDEF Version6} {$WARN SYMBOL_PLATFORM ON} {$ENDIF}
+{$WARN SYMBOL_PLATFORM ON}
 end;
 
 {LocalDateTimeToGlobal}
 function LocalDateTimeToGlobal(const DT1: TStDateTimeRec; MinOffset: Integer): TStDateTimeRec; {!!.02}
 {-adjusts a local date/time to the global (UTC) date/time}
-{$IFNDEF VERSION4}
-const
-  TIME_ZONE_ID_INVALID  = DWORD($FFFFFFFF);
-  TIME_ZONE_ID_UNKNOWN  = 0;
-  TIME_ZONE_ID_STANDARD = 1;
-  TIME_ZONE_ID_DAYLIGHT = 2;
-{$ENDIF}
 var
   Minutes : Integer;
   TZ : TTimeZoneInformation;
@@ -1665,7 +1546,7 @@ var
   end;
 
 begin
-{$IFDEF Version6} {$WARN SYMBOL_PLATFORM OFF} {$ENDIF}
+{$WARN SYMBOL_PLATFORM OFF}
   Result := False;
   ErrorCode := 0;
   Attr1 := FileGetAttr(FilePath1);
@@ -1699,7 +1580,7 @@ begin
 
   if FileSetAttr(FilePath1, Attr1) <> 0 then
     ErrorCode := 3;
-{$IFDEF Version6} {$WARN SYMBOL_PLATFORM ON} {$ENDIF}
+{$WARN SYMBOL_PLATFORM ON}
 end;
 
 {SetMediaID} {!!!! Does not work on NT/2000 !!!!}

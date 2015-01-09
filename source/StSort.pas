@@ -559,9 +559,9 @@ begin
     AllocRecs := MaxHeap div Integer(FRecLen);
     if AllocRecs < MergeOrder+1 then
       RaiseError(Status);
-{$IFDEF Version6} {$WARN SYMBOL_PLATFORM OFF} {$ENDIF}
+{$WARN SYMBOL_PLATFORM OFF}
     sorBuffer := GlobalAllocPtr(HeapAllocFlags, AllocRecs*Integer(FRecLen));
-{$IFDEF Version6} {$WARN SYMBOL_PLATFORM ON} {$ENDIF}
+{$WARN SYMBOL_PLATFORM ON}
     if sorBuffer = nil then begin
       Status := ecOutOfMemory;
       MaxHeap := MaxHeap div 2;

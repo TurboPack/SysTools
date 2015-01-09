@@ -59,11 +59,7 @@ type
 {!!.01 - end moved }
 
 type
-{$IFDEF CBuilder}
-  TStHwnd = Integer;
-{$ELSE}
   TStHwnd = HWND;
-{$ENDIF}
 
 {-SysTools exception class tree}
 type
@@ -131,10 +127,8 @@ const
 
   StHexDigits  : array[0..$F] of AnsiChar = '0123456789ABCDEF';
   DosDelimSet  : set of AnsiChar = ['\', ':', #0];
-{$IFDEF VERSION4} { Delphi/Builder 3 doesn't like widestring typed constants }
   StHexDigitsW : WideString = '0123456789ABCDEF';
   DosDelimSetW : WideString = '\:';
-{$ENDIF}
 
 {.Z-}
 
@@ -143,9 +137,7 @@ type
   TSmallArrayA = array[0..StMaxFileLen-1] of AnsiChar;
   TSmallArray = array[0..StMaxFileLen-1] of Char;
   BTable  = array[0..255] of Byte;  {Table used by Boyer-Moore search routines}
-  {$IFDEF UNICODE}
   BTableU = array[0..$FFFF] of Byte;
-  {$ENDIF}
 {.Z-}
 
 type
@@ -404,17 +396,6 @@ function DestroyNode(Container : TStContainer; Node : TStNode;
 
 
 {---WIN32 short string routines---}
-{$IFDEF WStrings}
-function AnsiUpperCaseShort32(const S : string) : string;
-  {-Ansi uppercase for H- strings in WIN32}
-
-function AnsiCompareTextShort32(const S1, S2: string): Integer;
-  {-Case-insensitive compare function for H- strings in WIN32}
-
-function AnsiCompareStrShort32(const S1, S2: string): Integer;
-  {-Case-sensitive compare function for H- strings in WIN32}
-{$ENDIF}
-
 
 {.Z+}
 {---Huge memory routines---}
@@ -489,13 +470,6 @@ procedure RaiseContainerErrorFmt(Code : Integer; Data : array of const);
 function ProductOverflow(A, B : Integer) : Boolean;
   {-Return True if A*B exceeds MaxLongInt}
 
-{$IFNDEF HStrings}
-function StNewStr(S : string) : PShortString;
-  {-Allocate a short string on the heap}
-
-procedure StDisposeStr(PS : PShortString);
-  {-Deallocate a short string from the heap}
-{$ENDIF}
 {.Z-}
 
 
@@ -514,13 +488,6 @@ procedure RaiseStError(ExceptionClass : EStExceptionClass; Code : Integer);
 procedure RaiseStWin32Error(ExceptionClass : EStExceptionClass; Code : Integer);
 procedure RaiseStWin32ErrorEx(ExceptionClass : EStExceptionClass; Code : Integer; Info : string);
 {.Z-}
-
-{$IFDEF VERSION3ONLY}
-var
-  StHexDigitsW : WideString;
-  DosDelimSetW : WideString;
-{$ENDIF}
-
 
 implementation
 
@@ -575,57 +542,6 @@ function AbstractCompare(Data1, Data2 : Pointer) : Integer; far;
 begin
   raise ESTContainerError.CreateResTP(stscNoCompare, 0);
 end;
-
-{$IFDEF WStrings}
-function AnsiCompareStrShort32(const S1, S2: AnsiString): Integer; assembler;
-asm
-  push esi
-  push edi
-  mov esi,S1
-  mov edi,S2
-  xor eax,eax
-  xor edx,edx
-  xor ecx,ecx
-  mov dl,[esi]
-  inc esi
-  mov dh,[edi]
-  inc edi
-  mov cl,dl
-  cmp cl,dh
-  jbe @1
-  mov cl,dh
-@1:
-  or ecx, ecx
-  je @CheckLengths
-  repe cmpsb
-  jb @LT
-  ja @GT
-@CheckLengths:
-  cmp dl, dh
-  je @Exit
-  jb @LT
-@GT:
-  inc eax
-  inc eax
-@LT:
-  dec eax
-@Exit:
-  pop edi
-  pop esi
-end;
-
-function AnsiCompareTextShort32(const S1, S2: string): Integer;
-begin
-  Result := AnsiCompareStrShort32(AnsiUpperCaseShort32(S1),
-                                  AnsiUpperCaseShort32(S2));
-end;
-
-function AnsiUpperCaseShort32(const S : string) : string;
-begin
-  Result := S;
-  AnsiUpperBuff(PChar(@Result[1]), Length(S));
-end;
-{$ENDIF}
 
 function DestroyNode(Container : TStContainer;
                      Node : TStNode;
@@ -1222,20 +1138,6 @@ begin
   raise E;
 end;
 
-{$IFNDEF HStrings}
-function StNewStr(S : AnsiString) : PShortString;
-begin
-  GetMem(Result, succ(length(S)));
-  Result^ := S;
-end;
-
-procedure StDisposeStr(PS : PShortString);
-begin
-  if (PS <> nil) then
-    FreeMem(PS, succ(length(PS^)));
-end;
-{$ENDIF}
-
 {----------------------------------------------------------------------}
 
 constructor TStNode.Create(AData : Pointer);
@@ -1477,13 +1379,6 @@ procedure TStBaseEdit.SetVersion(const Value : string);
 begin
 end;
 
-
-
-initialization
-{$IFDEF VERSION3ONLY} { Delphi/Builder 3 doesn't like widestring typed constants }
-  StHexDigitsW := '0123456789ABCDEF';
-  DosDelimSetW := '\:';
-{$ENDIF}
 end.
 
 

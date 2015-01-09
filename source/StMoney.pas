@@ -1098,8 +1098,8 @@ begin
       {the INI file stores rates with a decimal *point*; if the locale
        uses something else (eg, a comma) we'll need to switch it for
        the AsString property, which obeys the locale}
-      if ({$IFDEF DELPHIXE2}FormatSettings.{$ENDIF}DecimalSeparator <> '.') then
-        ReplaceCh(Str, '.', {$IFDEF DELPHIXE2}FormatSettings.{$ENDIF}DecimalSeparator);
+      if (FormatSettings.DecimalSeparator <> '.') then
+        ReplaceCh(Str, '.', FormatSettings.DecimalSeparator);
       FRate.AsString := AnsiString(Str);
     end;
   end;
@@ -1130,8 +1130,8 @@ begin
     List.Add('target=' + FTarget);
     List.Add('intermediate=' + FIntermediate);
     Str := string(FRate.AsString);
-    if ({$IFDEF DELPHIXE2}FormatSettings.{$ENDIF}DecimalSeparator <> '.') then
-      ReplaceCh(Str, {$IFDEF DELPHIXE2}FormatSettings.{$ENDIF}DecimalSeparator, '.');
+    if (FormatSettings.DecimalSeparator <> '.') then
+      ReplaceCh(Str, FormatSettings.DecimalSeparator, '.');
     List.Add('rate=' + Str);
     List.Add('type=' + MakeXChgStr(FConversionType));
     DayCount := trunc(FDateUpdated - ExchBaseDate);
