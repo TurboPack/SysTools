@@ -100,13 +100,13 @@ function Str2RealW(const S : WideString; var R : Double) : Boolean;
 function Str2ExtW(const S : WideString; var R : Extended) : Boolean;
   {-Convert a string to an extended.}
 
-function Long2StrW(L : LongInt) : WideString;
+function Long2StrW(L : LongInt) : string;
   {-Convert an integer type to a string.}
 
-function Real2StrW(R : Double; Width : Byte; Places : ShortInt) : WideString;
+function Real2StrW(R : Double; Width : Byte; Places : ShortInt) : string;
   {-Convert a real to a string.}
 
-function Ext2StrW(R : Extended; Width : Byte; Places : ShortInt) : WideString;
+function Ext2StrW(R : Extended; Width : Byte; Places : ShortInt) : string;
   {-Convert an extended to a string.}
 
 function ValPrepW(const S : WideString) : WideString;
@@ -579,11 +579,11 @@ function Str2RealW(const S : WideString; var R : Double) : Boolean;
   {-Convert a string to a real.}
 var
   Code : Integer;
-  St   : AnsiString;
+  St   : string;
 begin
   Result := False;
   if S = '' then Exit;
-  St := AnsiString(TrimTrailW(S));
+  St := TrimTrailW(S);
   if St = '' then Exit;
   Val(ValPrepW(St), R, Code);
   if Code <> 0 then begin
@@ -609,22 +609,28 @@ begin
     Result := True;
 end;
 
-function Long2StrW(L : LongInt) : WideString;
+function Long2StrW(L : LongInt) : string;
   {-Convert an integer type to a string.}
 begin
-  Str(L, Result);
+  Result := L.ToString;
 end;
 
-function Real2StrW(R : Double; Width : Byte; Places : ShortInt) : WideString;
+function Real2StrW(R : Double; Width : Byte; Places : ShortInt) : string;
   {-Convert a real to a string.}
+var
+  sBuffer: ShortString;
 begin
-  Str(R:Width:Places, Result);
+  Str(R:Width:Places, sBuffer);
+  Result := string(sBuffer);
 end;
 
-function Ext2StrW(R : Extended; Width : Byte; Places : ShortInt) : WideString;
+function Ext2StrW(R : Extended; Width : Byte; Places : ShortInt) : string;
   {-Convert an extended to a string.}
+var
+  sBuffer: ShortString;
 begin
-  Str(R:Width:Places, Result);
+  Str(R:Width:Places, sBuffer);
+  Result := string(sBuffer);
 end;
 
 function ValPrepW(const S : WideString) : WideString;
@@ -1438,13 +1444,13 @@ begin
   Result := CommaizeChW(L, ',');
 end;
 
-function FormPrimW(const Mask     : WideString;
+function FormPrimW(const Mask     : string;
                          R        : TstFloat;
                    const LtCurr,
-                         RtCurr   : WideString;
+                         RtCurr   : string;
                          Sep,
                          DecPt    : WideChar;
-                         AssumeDP : Boolean) : WideString;
+                         AssumeDP : Boolean) : string;
   {-Returns a formatted string with digits from R merged into the Mask}
 const
   Blank = 0;
@@ -1456,7 +1462,7 @@ const
 {$ELSE}
   MaxPlaces = 11;
 {$ENDIF}
-  FormChars  : string[8] = '#@*$-+,.';
+  FormChars  : string = '#@*$-+,.';
   PlusArray  : array[Boolean] of WideChar = ('+', '-');
   MinusArray : array[Boolean] of WideChar = (' ', '-');
   FillArray  : array[Blank..Zero] of WideChar = (' ', '*', '0');
@@ -1479,6 +1485,7 @@ var
   Extras,                    {# of extra digits needed for special cases}
   DigitPtr     : Byte;       {pointer into temporary string of digits}
   I            : Cardinal;
+  sBuffer: ShortString;
 label
   EndFound,
   RedoCase,
@@ -1588,7 +1595,8 @@ EndFound:
     AddMinus := False;
 
   {translate the real to a string}
-  Str(R:Digits:Places, S);
+  Str(R:Digits:Places, sBuffer);
+  S := string(sBuffer);
 
   {add zeros that Str may have left out}
   if Places > MaxPlaces then begin

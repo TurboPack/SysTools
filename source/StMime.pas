@@ -57,9 +57,9 @@ uses
 const
   AttachmentFileMode = (fmOpenRead or fmShareDenyWrite);
   CRLFStr : array[0..1] of AnsiChar = #13#10;
-  DefStContentDisposition : string[11] = 'attachment';
-  DefStContentType : string[27] = 'application/octet-stream';
-  DefStMimeEncoding : string[7] = 'base64';
+  DefStContentDisposition = 'attachment';
+  DefStContentType = 'application/octet-stream';
+  DefStMimeEncoding = 'base64';
   ExtractFileMode = (fmOpenReadWrite or fmShareExclusive);
   MaxMimeLine = 78;
 
@@ -770,7 +770,7 @@ var
   OutBuf : array[0..63] of AnsiChar;
   S : AnsiString;
 begin
-  S := Format('begin 600 %s'#13#10, [FCurrentFile]);
+  S := AnsiString(Format('begin 600 %s'#13#10, [FCurrentFile]));
   OutStream.Write(S[1], Length(S));
 
   { Encode and stream the attachment }
@@ -934,7 +934,7 @@ begin
   FillChar(OutBuf, Sizeof(OutBuf), #0);
 
   if not FOwner.MimeHeaders then begin
-    S := Format('begin-base64 600 %s'#13#10, [FCurrentFile]);
+    S := AnsiString(Format('begin-base64 600 %s'#13#10, [FCurrentFile]));
     OutStream.Write(S[1], Length(S));
   end;
 
@@ -1151,7 +1151,7 @@ var
 begin
   SavePos := Stream.Position;
   Stream.Write(CRLFStr, SizeOf(CRLFStr));
-  Temp := '--' + Boundary + '--';
+  Temp := AnsiString('--' + Boundary + '--');
   Stream.Write(Temp[1], Length(Temp));
   Stream.Write(CRLFStr, SizeOf(CRLFStr));
   Stream.Position := SavePos;
@@ -1159,29 +1159,30 @@ end;
 
 procedure TStMimeConverter.AddMimeHeaders(const AFileName : string);
 var
-  Temp, Descr : AnsiString;
+  Temp: AnsiString;
+  Descr : string;
 begin
   Stream.Write(CRLFStr, SizeOf(CRLFStr));
-  Temp := '--' + Boundary;
+  Temp := AnsiString('--' + Boundary);
   Stream.Write(Temp[1], Length(Temp));
   Stream.Write(CRLFStr, SizeOf(CRLFStr));
 
-  Temp := Format('Content-Type: %s; name="%s"'#13#10,
-    [ContentType, ExtractFileName(AFileName)]);
+  Temp := AnsiString(Format('Content-Type: %s; name="%s"'#13#10,
+    [ContentType, ExtractFileName(AFileName)]));
   Stream.Write(Temp[1], Length(Temp));
 
-  Temp := Format('Content-Transfer-Encoding: %s'#13#10, [Encoding]);
+  Temp := AnsiString(Format('Content-Transfer-Encoding: %s'#13#10, [Encoding]));
   Stream.Write(Temp[1], Length(Temp));
 
   if ContentDescription = '' then
     Descr := ExtractFileName(AFileName)
   else
     Descr := ContentDescription;
-  Temp := Format('Content-Description: %s'#13#10, [Descr]);
+  Temp := AnsiString(Format('Content-Description: %s'#13#10, [Descr]));
   Stream.Write(Temp[1], Length(Temp));
 
-  Temp := Format('Content-Disposition: %s; filename="%s"'#13#10#13#10,
-    [ContentDisposition, ExtractFileName(AFileName)]);
+  Temp := AnsiString(Format('Content-Disposition: %s; filename="%s"'#13#10#13#10,
+    [ContentDisposition, ExtractFileName(AFileName)]));
   Stream.Write(Temp[1], Length(Temp));
 end;
 
@@ -1362,18 +1363,18 @@ begin
         end;
 
         { Grab second word -- should be a number if this is an attachment }
-        TokenBuf := ExtractWordL(2, TempBuf, ' ');
-        if Str2WordL(TokenBuf, TempWord) then begin
+        TokenBuf := AnsiString(ExtractWordL(2, string(TempBuf), ' '));
+        if Str2WordL(string(TokenBuf), TempWord) then begin
           { We've got an attachment }
           NewAtt := TStAttachment.Create;
           NewAtt.atStreamOffset := Pos;
-          TokenBuf := ExtractWordL(1, TempBuf, ' ');
-          if CompStringL(TokenBuf, 'begin') = 0 then
+          TokenBuf := AnsiString(ExtractWordL(1, string(TempBuf), ' '));
+          if CompStringL(string(TokenBuf), 'begin') = 0 then
             NewAtt.atEncoding := 'uuencoded'
           else
             NewAtt.atEncoding := 'base64';
-          TokenBuf := ExtractWordL(3, TempBuf, ' ');
-          NewAtt.atFilename := TokenBuf;
+          TokenBuf := AnsiString(ExtractWordL(3, string(TempBuf), ' '));
+          NewAtt.atFilename := string(TokenBuf);
           NewAtt.atOldStyle := True;
           Attachments.AddObject(NewAtt.atFileName, NewAtt);
           NewAtt := nil;
@@ -1562,7 +1563,7 @@ begin
       AnsiStrings.StrCopy(SearchString, #13#10'--')
     else begin
       FBoundaryUsed := True;
-      AnsiStrings.StrPCopy(SearchString, '--' + Boundary);
+      AnsiStrings.StrPCopy(SearchString, AnsiString('--' + Boundary));
     end;
     BMMakeTableZ(SearchString, BMT);
     ScanStream.Position := 0;
@@ -1587,7 +1588,7 @@ begin
             end;
             TempBuf[I] := MemArray(ScanStream.Memory^)[Pos+I];
           end;
-          Boundary := AnsiStrings.StrPas(TempBuf);
+          Boundary := string(AnsiStrings.StrPas(TempBuf));
           AnsiStrings.StrCopy(AnsiStrings.StrECopy(SearchString, '--'), TempBuf);
 
           { Adjust to account for CR/LF searched on this go around }
@@ -1624,7 +1625,7 @@ begin
         try
           with OStr do begin
             { Check for another boundary in buffer }
-            if not BMSearchUC(FBoundary, BoundPos) then
+            if not BMSearchUC(AnsiString(FBoundary), BoundPos) then
               BoundPos := SizeOf(TempBuf);
             Delimiters := ' :;='#13#10;
             Quote := '"';
@@ -1649,34 +1650,34 @@ begin
                 ctType :
                   begin
                     OStr.CursorNextWord;
-                    NewAtt.atContentType := OStr.GetAsciiAtCursor;
+                    NewAtt.atContentType := string(OStr.GetAsciiAtCursor);
                     OStr.CursorNextWord;
-                    if CompareText(OStr.GetAsciiAtCursor, 'name') = 0 then begin
+                    if CompareText(string(OStr.GetAsciiAtCursor), 'name') = 0 then begin
                       OStr.Delimiters := ' :;="'#13#10;
                       OStr.CursorNextWord;
-                      NewAtt.atFileName := OStr.GetWordAtCursor;
+                      NewAtt.atFileName := string(OStr.GetWordAtCursor);
                       OStr.Delimiters := ' :;='#13#10;
                     end;
                   end;
                 ctEncoding :
                   begin
                     OStr.CursorNextWord;
-                    NewAtt.atEncoding := OStr.GetAsciiAtCursor;
+                    NewAtt.atEncoding := string(OStr.GetAsciiAtCursor);
                   end;
                 ctDescription :
                   begin
                     OStr.CursorNextWord;
-                    NewAtt.atContentDescription := OStr.GetAsciiAtCursor;
+                    NewAtt.atContentDescription := string(OStr.GetAsciiAtCursor);
                   end;
                 ctDisposition :
                   begin
                     OStr.CursorNextWord;
-                    NewAtt.atContentDisposition := OStr.GetAsciiAtCursor;
+                    NewAtt.atContentDisposition := string(OStr.GetAsciiAtCursor);
                     OStr.CursorNextWord;
-                    if CompareText(OStr.GetAsciiAtCursor, 'filename') = 0 then begin
+                    if CompareText(string(OStr.GetAsciiAtCursor), 'filename') = 0 then begin
                       OStr.Delimiters := ' :;="'#13#10;
                       OStr.CursorNextWord;
-                      NewAtt.atFileName := OStr.GetWordAtCursor;
+                      NewAtt.atFileName := string(OStr.GetWordAtCursor);
                       OStr.Delimiters := ' :;='#13#10;
                     end;
                   end;

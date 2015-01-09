@@ -1728,7 +1728,7 @@ begin
       MS[1] := '0';
     Str(Hr:2:0, HS);
   end;
-  Result := HS + ' ' + MS;
+  Result := string(HS) + ' ' + string(MS);
 end;
 
 function DegsMin(DC : Double) : String;
@@ -1759,7 +1759,7 @@ begin
       if DC > -1 then
         DS := '- 0'
       else
-        DS := '- ' + DS[2];
+        DS := '- ' + ShortString(DS[2]);
     end else
       DS := '+ ' + DS;
   end else begin
@@ -1773,7 +1773,7 @@ begin
   end;
   if MS[1] = ' ' then
     MS[1] := '0';
-  Result := DS + ' ' + MS;
+  Result := string(DS) + ' ' + string(MS);
 end;
 
 function DateTimeToAJD(D : TDateTime) : Double;

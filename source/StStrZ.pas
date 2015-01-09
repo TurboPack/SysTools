@@ -1492,7 +1492,7 @@ var
 begin
   case ConvertToShortString(S, SS) of
     0 : begin {success}
-          ValSmallint(SS, I, ec);
+          ValSmallint(string(SS), I, ec);
           if (ec = 0) then
             Result := true
           else begin
@@ -1525,7 +1525,7 @@ var
 begin
   case ConvertToShortString(S, SS) of
     0 : begin {success}
-          ValWord(SS, I, ec);
+          ValWord(string(SS), I, ec);
           if (ec = 0) then
             Result := true
           else begin
@@ -1558,7 +1558,7 @@ var
 begin
   case ConvertToShortString(S, SS) of
     0 : begin {success}
-          ValLongint(SS, I, ec);
+          ValLongint(string(SS), I, ec);
           if (ec = 0) then
             Result := true
           else begin
@@ -1620,7 +1620,7 @@ begin
   end;
   AnsiStrings.StrCopy(P, S);
   TrimTrailPrimZ(P);
-  Val(ValPrepZ(P), R, Code);
+  Val(string(ValPrepZ(P)), R, Code);
   if Code <> 0 then begin
     R := Code - 1;
     Result := False;
@@ -4024,7 +4024,7 @@ begin
               else begin
                 inc(TokenStart);
                 AnsiStrings.StrLCopy(TempStr, TokenStart, CurChar - TokenStart - 1);
-                Tokens.Add(AnsiStrings.StrPas(TempStr));
+                Tokens.Add(string(AnsiStrings.StrPas(TempStr)));
                 inc(Result);
               end;
 
@@ -4053,7 +4053,7 @@ begin
             {if the current char is a delimiter, output the token}
             else if CharExistsZ(Delims, CurChar^) then begin
               AnsiStrings.StrLCopy(TempStr, TokenStart, CurChar - TokenStart);
-              Tokens.Add(AnsiStrings.StrPas(TempStr));
+              Tokens.Add(string(AnsiStrings.StrPas(TempStr)));
               inc(Result);
 
               {set the start of the next token to be one character
@@ -4097,7 +4097,7 @@ begin
     {if the final token is not empty, output the token}
     if (TokenStart < CurChar) then begin
       AnsiStrings.StrLCopy(TempStr, TokenStart, CurChar - TokenStart);
-      Tokens.Add(AnsiStrings.StrPas(TempStr));
+      Tokens.Add(string(AnsiStrings.StrPas(TempStr)));
       inc(Result);
     end
     {otherwise the final token is empty, so output a null token if

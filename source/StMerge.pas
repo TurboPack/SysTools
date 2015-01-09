@@ -219,7 +219,7 @@ const
     TagID : string;
   begin
     { extract TagID from delimiters }
-    TagID := Copy(Tag, Length(TagStart) + 1, Length(Tag));
+    TagID := Copy(string(Tag), Length(TagStart) + 1, Length(Tag));
     TagID := Copy(TagID, 1, Length(TagID) - Length(TagEnd));
 
     { see if it matches Tag in MergeTags or DefaultTags }
@@ -228,17 +228,17 @@ const
 
     { fire events as needed }
     if (IdxMerge < 0) and (IdxDef < 0) then begin { no match }
-      DoGotUnknownTag(TagID, Result, Discard)
+      DoGotUnknownTag(AnsiString(TagID), Result, Discard)
     end
     else begin  { found match }
       if (IdxMerge > -1) then begin { match in MergeTags }
         Result := AnsiString(FMergeTags.Values[TagID]);
-        DoGotMergeTag(TagID, Result, Discard);
+        DoGotMergeTag(AnsiString(TagID), Result, Discard);
       end
       else { not in MergTags, use Default }
       if (IdxDef > -1) then begin
         Result := AnsiString(FDefaultTags.Values[TagID]);
-        DoGotMergeTag(TagID, Result, Discard);
+        DoGotMergeTag(AnsiString(TagID), Result, Discard);
       end;
     end;
   end;

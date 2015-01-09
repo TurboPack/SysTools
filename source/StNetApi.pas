@@ -4736,7 +4736,7 @@ begin
         { call the API }
         Result := _NetGetAnyDCName(S.Value, D.Value, B);
         if Result = NERR_SUCCESS then begin
-          Buffer := AnsiStrings.StrPas(PAnsiChar(B));
+          Buffer := string(AnsiStrings.StrPas(PAnsiChar(B)));
           StNetApiBufferFree(B);
         end;
       finally

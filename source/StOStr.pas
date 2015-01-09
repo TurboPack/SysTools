@@ -274,7 +274,7 @@ var
   Temp : AnsiString;
 begin
   Create;
-  Temp := S;
+  Temp := AnsiString(S);
   Len := System.Length(Temp);
   FString := AnsiStrAlloc(SuggestSize(Len));
   if Assigned(FString) then begin
@@ -852,7 +852,7 @@ end;
 procedure TStString.ItemsToString;
 {- Copies items strings to string. }
 var                                                                    
-  Temp : AnsiString;
+  Temp : string;
 begin
   Temp := FItems.Text;
   SetAsPChar(PAnsiChar(AnsiString(Temp)));
@@ -1206,7 +1206,7 @@ begin
         Cur := Anchor;
       end;
     until EndFound;
-    FItems.Text := FTemp;
+    FItems.Text := string(AnsiString(FTemp));
     AnsiStrings.StrDispose(FTemp);
   end else begin
     StringToItems;
@@ -1297,7 +1297,7 @@ begin
       try
         GetWordAtCursorZ(Temp);
         Result := AnsiStrings.StrPas(SoundexZ(Dest, Temp));
-        FItems.Add(Result);
+        FItems.Add(string(Result));
       finally
         AnsiStrings.StrDispose(Temp);
       end;
@@ -1375,7 +1375,7 @@ end;
 procedure TStString.StringToItems;
 {- Copies string into items -- respects line terminators. }
 begin
-  FItems.Text := FString;
+  FItems.Text := string(AnsiString(FString));
 end;
 
 function TStString.SuggestSize(Size : Cardinal) : Cardinal;
@@ -1430,7 +1430,7 @@ procedure TStString.SetAsVariant(Value : Variant);
 var
   Temp : AnsiString;
 begin
-  Temp := Value;
+  Temp := AnsiString(Value);
   CheckAlloc(System.Length(Temp));
   AnsiStrings.StrCopy(FString, PAnsiChar(Temp));
   ResetCursor;

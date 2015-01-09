@@ -347,7 +347,7 @@ type
     FInLineTermChar   : AnsiChar;
     FInLineTerminator : TStLineTerminator;
     FInFixedLineLength: integer;
-    FInputFile        : AnsiString;
+    FInputFile        : string;
 
     FLineNumbers      : Boolean;
     FLinesPerSec      : Cardinal;
@@ -373,7 +373,7 @@ type
     FOutLineTermChar  : AnsiChar;
     FOutLineTerminator: TStLineTerminator;
 
-    FOutputFile       : AnsiString;
+    FOutputFile       : string;
     FOutputOptions    : TStOutputOptions;
 
     FReplaceCount     : Cardinal;
@@ -446,7 +446,7 @@ type
       read FInLineTerminator
       write FInLineTerminator default ltCRLF;
 
-    property InputFile : AnsiString
+    property InputFile : string
       read FInputFile
       write FInputFile;
 
@@ -478,7 +478,7 @@ type
       read FOutLineTerminator
       write FOutLineTerminator default ltCRLF;
 
-    property OutputFile : AnsiString
+    property OutputFile : string
       read FOutputFile
       write FOutputFile;
 

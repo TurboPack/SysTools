@@ -712,12 +712,12 @@ end;
 function BcdExt(const B : TBcd) : Extended;
 var
   Code : Integer;
-  S : string[59];
+  S : string;
 begin
   S := StrExpBcd(B, 0);
-  if ({$IFDEF DELPHIXE2}FormatSettings.{$ENDIF}DecimalSeparator <> '.') then begin
-    while (pos({$IFDEF DELPHIXE2}FormatSettings.{$ENDIF}DecimalSeparator, S) > 0) do
-      S[pos({$IFDEF DELPHIXE2}FormatSettings.{$ENDIF}DecimalSeparator, S)] := '.';
+  if (FormatSettings.DecimalSeparator <> '.') then begin
+    while (pos(FormatSettings.DecimalSeparator, S) > 0) do
+      S[pos(FormatSettings.DecimalSeparator, S)] := '.';
   end;
   Val(S, Result, Code);
 end;
@@ -1241,8 +1241,10 @@ end;
 function ExtBcd(E : Extended) : TBcd;
 var
   S : string;
+  sBuffer: ShortString;
 begin
-  Str(e:0:MantissaDigits, S);
+  Str(e:0:MantissaDigits, sBuffer);
+  S := string(sBuffer);
   Result := ValBcd(FastValPrep(S));
 end;
 
@@ -1304,6 +1306,7 @@ var
   Ch : Char;
   Sign : Byte;
   UB : TUnpBcd;
+  sBuffer: SHortString;
   SExponent : string;//[4];
   Buffer : array[0..255] of Char;
 
@@ -1625,7 +1628,8 @@ Restart:
                     StoreChar('-');
                     Exponent := Abs(Exponent);
                   end;
-                  Str(Exponent:ExpDigits, SExponent);
+                  Str(Exponent:ExpDigits, sBuffer);
+                  SExponent := string(sBuffer);
                   for I := 1 to ExpDigits do
                     if SExponent[I] = ' ' then
                       StoreChar('0')
@@ -1844,8 +1848,10 @@ end;
 function LongBcd(L : LongInt) : TBcd;
 var
   S : string;
+  sBuffer: ShortString;
 begin
-  Str(L, S);
+  Str(L, sBuffer);
+  S := string(sBuffer);
   Result := ValBcd(FastValPrep(S));
 end;
 

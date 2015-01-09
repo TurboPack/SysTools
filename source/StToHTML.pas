@@ -537,7 +537,7 @@ begin
     {make sure buffer is at the start}
     FInTextStream.Position := 0;
     while not FInTextStream.AtEndOfStream do begin
-      TmpStr := FInTextStream.ReadLine;
+      TmpStr := string(FInTextStream.ReadLine);
       Inc(BRead, Length(TmpStr) + Length(FInTextStream.LineTermChar));
       if (FInFileSize > 0) then begin
         PC := Round((BRead / FInFileSize * 100));

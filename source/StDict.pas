@@ -503,7 +503,7 @@ var
 begin
   Prev := nil;
   This := nil;
-  H := Hash(Name, HashSize);
+  H := Hash(AnsiString(Name), HashSize);
   T := dySymbols^[H];
   P := nil;
   while Assigned(T) do begin
