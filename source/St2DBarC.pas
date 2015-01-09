@@ -455,6 +455,10 @@ type
 
 
 implementation
+
+uses
+  System.Types, System.UITypes;
+
   { PDF417 types and constants }
 
 type
