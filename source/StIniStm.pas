@@ -242,10 +242,10 @@ begin
   { assume we're at the start of a section }
   FAnsiStream.ReadLine; { skip section header }
 
-  LineVal := FAnsiStream.ReadLine;
+  LineVal := string(FAnsiStream.ReadLine);
   while not (FAnsiStream.AtEndOfStream) and not (IsHeader(LineVal)) do begin
     Strs.Add(LineVal); { add it to the list }
-    LineVal := FAnsiStream.ReadLine; { get next line }
+    LineVal := string(FAnsiStream.ReadLine); { get next line }
   end;
 end;
 
@@ -391,7 +391,7 @@ begin
 
   { iterate data looking for section headers: '[blah]' }
   while not FAnsiStream.AtEndOfStream do begin
-    Line := Trim(FAnsiStream.ReadLine);
+    Line := Trim(string(FAnsiStream.ReadLine));
     { if it looks like a header }
     if IsHeader(Line) then
       { add it to the list with a line index }

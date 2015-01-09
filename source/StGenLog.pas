@@ -192,7 +192,7 @@ begin
   for I := 0 to Lines-1 do begin
 
     { Load string, add index marker }
-    TempStr := Format(StockString, [I*16]);
+    TempStr := AnsiString(Format(StockString, [I*16]));
 
     { Format data for first word }
     for J := 0 to 7 do begin
@@ -529,7 +529,7 @@ begin
     try
       { Do file header if appropriate }
       if (FS.Size = 0) then begin
-        S := FLogFileHeader;
+        S := AnsiString(FLogFileHeader);
         FS.Write(S[1], Length(S));
 
         { Write trailing CRLF }                                        {!!.02}
@@ -565,14 +565,14 @@ begin
               end;
 
             else
-              S := Format('!! Unknown log entry : [%8.8x][%8.8x][%8.8x][%8.8x]' + StCRLF,
-                [LR.lrData1, LR.lrData2, LR.lrData3, LR.lrData4]);
+              S := AnsiString(Format('!! Unknown log entry : [%8.8x][%8.8x][%8.8x][%8.8x]' + StCRLF,
+                [LR.lrData1, LR.lrData2, LR.lrData3, LR.lrData4]));
 
           end;
         end;
 
         { Write time stamp }
-        T := glTimeStamp(LR.lrTime);
+        T := AnsiString(glTimeStamp(LR.lrTime));
         FS.Write(T[1], Length(T));
 
         { Write log string }
@@ -585,7 +585,7 @@ begin
 
       { Do file header if appropriate }
       if (FLogFileFooter <> '') then begin
-        S := FLogFileFooter;
+        S := AnsiString(FLogFileFooter);
         FS.Write(S[1], Length(S));
 
         { Write trailing CRLF }                                        {!!.02}

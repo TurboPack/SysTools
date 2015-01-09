@@ -148,7 +148,8 @@ type
       function SeekNearestLine(aOffset : longint) : longint;
       function SeekLine(aLineNum : longint) : longint;
 
-      procedure WriteLine(const aSt : AnsiString);
+      procedure WriteLine(const aSt : string); overload;
+      procedure WriteLine(const aSt : AnsiString); overload;
       procedure WriteLineArray(aCharArray : PAnsiChar; aLen : TStMemSize);
       procedure WriteLineZ(aSt : PAnsiChar);
 
@@ -1104,6 +1105,11 @@ begin
     WriteLineArray(PAnsiChar(aSt), Len)
   else
     WriteLineArray('', 0);
+end;
+
+procedure TStAnsiTextStream.WriteLine(const aSt : string);
+begin
+  WriteLine(AnsiString(ASt));
 end;
 
 {-----------------------------------------------------------------------------}

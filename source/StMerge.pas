@@ -216,7 +216,7 @@ const
   function GetTag(const Tag: AnsiString; var Discard : Boolean) : AnsiString;
   var
     IdxMerge, IdxDef : Integer;
-    TagID : AnsiString;
+    TagID : string;
   begin
     { extract TagID from delimiters }
     TagID := Copy(Tag, Length(TagStart) + 1, Length(Tag));
@@ -232,12 +232,12 @@ const
     end
     else begin  { found match }
       if (IdxMerge > -1) then begin { match in MergeTags }
-        Result := FMergeTags.Values[TagID];
+        Result := AnsiString(FMergeTags.Values[TagID]);
         DoGotMergeTag(TagID, Result, Discard);
       end
       else { not in MergTags, use Default }
       if (IdxDef > -1) then begin
-        Result := FDefaultTags.Values[TagID];
+        Result := AnsiString(FDefaultTags.Values[TagID]);
         DoGotMergeTag(TagID, Result, Discard);
       end;
     end;
@@ -255,7 +255,7 @@ const
     {Escaped,} Discard : Boolean;
   begin
     { copy current template line }
-    Buff := FTemplate[Idx];
+    Buff := AnsiString(FTemplate[Idx]);
     Len := Length(Buff);
 
     { output line starts empty }
@@ -366,7 +366,7 @@ const
       NewBuff := NewBuff + TagBuff;
 
     { update merge text with current line }
-    FMergedText.Add(NewBuff);
+    FMergedText.Add(string(NewBuff));
   end;
 
 var

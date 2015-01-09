@@ -710,7 +710,7 @@ end;
 function TStMoney.GetAsString: String;
 { return money amount as a string }
 begin
-  Result := Amount.AsString;
+  Result := string(Amount.AsString);
 end;
 
 function TStMoney.IsEqual(AMoney : TStMoney): Boolean;
@@ -833,7 +833,7 @@ end;
 
 procedure TStMoney.SetAsString(const Value: String);
 begin
-  Amount.AsString := Value;
+  Amount.AsString := AnsiString(Value);
 end;
 
 procedure TStMoney.Subtract(Subtrahend, Remainder : TStMoney);
@@ -1100,7 +1100,7 @@ begin
        the AsString property, which obeys the locale}
       if ({$IFDEF DELPHIXE2}FormatSettings.{$ENDIF}DecimalSeparator <> '.') then
         ReplaceCh(Str, '.', {$IFDEF DELPHIXE2}FormatSettings.{$ENDIF}DecimalSeparator);
-      FRate.AsString := Str;
+      FRate.AsString := AnsiString(Str);
     end;
   end;
 end;
@@ -1129,7 +1129,7 @@ begin
     List.Add('source=' + FSource);
     List.Add('target=' + FTarget);
     List.Add('intermediate=' + FIntermediate);
-    Str := FRate.AsString;
+    Str := string(FRate.AsString);
     if ({$IFDEF DELPHIXE2}FormatSettings.{$ENDIF}DecimalSeparator <> '.') then
       ReplaceCh(Str, {$IFDEF DELPHIXE2}FormatSettings.{$ENDIF}DecimalSeparator, '.');
     List.Add('rate=' + Str);

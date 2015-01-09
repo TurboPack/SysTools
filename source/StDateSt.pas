@@ -305,7 +305,7 @@ var
       Picture.}
   var
     PTmp : string;
-    C, posLCCh, posUCCh : Cardinal;
+    C, posLCCh, posUCCh : Integer;
     Code : Integer;
   begin
     {find the start of the subfield}
@@ -407,7 +407,7 @@ var
   var
     I    : Integer;
     UpCh : Char;
-    P    : Cardinal;
+    P    : Integer;
   begin
     UpCh := StBase.Upcase(OldCh);
     if (StrChPosL(Picture,OldCh,P)) or (StrChPosL(Picture,UpCh,P)) then
@@ -443,14 +443,16 @@ var
   procedure MergeIntoPicture(var Picture : string; Ch : Char; I : Integer);
     {-Merge I into location in Picture indicated by format character Ch}
   var
+    sBuffer: ShortString;
     Tmp     : string;
     C,
-    J, K, L : Cardinal;
+    K: Integer;
+    J, L : Integer;
     UCh,
     CPJ,
     CTI     : Char;
     OK, Done: Boolean;
-    step  : Cardinal;
+    step  : Integer;
   begin
     {find the start of the subfield}
     OK := StrChPosL(Picture,Ch,J);
@@ -490,7 +492,8 @@ var
       Tmp := Copy(Tmp,1,K);
     end else
       {convert I to a string}
-      Str(I:DateLen, Tmp);
+      Str(I:DateLen, sBuffer);
+      Tmp := string(sBuffer);
 
     {now merge}
     L := Length(Tmp);
@@ -525,8 +528,8 @@ var
   procedure MergePictureSt(const Picture : string; var P : string;     {!!.02}
                           MC : Char; const SP : string);           {!!.02}
   var
-    I, J : Cardinal;
-    L    : Cardinal;
+    I, J : Integer;
+    L    : Integer;
   begin
     if NOT (StrChPosL(Picture,MC,I)) then
        Exit;
@@ -566,9 +569,9 @@ var
     {map slashes}
     Result := SubstChar(Result, DateSlash, wSlashChar);
 
-    MergePictureSt(Picture, Result, LongDateSub1, wldSub1);
-    MergePictureSt(Picture, Result, LongDateSub2, wldSub2);
-    MergePictureSt(Picture, Result, LongDateSub3, wldSub3);
+    MergePictureSt(Picture, Result, LongDateSub1, string(wldSub1));
+    MergePictureSt(Picture, Result, LongDateSub2, string(wldSub2));
+    MergePictureSt(Picture, Result, LongDateSub3, string(wldSub3));
 
     if Pack then
       Result:= PackResult(Picture, Result);
@@ -589,9 +592,9 @@ var
       Result := SubstChar(Result, YearOnly,    ' ');
       Result := SubstChar(Result, WeekDayOnly, ' ');
 
-      MergePictureSt(Picture, Result, LongDateSub1, wldSub1);
-      MergePictureSt(Picture, Result, LongDateSub2, wldSub2);
-      MergePictureSt(Picture, Result, LongDateSub3, wldSub3);
+      MergePictureSt(Picture, Result, LongDateSub1, string(wldSub1));
+      MergePictureSt(Picture, Result, LongDateSub2, string(wldSub2));
+      MergePictureSt(Picture, Result, LongDateSub3, string(wldSub3));
 
       {map slashes}
       Result := SubstChar(Result, DateSlash, wSlashChar);
@@ -614,8 +617,8 @@ var
   function TimeStringToHMS(const Picture, St : string; var H, M, S : Integer) : Boolean;
     {-Extract Hours, Minutes, Seconds from St, returning true if string is valid}
   var
-    I,
-    J      : Cardinal;
+    I: Integer;
+//    J      : Integer;
     Tmp,
     t1159,
     t2359  : string;
@@ -634,19 +637,19 @@ var
        (Length(w1159) > 0) and (Length(w2359) > 0) then begin
 
       Tmp := '';
-      J := 1;
-      while (I <= Cardinal(Length(Picture))) and (Picture[I] = TimeOnly) do begin{!!.02}
+//      J := 1;
+      while (I <= Length(Picture)) and (Picture[I] = TimeOnly) do begin{!!.02}
   //      while (Picture[I] = TimeOnly) do begin
         //SZ Inc(Tmp[0]);
         //SZ Tmp[J] := St[I];
         Tmp := Tmp + St[I];
-        Inc(J);
-        Inc(I);
+//        Inc(J);
+//        Inc(I);
       end;
       Tmp := TrimRight(Tmp);
 
-      t1159 := w1159;
-      t2359 := w2359;
+      t1159 := string(w1159);
+      t2359 := string(w2359);
       if (Length(Tmp) = 0) then
          H := -1
       else if (UpperCase(Tmp) = UpperCase(t2359)) then begin
@@ -690,7 +693,7 @@ var
     Minutes,
     Seconds  : Byte;
     L, I,
-    TPos     : Cardinal;
+    TPos     : Integer;
     P        : string;
     OK       : Boolean;
     C        : string;//[1];
@@ -759,7 +762,7 @@ var
                               Pack : Boolean) : string;
     {-Convert T to a string of the form indicated by Picture}
   begin
-    Result := TimeToTimeStringPrim(Picture, T, Pack, w1159, w2359);
+    Result := TimeToTimeStringPrim(Picture, T, Pack, string(w1159), string(w2359));
   end;
 
   function StTimeToAmPmString(const Picture : string; const T : TStTime;
@@ -770,7 +773,7 @@ var
     t1159 = 'AM';
     t2359 = 'PM';
   var
-    P    : Cardinal;
+    P    : Integer;
   begin
     Result := Picture;
     if NOT (StrChPosL(Result, TimeOnly, P)) then
@@ -793,7 +796,7 @@ var
   function MaskCharCount(const P : string; MC : Char) : Integer;   {!!.02}
   var
     I, R,
-    Len  : Cardinal;
+    Len  : Integer;
     OK   : Boolean;
   begin
     OK := StrChPosL(P, MC, I);
@@ -810,7 +813,7 @@ var
 
     procedure FixMask(MC : Char; DL : Integer);
     var
-      I, J, AL, D : Cardinal;
+      I, J, AL, D : Integer;
       MCT : Char;
       OK  : Boolean;
     begin
@@ -861,10 +864,11 @@ var
                                  ExcludeDOW : Boolean) : string;
     {-Return a picture mask for a date string, based on Windows' int'l info}
   var
-    I, WC : Cardinal;
+    I: Integer;
+    WC : Integer;
     OK,
     Stop : Boolean;
-    Temp : string[81];
+    Temp : string;
 
     function LongestMonthName : Integer;
     var
@@ -889,7 +893,8 @@ var
 
     procedure FixMask(MC : Char; DL : Integer);
     var
-      I, J, AL, D : Cardinal;                                          
+      I: Integer;
+      J, AL, D : Cardinal;
       MCT : Char;
     begin
       {find first matching mask character}
@@ -906,7 +911,7 @@ var
       {pad substring to desired length}
       AL := MaskCharCount(Temp, MCT);
       if AL < D then begin
-        for J := 1 to D-AL do                                          
+        for J := 1 to D-AL do
           Temp := StrChInsertL(Temp, MCT, I);
       end else if (AL > D) then
         Temp := StrStDeleteL(Temp, I, AL-D);
@@ -932,7 +937,7 @@ var
         WC := I+1;
         while (WC <= Length(Temp)) AND (NOT Stop) do
         begin
-          if LoCase(Temp[WC]) in [MonthOnly,DayOnly,YearOnly,NameOnly] then
+          if CharInSet(LoCase(Temp[WC]), [MonthOnly,DayOnly,YearOnly,NameOnly]) then
             Stop := TRUE
           else
             Inc(WC);
@@ -1014,7 +1019,9 @@ var
 
     procedure ExtractSubString(SubChar : Char; Dest : string);
     var
-      I, L, P : Cardinal;
+      I: Integer;
+      L: Cardinal;
+      P : Integer;
     begin
 //      SetLength(Dest,sizeof(wldSub1));
 //      FillChar(Dest[1], SizeOf(wldSub1), 0);
@@ -1052,9 +1059,9 @@ var
     wSlashChar := {$IFDEF DELPHIXE2}FormatSettings.{$ENDIF}DateSeparator;
 
     GetProfileString('intl','s1159','AM', S, Length(S));
-    w1159 := StrPas(S);
+    w1159 := ShortString(StrPas(S));
     GetProfileString('intl','s2359','PM', S, Length(S));
-    w2359 := StrPas(S);
+    w2359 := ShortString(StrPas(S));
 
     {get short date mask and fix it up}
     wShortDate := {$IFDEF DELPHIXE2}FormatSettings.{$ENDIF}ShortDateFormat;

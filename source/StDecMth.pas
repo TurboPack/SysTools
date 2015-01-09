@@ -810,7 +810,7 @@ end;
 {--------}
 function TStDecimal.AsFloat : double;
 begin
-  Result := StrToFloat(AsString);
+  Result := StrToFloat(string(AsString));
 end;
 {--------}
 function TStDecimal.AsInt(aRound : TStRoundMethod) : integer;
@@ -858,7 +858,7 @@ end;
 {--------}
 procedure TStDecimal.AssignFromFloat(aValue : double);
 begin
-  AsString := Format('%38.16f', [aValue]);
+  AsString := AnsiString(Format('%38.16f', [aValue]));
 end;
 {--------}
 procedure TStDecimal.AssignFromInt(aValue : integer);

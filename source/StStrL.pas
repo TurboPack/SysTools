@@ -285,7 +285,7 @@ function LongIntFormL(const Mask : String ; L : LongInt ; const LtCurr,
                       RtCurr : String ; Sep : Char) : String;
   {-Return a formatted string with digits from L merged into mask.}
 
-function StrChPosL(const P : String; C : Char; var Pos : Cardinal) : Boolean;
+function StrChPosL(const P : String; C : Char; var Pos : Integer) : Boolean;
   {-Return the position of a specified character within a string.}
 
 function StrStPosL(const P, S : String; var Pos : Cardinal) : Boolean;
@@ -646,12 +646,12 @@ end;
 function ValPrepL(const S : String) : String;
   {-Prepares a string for calling Val.}
 var
-  P : Cardinal;
+  P : Integer;
   C : Longint;                                                         
 begin
   Result := TrimSpacesL(S);
   if Result <> '' then begin
-    if StrChPosL(Result, {$IFDEF DELPHIXE2}FormatSettings.{$ENDIF}DecimalSeparator, P) then begin
+    if StrChPosL(Result, FormatSettings.DecimalSeparator, P) then begin
       C := P;
       Result[C] := '.';
       if C = Length(Result) then
@@ -868,7 +868,7 @@ begin
   if S = '' then Exit;
   if TabSize = 0 then Exit;
   Result := S;
-  NumTabs := CharCountL(S, #9);
+  NumTabs := CharCountL(string(S), #9);
   if NumTabs = 0 then Exit;
   SetLength(Result, Length(Result)+NumTabs*(Pred(TabSize)));
 asm
@@ -966,8 +966,8 @@ end;
 function SubstituteL(const S, FromStr, ToStr : String) : String;
   {-Map the characters found in FromStr to the corresponding ones in ToStr.}
 var
-  I : Cardinal;
-  P : Cardinal;
+  I : Integer;
+  P : Integer;
 begin
   Result := S;
   if Length(FromStr) = Length(ToStr) then
@@ -1304,8 +1304,8 @@ procedure WordWrapL(const InSt : String; var OutSt, Overlap : String;
                    Margin : Integer; PadToMargin : Boolean);
   {-Wrap a text string at a specified margin.}
 var
-  InStLen  : Cardinal;
-  EOS, BOS : Cardinal;
+  InStLen  : Integer;
+  EOS, BOS : Integer;
   Len : Integer;                                                       {!!.02}
 begin
   InStLen := Length(InSt);
@@ -2069,7 +2069,7 @@ function JustNameL(const PathName : String) : String;
   {-Return just the filename (no extension, path, or drive) of a pathname.}
 var
   DotPos : Cardinal;
-  S      : AnsiString;
+  S      : string;
 begin
   S := JustFileNameL(PathName);
   if HasExtensionL(S, DotPos) then
@@ -2129,7 +2129,7 @@ begin
     Result := Result + '\';
 end;
 
-function CleanFileNameL(const FileName : AnsiString) : AnsiString;
+function CleanFileNameL(const FileName : string) : string;
   {-Return filename with at most 8 chars of name and 3 of extension}
 var
   DotPos : Cardinal;
@@ -2245,6 +2245,7 @@ const
   MinusArray : array[Boolean] of Char = (' ', '-');
   FillArray : array[Blank..Zero] of Char = (' ', '*', '0');
 var
+  sBuffer: ShortString;
   S : string;              {temporary string}
   Filler : Integer;        {char for unused digit slots: ' ', '*', '0'}
   WontFit,                 {true if number won't fit in the mask}
@@ -2372,7 +2373,8 @@ EndFound:
     AddMinus := False;
 
   {translate the real to a string}
-  Str(R:Digits:Places, S);
+  Str(R:Digits:Places, sBuffer);
+  S := string(sBuffer);
 
   {add zeros that Str may have left out}
   if Places > MaxPlaces then begin
@@ -2493,7 +2495,7 @@ begin
   Result := FormPrimL(Mask, L, LtCurr, RtCurr, Sep, '.', True);
 end;
 
-function StrChPosL(const P : String; C : Char; var Pos : Cardinal) : Boolean;
+function StrChPosL(const P : String; C : Char; var Pos : Integer) : Boolean;
   {-Return the position of a specified character within a string.}
 {$IFDEF UNICODE}
 begin

@@ -583,7 +583,7 @@ var
 begin
   Result := False;
   if S = '' then Exit;
-  St := TrimTrailW(S);
+  St := AnsiString(TrimTrailW(S));
   if St = '' then Exit;
   Val(ValPrepW(St), R, Code);
   if Code <> 0 then begin

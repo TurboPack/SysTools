@@ -901,7 +901,7 @@ begin
   try
     FSchema.Clear;                                                    {!!.01}
     while not TS.AtEndOfStream do
-      FSchema.Add(TS.ReadLine);
+      FSchema.Add(string(TS.ReadLine));
     { code to extract Schema properties moved to Update routine }     {!!.01}
     Update(FSchema);                                                  {!!.01}
 
@@ -1175,18 +1175,18 @@ const
   BoolChars: array[Boolean] of Char = ('F', 'T');
 begin
   case Value.VType of
-    vtAnsiString: Result := AnsiString(Value.VAnsiString);
+    vtAnsiString: Result := string(Value.VAnsiString);
     {$IFDEF UNICODE}
     vtUnicodeString: Result := UnicodeString(Value.VUnicodeString);
     vtWideString: Result := WideString(Value.VWideString);
     {$ENDIF}
     vtBoolean:    Result := BoolChars[Value.VBoolean];
-    vtChar:       Result := Value.VChar;
+    vtChar:       Result := string(Value.VChar);
     vtCurrency:   Result := CurrToStr(Value.VCurrency^);
     vtExtended:   Result := FloatToStr(Value.VExtended^);
     vtInteger:    Result := IntToStr(Value.VInteger);
-    vtPChar:      Result := Value.VPChar;
-    vtString:     Result := Value.VString^;
+    vtPChar:      Result := string(Value.VPChar);
+    vtString:     Result := string(Value.VString^);
     {$IFDEF VERSION4}
     vtInt64:      Result := IntToStr(Value.VInt64^);
     {$ENDIF VERSION4}
@@ -1721,7 +1721,7 @@ begin
       NewRec := TStTextDataRecord.Create;
 
       { set record data }
-      NewRec.FValue := TS.ReadLine;
+      NewRec.FValue := string(TS.ReadLine);
 
 {!!.01 - Rewritten }
       if TrimCharsL(NewRec.FValue, St_WhiteSpace) <> '' then begin

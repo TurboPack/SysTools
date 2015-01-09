@@ -540,7 +540,7 @@ function CleanUpCase(S : String) : String;
 {-convert string to uppercase and remove duplicates}
 var
   I  : Integer;
-  K  : Cardinal;
+  K  : Integer;
   C  : Char;
 begin
   Result := '';
@@ -1184,7 +1184,7 @@ function TStStreamRegEx.FileMasksToRegEx(Masks : AnsiString) : Boolean;
 var
   SL : TStringList;
   S  : AnsiString;
-  K  : Cardinal;
+  K  : Integer;
   Len: Integer;
 begin
   SL := TStringList.Create;
@@ -1389,7 +1389,7 @@ begin
       begin
         PatRec^.OneChar := Null;
         if FIgnoreCase then
-          S := CleanUpCase(S);
+          S := AnsiString(CleanUpCase(S));
         New(PatRec^.StrPtr);
         PatRec^.StrPtr^ := S;
       end;
@@ -1667,7 +1667,7 @@ var
   Advance  : -1..255;
   AToken   : TStTokens;
   PatPos   : Integer;
-  K        : Cardinal;
+  K        : Integer;
   C        : AnsiChar;
 begin
   Advance := -1;
@@ -1845,7 +1845,7 @@ begin
   Count := AnsiStrings.StrLen(S);
   if (Count > MaxLineLength - 8) then
     Count := MaxLineLength - 8;
-  SI := LeftPadS(IntToStr(LineNum), 6) + '  ';
+  SI := AnsiString(LeftPadS(IntToStr(LineNum), 6) + '  ');
   Move(SI[1], Dest[0], 8);
   Move(S^, Dest[8], Count);
   Dest[Count+8] := #0;
@@ -1990,7 +1990,7 @@ var
   Advance  : -1..255;
   lToken   : TStTokens;
   PatPos   : Integer;
-  K        : Cardinal;
+  K        : Integer;
   C        : AnsiChar;
 begin                       
   Advance := -1;

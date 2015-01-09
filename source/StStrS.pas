@@ -112,10 +112,10 @@ function PadChS(const S : ShortString; C : AnsiChar; Len : Cardinal) : ShortStri
 function PadS(const S : ShortString; Len : Cardinal) : ShortString;
   {-Pad a string on the right with spaces.}
 
-function LeftPadChS(const S : ShortString; C : AnsiChar; Len : Cardinal) : ShortString;
+function LeftPadChS(const S : string; C : Char; Len : Integer) : string;
   {-Pad a string on the left with a specified character.}
 
-function LeftPadS(const S : ShortString; Len : Cardinal) : ShortString;
+function LeftPadS(const S : string; Len : Cardinal) : string;
   {-Pad a string on the left with spaces.}
 
 function TrimLeadS(const S : ShortString) : ShortString;
@@ -256,8 +256,8 @@ function LongIntFormS(const Mask : ShortString ; L : LongInt ; const LtCurr,
                      RtCurr : ShortString ; Sep : AnsiChar) : ShortString;
   {-Return a formatted string with digits from L merged into mask.}
 
-function StrChPosS(const P : string; C : Char; var Pos : Cardinal) : Boolean; overload;
-function StrChPosS(const P : ShortString; C : AnsiChar; var Pos : Cardinal) : Boolean; overload;
+function StrChPosS(const P : string; C : Char; var Pos : Integer) : Boolean; overload;
+function StrChPosS(const P : ShortString; C : AnsiChar; var Pos : Integer) : Boolean; overload;
 
   {-Return the position of a specified character within a string.}
 
@@ -273,10 +273,10 @@ function StrChInsertS(const S : ShortString; C : AnsiChar; Pos : Cardinal) : Sho
 function StrStInsertS(const S1, S2 : ShortString; Pos : Cardinal) : ShortString;
   {-Insert a string into another string at a specified position.}
 
-function StrChDeleteS(const S : ShortString; Pos : Cardinal) : ShortString;
+function StrChDeleteS(const S : string; Pos : Integer) : string;
   {-Delete the character at a specified position in a string.}
 
-function StrStDeleteS(const S : ShortString; Pos, Count : Cardinal) : ShortString;
+function StrStDeleteS(const S : string; Pos, Count : Integer) : string;
   {-Delete characters at a specified position in a string.}
 
 
@@ -619,7 +619,7 @@ end;
 function ValPrepS(const S : string) : string;
   {-Prepares a string for calling Val.}
 var
-  P : Cardinal;
+  P : Integer;
 begin
   Result := S.Trim;
   if Result <> '' then
@@ -670,20 +670,13 @@ begin
   Result := PadChS(S, ' ', Len);
 end;
 
-function LeftPadChS(const S : ShortString; C : AnsiChar; Len : Cardinal) : ShortString;
+function LeftPadChS(const S : string; C : Char; Len : Integer) : string;
   {-Pad a string on the left with a specified character.}
 begin
-  if Length(S) >= Len then
-    Result := S
-  else if Length(S) < 255 then begin
-    if Len > 255 then Len := 255;
-    Result[0] := AnsiChar(Len);
-    Move(S[1], Result[Succ(Word(Len))-Length(S)], Length(S));
-    FillChar(Result[1], Len-Length(S), C);
-  end;
+  Result := S.PadLeft(Len, C);
 end;
 
-function LeftPadS(const S : ShortString; Len : Cardinal) : ShortString;
+function LeftPadS(const S : string; Len : Cardinal) : string;
   {-Pad a string on the left with spaces.}
 begin
   Result := LeftPadChS(S, ' ', Len);
@@ -947,7 +940,7 @@ end;
 function SubstituteS(const S, FromStr, ToStr : ShortString) : ShortString;
   {-Map the characters found in FromStr to the corresponding ones in ToStr.}
 var
-  P : Cardinal;
+  P : Integer;
   I : Byte;
 begin
   Result := S;
@@ -2296,7 +2289,7 @@ Done:
     if Byte(S[0]) > RtChars then
       S[0] := AnsiChar(RtChars)
     else
-      S := LeftPadS(S, RtChars);
+      S := ShortString(LeftPadS(string(S), RtChars));
     Result := Result + S;
   end;
   if LtChars > 0 then begin
@@ -2323,7 +2316,7 @@ begin
   Result := FormPrimS(Mask, L, LtCurr, RtCurr, Sep, '.', True);
 end;
 
-function StrChPosS(const P : String; C : Char; var Pos : Cardinal) : Boolean;
+function StrChPosS(const P : String; C : Char; var Pos : Integer) : Boolean;
 var
   I: Integer;
 {-Return the position of a specified character within a string.}
@@ -2340,7 +2333,7 @@ begin
   end;
 end;
 
-function StrChPosS(const P : ShortString; C : AnsiChar; var Pos : Cardinal) : Boolean;
+function StrChPosS(const P : ShortString; C : AnsiChar; var Pos : Integer) : Boolean;
   {-Return the position of a specified character within a string.}
 asm
   push  ebx             { Save registers }
@@ -2406,14 +2399,14 @@ begin
   System.Insert(S2, Result, Pos);
 end;
 
-function StrChDeleteS(const S : ShortString; Pos : Cardinal) : ShortString;
+function StrChDeleteS(const S : string; Pos : Integer) : string;
   {-Delete the character at a specified position in a string.}
 begin
   Result := S;
   System.Delete(Result, Pos, 1);
 end;
 
-function StrStDeleteS(const S : ShortString; Pos, Count : Cardinal) : ShortString;
+function StrStDeleteS(const S : string; Pos, Count : Integer) : string;
   {-Delete characters at a specified position in a string.}
 begin
   Result := S;
