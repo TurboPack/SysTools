@@ -1064,16 +1064,16 @@ var
     w2359 := ShortString(StrPas(S));
 
     {get short date mask and fix it up}
-    wShortDate := {$IFDEF DELPHIXE2}FormatSettings.{$ENDIF}ShortDateFormat;
+    wShortDate := FormatSettings.ShortDateFormat;
     for I := 1 to Length(wShortDate) do
       if (wShortDate[I] = wSlashChar) then
         wShortDate[I] := '/';
 
     {get long date mask and fix it up}
-    wLongDate := {$IFDEF DELPHIXE2}FormatSettings.{$ENDIF}LongDateFormat;
-    ExtractSubString(LongDateSub1, wldSub1);
-    ExtractSubString(LongDateSub2, wldSub2);
-    ExtractSubString(LongDateSub3, wldSub3);
+    wLongDate := FormatSettings.LongDateFormat;
+    ExtractSubString(LongDateSub1, string(wldSub1));
+    ExtractSubString(LongDateSub2, string(wldSub2));
+    ExtractSubString(LongDateSub3, string(wldSub3));
 
     {replace ddd/dddd with www/wwww}
     I := pos('ddd',wLongDate);

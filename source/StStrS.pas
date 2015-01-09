@@ -267,7 +267,7 @@ function StrStPosS(const P, S : ShortString; var Pos : Cardinal) : Boolean;
 function StrStCopyS(const S : ShortString; Pos, Count : Cardinal) : ShortString;
   {-Copy characters at a specified position in a string.}
 
-function StrChInsertS(const S : ShortString; C : AnsiChar; Pos : Cardinal) : ShortString;
+function StrChInsertS(const S : string; C : Char; Pos : Integer) : string;
   {-Insert a character into a string at a specified position.}
 
 function StrStInsertS(const S1, S2 : ShortString; Pos : Cardinal) : ShortString;
@@ -2381,15 +2381,11 @@ begin
   Result := System.Copy(S, Pos, Count);
 end;
 
-function StrChInsertS(const S : ShortString; C : AnsiChar; Pos : Cardinal) : ShortString;
+function StrChInsertS(const S : string; C : Char; Pos : Integer) : string;
   {-Insert a character into a string at a specified position.}
-var
-  Temp : string[2];
 begin
-  Temp[0] := #1;
-  Temp[1] := C;
   Result := S;
-  System.Insert(Temp, Result, Pos);
+  System.Insert(C, Result, Pos);
 end;
 
 function StrStInsertS(const S1, S2 : ShortString; Pos : Cardinal) : ShortString;
