@@ -259,6 +259,9 @@ type
 
 implementation
 
+uses
+  AnsiStrings;
+
 procedure RaiseRegIniError(Code : LongInt);
 var
   E : ESTRegIniError;
@@ -989,7 +992,7 @@ begin
     S[1] := '$';
     S[2] := IString[Index];
     S[3] := IString[Index+1];
-    Val(S,Q[I],Code);
+    Val(string(S),Q[I],Code);
     if (Code <> 0) then begin
       Result := False;
       Exit;
@@ -1015,7 +1018,7 @@ begin
     if (riType = riIniType) then begin
       if (Size > MaxByteArraySize) then
         RaiseRegIniError(stscByteArrayTooLarge);
-      SValue := BytesToString(PByte(@Value),Size);
+      SValue := string(BytesToString(PByte(@Value),Size));
       if (NOT WriteIniData(ValueName,SValue)) then
         RaiseRegIniError(stscIniWriteFail);
     end else begin
@@ -1059,11 +1062,11 @@ begin
   try
 {$ENDIF}
     if (riType = riIniType) then begin
-      DefVals := BytesToString(PByte(@Default), Size);
+      DefVals := string(BytesToString(PByte(@Default), Size));
       Len := ReadIniData(ValueName, Values, DefVals);
       if (Len mod 2 = 0) then begin
         {covert string, if possible, to series of bytes}
-        if not (StringToBytes(Values, PByte(Value), Size)) then
+        if not (StringToBytes(AnsiString(Values), PByte(Value), Size)) then
           Move(Default, PByte(Value), Size);
       end else
         Move(Default, PByte(Value), Size);
@@ -1160,6 +1163,7 @@ var
   ValType   : DWORD;
   TmpVal    : DWORD;
   LResult   : Pointer;
+  sBuffer: ShortString;
 
 begin
   riMode := riGet;
@@ -1206,11 +1210,12 @@ begin
               REG_BINARY   : begin
                                if (ValSize > MaxByteArraySize) then
                                  RaiseRegIniError(stscByteArrayTooLarge);
-                               Result := BytesToString(PByte(@LResult),ValSize);
+                               Result := string(BytesToString(PByte(@LResult),ValSize));
                              end;
               REG_DWORD    : begin
                                TmpVal := DWORD(LResult^);
-                               Str(TmpVal,Result);
+                               Str(TmpVal,sBuffer);
+                               Result := string(sBuffer);
                              end;
             else
               Result := Default;
@@ -1239,14 +1244,15 @@ var
   ECode   : LongInt;
   Key     : HKey;
   SValue  : string;
-
+  sBuffer: ShortString;
 begin
   riMode := riSet;
 {$IFDEF ThreadSafe}
   EnterCS;
   try
 {$ENDIF}
-    Str(Value, SValue);
+    Str(Value, sBuffer);
+    SValue := string(sBuffer);
     while (SValue[1] = ' ') do
       System.Delete(SValue, 1, 1);
     if (riType = riIniType) then begin
@@ -1277,7 +1283,7 @@ function TStRegIni.ReadFloat(const ValueName : string; const Default : TStFloat)
 var
   SDefault,
   Value      : string;
-
+  sBuffer: ShortString;
   ECode,
   Key        : HKey;
   Len        : LongInt;
@@ -1294,7 +1300,8 @@ begin
   try
 {$ENDIF}
     if (riType = riIniType) then begin
-      Str(Default,SDefault);
+      Str(Default,sBuffer);
+      SDefault := string(sBuffer);
       Len := ReadIniData(ValueName,Value,SDefault);
       if (Len > 0) then begin
         Val(Value,Result,Code);
@@ -1370,14 +1377,15 @@ var
   ECode   : LongInt;
   Key     : HKey;
   SValue  : string;
-
+  sBuffer: ShortString;
 begin
   riMode := riSet;
 {$IFDEF ThreadSafe}
   EnterCS;
   try
 {$ENDIF}
-    Str(Value,SValue);
+    Str(Value,sBuffer);
+    SValue := string(sBuffer);
     if (riType = riIniType) then begin
       if (NOT WriteIniData(ValueName,SValue)) then
         RaiseRegIniError(stscIniWriteFail);
@@ -1415,7 +1423,7 @@ var
 
   LResult    : Pointer;
   Code       : integer;
-
+  sBuffer: ShortString;
 begin
   riMode := riGet;
 {$IFDEF ThreadSafe}
@@ -1423,7 +1431,8 @@ begin
   try
 {$ENDIF}
     if (riType = riIniType) then begin
-      Str(Default,SDefault);
+      Str(Default,sBuffer);
+      SDefault := string(sBuffer);
       Len := ReadIniData(ValueName,Value,SDefault);
       if (Len > 0) then begin
         Val(Value,Result,Code);
@@ -1464,7 +1473,7 @@ begin
             case (ValType) of
               REG_SZ,
               REG_EXPAND_SZ : begin
-                                Value := StrPas(PAnsiChar(LResult));
+                                Value := string(AnsiStrings.StrPas(PAnsiChar(LResult)));
                                 Val(Value,Result,Code);
                                 if (Code <> 0) then
                                   Result := Default;
@@ -1558,7 +1567,7 @@ begin
       end;
     end else begin
       HoldKey := 0;
-      PCSKey := StrAlloc(Length(KeyName) + StrLen(riCurSubKey) + 2); // GetMem(PCSKey, Length(KeyName)+1 + LongInt(strlen(riCurSubkey))+2);
+      PCSKey := StrAlloc(Length(KeyName) + Integer(StrLen(riCurSubKey)) + 2); // GetMem(PCSKey, Length(KeyName)+1 + LongInt(strlen(riCurSubkey))+2);
       PSKey := StrAlloc(Length(KeyName)); // GetMem(PSKey, Length(KeyName)+1);
       try
         PCSKey[0] := #0;
@@ -1733,6 +1742,7 @@ var
   ValType      : DWORD;
   LResult      : Pointer;
 
+  sBuffer: ShortString;
 begin
   riMode := riGet;
 {$IFDEF ThreadSafe}
@@ -1798,9 +1808,12 @@ begin
                 REG_DWORD,
                 REG_BINARY     : begin
                                   if ValType = REG_DWORD then
-                                    Str(LongInt(LResult^),TS)
+                                  begin
+                                    Str(LongInt(LResult^),sBuffer);
+                                    TS := string(sBuffer);
+                                  end
                                   else
-                                    TS := BytesToString(PByte(LResult),DSize);
+                                    TS := string(BytesToString(PByte(LResult),DSize));
                                   S := S + TS;
                                   SKV.AddObject(S,BmpBinary);
                                 end;

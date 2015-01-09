@@ -1189,24 +1189,24 @@ var
 begin
   SL := TStringList.Create;
   try
-    if StrChPosL(Masks, ';', K) then begin
+    if StrChPosL(string(Masks), ';', K) then begin
       while (K > 0) do begin
         S := Copy(Masks, 1, K-1);
         if (Length(S) > 0) then begin
           if (SL.Count = 0) then
-            SL.Add(ConvertMaskToRegEx(S))
+            SL.Add(string(ConvertMaskToRegEx(S)))
           else
-            SL.Add('|' + ConvertMaskToRegEx(S));
+            SL.Add('|' + string(ConvertMaskToRegEx(S)));
         end;
         Delete(Masks, 1, K);
-        if not (StrChPosL(Masks, ';', K)) then
+        if not (StrChPosL(string(Masks), ';', K)) then
           break;
       end;
       if (Length(Masks) > 0) then
-        SL.Add('|' + ConvertMaskToRegEx(Masks));
+        SL.Add('|' + string(ConvertMaskToRegEx(Masks)));
     end else begin
       if (Length(Masks) > 0) then
-        SL.Add(ConvertMaskToRegEx(Masks));
+        SL.Add(string(ConvertMaskToRegEx(Masks)));
     end;
 
     if (SL.Count > 0) then begin
@@ -1389,7 +1389,7 @@ begin
       begin
         PatRec^.OneChar := Null;
         if FIgnoreCase then
-          S := AnsiString(CleanUpCase(S));
+          S := AnsiString(CleanUpCase(string(S)));
         New(PatRec^.StrPtr);
         PatRec^.StrPtr^ := S;
       end;
@@ -2008,7 +2008,7 @@ begin
       if (StrChPosS(PatPtr^.StrPtr^, C, K)) then
         Advance := 1;
     end else if (lToken = tknNegCharClass) then begin
-      if (pos(C, NewLine) = 0) then begin
+      if (pos(string(AnsiString(C)), NewLine) = 0) then begin
         if not (StrChPosS(PatPtr^.StrPtr^, C, K)) then
           Advance := 1;
       end;
