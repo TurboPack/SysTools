@@ -40,9 +40,9 @@ uses
   StBase, StStrms, StTxtDat;
 
 const
-  DefaultDateFmt : AnsiString = 'mm/dd/yyyy';
-  DefaultTimeFmt : AnsiString = 'hh:mm:ss';
-  DefaultDateTimeFmt : AnsiString = 'mm/dd/yyyy hh:mm:ss';
+  DefaultDateFmt = 'mm/dd/yyyy';
+  DefaultTimeFmt = 'hh:mm:ss';
+  DefaultDateTimeFmt = 'mm/dd/yyyy hh:mm:ss';
 
 type
   TStExportProgressEvent = procedure (Sender : TObject; Index : Integer;
@@ -51,27 +51,28 @@ type
   TStDBtoCSVExport = class
   private
     FDataSet: TDataSet;
-    FFieldDelimiter: AnsiChar;
+    FFieldDelimiter: Char;
     FIncludeHeader: Boolean;
     FLineTermChar : AnsiChar;
     FLineTerminator : TStLineTerminator;
     FQuoteAlways: Boolean;
-    FQuoteDelimiter: AnsiChar;
+    FQuoteDelimiter: Char;
     FQuoteIfSpaces: Boolean;
 
-    FDateFmt, FTimeFmt, FDateTimeFmt : AnsiString;
+    FDateFmt: string;
+    FTimeFmt, FDateTimeFmt : string;
 
     FOnExportProgress : TStExportProgressEvent;
     FOnQuoteField : TStOnQuoteFieldEvent;
   protected {private}
-    function BuildCSVHeader: AnsiString;
-    function BuildCSVRec : AnsiString;
+    function BuildCSVHeader: string;
+    function BuildCSVRec : string;
 
     procedure SetDataSet(const Value: TDataSet);
-    procedure SetFieldDelimiter(const Value: AnsiChar);
+    procedure SetFieldDelimiter(const Value: Char);
     procedure SetIncludeHeader(const Value: Boolean);
     procedure SetQuoteAlways(const Value: Boolean);
-    procedure SetQuoteDelimiter(const Value: AnsiChar);
+    procedure SetQuoteDelimiter(const Value: Char);
     procedure SetQuoteIfSpaces(const Value: Boolean);
   public
     constructor Create;
@@ -85,7 +86,7 @@ type
 
     { properties }
     property DataSet : TDataSet read FDataSet write SetDataSet;
-    property FieldDelimiter : AnsiChar
+    property FieldDelimiter : Char
       read FFieldDelimiter write SetFieldDelimiter default StDefaultDelim;
     property IncludeHeader : Boolean
       read FIncludeHeader write SetIncludeHeader default False;
@@ -95,16 +96,16 @@ type
       read FLineTerminator write FLineTerminator default ltCRLF;
     property QuoteAlways : Boolean
       read FQuoteAlways write SetQuoteAlways default False;
-    property QuoteDelimiter : AnsiChar
+    property QuoteDelimiter : Char
       read FQuoteDelimiter write SetQuoteDelimiter default StDefaultQuote;
     property QuoteIfSpaces : Boolean
       read FQuoteIfSpaces write SetQuoteIfSpaces default False;
 
-    property DateFmt : AnsiString
+    property DateFmt : string
       read FDateFmt write FDateFmt;
-    property TimeFmt : AnsiString
+    property TimeFmt : string
       read FTimeFmt write FTimeFmt;
-    property DateTimeFmt : AnsiString
+    property DateTimeFmt : string
       read FDateTimeFmt write FDateTimeFmt;
     { events }
     property OnQuoteField : TStOnQuoteFieldEvent
@@ -121,11 +122,11 @@ type
   protected {private}
     function GetFieldDelimiter: Char;
     function GetQuoteDelimiter: Char;
-    function GetSchemaName: AnsiString;
+    function GetSchemaName: string;
     procedure SetDataSet(const Value: TDataSet);
     procedure SetFieldDelimiter(const Value: Char);
     procedure SetQuoteDelimiter(const Value: Char);
-    procedure SetSchemaName(const Value: AnsiString);
+    procedure SetSchemaName(const Value: string);
   public
     constructor Create;
     destructor Destroy; override;
@@ -141,7 +142,7 @@ type
       read GetFieldDelimiter write SetFieldDelimiter default StDefaultDelim;
     property QuoteDelimiter : Char
       read GetQuoteDelimiter write SetQuoteDelimiter default StDefaultQuote;
-    property SchemaName : AnsiString
+    property SchemaName : string
       read GetSchemaName write SetSchemaName;
   end;
 
@@ -177,11 +178,11 @@ begin
   FDateTimeFmt := DefaultDateTimeFmt;
 end;
 
-function TStDBtoCSVExport.BuildCSVHeader: AnsiString;
+function TStDBtoCSVExport.BuildCSVHeader: string;
 { generate CSV header from Data Set field data }
 var
   i : Integer;
-  Name : AnsiString;
+  Name : string;
   TheField : TField;
 begin
   Result := '';
@@ -202,7 +203,7 @@ begin
   end;
 end;
 
-function TStDBtoCSVExport.BuildCSVRec: AnsiString;
+function TStDBtoCSVExport.BuildCSVRec: string;
 { generate record of CSV data from Data Set field data }
 var
   i : Integer;
@@ -322,7 +323,7 @@ begin
   FDataSet := Value;
 end;
 
-procedure TStDBtoCSVExport.SetFieldDelimiter(const Value: AnsiChar);
+procedure TStDBtoCSVExport.SetFieldDelimiter(const Value: Char);
 begin
   FFieldDelimiter := Value;
 end;
@@ -342,7 +343,7 @@ begin
   FQuoteIfSpaces := Value;
 end;
 
-procedure TStDBtoCSVExport.SetQuoteDelimiter(const Value: AnsiChar);
+procedure TStDBtoCSVExport.SetQuoteDelimiter(const Value: Char);
 begin
   FQuoteDelimiter := Value;
 end;
@@ -378,7 +379,7 @@ begin
   end;
 end;
 
-function GetDecimals(const DataStr : AnsiString): Integer;
+function GetDecimals(const DataStr : string): Integer;
 { determine decimal places for float formatted string }
 begin
   Result := Length(DataStr) - Pos({$IFDEF DELPHIXE2}FormatSettings.{$ENDIF}DecimalSeparator, DataStr);
@@ -473,7 +474,7 @@ begin
   Result := FSchema.QuoteDelimiter;
 end;
 
-function TStDbSchemaGenerator.GetSchemaName: AnsiString;
+function TStDbSchemaGenerator.GetSchemaName: string;
 begin
   Result := FSchema.SchemaName;
 end;
@@ -493,7 +494,7 @@ begin
   FSchema.QuoteDelimiter := Value;
 end;
 
-procedure TStDbSchemaGenerator.SetSchemaName(const Value: AnsiString);
+procedure TStDbSchemaGenerator.SetSchemaName(const Value: string);
 begin
   FSchema.SchemaName:= Value;
 end;

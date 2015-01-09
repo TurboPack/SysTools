@@ -51,9 +51,9 @@ extern DELPHI_PACKAGE bool __fastcall Str2WordW(const System::WideString S, Syst
 extern DELPHI_PACKAGE bool __fastcall Str2LongW(const System::WideString S, int &I);
 extern DELPHI_PACKAGE bool __fastcall Str2RealW(const System::WideString S, double &R);
 extern DELPHI_PACKAGE bool __fastcall Str2ExtW(const System::WideString S, System::Extended &R);
-extern DELPHI_PACKAGE System::WideString __fastcall Long2StrW(int L);
-extern DELPHI_PACKAGE System::WideString __fastcall Real2StrW(double R, System::Byte Width, System::Int8 Places);
-extern DELPHI_PACKAGE System::WideString __fastcall Ext2StrW(System::Extended R, System::Byte Width, System::Int8 Places);
+extern DELPHI_PACKAGE System::UnicodeString __fastcall Long2StrW(int L);
+extern DELPHI_PACKAGE System::UnicodeString __fastcall Real2StrW(double R, System::Byte Width, System::Int8 Places);
+extern DELPHI_PACKAGE System::UnicodeString __fastcall Ext2StrW(System::Extended R, System::Byte Width, System::Int8 Places);
 extern DELPHI_PACKAGE System::WideString __fastcall ValPrepW(const System::WideString S);
 extern DELPHI_PACKAGE System::WideString __fastcall CharStrW(System::WideChar C, unsigned Len);
 extern DELPHI_PACKAGE System::WideString __fastcall PadChW(const System::WideString S, System::WideChar C, unsigned Len);

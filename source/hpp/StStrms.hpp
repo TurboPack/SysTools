@@ -110,7 +110,8 @@ public:
 	char * __fastcall ReadLineZ(char * aSt, int aMaxLen);
 	int __fastcall SeekNearestLine(int aOffset);
 	int __fastcall SeekLine(int aLineNum);
-	void __fastcall WriteLine(const System::AnsiString aSt);
+	void __fastcall WriteLine(const System::UnicodeString aSt)/* overload */;
+	void __fastcall WriteLine(const System::AnsiString aSt)/* overload */;
 	void __fastcall WriteLineArray(char * aCharArray, int aLen);
 	void __fastcall WriteLineZ(char * aSt);
 	__property int FixedLineLength = {read=FLineLen, write=atsSetLineLen, nodefault};

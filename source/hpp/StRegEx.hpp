@@ -212,7 +212,7 @@ protected:
 	char FInLineTermChar;
 	Stbase::TStLineTerminator FInLineTerminator;
 	int FInFixedLineLength;
-	System::AnsiString FInputFile;
+	System::UnicodeString FInputFile;
 	bool FLineNumbers;
 	unsigned FLinesPerSec;
 	unsigned FMatchCount;
@@ -229,7 +229,7 @@ protected:
 	int FOutFixedLineLength;
 	char FOutLineTermChar;
 	Stbase::TStLineTerminator FOutLineTerminator;
-	System::AnsiString FOutputFile;
+	System::UnicodeString FOutputFile;
 	TStOutputOptions FOutputOptions;
 	unsigned FReplaceCount;
 	System::Classes::TStringList* FReplacePatSL;
@@ -266,7 +266,7 @@ __published:
 	__property int InFixedLineLength = {read=FInFixedLineLength, write=FInFixedLineLength, default=80};
 	__property char InLineTermChar = {read=FInLineTermChar, write=FInLineTermChar, default=10};
 	__property Stbase::TStLineTerminator InLineTerminator = {read=FInLineTerminator, write=FInLineTerminator, default=3};
-	__property System::AnsiString InputFile = {read=FInputFile, write=FInputFile};
+	__property System::UnicodeString InputFile = {read=FInputFile, write=FInputFile};
 	__property bool LineNumbers = {read=FLineNumbers, write=FLineNumbers, default=0};
 	__property System::Classes::TStringList* MatchPattern = {read=FMatchPatSL, write=SetMatchPatSL};
 	__property TStOnMatchEvent OnMatch = {read=FOnMatch, write=FOnMatch};
@@ -274,7 +274,7 @@ __published:
 	__property int OutFixedLineLength = {read=FOutFixedLineLength, write=FOutFixedLineLength, default=80};
 	__property char OutLineTermChar = {read=FOutLineTermChar, write=FOutLineTermChar, default=10};
 	__property Stbase::TStLineTerminator OutLineTerminator = {read=FOutLineTerminator, write=FOutLineTerminator, default=3};
-	__property System::AnsiString OutputFile = {read=FOutputFile, write=FOutputFile};
+	__property System::UnicodeString OutputFile = {read=FOutputFile, write=FOutputFile};
 	__property TStOutputOptions OutputOptions = {read=FOutputOptions, write=SetOptions, nodefault};
 	__property System::Classes::TStringList* ReplacePattern = {read=FReplacePatSL, write=SetReplacePatSL};
 	__property System::Classes::TStringList* SelAvoidPattern = {read=FSelAvoidPatSL, write=SetSelAvoidPatSL};

@@ -56,9 +56,9 @@ extern DELPHI_PACKAGE System::UnicodeString __fastcall Real2StrL(double R, Syste
 extern DELPHI_PACKAGE System::UnicodeString __fastcall Ext2StrL(System::Extended R, System::Byte Width, System::Int8 Places);
 extern DELPHI_PACKAGE System::UnicodeString __fastcall ValPrepL(const System::UnicodeString S);
 extern DELPHI_PACKAGE System::UnicodeString __fastcall CharStrL(System::WideChar C, unsigned Len);
-extern DELPHI_PACKAGE System::UnicodeString __fastcall PadChL(const System::UnicodeString S, System::WideChar C, unsigned Len);
+extern DELPHI_PACKAGE System::UnicodeString __fastcall PadChL(const System::UnicodeString S, System::WideChar C, int Len);
 extern DELPHI_PACKAGE System::UnicodeString __fastcall PadL(const System::UnicodeString S, unsigned Len);
-extern DELPHI_PACKAGE System::UnicodeString __fastcall LeftPadChL(const System::UnicodeString S, System::WideChar C, unsigned Len);
+extern DELPHI_PACKAGE System::UnicodeString __fastcall LeftPadChL(const System::UnicodeString S, System::WideChar C, int Len);
 extern DELPHI_PACKAGE System::UnicodeString __fastcall LeftPadL(const System::UnicodeString S, unsigned Len);
 extern DELPHI_PACKAGE System::UnicodeString __fastcall TrimLeadL(const System::UnicodeString S);
 extern DELPHI_PACKAGE System::UnicodeString __fastcall TrimTrailL(const System::UnicodeString S);
@@ -79,7 +79,7 @@ extern DELPHI_PACKAGE System::UnicodeString __fastcall ExtractWordL(unsigned N, 
 extern DELPHI_PACKAGE unsigned __fastcall AsciiCountL(const System::UnicodeString S, const System::UnicodeString WordDelims, System::WideChar Quote);
 extern DELPHI_PACKAGE bool __fastcall AsciiPositionL(unsigned N, const System::UnicodeString S, const System::UnicodeString WordDelims, System::WideChar Quote, unsigned &Pos);
 extern DELPHI_PACKAGE System::UnicodeString __fastcall ExtractAsciiL(unsigned N, const System::UnicodeString S, const System::UnicodeString WordDelims, System::WideChar Quote);
-extern DELPHI_PACKAGE void __fastcall WordWrapL(const System::UnicodeString InSt, System::UnicodeString &OutSt, System::UnicodeString &Overlap, unsigned Margin, bool PadToMargin);
+extern DELPHI_PACKAGE void __fastcall WordWrapL(const System::UnicodeString InSt, System::UnicodeString &OutSt, System::UnicodeString &Overlap, int Margin, bool PadToMargin);
 extern DELPHI_PACKAGE int __fastcall CompStringL(const System::UnicodeString S1, const System::UnicodeString S2);
 extern DELPHI_PACKAGE int __fastcall CompUCStringL(const System::UnicodeString S1, const System::UnicodeString S2);
 extern DELPHI_PACKAGE System::AnsiString __fastcall SoundexL(const System::AnsiString S);
@@ -100,7 +100,7 @@ extern DELPHI_PACKAGE System::UnicodeString __fastcall CommaizeChL(int L, System
 extern DELPHI_PACKAGE System::UnicodeString __fastcall CommaizeL(int L);
 extern DELPHI_PACKAGE System::UnicodeString __fastcall FloatFormL(const System::UnicodeString Mask, System::Extended R, const System::UnicodeString LtCurr, const System::UnicodeString RtCurr, System::WideChar Sep, System::WideChar DecPt);
 extern DELPHI_PACKAGE System::UnicodeString __fastcall LongIntFormL(const System::UnicodeString Mask, int L, const System::UnicodeString LtCurr, const System::UnicodeString RtCurr, System::WideChar Sep);
-extern DELPHI_PACKAGE bool __fastcall StrChPosL(const System::UnicodeString P, System::WideChar C, unsigned &Pos);
+extern DELPHI_PACKAGE bool __fastcall StrChPosL(const System::UnicodeString P, System::WideChar C, int &Pos);
 extern DELPHI_PACKAGE bool __fastcall StrStPosL(const System::UnicodeString P, const System::UnicodeString S, unsigned &Pos);
 extern DELPHI_PACKAGE System::UnicodeString __fastcall StrStCopyL(const System::UnicodeString S, unsigned Pos, unsigned Count);
 extern DELPHI_PACKAGE System::UnicodeString __fastcall StrChInsertL(const System::UnicodeString S, System::WideChar C, unsigned Pos);

@@ -223,9 +223,9 @@ public:
 //-- var, const, procedure ---------------------------------------------------
 static const System::Int8 AttachmentFileMode = System::Int8(0x20);
 extern DELPHI_PACKAGE System::StaticArray<char, 2> CRLFStr;
-extern DELPHI_PACKAGE System::SmallString<11> DefStContentDisposition;
-extern DELPHI_PACKAGE System::SmallString<27> DefStContentType;
-extern DELPHI_PACKAGE System::SmallString<7> DefStMimeEncoding;
+#define DefStContentDisposition L"attachment"
+#define DefStContentType L"application/octet-stream"
+#define DefStMimeEncoding L"base64"
 static const System::Int8 ExtractFileMode = System::Int8(0x12);
 static const System::Int8 MaxMimeLine = System::Int8(0x4e);
 }	/* namespace Stmime */
