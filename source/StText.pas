@@ -41,13 +41,13 @@ uses
   Windows,
   SysUtils, STConst, StBase, StSystem;
 
-function TextSeek(var F : TextFile; Target : LongInt) : Boolean;
+function TextSeek(var F : TextFile; Target : Integer) : Boolean;
  {-Seek to the specified position in a text file opened for input}
 
-function TextFileSize(var F : TextFile) : LongInt;
+function TextFileSize(var F : TextFile) : Integer;
   {-Return the size of a text file}
 
-function TextPos(var F : TextFile) : LongInt;
+function TextPos(var F : TextFile) : Integer;
  {-Return the current position of the logical file pointer (that is,
    the position of the physical file pointer, adjusted to account for
    buffering)}
@@ -57,11 +57,11 @@ function TextFlush(var F : TextFile) : Boolean;
 
 implementation
 
-function TextSeek(var F : TextFile; Target : LongInt) : Boolean;
+function TextSeek(var F : TextFile; Target : Integer) : Boolean;
   {-Do a Seek for a text file opened for input. Returns False in case of I/O
     error.}
 var
-  Pos : LongInt;
+  Pos : Integer;
 begin
   with TTextRec(F) do begin
     {assume failure}
@@ -73,7 +73,7 @@ begin
     Dec(Pos, BufEnd);
     {see if the Target is within the buffer}
     Pos := Target-Pos;
-    if (Pos >= 0) and (Pos < LongInt(BufEnd)) then
+    if (Pos >= 0) and (Pos < Integer(BufEnd)) then
       {it is--just move the buffer pointer}
       BufPos := Pos
     else begin
@@ -87,11 +87,11 @@ begin
   Result := True;
 end;
 
-function TextFileSize(var F : TextFile) : LongInt;
+function TextFileSize(var F : TextFile) : Integer;
   {-Return the size of text file F. Returns -1 in case of I/O error.}
 var
-  Old : LongInt;
-  Res : LongInt;
+  Old : Integer;
+  Res : Integer;
 begin
   Result := -1;
   with TTextRec(F) do begin
@@ -109,12 +109,12 @@ begin
   Result := Res;
 end;
 
-function TextPos(var F : TextFile) : LongInt;
+function TextPos(var F : TextFile) : Integer;
   {-Return the current position of the logical file pointer (that is,
     the position of the physical file pointer, adjusted to account for
     buffering). Returns -1 in case of I/O error.}
 var
-  Position : LongInt;
+  Position : Integer;
 begin
   Result := -1;
   with TTextRec(F) do begin
@@ -135,7 +135,7 @@ end;
 function TextFlush(var F : TextFile) : Boolean;
   {-Flush the buffer(s) for a text file. Returns False in case of I/O error.}
 var
-  Position : LongInt;
+  Position : Integer;
   Code : Integer;
 begin
   Result := False;

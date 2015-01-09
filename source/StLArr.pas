@@ -82,11 +82,11 @@ type
       override;
     function StoresUntypedVars : boolean;
       override;
-    procedure laSetCount(Elements : LongInt);
+    procedure laSetCount(Elements : Integer);
 
   {.Z-}
   public
-    constructor Create(Elements : LongInt; ElementSize : Cardinal);
+    constructor Create(Elements : Integer; ElementSize : Cardinal);
       {-Initialize a large 1D array}
     destructor Destroy; override;
       {-Free a large 1D array}
@@ -104,17 +104,17 @@ type
     procedure Fill(const Value);
       {-Fill array with specified value}
 
-    procedure Put(El : LongInt; const Value);
+    procedure Put(El : Integer; const Value);
       {-Set an element}
-    procedure Get(El : LongInt; var Value);
+    procedure Get(El : Integer; var Value);
       {-Return an element}
 
-    procedure Exchange(El1, El2 : LongInt);
+    procedure Exchange(El1, El2 : Integer);
       {-Exchange the specified elements}
     procedure Sort(Compare : TUntypedCompareFunc);
       {-Sort the array using the given comparison function}
 
-    property Count : LongInt
+    property Count : Integer
       {-Read or write the number of elements in the array}
       read FCount
       write laSetCount;
@@ -139,7 +139,7 @@ type
 
     {private instance variables}
     lmData     : Pointer;    {Pointer to data block}
-    lmRowSize  : LongInt;    {Number of bytes in a row}
+    lmRowSize  : Integer;    {Number of bytes in a row}
 
     {undocumented protected methods}
     procedure ForEachUntypedVar(Action : TIterateUntypedFunc; OtherData : pointer);
@@ -252,7 +252,7 @@ procedure TStLArray.Assign(Source: TPersistent);
 
 procedure TStLArray.Clear;
 var
-  C : LongInt;                                                         
+  C : Integer;
 begin
 {$IFDEF ThreadSafe}
   EnterCS;
@@ -306,8 +306,8 @@ procedure TStLArray.SetArraySizes(RowCount, ColCount, ElSize : Cardinal);
 begin
   if (ColCount <> 1) then
     RaiseContainerError(stscTooManyCols);
-  if (LongInt(RowCount) <> Count) or
-     (LongInt(ElSize) <> ElementSize) then begin
+  if (Integer(RowCount) <> Count) or
+     (Integer(ElSize) <> ElementSize) then begin
     HugeFreeMem(laData, FCount*FElSize);
     FCount := RowCount;
     FElSize := ElSize;
@@ -321,7 +321,7 @@ begin
   Result := True;
 end;
 
-constructor TStLArray.Create(Elements : LongInt; ElementSize : Cardinal);
+constructor TStLArray.Create(Elements : Integer; ElementSize : Cardinal);
 begin
   if (Elements <= 0) or (ElementSize = 0) or
   ProductOverflow(Elements, ElementSize) then
@@ -332,7 +332,7 @@ begin
   FCount := Elements;
   FElSize := ElementSize;
 
-  HugeGetMem(laData, Elements*LongInt(ElementSize));
+  HugeGetMem(laData, Elements*Integer(ElementSize));
   Clear;
 end;
 
@@ -343,7 +343,7 @@ begin
   inherited Destroy;
 end;
 
-procedure TStLArray.Exchange(El1, El2 : LongInt);
+procedure TStLArray.Exchange(El1, El2 : Integer);
 begin
 {$IFDEF ThreadSafe}
   EnterCS;
@@ -419,7 +419,7 @@ begin
 {$ENDIF}
 end;
 
-procedure TStLArray.Get(El : LongInt; var Value);
+procedure TStLArray.Get(El : Integer; var Value);
 (* model for code below
 begin
   move((PChar(laData)+El*FElSize)^, Value, FElSize);
@@ -460,9 +460,9 @@ begin
 end;
 
 
-procedure TStLArray.laSetCount(Elements : LongInt);
+procedure TStLArray.laSetCount(Elements : Integer);
 var
-  CurSize, NewSize : LongInt;
+  CurSize, NewSize : Integer;
   CurFData : Pointer;
 begin
 {$IFDEF ThreadSafe}
@@ -498,7 +498,7 @@ begin
 {$ENDIF}
 end;
 
-procedure TStLArray.Put(El : LongInt; const Value);
+procedure TStLArray.Put(El : Integer; const Value);
 (* model for assembly language below
 begin
   move(Value, (PChar(laData)+Row*FElSize)^, FElSize);
@@ -542,12 +542,12 @@ procedure TStLArray.Sort(Compare : TUntypedCompareFunc);
 const
   StackSize = 32;
 type
-  Stack = array[0..StackSize-1] of LongInt;
+  Stack = array[0..StackSize-1] of Integer;
 var
-  L : LongInt;
-  R : LongInt;
-  PL : LongInt;
-  PR : LongInt;
+  L : Integer;
+  R : Integer;
+  PL : Integer;
+  PR : Integer;
   CurEl : Pointer;
   PivEl : Pointer;
   StackP : Integer;
@@ -650,10 +650,10 @@ procedure TStLArray.LoadFromStream(S : TStream);
 var
   Data         : pointer;
   Reader       : TReader;
-  NumElements  : longint;
-  ElementSize  : LongInt;                                              
-  i            : longint;
-  TotSize      : longint;
+  NumElements  : Integer;
+  ElementSize  : Integer;
+  i            : Integer;
+  TotSize      : Integer;
   StreamedClass : TPersistentClass;
   StreamedClassName : string;
   Value        : TValueType;
@@ -688,7 +688,7 @@ begin
           if ElementsStorable then
             begin
               Read(Value, sizeof(Value)); {s/b vaBinary}
-              Read(TotSize, sizeof(longint));
+              Read(TotSize, sizeof(Integer));
               GetMem(Data, FElSize);
               try
                 for i := 0 to pred(FCount) do
@@ -725,7 +725,7 @@ var
   Writer : TWriter;
   i      : integer;
   Data   : pointer;
-  TotSize: longint;
+  TotSize: Integer;
   Value  : TValueType;
 begin
 {$IFDEF ThreadSafe}
@@ -745,7 +745,7 @@ begin
             Value := vaBinary;
             Write(Value, sizeof(Value));
             TotSize := FCount * FElSize;
-            Write(TotSize, sizeof(longint));
+            Write(TotSize, sizeof(Integer));
             for i := 0 to pred(FCount) do begin
               Get(i, Data^);
               Write(Data^, FElSize);
@@ -846,7 +846,7 @@ end;
 procedure TStLMatrix.SetArraySizes(RowCount, ColCount, ElSize : Cardinal);
 begin
   if (RowCount <> Rows) or (ColCount <> Cols) or
-     (LongInt(ElSize) <> ElementSize) then                             
+     (Integer(ElSize) <> ElementSize) then
     begin
       HugeFreeMem(lmData, FCount*FElSize);
       FElSize := ElSize;
@@ -855,10 +855,10 @@ begin
       {$IFDEF VERSION4}
       FCount := RowCount*ColCount;
       lmRowSize := ColCount*ElSize;
-      HugeGetMem(lmData, FCount*LongInt(ElSize));
+      HugeGetMem(lmData, FCount*Integer(ElSize));
       {$ELSE}
-      FCount := LongInt(RowCount)*ColCount;
-      lmRowSize := LongInt(ColCount)*ElSize;
+      FCount := Integer(RowCount)*ColCount;
+      lmRowSize := Integer(ColCount)*ElSize;
       HugeGetMem(lmData, FCount*ElSize);
       {$ENDIF}
       Clear;
@@ -877,14 +877,14 @@ begin
   FElSize := ElementSize;
   FRows := Rows;
   FCols := Cols;
-  FCount := LongInt(Rows)*LongInt(Cols);
-  lmRowSize := LongInt(Cols)*LongInt(ElementSize);
+  FCount := Integer(Rows)*Integer(Cols);
+  lmRowSize := Integer(Cols)*Integer(ElementSize);
 
   if (Rows = 0) or (Cols = 0) or (ElementSize = 0) or
   ProductOverflow(FCount, ElementSize) then
     RaiseContainerError(stscBadSize);
 
-  HugeGetMem(lmData, FCount*LongInt(ElementSize));                     
+  HugeGetMem(lmData, FCount*Integer(ElementSize));
   Clear;
 end;
 
@@ -1020,7 +1020,7 @@ begin
     if Row >= Rows then
       RaiseContainerError(stscBadIndex);
 {$ENDIF}
-    move((PAnsiChar(lmData)+(LongInt(Row)*lmRowSize))^, RowValue, lmRowSize);
+    move((PAnsiChar(lmData)+(Integer(Row)*lmRowSize))^, RowValue, lmRowSize);
 {$IFDEF ThreadSafe}
   finally
     LeaveCS;
@@ -1030,7 +1030,7 @@ end;
 
 procedure TStLMatrix.lmSetCols(Cols : Cardinal);
 var
-  CurSize, NewSize, CurRowSize, NewRowSize, BufSize : LongInt;
+  CurSize, NewSize, CurRowSize, NewRowSize, BufSize : Integer;
   R, CurCols : Cardinal;
   CurFData, NewFData, RowData : Pointer;
 begin
@@ -1044,14 +1044,14 @@ begin
     {validate new size}
     if (Cols = 0) or
     ProductOverflow(Cols, FRows) or
-    ProductOverflow(LongInt(Cols)*LongInt(FRows), FElSize) then
+    ProductOverflow(Integer(Cols)*Integer(FRows), FElSize) then
       RaiseContainerError(stscBadSize);
 
     {compute and save various sizes}
     CurSize := FCount*FElSize;
-    NewSize := LongInt(Cols)*LongInt(FRows)*FElSize;
+    NewSize := Integer(Cols)*Integer(FRows)*FElSize;
     CurRowSize := lmRowSize;
-    NewRowSize := LongInt(Cols)*FElSize;
+    NewRowSize := Integer(Cols)*FElSize;
     CurCols := FCols;
     CurFData := lmData;
 
@@ -1084,7 +1084,7 @@ begin
     end;
     HugeFreeMem(RowData, BufSize);
 
-    FCount := LongInt(Cols)*LongInt(FRows);
+    FCount := Integer(Cols)*Integer(FRows);
 
     {free original data area}
     HugeFreeMem(CurFData, CurSize);
@@ -1097,7 +1097,7 @@ end;
 
 procedure TStLMatrix.lmSetRows(Rows : Cardinal);
 var
-  CurSize, NewSize : LongInt;
+  CurSize, NewSize : Integer;
   CurFData : Pointer;
 begin
 {$IFDEF ThreadSafe}
@@ -1110,17 +1110,17 @@ begin
     {validate new size}
     if (Rows = 0) or
     ProductOverflow(Rows, FCols) or
-    ProductOverflow(LongInt(Rows)*LongInt(FCols), FElSize) then
+    ProductOverflow(Integer(Rows)*Integer(FCols), FElSize) then
       RaiseContainerError(stscBadSize);
 
     CurSize := FCount*FElSize;
-    NewSize := LongInt(Rows)*LongInt(FCols)*FElSize;
+    NewSize := Integer(Rows)*Integer(FCols)*FElSize;
     CurFData := lmData;
 
     {allocate data block of new size}
     HugeGetMem(lmData, NewSize);
 
-    FCount := LongInt(Rows)*LongInt(FCols);
+    FCount := Integer(Rows)*Integer(FCols);
     FRows := Rows;
 
     {fill extra area with zeros and copy old data}
@@ -1191,7 +1191,7 @@ begin
     if Row >= Rows then
       RaiseContainerError(stscBadIndex);
 {$ENDIF}
-    move(RowValue, (PAnsiChar(lmData)+(LongInt(Row)*lmRowSize))^, lmRowSize);
+    move(RowValue, (PAnsiChar(lmData)+(Integer(Row)*lmRowSize))^, lmRowSize);
 {$IFDEF ThreadSafe}
   finally
     LeaveCS;
@@ -1203,12 +1203,12 @@ procedure TStLMatrix.SortRows(KeyCol : Cardinal; Compare : TUntypedCompareFunc);
 const
   StackSize = 32;
 type
-  Stack = array[0..StackSize-1] of LongInt;
+  Stack = array[0..StackSize-1] of Integer;
 var
-  L : LongInt;
-  R : LongInt;
-  PL : LongInt;
-  PR : LongInt;
+  L : Integer;
+  R : Integer;
+  PL : Integer;
+  PR : Integer;
   CurEl : Pointer;
   PivEl : Pointer;
   StackP : Integer;
@@ -1313,11 +1313,11 @@ procedure TStLMatrix.LoadFromStream(S : TStream);
 var
   Data         : pointer;
   Reader       : TReader;
-  NumRows      : longint;
-  NumCols      : longint;
+  NumRows      : Integer;
+  NumCols      : Integer;
   ElementSize  : cardinal;
-  R, C         : longint;
-  TotSize      : longint;
+  R, C         : Integer;
+  TotSize      : Integer;
   StreamedClass : TPersistentClass;
   StreamedClassName : string;
   Value        : TValueType;
@@ -1341,23 +1341,23 @@ begin
           NumRows := ReadInteger;
           NumCols := ReadInteger;
           ElementSize := ReadInteger;
-          if (NumRows <> LongInt(Rows)) or (NumCols <> LongInt(Cols)) or
-             (LongInt(ElementSize) <> FElSize) then
+          if (NumRows <> Integer(Rows)) or (NumCols <> Integer(Cols)) or
+             (Integer(ElementSize) <> FElSize) then
             begin
               HugeFreeMem(lmData, FCount*FElSize);
               FElSize := ElementSize;
               FRows := NumRows;
               FCols := NumCols;
-              FCount := LongInt(NumRows)*NumCols;
-              lmRowSize := LongInt(NumCols)*LongInt(ElementSize);
-              HugeGetMem(lmData, FCount*LongInt(ElementSize));
+              FCount := Integer(NumRows)*NumCols;
+              lmRowSize := Integer(NumCols)*Integer(ElementSize);
+              HugeGetMem(lmData, FCount*Integer(ElementSize));
               Clear;
             end;
           ElementsStorable := ReadBoolean;
           if ElementsStorable then
             begin
               Read(Value, sizeof(Value)); {s/b vaBinary}
-              Read(TotSize, sizeof(longint));
+              Read(TotSize, sizeof(Integer));
               GetMem(Data, FElSize);
               try
                 for R := 0 to pred(FRows) do
@@ -1396,7 +1396,7 @@ var
   Writer : TWriter;
   R, C   : integer;
   Data   : pointer;
-  TotSize: longint;
+  TotSize: Integer;
   Value  : TValueType;
 begin
 {$IFDEF ThreadSafe}
@@ -1419,7 +1419,7 @@ begin
                 Value := vaBinary;
                 Write(Value, sizeof(Value));
                 TotSize := FCount * FElSize;
-                Write(TotSize, sizeof(longint));
+                Write(TotSize, sizeof(Integer));
                 for R := 0 to pred(FRows) do
                   for C := 0 to pred(FCols) do
                     begin

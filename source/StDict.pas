@@ -158,7 +158,7 @@ type
                      OtherData : Pointer) : TStDictNode;
       {-Call Action for all the nodes, returning the last node visited}
 
-    function BinCount(H : Integer) : LongInt;
+    function BinCount(H : Integer) : Integer;
       {-Return number of names in a hash bin (for testing)}
 
     property Equal : TStringCompareFunc
@@ -217,18 +217,18 @@ end;
 
 
 {The following routine was extracted from LockBox and modified}
-function HashElf(const Buf;  BufSize : LongInt) : LongInt;
+function HashElf(const Buf;  BufSize : Integer) : Integer;
 var
 //  Bytes : TByteArray absolute Buf;                                   {!!.02}
   Bytes : PAnsiChar;                                                       {!!.02}
-  I, X  : LongInt;
+  I, X  : Integer;
 begin
   Bytes := @Buf;                                                       {!!.02}
   Result := 0;
   for I := 0 to BufSize - 1 do begin
     Result := (Result shl 4) + Ord(Bytes^);                            {!!.02}
     Inc(Bytes);                                                        {!!.02}
-    X := LongInt(Result and $F0000000);                                {!!.02}
+    X := Integer(Result and $F0000000);                                {!!.02}
     if (X <> 0) then
       Result := Result xor (X shr 24);
     Result := Result and (not X);
@@ -398,9 +398,9 @@ procedure TStDictionary.Assign(Source: TPersistent);
       inherited Assign(Source);
   end;
 
-function TStDictionary.BinCount(H : Integer) : LongInt;
+function TStDictionary.BinCount(H : Integer) : Integer;
 var
-  C : LongInt;
+  C : Integer;
   T : TStDictNode;
 begin
 {$IFDEF ThreadSafe}
@@ -430,7 +430,7 @@ begin
     if FCount <> 0 then begin
       Iterate(DestroyNode, nil);
       FCount := 0;
-      FillChar(dySymbols^, LongInt(FHashSize)*SizeOf(TStDictNode), 0);
+      FillChar(dySymbols^, Integer(FHashSize)*SizeOf(TStDictNode), 0);
     end;
 {$IFDEF ThreadSafe}
   finally
@@ -482,7 +482,7 @@ begin
   if conNodeProt = 0 then
     Clear;
   if Assigned(dySymbols) then
-    FreeMem(dySymbols, LongInt(FHashSize)*SizeOf(TStDictNode));
+    FreeMem(dySymbols, Integer(FHashSize)*SizeOf(TStDictNode));
   IncNodeProtection;
   inherited Destroy;
 end;
@@ -553,7 +553,7 @@ end;
 procedure TStDictionary.dySetHashSize(Size : Integer);
 var
   H, OldSize :  Integer;
-  TableSize : LongInt;
+  TableSize : Integer;
   T, N : TStDictNode;
   OldSymbols : PSymbolArray;
   OldDisposeData : TDisposeDataProc;
@@ -563,7 +563,7 @@ begin
   EnterCS;
   try
 {$ENDIF}
-    TableSize := LongInt(Size)*SizeOf(TStDictNode);
+    TableSize := Integer(Size)*SizeOf(TStDictNode);
     if (Size <= 0) {or (TableSize > MaxBlockSize)} then
       RaiseContainerError(stscBadSize);
 

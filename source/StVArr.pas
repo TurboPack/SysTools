@@ -67,7 +67,7 @@ type
   TStCacheRec = record
     crRow     : Cardinal;    {row number in cache}
     crRowData : Pointer;     {pointer to row buffer}
-    crTime    : LongInt;     {quasi-time last used}
+    crTime    : Integer;     {quasi-time last used}
     crDirty   : Integer;     {non-zero if Row changed in memory}
   end;
   TStCacheArray = array[0..(StMaxBlockSize div SizeOf(TStCacheRec))-1] of TStCacheRec;
@@ -84,9 +84,9 @@ type
     FElSize   : Integer;    {size of each array element}               
 
     {private instance variables}
-    vmRowSize  : LongInt;    {number of bytes in a row}
+    vmRowSize  : Integer;    {number of bytes in a row}
     vmCacheCnt : Integer;    {number of used rows in cache}
-    vmCacheTime: LongInt;    {quasi-time for LRU}
+    vmCacheTime: Integer;    {quasi-time for LRU}
     vmCache    : PStCacheArray; {sorted collection of cached rows}
     vmDataF    : Integer;    {data file}
 
@@ -105,7 +105,7 @@ type
     procedure vmDeallocateCache;
     procedure vmInvalidateCache;
     procedure vmFlushCacheNode(CacheIndex : Integer);
-    function vmIncCacheTime : LongInt;
+    function vmIncCacheTime : Integer;
     function vmSearchCache(Row : Cardinal; var CacheIndex : Integer) : Boolean;
     function vmGetRowData(Row : Cardinal; MakeDirty : Boolean) : Pointer;
     procedure vmWriteRow(Row : Cardinal; Data : Pointer; Seek : Boolean);
@@ -122,7 +122,7 @@ type
     procedure FlushCache;
       {-Write any dirty cache rows to disk}
 
-    function HeaderSize : LongInt; virtual;
+    function HeaderSize : Integer; virtual;
       {-Return the header size of the array file, default 0}
     procedure WriteHeader; virtual;
       {-Write a header to the array file, default none}
@@ -270,7 +270,7 @@ procedure TStVMatrix.SetArraySizes(RowCount, ColCount, ElSize : Cardinal);
   begin
     if (ColCount <> Cols) then
       RaiseContainerError(stscBadColCount);
-    if (LongInt(ElSize) <> ElementSize) then                           
+    if (Integer(ElSize) <> ElementSize) then
       RaiseContainerError(stscBadElSize);
     if (RowCount <> Rows) then
       begin
@@ -290,8 +290,8 @@ begin
   FElSize := ElementSize;
   FRows := Rows;
   FCols := Cols;
-  FCount := LongInt(Rows)*LongInt(Cols);
-  vmRowSize := LongInt(Cols)*LongInt(ElementSize);
+  FCount := Integer(Rows)*Integer(Cols);
+  vmRowSize := Integer(Cols)*Integer(ElementSize);
   FCacheRows := CacheRows;
   vmDataF := -1;
 
@@ -299,8 +299,8 @@ begin
 
   if (Rows = 0) or (Cols = 0) or (ElementSize = 0) or (CacheRows < 2) or
   ProductOverflow(Cols, ElementSize) or
-  ProductOverflow(LongInt(Cols)*LongInt(ElementSize), Rows) or
-  (LongInt(Cols)*LongInt(ElementSize)*LongInt(Rows) > MaxLongInt-HeaderSize) or
+  ProductOverflow(Integer(Cols)*Integer(ElementSize), Rows) or
+  (Integer(Cols)*Integer(ElementSize)*Integer(Rows) > MaxLongInt-HeaderSize) or
   (CacheRows > StMaxBlockSize div SizeOf(TStCacheRec)) then
     RaiseContainerError(stscBadSize);
 
@@ -419,7 +419,7 @@ begin
     if (Row >= Rows) or (Col >= Cols) then
       RaiseContainerError(stscBadIndex);
 {$ENDIF}
-    Move(PAnsiChar(vmGetRowData(Row, False))[LongInt(Col)*FElSize], Value, FElSize);
+    Move(PAnsiChar(vmGetRowData(Row, False))[Integer(Col)*FElSize], Value, FElSize);
 {$IFDEF ThreadSafe}
   finally
     LeaveCS;
@@ -445,7 +445,7 @@ begin
 {$ENDIF}
 end;
 
-function TStVMatrix.HeaderSize : LongInt;
+function TStVMatrix.HeaderSize : Integer;
 begin
   Result := 0;
 end;
@@ -466,7 +466,7 @@ begin
     if (Row >= Rows) or (Col >= Cols) then
       RaiseContainerError(stscBadIndex);
 {$ENDIF}
-    Move(Value, PAnsiChar(vmGetRowData(Row, True))[LongInt(Col)*FElSize], FElSize);
+    Move(Value, PAnsiChar(vmGetRowData(Row, True))[Integer(Col)*FElSize], FElSize);
 {$IFDEF ThreadSafe}
   finally
     LeaveCS;
@@ -496,12 +496,12 @@ procedure TStVMatrix.SortRows(KeyCol : Cardinal; Compare : TUntypedCompareFunc);
 const
   StackSize = 32;
 type
-  Stack = array[0..StackSize-1] of LongInt;
+  Stack = array[0..StackSize-1] of Integer;
 var
-  L : LongInt;
-  R : LongInt;
-  PL : LongInt;
-  PR : LongInt;
+  L : Integer;
+  R : Integer;
+  PL : Integer;
+  PR : Integer;
   CurEl : Pointer;
   PivEl : Pointer;
   StackP : Integer;
@@ -645,7 +645,7 @@ end;
 function TStVMatrix.vmGetRowData(Row : Cardinal; MakeDirty : Boolean) : Pointer;
 var
   CacheIndex, OldestIndex : Integer;
-  OldestTime, Bytes : LongInt;
+  OldestTime, Bytes : Integer;
   TmpRowData : Pointer;
 begin
   if not vmSearchCache(Row, CacheIndex) then begin
@@ -678,7 +678,7 @@ begin
     with vmCache^[CacheIndex] do begin
       crRowData := TmpRowData;
       crRow := Row;
-      Bytes := FileSeek(vmDataF, HeaderSize+LongInt(Row)*vmRowSize, 0);
+      Bytes := FileSeek(vmDataF, HeaderSize+Integer(Row)*vmRowSize, 0);
       if Bytes >= 0 then
         Bytes := FileRead(vmDataF, crRowData^, vmRowSize);
       if Bytes < 0 then
@@ -698,7 +698,7 @@ begin
   end;
 end;
 
-function TStVMatrix.vmIncCacheTime : LongInt;
+function TStVMatrix.vmIncCacheTime : Integer;
 var
   I : Integer;
 begin
@@ -721,7 +721,7 @@ end;
 function TStVMatrix.vmSearchCache(Row : Cardinal; var CacheIndex : Integer) : Boolean;
 var
   L, R, M : Integer;
-  Comp : LongInt;
+  Comp : Integer;
 begin
   if vmCacheCnt = 0 then begin
     Result := False;
@@ -735,7 +735,7 @@ begin
   repeat
     M := (L+R) div 2;
     with vmCache^[M] do begin
-      Comp := LongInt(Row)-LongInt(crRow);
+      Comp := Integer(Row)-Integer(crRow);
       if Comp = 0 then begin
         {found row in cache}
         Result := True;
@@ -815,7 +815,7 @@ end;
 procedure TStVMatrix.vmSetRows(Rows : Cardinal);
 var
   I : Integer;
-  NewSize : LongInt;
+  NewSize : Integer;
 begin
 {$IFDEF ThreadSafe}
   EnterCS;
@@ -827,7 +827,7 @@ begin
     {validate new size}
     if (Rows = 0) or
     ProductOverflow(Rows, Cols) or
-    ProductOverflow(LongInt(Rows)*LongInt(Cols), FElSize) then
+    ProductOverflow(Integer(Rows)*Integer(Cols), FElSize) then
       RaiseContainerError(stscBadSize);
 
     if Rows < FRows then begin
@@ -838,7 +838,7 @@ begin
           break;
         end;
       {truncate data file}
-      NewSize := HeaderSize+LongInt(Rows)*LongInt(Cols)*FElSize;
+      NewSize := HeaderSize+Integer(Rows)*Integer(Cols)*FElSize;
       if FileSeek(vmDataF, 0, 2) > NewSize then begin
         FileSeek(vmDataF, NewSize, 0);
         if not SetEndOfFile(vmDataF) then
@@ -858,10 +858,10 @@ end;
 
 procedure TStVMatrix.vmWriteRow(Row : Cardinal; Data : Pointer; Seek : Boolean);
 var
-  Bytes : LongInt;
+  Bytes : Integer;
 begin
   if Seek then
-    FileSeek(vmDataF, HeaderSize+LongInt(Row)*vmRowSize, 0);
+    FileSeek(vmDataF, HeaderSize+Integer(Row)*vmRowSize, 0);
   Bytes := FileWrite(vmDataF, Data^, vmRowSize);
   if (Bytes < 0) or (Bytes <> vmRowSize) then
     RaiseContainerError(stscFileWrite);

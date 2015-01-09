@@ -43,17 +43,17 @@ uses
 
 type
   TStPNBarCodeDims = packed record
-    PixPerBar        : Longint;
-    PixPerSpace      : Longint;
-    ShortBarHeight   : Longint;
-    TallBarHeight    : Longint;
-    Width            : Longint;
-    Height           : Longint;
+    PixPerBar        : Integer;
+    PixPerSpace      : Integer;
+    ShortBarHeight   : Integer;
+    TallBarHeight    : Integer;
+    Width            : Integer;
+    Height           : Integer;
   end;
 
   TStPNBarCodeRes = packed record
-    XRes  : Longint;
-    YRes  : Longint;
+    XRes  : Integer;
+    YRes  : Integer;
   end;
 
   TStPNBarCode = class(TGraphicControl)
@@ -76,17 +76,17 @@ type
     function DrawTallBar(C         : TCanvas;
                          Dims      : TStPNBarCodeDims;
                          XPos      : Integer;
-                         AddSpace  : Boolean) : Longint;
+                         AddSpace  : Boolean) : Integer;
     function DrawShortBar(C        : TCanvas;
                           Dims     : TStPNBarCodeDims;
                           XPos     : Integer;
-                          AddSpace : Boolean) : Longint;
+                          AddSpace : Boolean) : Integer;
     function DrawNumber(C          : TCanvas;
                         Dims       : TStPNBarCodeDims;
                         Value      : Integer;
-                        XPos       : Longint;
+                        XPos       : Integer;
                         FrontGuard : Boolean;
-                        EndGuard   : Boolean) : Longint;
+                        EndGuard   : Boolean) : Integer;
     procedure DrawBarCode(C : TCanvas; Dims : TStPNBarCodeDims);
     procedure SetCheckNumber;
 
@@ -181,7 +181,7 @@ end;
 
 procedure TStPNBarCode.SetCheckNumber;
 var
-  I : Longint;
+  I : Integer;
 begin
   if (Length(TrimL(FPostalCode)) < 5) then Exit;
   FCheckNumber := 0;
@@ -227,9 +227,9 @@ end;
 function TStPNBarCode.DrawTallBar(C        : TCanvas;
                                   Dims     : TStPNBarCodeDims;
                                   XPos     : Integer;
-                                  AddSpace : Boolean) : Longint;
+                                  AddSpace : Boolean) : Integer;
 var
-  YPos : Longint;
+  YPos : Integer;
 begin
   Result := XPos;
   YPos := Dims.Height - 5 - Dims.TallBarHeight;
@@ -244,9 +244,9 @@ end;
 function TStPNBarCode.DrawShortBar(C        : TCanvas;
                                    Dims     : TStPNBarCodeDims;
                                    XPos     : Integer;
-                                   AddSpace : Boolean) : Longint;
+                                   AddSpace : Boolean) : Integer;
 var
-  YPos : Longint;
+  YPos : Integer;
 begin
   Result := XPos;
   YPos := Dims.Height - 5 - Dims.ShortBarHeight;
@@ -261,9 +261,9 @@ end;
 function TStPNBarCode.DrawNumber(C          : TCanvas;
                                  Dims       : TStPNBarCodeDims;
                                  Value      : Integer;
-                                 XPos       : Longint;
+                                 XPos       : Integer;
                                  FrontGuard : Boolean;
-                                 EndGuard   : Boolean) : Longint;
+                                 EndGuard   : Boolean) : Integer;
 begin
   Result := XPos;
   if (FrontGuard) then
@@ -361,7 +361,7 @@ procedure TStPNBarCode.ComputeSizes(C        : TCanvas;
                                     var Dims : TStPNBarCodeDims);
 var
   PPIX,
-  PPIY   : Longint;
+  PPIY   : Integer;
 begin
   if csLoading in ComponentState then
     Exit;
@@ -415,7 +415,7 @@ end;
 procedure TStPNBarCode.DrawBarCode(C : TCanvas; Dims : TStPNBarCodeDims);
 var
   I,
-  XPos : Longint;
+  XPos : Integer;
 begin
   if csLoading in ComponentState then
     Exit;

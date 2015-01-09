@@ -723,7 +723,7 @@ type
   TNetGetAnyDCName               = function(ServerName, DomainName: LPCWSTR; var Buffer: PByte): NET_API_STATUS; stdcall;
   TI_NetLogonControl             = function(ServerName: LPCWSTR; FunctionCode, QueryLevel: DWord; var Buffer: Pointer): NET_API_STATUS; stdcall;
   TI_NetLogonControl2            = function(ServerName: LPCWSTR; FunctionCode, QueryLevel: DWord; Data: Pointer; var Buffer: Pointer): NET_API_STATUS; stdcall;
-  TNetEnumerateTrustedDomains    = function(ServerName: LPCWSTR; var Buffer: Pointer):  LongInt; StdCall;
+  TNetEnumerateTrustedDomains    = function(ServerName: LPCWSTR; var Buffer: Pointer):  Integer; StdCall;
 
 const
   USER_POSIX_ID_PARMNUM  = 1;
@@ -1891,7 +1891,7 @@ type
     tod_mins : DWord;
     tod_secs : DWord;
     tod_hunds : DWord;
-    tod_timezone : LongInt;
+    tod_timezone : Integer;
     tod_tinterval : DWord;
     tod_day : DWord;
     tod_month : DWord;
@@ -1948,7 +1948,7 @@ type
     sv102_type                        : DWord;
     sv102_comment                     : LPWSTR;
     sv102_users                       : DWord;
-    sv102_disc                        : LongInt;
+    sv102_disc                        : Integer;
     sv102_hidden                      : Bool;
     sv102_announce                    : DWord;
     sv102_anndelta                    : DWord;
@@ -2196,7 +2196,7 @@ type
   end;
 
   TSERVER_INFO_1010 = record
-    sv1010_disc                       : LongInt;
+    sv1010_disc                       : Integer;
   end;
 
   TSERVER_INFO_1016 = record

@@ -47,9 +47,9 @@ uses
 {.Z+}
 type
   LStrRec = record
-    AllocSize : Longint;
-    RefCount  : Longint;
-    Length    : Longint;
+    AllocSize : Integer;
+    RefCount  : Integer;
+    Length    : Integer;
   end;
 
 const
@@ -64,7 +64,7 @@ function HexBL(B : Byte) : AnsiString;
 function HexWL(W : Word) : AnsiString;
   {-Return the hex string for a word.}
 
-function HexLL(L : LongInt) : AnsiString;
+function HexLL(L : Integer) : AnsiString;
   {-Return the hex string for a long integer.}
 
 function HexPtrL(P : Pointer) : AnsiString;
@@ -76,7 +76,7 @@ function BinaryBL(B : Byte) : AnsiString;
 function BinaryWL(W : Word) : AnsiString;
   {-Return the binary string for a word.}
 
-function BinaryLL(L : LongInt) : AnsiString;
+function BinaryLL(L : Integer) : AnsiString;
   {-Return the binary string for a long integer.}
 
 function OctalBL(B : Byte) : AnsiString;
@@ -85,7 +85,7 @@ function OctalBL(B : Byte) : AnsiString;
 function OctalWL(W : Word) : AnsiString;
   {-Return an octal string for a word.}
 
-function OctalLL(L : LongInt) : AnsiString;
+function OctalLL(L : Integer) : AnsiString;
   {-Return an octal string for a long integer.}
 
 function Str2Int16L(const S : string; var I : SmallInt) : Boolean;
@@ -94,7 +94,7 @@ function Str2Int16L(const S : string; var I : SmallInt) : Boolean;
 function Str2WordL(const S : string; var I : Word) : Boolean;
   {-Convert a string to a word.}
 
-function Str2LongL(const S : string; var I : LongInt) : Boolean;
+function Str2LongL(const S : string; var I : Integer) : Boolean;
   {-Convert a string to a long integer.}
 
 function Str2RealL(const S : string; var R : Double) : Boolean;
@@ -102,7 +102,7 @@ function Str2RealL(const S : string; var R : Double) : Boolean;
 function Str2ExtL(const S : string; var R : Extended) : Boolean;
   {-Convert a string to an extended.}
 
-function Long2StrL(L : LongInt) : String; inline;
+function Long2StrL(L : Integer) : String; inline;
   {-Convert an integer type to a string.}
 
 function Real2StrL(R : Double; Width : Byte; Places : ShortInt) : String;
@@ -210,7 +210,7 @@ function CompUCStringL(const S1, S2 : String) : Integer;
 function SoundexL(const S : AnsiString) : AnsiString;
   {-Return 4 character soundex of an input string.}
 
-function MakeLetterSetL(const S : AnsiString) : Longint;
+function MakeLetterSetL(const S : AnsiString) : Integer;
   {-Return a bit-mapped long storing the individual letters contained in S.}
 
 {$IFDEF UNICODE}
@@ -271,17 +271,17 @@ function HasExtensionL(const Name : String; var DotPos : Cardinal) : Boolean;
 
   {------------------ Formatting routines --------------------}
 
-function CommaizeL(L : LongInt) : String;
+function CommaizeL(L : Integer) : String;
   {-Convert a long integer to a string with commas.}
 
-function CommaizeChL(L : Longint; Ch : Char) : String;
+function CommaizeChL(L : Integer; Ch : Char) : String;
   {-Convert a long integer to a string with Ch in comma positions.}
 
 function FloatFormL(const Mask : String ; R : TstFloat ; const LtCurr,
                     RtCurr : String ; Sep, DecPt : Char) : String;
   {-Return a formatted string with digits from R merged into mask.}
 
-function LongIntFormL(const Mask : String ; L : LongInt ; const LtCurr,
+function LongIntFormL(const Mask : String ; L : Integer ; const LtCurr,
                       RtCurr : String ; Sep : Char) : String;
   {-Return a formatted string with digits from L merged into mask.}
 
@@ -438,7 +438,7 @@ begin
   Result[4] := StHexDigits[lo(W) and $F];
 end;
 
-function HexLL(L : LongInt) : AnsiString;
+function HexLL(L : Integer) : AnsiString;
   {-Return the hex string for a long integer.}
 begin
   SetLength(Result, 8);
@@ -449,7 +449,7 @@ function HexPtrL(P : Pointer) : AnsiString;
   {-Return the hex string for a pointer.}
 begin
   SetLength(Result, 9);
-  Result := ':' + HexLL(LongInt(P));
+  Result := ':' + HexLL(Integer(P));
 end;
 
 function BinaryBL(B : Byte) : AnsiString;
@@ -478,16 +478,16 @@ begin
   end;
 end;
 
-function BinaryLL(L : LongInt) : AnsiString;
+function BinaryLL(L : Integer) : AnsiString;
   {-Return the binary string for a long integer.}
 var
-  I : Longint;
+  I : Integer;
   N : Byte;
 begin
   N := 1;
   SetLength(Result, 32);
   for I := 31 downto 0 do begin
-    Result[N] := StHexDigits[Ord(L and LongInt(1 shl I) <> 0)]; {0 or 1}
+    Result[N] := StHexDigits[Ord(L and Integer(1 shl I) <> 0)]; {0 or 1}
     Inc(N);
   end;
 end;
@@ -516,7 +516,7 @@ begin
   end;
 end;
 
-function OctalLL(L : LongInt) : AnsiString;
+function OctalLL(L : Integer) : AnsiString;
   {-Return an octal string for a long integer.}
 var
   I : Word;
@@ -566,7 +566,7 @@ begin
   end;
 end;
 
-function Str2LongL(const S : string; var I : LongInt) : Boolean;
+function Str2LongL(const S : string; var I : Integer) : Boolean;
   {-Convert a string to a long integer.}
 
 var
@@ -619,7 +619,7 @@ begin
     Result := True;
 end;
 
-function Long2StrL(L : LongInt) : String;
+function Long2StrL(L : Integer) : String;
   {-Convert an integer type to a string.}
 begin
   Result := L.ToString;
@@ -647,7 +647,7 @@ function ValPrepL(const S : String) : String;
   {-Prepares a string for calling Val.}
 var
   P : Integer;
-  C : Longint;                                                         
+  C : Integer;
 begin
   Result := TrimSpacesL(S);
   if Result <> '' then begin
@@ -713,7 +713,7 @@ end;
 function TrimL(const S : String) : String;
   {-Return a string with leading and trailing white space removed.}
 var
-  I : Longint;
+  I : Integer;
 begin
   Result := S;
   while (Length(Result) > 0) and (Result[Length(Result)] <= ' ') do
@@ -730,7 +730,7 @@ end;
 function TrimSpacesL(const S : String) : String;
   {-Return a string with leading and trailing spaces removed.}
 var
-  I : Longint;
+  I : Integer;
 begin
   Result := S;
   while (Length(Result) > 0) and (Result[Length(Result)] = ' ') do
@@ -746,14 +746,14 @@ end;
 function CenterChL(const S : String; C : Char; Len : Cardinal) : String;
   {-Pad a string on the left and right with a specified character.}
 begin
-  if Length(S) >= LongInt(Len) then
+  if Length(S) >= Integer(Len) then
     Result := S
   else if Length(S) < MaxLongInt then begin
 //    SetLength(Result, Len);
 //    FillChar(Result[1], Len, C);
     Result := StringOfChar(C, Len);
     if Length(S) > 0 then                                                {!!.01}
-      Move(S[1], Result[Succ((LongInt(Len)-Length(S)) shr 1)], Length(S)*SizeOf(Char));
+      Move(S[1], Result[Succ((Integer(Len)-Length(S)) shr 1)], Length(S)*SizeOf(Char));
   end;
 end;
 
@@ -1167,14 +1167,14 @@ function WordPositionL(N : Cardinal; const S, WordDelims : String;
   {-Given an array of word delimiters, set Pos to the start position of the
     N'th word in a string.  Result indicates success/failure.}
 var
-  Count : Longint;
-  I     : Longint;
+  Count : Integer;
+  I     : Integer;
 begin
   Count := 0;
   I := 1;
   Result := False;
 
-  while (I <= Length(S)) and (Count <> LongInt(N)) do begin            
+  while (I <= Length(S)) and (Count <> Integer(N)) do begin
     {skip over delimiters}
     while (I <= Length(S)) and CharExistsL(WordDelims, S[I]) do
       Inc(I);
@@ -1184,7 +1184,7 @@ begin
       Inc(Count);
 
     {if not finished, find the end of the current word}
-    if Count <> LongInt(N) then                                        
+    if Count <> Integer(N) then
       while (I <= Length(S)) and not CharExistsL(WordDelims, S[I]) do
         Inc(I)
     else begin
@@ -1198,7 +1198,7 @@ function ExtractWordL(N : Cardinal; const S, WordDelims : String) : String;
   {-Given an array of word delimiters, return the N'th word in a string.}
 var
   C : Cardinal;
-  I, J   : Longint;
+  I, J   : Integer;
 begin
   Result := '';
   if WordPositionL(N, S, WordDelims, C) then begin
@@ -1217,7 +1217,7 @@ end;
 function AsciiCountL(const S, WordDelims : String; Quote : Char) : Cardinal;
   {-Return the number of words in a string.}
 var
-  I       : Longint;
+  I       : Integer;
   InQuote : Boolean;
 begin
   Result := 0;
@@ -1245,14 +1245,14 @@ function AsciiPositionL(N : Cardinal; const S, WordDelims : String;
                         Quote : Char; var Pos : Cardinal) : Boolean;
   {-Return the position of the N'th word in a string.}
 var
-  Count, I : Longint;
+  Count, I : Integer;
   InQuote  : Boolean;
 begin
   Count := 0;
   InQuote := False;
   Result := False;
   I := 1;
-  while (I <= Length(S)) and (Count <> LongInt(N)) do begin            
+  while (I <= Length(S)) and (Count <> Integer(N)) do begin
     {skip over delimiters}
     while (I <= Length(S)) and (S[I] <> Quote) and
           CharExistsL(WordDelims, S[I]) do
@@ -1261,7 +1261,7 @@ begin
     if I <= Length(S) then
       Inc(Count);
     {if not finished, find the end of the current word}
-    if Count <> LongInt(N) then                                        
+    if Count <> Integer(N) then
       while (I <= Length(S)) and (InQuote or not
              CharExistsL(WordDelims, S[I])) do begin
         if S[I] = Quote then
@@ -1281,7 +1281,7 @@ function ExtractAsciiL(N : Cardinal; const S, WordDelims : String;
     text within Quote characters is counted as one word.}
 var
   C       : Cardinal;                                                  
-  I, J    : Longint;                                                   
+  I, J    : Integer;
   InQuote : Boolean;
 begin
   InQuote := False;
@@ -1372,9 +1372,9 @@ begin
   {pad the end of the output string if requested}
 {!!.02 - Rewritten}
   Len := Length(OutSt);
-  if PadToMargin and (Len < LongInt(Margin)) then begin
+  if PadToMargin and (Len < Integer(Margin)) then begin
 //    SetLength(OutSt, Margin);
-//    FillChar(OutSt[Succ(Len)], LongInt(Margin)-Length(OutSt), ' ');
+//    FillChar(OutSt[Succ(Len)], Integer(Margin)-Length(OutSt), ' ');
     OutSt := OutSt + StringOfChar(' ', Margin - Length(OutSt));
   end;
 {!!.02 - End Rewritten}
@@ -1622,7 +1622,7 @@ asm
 end;
 end;
 
-function MakeLetterSetL(const S : AnsiString) : Longint; register;
+function MakeLetterSetL(const S : AnsiString) : Integer; register;
   {-Return a bit-mapped long storing the individual letters contained in S.}
 asm
   push   ebx                { Save registers }
@@ -2198,7 +2198,7 @@ end;
   {------------------ Formatting routines --------------------}
 
 
-function CommaizeChL(L : Longint; Ch : Char) : String;
+function CommaizeChL(L : Integer; Ch : Char) : String;
   {-Convert a long integer to a string with Ch in comma positions}
 var
   Temp : string;
@@ -2221,7 +2221,7 @@ begin
     System.Insert('-', Result, 1);
 end;
 
-function CommaizeL(L : LongInt) : String;
+function CommaizeL(L : Integer) : String;
   {-Convert a long integer to a string with commas}
 begin
   Result := CommaizeChL(L, ',');
@@ -2253,7 +2253,7 @@ var
   Dollar,                  {true if floating dollar sign is desired}
   Negative : Boolean;      {true if B is negative}
   StartF,                  {starting point of the numeric field}
-  EndF : Longint;          {end of numeric field}
+  EndF : Integer;          {end of numeric field}
   RtChars,                 {# of chars to add to right}
   LtChars,                 {# of chars to add to left}
   DotPos,                  {position of '.' in Mask}
@@ -2379,7 +2379,7 @@ EndFound:
   {add zeros that Str may have left out}
   if Places > MaxPlaces then begin
 //    I := Length(S);
-//    SetLength(S, LongInt(I) + (Places-MaxPlaces));
+//    SetLength(S, Integer(I) + (Places-MaxPlaces));
 //    FillChar(S[Succ(I)], Places-MaxPlaces, '0');
     S := StringOfChar('0', Places-MaxPlaces) + S;
     while (Length(S) > Digits) and (S[1] = ' ') do
@@ -2488,7 +2488,7 @@ begin
   Result := FormPrimL(Mask, R, LtCurr, RtCurr, Sep, DecPt, False);
 end;
 
-function LongIntFormL(const Mask : String ; L : LongInt ; const LtCurr,
+function LongIntFormL(const Mask : String ; L : Integer ; const LtCurr,
                       RtCurr : String ; Sep : Char) : String;
   {-Return a formatted string with digits from L merged into mask.}
 begin
@@ -2598,7 +2598,7 @@ end;
 function CopyMidL(const S : String; First, Len : Cardinal) : String;
   {-Return the mid part of a string}
 begin
-  if (LongInt(First) > Length(S)) or (LongInt(Len) < 1) or (S = '') then
+  if (Integer(First) > Length(S)) or (Integer(Len) < 1) or (S = '') then
     Result := ''
   else
     Result := Copy(S, First, Len);
@@ -2609,7 +2609,7 @@ end;
 function CopyRightL(const S : String; First : Cardinal) : String;
   {-Return the right Len characters of a string}
 begin
-  if (LongInt(First) > Length(S)) or (First < 1) or (S = '') then
+  if (Integer(First) > Length(S)) or (First < 1) or (S = '') then
     Result := ''
   else
     Result := Copy(S, First, Length(S));
@@ -2661,11 +2661,11 @@ begin
         System.Delete(TmpStr, 1, P2);
     end else if (pos(TmpStr[P1-1], WordDelims) > 0) and
 //                ((pos(TmpStr[P2+1], WordDelims) > 0) or              {!!.02}
-//                 (LongInt(P2+1) = Length(TmpStr))) then begin        {!!.02}
-                ((LongInt(P2+1) >= Length(TmpStr)) or                  {!!.02}
+//                 (Integer(P2+1) = Length(TmpStr))) then begin        {!!.02}
+                ((Integer(P2+1) >= Length(TmpStr)) or                  {!!.02}
                 (pos(TmpStr[P2+1], WordDelims) > 0)) then begin        {!!.02}
       Inc(I);
-    end else if ((LongInt(P1 + pred(Len))) = Length(TmpStr)) then begin
+    end else if ((Integer(P1 + pred(Len))) = Length(TmpStr)) then begin
       if (P1 > 1) and (pos(TmpStr[P1-1], WordDelims) > 0) then
         Inc(I);
     end;
@@ -2789,7 +2789,7 @@ begin
     Result := ''
   else begin
     if (StrStPosL(S, Delimiter, P1)) then begin
-      TmpStr := Copy(S, LongInt(P1) + Length(Delimiter), Length(S));
+      TmpStr := Copy(S, Integer(P1) + Length(Delimiter), Length(S));
       if StrStPosL(TmpStr, Delimiter, P2) then begin
         Result := Copy(TmpStr, 1, P2-1);
         if (not Strip) then
@@ -2815,13 +2815,13 @@ begin
     Result := ''
   else begin
     if (StrStPosL(S, Delimiter, P1)) then begin
-      TmpStr := Copy(S, LongInt(P1) + Length(Delimiter), Length(S));
+      TmpStr := Copy(S, Integer(P1) + Length(Delimiter), Length(S));
       if (pos(Delimiter, TmpStr) = 0) then
         Result := Copy(S, 1, P1-1)
       else begin
         if (StrStPosL(TmpStr, Delimiter, P2)) then begin
           Result := S;
-          P2 := LongInt(P2) + (2*Length(Delimiter));
+          P2 := Integer(P2) + (2*Length(Delimiter));
           System.Delete(Result, P1, P2);
         end;
       end;
@@ -2920,10 +2920,10 @@ begin
   I  := 1;
   P1 := pos(OldString, TmpStr);
   C  := P1;
-  while (I < N) and (LongInt(C) < Length(TmpStr)) do begin
+  while (I < N) and (Integer(C) < Length(TmpStr)) do begin
     Inc(I);
-    System.Delete(TmpStr, 1, LongInt(P1) + Length(OldString));
-    Inc(C, LongInt(P1) + Length(OldString));
+    System.Delete(TmpStr, 1, Integer(P1) + Length(OldString));
+    Inc(C, Integer(P1) + Length(OldString));
   end;
   Result := S;
   System.Delete(Result, C, Length(OldString));
@@ -2947,7 +2947,7 @@ function ReplaceStringAllL(const S, OldString, NewString : String;
 var
   I,
   C  : Cardinal;
-  P1 : longint;
+  P1 : Integer;
   Tmp: String;
 begin
   if (S = '') or (OldString = '') or (Pos(OldString, S) = 0) then
@@ -3065,8 +3065,8 @@ begin
   C := 0;
   I := pos(AString, TmpStr);
   while (I > 0) do begin
-    Inc(C, LongInt(I) + Length(AString));
-    System.Delete(TmpStr, 1, LongInt(I) + Length(AString));
+    Inc(C, Integer(I) + Length(AString));
+    System.Delete(TmpStr, 1, Integer(I) + Length(AString));
     I := pos(AString, TmpStr);
   end;
 {Go back the length of AString since the while loop deletes the last instance}

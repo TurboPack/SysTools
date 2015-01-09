@@ -46,14 +46,14 @@ type
 
   TStWaitThread = class(TThread)
     protected
-      FTimeOut  : Longint;
+      FTimeOut  : Integer;
       procedure Execute; override;
     public
       CancelWaitEvent : THandle;
       WaitResult  : DWORD;
       WaitFors    : PWOHandleArray;                                      {!!.01}
 
-      constructor Create(aInst, CancelIt : THandle; ATimeOut : Longint);
+      constructor Create(aInst, CancelIt : THandle; ATimeOut : Integer);
       destructor Destroy; override;                                      {!!.01}
   end;
 
@@ -81,7 +81,7 @@ type
     FShowState      : TStShowState;
     FSpawnCommand   : TStSpawnCommand;
     FTimer          : TTimer;
-    FTimeOut        : Longint;
+    FTimeOut        : Integer;
     FWaitResult     : DWORD;
     FWaitThread     : TStWaitThread;
     FSpawnCommandStr     : String;
@@ -89,7 +89,7 @@ type
   protected
     { Protected declarations }
 
-    CountDownValue : Longint;
+    CountDownValue : Integer;
     procedure DoOnThreadEnd(Sender : TObject);
     procedure SetDefaultDir(const Value : String);                 {!!.02}
     procedure SetFileName(const Value : String);                   {!!.02}
@@ -100,7 +100,7 @@ type
     procedure SetShowState(Value : TStShowState);
     procedure SetSpawnCommand(Value : TStSpawnCommand);
     procedure SetSpawnTimeOut(Value : TStSpawnTimeOutEvent);
-    procedure SetTimeOut(Value : Longint);
+    procedure SetTimeOut(Value : Integer);
   public
     { Public declarations }
 
@@ -139,7 +139,7 @@ type
     property SpawnCommand : TStSpawnCommand
       read FSpawnCommand write SetSpawnCommand default scOpen;
 
-    property TimeOut : Longint
+    property TimeOut : Integer
       read FTimeOut write SetTimeOut default 0;
 
     property SpawnCommandStr : String
@@ -156,7 +156,7 @@ implementation
 const                                                                    {!!.01}
   WAIT_HANDLE_COUNT = 2;                                                 {!!.01}
 
-constructor TStWaitThread.Create(aInst, CancelIt : THandle; ATimeOut : Longint);
+constructor TStWaitThread.Create(aInst, CancelIt : THandle; ATimeOut : Integer);
 begin
   GetMem(WaitFors, WAIT_HANDLE_COUNT * SizeOf(THandle));                 {!!.01}
   WaitFors^[0] := aInst;                                                 {!!.01}
@@ -401,7 +401,7 @@ begin
 end;
 
 
-procedure TStSpawnApplication.SetTimeOut(Value : Longint);
+procedure TStSpawnApplication.SetTimeOut(Value : Integer);
 begin
   if (FAllowChange) or (csDesigning in ComponentState) then begin
     if (Value <> FTimeOut) and (Value >= 0) then

@@ -458,7 +458,7 @@ implementation
   { PDF417 types and constants }
 
 type
-  TStPDF417CodewordArray = array [0..2] of array [0..928] of Longint;
+  TStPDF417CodewordArray = array [0..2] of array [0..928] of Integer;
 
 const
 

@@ -43,8 +43,8 @@ uses
   StConst, StBase, StDate,
   StStrL; { long string routines }
 
-function SignL(L : LongInt) : Integer;
-  {-return sign of LongInt value}
+function SignL(L : Integer) : Integer;
+  {-return sign of Integer value}
 function SignF(F : Extended) : Integer;
   {-return sign of floating point value}
 
@@ -55,11 +55,11 @@ function MidWord(W1, W2, W3 : Word) : Word;
 function MaxWord(A, B : Word) : Word;
   {-Return the greater of A and B}
 
-function MinLong(A, B : LongInt) : LongInt;
+function MinLong(A, B : Integer) : Integer;
   {-Return the smaller of A and B}
-function MidLong(L1, L2, L3 : LongInt) : LongInt;
-  {-return the middle of three LongInt values}
-function MaxLong(A, B : LongInt) : LongInt;
+function MidLong(L1, L2, L3 : Integer) : Integer;
+  {-return the middle of three Integer values}
+function MaxLong(A, B : Integer) : Integer;
   {-Return the greater of A and B}
 
 function MinFloat(F1, F2 : Extended) : Extended;
@@ -80,7 +80,7 @@ function MakeWord(H, L : Byte) : Word;
 function SwapNibble(B : Byte) : Byte;
   {-Swap the high and low nibbles of a byte}
 
-function SwapWord(L : LongInt) : LongInt;
+function SwapWord(L : Integer) : Integer;
   {-Swap the low- and high-order words of a long integer}
 
 procedure SetFlag(var Flags : Word; FlagMask : Word);
@@ -101,15 +101,15 @@ procedure ClearByteFlag(var Flags : Byte; FlagMask : Byte);
 function ByteFlagIsSet(Flags, FlagMask : Byte) : Boolean;
   {-Return True if the bit specified by FlagMask is set in the Flags parameter}
 
-procedure SetLongFlag(var Flags : LongInt; FlagMask : LongInt);
+procedure SetLongFlag(var Flags : Integer; FlagMask : Integer);
   {-Set bit(s) in the parameter Flags. The bits to set are specified in FlagMask}
 
 
-procedure ClearLongFlag(var Flags : LongInt; FlagMask : LongInt);
+procedure ClearLongFlag(var Flags : Integer; FlagMask : Integer);
   {-Clear bit(s) in the parameter Flags. The bits to clear are specified in FlagMask}
 
 
-function LongFlagIsSet(Flags, FlagMask : LongInt) : Boolean;
+function LongFlagIsSet(Flags, FlagMask : Integer) : Boolean;
   {-Return True if the bit specified by FlagMask is set in Flags}
 
 procedure ExchangeBytes(var I, J : Byte);
@@ -118,7 +118,7 @@ procedure ExchangeBytes(var I, J : Byte);
 procedure ExchangeWords(var I, J : Word);
   {-Exchange the values in two words}
 
-procedure ExchangeLongInts(var I, J : LongInt);
+procedure ExchangeLongInts(var I, J : Integer);
   {-Exchange the values in two long integers}
 
 procedure ExchangeStructs(var I, J; Size : Cardinal);
@@ -149,7 +149,7 @@ begin
   Result := (B shr 4) or (B shl 4);
 end;
 
-function SwapWord(L : LongInt) : LongInt; register;
+function SwapWord(L : Integer) : Integer; register;
 asm
   ror eax,16;
 end;
@@ -185,17 +185,17 @@ begin
   Result := (FlagMask AND Flags <> 0);
 end;
 
-procedure SetLongFlag(var Flags : LongInt; FlagMask : LongInt);
+procedure SetLongFlag(var Flags : Integer; FlagMask : Integer);
 begin
   Flags := Flags or FlagMask;
 end;
 
-procedure ClearLongFlag(var Flags : LongInt; FlagMask : LongInt);
+procedure ClearLongFlag(var Flags : Integer; FlagMask : Integer);
 begin
   Flags := Flags and (not FlagMask);
 end;
 
-function LongFlagIsSet(Flags, FlagMask : LongInt) : Boolean;
+function LongFlagIsSet(Flags, FlagMask : Integer) : Boolean;
 begin
   Result := FlagMask = (Flags and FlagMask);
 end;
@@ -220,7 +220,7 @@ asm
   mov  [edx], cx
 end;
 
-procedure ExchangeLongInts(var I, J : LongInt);
+procedure ExchangeLongInts(var I, J : Integer);
 register;
 asm
   mov  ecx, [eax]
@@ -325,7 +325,7 @@ end;
 
 function AddWordToPtr(P : Pointer; W : Word) : Pointer;
 begin
-  Result := Pointer(LongInt(P)+W);
+  Result := Pointer(Integer(P)+W);
 end;
 
 function MakeWord(H, L : Byte) : Word;
@@ -349,7 +349,7 @@ begin
     Result := B;
 end;
 
-function MinLong(A, B : LongInt) : LongInt;
+function MinLong(A, B : Integer) : Integer;
 begin
   if A < B then
     Result := A
@@ -357,7 +357,7 @@ begin
     Result := B;
 end;
 
-function MaxLong(A, B : LongInt) : LongInt;
+function MaxLong(A, B : Integer) : Integer;
 begin
   if A > B then
     Result := A
@@ -365,8 +365,8 @@ begin
     Result := B;
 end;
 
-function SignL(L : LongInt) : Integer;
-  {-return sign of LongInt value}
+function SignL(L : Integer) : Integer;
+  {-return sign of Integer value}
 begin
   if L < 0 then
     Result := -1
@@ -394,8 +394,8 @@ begin
                             StUtils.MaxWord(W2, W3)), StUtils.MaxWord(W1, W3));
 end;
 
-function MidLong(L1, L2, L3 : LongInt) : LongInt;
-  {return the middle of three LongInt values}
+function MidLong(L1, L2, L3 : Integer) : Integer;
+  {return the middle of three Integer values}
 begin
   Result := StUtils.MinLong(StUtils.MinLong(StUtils.MaxLong(L1, L2),
                             StUtils.MaxLong(L2, L3)), StUtils.MaxLong(L1, L3));

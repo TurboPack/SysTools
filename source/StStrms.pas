@@ -52,7 +52,7 @@ type
     private
       FBufCount: TStMemSize;   {count of valid bytes in buffer}
       FBuffer  : PAnsiChar;    {buffer into underlying stream}
-      FBufOfs  : longint;      {offset of buffer in underlying stream}
+      FBufOfs  : Integer;      {offset of buffer in underlying stream}
       FBufPos  : TStMemSize;   {current position in buffer}
       FBufSize : TStMemSize;   {size of buffer}
       FDirty   : boolean;      {has data in buffer been changed?}
@@ -71,18 +71,18 @@ type
       procedure bsWriteToStream;
 
       {$IFDEF VERSION3}
-      procedure SetSize(NewSize : longint); override;
+      procedure SetSize(NewSize : Integer); override;
       {$ENDIF}
     public
       constructor Create(aStream : TStream);
       constructor CreateEmpty;
       destructor Destroy; override;
 
-      function Read(var Buffer; Count : longint) : longint; override;
-      function Seek(Offset : longint; Origin : word) : longint; override;
-      function Write(const Buffer; Count : longint) : longint; override;
+      function Read(var Buffer; Count : Integer) : Integer; override;
+      function Seek(Offset : Integer; Origin : word) : Integer; override;
+      function Write(const Buffer; Count : Integer) : Integer; override;
       {$IFNDEF VERSION3}
-      procedure SetSize(NewSize : longint);
+      procedure SetSize(NewSize : Integer);
       {$ENDIF}
 
       property FastSize : Int64 read FSize;
@@ -115,22 +115,22 @@ type
       FLineLen     : integer;
       FLineTerm    : TStLineTerminator;
       FFixedLine   : PAnsiChar;
-      FLineCount   : longint;
-      FLineCurrent : longint;
-      FLineCurOfs  : longint;
+      FLineCount   : Integer;
+      FLineCurrent : Integer;
+      FLineCurOfs  : Integer;
       FLineIndex   : TList;
-      FLineInxStep : longint;
+      FLineInxStep : Integer;
       FLineInxTop  : integer;
     protected
-      function atsGetLineCount : longint;
+      function atsGetLineCount : Integer;
 
       procedure atsSetLineTerm(aValue : TStLineTerminator);
       procedure atsSetLineEndCh(aValue : AnsiChar);
       procedure atsSetLineLen(aValue : integer);
 
-      procedure atsGetLine(var aStartPos : longint;
-                           var aEndPos   : longint;
-                           var aLen      : longint);
+      procedure atsGetLine(var aStartPos : Integer;
+                           var aEndPos   : Integer;
+                           var aLen      : Integer);
       procedure atsResetLineIndex;
 
       procedure bsInitForNewStream; override;
@@ -145,8 +145,8 @@ type
                                                           : TStMemSize;
       function ReadLineZ(aSt : PAnsiChar; aMaxLen : TStMemSize) : PAnsiChar;
 
-      function SeekNearestLine(aOffset : longint) : longint;
-      function SeekLine(aLineNum : longint) : longint;
+      function SeekNearestLine(aOffset : Integer) : Integer;
+      function SeekLine(aLineNum : Integer) : Integer;
 
       procedure WriteLine(const aSt : string); overload;
       procedure WriteLine(const aSt : AnsiString); overload;
@@ -155,7 +155,7 @@ type
 
       property FixedLineLength : integer
                   read FLineLen write atsSetLineLen;
-      property LineCount : longint
+      property LineCount : Integer
                   read atsGetLineCount;
       property LineTermChar : AnsiChar
                   read FLineEndCh write atsSetLineEndCh;
@@ -187,9 +187,9 @@ type
                              SharedData : Boolean);
     destructor Destroy; override;
 
-    function Read(var Buffer; Count : Longint) : Longint; override;
-    function Seek(Offset : Longint; Origin : Word) : Longint; override;
-    function Write(const Buffer; Count : Longint) : Longint; override;
+    function Read(var Buffer; Count : Integer) : Integer; override;
+    function Seek(Offset : Integer; Origin : Word) : Integer; override;
+    function Write(const Buffer; Count : Integer) : Integer; override;
 
     property DataSize : Cardinal
       read GetDataSize;
@@ -224,7 +224,7 @@ const
 
 {--- Helper routines ---------------------------------------------------------}
 
-function MinLong(A, B : longint) : longint;
+function MinLong(A, B : Integer) : Integer;
 begin
   if A < B then
     Result := A
@@ -323,7 +323,7 @@ end;
 
 procedure TStBufferedStream.bsReadFromStream;
 var
-  NewPos : longint;
+  NewPos : Integer;
 begin
   {assumptions: FBufOfs is where to read the buffer
                 FBufSize is the number of bytes to read
@@ -352,8 +352,8 @@ end;
 
 procedure TStBufferedStream.bsWriteToStream;
 var
-  NewPos       : longint;
-  BytesWritten : longint;
+  NewPos       : Integer;
+  BytesWritten : Integer;
 begin
   {assumptions: FDirty is true
                 FBufOfs is where to write the buffer
@@ -370,12 +370,12 @@ end;
 
 {-----------------------------------------------------------------------------}
 
-function TStBufferedStream.Read(var Buffer; Count : longint) : longint;
+function TStBufferedStream.Read(var Buffer; Count : Integer) : Integer;
 var
-  BytesToGo   : longint;
-  BytesToRead : longint;
+  BytesToGo   : Integer;
+  BytesToRead : Integer;
 //  BufAsBytes  : TByteArray absolute Buffer;                          {!!.02}
-//  DestPos     : longint;                                             {!!.02}
+//  DestPos     : Integer;                                             {!!.02}
   BufAsBytes  : PByte;                                                 {!!.02}
 begin
   BufAsBytes := @Buffer;                                               {!!.02}
@@ -428,10 +428,10 @@ end;
 
 {-----------------------------------------------------------------------------}
 
-function TStBufferedStream.Seek(Offset : longint; Origin : word) : longint;
+function TStBufferedStream.Seek(Offset : Integer; Origin : word) : Integer;
 var
-  NewPos : longint;
-  NewOfs : longint;
+  NewPos : Integer;
+  NewOfs : Integer;
 begin
   if (FStream = nil) then
     RaiseStError(EStBufStreamError, stscNilStream);
@@ -475,9 +475,9 @@ end;
 
 {-----------------------------------------------------------------------------}
 
-procedure TStBufferedStream.SetSize(NewSize : longint);
+procedure TStBufferedStream.SetSize(NewSize : Integer);
 var
-  NewPos : longint;
+  NewPos : Integer;
 begin
   {get rid of the simple case first where the new size and the old
    size are the same}
@@ -499,12 +499,12 @@ end;
 
 {-----------------------------------------------------------------------------}
 
-function TStBufferedStream.Write(const Buffer; Count : longint) : longint;
+function TStBufferedStream.Write(const Buffer; Count : Integer) : Integer;
 var
-  BytesToGo   : longint;
-  BytesToWrite: longint;
+  BytesToGo   : Integer;
+  BytesToWrite: Integer;
 //  BufAsBytes  : TByteArray absolute Buffer;                          {!!.02}
-//  DestPos     : longint;                                             {!!.02}
+//  DestPos     : Integer;                                             {!!.02}
   BufAsBytes  : PByte;                                                 {!!.02}
 begin
   BufAsBytes := @Buffer;                                               {!!.02}
@@ -599,9 +599,9 @@ end;
 
 {-----------------------------------------------------------------------------}
 
-procedure TStAnsiTextStream.atsGetLine(var aStartPos : longint;
-                                       var aEndPos   : longint;
-                                       var aLen      : longint);
+procedure TStAnsiTextStream.atsGetLine(var aStartPos : Integer;
+                                       var aEndPos   : Integer;
+                                       var aLen      : Integer);
 var
   Done   : boolean;
   Ch     : AnsiChar;
@@ -659,7 +659,7 @@ end;
 
 {-----------------------------------------------------------------------------}
 
-function TStAnsiTextStream.atsGetLineCount : longint;
+function TStAnsiTextStream.atsGetLineCount : Integer;
 begin
   if FLineCount < 0 then
     Result := MaxLongInt
@@ -752,10 +752,10 @@ end;
 
 function TStAnsiTextStream.ReadLine : AnsiString;
 var
-  CurPos : longint;
-  EndPos : longint;
-  Len    : longint;
-  StLen  : longint;
+  CurPos : Integer;
+  EndPos : Integer;
+  Len    : Integer;
+  StLen  : Integer;
 begin
   atsGetLine(CurPos, EndPos, Len);
   if (LineTerminator = ltNone) then begin
@@ -786,10 +786,10 @@ function TStAnsiTextStream.ReadLineArray(aCharArray : PAnsiChar;
                                          aLen       : TStMemSize)
                                                     : TStMemSize;
 var
-  CurPos : longint;
-  EndPos : longint;
-  Len    : longint;
-  StLen  : longint;
+  CurPos : Integer;
+  EndPos : Integer;
+  Len    : Integer;
+  StLen  : Integer;
 begin
   atsGetLine(CurPos, EndPos, Len);
   if (LineTerminator = ltNone) then begin
@@ -817,10 +817,10 @@ end;
 
 function TStAnsiTextStream.ReadLineZ(aSt : PAnsiChar; aMaxLen : TStMemSize) : PAnsiChar;
 var
-  CurPos : longint;
-  EndPos : longint;
-  Len    : longint;
-  StLen  : longint;
+  CurPos : Integer;
+  EndPos : Integer;
+  Len    : Integer;
+  StLen  : Integer;
 begin
   Result := aSt;
   atsGetLine(CurPos, EndPos, Len);
@@ -847,14 +847,14 @@ end;
 
 {-----------------------------------------------------------------------------}
 
-function TStAnsiTextStream.SeekNearestLine(aOffset : longint) : longint;
+function TStAnsiTextStream.SeekNearestLine(aOffset : Integer) : Integer;
 var
-  CurLine : longint;
-  CurOfs  : longint;
-  CurPos  : longint;
-  EndPos  : longint;
-  Len     : longint;
-  i       : longint;
+  CurLine : Integer;
+  CurOfs  : Integer;
+  CurPos  : Integer;
+  EndPos  : Integer;
+  Len     : Integer;
+  i       : Integer;
   Done    : boolean;
   L, R, M : integer;
 begin
@@ -889,10 +889,10 @@ begin
   {if the offset requested is greater than the top item in the
    line index, we shall have to build up the index until we get to the
    line we require, or just beyond}
-  if (aOffset > longint(FLineIndex[FLineInxTop+1])) then begin
+  if (aOffset > Integer(FLineIndex[FLineInxTop+1])) then begin
     {position at the last known line offset}
-    CurLine := longint(FLineIndex[FLineInxTop]);
-    CurOfs := longint(FLineIndex[FLineInxTop+1]);
+    CurLine := Integer(FLineIndex[FLineInxTop]);
+    CurOfs := Integer(FLineIndex[FLineInxTop+1]);
     Seek(CurOfs, soFromBeginning);
     Done := false;
     {continue reading lines in chunks of FLineInxStep and add an index
@@ -937,13 +937,13 @@ begin
     M := (L + R) div 2;
     if not Odd(M) then
       inc(M);
-    if (aOffset < longint(FLineIndex[M])) then
+    if (aOffset < Integer(FLineIndex[M])) then
       R := M - 2
-    else if (aOffset > longint(FLineIndex[M])) then
+    else if (aOffset > Integer(FLineIndex[M])) then
       L := M + 2
     else begin
-      FLineCurrent := longint(FLineIndex[M-1]);
-      FLineCurOfs := longint(FLineIndex[M]);
+      FLineCurrent := Integer(FLineIndex[M-1]);
+      FLineCurOfs := Integer(FLineIndex[M]);
       Seek(FLineCurOfs, soFromBeginning);
       Result := FLineCurrent;
       Exit;
@@ -952,8 +952,8 @@ begin
   {the item at L-2 will have the nearest smaller offset than the
    one we want, hence the nearest smaller line is at L-3; start here
    and read through the stream forwards}
-  CurLine := longint(FLineIndex[L-3]);
-  Seek(longint(FLineIndex[L-2]), soFromBeginning);
+  CurLine := Integer(FLineIndex[L-3]);
+  Seek(Integer(FLineIndex[L-2]), soFromBeginning);
   while true do begin
     atsGetLine(CurPos, EndPos, Len);
     inc(CurLine);
@@ -976,14 +976,14 @@ end;
 
 {-----------------------------------------------------------------------------}
 
-function TStAnsiTextStream.SeekLine(aLineNum : longint) : longint;
+function TStAnsiTextStream.SeekLine(aLineNum : Integer) : Integer;
 var
-  CurLine : longint;
-  CurOfs  : longint;
-  CurPos  : longint;
-  EndPos  : longint;
-  Len     : longint;
-  i       : longint;
+  CurLine : Integer;
+  CurOfs  : Integer;
+  CurPos  : Integer;
+  EndPos  : Integer;
+  Len     : Integer;
+  i       : Integer;
   Done    : boolean;
   L, R, M : integer;
 begin
@@ -1017,10 +1017,10 @@ begin
   {if the line number requested is greater than the top item in the
    line index, we shall have to build up the index until we get to the
    line we require, or just beyond}
-  if (aLineNum > longint(FLineIndex[FLineInxTop])) then begin
+  if (aLineNum > Integer(FLineIndex[FLineInxTop])) then begin
     {position at the last known line offset}
-    CurLine := longint(FLineIndex[FLineInxTop]);
-    CurOfs := longint(FLineIndex[FLineInxTop+1]);
+    CurLine := Integer(FLineIndex[FLineInxTop]);
+    CurOfs := Integer(FLineIndex[FLineInxTop+1]);
     Seek(CurOfs, soFromBeginning);
     Done := false;
     {continue reading lines in chunks of FLineInxStep and add an index
@@ -1065,13 +1065,13 @@ begin
     M := (L + R) div 2;
     if Odd(M) then
       dec(M);
-    if (aLineNum < longint(FLineIndex[M])) then
+    if (aLineNum < Integer(FLineIndex[M])) then
       R := M - 2
-    else if (aLineNum > longint(FLineIndex[M])) then
+    else if (aLineNum > Integer(FLineIndex[M])) then
       L := M + 2
     else begin
-      FLineCurrent := longint(FLineIndex[M]);
-      FLineCurOfs := longint(FLineIndex[M+1]);
+      FLineCurrent := Integer(FLineIndex[M]);
+      FLineCurOfs := Integer(FLineIndex[M+1]);
       Seek(FLineCurOfs, soFromBeginning);
       Result := FLineCurrent;
       Exit;
@@ -1079,8 +1079,8 @@ begin
   end;
   {the item at L-2 will have the nearest smaller line number than the
    one we want; start here and read through the stream forwards}
-  CurLine := longint(FLineIndex[L-2]);
-  Seek(longint(FLineIndex[L-1]), soFromBeginning);
+  CurLine := Integer(FLineIndex[L-2]);
+  Seek(Integer(FLineIndex[L-1]), soFromBeginning);
   while true do begin
     atsGetLine(CurPos, EndPos, Len);
     inc(CurLine);
@@ -1300,7 +1300,7 @@ end;
 
 {-----------------------------------------------------------------------------}
 
-function TStMemoryMappedFile.Read(var Buffer; Count : Longint) : Longint;
+function TStMemoryMappedFile.Read(var Buffer; Count : Integer) : Integer;
 var
 //  ByteArray : TByteArray absolute Buffer;                            {!!.02}
   ByteArray : PByte;                                                   {!!.02}
@@ -1330,7 +1330,7 @@ end;
 
 {-----------------------------------------------------------------------------}
 
-function TStMemoryMappedFile.Write(const Buffer; Count : Longint) : Longint;
+function TStMemoryMappedFile.Write(const Buffer; Count : Integer) : Integer;
 var
 //  ByteArray : TByteArray absolute Buffer;                            {!!.02}
   ByteArray : PByte;                                                   {!!.02}
@@ -1373,7 +1373,7 @@ end;
 
 {-----------------------------------------------------------------------------}
 
-function TStMemoryMappedFile.Seek(Offset : Longint; Origin : Word) : Longint;
+function TStMemoryMappedFile.Seek(Offset : Integer; Origin : Word) : Integer;
 begin
   if (SharedData) then begin
     WaitForSingleObject(FMutex, INFINITE);

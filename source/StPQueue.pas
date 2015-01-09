@@ -374,7 +374,7 @@ end;
 procedure TStPQueue.Expand(Need : Integer);
 var
   NewCapacity : Integer;
-  Size        : LongInt;
+  Size        : Integer;
   NewData     : PStPQData;
 begin
   if Need > pqCapacity then begin
@@ -384,7 +384,7 @@ begin
       NewCapacity := Need;
 
     {make sure it's feasible to allocate it}
-    Size := LongInt(NewCapacity)*SizeOf(Pointer);
+    Size := Integer(NewCapacity)*SizeOf(Pointer);
     {if Size > MaxBlockSize then}
       {RaiseContainerError(stscBadSize);}                              
 

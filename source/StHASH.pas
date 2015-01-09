@@ -67,7 +67,7 @@ type
       hnNext : TStHashNode;     {Next node in hash list}
       hnValue: Pointer;         {Pointer to value of element}
       hnValSize : Cardinal;     {Size of hnValue memory block}
-      FLRU : LongInt;           {LRU counter of this node}
+      FLRU : Integer;           {LRU counter of this node}
 
       function GetValue : Pointer;
 
@@ -81,7 +81,7 @@ type
 
       property Value : Pointer
          read GetValue;
-      property LRU : LongInt
+      property LRU : Integer
          read FLRU
          write FLRU;
   end;
@@ -101,12 +101,12 @@ type
       FHashSize : Integer;          {Bins in hash array}
       FEqual : TUntypedCompareFunc; {Element compare function}
       FHash : THashFunc;            {Hash function}
-      FMaxNodes : LongInt;          {Max nodes allowed in table}
+      FMaxNodes : Integer;          {Max nodes allowed in table}
 
       {private instance variables}
       htHeads : PHashArray;         {Pointer to head of node lists}
       htTails : PHashArray;         {Pointer to tail of node lists}
-      htLRU : LongInt;              {LRU counter}
+      htLRU : Integer;              {LRU counter}
       htIgnoreDups : Boolean;       {Ignore duplicates during Join?}
 
       {protected undocumented methods}
@@ -116,7 +116,7 @@ type
       procedure htSetEqual(E : TUntypedCompareFunc);
       procedure htSetHash(H : THashFunc);
       procedure htSetHashSize(Size : Integer);
-      procedure htSetMaxNodes(Nodes : LongInt);
+      procedure htSetMaxNodes(Nodes : Integer);
       procedure htMoveToFront(H : Integer; Prev, This : TStHashNode);
       procedure htFindNode(const V; var H : Integer;
                            var Prev, This : TStHashNode);
@@ -161,7 +161,7 @@ type
       procedure NodeRemoved(const V; Data : Pointer); virtual;
         {-Called when a not recently used node is removed from the table}
 
-      function BinCount(H : Integer) : LongInt;
+      function BinCount(H : Integer) : Integer;
         {-Return number of names in a hash bin (for testing)}
 
       property Equal : TUntypedCompareFunc
@@ -183,7 +183,7 @@ type
         {-Read the size of each element in the table}
         read FValSize;
 
-      property MaxNodes : LongInt
+      property MaxNodes : Integer
         {-Change the maximum nodes in the table}
         read FMaxNodes
         write htSetMaxNodes;
@@ -293,9 +293,9 @@ begin
 end;
 
 
-function TStHashTable.BinCount(H : Integer) : LongInt;
+function TStHashTable.BinCount(H : Integer) : Integer;
 var
-  C : LongInt;
+  C : Integer;
   T : TStHashNode;
 begin
 {$IFDEF ThreadSafe}
@@ -453,7 +453,7 @@ procedure TStHashTable.htDeleteOldestNode;
   {-Find and delete the hash node with the smallest LRU counter}
 var
   H, MinH :  Integer;
-  MinLRU : LongInt;
+  MinLRU : Integer;
   T, P : TStHashNode;
 begin
   if FCount <> 0 then begin
@@ -608,7 +608,7 @@ end;
 procedure TStHashTable.htSetHashSize(Size : Integer);
 var
   HInx     : integer;
-  TableSize: LongInt;
+  TableSize: Integer;
   Temp     : TStHashNode;
   Node     : TStHashNode;
   OldHeads : PHashArray;
@@ -623,7 +623,7 @@ begin
   try
 {$ENDIF}
     {calculate the new table size}
-    TableSize := LongInt(Size) * sizeof(TStHashNode);
+    TableSize := Integer(Size) * sizeof(TStHashNode);
     if (Size <= 0) {or (TableSize > MaxBlockSize)} then
       RaiseContainerError(stscBadSize);
 
@@ -723,7 +723,7 @@ begin
 {$ENDIF}
 end;
 
-procedure TStHashTable.htSetMaxNodes(Nodes : LongInt);
+procedure TStHashTable.htSetMaxNodes(Nodes : Integer);
 begin
   if Nodes < 1 then
     RaiseContainerError(stscBadSize);
@@ -734,7 +734,7 @@ end;
 
 type
   TMinNode = record
-    MLRU : LongInt;
+    MLRU : Integer;
     MNode : TStHashNode;
   end;
   PMinNode = ^TMinNode;

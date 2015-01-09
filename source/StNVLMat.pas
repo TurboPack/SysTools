@@ -101,7 +101,7 @@ type
 
     property ElementSize : Cardinal
       read FElementSize
-      write SetElementSize default SizeOf(LongInt);
+      write SetElementSize default SizeOf(Integer);
 
     property ElementsStorable : Boolean
       read GetStoreable
@@ -125,7 +125,7 @@ begin
   {defaults}
   FCols := 2;
   FRows := 10;
-  FElementSize := SizeOf(LongInt);
+  FElementSize := SizeOf(Integer);
 
   if Classes.GetClass(TStLMatrix.ClassName) = nil then
     RegisterClass(TStLMatrix);

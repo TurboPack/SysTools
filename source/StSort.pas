@@ -114,13 +114,13 @@ type
     MergeFiles   : Integer;    {Total number of merge files created}
     MergeHandles : Integer;    {Maximum file handles used}
     MergePhases  : Integer;    {Number of merge phases}
-    MaxDiskSpace : LongInt;    {Maximum peak disk space used}
-    HeapUsed     : LongInt;    {Heap space actually used}
+    MaxDiskSpace : Integer;    {Maximum peak disk space used}
+    HeapUsed     : Integer;    {Heap space actually used}
   end;
 
   {.Z+}
   TMergeIntArray = array[1..MergeOrder] of Integer;
-  TMergeLongArray = array[1..MergeOrder] of LongInt;
+  TMergeLongArray = array[1..MergeOrder] of Integer;
   TMergePtrArray = array[1..MergeOrder] of Pointer;
   {.Z-}
 
@@ -128,22 +128,22 @@ type
   {.Z+}
   protected
     {property instance variables}
-    FCount     : LongInt;                {Number of records put to sort}
+    FCount     : Integer;                {Number of records put to sort}
     FRecLen    : Cardinal;               {Size of each record}
     FCompare   : TUntypedCompareFunc;    {Compare function}
     FMergeName : TMergeNameFunc;         {Merge file naming function}
 
     {private instance variables}
-    sorRunCapacity : LongInt;            {Capacity (in records) of run buffer}
-    sorRunCount    : LongInt;            {Current number of records in run buffer}
-    sorGetIndex    : LongInt;            {Last run element passed back to user}
+    sorRunCapacity : Integer;            {Capacity (in records) of run buffer}
+    sorRunCount    : Integer;            {Current number of records in run buffer}
+    sorGetIndex    : Integer;            {Last run element passed back to user}
     sorPivotPtr    : Pointer;            {Pointer to pivot record}
     sorSwapPtr     : Pointer;            {Pointer to swap record}
     sorState       : Integer;            {0 = empty, 1 = adding, 2 = getting}
     sorMergeFileCount  : Integer;        {Number of merge files created}
     sorMergeFileMerged : Integer;        {Index of last merge file merged}
     sorMergeOpenCount  : Integer;        {Count of open merge files}
-    sorMergeBufSize    : LongInt;        {Usable bytes in merge buffer}
+    sorMergeBufSize    : Integer;        {Usable bytes in merge buffer}
     sorMergeFileNumber : TMergeIntArray; {File number of each open merge file}
     sorMergeFiles      : TMergeIntArray; {File handles for merge files}
     sorMergeBytesLoaded: TMergeLongArray;{Count of bytes in each merge buffer}
@@ -152,17 +152,17 @@ type
     sorMergePtrs      : TMergePtrArray;  {Current head elements in each merge buffer}
     sorOutFile        : Integer;         {Output file handle}
     sorOutPtr         : Pointer;         {Pointer for output buffer}
-    sorOutBytesUsed   : LongInt;         {Number of bytes in output buffer}
+    sorOutBytesUsed   : Integer;         {Number of bytes in output buffer}
  {$IFDEF ThreadSafe}
     sorThreadSafe  : TRTLCriticalSection;{Windows critical section record}
  {$ENDIF}
     sorBuffer      : Pointer;            {Pointer to global buffer}
 
     {protected undocumented methods}
-    procedure sorAllocBuffer(MaxHeap : LongInt);
+    procedure sorAllocBuffer(MaxHeap : Integer);
     procedure sorCreateNewMergeFile(var Handle : Integer);
     procedure sorDeleteMergeFiles;
-    function  sorElementPtr(Index : LongInt) : Pointer;
+    function  sorElementPtr(Index : Integer) : Pointer;
     procedure sorFlushOutBuffer;
     procedure sorFreeBuffer;
     procedure sorGetMergeElementPtr(M : Integer);
@@ -171,10 +171,10 @@ type
     procedure sorMoveElement(Src, Dest : Pointer);
     procedure sorOpenMergeFiles;
     procedure sorPrimaryMerge;
-    procedure sorRunSort(L, R : LongInt);
+    procedure sorRunSort(L, R : Integer);
     procedure sorStoreElement(Src : Pointer);
     procedure sorStoreNewMergeFile;
-    procedure sorSwapElements(L, R : LongInt);
+    procedure sorSwapElements(L, R : Integer);
     procedure sorSetCompare(Comp : TUntypedCompareFunc);
 
     {protected documented methods}
@@ -185,7 +185,7 @@ type
   {.Z-}
 
   public
-    constructor Create(MaxHeap : LongInt; RecLen : Cardinal); virtual;
+    constructor Create(MaxHeap : Integer; RecLen : Cardinal); virtual;
       {-Initialize a sorter}
     destructor Destroy; override;
       {-Destroy a sorter}
@@ -198,7 +198,7 @@ type
     procedure Reset;
       {-Reset sorter before starting another sort}
 
-    property Count : LongInt
+    property Count : Integer
       {-Return the number of elements in the sorter}
       read FCount;
 
@@ -217,16 +217,16 @@ type
       read FRecLen;
   end;
 
-function OptimumHeapToUse(RecLen : Cardinal; NumRecs : LongInt) : LongInt;
+function OptimumHeapToUse(RecLen : Cardinal; NumRecs : Integer) : Integer;
   {-Returns the optimum amount of heap space to sort NumRecs records
     of RecLen bytes each. Less heap space causes merging; more heap
     space is partially unused.}
 
-function MinimumHeapToUse(RecLen : Cardinal) : LongInt;
+function MinimumHeapToUse(RecLen : Cardinal) : Integer;
   {-Returns the absolute minimum heap that allows MergeSort to succeed}
 
-function MergeInfo(MaxHeap : LongInt; RecLen : Cardinal;
-                   NumRecs : LongInt) : TMergeInfo;
+function MergeInfo(MaxHeap : Integer; RecLen : Cardinal;
+                   NumRecs : Integer) : TMergeInfo;
   {-Predicts status and resource usage of a merge sort}
 
 function DefaultMergeName(MergeNum : Integer) : string;
@@ -243,7 +243,7 @@ implementation
 const
   ecOutOfMemory = 8;
 
-procedure RaiseError(Code : longint);
+procedure RaiseError(Code : Integer);
 var
   E : ESTSortError;
 begin
@@ -261,14 +261,14 @@ begin
   Result := 'SOR'+IntToStr(MergeNum)+'.TMP';
 end;
 
-function MergeInfo(MaxHeap : LongInt; RecLen : Cardinal;
-                   NumRecs : LongInt) : TMergeInfo;
+function MergeInfo(MaxHeap : Integer; RecLen : Cardinal;
+                   NumRecs : Integer) : TMergeInfo;
 type
-  MergeFileSizeArray = array[1..(StMaxBlockSize div SizeOf(LongInt))] of LongInt;
+  MergeFileSizeArray = array[1..(StMaxBlockSize div SizeOf(Integer))] of Integer;
 var
   MFileMerged, MOpenCount, MFileCount : Integer;
-  SizeBufSize, DiskSpace,  OutputSpace, PeakDiskSpace : LongInt;
-  AllocRecs, RunCapacity, RecordsLeft, RecordsInFile : LongInt;
+  SizeBufSize, DiskSpace,  OutputSpace, PeakDiskSpace : Integer;
+  AllocRecs, RunCapacity, RecordsLeft, RecordsInFile : Integer;
   MFileSizeP : ^MergeFileSizeArray;
 begin
   {Set defaults for the result}
@@ -280,7 +280,7 @@ begin
     Exit;
   end;
 
-  AllocRecs := MaxHeap div LongInt(RecLen);
+  AllocRecs := MaxHeap div Integer(RecLen);
   if AllocRecs < MergeOrder+1 then begin
     Result.SortStatus := stscBadSize;
     Exit;
@@ -293,7 +293,7 @@ begin
   end;
 
   {Compute amount of memory used}
-  Result.HeapUsed := AllocRecs*LongInt(RecLen);                        
+  Result.HeapUsed := AllocRecs*Integer(RecLen);
 
   if RunCapacity >= NumRecs then
     {All the records fit into memory}
@@ -307,7 +307,7 @@ begin
   {  Result.SortStatus := stscTooManyFiles;}                           
   {  Exit;                                 }                           
   {end;                                    }                           
-  DiskSpace := NumRecs*LongInt(RecLen);                                
+  DiskSpace := NumRecs*Integer(RecLen);
 
   {At least one merge phase required}
   Result.MergePhases := 1;
@@ -338,9 +338,9 @@ begin
 
   {Determine whether the disk space analysis can proceed}
   Result.MaxDiskSpace := -1;
-  if MFileCount > (StMaxBlockSize div SizeOf(LongInt)) then
+  if MFileCount > (StMaxBlockSize div SizeOf(Integer)) then
     Exit;
-  SizeBufSize := MFileCount*SizeOf(LongInt);
+  SizeBufSize := MFileCount*SizeOf(Integer);
   try
     GetMem(MFileSizeP, SizeBufSize);
   except
@@ -356,7 +356,7 @@ begin
       RecordsInFile := RunCapacity
     else
       RecordsInFile := RecordsLeft;
-    MFileSizeP^[MFileCount] := RecordsInFile*LongInt(RecLen);          
+    MFileSizeP^[MFileCount] := RecordsInFile*Integer(RecLen);
     dec(RecordsLeft, RecordsInFile);
   end;
 
@@ -387,9 +387,9 @@ begin
   FreeMem(MFileSizeP, SizeBufSize);
 end;
 
-function MinimumHeapToUse(RecLen : Cardinal) : LongInt;
+function MinimumHeapToUse(RecLen : Cardinal) : Integer;
 var
-  HeapToUse : LongInt;
+  HeapToUse : Integer;
 begin
   HeapToUse := (MergeOrder+1)*RecLen;
   Result := (MinRecsPerRun+2)*RecLen;
@@ -397,16 +397,16 @@ begin
     Result := HeapToUse;
 end;
 
-function OptimumHeapToUse(RecLen : Cardinal; NumRecs : LongInt) : LongInt;
+function OptimumHeapToUse(RecLen : Cardinal; NumRecs : Integer) : Integer;
 begin
   if (NumRecs < MergeOrder+1) then
     NumRecs := MergeOrder+1;
-  Result := LongInt(RecLen)*(NumRecs+2);
+  Result := Integer(RecLen)*(NumRecs+2);
 end;
 
 {----------------------------------------------------------------------}
 
-constructor TStSorter.Create(MaxHeap : LongInt; RecLen : Cardinal);
+constructor TStSorter.Create(MaxHeap : Integer; RecLen : Cardinal);
 begin
   if (RecLen = 0) or (MaxHeap <= 0) then
     RaiseError(stscBadSize);
@@ -548,19 +548,19 @@ begin
 {$ENDIF}
 end;
 
-procedure TStSorter.sorAllocBuffer(MaxHeap : LongInt);
+procedure TStSorter.sorAllocBuffer(MaxHeap : Integer);
   {-Allocate a work buffer of records in at most MaxHeap bytes}
 var
   Status : Integer;
-  AllocRecs : LongInt;
+  AllocRecs : Integer;
 begin
   Status := stscBadSize;
   repeat
-    AllocRecs := MaxHeap div LongInt(FRecLen);
+    AllocRecs := MaxHeap div Integer(FRecLen);
     if AllocRecs < MergeOrder+1 then
       RaiseError(Status);
 {$IFDEF Version6} {$WARN SYMBOL_PLATFORM OFF} {$ENDIF}
-    sorBuffer := GlobalAllocPtr(HeapAllocFlags, AllocRecs*LongInt(FRecLen));
+    sorBuffer := GlobalAllocPtr(HeapAllocFlags, AllocRecs*Integer(FRecLen));
 {$IFDEF Version6} {$WARN SYMBOL_PLATFORM ON} {$ENDIF}
     if sorBuffer = nil then begin
       Status := ecOutOfMemory;
@@ -569,7 +569,7 @@ begin
       break;
   until False;
 
-  sorMergeBufSize := LongInt(FRecLen)*(AllocRecs div (MergeOrder+1));
+  sorMergeBufSize := Integer(FRecLen)*(AllocRecs div (MergeOrder+1));
 
   sorRunCapacity := AllocRecs-2;
   if sorRunCapacity < MinRecsPerRun then
@@ -609,16 +609,16 @@ begin
     SysUtils.DeleteFile(FMergeName(I));
 end;
 
-function TStSorter.sorElementPtr(Index : LongInt) : Pointer;
+function TStSorter.sorElementPtr(Index : Integer) : Pointer;
   {-Return a pointer to the given element in the sort buffer}
 begin
-  Result := PAnsiChar(sorBuffer)+Index*LongInt(FRecLen);
+  Result := PAnsiChar(sorBuffer)+Index*Integer(FRecLen);
 end;
 
 procedure TStSorter.sorFlushOutBuffer;
   {-Write the merge output buffer to disk}
 var
-  BytesWritten : LongInt;
+  BytesWritten : Integer;
 begin
   if sorOutBytesUsed <> 0 then begin
     BytesWritten := FileWrite(sorOutFile, sorOutPtr^, sorOutBytesUsed);
@@ -635,7 +635,7 @@ end;
 procedure TStSorter.sorGetMergeElementPtr(M : Integer);
   {-Update head pointer in input buffer of specified open merge file}
 var
-  BytesRead : LongInt;
+  BytesRead : Integer;
 begin
   if sorMergeBytesUsed[M] >= sorMergeBytesLoaded[M] then begin
     {Try to load new data into buffer}
@@ -643,7 +643,7 @@ begin
     if BytesRead < 0 then
       {Error reading file}
       RaiseError(stscFileRead);
-    if BytesRead < LongInt(FRecLen) then begin
+    if BytesRead < Integer(FRecLen) then begin
       {End of file. Close and delete it}
       FileClose(sorMergeFiles[M]);
       SysUtils.DeleteFile(FMergeName(sorMergeFileNumber[M]));
@@ -781,17 +781,17 @@ begin
   end;
 end;
 
-procedure TStSorter.sorRunSort(L, R : LongInt);
+procedure TStSorter.sorRunSort(L, R : Integer);
   {-Sort one run buffer full of records in memory using non-recursive QuickSort}
 const
   StackSize = 32;
 type
-  Stack = array[0..StackSize-1] of LongInt;
+  Stack = array[0..StackSize-1] of Integer;
 var
-  Pl : LongInt;            {Left edge within partition}
-  Pr : LongInt;            {Right edge within partition}
-  Pm : LongInt;            {Mid-point of partition}
-  PartitionLen : LongInt;  {Size of current partition}
+  Pl : Integer;            {Left edge within partition}
+  Pr : Integer;            {Right edge within partition}
+  Pm : Integer;            {Mid-point of partition}
+  PartitionLen : Integer;  {Size of current partition}
   StackP : Integer;        {Stack pointer}
   Lstack : Stack;          {Pending partitions, left edge}
   Rstack : Stack;          {Pending partitions, right edge}
@@ -922,7 +922,7 @@ var
 begin
   sorCreateNewMergeFile(sorOutFile);
   try
-    BytesToWrite := sorRunCount*LongInt(FRecLen);
+    BytesToWrite := sorRunCount*Integer(FRecLen);
     BytesWritten := FileWrite(sorOutFile, sorBuffer^, BytesToWrite);
     if BytesWritten <> BytesToWrite then
       RaiseError(stscFileWrite);
@@ -932,7 +932,7 @@ begin
   end;
 end;
 
-procedure TStSorter.sorSwapElements(L, R : LongInt);
+procedure TStSorter.sorSwapElements(L, R : Integer);
   {-Swap elements with indexes L and R}
 var
   LPtr : Pointer;
@@ -950,10 +950,10 @@ procedure ArraySort(var A; RecLen, NumRecs : Cardinal;
 const
   StackSize = 32;
 type
-  Stack = array[0..StackSize-1] of LongInt;
+  Stack = array[0..StackSize-1] of Integer;
 var
-  Pl, Pr, Pm, L, R : LongInt;
-  ArraySize, PartitionLen : LongInt;
+  Pl, Pr, Pm, L, R : Integer;
+  ArraySize, PartitionLen : Integer;
   PivotPtr : Pointer;
   SwapPtr : Pointer;
   StackP : Integer;
@@ -964,7 +964,7 @@ var
     Result := PAnsiChar(@A)+Index*RecLen;
   end;
 
-  procedure SwapElements(L, R : LongInt);
+  procedure SwapElements(L, R : Integer);
   var
     LPtr : Pointer;
     RPtr : Pointer;
@@ -982,7 +982,7 @@ begin
     RaiseError(stscNoCompare);
 
   {Make sure the array size is reasonable}
-  ArraySize := LongInt(RecLen)*LongInt(NumRecs);
+  ArraySize := Integer(RecLen)*Integer(NumRecs);
   if (ArraySize = 0) {or (ArraySize > MaxBlockSize)} then
     RaiseError(stscBadSize);
 

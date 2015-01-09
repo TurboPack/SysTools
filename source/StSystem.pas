@@ -77,7 +77,7 @@ type
   {This type describes the information that DOS 4.0 or higher writes
    in the boot sector of a disk when it is formatted}
     InfoLevel : Word;                        {Reserved for future use}
-    SerialNumber : LongInt;                  {Disk serial number}
+    SerialNumber : Integer;                  {Disk serial number}
     VolumeLabel : array[0..10] of Char;  {Disk volume label}
     FileSystemID : array[0..7] of Char;  {String for internal use by the OS}
   end;
@@ -129,7 +129,7 @@ function FileMatchesMask(const FileName, FileMask : String ) : Boolean;
 {-see if FileName matches FileMask}
 
 {FileTimeToStDateTime}
-function FileTimeToStDateTime(FileTime : LongInt) : TStDateTimeRec;
+function FileTimeToStDateTime(FileTime : Integer) : TStDateTimeRec;
 {-Converts a DOS date-time value to TStDate and TStTime values.}
 
 {FindNthSlash}
@@ -282,15 +282,15 @@ procedure SplitPath(const APath : String; Parts : TStrings);
 {-Splits the provided path into its component sub-paths}
 
 {StDateTimeToFileTime}
-function StDateTimeToFileTime(const FileTime : TStDateTimeRec) : LongInt;  {!!.02}
+function StDateTimeToFileTime(const FileTime : TStDateTimeRec) : Integer;  {!!.02}
 {-Converts an TStDate and TStTime to a DOS date-time value.}
 
 {StDateTimeToUnixTime}
-function StDateTimeToUnixTime(const DT1 : TStDateTimeRec) : Longint;   {!!.02}
+function StDateTimeToUnixTime(const DT1 : TStDateTimeRec) : Integer;   {!!.02}
 {-converts a TStDateTimeRec to a time in Unix base (1970)}
 
 {UnixTimeToStDateTime}
-function UnixTimeToStDateTime(UnixTime : Longint) : TStDateTimeRec;
+function UnixTimeToStDateTime(UnixTime : Integer) : TStDateTimeRec;
 {-converts a time in Unix base (1970) to a TStDateTimeRec}
 
 {ValidDrive}
@@ -353,8 +353,8 @@ const
   BufferSize = 4 * 1024;
 
 var
-  BytesRead, BytesWritten : LongInt;
-  FileDate : LongInt;
+  BytesRead, BytesWritten : Integer;
+  FileDate : Integer;
   Src, Dest, Mode, SaveFAttr : Integer;
   Buffer : Pointer;
 
@@ -637,7 +637,7 @@ begin
     for I := 0 to Pred(MaxH) do begin
       Handles^[I] := CreateFile(TempFile, 0, FILE_SHARE_READ, nil,
         OPEN_EXISTING, FILE_FLAG_DELETE_ON_CLOSE, 0);
-      if Handles^[I] <> LongInt(INVALID_HANDLE_VALUE) then
+      if Handles^[I] <> Integer(INVALID_HANDLE_VALUE) then
         Inc(Result) else Break;
     end;
     for I := 0 to Pred(Result) do
@@ -746,7 +746,7 @@ begin
 end;
 
 {FileTimeToStDateTime}
-function FileTimeToStDateTime(FileTime : LongInt) : TStDateTimeRec;
+function FileTimeToStDateTime(FileTime : Integer) : TStDateTimeRec;
 {-Converts a DOS date-time value to TStDate and TStTime values.}
 
 var
@@ -1439,7 +1439,7 @@ const
   TIME_ZONE_ID_DAYLIGHT = 2;
 {$ENDIF}
 var
-  Minutes : LongInt;
+  Minutes : Integer;
   TZ : TTimeZoneInformation;
 begin
   Minutes := (UTC.D * MinutesInDay) + (UTC.T div 60);
@@ -1597,7 +1597,7 @@ const
   TIME_ZONE_ID_DAYLIGHT = 2;
 {$ENDIF}
 var
-  Minutes : LongInt;
+  Minutes : Integer;
   TZ : TTimeZoneInformation;
 begin
   Minutes := (DT1.D * MinutesInDay) + (DT1.T div 60);
@@ -1707,13 +1707,13 @@ function SetMediaID(Drive : Char; var MediaIDRec : MediaIDType) : Cardinal;
 {-Set the media ID record for the specified drive.}
 type
   DevIOCtlRegisters = record
-    reg_EBX : LongInt;
-    reg_EDX : LongInt;
-    reg_ECX : LongInt;
-    reg_EAX : LongInt;
-    reg_EDI : LongInt;
-    reg_ESI : LongInt;
-    reg_Flags : LongInt;
+    reg_EBX : Integer;
+    reg_EDX : Integer;
+    reg_ECX : Integer;
+    reg_EAX : Integer;
+    reg_EDI : Integer;
+    reg_ESI : Integer;
+    reg_Flags : Integer;
   end;
 var
   PMid : PMediaIDType;
@@ -1732,7 +1732,7 @@ begin
     reg_EAX := $440D;
     reg_EBX := Ord(System.UpCase(Drive)) - (Ord('A') - 1);
     reg_ECX := $0846;
-    reg_EDX := LongInt(PMid);
+    reg_EDX := Integer(PMid);
   end;
   HDevice := CreateFile('\\.\vwin32', GENERIC_READ, FILE_SHARE_READ or FILE_SHARE_WRITE,
     Pointer(@SA), OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, 0);
@@ -1777,7 +1777,7 @@ begin
 end;
 
 {StDateTimeToFileTime}
-function StDateTimeToFileTime(const FileTime : TStDateTimeRec) : LongInt;  {!!.02}
+function StDateTimeToFileTime(const FileTime : TStDateTimeRec) : Integer;  {!!.02}
 {-Converts an TStDate and TStTime to a DOS date-time value.}
 var
   DDT : TDateTime;
@@ -1787,14 +1787,14 @@ begin
 end;
 
 {StDateTimeToUnixTime}
-function StDateTimeToUnixTime(const DT1 : TStDateTimeRec) : Longint;   {!!.02}
+function StDateTimeToUnixTime(const DT1 : TStDateTimeRec) : Integer;   {!!.02}
 {-converts a TStDateTimeRec to a time in Unix base (1970)}
 begin
   Result := ((DT1.D - Date1970) * SecondsInDay) + DT1.T;
 end;
 
 {UnixTimeToStDateTime}
-function UnixTimeToStDateTime(UnixTime : Longint) : TStDateTimeRec;
+function UnixTimeToStDateTime(UnixTime : Integer) : TStDateTimeRec;
 {-converts a time in Unix base (1970) to a TStDateTimeRec}
 begin
   Result.D := Date1970 + (UnixTime div SecondsInDay);
@@ -1805,7 +1805,7 @@ end;
 function ValidDrive(Drive : Char) : Boolean;
 {-Determine if the drive is a valid drive.}
 var
-  DriveBits : LongInt;
+  DriveBits : Integer;
   DriveLtr : Char;
 begin
   DriveLtr := System.UpCase(Drive);

@@ -388,7 +388,7 @@ Return a string with specified trailing character removed,
 useful for cleanup of fixed data records
 }
 var
-  Len : LongInt;
+  Len : Integer;
 begin
   Result := S;
   Len := Length(S);

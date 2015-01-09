@@ -62,26 +62,26 @@ type
   TStBits = class;
 
   TBitIterateFunc =
-    function(Container : TStBits; N : LongInt; OtherData : Pointer) : Boolean;
+    function(Container : TStBits; N : Integer; OtherData : Pointer) : Boolean;
 
   TStBits = class(TStContainer)
   {.Z+}
   protected
     {property instance variables}
-    FMax : LongInt;          {highest element number}
+    FMax : Integer;          {highest element number}
 
     {private instance variables}
-    btBlockSize : LongInt;   {bytes allocated to data area}
+    btBlockSize : Integer;   {bytes allocated to data area}
     btBits : PByte;          {pointer to data area}
 
     {undocumented protected methods}
-    procedure btSetMax(Max : LongInt);
+    procedure btSetMax(Max : Integer);
     procedure btRecount;
-    function btByte(I : LongInt) : PByte;
+    function btByte(I : Integer) : PByte;
 
   {.Z-}
   public
-    constructor Create(Max : LongInt); virtual;
+    constructor Create(Max : Integer); virtual;
       {-Initialize an empty bitset with highest element number Max}
     destructor Destroy; override;
       {-Free a bitset}
@@ -107,50 +107,50 @@ type
     procedure SubBits(B : TStBits);
       {-Subtract the specified bitset from this one (create the difference)}
 
-    procedure SetBit(N : LongInt);
+    procedure SetBit(N : Integer);
       {-Set bit N}
-    procedure ClearBit(N : LongInt);
+    procedure ClearBit(N : Integer);
       {-Clear bit N}
-    procedure ToggleBit(N : LongInt);
+    procedure ToggleBit(N : Integer);
       {-Toggle bit N}
-    procedure ControlBit(N : LongInt; State : Boolean);
+    procedure ControlBit(N : Integer; State : Boolean);
       {-Set or clear bit N according to State}
-    function BitIsSet(N : LongInt) : Boolean;
+    function BitIsSet(N : Integer) : Boolean;
       {-Return True if bit N is set}
 
-    function FirstSet : LongInt;
+    function FirstSet : Integer;
       {-Return the index of the first set bit, -1 if none}
-    function LastSet : LongInt;
+    function LastSet : Integer;
       {-Return the index of the last set bit, -1 if none}
-    function FirstClear : LongInt;
+    function FirstClear : Integer;
       {-Return the index of the first clear bit, -1 if none}
-    function LastClear : LongInt;
+    function LastClear : Integer;
       {-Return the index of the last clear bit, -1 if none}
-    function NextSet(N : LongInt) : LongInt;
+    function NextSet(N : Integer) : Integer;
       {-Return the index of the next set bit after N, -1 if none}
-    function PrevSet(N : LongInt) : LongInt;
+    function PrevSet(N : Integer) : Integer;
       {-Return the index of the previous set bit after N, -1 if none}
-    function NextClear(N : LongInt) : LongInt;
+    function NextClear(N : Integer) : Integer;
       {-Return the index of the next set bit after N, -1 if none}
-    function PrevClear(N : LongInt) : LongInt;
+    function PrevClear(N : Integer) : Integer;
       {-Return the index of the previous set bit after N, -1 if none}
 
     function Iterate(Action : TBitIterateFunc;
                      UseSetBits, Up : Boolean;
-                     OtherData : Pointer) : LongInt;
+                     OtherData : Pointer) : Integer;
       {-Call Action for all the matching bits, returning the last bit visited}
     function IterateFrom(Action : TBitIterateFunc;
                          UseSetBits, Up : Boolean;
                          OtherData : Pointer;
-                         From : LongInt) : LongInt;
+                         From : Integer) : Integer;
       {-Call Action for all the matching bits starting with bit From}
 
-    property Max : LongInt
+    property Max : Integer
       {-Read or write the maximum element count in the bitset}
       read FMax
       write btSetMax;
 
-    property Items[N : LongInt] : Boolean
+    property Items[N : Integer] : Boolean
       {-Read or write Nth bit in set}
       read BitIsSet
       write ControlBit;
@@ -182,7 +182,7 @@ begin
 {$ENDIF}
 end;
 
-function MinLong(A, B : LongInt) : LongInt;
+function MinLong(A, B : Integer) : Integer;
 begin
   if A < B then
     Result := A
@@ -190,7 +190,7 @@ begin
     Result := B;
 end;
 
-function MaxLong(A, B : LongInt) : LongInt;
+function MaxLong(A, B : Integer) : Integer;
 begin
   if A > B then
     Result := A
@@ -202,7 +202,7 @@ end;
 
 procedure TStBits.AndBits(B : TStBits);
 var
-  I : LongInt;
+  I : Integer;
   P : PByte;
 begin
 {$IFDEF ThreadSafe}
@@ -227,7 +227,7 @@ begin
 {$ENDIF}
 end;
 
-function TStBits.BitIsSet(N : LongInt) : Boolean;
+function TStBits.BitIsSet(N : Integer) : Boolean;
 begin
 {$IFDEF ThreadSafe}
   EnterCS;
@@ -245,7 +245,7 @@ begin
 {$ENDIF}
 end;
 
-function TStBits.btByte(I : LongInt) : PByte;
+function TStBits.btByte(I : Integer) : PByte;
 begin
   Result := PByte(PAnsiChar(btBits)+I);
 end;
@@ -271,7 +271,7 @@ const
   3, 4, 4, 5, 4, 5, 5, 6, 4, 5, 5, 6, 5, 6, 6, 7,
   4, 5, 5, 6, 5, 6, 6, 7, 5, 6, 6, 7, 6, 7, 7, 8);
 var
-  N : LongInt;
+  N : Integer;
   P : PByte;
   B : Byte;
 begin
@@ -297,9 +297,9 @@ begin
 {$ENDIF}
 end;
 
-procedure TStBits.btSetMax(Max : LongInt);
+procedure TStBits.btSetMax(Max : Integer);
 var
-  BlockSize, OldBlockSize, OldMax : LongInt;
+  BlockSize, OldBlockSize, OldMax : Integer;
   OldBits : PByte;
 begin
 {$IFDEF ThreadSafe}
@@ -363,7 +363,7 @@ begin
 {$ENDIF}
 end;
 
-procedure TStBits.ClearBit(N : LongInt);
+procedure TStBits.ClearBit(N : Integer);
 var
   P : PByte;
   M : Byte;
@@ -389,7 +389,7 @@ begin
 {$ENDIF}
 end;
 
-procedure TStBits.ControlBit(N : LongInt; State : Boolean);
+procedure TStBits.ControlBit(N : Integer; State : Boolean);
 begin
 {$IFDEF ThreadSafe}
   EnterCS;
@@ -428,7 +428,7 @@ begin
 {$ENDIF}
 end;
 
-constructor TStBits.Create(Max : LongInt);
+constructor TStBits.Create(Max : Integer);
 begin
   {Validate size}
   if Max < 0 then
@@ -452,26 +452,26 @@ begin
   inherited Destroy;
 end;
 
-function StopImmediately(Container : TStBits; N : LongInt;
+function StopImmediately(Container : TStBits; N : Integer;
                          OtherData : Pointer) : Boolean; far;
   {-Iterator function used to stop after first found bit}
 begin
   Result := False;
 end;
 
-function TStBits.FirstClear : LongInt;
+function TStBits.FirstClear : Integer;
 begin
   Result := IterateFrom(StopImmediately, False, True, nil, 0);
 end;
 
-function TStBits.FirstSet : LongInt;
+function TStBits.FirstSet : Integer;
 begin
   Result := IterateFrom(StopImmediately, True, True, nil, 0);
 end;
 
 procedure TStBits.InvertBits;
 var
-  I : LongInt;
+  I : Integer;
   P : PByte;
 begin
 {$IFDEF ThreadSafe}
@@ -492,7 +492,7 @@ end;
 
 function TStBits.Iterate(Action : TBitIterateFunc;
                          UseSetBits, Up : Boolean;
-                         OtherData : Pointer) : LongInt;
+                         OtherData : Pointer) : Integer;
 begin
   if Up then
     Result := IterateFrom(Action, UseSetBits, True, OtherData, 0)
@@ -503,9 +503,9 @@ end;
 function TStBits.IterateFrom(Action : TBitIterateFunc;
                              UseSetBits, Up : Boolean;
                              OtherData : Pointer;
-                             From : LongInt) : LongInt;
+                             From : Integer) : Integer;
 var
-  I, N, F : LongInt;
+  I, N, F : Integer;
   O : ShortInt;
   B, TB : Byte;
 begin
@@ -600,29 +600,29 @@ begin
 {$ENDIF}
 end;
 
-function TStBits.LastClear : LongInt;
+function TStBits.LastClear : Integer;
 begin
   Result := IterateFrom(StopImmediately, False, False, nil, FMax);
 end;
 
-function TStBits.LastSet : LongInt;
+function TStBits.LastSet : Integer;
 begin
   Result := IterateFrom(StopImmediately, True, False, nil, FMax);
 end;
 
-function TStBits.NextClear(N : LongInt) : LongInt;
+function TStBits.NextClear(N : Integer) : Integer;
 begin
   Result := IterateFrom(StopImmediately, False, True, nil, N+1);
 end;
 
-function TStBits.NextSet(N : LongInt) : LongInt;
+function TStBits.NextSet(N : Integer) : Integer;
 begin
   Result := IterateFrom(StopImmediately, True, True, nil, N+1);
 end;
 
 procedure TStBits.OrBits(B : TStBits);
 var
-  I : LongInt;
+  I : Integer;
   P : PByte;
 begin
 {$IFDEF ThreadSafe}
@@ -647,17 +647,17 @@ begin
 {$ENDIF}
 end;
 
-function TStBits.PrevClear(N : LongInt) : LongInt;
+function TStBits.PrevClear(N : Integer) : Integer;
 begin
   Result := IterateFrom(StopImmediately, False, False, nil, N-1);
 end;
 
-function TStBits.PrevSet(N : LongInt) : LongInt;
+function TStBits.PrevSet(N : Integer) : Integer;
 begin
   Result := IterateFrom(StopImmediately, True, False, nil, N-1);
 end;
 
-procedure TStBits.SetBit(N : LongInt);
+procedure TStBits.SetBit(N : Integer);
 var
   P : PByte;
   M : Byte;
@@ -700,7 +700,7 @@ end;
 
 procedure TStBits.SubBits(B : TStBits);
 var
-  I : LongInt;
+  I : Integer;
   P : PByte;
 begin
 {$IFDEF ThreadSafe}
@@ -725,7 +725,7 @@ begin
 {$ENDIF}
 end;
 
-procedure TStBits.ToggleBit(N : LongInt);
+procedure TStBits.ToggleBit(N : Integer);
 begin
 {$IFDEF ThreadSafe}
   EnterCS;

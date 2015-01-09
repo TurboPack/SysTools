@@ -48,12 +48,12 @@ type
   protected {private}
     {property variables}
     FContainer        : TStLArray; {instance of the container}
-    FElementCount     : LongInt;
+    FElementCount     : Integer;
     FElementSize      : Cardinal;
 
     {property methods}
     function GetStoreable : Boolean;
-    procedure SetElementCount(Value : LongInt);
+    procedure SetElementCount(Value : Integer);
     procedure SetElementSize(Value : Cardinal);
     procedure SetStoreable(Value : Boolean);
 
@@ -89,13 +89,13 @@ type
       read FContainer;
 
   published
-    property ElementCount : LongInt
+    property ElementCount : Integer
       read FElementCount
       write SetElementCount default 10;
 
     property ElementSize : Cardinal
       read FElementSize
-      write SetElementSize default SizeOf(LongInt);
+      write SetElementSize default SizeOf(Integer);
 
     property ElementsStorable : Boolean
       read GetStoreable
@@ -118,7 +118,7 @@ begin
 
   {defaults}
   FElementCount := 10;
-  FElementSize := SizeOf(LongInt);
+  FElementSize := SizeOf(Integer);
 
   if Classes.GetClass(TStLArray.ClassName) = nil then
     RegisterClass(TStLArray);
@@ -178,7 +178,7 @@ begin
   FContainer.OnStoreData := HoldOnStoreData;
 end;
 
-procedure TStNVLArray.SetElementCount(Value : LongInt);
+procedure TStNVLArray.SetElementCount(Value : Integer);
 begin
   FElementCount := Value;
   RecreateContainer;

@@ -1672,7 +1672,7 @@ var
   G, H,
   I, K,
   L, M,
-  N, P : LongInt;
+  N, P : Integer;
 begin
   Y := CheckYear(Y, Epoch);
 

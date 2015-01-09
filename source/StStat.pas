@@ -58,7 +58,7 @@ function AveDev16(const Data; NData : Integer) : Double;
   }
 
 {CONFIDENCE}
-function Confidence(Alpha, StandardDev : Double; Size : LongInt) : Double;
+function Confidence(Alpha, StandardDev : Double; Size : Integer) : Double;
   {-Returns the confidence interval for a population mean.
     The confidence interval is a range on either side of a sample mean.
       Alpha is the significance level used to compute the confidence level.
@@ -96,7 +96,7 @@ function DevSq16(const Data; NData : Integer) : Double;
 
 {FREQUENCY}
 procedure Frequency(const Data : array of Double; const Bins : array of Double;
-  var Counts : array of LongInt);
+  var Counts : array of Integer);
 procedure Frequency16(const Data; NData : Integer; const Bins; NBins : Integer;
   var Counts);
   {-Calculates how often values occur within an array of data,
@@ -567,7 +567,7 @@ function SmallestSort(const Data: array of double; K : Integer) : Double;
 
 implementation
 
-procedure RaiseStatError(Code : LongInt);
+procedure RaiseStatError(Code : Integer);
   {-Generate a statistics exception}
 var
   E : EStStatError;
@@ -631,9 +631,9 @@ function CopyAndSort(const Data; NData : Integer;
   var SD : PDoubleArray) : Cardinal;
   {-Allocates heap space for an array copy, moves data, sorts, and returns size}
 var
-  Size : LongInt;
+  Size : Integer;
 begin
-  Size := LongInt(NData)*sizeof(Double);
+  Size := Integer(NData)*sizeof(Double);
   {if (Size > MaxBlockSize) then}
   {  RaiseStatError(stscStatBadCount);}
   Result := Size;
@@ -681,7 +681,7 @@ begin
   Result := s/NData;
 end;
 
-function Confidence(Alpha, StandardDev : Double; Size : LongInt) : Double;
+function Confidence(Alpha, StandardDev : Double; Size : Integer) : Double;
 begin
   if (StandardDev <= 0) or (Size < 1) then
     RaiseStatError(stscStatBadParam);
@@ -784,7 +784,7 @@ begin
 end;
 
 procedure Frequency(const Data: array of Double; const Bins: array of Double;
-  var Counts: array of LongInt);
+  var Counts: array of Integer);
 begin
   if (High(Counts) <= High(Bins)) then
     RaiseStatError(stscStatBadCount);
@@ -888,7 +888,7 @@ end;
 function Largest16(const Data; NData : Integer; K : Integer) : Double;
 var
   b, t, i, j : integer;
-  Size : LongInt;
+  Size : Integer;
   temp, pval : Double;
   SD : PDoubleArray;
 begin
@@ -897,7 +897,7 @@ begin
   if (K <= 0) or (K > NData) then
     RaiseStatError(stscStatBadParam);
 
-  Size := LongInt(NData)*sizeof(Double);
+  Size := Integer(NData)*sizeof(Double);
   {if (Size > MaxBlockSize) then}
   {  RaiseStatError(stscStatBadCount);}
   getmem(SD, Size); {raises exception if insufficient memory}
@@ -1247,7 +1247,7 @@ end;
 function Smallest16(const Data; NData : Integer; K : Integer) : Double;
 var
   b, t, i, j : integer;
-  Size : LongInt;
+  Size : Integer;
   temp, pval : Double;
   SD : PDoubleArray;
 begin
@@ -1256,7 +1256,7 @@ begin
   if (K <= 0) or (K > NData) then
     RaiseStatError(stscStatBadParam);
 
-  Size := LongInt(NData)*sizeof(Double);
+  Size := Integer(NData)*sizeof(Double);
   {if (Size > MaxBlockSize) then}
   {  RaiseStatError(stscStatBadCount);}
   getmem(SD, Size); {raises exception if insufficient memory}
@@ -1440,14 +1440,14 @@ procedure LogEst16(const KnownY; const KnownX; NData : Integer;
   var LF : TStLinEst; ErrorStats : Boolean);
 var
   i : Integer;
-  Size : LongInt;
+  Size : Integer;
   lny : PDoubleArray;
 begin
   if (NData <= 2) then
     RaiseStatError(stscStatBadCount);
 
   {allocate array for the log-transformed data}
-  Size := LongInt(NData)*sizeof(Double);
+  Size := Integer(NData)*sizeof(Double);
   {f (Size > MaxBlockSize) then}
   { RaiseStatError(stscStatBadCount);}
   getmem(lny, Size);

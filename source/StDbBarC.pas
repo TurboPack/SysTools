@@ -37,8 +37,7 @@ interface
 
 uses
   Windows, Classes, ClipBrd, Controls, Graphics, Messages, SysUtils,
-  Db, DbCtrls, DbTables,
-  StConst, StBarc;
+  Db, DbCtrls, StConst, StBarc;
 
 type
   TStDbBarCode = class(TStBarCode)

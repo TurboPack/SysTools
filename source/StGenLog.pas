@@ -168,7 +168,7 @@ implementation
 { Gives text representation of a block of data }
 function HexifyBlock(var Buffer; BufferSize : Integer) : AnsiString;
 type
-  TCastCharArray = array[0..Pred(High(LongInt))] of AnsiChar;
+  TCastCharArray = array[0..Pred(High(Integer))] of AnsiChar;
 const
   { Starting string to work with - this is directly written to by index }
   { below, so any positional changes here will also have to be made below. }

@@ -168,7 +168,7 @@ function RoundPlacesBcd(const B : TBcd; Places : Cardinal) : TBcd;
   {-Return B rounded to specified decimal places of accuracy}
 function ValBcd(const S : string) : TBcd;
   {-Convert a string to a BCD}
-function LongBcd(L : LongInt) : TBcd;
+function LongBcd(L : Integer) : TBcd;
   {-Convert a long integer to a BCD}
 function ExtBcd(E : Extended) : TBcd;
   {-Convert an extended real to a BCD}
@@ -176,7 +176,7 @@ function ExpBcd(const B : TBcd) : TBcd;
   {-Return e**B}
 function LnBcd(const B : TBcd) : TBcd;
   {-Return natural log of B}
-function IntPowBcd(const B : TBcd; E : LongInt) : TBcd;
+function IntPowBcd(const B : TBcd; E : Integer) : TBcd;
   {-Return B**E, where E is an integer}
 function PowBcd(const B, E : TBcd) : TBcd;
   {-Return B**E}
@@ -191,12 +191,12 @@ function EqDigitsBcd(const B1, B2 : TBcd; Digits : Cardinal) : Boolean;
 function EqPlacesBcd(const B1, B2 : TBcd; Digits : Cardinal) : Boolean;
   {-Return True if B1 and B2 are equal after rounding to specified decimal places}
 function IsIntBcd(const B : TBcd) : Boolean;
-  {-Return True if B has no fractional part (may still not fit into a LongInt)}
-function TruncBcd(const B : TBcd) : LongInt;
+  {-Return True if B has no fractional part (may still not fit into a Integer)}
+function TruncBcd(const B : TBcd) : Integer;
   {-Return B after discarding its fractional part}
 function BcdExt(const B : TBcd) : Extended;
   {-Convert B to an extended real}
-function RoundBcd(const B : TBcd) : LongInt;
+function RoundBcd(const B : TBcd) : Integer;
   {-Round B rounded to the nearest integer}
 function StrBcd(const B : TBcd; Width, Places : Cardinal) : string;
   {-Convert BCD to a string in floating point format}
@@ -228,11 +228,11 @@ procedure IntBcd_C(const B : TBcd; var Res : TBcd);
 procedure RoundDigitsBcd_C(const B : TBcd; Digits : Cardinal; var Res : TBcd);
 procedure RoundPlacesBcd_C(const B : TBcd; Places : Cardinal; var Res : TBcd);
 procedure ValBcd_C(const S : string; var Res : TBcd);
-procedure LongBcd_C(L : LongInt; var Res : TBcd);
+procedure LongBcd_C(L : Integer; var Res : TBcd);
 procedure ExtBcd_C(E : Extended; var Res : TBcd);
 procedure ExpBcd_C(const B : TBcd; var Res : TBcd);
 procedure LnBcd_C(const B : TBcd; var Res : TBcd);
-procedure IntPowBcd_C(const B : TBcd; E : LongInt; var Res : TBcd);
+procedure IntPowBcd_C(const B : TBcd; E : Integer; var Res : TBcd);
 procedure PowBcd_C(const B, E : TBcd; var Res : TBcd);
 procedure SqrtBcd_C(const B : TBcd; var Res : TBcd);
 {$ENDIF}
@@ -274,18 +274,18 @@ function IntBcd(const B : TBcd) : TBcd; forward;
 function RoundDigitsBcd(const B : TBcd; Digits : Cardinal) : TBcd; forward;
 function RoundPlacesBcd(const B : TBcd; Places : Cardinal) : TBcd; forward;
 function ValBcd(const S : string) : TBcd; forward;
-function LongBcd(L : LongInt) : TBcd; forward;
+function LongBcd(L : Integer) : TBcd; forward;
 function ExtBcd(E : Extended) : TBcd; forward;
 function ExpBcd(const B : TBcd) : TBcd; forward;
 function LnBcd(const B : TBcd) : TBcd; forward;
-function IntPowBcd(const B : TBcd; E : LongInt) : TBcd; forward;
+function IntPowBcd(const B : TBcd; E : Integer) : TBcd; forward;
 function PowBcd(const B, E : TBcd) : TBcd; forward;
 function SqrtBcd(const B : TBcd) : TBcd; forward;
 {$ENDIF}
 
 function FastValPrep(S : String) : String;
 var
-  I : LongInt;
+  I : Integer;
 begin
   I := Pos('.', S);
   if I > 0 then
@@ -293,7 +293,7 @@ begin
   Result := S;
 end;
 
-procedure RaiseBcdError(Code : LongInt);
+procedure RaiseBcdError(Code : Integer);
 var
   E : EStBCDError;
 begin
@@ -1150,7 +1150,7 @@ end;
 
 function ExpBcd(const B : TBcd) : TBcd;
 var
-  MI, Exponent : LongInt;
+  MI, Exponent : Integer;
   B1, B2, B3, B4, B5 : TBcd;
 begin
   if CmpBcd(B, FastVal('147.36')) > 0 then
@@ -1736,9 +1736,9 @@ begin
   end;
 end;
 
-function IntPowBcd(const B : TBcd; E : LongInt) : TBcd;
+function IntPowBcd(const B : TBcd; E : Integer) : TBcd;
 var
-  I : LongInt;
+  I : Integer;
   B1 : TBcd;
 begin
   B1 := FastVal('1.0');
@@ -1845,7 +1845,7 @@ begin
     Result := LnBcd20(B);
 end;
 
-function LongBcd(L : LongInt) : TBcd;
+function LongBcd(L : Integer) : TBcd;
 var
   S : string;
   sBuffer: ShortString;
@@ -2002,7 +2002,7 @@ begin
   end;
 end;
 
-function RoundBcd(const B : TBcd) : LongInt;
+function RoundBcd(const B : TBcd) : Integer;
 var
   Exponent, I : Integer;
   Sign : Byte;
@@ -2098,14 +2098,14 @@ begin
   else begin
     ActPlaces := Integer(MantissaDigits)-(B[0] and NoSignBit)+ExpBias;
 
-    if LongInt(Places) >= ActPlaces then
+    if Integer(Places) >= ActPlaces then
       {no actual rounding}
       Result := B
 
     else begin
       Unpack(B, UB, Exponent, Sign);
 
-      RoundMantissa(UB, ActPlaces-LongInt(Places));
+      RoundMantissa(UB, ActPlaces-Integer(Places));
       if UB[SigDigits] <> 0 then begin
         ShiftMantissaDown(UB, 1);
         inc(Exponent);
@@ -2199,7 +2199,7 @@ begin
 
   {see how many digits from mantissa to use}
   if Exponent < ExpBias+1 then begin
-    Digits := LongInt(Places)-(ExpBias-Exponent);
+    Digits := Integer(Places)-(ExpBias-Exponent);
     if Digits < 0 then
       Digits := 0;
   end else
@@ -2236,16 +2236,16 @@ begin
 {$ENDIF}
   SetLength(Result, Width);
 
-  if LongInt(Width) < ActWidth then begin
+  if Integer(Width) < ActWidth then begin
     {result won't fit in specified width}
     Result := StringOfChar(OverflowChar, Length(Result)); //FillChar(Result[1], Length(Result) * SizeOf(Char), OverflowChar);
     Exit;
   end;
 
-  if LongInt(Width) > ActWidth then begin
+  if Integer(Width) > ActWidth then begin
     {store leading spaces}
-     StrPCopy(PChar(Result), StringOfChar(' ', LongInt(Width)-ActWidth));    //FillChar(Result[1], LongInt(Width)-ActWidth, ' ');
-    O := LongInt(Width)-ActWidth+1;
+     StrPCopy(PChar(Result), StringOfChar(' ', Integer(Width)-ActWidth));    //FillChar(Result[1], Integer(Width)-ActWidth, ' ');
+    O := Integer(Width)-ActWidth+1;
   end else
     O := 1;
 
@@ -2258,7 +2258,7 @@ begin
     if Exponent <> 0 then begin
       AddChar({$IFDEF DELPHIXE2}FormatSettings.{$ENDIF}DecimalSeparator);
       for I := 1 to ExpBias-Exponent do
-        if O <= LongInt(Width) then
+        if O <= Integer(Width) then
           AddChar('0');
     end;
   end;
@@ -2274,7 +2274,7 @@ begin
     I := SigDigits;
     if UB[I] = 0 then
       dec(I);
-    while (Digits > 0) and (O <= LongInt(Width)) do begin
+    while (Digits > 0) and (O <= Integer(Width)) do begin
       if O = DecimalPos then
         AddChar({$IFDEF DELPHIXE2}FormatSettings.{$ENDIF}DecimalSeparator);
       AddChar(Char(UB[I]+Byte('0')));
@@ -2284,10 +2284,10 @@ begin
   end;
 
   {add trailing zeros, if any}
-  while O <= LongInt(Width) do begin
+  while O <= Integer(Width) do begin
     if O = DecimalPos then
       AddChar({$IFDEF DELPHIXE2}FormatSettings.{$ENDIF}DecimalSeparator);
-    if O <= LongInt(Width) then
+    if O <= Integer(Width) then
       AddChar('0');
   end;
 end;
@@ -2354,7 +2354,7 @@ begin
   AddChar(Char(UB[I]+Byte('0')));
   dec(I);
   AddChar({$IFDEF DELPHIXE2}FormatSettings.{$ENDIF}DecimalSeparator);
-  while O < LongInt(Width-3) do begin
+  while O < Integer(Width-3) do begin
     AddChar(Char(UB[I]+Byte('0')));
     dec(I);
   end;
@@ -2377,7 +2377,7 @@ begin
   Result := AddBcd(B1, NegBcd(B2));
 end;
 
-function TruncBcd(const B : TBcd) : LongInt;
+function TruncBcd(const B : TBcd) : Integer;
 var
   Exponent, I : Integer;
   Sign : Byte;
@@ -2859,7 +2859,7 @@ begin
   Res := ValBcd(S);
 end;
 
-procedure LongBcd_C(L : LongInt; var Res : TBcd);
+procedure LongBcd_C(L : Integer; var Res : TBcd);
 begin
   Res := LongBcd(L);
 end;
@@ -2879,7 +2879,7 @@ begin
   Res := LnBcd(B);
 end;
 
-procedure IntPowBcd_C(const B : TBcd; E : LongInt; var Res : TBcd);
+procedure IntPowBcd_C(const B : TBcd; E : Integer; var Res : TBcd);
 begin
   Res := IntPowBcd(B, E);
 end;

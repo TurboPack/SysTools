@@ -51,17 +51,17 @@ const
   CrcBufSize = 2048;
   CrcFileMode = fmOpenRead or fmShareDenyWrite;
 
-function Adler32Prim(var Data; DataSize : Cardinal; CurCrc : LongInt) : LongInt;
-function Adler32OfStream(Stream : TStream; CurCrc : LongInt) : LongInt;
-function Adler32OfFile(FileName : String) : LongInt;
+function Adler32Prim(var Data; DataSize : Cardinal; CurCrc : Integer) : Integer;
+function Adler32OfStream(Stream : TStream; CurCrc : Integer) : Integer;
+function Adler32OfFile(FileName : String) : Integer;
 
 function Crc16Prim(var Data; DataSize, CurCrc : Cardinal) : Cardinal;
 function Crc16OfStream(Stream : TStream; CurCrc : Cardinal) : Cardinal;
 function Crc16OfFile(FileName : String) : Cardinal;
 
-function Crc32Prim(var Data; DataSize : Cardinal; CurCrc : LongInt) : LongInt;
-function Crc32OfStream(Stream : TStream; CurCrc : LongInt) : LongInt;
-function Crc32OfFile(FileName : String) : LongInt;
+function Crc32Prim(var Data; DataSize : Cardinal; CurCrc : Integer) : Integer;
+function Crc32OfStream(Stream : TStream; CurCrc : Integer) : Integer;
+function Crc32OfFile(FileName : String) : Integer;
 
 function InternetSumPrim(var Data; DataSize, CurCrc : Cardinal) : Cardinal;
 function InternetSumOfStream(Stream : TStream; CurCrc : Cardinal) : Cardinal;
@@ -157,12 +157,12 @@ uses
 {$ENDIF}
 
 type
-  CRCByteArray = array[0..Pred(High(LongInt))] of Byte;
+  CRCByteArray = array[0..Pred(High(Integer))] of Byte;
 
-function Adler32Prim(var Data; DataSize : Cardinal; CurCrc : LongInt) : LongInt;
+function Adler32Prim(var Data; DataSize : Cardinal; CurCrc : Integer) : Integer;
   { Calculates the Adler 32-bit CRC of a block }
 var
-  S1, S2, I : LongInt;
+  S1, S2, I : Integer;
 begin
   if DataSize > 0 then begin
     S1 := CurCrc and $FFFF;
@@ -178,11 +178,11 @@ begin
     Result := CurCrc;
 end;
 
-function Adler32OfStream(Stream : TStream; CurCrc : LongInt) : LongInt;
+function Adler32OfStream(Stream : TStream; CurCrc : Integer) : Integer;
   { Calculates the Adler 32-bit CRC of a stream }
 var
   BufArray : array[0..(CrcBufSize-1)] of Byte;
-  Res      : LongInt;
+  Res      : Integer;
 begin
   {Initialize Crc}
   Result := CurCrc;
@@ -192,7 +192,7 @@ begin
   until (Res <> CrcBufSize);
 end;
 
-function Adler32OfFile(FileName : String) : LongInt;
+function Adler32OfFile(FileName : String) : Integer;
   { Calculates the Adler 32-bit CRC of a file }
 var
   FileSt : TFileStream;
@@ -220,7 +220,7 @@ function Crc16OfStream(Stream : TStream; CurCrc : Cardinal) : Cardinal;
   { Calculates the 16-bit CRC of a stream }
 var
   BufArray : array[0..(CrcBufSize-1)] of Byte;
-  Res      : LongInt;
+  Res      : Integer;
 begin
   {Initialize Crc}
   Result := CurCrc;
@@ -243,7 +243,7 @@ begin
   end;
 end;
 
-function Crc32Prim(var Data; DataSize : Cardinal; CurCrc : LongInt) : LongInt;
+function Crc32Prim(var Data; DataSize : Cardinal; CurCrc : Integer) : Integer;
   { Calculates the 32-bit CRC of a block }
 var
   I : Integer;
@@ -254,11 +254,11 @@ begin
       DWord((Result shr 8) and $00FFFFFF);
 end;
 
-function Crc32OfStream(Stream : TStream; CurCrc : LongInt) : LongInt;
+function Crc32OfStream(Stream : TStream; CurCrc : Integer) : Integer;
   { Calculates the 32-bit CRC of a stream }
 var
   BufArray : array[0..(CrcBufSize-1)] of Byte;
-  Res      : LongInt;
+  Res      : Integer;
 begin
   {Initialize Crc}
   Result := CurCrc;
@@ -268,14 +268,14 @@ begin
   until (Res <> CrcBufSize);
 end;
 
-function Crc32OfFile(FileName : String) : LongInt;
+function Crc32OfFile(FileName : String) : Integer;
   { Calculates the 32-bit CRC of a file }
 var
   FileSt : TFileStream;
 begin
   FileSt := TFileStream.Create(FileName, CrcFileMode);
   try
-    Result := not Crc32OfStream(FileSt, LongInt($FFFFFFFF));
+    Result := not Crc32OfStream(FileSt, Integer($FFFFFFFF));
   finally
     FileSt.Free;
   end;
@@ -301,7 +301,7 @@ function InternetSumOfStream(Stream : TStream; CurCrc : Cardinal) : Cardinal;
   { Calculates the Internet Checksum of a stream }
 var
   BufArray : array[0..(CrcBufSize-1)] of Byte;
-  Res      : LongInt;
+  Res      : Integer;
 begin
   {Initialize Crc}
   Result := CurCrc;
@@ -348,7 +348,7 @@ function Kermit16OfStream(Stream : TStream; CurCrc : Cardinal) : Cardinal;
   { Calculates the Kermit 16-bit CRC of a stream }
 var
   BufArray : array[0..(CrcBufSize-1)] of Byte;
-  Res      : LongInt;
+  Res      : Integer;
 begin
   {Initialize Crc}
   Result := CurCrc;

@@ -51,7 +51,7 @@ type
     rmBankers,       {..bankers (round to even digit if half way)}
     rmUp);           {..force round up (always round from zero)}
 
-  TStInt128 = array [0..3] of longint; // must be longint, not DWORD
+  TStInt128 = array [0..3] of Integer; // must be Integer, not DWORD
 
   TStDecimal = class
     private
@@ -128,8 +128,8 @@ type
 const
   MaxDecPl = 16;
 
-  Int128One_0 = longint($6FC10000);
-  Int128One_1 = longint($002386F2);
+  Int128One_0 = Integer($6FC10000);
+  Int128One_1 = Integer($002386F2);
 
   PowerOf10 : array [0..MaxDecPl div 2] of integer =
               (1, 10, 100, 1000, 10000, 100000, 1000000, 10000000,
@@ -236,8 +236,8 @@ asm
   pop ebx            // restore ebx
 end;
 {--------}
-function Int32MultPrim(X, Y : longint;
-                   var P : longint; Carry : longint) : longint;
+function Int32MultPrim(X, Y : Integer;
+                   var P : Integer; Carry : Integer) : Integer;
 asm
   {Note: calculates X * Y + P + Carry
          returns answer in P, with overflow as result value}
@@ -1150,7 +1150,7 @@ end;
 {--------}
 function TStDecimal.IsNegative : boolean;
 begin
-  {if the most significant longint is negative, so is the value}
+  {if the most significant Integer is negative, so is the value}
   Result := FInt[3] < 0;
 end;
 {--------}
@@ -1162,7 +1162,7 @@ end;
 {--------}
 function TStDecimal.IsPositive : boolean;
 begin
-  {if the most significant longint is positive, so is the value; if it
+  {if the most significant Integer is positive, so is the value; if it
    is zero, one of the other longints must be non-zero for the value
    to be positive}
   Result := (FInt[3] > 0) or
@@ -1187,7 +1187,7 @@ end;
 procedure TStDecimal.RaiseToPower(N : integer);
 var
   Accum : TStInt128;
-  Mask  : longint;
+  Mask  : Integer;
   IsNeg : boolean;
 begin
   {take care of some easy cases}
@@ -1212,7 +1212,7 @@ begin
   Accum[3] := 0;
 
   {set the bit mask}
-  Mask := longint($80000000);
+  Mask := Integer($80000000);
 
   {find the first set bit in the exponent}
   while ((N and Mask) = 0) do

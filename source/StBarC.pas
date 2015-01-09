@@ -2069,7 +2069,7 @@ end;
 procedure TStBarCode.PaintToCanvas(ACanvas : TCanvas; ARect : TRect);
 var
   Margin  : Integer;
-  SavedDC : LongInt;
+  SavedDC : Integer;
   R       : TRect;
 begin
   Canvas.Handle := ACanvas.Handle;
@@ -2100,7 +2100,7 @@ var
   PixelsPerInchX : Integer;
   PixelsPerInchY : Integer;
   OldPPI         : Integer;
-  SavedDC        : LongInt;
+  SavedDC        : Integer;
   R              : TRect;
   SmallestWidth  : Double;
 begin
@@ -2154,7 +2154,7 @@ end;
 procedure TStBarCode.PaintToDC(DC : hDC; ARect : TRect);
 var
   Margin  : Integer;
-  SavedDC : LongInt;
+  SavedDC : Integer;
   R       : TRect;
 begin
   Canvas.Handle := DC;

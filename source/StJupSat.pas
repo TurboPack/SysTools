@@ -485,7 +485,7 @@ end;
 
 function JupSatsHi(AJD : Double; Shadows : Boolean) : TStJupSats;
 var
-  I      : longint;
+  I      : Integer;
   SunPos : SunCoordsRec;
   STUT   : TStDateTimeRec;
   JupPos : TStEclipticalCord;

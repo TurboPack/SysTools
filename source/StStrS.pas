@@ -50,7 +50,7 @@ function HexBS(B : Byte) : ShortString;
 function HexWS(W : Word) : ShortString;
   {-Return the hex string for a word.}
 
-function HexLS(L : LongInt) : ShortString;
+function HexLS(L : Integer) : ShortString;
   {-Return the hex string for a long integer.}
 
 function HexPtrS(P : Pointer) : ShortString;
@@ -62,7 +62,7 @@ function BinaryBS(B : Byte) : ShortString;
 function BinaryWS(W : Word) : ShortString;
   {-Return the binary string for a word.}
 
-function BinaryLS(L : LongInt) : ShortString;
+function BinaryLS(L : Integer) : ShortString;
   {-Return the binary string for a long integer.}
 
 function OctalBS(B : Byte) : ShortString;
@@ -71,7 +71,7 @@ function OctalBS(B : Byte) : ShortString;
 function OctalWS(W : Word) : ShortString;
   {-Return an octal string for a word.}
 
-function OctalLS(L : LongInt) : ShortString;
+function OctalLS(L : Integer) : ShortString;
   {-Return an octal string for a long integer.}
 
 function Str2Int16S(const S : string; var I : SmallInt) : Boolean;
@@ -80,7 +80,7 @@ function Str2Int16S(const S : string; var I : SmallInt) : Boolean;
 function Str2WordS(const S : string; var I : Word) : Boolean;
   {-Convert a string to a word.}
 
-function Str2LongS(const S : string; var I : LongInt) : Boolean;
+function Str2LongS(const S : string; var I : Integer) : Boolean;
   {-Convert a string to a long integer.}
 
 function Str2RealS(const S : string; var R : Double) : Boolean;
@@ -88,7 +88,7 @@ function Str2RealS(const S : string; var R : Double) : Boolean;
 function Str2ExtS(const S : string; var R : Extended) : Boolean;
   {-Convert a string to an extended.}
 
-function Long2StrS(L : LongInt) : ShortString;
+function Long2StrS(L : Integer) : ShortString;
   {-Convert an integer type to a string.}
 
 function Real2StrS(R : Double; Width : Byte; Places : ShortInt) : ShortString;
@@ -195,7 +195,7 @@ function CompUCStringS(const S1, S2 : ShortString) : Integer;
 function SoundexS(const S : ShortString) : ShortString;
   {-Return 4 character soundex of an input string.}
 
-function MakeLetterSetS(const S : ShortString) : Longint;
+function MakeLetterSetS(const S : ShortString) : Integer;
   {-Return a bit-mapped long storing the individual letters contained in S.}
 
 procedure BMMakeTableS(const MatchString : ShortString; var BT : BTable);
@@ -242,17 +242,17 @@ function HasExtensionS(const Name : ShortString; var DotPos : Cardinal) : Boolea
 
   {------------------ Formatting routines --------------------}
 
-function CommaizeS(L : LongInt) : ShortString;
+function CommaizeS(L : Integer) : ShortString;
   {-Convert a long integer to a string with commas.}
 
-function CommaizeChS(L : Longint; Ch : AnsiChar) : ShortString;
+function CommaizeChS(L : Integer; Ch : AnsiChar) : ShortString;
   {-Convert a long integer to a string with Ch in comma positions.}
 
 function FloatFormS(const Mask : ShortString ; R : TstFloat ; const LtCurr,
                     RtCurr : ShortString ; Sep, DecPt : AnsiChar) : ShortString;
   {-Return a formatted string with digits from R merged into mask.}
 
-function LongIntFormS(const Mask : ShortString ; L : LongInt ; const LtCurr,
+function LongIntFormS(const Mask : ShortString ; L : Integer ; const LtCurr,
                      RtCurr : ShortString ; Sep : AnsiChar) : ShortString;
   {-Return a formatted string with digits from L merged into mask.}
 
@@ -424,7 +424,7 @@ begin
   Result[4] := StHexDigits[lo(W) and $F];
 end;
 
-function HexLS(L : LongInt) : ShortString;
+function HexLS(L : Integer) : ShortString;
   {-Return the hex string for a long integer.}
 begin
   Result := HexWS(HiWord(DWORD(L))) + HexWS(LoWord(DWORD(L)));         {!!.02}
@@ -433,7 +433,7 @@ end;
 function HexPtrS(P : Pointer) : ShortString;
   {-Return the hex string for a pointer.}
 begin
-  Result := HexLS(LongInt(P));                                         {!!.02}
+  Result := HexLS(Integer(P));                                         {!!.02}
 end;
 
 function BinaryBS(B : Byte) : ShortString;
@@ -462,16 +462,16 @@ begin
   end;
 end;
 
-function BinaryLS(L : LongInt) : ShortString;
+function BinaryLS(L : Integer) : ShortString;
   {-Return the binary string for a long integer.}
 var
-  I : Longint;
+  I : Integer;
   N : Byte;
 begin
   N := 1;
   Result[0] := #32;
   for I := 31 downto 0 do begin
-    Result[N] := StHexDigits[Ord(L and LongInt(1 shl I) <> 0)]; {0 or 1}
+    Result[N] := StHexDigits[Ord(L and Integer(1 shl I) <> 0)]; {0 or 1}
     Inc(N);
   end;
 end;
@@ -500,7 +500,7 @@ begin
   end;
 end;
 
-function OctalLS(L : LongInt) : ShortString;
+function OctalLS(L : Integer) : ShortString;
   {-Return an octal string for a long integer.}
 var
   I : Cardinal;
@@ -548,7 +548,7 @@ begin
   end;
 end;
 
-function Str2LongS(const S : string; var I : LongInt) : Boolean;
+function Str2LongS(const S : string; var I : Integer) : Boolean;
   {-Convert a string to a long integer.}
 
 var
@@ -598,7 +598,7 @@ begin
     Result := True;
 end;
 
-function Long2StrS(L : LongInt) : ShortString;
+function Long2StrS(L : Integer) : ShortString;
   {-Convert an integer type to a string.}
 begin
   Str(L, Result);
@@ -1548,7 +1548,7 @@ asm
   pop   edi
 end;
 
-function MakeLetterSetS(const S : ShortString) : Longint;
+function MakeLetterSetS(const S : ShortString) : Integer;
   {-Return a bit-mapped long storing the individual letters contained in S.}
 register;
 asm
@@ -1886,7 +1886,7 @@ end;
 function JustFilenameS(const PathName : ShortString) : ShortString;
   {-Return just the filename and extension of a pathname.}
 var
-  I : Longint;
+  I : Integer;
 begin
   Result := '';
   if PathName = '' then
@@ -1922,7 +1922,7 @@ end;
 function JustPathnameS(const PathName : ShortString) : ShortString;
   {-Return just the drive and directory portion of a pathname.}
 var
-  I : Longint;
+  I : Integer;
 begin
   I := Succ(Length(PathName));
   repeat
@@ -1978,7 +1978,7 @@ end;
 function CleanPathNameS(const PathName : ShortString) : ShortString;
   {-Return a pathname cleaned up as DOS does it.}
 var
-  I : Longint;
+  I : Integer;
   S : ShortString;
 begin
   Result[0] := #0;
@@ -2028,7 +2028,7 @@ end;
   {------------------ Formatting routines --------------------}
 
 
-function CommaizeChS(L : Longint; Ch : AnsiChar) : ShortString;
+function CommaizeChS(L : Integer; Ch : AnsiChar) : ShortString;
   {-Convert a long integer to a string with Ch in comma positions}
 var
   NumCommas, I, Len : Cardinal;
@@ -2048,7 +2048,7 @@ begin
     System.Insert('-', Result, 1);
 end;
 
-function CommaizeS(L : LongInt) : ShortString;
+function CommaizeS(L : Integer) : ShortString;
   {-Convert a long integer to a string with commas}
 begin
   Result := CommaizeChS(L, ',');
@@ -2309,7 +2309,7 @@ begin
   Result := FormPrimS(Mask, R, LtCurr, RtCurr, Sep, DecPt, False);
 end;
 
-function LongIntFormS(const Mask : ShortString ; L : LongInt ; const LtCurr,
+function LongIntFormS(const Mask : ShortString ; L : Integer ; const LtCurr,
                       RtCurr : ShortString ; Sep : AnsiChar) : ShortString;
   {-Return a formatted string with digits from L merged into mask.}
 begin

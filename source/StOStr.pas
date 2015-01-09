@@ -80,7 +80,7 @@ type
   protected
     procedure SetLineTerm(const Value: TStLineTerminator);
     procedure SetLineTermChar(const Value: AnsiChar);
-    procedure AddIntToList(Num : LongInt);
+    procedure AddIntToList(Num : Integer);
     procedure AllocTemp(Size : Cardinal);
     procedure BMMakeTable(S : PAnsiChar);
     procedure CheckAlloc(Size : Cardinal);
@@ -154,7 +154,7 @@ type
     procedure ItemsToString;
     procedure LeftPad(Size : Cardinal);
     procedure LeftPadCh(const C : AnsiChar; Size : Cardinal);
-    function  MakeLetterSet : LongInt;
+    function  MakeLetterSet : Integer;
     procedure MoveCursor(Delta : Integer);
     procedure Pack;
     procedure Pad(Size : Cardinal);
@@ -333,7 +333,7 @@ procedure TStString.AppendString(S : AnsiString);
 var
   Temp : PAnsiChar;
 begin
-  CheckAlloc(System.Length(S) + LongInt(GetLength));                   
+  CheckAlloc(System.Length(S) + Integer(GetLength));
   Temp := AnsiStrings.StrEnd(FString);
   AnsiStrings.StrPCopy(Temp, S);
 end;
@@ -453,7 +453,7 @@ begin
   ResetCursor;
 end;
 
-procedure TStString.AddIntToList(Num : LongInt);
+procedure TStString.AddIntToList(Num : Integer);
 {- Adds integer value to Items -- as both numeric value and numeric string. }
 begin
   FItems.AddObject(IntToStr(Num), TObject(Num));
@@ -654,20 +654,20 @@ end;
 procedure TStString.FixCursor(Pos, Size : Cardinal; Delete : Boolean);
 {- Fixes cursor position following an insertion or deletion. }
 begin
-  if (FCursor - FString) < LongInt(Pos) then                           
+  if (FCursor - FString) < Integer(Pos) then
     Exit;
   if Delete then begin
     FCursor := FCursor - Size;
-    if (FCursor - FString) < LongInt(Pos) then                         
+    if (FCursor - FString) < Integer(Pos) then
       FCursor := FString + Pos;
   end else begin
-    if (FCursor - FString) = LongInt(Pos) then                         
+    if (FCursor - FString) = Integer(Pos) then
       Exit;
     FCursor := FCursor + Size;
   end;
 end;
 
-function TStString.MakeLetterSet : LongInt;
+function TStString.MakeLetterSet : Integer;
 {- Performs MakeLetterSetZ on the word at the Cursor. }
 var
   Temp : PAnsiChar;
@@ -694,7 +694,7 @@ end;
 function TStString.GetAsciiAtCursor : AnsiString;
 {- Gets the word that the Cursor is pointing to -- returns string. }
 var
-  I, Size : Longint;
+  I, Size : Integer;
 begin
   Size := SizeAsciiAtCursor(False);
   SetLength(Result, Size);
@@ -705,7 +705,7 @@ end;
 function TStString.GetAsciiAtCursorZ(Dest : PAnsiChar) : PAnsiChar;
 {- Gets the word that the Cursor is pointing to -- returns PChar. }
 var
-  I, Size : Longint;
+  I, Size : Integer;
 begin
   Size := SizeAsciiAtCursor(False);
   Result := Dest;
@@ -724,7 +724,7 @@ end;
 function TStString.GetWordAtCursor : AnsiString;
 {- Gets the word that the Cursor is pointing to -- returns string. }
 var
-  I, Size : Longint;
+  I, Size : Integer;
 begin
   Size := SizeWordAtCursor(False);
   SetLength(Result, Size);
@@ -735,7 +735,7 @@ end;
 function TStString.GetWordAtCursorZ(Dest : PAnsiChar) : PAnsiChar;
 {- Gets the word that the Cursor is pointing to -- returns PChar. }
 var
-  I, Size : Longint;
+  I, Size : Integer;
 begin
   Size := SizeWordAtCursor(False);
   Result := Dest;

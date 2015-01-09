@@ -76,7 +76,7 @@ type
     FFileVersion         : string;
     FFileVersionFloat    : Double;
     FInternalName        : string;
-    FLanguageCount       : LongInt;
+    FLanguageCount       : Integer;
     FLanguageName        : string;
     FLegalCopyright      : string;
     FLegalTrademark      : string;
@@ -86,7 +86,7 @@ type
     FProductName         : string;
     FProductVersion      : string;
     FProductVersionFloat : Double;
-    FTranslationValue    : LongInt;
+    FTranslationValue    : Integer;
     VInfoLoaded          : Boolean;
 
     function GetComments : string;
@@ -103,7 +103,7 @@ type
     function GetFileVersion : string;
     function GetFileVersionFloat : Double;
     function GetInternalName : string;
-    function GetLanguageCount: LongInt;
+    function GetLanguageCount: Integer;
     function GetLanguageName: string;
     function GetLegalCopyright : string;
     function GetLegalTrademark : string;
@@ -113,7 +113,7 @@ type
     function GetProductName : string;
     function GetProductVersion : string;
     function GetProductVersionFloat : Double;
-    function GetTranslationValue: LongInt;
+    function GetTranslationValue: Integer;
     procedure SetFileName(const Value : string);
 
     function LoadVersionInfo(const Key : string) : string;
@@ -173,7 +173,7 @@ type
     property InternalName : string
       read GetInternalName;
 
-    property LanguageCount : LongInt
+    property LanguageCount : Integer
       read GetLanguageCount;
 
     property LanguageName : string
@@ -203,7 +203,7 @@ type
     property ProductVersionFloat : Double
       read GetProductVersionFloat;
 
-    property TranslationValue : LongInt
+    property TranslationValue : Integer
       read GetTranslationValue;
 
 {!!.02 - added }
@@ -305,7 +305,7 @@ var
   Handle : DWORD;
   Res     : Boolean;
   Size    : Integer;
-  Error   : LongInt;
+  Error   : Integer;
   Data    : Pointer;
   Buffer  : Pointer;
   ErrCode : Integer;
@@ -381,7 +381,7 @@ begin
     TrSize := Bytes;
     GetMem(Trans, TrSize);
     Move(Buffer^, Trans^, TrSize);
-    FTranslationValue := LongInt(Trans^);
+    FTranslationValue := Integer(Trans^);
     FLanguageCount := Bytes div SizeOf(TVerTranslation);
     VerLanguageName(Trans^.Language, LangBuff, Length(LangBuff));
     FLanguageName := StrPas(LangBuff);
@@ -719,7 +719,7 @@ begin
   Result := FProductMinorVersion;
 end;
 
-function TStCustomVersionInfo.GetLanguageCount: LongInt;
+function TStCustomVersionInfo.GetLanguageCount: Integer;
 begin
   if not VInfoLoaded then
     LoadVersionInfo('');
@@ -733,7 +733,7 @@ begin
   Result := FLanguageName;
 end;
 
-function TStCustomVersionInfo.GetTranslationValue: LongInt;
+function TStCustomVersionInfo.GetTranslationValue: Integer;
 begin
   if not VInfoLoaded then
     LoadVersionInfo('');

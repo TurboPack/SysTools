@@ -109,7 +109,7 @@ type
     FUPrime,
     FDPrime   : Double;
 
-    function GetEclipse(Idx : longint) : PStEclipseRecord;
+    function GetEclipse(Idx : Integer) : PStEclipseRecord;
     procedure CentralEclipseTime(JD, K, J2,
                                  SunAnom, MoonAnom,
                                  ArgLat, AscNode, EFac : Double;
@@ -132,7 +132,7 @@ type
       override;
     procedure FindEclipses(Year : integer);
 
-    property Eclipses[Idx : longint] : PStEclipseRecord
+    property Eclipses[Idx : Integer] : PStEclipseRecord
       read GetEclipse;
   end;
 
@@ -161,7 +161,7 @@ begin
   DisposeData := DisposeEclipseRecord;
 end;
 
-function TStEclipses.GetEclipse(Idx : longint) : PStEclipseRecord;
+function TStEclipses.GetEclipse(Idx : Integer) : PStEclipseRecord;
 begin
   if (Idx < 0) or (Idx > pred(Count)) then
     Result := nil
@@ -483,7 +483,7 @@ end;
 procedure TStEclipses.GetBesselianElements(CentralJD : Double);
 var
   I,
-  Mins       : LongInt;
+  Mins       : Integer;
   CurJD,
   SidTime,
   SunDist,

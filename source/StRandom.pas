@@ -147,25 +147,25 @@ begin
 
   {hash in the milliseconds}
   Hash := (Hash shl 4) + SystemTime.wMilliseconds;
-  G := Hash and longint($F0000000);
+  G := Hash and Integer($F0000000);
   if (G <> 0) then
     Hash := (Hash xor (G shr 24)) xor G;
 
   {hash in the second}
   Hash := (Hash shl 4) + SystemTime.wSecond;
-  G := Hash and longint($F0000000);
+  G := Hash and Integer($F0000000);
   if (G <> 0) then
     Hash := (Hash xor (G shr 24)) xor G;
 
   {hash in the minute}
   Hash := (Hash shl 4) + SystemTime.wMinute;
-  G := Hash and longint($F0000000);
+  G := Hash and Integer($F0000000);
   if (G <> 0) then
     Hash := (Hash xor (G shr 24)) xor G;
 
   {hash in the hour}
   Hash := (Hash shl 3) + SystemTime.wHour;
-  G := Hash and longint($F0000000);
+  G := Hash and Integer($F0000000);
   if (G <> 0) then
     Hash := (Hash xor (G shr 24)) xor G;
 
@@ -564,8 +564,8 @@ const
 
   OneOverM1 : double = 1.0 / m1;
 var
-  k : longint;
-  Z : longint;
+  k : Integer;
+  Z : Integer;
 begin
   {advance first PRNG}
   k := FSeed1 div q1;

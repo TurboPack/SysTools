@@ -136,8 +136,8 @@ type
     FEncoding : string;
     FFileName : string;
     FOldStyle : Boolean;
-    FSize : LongInt;
-    FStreamOffset : LongInt;
+    FSize : Integer;
+    FStreamOffset : Integer;
   public
     { Description of this attachment }
     property atContentDescription : string
@@ -164,11 +164,11 @@ type
       read FOldStyle write FOldStyle;
 
     { Size of attachment (in the unencoded state) }
-    property atSize : LongInt
+    property atSize : Integer
       read FSize write FSize;
 
     { Offset of attachment in message }
-    property atStreamOffset : LongInt
+    property atStreamOffset : Integer
       read FStreamOffset write FStreamOffset;
   end;
 
@@ -184,7 +184,7 @@ type
     FConverter : TStConvertStream;
     FDirectory : string;
     FEncoding : string;
-    FEndBoundaryOffset : LongInt;
+    FEndBoundaryOffset : Integer;
     FMimeHeaders : Boolean;
     FStream : TStream;
     FInternalStream : TMemoryStream;
@@ -1146,7 +1146,7 @@ end;
 
 procedure TStMimeConverter.AddMimeFooters;
 var
-  SavePos : LongInt;
+  SavePos : Integer;
   Temp : AnsiString;
 begin
   SavePos := Stream.Position;
@@ -1190,7 +1190,7 @@ procedure TStMimeConverter.AddStreamAttachment(AStream : TStream; const AFileNam
 var
   I : Integer;
   AttObj : TStAttachment;
-  SavePos : LongInt;
+  SavePos : Integer;
 begin
   if Converters.Find(FEncoding, I) then
     ForceType(TCvtFormat(Converters.Objects[I]).ConverterClass)
@@ -1314,7 +1314,7 @@ const
 type
   MemArray = array[0..(StmSize-1)] of AnsiChar;
 var
-  I, Pos, ScanSize, StmOffset : LongInt;
+  I, Pos, ScanSize, StmOffset : Integer;
   NewAtt : TStAttachment;
   ScanStream : TMemoryStream;
   FoundPos : Cardinal;
@@ -1324,7 +1324,7 @@ var
   TempWord : Word;
   BMT : BTable;
 
-  function Min(A, B : LongInt) : LongInt;
+  function Min(A, B : Integer) : Integer;
   begin
     Result := A;
     if A > B then
@@ -1380,7 +1380,7 @@ begin
           NewAtt := nil;
           Break;
         end else begin
-          Stream.Position := (StmOffset + LongInt(FoundPos) + LongInt(Length(SearchString)));
+          Stream.Position := (StmOffset + Integer(FoundPos) + Integer(Length(SearchString)));
           StmOffset := Stream.Position;
           ScanStream.Position := 0;
           ScanSize := ScanStream.CopyFrom(Stream,
@@ -1511,7 +1511,7 @@ const
 type
   MemArray = array[0..(StmSize-1)] of AnsiChar;
 var
-  I, Pos, ScanSize, StmOffset : LongInt;
+  I, Pos, ScanSize, StmOffset : Integer;
   TTree : TStTernaryTree;
   TTag : Pointer;
   NewAtt : TStAttachment;
@@ -1523,7 +1523,7 @@ var
   AttToken : array[0..MaxMimeLine] of AnsiChar;
   BMT : BTable;
 
-  function Min(A, B : LongInt) : LongInt;
+  function Min(A, B : Integer) : Integer;
   begin
     Result := A;
     if A > B then
@@ -1604,15 +1604,15 @@ begin
         if (MemArray(ScanStream.Memory^)[Pos] = '-') and
            (MemArray(ScanStream.Memory^)[Pos+1] = '-') then begin
           { Position the stream to the beginning of the end marker }
-          FEndBoundaryOffset := (StmOffset + LongInt(FoundPos) - 2);
+          FEndBoundaryOffset := (StmOffset + Integer(FoundPos) - 2);
           Stream.Position := FEndBoundaryOffset;
           Exit;
         end else begin
           if not Assigned(NewAtt) then NewAtt := TStAttachment.Create;
           { Go ahead and reposition here -- won't lose us much, and it }
           { guarantees all tags for this attachment will be within the buffer }
-          NewAtt.atStreamOffset := (StmOffset + LongInt(FoundPos));
-          Stream.Position := (StmOffset + LongInt(FoundPos) + Length(FBoundary) + 2);
+          NewAtt.atStreamOffset := (StmOffset + Integer(FoundPos));
+          Stream.Position := (StmOffset + Integer(FoundPos) + Length(FBoundary) + 2);
           StmOffset := Stream.Position;
           ScanStream.Position := 0;
           if Stream.Position >= Stream.Size then Exit;

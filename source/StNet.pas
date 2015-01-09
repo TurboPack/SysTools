@@ -988,9 +988,9 @@ begin
   if Value <> AccountDisabled then begin
     Data := TUSER_INFO_3(FUserData^).usri3_flags;
     if Value then
-      SetLongFlag(LongInt(Data), UF_ACCOUNTDISABLE)
+      SetLongFlag(Integer(Data), UF_ACCOUNTDISABLE)
     else
-      ClearLongFlag(LongInt(Data), UF_ACCOUNTDISABLE);
+      ClearLongFlag(Integer(Data), UF_ACCOUNTDISABLE);
 
     ErrorD := StNetUserSetInfo(FServer, FName, 1008, @Data, ParmErr);
     if ErrorD = NERR_SUCCESS then
@@ -1143,7 +1143,7 @@ begin
   if LockedOut then begin
     if Value = False then begin
       Data := TUSER_INFO_3(FUserData^).usri3_flags;
-      ClearLongFlag(LongInt(Data), UF_LOCKOUT);
+      ClearLongFlag(Integer(Data), UF_LOCKOUT);
 
       ErrorD := StNetUserSetInfo(FServer, FName, 1008, @Data, ParmErr);
       if ErrorD = NERR_SUCCESS then
@@ -1196,9 +1196,9 @@ begin
   if Value <> NoUserPasswordChange then begin
     Data := TUSER_INFO_3(FUserData^).usri3_flags;
     if Value then
-      SetLongFlag(LongInt(Data), UF_PASSWD_CANT_CHANGE)
+      SetLongFlag(Integer(Data), UF_PASSWD_CANT_CHANGE)
     else
-      ClearLongFlag(LongInt(Data), UF_PASSWD_CANT_CHANGE);
+      ClearLongFlag(Integer(Data), UF_PASSWD_CANT_CHANGE);
 
     ErrorD := StNetUserSetInfo(FServer, FName, 1008, @Data, ParmErr);
     if ErrorD = NERR_SUCCESS then
@@ -1261,9 +1261,9 @@ begin
   if Value <> PasswordNeverExpires then begin
     Data := TUSER_INFO_3(FUserData^).usri3_flags;
     if Value then
-      SetLongFlag(LongInt(Data), UF_DONT_EXPIRE_PASSWD)
+      SetLongFlag(Integer(Data), UF_DONT_EXPIRE_PASSWD)
     else
-      ClearLongFlag(LongInt(Data), UF_DONT_EXPIRE_PASSWD);
+      ClearLongFlag(Integer(Data), UF_DONT_EXPIRE_PASSWD);
 
     ErrorD := StNetUserSetInfo(FServer, FName, 1008, @Data, ParmErr);
     if ErrorD = NERR_SUCCESS then
@@ -1305,9 +1305,9 @@ begin
   if Value <> PasswordNotRequired then begin
     Data := TUSER_INFO_3(FUserData^).usri3_flags;
     if Value then
-      SetLongFlag(LongInt(Data), UF_PASSWD_NOTREQD)
+      SetLongFlag(Integer(Data), UF_PASSWD_NOTREQD)
     else
-      ClearLongFlag(LongInt(Data), UF_PASSWD_NOTREQD);
+      ClearLongFlag(Integer(Data), UF_PASSWD_NOTREQD);
 
     ErrorD := StNetUserSetInfo(FServer, FName, 1008, @Data, ParmErr);
     if ErrorD = NERR_SUCCESS then
@@ -2681,10 +2681,10 @@ begin
       Data.usri1_priv := USER_PRIV_USER;
       Data.usri1_flags := UF_SCRIPT;
       if AGlobal then
-        SetLongFlag(LongInt(Data.usri1_flags),
+        SetLongFlag(Integer(Data.usri1_flags),
           UF_NORMAL_ACCOUNT)
       else
-        SetLongFlag(LongInt(Data.usri1_flags),
+        SetLongFlag(Integer(Data.usri1_flags),
           UF_TEMP_DUPLICATE_ACCOUNT);
 
       ErrorD := StNetUserAdd(FServer, 1, @Data, ParmErr);
@@ -2835,7 +2835,7 @@ begin
     Include(Result, nsvtAlternateXPORT);
   if LongFlagIsSet(TSERVER_INFO_102(FServerData^).sv102_type, SV_TYPE_LOCAL_LIST_ONLY) then
     Include(Result, nsvtLocalListOnly);
-  if LongFlagIsSet(TSERVER_INFO_102(FServerData^).sv102_type, LongInt(SV_TYPE_DOMAIN_ENUM)) then
+  if LongFlagIsSet(TSERVER_INFO_102(FServerData^).sv102_type, Integer(SV_TYPE_DOMAIN_ENUM)) then
     Include(Result, nsvtDomainEnum);
 end;
 

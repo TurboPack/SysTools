@@ -515,7 +515,7 @@ var
   MS : TMemoryStream;
   TS : TStAnsiTextStream;
   i : Integer;
-  L : LongInt;
+  L : Integer;
   Name : String;
 begin
   if not Assigned(Strings) then Exit;

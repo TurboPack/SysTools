@@ -48,10 +48,10 @@ type
   protected {private}
     {property variables}
     FContainer : TStBits; {instance of the container}
-    FMaxBits   : LongInt;
+    FMaxBits   : Integer;
 
     {property methods}
-    procedure SetMaxBits(Value : LongInt);
+    procedure SetMaxBits(Value : Integer);
 
   protected
     {virtual property methods}
@@ -75,7 +75,7 @@ type
       read FContainer;
 
   published
-    property MaxBits : LongInt
+    property MaxBits : Integer
       read FMaxBits
       write SetMaxBits default 100;
 
@@ -119,7 +119,7 @@ begin
   Result := FContainer.OnStoreData;
 end;
 
-procedure TStNVBits.SetMaxBits(Value : LongInt);
+procedure TStNVBits.SetMaxBits(Value : Integer);
 var
   HoldOnLoadData  : TStLoadDataEvent;
   HoldOnStoreData : TStStoreDataEvent;

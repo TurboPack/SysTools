@@ -114,7 +114,7 @@ type
   protected
     {PageElements count is stored in inherited Data field}
     pdPage  : PPointerArray; {Pointer to page data}
-    pdStart : LongInt;       {Index of first element in page}
+    pdStart : Integer;       {Index of first element in page}
     pdCount : Integer;       {Number of elements used in page}
 
   public
@@ -134,11 +134,11 @@ type
     colPageElements : Integer;  {Number of elements in a page}
     colCachePage : TPageDescriptor; {Page last found by At}
 
-    procedure colAdjustPagesAfter(N : TPageDescriptor; Delta : LongInt);
+    procedure colAdjustPagesAfter(N : TPageDescriptor; Delta : Integer);
     procedure colAtInsertInPage(N : TPageDescriptor; PageIndex : Integer;
                                 AData : Pointer);
     procedure colAtDeleteInPage(N : TPageDescriptor; PageIndex : Integer);
-    function colGetCount : LongInt;
+    function colGetCount : Integer;
     function colGetEfficiency : Integer;
 
     procedure ForEachPointer(Action : TIteratePointerFunc; OtherData : pointer);
@@ -164,19 +164,19 @@ type
     procedure Pack;
       {-Squeeze collection elements into the least memory possible}
 
-    function At(Index : LongInt) : Pointer;
+    function At(Index : Integer) : Pointer;
       {-Return the element at a given index}
-    function IndexOf(Data : Pointer) : LongInt; virtual;
+    function IndexOf(Data : Pointer) : Integer; virtual;
       {-Return the index of the first item with given data}
 
-    procedure AtInsert(Index : LongInt; Data : Pointer);
+    procedure AtInsert(Index : Integer; Data : Pointer);
       {-Insert a new element at a given index and move following items down}
-    procedure AtPut(Index : LongInt; Data : Pointer);
+    procedure AtPut(Index : Integer; Data : Pointer);
       {-Replace element at given index with new data}
     procedure Insert(Data : Pointer); virtual;
       {-Insert item at the end of the collection}
 
-    procedure AtDelete(Index : LongInt);
+    procedure AtDelete(Index : Integer);
       {-Remove element at a given index, move following items up, free element}
     procedure Delete(Data : Pointer);
       {-Delete the first item with the given data}
@@ -185,7 +185,7 @@ type
                      OtherData : Pointer) : Pointer;
       {-Call Action for all the non-nil elements, returning the last data}
 
-    property Count : LongInt
+    property Count : Integer
       {-Return the index of the highest assigned item, plus one}
       read colGetCount;
 
@@ -193,7 +193,7 @@ type
       {-Return the overall percent Efficiency of the pages}
       read colGetEfficiency;
 
-    property Items[Index : LongInt] : Pointer
+    property Items[Index : Integer] : Pointer
       {-Return the Index'th node, 0-based}
       read At
       write AtPut;
@@ -224,7 +224,7 @@ type
     procedure StoreToStream(S : TStream); override;
      {-Write a collection and its data to a stream}
 
-    function IndexOf(Data : Pointer) : LongInt; override;
+    function IndexOf(Data : Pointer) : Integer; override;
       {-Return the index of the first item with given data}
     procedure Insert(Data : Pointer); override;
       {-Insert item in sorted position}
@@ -250,14 +250,14 @@ function AssignData(Container : TStContainer;
 constructor TPageDescriptor.Create(AData : Pointer);
 begin
   inherited Create(AData);
-  GetMem(pdPage, LongInt(Data)*SizeOf(Pointer));
-  FillChar(pdPage^, LongInt(Data)*SizeOf(Pointer), 0);
+  GetMem(pdPage, Integer(Data)*SizeOf(Pointer));
+  FillChar(pdPage^, Integer(Data)*SizeOf(Pointer), 0);
 end;
 
 destructor TPageDescriptor.Destroy;
 begin
   if Assigned(pdPage) then
-    FreeMem(pdPage, LongInt(Data)*SizeOf(Pointer));
+    FreeMem(pdPage, Integer(Data)*SizeOf(Pointer));
   inherited Destroy;
 end;
 
@@ -282,9 +282,9 @@ procedure TStCollection.Assign(Source: TPersistent);
     {$ENDIF}
   end;
 
-function TStCollection.At(Index : LongInt) : Pointer;
+function TStCollection.At(Index : Integer) : Pointer;
 var
-  Start : LongInt;
+  Start : Integer;
   N : TPageDescriptor;
 begin
 {$IFDEF ThreadSafe}
@@ -344,9 +344,9 @@ begin
 {$ENDIF}
 end;
 
-procedure TStCollection.AtDelete(Index : LongInt);
+procedure TStCollection.AtDelete(Index : Integer);
 var
-  Start : LongInt;
+  Start : Integer;
   N : TPageDescriptor;
 begin
 {$IFDEF ThreadSafe}
@@ -408,9 +408,9 @@ begin
 {$ENDIF}
 end;
 
-procedure TStCollection.AtInsert(Index : LongInt; Data : Pointer);
+procedure TStCollection.AtInsert(Index : Integer; Data : Pointer);
 var
-  Start : LongInt;
+  Start : Integer;
   NC : Integer;
   N : TPageDescriptor;
 begin
@@ -462,9 +462,9 @@ begin
 {$ENDIF}
 end;
 
-procedure TStCollection.AtPut(Index : LongInt; Data : Pointer);
+procedure TStCollection.AtPut(Index : Integer; Data : Pointer);
 var
-  Start : LongInt;
+  Start : Integer;
   N, T : TPageDescriptor;
 begin
 {$IFDEF ThreadSafe}
@@ -585,7 +585,7 @@ begin
 {$ENDIF}
 end;
 
-procedure TStCollection.colAdjustPagesAfter(N : TPageDescriptor; Delta : LongInt);
+procedure TStCollection.colAdjustPagesAfter(N : TPageDescriptor; Delta : Integer);
 begin
   N := TPageDescriptor(N.FNext);
   while Assigned(N) do begin
@@ -648,7 +648,7 @@ begin
     end;
 end;
 
-function TStCollection.colGetCount : LongInt;
+function TStCollection.colGetCount : Integer;
 begin
 {$IFDEF ThreadSafe}
   EnterCS;
@@ -665,7 +665,7 @@ end;
 
 function TStCollection.colGetEfficiency : Integer;
 var
-  Pages, ECount : LongInt;
+  Pages, ECount : Integer;
   N : TPageDescriptor;
 begin
 {$IFDEF ThreadSafe}
@@ -739,7 +739,7 @@ end;
 
 procedure TStCollection.Delete(Data : Pointer);
 var
-  Index : LongInt;
+  Index : Integer;
 begin
 {$IFDEF ThreadSafe}
   EnterCS;
@@ -763,9 +763,9 @@ begin
   inherited Destroy;
 end;
 
-function TStCollection.IndexOf(Data : Pointer) : LongInt;
+function TStCollection.IndexOf(Data : Pointer) : Integer;
 var
-  I : LongInt;
+  I : Integer;
   N : TPageDescriptor;
 begin
 {$IFDEF ThreadSafe}
@@ -792,7 +792,7 @@ end;
 
 procedure TStCollection.Insert(Data : Pointer);
 var
-  Start : LongInt;
+  Start : Integer;
   N : TPageDescriptor;
 begin
 {$IFDEF ThreadSafe}
@@ -906,7 +906,7 @@ var
   Data         : pointer;
   Reader       : TReader;
   PageElements : integer;
-  Index        : longint;
+  Index        : Integer;
   StreamedClass : TPersistentClass;
   StreamedClassName : string;
 begin
@@ -978,7 +978,7 @@ end;
 
 {----------------------------------------------------------------------}
 
-function TStSortedCollection.IndexOf(Data : Pointer) : LongInt;
+function TStSortedCollection.IndexOf(Data : Pointer) : Integer;
 var
   N : TPageDescriptor;
   PageIndex : Integer;

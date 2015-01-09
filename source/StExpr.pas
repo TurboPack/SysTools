@@ -149,7 +149,7 @@ type
       {-return the next token string in eTokenStr and type in eToken}
     function PopOperand : TStFloat;
       {-remove top operand value from stack}
-    procedure RaiseExprError(Code : LongInt; Column : Integer);
+    procedure RaiseExprError(Code : Integer; Column : Integer);
       {-generate an expression exception}
 
   public
@@ -202,7 +202,7 @@ type
 
 type
   TStExprErrorEvent =
-    procedure(Sender : TObject; ErrorNumber : LongInt; const ErrorStr : String)
+    procedure(Sender : TObject; ErrorNumber : Integer; const ErrorStr : String)
     of object;
 
 type
@@ -814,7 +814,7 @@ var
   P        : PChar;      { current position in evaluated string }
   NegVal   : Boolean;        { is entire value negative? }
   NegExp   : Boolean;        { is exponent negative? }
-  Exponent : LongInt;        { accumulator for exponent }
+  Exponent : Integer;        { accumulator for exponent }
   Mantissa : Extended;       { mantissa }
   FracMul  : Extended;       { decimal place holder }
   State : TNumConvertState;  { current state of recognizer machine }
@@ -1452,7 +1452,7 @@ begin
   Result := StackPop;
 end;
 
-procedure TStExpression.RaiseExprError(Code : LongInt; Column : Integer);
+procedure TStExpression.RaiseExprError(Code : Integer; Column : Integer);
 var
   E : EStExprError;
 begin

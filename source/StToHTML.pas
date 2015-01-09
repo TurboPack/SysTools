@@ -345,7 +345,7 @@ var
   P1,
   P2,
   BRead,
-  PC          : Longint;
+  PC          : Integer;
   CloseStr,
   SStr,
   EStr,
@@ -364,7 +364,7 @@ var
       function ConvertEmbeddedHTML(const Str2 : String) : String;
       var
         L,
-        J  : Longint;
+        J  : Integer;
         PH : Pointer;
       begin
         Result := '';

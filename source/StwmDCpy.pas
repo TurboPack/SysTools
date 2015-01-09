@@ -113,9 +113,9 @@ begin
       Exit;
     if Value then begin
       PrevWndProc:= Pointer(
-        SetWindowLong(TForm(Owner).Handle, GWL_WNDPROC, LongInt(NewWndProc)))
+        SetWindowLong(TForm(Owner).Handle, GWL_WNDPROC, Integer(NewWndProc)))
     end else if Assigned(PrevWndProc) then begin
-      SetWindowLong(TForm(Owner).Handle, GWL_WNDPROC, LongInt(PrevWndProc));
+      SetWindowLong(TForm(Owner).Handle, GWL_WNDPROC, Integer(PrevWndProc));
       PrevWndProc := nil;
     end;
   end;

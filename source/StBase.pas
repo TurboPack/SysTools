@@ -69,13 +69,13 @@ type
 type
   EStException = class(Exception)     {ancestor to all SysTools exceptions}
     protected {private}
-      FErrorCode : Longint;
+      FErrorCode : Integer;
 
     public
-      constructor CreateResTP(Ident : LongInt; Dummy : Word);
-      constructor CreateResFmtTP(Ident : Longint; const Args : array of const;
+      constructor CreateResTP(Ident : Integer; Dummy : Word);
+      constructor CreateResFmtTP(Ident : Integer; const Args : array of const;
                                  Dummy : Word);
-      property ErrorCode : LongInt
+      property ErrorCode : Integer
         read FErrorCode
         write FErrorCode;
   end;
@@ -105,7 +105,7 @@ type
     protected {private}
       FErrorCol : Integer;
   public
-    constructor CreateResTPCol(Ident : Longint; Column : Integer; Dummy : Integer);
+    constructor CreateResTPCol(Ident : Integer; Column : Integer; Dummy : Integer);
     property ErrorColumn : Integer
       {-Returns the string position at the start of the token where
         the error was detected}
@@ -259,7 +259,7 @@ type
   protected
     conNodeClass : TStNodeClass;
     conNodeProt  : Integer;
-    FCount       : Longint;
+    FCount       : Integer;
 
     {protected undocumented methods}
     function AssignPointers(Source : TPersistent; AssignData : TIteratePointerFunc) : boolean;
@@ -322,7 +322,7 @@ type
       dynamic; abstract;
       {-Write a container and its data to a stream}
 
-    property Count : LongInt
+    property Count : Integer
       {-Return the number of elements in the collection}
       read FCount;
 
@@ -418,28 +418,28 @@ function AnsiCompareStrShort32(const S1, S2: string): Integer;
 
 {.Z+}
 {---Huge memory routines---}
-function HugeCompressRLE(const InBuffer; InLen : Longint;
-                         var OutBuffer) : Longint;
+function HugeCompressRLE(const InBuffer; InLen : Integer;
+                         var OutBuffer) : Integer;
   {-Run length encode a buffer}
 
-function HugeDecompressRLE(const InBuffer; InLen : Longint;
-                           var OutBuffer; OutLen : LongInt) : Longint;
+function HugeDecompressRLE(const InBuffer; InLen : Integer;
+                           var OutBuffer; OutLen : Integer) : Integer;
   {-Run length decode a buffer}
 
-procedure HugeFillChar(var Dest; Count : Longint; Value : Byte);
+procedure HugeFillChar(var Dest; Count : Integer; Value : Byte);
   {-Fill huge memory block with byte value}
 
-procedure HugeFillStruc(var Dest; Count : Longint;
+procedure HugeFillStruc(var Dest; Count : Integer;
                         const Value; ValSize : Cardinal);
   {-Fill huge memory block with structure value}
 
-procedure HugeMove(const Src; var Dest; Count : LongInt);
+procedure HugeMove(const Src; var Dest; Count : Integer);
   {-Copy huge memory block to another}
 
-procedure HugeGetMem(var P : Pointer; Size : LongInt);
+procedure HugeGetMem(var P : Pointer; Size : Integer);
   {-Get huge memory block allocation}
 
-procedure HugeFreeMem(var P : Pointer; Size : LongInt);
+procedure HugeFreeMem(var P : Pointer; Size : Integer);
   {-Free huge memory block allocation}
 {.Z-}
 
@@ -458,7 +458,7 @@ function LoCase(C : WideChar) : WideChar; overload;
 
 {---General comparison and searching---}
 
-function CompareLetterSets(Set1, Set2 : LongInt) : Cardinal;
+function CompareLetterSets(Set1, Set2 : Integer) : Cardinal;
   {-Return the sum of the values of the letters common to Set1 and Set2.}
 
 function CompStruct(const S1, S2; Size : Cardinal) : Integer;
@@ -480,13 +480,13 @@ function SearchUC(const Buffer; BufLength : Cardinal; const Match;
 function IsOrInheritsFrom(Root, Candidate : TClass) : boolean;
   {-Return true if the classes are equal or Candidate is a descendant of Root}
 
-procedure RaiseContainerError(Code : longint);
+procedure RaiseContainerError(Code : Integer);
   {-Internal routine: raise an exception for a container}
 
-procedure RaiseContainerErrorFmt(Code : Longint; Data : array of const);
+procedure RaiseContainerErrorFmt(Code : Integer; Data : array of const);
   {-Internal routine: raise an exception for a container}
 
-function ProductOverflow(A, B : LongInt) : Boolean;
+function ProductOverflow(A, B : Integer) : Boolean;
   {-Return True if A*B exceeds MaxLongInt}
 
 {$IFNDEF HStrings}
@@ -500,19 +500,19 @@ procedure StDisposeStr(PS : PShortString);
 
 
 {---primitives for converting strings to integers}
-procedure ValLongInt(S :string; var LI : Longint; var ErrorCode : integer);
+procedure ValLongInt(S :string; var LI : Integer; var ErrorCode : integer);
 procedure ValSmallint(const S : string; var SI : smallint; var ErrorCode : integer);
 procedure ValWord(const S : string; var Wd : word; var ErrorCode : integer);
 
 {.Z+}
 {general routine to raise a specific class of SysTools exception}
-procedure RaiseStError(ExceptionClass : EStExceptionClass; Code : LongInt);
+procedure RaiseStError(ExceptionClass : EStExceptionClass; Code : Integer);
 {.Z-}
 
 {.Z+}
 {general routines to raise a specific Win32 exception in SysTools}
-procedure RaiseStWin32Error(ExceptionClass : EStExceptionClass; Code : LongInt);
-procedure RaiseStWin32ErrorEx(ExceptionClass : EStExceptionClass; Code : LongInt; Info : string);
+procedure RaiseStWin32Error(ExceptionClass : EStExceptionClass; Code : Integer);
+procedure RaiseStWin32ErrorEx(ExceptionClass : EStExceptionClass; Code : Integer; Info : string);
 {.Z-}
 
 {$IFDEF VERSION3ONLY}
@@ -524,7 +524,7 @@ var
 
 implementation
 
-procedure RaiseStError(ExceptionClass : EStExceptionClass; Code : LongInt);
+procedure RaiseStError(ExceptionClass : EStExceptionClass; Code : Integer);
 var
   E : EStException;
 begin
@@ -533,7 +533,7 @@ begin
   raise E;
 end;
 
-procedure RaiseStWin32Error(ExceptionClass : EStExceptionClass; Code : LongInt);
+procedure RaiseStWin32Error(ExceptionClass : EStExceptionClass; Code : Integer);
 var
   E : EStException;
 begin
@@ -542,7 +542,7 @@ begin
   raise E;
 end;
 
-procedure RaiseStWin32ErrorEx(ExceptionClass : EStExceptionClass; Code : LongInt;
+procedure RaiseStWin32ErrorEx(ExceptionClass : EStExceptionClass; Code : Integer;
           Info : string);
 var
   E : EStException;
@@ -552,18 +552,18 @@ begin
   raise E;
 end;
 
-constructor EStException.CreateResTP(Ident : LongInt; Dummy : Word);
+constructor EStException.CreateResTP(Ident : Integer; Dummy : Word);
 begin
   inherited Create(SysToolsStr(Ident));
 end;
 
-constructor EStException.CreateResFmtTP(Ident : Longint;
+constructor EStException.CreateResFmtTP(Ident : Integer;
             const Args : array of const; Dummy : Word);
 begin
   inherited CreateFmt(SysToolsStr(Ident), Args);
 end;
 
-constructor EStExprError.CreateResTPCol(Ident : Longint; Column : Integer; Dummy : Integer);
+constructor EStExprError.CreateResTPCol(Ident : Integer; Column : Integer; Dummy : Integer);
 begin
   inherited CreateResTP(Ident, 0);
 
@@ -636,13 +636,13 @@ begin
   Result := True;
 end;
 
-procedure HugeFillChar(var Dest; Count : Longint; Value : Byte);
+procedure HugeFillChar(var Dest; Count : Integer; Value : Byte);
 begin
   FillChar(Dest, Count, Value);
 end;
 
-function HugeCompressRLE(const InBuffer; InLen : Longint;
-                         var OutBuffer) : Longint;
+function HugeCompressRLE(const InBuffer; InLen : Integer;
+                         var OutBuffer) : Integer;
     {assumes OutBuffer is at least InLen long}
     {returns -1 if InLen <= 1 or if output length would exceed InLen}
     {otherwise returns compressed length}
@@ -732,8 +732,8 @@ function HugeCompressRLE(const InBuffer; InLen : Longint;
     pop ebx
   end;
 
-function HugeDecompressRLE(const InBuffer; InLen : Longint;
-                           var OutBuffer; OutLen : LongInt) : Longint;
+function HugeDecompressRLE(const InBuffer; InLen : Integer;
+                           var OutBuffer; OutLen : Integer) : Integer;
     {returns -1 if InLen is <= 0 or output length > OutLen}
     {otherwise returns decompressed length}
   asm
@@ -786,7 +786,7 @@ function HugeDecompressRLE(const InBuffer; InLen : Longint;
     pop  ebx
   end;
 
-procedure HugeFillStruc(var Dest; Count : Longint;
+procedure HugeFillStruc(var Dest; Count : Integer;
                         const Value; ValSize : Cardinal); assembler;
 register;
   asm
@@ -814,7 +814,7 @@ register;
     pop ebx
   end;
 
-procedure HugeFreeMem(var P : Pointer; Size : LongInt);
+procedure HugeFreeMem(var P : Pointer; Size : Integer);
 begin
   if Assigned(P) then begin
     FreeMem(P, Size);
@@ -822,12 +822,12 @@ begin
   end;
 end;
 
-procedure HugeGetMem(var P : Pointer; Size : LongInt);
+procedure HugeGetMem(var P : Pointer; Size : Integer);
 begin
   GetMem(P, Size);
 end;
 
-procedure HugeMove(const Src; var Dest; Count : LongInt);
+procedure HugeMove(const Src; var Dest; Count : Integer);
 begin
   Move(Src, Dest, Count);
 end;
@@ -861,7 +861,7 @@ asm
 end;
 
 
-function ProductOverflow(A, B : LongInt) : Boolean;
+function ProductOverflow(A, B : Integer) : Boolean;
 register;
 asm
   mov ecx,False
@@ -873,7 +873,7 @@ asm
   mov eax,ecx
 end;
 
-function CompareLetterSets(Set1, Set2 : LongInt) : Cardinal;
+function CompareLetterSets(Set1, Set2 : Integer) : Cardinal;
   {-Returns the sum of the values of the letters common to Set1 and Set2.}
 asm
   push   ebx                       { Save registers }
@@ -1107,7 +1107,7 @@ asm
 end;
 
 {---primitives for converting strings to integers---}
-procedure ValLongInt(S : string; var LI : Longint; var ErrorCode : integer);
+procedure ValLongInt(S : string; var LI : Integer; var ErrorCode : integer);
 var
   LenS   : byte absolute S;
   Offset : Integer;
@@ -1162,7 +1162,7 @@ const
   SmallestInt16 = -32767;
   LargestInt16 = 32767;
 var
-  LI : Longint;
+  LI : Integer;
 begin
   ValLongInt(S, LI, ErrorCode);
   if (ErrorCode <> 0) then
@@ -1182,7 +1182,7 @@ const
   SmallestWord = 0;
   LargestWord = 65535;
 var
-  LI : Longint;
+  LI : Integer;
 begin
   ValLongInt(S, LI, ErrorCode);
   if (ErrorCode <> 0) then
@@ -1204,7 +1204,7 @@ function IsOrInheritsFrom(Root, Candidate : TClass) : boolean;
     Result := (Root = Candidate) or Candidate.InheritsFrom(Root);
   end;
 
-procedure RaiseContainerError(Code : LongInt);
+procedure RaiseContainerError(Code : Integer);
 var
   E : ESTContainerError;
 begin
@@ -1213,7 +1213,7 @@ begin
   raise E;
 end;
 
-procedure RaiseContainerErrorFmt(Code : Longint; Data : array of const);
+procedure RaiseContainerErrorFmt(Code : Integer; Data : array of const);
 var
   E : ESTContainerError;
 begin

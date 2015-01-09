@@ -107,7 +107,7 @@ function CumulativePrincipal(Rate : Extended;
                              Timing : TStPaymentTime) : Extended;
   {-Returns the cumulative principal paid on a loan in specified periods}
 
-function DayCount(Day1, Day2 : TStDate; Basis : TStBasis) : LongInt;
+function DayCount(Day1, Day2 : TStDate; Basis : TStBasis) : Integer;
   {-Returns the number of days from Day1 to Day2 according to day count basis}
 
 function DecliningBalance(Cost, Salvage : Extended;
@@ -301,7 +301,7 @@ var
 
 {=================  Local routines used by this unit ==================}
 
-procedure RaiseStFinError(Code : Longint);
+procedure RaiseStFinError(Code : Integer);
 begin
   Raise EStFinError.CreateResTP(Code, 0);
 end;
@@ -324,7 +324,7 @@ end;
 
 {-------------------------------------------------------}
 
-function DayCount(Day1, Day2 : TStDate; Basis : TStBasis) : LongInt;
+function DayCount(Day1, Day2 : TStDate; Basis : TStBasis) : Integer;
   {-The number of days from Day1 to Day2 according to day count basis}
 var
   BDT : TStBondDateType;
@@ -335,7 +335,7 @@ begin
   else
     BDT := bdtActual;
   end;
-  Result := Longint(BondDateDiff(Day1, Day2, BDT));
+  Result := Integer(BondDateDiff(Day1, Day2, BDT));
 end;
 
 {-------------------------------------------------------}
@@ -626,17 +626,17 @@ var
   A, P  : Extended;
   N, I  : Integer;
   Str   : string;
-  T     : Longint;
+  T     : Integer;
   CentVal : Integer;                                                 
 const
   Orders : array[0..5] of string = ('', 'Thousand ', 'Million ',     
     'Billion ', 'Trillion ', 'Quadrillion ');                        
 
-  function Text100(Num: Longint) : string;
+  function Text100(Num: Integer) : string;
     {formats an integer in the range 0 to 999}
   var
     I, J : Integer;
-    A, T : Longint;
+    A, T : Integer;
     S    : string;
   const
     Tens : array[0..9] of string =

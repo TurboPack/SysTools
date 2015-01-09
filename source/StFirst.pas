@@ -71,7 +71,7 @@ end;
 procedure ActivateFirstCommandLine;
 var
   S : String;
-  I : Longint;
+  I : Integer;
 begin
   S := '';
   for I := 0 to ParamCount-1 do

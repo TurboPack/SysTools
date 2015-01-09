@@ -74,7 +74,7 @@ type
     FTail : TStListNode;     {End of list}
 
     {private instance variables}
-    lsLastI : LongInt;        {Last index requested from Nth}
+    lsLastI : Integer;        {Last index requested from Nth}
     lsLastP : TStListNode;    {Last node returned by Nth}
 
     {protected undocumented methods}
@@ -126,13 +126,13 @@ type
       {-Return the node after P, nil if none}
     function Prev(P : TStListNode) : TStListNode;
       {-Return the node before P, nil if none}
-    function Nth(Index : LongInt) : TStListNode;
+    function Nth(Index : Integer) : TStListNode;
       {-Return the Index'th node in the list, Index >= 0 (cached)}
-    function NthFrom(P : TStListNode; Index : LongInt) : TStListNode;
+    function NthFrom(P : TStListNode; Index : Integer) : TStListNode;
       {-Return the Index'th node from P, either direction}
-    function Posn(P : TStListNode) : LongInt;
+    function Posn(P : TStListNode) : Integer;
       {-Return the ordinal position of an element in the list}
-    function Distance(P1, P2 : TStListNode) : LongInt;
+    function Distance(P1, P2 : TStListNode) : Integer;
       {-Return the number of nodes separating P1 and P2 (signed)}
     function Find(Data : Pointer) : TStListNode;
       {-Return the first node whose data equals Data}
@@ -146,7 +146,7 @@ type
     property Tail : TStListNode
       {-Return the tail node}
       read FTail;
-    property Items[Index : LongInt] : TStListNode
+    property Items[Index : Integer] : TStListNode
       {-Return the Index'th node, 0-based}
       read Nth;
       default;
@@ -315,9 +315,9 @@ begin
 {$ENDIF}
 end;
 
-function TStList.Distance(P1, P2 : TStListNode) : LongInt;
+function TStList.Distance(P1, P2 : TStListNode) : Integer;
 var
-  I : LongInt;
+  I : Integer;
   N : TStListNode;
 begin
 {$IFDEF ThreadSafe}
@@ -648,9 +648,9 @@ begin
 {$ENDIF}
 end;
 
-function TStList.Nth(Index : LongInt) : TStListNode;
+function TStList.Nth(Index : Integer) : TStListNode;
 var
-  MinI : LongInt;
+  MinI : Integer;
   MinP : TStListNode;
 begin
 {$IFDEF ThreadSafe}
@@ -688,9 +688,9 @@ begin
 {$ENDIF}
 end;
 
-function TStList.NthFrom(P : TStListNode; Index : LongInt) : TStListNode;
+function TStList.NthFrom(P : TStListNode; Index : Integer) : TStListNode;
 var
-  I : LongInt;
+  I : Integer;
 begin
 {$IFDEF ThreadSafe}
   EnterCS;
@@ -779,9 +779,9 @@ begin
 {$ENDIF}
 end;
 
-function TStList.Posn(P : TStListNode) : LongInt;
+function TStList.Posn(P : TStListNode) : Integer;
 var
-  I : LongInt;
+  I : Integer;
   N : TStListNode;
 begin
 {$IFDEF ThreadSafe}
@@ -838,13 +838,13 @@ var
   PR : TStListNode;
   PivotData : Pointer;
   TmpData : Pointer;
-  Dist : LongInt;
-  DistL : LongInt;
-  DistR : LongInt;
+  Dist : Integer;
+  DistL : Integer;
+  DistR : Integer;
   StackP : Integer;
   LStack : Stack;
   RStack : Stack;
-  DStack : array[0..StackSize-1] of LongInt;
+  DStack : array[0..StackSize-1] of Integer;
 begin
 {$IFDEF ThreadSafe}
   EnterCS;
@@ -951,7 +951,7 @@ end;
 
 function TStList.Split(P : TStListNode) : TStList;
 var
-  I : LongInt;
+  I : Integer;
 begin
 {$IFDEF ThreadSafe}
   EnterCS;

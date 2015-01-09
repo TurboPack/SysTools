@@ -48,7 +48,7 @@ function HexBZ(Dest : PWideChar; B : Byte) : PWideChar; overload;
 function HexWZ(Dest : PAnsiChar; W : Word) : PAnsiChar;
   {-Return the hex string for a word.}
 
-function HexLZ(Dest : PAnsiChar; L : LongInt) : PAnsiChar;
+function HexLZ(Dest : PAnsiChar; L : Integer) : PAnsiChar;
   {-Return the hex string for a long integer.}
 
 function HexPtrZ(Dest : PAnsiChar; P : Pointer) : PAnsiChar;
@@ -60,7 +60,7 @@ function BinaryBZ(Dest : PAnsiChar; B : Byte) : PAnsiChar;
 function BinaryWZ(Dest : PAnsiChar; W : Word) : PAnsiChar;
   {-Return the binary string for a word.}
 
-function BinaryLZ(Dest : PAnsiChar; L : LongInt) : PAnsiChar;
+function BinaryLZ(Dest : PAnsiChar; L : Integer) : PAnsiChar;
   {-Return the binary string for a long integer.}
 
 function OctalBZ(Dest : PAnsiChar; B : Byte) : PAnsiChar;
@@ -69,7 +69,7 @@ function OctalBZ(Dest : PAnsiChar; B : Byte) : PAnsiChar;
 function OctalWZ(Dest : PAnsiChar; W : Word) : PAnsiChar;
   {-Return an octal string for a word.}
 
-function OctalLZ(Dest : PAnsiChar; L : LongInt) : PAnsiChar;
+function OctalLZ(Dest : PAnsiChar; L : Integer) : PAnsiChar;
   {-Return an octal string for a long integer.}
 
 function Str2Int16Z(S : PAnsiChar; var I : SmallInt) : Boolean;
@@ -78,7 +78,7 @@ function Str2Int16Z(S : PAnsiChar; var I : SmallInt) : Boolean;
 function Str2WordZ(S : PAnsiChar; var I : Word) : Boolean;
   {-Convert a string to a word.}
 
-function Str2LongZ(S : PAnsiChar; var I : LongInt) : Boolean;
+function Str2LongZ(S : PAnsiChar; var I : Integer) : Boolean;
   {-Convert a string to a long integer.}
 
 {$IFDEF VER93}
@@ -91,7 +91,7 @@ function Str2RealZ(S : PChar; var R : Real) : Boolean;
 function Str2ExtZ(S : PAnsiChar; var R : Extended) : Boolean;
   {-Convert a string to an extended.}
 
-function Long2StrZ(Dest : PAnsiChar; L : LongInt) : PAnsiChar;
+function Long2StrZ(Dest : PAnsiChar; L : Integer) : PAnsiChar;
   {-Convert an integer type to a string.}
 
 function Real2StrZ(Dest : PAnsiChar; R : Double; Width : Byte;
@@ -256,7 +256,7 @@ function CompUCStringZ(S1, S2 : PAnsiChar) : Integer;
 function SoundexZ(Dest : PAnsiChar; S : PAnsiChar) : PAnsiChar;
   {-Return 4 character soundex of an input string}
 
-function MakeLetterSetZ(S : PAnsiChar) : Longint;
+function MakeLetterSetZ(S : PAnsiChar) : Integer;
   {-Return a bit-mapped long storing the individual letters contained in S.}
 
 procedure BMMakeTableZ(MatchString : PAnsiChar; var BT : BTable);
@@ -309,17 +309,17 @@ function HasExtensionZ(Name : PWideChar; var DotPos : Cardinal) : Boolean; overl
 
   {------------------ Formatting routines --------------------}
 
-function CommaizeZ(Dest : PAnsiChar; L : LongInt) : PAnsiChar;
+function CommaizeZ(Dest : PAnsiChar; L : Integer) : PAnsiChar;
   {-Convert a long integer to a string with commas.}
 
-function CommaizeChZ(Dest : PAnsiChar; L : Longint; Ch : AnsiChar) : PAnsiChar;
+function CommaizeChZ(Dest : PAnsiChar; L : Integer; Ch : AnsiChar) : PAnsiChar;
   {-Convert a long integer to a string with Ch in comma positions.}
 
 function FloatFormZ(Dest, Mask : PAnsiChar ; R : TstFloat ; LtCurr,
                     RtCurr : PAnsiChar ; Sep, DecPt : AnsiChar) : PAnsiChar;
   {-Return a formatted string with digits from R merged into mask.}
 
-function LongIntFormZ(Dest, Mask : PAnsiChar ; L : LongInt ; LtCurr,
+function LongIntFormZ(Dest, Mask : PAnsiChar ; L : Integer ; LtCurr,
                      RtCurr : PAnsiChar ; Sep : AnsiChar) : PAnsiChar;
   {-Return a formatted string with digits from L merged into mask.}
 
@@ -518,8 +518,8 @@ begin
   Dest^ := #0;
 end;
 
-function HexLZ(Dest : PAnsiChar; L : LongInt) : PAnsiChar;
-  {-Return hex string for LongInt}
+function HexLZ(Dest : PAnsiChar; L : Integer) : PAnsiChar;
+  {-Return hex string for Integer}
 //type                                                                 {!!.02}
 //  LH = record L, H : word; end;                                      {!!.02}
 var
@@ -536,7 +536,7 @@ var
   T2 : array[0..8] of AnsiChar;
 begin
   AnsiStrings.StrCopy(Dest, ':');
-  Result := AnsiStrings.StrCat(Dest, HexLZ(T2, LongInt(P)));
+  Result := AnsiStrings.StrCat(Dest, HexLZ(T2, Integer(P)));
 end;
 
 function BinaryBZ(Dest : PAnsiChar; B : Byte) : PAnsiChar;
@@ -565,14 +565,14 @@ begin
   Dest^ := #0;
 end;
 
-function BinaryLZ(Dest : PAnsiChar; L : LongInt) : PAnsiChar;
-  {-Return binary string for LongInt}
+function BinaryLZ(Dest : PAnsiChar; L : Integer) : PAnsiChar;
+  {-Return binary string for Integer}
 var
-  I : Longint;
+  I : Integer;
 begin
   Result := Dest;
   for I := 31 downto 0 do begin
-    Dest^ := StHexDigits[Ord(L and LongInt(1 shl I) <> 0)]; {0 or 1}
+    Dest^ := StHexDigits[Ord(L and Integer(1 shl I) <> 0)]; {0 or 1}
     Inc(Dest);
   end;
   Dest^ := #0;
@@ -604,7 +604,7 @@ begin
   Dest[6] := #0;
 end;
 
-function OctalLZ(Dest : PAnsiChar; L : LongInt) : PAnsiChar;
+function OctalLZ(Dest : PAnsiChar; L : Integer) : PAnsiChar;
   {-Return octal string for word}
 var
   I : Word;
@@ -1353,7 +1353,7 @@ end;
 function JustPathnameZ(Dest : PAnsiChar; PathName : PAnsiChar) : PAnsiChar;
   {-Return just the drive:directory portion of a pathname}
 var
-  I : Longint;
+  I : Integer;
 begin
   I := AnsiStrings.StrLen(PathName);
   repeat
@@ -1549,8 +1549,8 @@ begin
   end;
 end;
 
-function Str2LongZ(S : PAnsiChar; var I : LongInt) : Boolean;
-  {-Convert a string to a longint, returning true if successful}
+function Str2LongZ(S : PAnsiChar; var I : Integer) : Boolean;
+  {-Convert a string to a Integer, returning true if successful}
 
 var
   ec : integer;
@@ -1628,7 +1628,7 @@ begin
     Result := True;
 end;
 
-function Long2StrZ(Dest : PAnsiChar; L : LongInt) : PAnsiChar;
+function Long2StrZ(Dest : PAnsiChar; L : Integer) : PAnsiChar;
   {-Convert a long/word/integer/byte/shortint to a string}
 type
   PCharArray = ^TCharArray;
@@ -2326,7 +2326,7 @@ asm
   pop    eax
 end;
 
-function MakeLetterSetZ(S : PAnsiChar) : Longint;
+function MakeLetterSetZ(S : PAnsiChar) : Integer;
   {-Return a bit-mapped long storing the individual letters contained in S.}
 register;
 asm
@@ -2652,7 +2652,7 @@ end;
 
   {------------------ Formatting routines --------------------}
 
-function CommaizeChZ(Dest : PAnsiChar; L : Longint; Ch : AnsiChar) : PAnsiChar;
+function CommaizeChZ(Dest : PAnsiChar; L : Integer; Ch : AnsiChar) : PAnsiChar;
 var
   NumCommas, Len, I : Cardinal;
 begin
@@ -2664,7 +2664,7 @@ begin
     StrChInsertPrimZ(Dest, Ch, Len - (I * 3));
 end;
 
-function CommaizeZ(Dest : PAnsiChar; L : LongInt) : PAnsiChar;
+function CommaizeZ(Dest : PAnsiChar; L : Integer) : PAnsiChar;
 begin
   Result := CommaizeChZ(Dest, L, ',');
 end;
@@ -2919,7 +2919,7 @@ begin
   Result := FormPrimZ(Dest, Mask, R, LtCurr, RtCurr, Sep, DecPt, False);
 end;
 
-function LongIntFormZ(Dest, Mask : PAnsiChar; L : Longint; LtCurr,
+function LongIntFormZ(Dest, Mask : PAnsiChar; L : Integer; LtCurr,
                       RtCurr : PAnsiChar; Sep : AnsiChar) : PAnsiChar;
   {-Return a formatted string with digits from L merged into mask.}
 begin
@@ -3263,7 +3263,7 @@ end;
 function CopyMidZ(Dest, S : PAnsiChar; First, Len : Cardinal) : PAnsiChar;
   {-Return the mid part of a string}
 begin
-  if (First >= AnsiStrings.StrLen(S)) or (LongInt(Len) < 1) or (S[0] = #0) then
+  if (First >= AnsiStrings.StrLen(S)) or (Integer(Len) < 1) or (S[0] = #0) then
     Dest[0] := #0
   else
     Dest := StrStCopyZ(Dest, S, First, Len);
@@ -3664,7 +3664,7 @@ begin
     while StrStPosZ(Dest, OldString, P1) do begin
       StrStDeleteZ(Dest, Dest, P1, AnsiStrings.StrLen(OldString));
       for I := 1 to Replacements do begin
-        if (LongInt((AnsiStrings.StrLen(NewString) + 1 + AnsiStrings.StrLen(Dest))) < MaxLongInt) then begin
+        if (Integer((AnsiStrings.StrLen(NewString) + 1 + AnsiStrings.StrLen(Dest))) < MaxLongInt) then begin
           Inc(C);
           StrStInsertZ(Dest, Dest, NewString, P1);
         end else begin

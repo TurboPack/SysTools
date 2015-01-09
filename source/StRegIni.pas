@@ -142,11 +142,11 @@ type
       {-read data from an Ini file}
 
     function WriteRegData(Key : HKey; const ValueName : string; Data : Pointer;
-                          DType : DWORD; Size : Integer) : LongInt;
+                          DType : DWORD; Size : Integer) : Integer;
       {-write data to the registry}
 
     function ReadRegData(Key : HKey; const ValueName : string; Data : Pointer;
-                         Size : LongInt; DType : DWORD) : LongInt;
+                         Size : Integer; DType : DWORD) : Integer;
       {-read data from the registry}
 
 {.Z-}
@@ -160,7 +160,7 @@ type
       {-return current INI filename or primary key of registry}
 
     function GetDataInfo(Key : HKey; const ValueName : string;
-                         var Size : LongInt; var DType : DWORD) : LongInt;
+                         var Size : Integer; var DType : DWORD) : Integer;
       {-get size and type of data for entry in registry}
 
     function BytesToString(Value : PByte; Size : Cardinal) : AnsiString;
@@ -262,7 +262,7 @@ implementation
 uses
   AnsiStrings;
 
-procedure RaiseRegIniError(Code : LongInt);
+procedure RaiseRegIniError(Code : Integer);
 var
   E : ESTRegIniError;
 begin
@@ -273,7 +273,7 @@ end;
 
 {==========================================================================}
 
-procedure RaiseRegIniErrorFmt(Code : LongInt; A : array of const);
+procedure RaiseRegIniErrorFmt(Code : Integer; A : array of const);
 var
   E : ESTRegIniError;
 begin
@@ -506,7 +506,7 @@ function TStRegIni.OpenRegKey : HKey;
   {-open a registry key}
 var
   Disposition   : DWORD;
-  ECode         : LongInt;
+  ECode         : Integer;
 begin
   Disposition := 0;
   if (riMode = riSet) then begin
@@ -604,7 +604,7 @@ end;
 {==========================================================================}
 
 function TStRegIni.WriteRegData(Key : HKey; const ValueName : string; Data : Pointer;
-                                DType : DWORD; Size : Integer) : LongInt;
+                                DType : DWORD; Size : Integer) : Integer;
   {-write a value into the registry}
 begin
   Result := RegSetValueEx(Key, PChar(ValueName), 0, DType, Data, Size);
@@ -613,7 +613,7 @@ end;
 {==========================================================================}
 
 function TStRegIni.GetDataInfo(Key : HKey; const ValueName : string;
-                               var Size : LongInt; var DType : DWORD) : LongInt;
+                               var Size : Integer; var DType : DWORD) : Integer;
   {-get the size and type of a specific value in the registry}
 var
   PVName : PChar;
@@ -648,7 +648,7 @@ end;
 {==========================================================================}
 
 function TStRegIni.ReadRegData(Key : HKey; const ValueName : string; Data : Pointer;
-                               Size : LongInt; DType : DWORD) : LongInt;
+                               Size : Integer; DType : DWORD) : Integer;
   {-read a value from the registry}
 var
   PVName : PChar;
@@ -695,7 +695,7 @@ end;
 procedure TStRegIni.WriteBoolean(const ValueName : string; Value : Boolean);
   {-write Boolean value to the Ini file or registry}
 var
-  ECode    : LongInt;
+  ECode    : Integer;
   IValue   : DWORD;
   Key      : HKey;
   wResult  : Boolean;
@@ -742,7 +742,7 @@ var
   Key        : HKey;
   ECode,
 
-  ValSize    : LongInt;
+  ValSize    : Integer;
   ValType    : DWORD;
   LResult    : Pointer;
   Code       : Integer;
@@ -807,7 +807,7 @@ begin
               REG_SZ,
               REG_EXPAND_SZ : Result := StrIComp(PChar(LResult),riFalseString) <> 0;
               REG_BINARY,
-              REG_DWORD     : Result := (LongInt(LResult^) <> 0);
+              REG_DWORD     : Result := (Integer(LResult^) <> 0);
             else
               Result := Default;
             end;
@@ -832,7 +832,7 @@ end;
 procedure TStRegIni.WriteInteger(const ValueName : string; Value : DWORD);
   {-write an integer to the Ini file or the registry}
 var
-  ECode   : LongInt;
+  ECode   : Integer;
   Key     : HKey;
 
 begin
@@ -871,8 +871,8 @@ var
 
   ECode,
   Key        : HKey;
-  Len        : LongInt;
-  ValSize    : LongInt;
+  Len        : Integer;
+  ValSize    : Integer;
   ValType    : DWORD;
 
   LResult    : Pointer;
@@ -981,7 +981,7 @@ var
   Q     : array[1..MaxByteArraySize] of byte;
   S     : array[1..3] of AnsiChar;
 begin
-  if ((Length(IString) div 2) <> LongInt(Size)) then begin
+  if ((Length(IString) div 2) <> Integer(Size)) then begin
     Result := False;
     Exit;
   end;
@@ -1007,7 +1007,7 @@ procedure TStRegIni.WriteBinaryData(const ValueName : string; const Value; Size 
   {-write binary data of any form to Ini file or registry}
 var
   SValue : string;
-  ECode  : LongInt;
+  ECode  : Integer;
   Key    : HKey;
 begin
   riMode := riSet;
@@ -1045,11 +1045,11 @@ procedure TStRegIni.ReadBinaryData(const ValueName : string; const Default;
                                      var Value; var Size : Integer);
   {-read binary data of any form from Ini file or regsitry}
 var
-  ECode     : LongInt;
+  ECode     : Integer;
   Key       : HKey;
   Len       : Cardinal;
 
-  ValSize   : LongInt;
+  ValSize   : Integer;
   ValType   : DWORD;
 
   DefVals,
@@ -1114,7 +1114,7 @@ end;
 procedure TStRegIni.WriteString(const ValueName : string; const Value : string);
   {-write a string to the Ini file or registry}
 var
-  ECode  : LongInt;
+  ECode  : Integer;
   Key    : HKey;
   PValue : PChar;
 begin
@@ -1156,9 +1156,9 @@ end;
 function TStRegIni.ReadString(const ValueName : string; const Default : string) : string;
   {-read a string from an Ini file or the registry}
 var
-  ECode     : LongInt;
-  Len       : LongInt;
-  ValSize   : LongInt;
+  ECode     : Integer;
+  Len       : Integer;
+  ValSize   : Integer;
   Key       : HKey;
   ValType   : DWORD;
   TmpVal    : DWORD;
@@ -1241,7 +1241,7 @@ end;
 procedure TStRegIni.WriteFloat(const ValueName : string; const Value : Double);
   {-write floating point number to Ini file or registry}
 var
-  ECode   : LongInt;
+  ECode   : Integer;
   Key     : HKey;
   SValue  : string;
   sBuffer: ShortString;
@@ -1286,8 +1286,8 @@ var
   sBuffer: ShortString;
   ECode,
   Key        : HKey;
-  Len        : LongInt;
-  ValSize    : LongInt;
+  Len        : Integer;
+  ValSize    : Integer;
   ValType    : DWORD;
 
   LResult    : Pointer;
@@ -1374,7 +1374,7 @@ end;
 procedure TStRegIni.WriteDateTime(const ValueName : string; const Value : TDateTime);
   {-write a Delphi DateTime to Ini file or registry}
 var
-  ECode   : LongInt;
+  ECode   : Integer;
   Key     : HKey;
   SValue  : string;
   sBuffer: ShortString;
@@ -1417,8 +1417,8 @@ var
 
   ECode,
   Key        : HKey;
-  Len        : LongInt;
-  ValSize    : LongInt;
+  Len        : Integer;
+  ValSize    : Integer;
   ValType    : DWORD;
 
   LResult    : Pointer;
@@ -1539,7 +1539,7 @@ const
   TempValueName = '$ABC123098FED';
 var
   Disposition   : DWORD;
-  ECode         : LongInt;
+  ECode         : Integer;
   newKey        : HKey;
   PCSKey,
   PSKey         : PChar;
@@ -1567,7 +1567,7 @@ begin
       end;
     end else begin
       HoldKey := 0;
-      PCSKey := StrAlloc(Length(KeyName) + Integer(StrLen(riCurSubKey)) + 2); // GetMem(PCSKey, Length(KeyName)+1 + LongInt(strlen(riCurSubkey))+2);
+      PCSKey := StrAlloc(Length(KeyName) + Integer(StrLen(riCurSubKey)) + 2); // GetMem(PCSKey, Length(KeyName)+1 + Integer(strlen(riCurSubkey))+2);
       PSKey := StrAlloc(Length(KeyName)); // GetMem(PSKey, Length(KeyName)+1);
       try
         PCSKey[0] := #0;
@@ -1593,7 +1593,7 @@ begin
         if (HoldKey <> 0) then
           riPrimaryKey := HoldKey;
         StrDispose(PSKey); // FreeMem(PSKey,Length(KeyName)+1);
-        StrDispose(PCSKey); // FreeMem(PCSKey, Length(KeyName)+1 + LongInt(strlen(riCurSubkey))+2);
+        StrDispose(PCSKey); // FreeMem(PCSKey, Length(KeyName)+1 + Integer(strlen(riCurSubkey))+2);
       end;
     end;
 {$IFDEF ThreadSafe}
@@ -1647,7 +1647,7 @@ var
   VSize         : DWORD;
   Buffer        : array[0..MaxBufSize] of Char;
   S             : string;
-  ECode         : LongInt;
+  ECode         : Integer;
   Key           : HKey;
 
 begin
@@ -1736,7 +1736,7 @@ var
 
   S, TS        : string;
   KeyList      : TStringList;
-  ECode        : LongInt;
+  ECode        : Integer;
   Key          : HKey;
 
   ValType      : DWORD;
@@ -1809,7 +1809,7 @@ begin
                 REG_BINARY     : begin
                                   if ValType = REG_DWORD then
                                   begin
-                                    Str(LongInt(LResult^),sBuffer);
+                                    Str(Integer(LResult^),sBuffer);
                                     TS := string(sBuffer);
                                   end
                                   else
@@ -1851,7 +1851,7 @@ var
   NumSubKeys,
   NumValues  : DWORD;
   Key        : HKey;
-  ECode      : LongInt;
+  ECode      : Integer;
   TS,
   HldKey     : String;
   ASL        : TStringList;
@@ -1863,7 +1863,7 @@ var
        NK   : HKey;
        NSK,
        NV   : DWORD;
-       J    : LongInt;
+       J    : Integer;
        TS,
        HK   : String;
        PSK  : array[0..255] of char;
@@ -1984,7 +1984,7 @@ procedure TStRegIni.DeleteValue(const ValueName : string);
   {-delete value from Ini file section or registry subkey}
 var
   PVName : PChar;
-  ECode  : LongInt;
+  ECode  : Integer;
   Key    : HKey;
 begin
   riMode := riSet;
@@ -2034,7 +2034,7 @@ var
 
   CNSize       : DWORD;
   Key          : HKey;
-  ECode        : LongInt;
+  ECode        : Integer;
   SL           : TStringList;
 
 begin
@@ -2058,11 +2058,11 @@ begin
             for step := 0 to SL.Count-1 do begin
               {find maximum length of value names and values}
               P := pos('=',SL[step])-1;
-              if (P > LongInt(QIMaxVNLen)) then
+              if (P > Integer(QIMaxVNLen)) then
                 QIMaxVNLen := P;
 
               P := Length(SL[step]) - P;
-              if (P > LongInt(QIMaxDataLen)) then
+              if (P > Integer(QIMaxDataLen)) then
                 QIMaxDataLen := P;
             end;
           end;
@@ -2153,7 +2153,7 @@ var
   Key        : HKey;
   NumSubKeys,
   NumValues  : DWORD;
-  ECode      : LongInt;
+  ECode      : Integer;
   HPrime,
   HSubKy     : String;
   ASL        : TStringList;
@@ -2312,8 +2312,8 @@ var
   TSL     : TStringList;
   S,
   SKey    : string;
-  ECode   : LongInt;
-  P       : LongInt;
+  ECode   : Integer;
+  P       : Integer;
 
   hToken    : THandle;
   ptp,
@@ -2424,7 +2424,7 @@ procedure TStRegIni.UnLoadKey(const SubKey : string);
   {-remove a section from Ini file or subkey from registry}
   {Registry only: SubKey must have been loaded with LoadKey}
 var
-  ECode      : LongInt;
+  ECode      : Integer;
   HoldKey    : HKey;
 
   hToken    : THandle;
@@ -2490,7 +2490,7 @@ procedure TStRegIni.RestoreKey(const SubKey, KeyFile : string; Options : DWORD);
   {-restore a section of Ini file or subkey of registry}
   {Registry only: key being loaded must have been stored using SaveKey}
 var
-  ECode   : LongInt;
+  ECode   : Integer;
   Key     : HKey;
   hToken    : THandle;
   ptp,
@@ -2557,7 +2557,7 @@ procedure TStRegIni.ReplaceKey(const SubKey, InputFile, SaveFile : string);
   {               "new" key does not take affect unti re-boot}
 var
   DotPos    : Cardinal;
-  ECode     : LongInt;
+  ECode     : Integer;
   hToken    : THandle;
   ptp,
   tp        : TTokenPrivileges;
@@ -2628,7 +2628,7 @@ end;
 procedure TStRegIni.RegOpenRemoteKey(CompName : string);
   {-open a registry subkey on a remote computer}
 var
-  ECode    : LongInt;
+  ECode    : Integer;
 begin
   riMode := riSet;
 {$IFDEF ThreadSafe}
@@ -2666,7 +2666,7 @@ end;
 procedure TStRegIni.RegCloseRemoteKey;
   {-close a registry key on a remote computer}
 var
-  ECode   : LongInt;
+  ECode   : Integer;
 begin
   riMode := riSet;
 {$IFDEF ThreadSafe}
@@ -2703,7 +2703,7 @@ procedure TStRegIni.RegGetKeySecurity(const SubKey : string; var SD : TSecurityD
   //SZ: todo Subkey never used
 var
   Key       : HKey;
-  ECode     : LongInt;
+  ECode     : Integer;
   SDSize    : DWORD;
   SI        : SECURITY_INFORMATION;
   QI        : TQueryKeyInfo;
@@ -2769,7 +2769,7 @@ procedure TStRegIni.RegSetKeySecurity(const SubKey : string; SD : TSecurityDescr
   {-set security attributes for a registry key (WinNT only) }
 var
   Key       : HKey;
-  ECode     : LongInt;
+  ECode     : Integer;
   SI        : SECURITY_INFORMATION;
 
   hToken    : THandle;
