@@ -223,6 +223,9 @@ function Convert4ByteDate(FourByteDate : TStDate) : Word;
 
 implementation
 
+uses
+  StUtils;
+
 const
   First2Months = 59;           {1600 was a leap year}
   FirstDayOfWeek = Saturday;   {01/01/1600 was a Saturday}
@@ -264,17 +267,6 @@ begin
     Result := true
   else
     Result := false;
-end;
-
-procedure ExchangeLongInts(var I, J : Integer);
-register;
-asm
-  mov  ecx, [eax]
-  push ecx
-  mov  ecx, [edx]
-  mov  [eax], ecx
-  pop  ecx
-  mov  [edx], ecx
 end;
 
 procedure ExchangeStructs(var I, J; Size : Cardinal);
