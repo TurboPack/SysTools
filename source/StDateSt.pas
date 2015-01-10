@@ -180,6 +180,9 @@ procedure ResetInternationalInfo;
 
 implementation
 
+uses
+  Character;
+
 const
   First2Months = 59;           {1600 was a leap year}
   FirstDayOfWeek = Saturday;   {01/01/1600 was a Saturday}
@@ -312,7 +315,7 @@ var
     I := Default;
 
     StrChPosL(Picture, Ch, posLCCh);
-    Ch := StBase.Upcase(Ch);
+    Ch := Ch.ToUpper;
     StrChPosL(Picture, Ch, posUCCh);
 
     if (posLCCh < 1) or ((posUCCh > 0) and (posUCCh < posLCCh)) then
@@ -324,7 +327,7 @@ var
 
     PTmp := '';
     C := Length(Picture);
-    while (posLCCh <= C) and (StBase.Upcase(Picture[posLCCh]) = Ch) do begin
+    while (posLCCh <= C) and (Picture[posLCCh].ToUpper = Ch) do begin
       if S[posLCCh] <> ' ' then
         AppendChar(PTmp,Char(S[posLCCh]));
       Inc(posLCCh);
@@ -409,10 +412,10 @@ var
     UpCh : Char;
     P    : Integer;
   begin
-    UpCh := StBase.Upcase(OldCh);
+    UpCh := OldCh.ToUpper;
     if (StrChPosL(Picture,OldCh,P)) or (StrChPosL(Picture,UpCh,P)) then
       for I := 1 to Length(Picture) do
-        if StBase.Upcase(Picture[I]) = UpCh then
+        if Picture[I].ToUpper = UpCh then
           Picture[I] := NewCh;
     Result := Picture;
   end;
@@ -456,7 +459,7 @@ var
   begin
     {find the start of the subfield}
     OK := StrChPosL(Picture,Ch,J);
-    UCh := StBase.Upcase(Ch);
+    UCh := Ch.ToUpper;
     if (NOT OK) then
     begin
       if NOT (StrChPosL(Picture, UCh, J)) then
@@ -466,7 +469,7 @@ var
     {find the end of the subfield}
     K := J;
     C := Length(Picture);
-    while (J <= C) and (StBase.Upcase(Picture[J]) = UCh) do
+    while (J <= C) and (Picture[J].ToUpper = UCh) do
       Inc(J);
     Dec(J);
 
@@ -500,14 +503,14 @@ var
     Done := False;
     CPJ := Picture[J];
 
-    while (stBase.Upcase(CPJ) = UCh) and not Done do
+    while (CPJ.ToUpper = UCh) and not Done do
     begin
       CTI := Tmp[L];
       if (UCh = NameOnlyU) or (UCh = WeekDayOnlyU) then
       begin
         case CPJ of
           NameOnlyU, WeekDayOnlyU :
-            CTI := stBase.Upcase(CTI);
+            CTI := CTI.ToUpper;
         end;
       end
       else{change spaces to 0's if desired}
@@ -821,7 +824,7 @@ var
       OK := StrChPosL(Result, MC, I);
       MCT := MC;
       if not OK then begin
-        MCT := StBase.UpCase(MC);
+        MCT := MC.ToUpper;
         OK := StrChPosL(Result, MCT, I);
       end;
       if NOT OK then
@@ -838,7 +841,7 @@ var
         {choose blank/zero padding}
         case AL of
           1 : if MCT = MC then
-                Result := SubstCharSim(Result, MCT, StBase.UpCase(MCT));
+                Result := SubstCharSim(Result, MCT, MCT.ToUpper);
           2 : if MCT <> MC then
                 Result := SubstCharSim(Result, MCT, MC);
         end;
@@ -901,7 +904,7 @@ var
       OK := StrChPosS(Temp, MC, I);
       MCT := MC;
       if NOT OK then begin
-        MCT := StBase.UpCase(MC);
+        MCT := MC.ToUpper;
         OK := StrChPosS(Temp, MCT, I);
       end;
       if NOT OK then
@@ -920,7 +923,7 @@ var
         {choose blank/zero padding}
         case AL of
           1 : if MCT = MC then
-                Temp := SubstCharSim(Temp, MCT, StBase.UpCase(MCT));
+                Temp := SubstCharSim(Temp, MCT, MCT.ToUpper);
           2 : if MCT <> MC then
                 Temp := SubstCharSim(Temp, MCT, MC);
         end;
@@ -937,7 +940,7 @@ var
         WC := I+1;
         while (WC <= Length(Temp)) AND (NOT Stop) do
         begin
-          if CharInSet(LoCase(Temp[WC]), [MonthOnly,DayOnly,YearOnly,NameOnly]) then
+          if CharInSet(Temp[WC].ToLower, [MonthOnly,DayOnly,YearOnly,NameOnly]) then
             Stop := TRUE
           else
             Inc(WC);

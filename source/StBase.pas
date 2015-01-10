@@ -416,18 +416,6 @@ procedure HugeFreeMem(var P : Pointer; Size : Integer);
 {.Z-}
 
 
-{---General purpose character manipulation---}
-
-function Upcase(C : AnsiChar) : AnsiChar; overload;
-function Upcase(C : WideChar) : WideChar; overload;
-  {-Return the uppercase of a character. Provides international character
-    support.}
-
-function LoCase(C : AnsiChar) : AnsiChar; overload;
-function LoCase(C : WideChar) : WideChar; overload;
-  {-Return the lowercase of a character. Provides international character
-    support.}
-
 {---General comparison and searching---}
 
 function CompareLetterSets(Set1, Set2 : Integer) : Cardinal;
@@ -483,7 +471,7 @@ procedure RaiseStWin32ErrorEx(ExceptionClass : EStExceptionClass; Code : Integer
 implementation
 
 uses
-  Math;
+  Math, Character;
 
 procedure RaiseStError(ExceptionClass : EStExceptionClass; Code : Integer);
 var
@@ -584,35 +572,6 @@ procedure HugeMove(const Src; var Dest; Count : Integer);
 begin
   Move(Src, Dest, Count);
 end;
-
-function UpCase(C: AnsiChar) : AnsiChar;
-asm
-  and   eax, 0FFh
-  push  eax
-  call  CharUpperA
-end;
-
-function UpCase(C: WideChar) : WideChar;
-asm
-  and   eax, 0FFFFh
-  push  eax
-  call  CharUpperW
-end;
-
-function LoCase(C: AnsiChar) : AnsiChar; assembler;
-asm
-  and   eax, 0FFh
-  push  eax
-  call  CharLowerA
-end;
-
-function LoCase(C: WideChar) : WideChar; assembler;
-asm
-  and   eax, 0FFFFh
-  push  eax
-  call  CharLowerW
-end;
-
 
 function ProductOverflow(A, B : Integer) : Boolean;
 register;
@@ -883,7 +842,7 @@ begin
 
   {check for a string of the form nnnnH}
   Offset := 0;
-  if (stbase.upcase(S[LenS]) = 'H') then begin
+  if S[LenS].ToUpper = 'H' then begin
     {if the first non-blank char is the final character, then the
      string is just of the form <spaces>H and is invalid}
     if (NBCInx = LenS) then begin
@@ -898,7 +857,7 @@ begin
   {check for a string of the form 0Xnnnn}
   else begin
     if (NBCInx < LenS) and
-       (S[NBCInx] = '0') and (stbase.upcase(S[NBCInx+1]) = 'X') then begin
+       (S[NBCInx] = '0') and (S[NBCInx+1].ToUpper = 'X') then begin
       S[NBCInx] := ' ';
       S[NBCInx+1] := '$';
     end;
