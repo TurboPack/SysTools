@@ -403,10 +403,6 @@ procedure HugeFreeMem(var P : Pointer; Size : Integer);
 
 {---General comparison and searching---}
 
-function Search(const Buffer; BufLength : Cardinal; const Match;
-                MatLength : Cardinal; var Pos : Cardinal) : Boolean;
-  {-Search a buffer for the specified pattern of bytes.}
-
 function SearchUC(const Buffer; BufLength : Cardinal; const Match;
                   MatLength : Cardinal; var Pos : Cardinal) : Boolean;
   {-Search a buffer for a specified pattern of bytes. This search is not case
@@ -547,66 +543,6 @@ asm
   mov ecx,True
 @1:
   mov eax,ecx
-end;
-
-function Search(const Buffer; BufLength : Cardinal; const Match;
-                MatLength : Cardinal; var Pos : Cardinal) : Boolean;
-asm
-  push   ebx
-  push   edi
-  push   esi
-
-  cld
-  mov    edi, eax
-  mov    ebx, eax
-  mov    esi, ecx
-  mov    ecx, edx
-  mov    edx, MatLength
-  or     edx, edx
-  jz     @@NotFound
-
-  mov    al, [esi]
-  inc    esi
-  dec    edx
-  sub    ecx, edx
-  jbe    @@NotFound
-
-@@Next:
-  repne  scasb
-  jne    @@NotFound
-  or     edx, edx
-  jz     @@Found
-
-  push   ecx
-  push   edi
-  push   esi
-
-  mov    ecx, edx
-  repe   cmpsb
-
-  pop    esi
-  pop    edi
-  pop    ecx
-
-  jne    @@Next            {Try again if no match}
-
-{Calculate number of bytes searched and return}
-@@Found:
-  mov    esi, Pos
-  dec    edi
-  sub    edi, ebx
-  mov    eax, 1
-  mov    [esi], edi
-  jmp    @@SDone
-
-{Match was not found}
-@@NotFound:
-  xor    eax, eax
-
-@@SDone:
-  pop    esi
-  pop    edi
-  pop    ebx
 end;
 
 function SearchUC(const Buffer; BufLength : Cardinal; const Match;
