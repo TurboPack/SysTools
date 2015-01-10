@@ -1610,37 +1610,9 @@ end;
 
 function StrChPosS(const P : ShortString; C : AnsiChar; var Pos : Integer) : Boolean;
   {-Return the position of a specified character within a string.}
-asm
-  push  ebx             { Save registers }
-  push  edi
-
-  xor   edi, edi        { Zero counter }
-  xor   ebx, ebx
-  add   bl, [eax]       { Get input length }
-  jz    @@NotFound
-  inc   eax
-
-@@Loop:
-  inc   edi             { Increment counter }
-  cmp   [eax], dl       { Did we find it? }
-  jz    @@Found
-  inc   eax             { Increment pointer }
-
-  cmp   edi, ebx        { End of string? }
-  jnz   @@Loop          { If not, loop }
-
-@@NotFound:
-  xor   eax, eax        { Not found, zero EAX for False }
-  mov   [ecx], eax
-  jmp   @@Done
-
-@@Found:
-  mov   [ecx], edi      { Set Pos }
-  mov   eax, 1          { Set EAX to True }
-
-@@Done:
-  pop   edi             { Restore registers }
-  pop   ebx
+begin
+  Pos := System.Pos(C, P);
+  Result := Pos <> 0;
 end;
 
 function StrStPosS(const P, S : ShortString; var Pos : Cardinal) : Boolean;
