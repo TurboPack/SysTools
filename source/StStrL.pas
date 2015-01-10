@@ -149,9 +149,6 @@ function CenterChL(const S : String; C : Char; Len : Cardinal) : String;
 function CenterL(const S : String; Len : Cardinal) : String;
   {-Pad a string on the left and right with spaces.}
 
-function DetabL(const S : AnsiString; TabSize : Byte) : AnsiString;
-  {-Expand tabs in a string to blanks.}
-
 function ScrambleL(const S, Key : AnsiString) : AnsiString;
   {-Encrypt / Decrypt string with enhanced XOR encryption.}
 
@@ -744,88 +741,6 @@ function CenterL(const S : String; Len : Cardinal) : String;
   {-Pad a string on the left and right with spaces.}
 begin
   Result := CenterChL(S, ' ', Len);
-end;
-
-function DetabL(const S : AnsiString; TabSize : Byte) : AnsiString;   //TODO-UNICODE
-  {-Expand tabs in a string to blanks.}
-var
-  NumTabs : Integer;
-begin
-  Result := '';
-  if S = '' then Exit;
-  if TabSize = 0 then Exit;
-  Result := S;
-  NumTabs := CharCountL(string(S), #9);
-  if NumTabs = 0 then Exit;
-  SetLength(Result, Length(Result)+NumTabs*(Pred(TabSize)));
-asm
-  push   ebx                { Save registers since we'll be changing them. }
-  push   edi
-  push   esi
-
-  mov    edi, Result        { EDI => output string. }
-  mov    esi, S             { ESI => input string. }
-  xor    ebx, ebx
-  mov    bl, TabSize
-  mov    edi, [edi]
-  xor    ecx, ecx           { Default input length = 0. }
-  xor    edx, edx           { Zero EDX for output length }
-  xor    eax, eax           { Zero EAX }
-  mov    ecx, [esi-StrOffset].LStrRec.Length  { Get input length. }
-  or     ebx, ebx           { TabSize = 0? }
-  jnz    @@DefLength
-  mov    ecx, edx           { Return zero length string if TabSize = 0. }
-
-@@DefLength:
-  mov    [edi-StrOffset].LStrRec.Length, ecx  { Store default output length. }
-  or     ecx, ecx
-  jz     @@Done             { Done if empty input string. }
-
-@@Next:
-  mov    al, [esi]          { Next input character. }
-  inc    esi
-  cmp    al, 09h            { Is it a tab? }
-  jz     @@Tab              { Yes, compute next tab stop. }
-  mov    [edi], al          { No, store to output. }
-  inc    edi
-  inc    edx                { Increment output length. }
-  dec    ecx                { Decrement input length. }
-  jnz    @@Next
-  jmp    @@StoreLen         { Loop termination. }
-
-@@Tab:
-  push   ecx                { Save input length. }
-  push   edx                { Save output length. }
-  mov    eax, edx           { Get current output length in EDX:EAX. }
-  xor    edx, edx
-  div    ebx                { Output length MOD TabSize in DX. }
-  mov    ecx, ebx           { Calc number of spaces to insert... }
-  sub    ecx, edx           {  = TabSize - Mod value. }
-  pop    edx
-  add    edx, ecx           { Add count of spaces into current output length. }
-
-  mov    eax,$2020          { Blank in AH, Blank in AL. }
-  shr    ecx, 1             { Store blanks. }
-  rep    stosw
-  adc    ecx, ecx
-  rep    stosb
-  pop    ecx                { Restore input length. }
-  dec    ecx
-  jnz    @@Next
-  {jmp    @@Next}           { Back for next input. }
-
-@@StoreLen:
-  xor    ebx, ebx
-  mov    [edi], bl          { Store terminating null }
-  mov    eax, edx
-  sub    edi, eax
-  mov    [edi-StrOffset].LStrRec.Length, edx  { Store final length. }
-
-@@Done:
-  pop    esi
-  pop    edi
-  pop    ebx
-end;
 end;
 
 function ScrambleL(const S, Key : AnsiString) : AnsiString;
