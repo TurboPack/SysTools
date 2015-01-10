@@ -399,19 +399,10 @@ function DestroyNode(Container : TStContainer; Node : TStNode;
 
 {.Z+}
 {---Huge memory routines---}
-function HugeCompressRLE(const InBuffer; InLen : Integer;
-                         var OutBuffer) : Integer;
-  {-Run length encode a buffer}
-
-function HugeDecompressRLE(const InBuffer; InLen : Integer;
-                           var OutBuffer; OutLen : Integer) : Integer;
-  {-Run length decode a buffer}
-
 procedure HugeFillChar(var Dest; Count : Integer; Value : Byte);
   {-Fill huge memory block with byte value}
 
-procedure HugeFillStruc(var Dest; Count : Integer;
-                        const Value; ValSize : Cardinal);
+procedure HugeFillStruc(var ADest; ADestSize: Integer; const ASource; ASourceSize: Integer);
   {-Fill huge memory block with structure value}
 
 procedure HugeMove(const Src; var Dest; Count : Integer);
@@ -491,6 +482,9 @@ procedure RaiseStWin32ErrorEx(ExceptionClass : EStExceptionClass; Code : Integer
 
 implementation
 
+uses
+  Math;
+
 procedure RaiseStError(ExceptionClass : EStExceptionClass; Code : Integer);
 var
   E : EStException;
@@ -557,178 +551,21 @@ begin
   FillChar(Dest, Count, Value);
 end;
 
-function HugeCompressRLE(const InBuffer; InLen : Integer;
-                         var OutBuffer) : Integer;
-    {assumes OutBuffer is at least InLen long}
-    {returns -1 if InLen <= 1 or if output length would exceed InLen}
-    {otherwise returns compressed length}
-    {does not initialize OutBuffer if the result is -1}
-  asm
-    {InBuffer = eax, InLen = edx, OutBuffer = ecx}
-    push ebx
-    push esi
-    push edi
-
-    push OutBuffer       {save output base for later}
-
-    cmp InLen,1
-    jle @A               {can't compress if input length <= 1}
-
-    mov esi,InBuffer     {esi = current input offset}
-    mov edi,OutBuffer    {edi = current output offset}
-    mov eax,InLen
-    mov ebx,edi          {ebx = control byte offset}
-    mov byte ptr [ebx],0 {reset first control byte}
-    mov edx,edi
-    add edx,eax          {edx = endpoint of output buffer}
-    dec edx              {reserve an extra space for control byte}
-    mov ecx,esi
-    add ecx,eax          {ecx = endpoint of input buffer}
-    dec ecx              {reduce by one for convenience below}
-    dec esi              {decrement first time through}
-
-@1: inc esi              {next input byte}
-    cmp esi,ecx
-    ja  @9               {exit at end of input}
-    mov al,[esi]         {load compare byte}
-    jae @5               {can't be a match if on last byte of input}
-    cmp [esi+1],al       {is it a run?}
-    jne @5               {jump if not}
-
-    {starting a run}
-    mov ebx,edi          {start a new control sequence}
-    mov byte ptr [ebx],1 {first byte in run}
-    mov [ebx+1],al       {store run byte}
-@2: inc esi              {next input byte}
-    cmp esi,ecx          {end of input?}
-    ja  @3               {exit this loop if so}
-    cmp [esi],al         {next byte a match?}
-    jne @3               {jump if not a run}
-    cmp byte ptr [ebx],StRLEMaxCount {max run length?}
-    je  @3               {exit this loop if so}
-    inc byte ptr [ebx]   {increment control byte}
-    jmp @2               {stay in the run loop}
-@3: or byte ptr [ebx],StRLERunMode {flag control byte as a run}
-    inc edi              {step past control and run bytes}
-    inc edi
-    cmp edi,edx          {filled up output buffer?}
-    jae @A               {jump if so}
-    mov ebx,edi          {set up new control byte}
-    mov byte ptr [ebx],0 {first byte in non-run}
-    dec esi              {back up one byte}
-    jmp @1               {classify run status again}
-
-@5: {not a run}
-    cmp edi,ebx          {the start of a new non-run?}
-    ja  @6               {jump if not}
-    inc edi              {next output position, guaranteed ok}
-@6: cmp byte ptr [ebx],StRLEMaxCount {max non-run length?}
-    jb  @7
-    mov ebx,edi          {start a new control sequence}
-    mov byte ptr [ebx],0 {reset control byte}
-    inc edi              {next output position}
-    cmp edi,edx          {filled up output buffer?}
-    jae @A               {jump if so}
-@7: inc byte ptr [ebx]   {increment control byte}
-    mov [edi],al         {copy input byte}
-    inc edi              {next output position}
-    cmp edi,edx          {filled up output buffer?}
-    jae @A               {jump if so}
-    jmp @1               {back to outer loop}
-
-@9: pop eax              {get output base again}
-    sub edi,eax          {get output length}
-    jmp @B
-@A: pop eax              {balance stack}
-    mov edi,-1           {could not compress input}
-@B: mov eax,edi          {return output length}
-
-    pop edi
-    pop esi
-    pop ebx
+procedure HugeFillStruc(var ADest; ADestSize: Integer; const ASource; ASourceSize: Integer);
+var
+  iSize: Integer;
+  pDest: Pointer;
+begin
+  pDest := @ADest;
+  iSize := Min(ADestSize, ASourceSize);
+  while iSize > 0 do
+  begin
+    Move(ASource, pDest^, iSize);
+    Inc(NativeInt(pDest), iSize);
+    ADestSize := ADestSize - iSize;
+    iSize := Min(ADestSize, ASourceSize);
   end;
-
-function HugeDecompressRLE(const InBuffer; InLen : Integer;
-                           var OutBuffer; OutLen : Integer) : Integer;
-    {returns -1 if InLen is <= 0 or output length > OutLen}
-    {otherwise returns decompressed length}
-  asm
-    {InBuffer = eax, InLen = edx, OutBuffer = ecx, OutLen = stack}
-    push ebx
-    push esi
-    push edi
-
-    push OutBuffer       {save output base for later}
-
-    cmp InLen,0          {anything to decompress?}
-    jle @A               {jump if not}
-
-    mov esi,InBuffer     {esi = current input offset}
-    mov edi,OutBuffer    {edi = current output offset}
-    mov ebx,esi
-    add ebx,InLen        {ebx = endpoint of input buffer}
-    mov edx,OutLen       {edx = space free in output buffer}
-
-@1: cmp esi,ebx          {end of input?}
-    jae @9               {jump if so}
-    mov al,[esi]         {get next control byte}
-    inc esi              {move to run data byte}
-    mov cl,al
-    and ecx,StRLEMaxCount{ecx = bytes for output}
-    sub edx,ecx          {is there space?}
-    jc  @A               {jump if not}
-    test al,StRLERunMode {is it a run?}
-    jz @5                {jump if not}
-
-    {a run}
-    mov al,[esi]         {get run data}
-    inc esi              {next input position}
-    rep stosb            {store it}
-    jmp @1               {loop}
-
-@5: {not a run}
-    rep movsb            {copy them}
-    jmp @1               {loop}
-
-@9: pop eax              {get output base again}
-    sub edi,eax          {get output length}
-    jmp @B
-@A: pop eax              {balance stack}
-    mov edi,-1           {could not decompress input}
-@B: mov eax,edi          {return output length}
-
-    pop  edi
-    pop  esi
-    pop  ebx
-  end;
-
-procedure HugeFillStruc(var Dest; Count : Integer;
-                        const Value; ValSize : Cardinal); assembler;
-register;
-  asm
-    {eax = Dest, edx = Count, ecx = Value}
-    push ebx
-    push esi
-    push edi
-    mov edi,Dest            {edi -> Dest}
-    mov eax,Value           {eax -> Value}
-    {mov edx,Count}         {edx = Count, register parameter}
-    mov ebp,ValSize         {ebp = ValSize}
-    jmp @2
-@1: mov ecx,ebp             {ecx = element ValSize}
-    mov esi,eax             {esi -> Value}
-    mov bx,cx
-    shr ecx,2
-    rep movsd
-    mov cx,bx
-    and cx,3
-    rep movsb
-@2: sub edx,1               {decrement elements left to fill}
-    jnc @1                  {loop for all elements}
-    pop edi
-    pop esi
-    pop ebx
-  end;
+end;
 
 procedure HugeFreeMem(var P : Pointer; Size : Integer);
 begin
