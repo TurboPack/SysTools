@@ -115,9 +115,6 @@ function LongFlagIsSet(Flags, FlagMask : Integer) : Boolean;
 procedure ExchangeBytes(var I, J : Byte);
   {-Exchange the values in two bytes}
 
-procedure ExchangeWords(var I, J : Word);
-  {-Exchange the values in two words}
-
 procedure ExchangeLongInts(var I, J : Integer);
   {-Exchange the values in two long integers}
 
@@ -207,17 +204,6 @@ asm
   mov  ch, [edx]
   mov  [edx], cl
   mov  [eax], ch
-end;
-
-procedure ExchangeWords(var I, J : Word);
-register;
-asm
-  mov  cx, [eax]
-  push ecx
-  mov  cx, [edx]
-  mov  [eax], cx
-  pop  ecx
-  mov  [edx], cx
 end;
 
 procedure ExchangeLongInts(var I, J : Integer);
