@@ -201,9 +201,6 @@ function CompStringL(const S1, S2 : String) : Integer;
 function CompUCStringL(const S1, S2 : String) : Integer;
   {-Compare two strings. This compare is not case sensitive.}
 
-function MakeLetterSetL(const S : AnsiString) : Integer;
-  {-Return a bit-mapped long storing the individual letters contained in S.}
-
 procedure BMMakeTableL(const MatchString : UnicodeString; var BT : BTable); overload;
   {-Build a Boyer-Moore link table}
 
@@ -1078,57 +1075,6 @@ function CompUCStringL(const S1, S2 : String) : Integer; register;
   {-Compare two strings. This compare is not case sensitive.}
 begin
   Result := AnsiCompareText(S1, S2);
-end;
-
-function MakeLetterSetL(const S : AnsiString) : Integer; register;
-  {-Return a bit-mapped long storing the individual letters contained in S.}
-asm
-  push   ebx                { Save registers }
-  push   esi
-
-  mov    esi, eax           { ESI => string }
-  xor    ecx, ecx           { Zero ECX }
-  xor    edx, edx           { Zero EDX }
-  {or     edx, edx}
-  or     eax, eax
-  jz     @@Exit
-  xor    eax, eax           { Zero EAX }
-  add    ecx, [esi-StrOffset].LStrRec.Length
-  jz     @@Exit             { Done if ECX is 0 }
-
-@@Next:
-  mov    al, [esi]          { EAX has next char in S }
-  inc    esi
-
-  push   ecx                { Save registers }
-  push   edx
-  push   eax                { Push Char onto stack for CharUpper }
-  call   CharUpper
-  pop    edx                { Restore registers }
-  pop    ecx
-
-  sub    eax, 'A'           { Convert to bit number }
-  cmp    eax, 'Z'-'A'       { Was char in range 'A'..'Z'? }
-  ja     @@Skip             { Skip it if not }
-
-  mov    ebx, eax               { Exchange EAX and ECX }
-  mov    eax, ecx
-  mov    ecx, ebx
-  ror    edx, cl
-  or     edx, 01h               { Set appropriate bit }
-  rol    edx, cl
-  mov    ebx, eax               { Exchange EAX and ECX }
-  mov    eax, ecx
-  mov    ecx, ebx
-
-@@Skip:
-  dec    ecx
-  jnz    @@Next             { Get next character }
-
-@@Exit:
-  mov    eax, edx           { Move EDX to result }
-  pop    esi                { Restore registers }
-  pop    ebx
 end;
 
 procedure BMMakeTableL(const MatchString : UnicodeString; var BT : BTable);
