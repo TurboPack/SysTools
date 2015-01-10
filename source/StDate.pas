@@ -269,58 +269,6 @@ begin
     Result := false;
 end;
 
-procedure ExchangeStructs(var I, J; Size : Cardinal);
-register;
-asm
-  push edi
-  push ebx
-  push ecx
-  shr  ecx, 2
-  jz   @@LessThanFour
-
-@@AgainDWords:
-  mov  ebx, [eax]
-  mov  edi, [edx]
-  mov  [edx], ebx
-  mov  [eax], edi
-  add  eax, 4
-  add  edx, 4
-  dec  ecx
-  jnz  @@AgainDWords
-
-@@LessThanFour:
-  pop  ecx
-  and  ecx, $3
-  jz   @@Done
-  mov  bl, [eax]
-  mov  bh, [edx]
-  mov  [edx], bl
-  mov  [eax], bh
-  inc  eax
-  inc  edx
-  dec  ecx
-  jz   @@Done
-
-  mov  bl, [eax]
-  mov  bh, [edx]
-  mov  [edx], bl
-  mov  [eax], bh
-  inc  eax
-  inc  edx
-  dec  ecx
-  jz   @@Done
-
-  mov  bl, [eax]
-  mov  bh, [edx]
-  mov  [edx], bl
-  mov  [eax], bh
-
-@@Done:
-  pop  ebx
-  pop  edi
-end;
-
-
 function ResolveEpoch(Year, Epoch : Integer) : Integer;
   {-Convert 2-digit year to 4-digit year according to Epoch}
 var
