@@ -237,7 +237,7 @@ begin
   for iCount := 0 to ACount - 1 do
   begin
     Move(AFiller, pDest^, SizeOf(AFiller));
-    Inc(Integer(pDest), SizeOf(AFiller));
+    Inc(NativeInt(pDest), SizeOf(AFiller));
   end;
 end;
 
