@@ -12,9 +12,14 @@ type
       Left: Integer;
       Right: Integer;
     end;
+    TWordStruct = record
+      Left: Word;
+      Right: Word;
+    end;
   published
     procedure TestExchangeLongInts;
     procedure TestExchangeStructs;
+    procedure TestFillWord;
   end;
 
 implementation
@@ -54,6 +59,21 @@ begin
 
   Check(pRight.Left = 1);
   Check(pRight.Right = 2);
+end;
+
+procedure TTestStUtils.TestFillWord;
+var
+  pStruct: TWordStruct;
+  iWord: Word;
+begin
+  pStruct.Left := 1;
+  pStruct.Right := 2;
+
+  iWord := 3;
+  FillWord(pStruct, SizeOf(pStruct), iWord);
+
+  Check(pStruct.Left = 3);
+  Check(pStruct.Right = 3);
 end;
 
 initialization

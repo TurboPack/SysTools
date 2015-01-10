@@ -122,7 +122,7 @@ procedure ExchangeStructs(var I, J; Size : Integer);
   {-Exchange the values in two structures}
 
 
-procedure FillWord(var Dest; Count : Cardinal; Filler : Word);
+procedure FillWord(var ADest; ACount: Integer; AFiller : Word);
   {-Fill memory with a word-sized filler}
 
 procedure FillStruct(var Dest; Count : Cardinal; var Filler; FillerSize : Cardinal);
@@ -222,21 +222,23 @@ begin
   if Size <= 0 then
     Exit;
 
-  pTemp := TBytes.Create(Size);
+  SetLength(pTemp, Size);
   Move(I, pTemp[0], Length(pTemp));
   Move(J, I, Length(pTemp));
-  Move(I, pTemp[0], Length(pTemp));
+  Move(pTemp[0], J, Length(pTemp));
 end;
 
-procedure FillWord(var Dest; Count : Cardinal; Filler : Word);
-asm
-  push edi
-  mov   edi,Dest
-  mov   ax,Filler
-  mov   ecx,Count
-  cld
-  rep  stosw
-  pop   edi
+procedure FillWord(var ADest; ACount: Integer; AFiller : Word);
+var
+  pDest: Pointer;
+  iCount: Integer;
+begin
+  pDest := @ADest;
+  for iCount := 0 to ACount - 1 do
+  begin
+    Move(AFiller, pDest^, SizeOf(AFiller));
+    Inc(Integer(pDest), SizeOf(AFiller));
+  end;
 end;
 
 procedure FillStruct(var Dest; Count : Cardinal; var Filler;
