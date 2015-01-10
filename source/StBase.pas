@@ -401,14 +401,6 @@ procedure HugeFreeMem(var P : Pointer; Size : Integer);
 {.Z-}
 
 
-{---General comparison and searching---}
-
-function SearchUC(const Buffer; BufLength : Cardinal; const Match;
-                  MatLength : Cardinal; var Pos : Cardinal) : Boolean;
-  {-Search a buffer for a specified pattern of bytes. This search is not case
-    sensitive.}
-
-
 {---Miscellaneous---}
 
 {.Z+}
@@ -543,120 +535,6 @@ asm
   mov ecx,True
 @1:
   mov eax,ecx
-end;
-
-function SearchUC(const Buffer; BufLength : Cardinal; const Match;
-                  MatLength: Cardinal; var Pos : Cardinal) : Boolean;
-
-asm
-  push   ebx                { Save registers }
-  push   edi
-  push   esi
-  push   eax
-
-  mov    edi, eax           { EDI = ^Buffer }
-  mov    esi, ecx           { ESI = ^Match }
-  mov    ecx, edx           { ECX = BufLength }
-  mov    edx, MatLength     { EDX = MatLength }
-  xor    ebx, ebx           { EBX will be used for comparison }
-  or     edx, edx           { Is MatLength 0? }
-  jz     @@NotFound
-
-  mov    al, [esi]          { Get first character }
-  inc    esi
-  and    eax, 0FFh          { Zero all but lower byte }
-
-  push   ecx                { Save registers }
-  push   edx
-  push   eax
-  call   CharUpper          { Upcase character }
-  pop    edx
-  pop    ecx
-
-  mov    bl, al             { Move uppercased char to BL }
-  dec    edx                { Dec MatLength }
-  sub    ecx, edx           { Is MatLength > BufLength? }
-  jbe    @@NotFound
-
-@@Next:
-  mov    al, [edi]
-  inc    edi
-
-  push   ecx                { Save registers }
-  push   edx
-  push   eax
-  call   CharUpper          { Upcase character in buffer }
-  pop    edx
-  pop    ecx
-
-  cmp    bl, al             { Match? }
-  je     @@CompRest         { Compare rest of string }
-@@RestNoMatch:
-  dec    ecx                { End of string? }
-  jnz    @@Next             { Try next char }
-  jmp    @@NotFound         { Done if not found }
-
-@@CompRest:
-  or     edx, edx           { Was there only one character? }
-  jz     @@Found            { If so, we're done }
-
-  push   ebx                { Save registers }
-  push   ecx
-  push   edi
-  push   esi
-
-  mov    ecx, edx
-
-@@CompLoop:
-  mov    al, [esi]
-  inc    esi
-
-  push   ecx                { Save registers }
-  push   edx
-  push   eax
-  call   CharUpper          { Upcase character in buffer }
-
-  mov    bl, al
-  mov    al, [edi]
-  inc    edi
-
-  push   eax
-  call   CharUpper          { Upcase character in buffer }
-  pop    edx
-  pop    ecx
-
-  cmp    bl, al
-  jne    @@NoComp
-  dec    ecx
-  jnz    @@CompLoop
-
-@@NoComp:
-  pop    esi                { Restore registers }
-  pop    edi
-  pop    ecx
-  pop    ebx
-
-  jne    @@RestNoMatch      { Try again if no match }
-
-{Calculate number of bytes searched and return}
-@@Found:
-  pop    ebx
-  mov    esi, Pos
-  dec    edi
-  sub    edi, ebx
-  mov    eax, 1
-  mov    [esi], edi
-  jmp    @@SDone
-
-{Match was not found}
-@@NotFound:
-  pop    eax
-  xor    eax, eax
-
-@@SDone:
-  pop    esi
-  pop    edi
-  pop    ebx
 end;
 
 {---primitives for converting strings to integers---}
