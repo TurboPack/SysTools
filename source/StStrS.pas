@@ -133,9 +133,6 @@ function CenterChS(const S : ShortString; C : AnsiChar; Len : Cardinal) : ShortS
 function CenterS(const S : ShortString; Len : Cardinal) : ShortString;
   {-Pad a string on the left and right with spaces.}
 
-function EntabS(const S : ShortString; TabSize : Byte) : ShortString;
-  {-Convert blanks in a string to tabs.}
-
 function DetabS(const S : ShortString; TabSize : Byte) : ShortString;
   {-Expand tabs in a string to blanks.}
 
@@ -743,103 +740,6 @@ function CenterS(const S : ShortString; Len : Cardinal) : ShortString;
   {-Pad a string on the left and right with spaces.}
 begin
   Result := CenterChS(S, ' ', Len);
-end;
-
-function EntabS(const S : ShortString; TabSize : Byte) : ShortString;
-  {-Convert blanks in a string to tabs.}
-register;
-asm
-  push   ebx                 { Save registers }
-  push   edi
-  push   esi
-
-  mov    esi, eax            { ESI => input string }
-  mov    edi, ecx            { EDI => output string }
-  xor    ebx, ebx            { Initial SpaceCount = 0 }
-  xor    ecx, ecx            { Default input length = 0 }
-  and    edx, 0FFh           { Default output length = 0 in DH, TabSize in DL }
-
-  mov    cl, [esi]           { Get input length }
-  inc    esi
-  or     edx, edx            { TabSize = 0? }
-  jnz    @@DefLength
-  mov    ecx, edx            { Return zero length string if TabSize = 0 }
-
-@@DefLength:
-  mov    [edi], cl           { Store default output length }
-  inc    edi
-  or     ecx, ecx
-  jz     @@Done              { Done if empty input string }
-  inc    ch                  { Current input position=1 }
-
-@@Next:
-  or     ebx, ebx            { Compare SpaceCount to 0 }
-  jz     @@NoTab             { If SpaceCount=0 then no tab insert here }
-  xor    eax, eax
-  mov    al, ch              { Ipos to AL }
-  div    dl                  { Ipos DIV TabSize }
-  cmp    ah, 1               { Ipos MOD TabSize = 1 ? }
-  jnz    @@NoTab             { If not, no tab insert here }
-  sub    edi, ebx            { Remove unused characters from output string }
-  sub    dh, bl              { Reduce Olen by SpaceCount }
-  inc    dh                  { Add one to output length }
-  xor    ebx, ebx            { Reset SpaceCount }
-  mov    byte ptr [edi], 09h { Store a tab }
-  inc    edi
-
-@@NoTab:
-  mov    al, [esi]           { Get next input character }
-  inc    esi
-  cmp    cl, ch              { End of string? }
-  jz     @@Store             { Yes, store character anyway }
-  inc    bl                  { Increment SpaceCount }
-  cmp    al, 32              { Is character a space? }
-  jz     @@Store             { Yes, store it for now }
-  xor    ebx, ebx            { Reset SpaceCount }
-  cmp    al, 39              { Is it a quote? }
-  jz     @@Quotes            { Yep, enter quote loop }
-  cmp    al, 34              { Is it a doublequote? }
-  jnz    @@Store             { Nope, store it }
-
-@@Quotes:
-  mov    ah, al              { Save quote start }
-
-@@NextQ:
-  mov    [edi], al           { Store quoted character }
-  inc    edi
-  inc    dh                  { Increment output length }
-  mov    al, [esi]           { Get next character }
-  inc    esi
-  inc    ch                  { Increment Ipos }
-  cmp    ch, cl              { At end of line? }
-  jae    @@Store             { If so, exit quote loop }
-  cmp    al, ah              { Matching end quote? }
-  jnz    @@NextQ             { Nope, stay in quote loop }
-  cmp    al, 39              { Single quote? }
-  jz     @@Store             { Exit quote loop }
-  cmp    byte ptr [esi-2],'\'{ Previous character an escape? }
-  jz     @@NextQ             { Stay in if so }
-
-@@Store:
-  mov    [edi], al           { Store last character }
-  inc    edi
-  inc    dh                  { Increment output length }
-  inc    ch                  { Increment input position }
-  jz     @@StoreLen          { Exit if past 255 }
-  cmp    ch, cl              { Compare Ipos to Ilen }
-  jbe    @@Next              { Repeat while characters left }
-
-@@StoreLen:
-  xor    eax, eax
-  mov    al, dh
-  sub    edi, eax
-  dec    edi
-  mov    [edi], dh           { Store final length }
-
-@@Done:
-  pop    esi
-  pop    edi
-  pop    ebx
 end;
 
 function DetabS(const S : ShortString; TabSize : Byte) : ShortString;
