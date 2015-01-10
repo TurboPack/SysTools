@@ -223,7 +223,6 @@ function LnBcd20(const B : TBcd) : TBcd;
 implementation
 
 {Define to use assembly language in primitive routines below}
-{$DEFINE UseAsm}
 
 const
   NoSignBit = $7F;                {mask to get just the exponent}
@@ -256,30 +255,6 @@ begin
 end;
 
 procedure AddMantissas(const UB1 : TUnpBcd; var UB2 : TUnpBcd);
-{$IFDEF UseAsm}
-  asm
-    push esi
-    push edi
-    mov esi,UB1
-    mov edi,UB2
-    {inc esi}
-    {inc edi}
-    mov ecx,SigDigits
-    clc
-@1: mov al,[esi]  {UB1}
-    inc esi
-    adc al,[edi]  {UB1+UB2+CF}
-    aaa
-    mov [edi],al  {update UB2}
-    inc edi
-    dec ecx
-    jnz @1
-    jnc @2
-    inc byte ptr [edi]
-@2: pop edi
-    pop esi
-  end;
-{$ELSE}
 var
   I : Integer;
   T, C : Byte;
@@ -296,22 +271,8 @@ begin
   end;
   UB2[SigDigits] := C;
 end;
-{$ENDIF}
 
 function IsZeroMantissa(const UB : TUnpBcd) : Boolean;
-{$IFDEF UseAsm}
- asm
-   push edi
-   mov edi,UB
-   {inc edi}
-   xor al,al
-   mov ecx,SigDigits
-   repe scasb
-   jne @1
-   inc al
-@1:pop edi
- end;
-{$ELSE}
 var
   I : Integer;
 begin
@@ -322,27 +283,8 @@ begin
     end;
   Result := True;
 end;
-{$ENDIF}
 
 procedure NegMantissa(var UB : TUnpBcd);
-{$IFDEF UseAsm}
-  asm
-    push edi
-    mov edi,UB
-    {inc edi}
-    mov ecx,SigDigits
-    xor dh,dh
-    clc
-@1: mov al,dh
-    sbb al,[edi]
-    aas
-    mov [edi],al
-    inc edi
-    dec ecx
-    jnz @1
-    pop edi
-  end;
-{$ELSE}
 var
   I : Integer;
   C : Byte;
@@ -357,7 +299,6 @@ begin
       C := 0;
   end;
 end;
-{$ENDIF}
 
 procedure NormalizeMantissa(var UB : TunpBcd; var E : Integer);
 var
@@ -389,10 +330,8 @@ end;
 
 procedure Pack(const UB : TUnpBcd; Exponent : Integer; Sign : Byte;
                var B : TBcd);
-{$IFNDEF UseAsm}
 var
   I : Integer;
-{$ENDIF}
 begin
   if Exponent <= 0 then
     SetZero(B)
@@ -400,40 +339,15 @@ begin
   else begin
     B[0] := Sign or Exponent;
     {repack digits}
-{$IFDEF UseAsm}
-    asm
-      push esi
-      push edi
-      mov esi,UB
-      mov edi,B
-      inc esi
-      inc edi
-      mov ecx,BcdSize-1
-@1:   mov ax,[esi]
-      inc esi
-      inc esi
-      shl ah,4
-      or  al,ah
-      mov [edi],al
-      inc edi
-      dec ecx
-      jnz @1
-      pop edi
-      pop esi
-    end;
-{$ELSE}
     for I := 1 to BcdSize-1 do
       B[I] := UB[2*I-1] or (UB[2*I] shl 4);
     {overflow digit ignored}
-{$ENDIF}
   end;
 end;
 
 procedure RoundMantissa(var UB : TUnpBcd; Start : Integer);
 var
-{$IFNDEF UseAsm}
   I : Integer;
-{$ENDIF}
   C : Byte;
 begin
   if Start > MantissaDigits then begin
@@ -444,29 +358,6 @@ begin
   FillChar(UB[1], Start, 0);
   if C < 5 then
     Exit;
-{$IFDEF UseAsm}
-  asm
-    push edi
-    mov edi,UB
-    mov eax,Start
-    add edi,eax
-    inc edi
-    mov ecx,MantissaDigits
-    sub ecx,eax
-    jle  @2
-    stc
-@1: mov al,[edi]
-    adc al,0
-    aaa
-    mov [edi],al
-    inc edi
-    jnc @3
-    dec ecx
-    jnz @1
-@2: inc byte ptr [edi]
-@3: pop edi
-  end;
-{$ELSE}
   C := 1;
   for I := Start+1 to MantissaDigits do begin
     inc(UB[I], C);
@@ -479,7 +370,6 @@ begin
   end;
   {set overflow digit if we get here}
   inc(UB[SigDigits]);
-{$ENDIF}
 end;
 
 procedure ShiftMantissaDown(var UB : TUnpBcd; Shift : Integer);
@@ -495,30 +385,6 @@ begin
 end;
 
 procedure SubMantissas(const UB1 : TUnpBcd; var UB2 : TUnpBcd);
-{$IFDEF UseAsm}
-  asm
-    push esi
-    push edi
-    mov esi,UB1
-    mov edi,UB2
-    {inc esi}
-    {inc edi}
-    mov ecx,SigDigits
-    clc
-@1: mov al,[edi]  {UB2}
-    sbb al,[esi]  {UB2-UB1-CF}
-    aas
-    mov [edi],al  {update UB2}
-    inc edi
-    inc esi
-    dec ecx
-    jnz @1
-    jnc @2
-    inc byte ptr [edi]
-@2: pop edi
-    pop esi
-  end;
-{$ELSE}
 var
   I : Integer;
   T, C : ShortInt;
@@ -535,40 +401,12 @@ begin
   end;
   UB2[SigDigits] := C;
 end;
-{$ENDIF}
 
 procedure Unpack(const B : TBcd; var UB : TUnpBcd;
                  var Exponent : Integer; var Sign : Byte);
-{$IFNDEF UseAsm}
 var
   I : Integer;
-{$ENDIF}
 begin
-{$IFDEF UseAsm}
-  asm
-    push esi
-    push edi
-    mov esi,B
-    mov edi,UB
-    inc esi
-    inc edi
-    mov ecx,BcdSize-1
-@1: mov al,[esi]
-    inc esi
-    mov ah,al
-    and al,$0F
-    shr ah,4
-    mov [edi],ax
-    inc edi
-    inc edi
-    dec ecx
-    jnz @1
-    xor al,al
-    mov [edi],al
-    pop edi
-    pop esi
-  end;
-{$ELSE}
   {unpack digits}
   for I := 1 to BcdSize-1 do begin
     UB[2*I-1] := B[I] and $F;
@@ -576,7 +414,6 @@ begin
   end;
   {set last overflow digit to zero}
   UB[2*BcdSize-1] := 0;
-{$ENDIF}
 
   {copy sign/exponent}
   UB[0] := 0;
@@ -751,9 +588,7 @@ end;
 
 function CmpBcd(const B1, B2 : TBcd) : Integer;
 var
-{$IFNDEF UseAsm}
   I : Integer;
-{$ENDIF}
   E1, E2 : Integer;
   S1, S2 : Byte;
   UB1, UB2 : TUnpBcd;
@@ -777,32 +612,11 @@ begin
 
     else begin
       {exponents the same, compare the mantissas}
-{$IFDEF UseAsm}
-      asm
-        push esi
-        push edi
-        lea esi,UB1+MantissaDigits
-        lea edi,UB2+MantissaDigits
-        mov ecx,MantissaDigits
-@1:     mov al,[esi]
-        sub al,[edi]
-        jnz @2
-        dec esi
-        dec edi
-        dec ecx
-        jnz @1
-@2:     movsx eax,al
-        mov Result,eax
-        pop edi
-        pop esi
-      end;
-{$ELSE}
       for I := MantissaDigits downto 1 do begin
         Result := Integer(UB1[I])-UB2[I];
         if Result <> 0 then
           break;
       end;
-{$ENDIF}
     end;
 
     if S1 <> 0 then
@@ -818,16 +632,12 @@ begin
 end;
 
 function DivBcd(const B1, B2 : TBcd) : TBcd;
-{$IFNDEF UseAsm}
 label
   StoreDigit;
-{$ENDIF}
 var
-{$IFNDEF UseAsm}
   DivIntoCount, I, R : Integer;
   T, C : ShortInt;
   DDigit, NDigit : Byte;
-{$ENDIF}
   E1, E2, DivDigits, N : Integer;
   S1, S2 : Byte;
   UB1, UB2 : TUnpBcd;
@@ -852,99 +662,17 @@ begin
     {UB1 is now used to store the result}
 
     {count significant mantissa digits in divisor}
-{$IFDEF UseAsm}
-  asm
-    push edi
-    lea edi,UB2+1
-    mov ecx,SigDigits
-    xor al,al
-    repe scasb
-    mov DivDigits,ecx
-    pop edi
-  end;
-{$ELSE}
     DivDigits := 0;
     for I := 1 to MantissaDigits do
       if UB2[I] <> 0 then begin
         DivDigits := SigDigits-I;
         break;
       end;
-{$ENDIF}
 
     if DivDigits = 0 then
       {divide by zero, shouldn't have gotten here, but just in case...}
       RaiseBcdError(stscBcdDivByZero);
 
-{$IFDEF UseAsm}
-  asm
-    push ebx
-    push esi
-    push edi
-    mov ecx,SigDigits             {number of digits in result}
-    lea edi,UB1+SigDigits         {edi points to MSD of result}
-    lea esi,TB+2*MantissaDigits+1 {esi points to MSD of numerator}
-    mov dh,byte ptr DivDigits     {keep DivDigits in dh}
-
-@1: push ecx                      {save result counter}
-    push edi                      {save result position}
-    mov ebx,esi                   {save numerator position}
-    xor dl,dl                     {dl = number of times divisor fits into numerator}
-
-@2: cmp byte ptr [esi+1],0        {check for remainder in numerator}
-    jnz @4                        {divisor guaranteed to fit again}
-    xor ecx,ecx
-    mov cl,dh                     {ecx = number of divisor digits}
-    lea edi,UB2+MantissaDigits    {last digit of divisor}
-
-@3: mov al,[esi]                  {al = numerator digit}
-    dec esi
-    mov ah,[edi]                  {ah = divisor digit}
-    dec edi
-    cmp al,ah
-    ja @4                         {divisor fits if numerator digit > divisor}
-    jb @7                         {doesn't fit if numerator digit < divisor}
-    dec ecx
-    jnz @3
-
-@4: inc dl                        {increment number of times divisor fits}
-    mov edi,ebx                   {restore numerator position to edi}
-    xor ecx,ecx
-    mov cl,dh                     {ecx = number of divisor digits}
-    lea esi,UB2+MantissaDigits    {esi points to MSD of divisor}
-    dec ecx
-    sub esi,ecx                   {first significant digit of divisor}
-    sub edi,ecx                   {first active digit of numerator}
-    inc ecx
-    clc                           {no carry to start}
-
-@5: mov al,[edi]                  {al = digit from numerator}
-    sbb al,[esi]                  {subtract divisor from numerator}
-    aas
-    mov [edi],al                  {store back to numerator}
-    inc esi
-    inc edi
-    dec ecx
-    jnz @5
-    jnc @6
-    dec byte ptr [edi]            {reduce last digit for borrow}
-
-@6: mov esi,ebx                   {restore numerator position to esi}
-    jmp @2                        {see if divisor fits in numerator again}
-
-@7: mov esi,ebx                   {restore numerator position to esi}
-    pop edi                       {restore result position}
-    pop ecx                       {restore result counter}
-    mov [edi],dl                  {store times divisor went into numerator}
-    dec edi                       {next result digit}
-    dec esi                       {next numerator digit}
-    dec ecx
-    jnz @1                        {compute next result digit}
-
-    pop edi
-    pop esi
-    pop ebx
-  end;
-{$ELSE}
     {start with most significant digit of numerator}
     N := 2*MantissaDigits+1;
 
@@ -990,7 +718,6 @@ StoreDigit:
       {next numerator digit}
       dec(N);
     end;
-{$ENDIF}
 
     if UB1[SigDigits] <> 0 then begin
       {round away the temporary digit}
@@ -1612,9 +1339,7 @@ end;
 
 function IsIntBcd(const B : TBcd) : Boolean;
 var
-{$IFNDEF UseAsm}
   I : Integer;
-{$ENDIF}
   Exponent : Integer;
   Sign : Byte;
   UB : TUnpBcd;
@@ -1635,28 +1360,12 @@ begin
 
   else begin
     {see if any non-zero digits to left of decimal point}
-{$IFDEF UseAsm}
-      asm
-        push edi
-        lea edi,UB+1
-        mov ecx,MantissaDigits+ExpBias
-        sub ecx,Exponent
-        xor al,al
-        cld
-        repe scasb
-        jne @1
-        inc al
-@1:     mov Result,al
-        pop edi
-      end;
-{$ELSE}
     for I := 1 to MantissaDigits-(Exponent-ExpBias) do
       if UB[I] <> 0 then begin
         Result := False;
         Exit;
       end;
     Result := True;
-{$ENDIF}
   end;
 end;
 
@@ -1806,11 +1515,9 @@ function MulBcd(const B1, B2 : TBcd) : TBcd;
 var
   E1, E2, Digits : Integer;
   S1, S2 : Byte;
-{$IFNDEF UseAsm}
   I1, I2 : Integer;
   CP, CN : Byte;
   T, T1, T2 : Byte;
-{$ENDIF}
   PB : PUnpBcd;
   UB1, UB2 : TUnpBcd;
   TB : TIntBcd;
@@ -1825,51 +1532,6 @@ begin
     FillChar(TB, SizeOf(TIntBcd), 0);
 
     {multiply and sum the mantissas}
-{$IFDEF UseAsm}
-    asm
-      push ebx
-      push esi
-      push edi
-      lea ebx,UB1  {multiplier}
-      lea edi,TB   {result}
-      mov ecx,MantissaDigits
-
-@1:   inc ebx      {next multiplier digit}
-      inc edi      {next output digit}
-      mov al,[ebx] {get next multiplier digit}
-      or al,al     {if zero, nothing to do}
-      jz @3
-
-      push ecx     {save digit counter}
-      mov dl,al    {save multiplier}
-      lea esi,UB2+1 {multiplicand}
-      mov ecx,MantissaDigits
-      xor dh,dh
-
-@2:   mov al,[esi] {next multiplicand digit}
-      inc esi
-      mul dl       {multiply by multiplier, overflow in ah}
-      aam
-      add al,[edi] {add previous result}
-      aaa
-      add al,dh    {add previous overflow}
-      aaa
-      mov [edi],al {store temporary result}
-      inc edi
-      mov dh,ah    {save overflow for next time}
-      dec ecx
-      jnz @2
-      mov [edi],dh {save last overflow in next digit}
-      sub edi,MantissaDigits {reset output offset for next multiplier}
-      pop ecx
-
-@3:   dec ecx      {next multiplier digit}
-      jnz @1
-      pop edi
-      pop esi
-      pop ebx
-    end;
-{$ELSE}
     for I1 := 1 to MantissaDigits do begin
       T1 := UB1[I1];
       if T1 <> 0 then begin
@@ -1895,7 +1557,6 @@ begin
         TB[I1+MantissaDigits] := CP;
       end;
     end;
-{$ENDIF}
 
     {normalize the product}
     if TB[2*MantissaDigits] <> 0 then begin
