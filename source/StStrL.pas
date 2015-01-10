@@ -201,9 +201,6 @@ function CompStringL(const S1, S2 : String) : Integer;
 function CompUCStringL(const S1, S2 : String) : Integer;
   {-Compare two strings. This compare is not case sensitive.}
 
-function SoundexL(const S : AnsiString) : AnsiString;
-  {-Return 4 character soundex of an input string.}
-
 function MakeLetterSetL(const S : AnsiString) : Integer;
   {-Return a bit-mapped long storing the individual letters contained in S.}
 
@@ -1081,103 +1078,6 @@ function CompUCStringL(const S1, S2 : String) : Integer; register;
   {-Compare two strings. This compare is not case sensitive.}
 begin
   Result := AnsiCompareText(S1, S2);
-end;
-
-function SoundexL(const S : AnsiString) : AnsiString;
-  {-Return 4 character soundex of an input string}
-const
-  SoundexTable : array[0..255] of Char =
-    (#0, #0, #0, #0, #0, #0, #0, #0, #0, #0,
-     #0, #0, #0, #0, #0, #0, #0, #0, #0, #0,
-     #0, #0, #0, #0, #0, #0, #0, #0, #0, #0,
-     #0, #0, #0, #0, #0, #0, #0, #0, #0, #0,
-     #0, #0, #0, #0, #0, #0, #0, #0, #0, #0,
-     #0, #0, #0, #0, #0, #0, #0, #0, #0, #0,
-     #0, #0, #0, #0, #0,
-    { A   B    C    D    E   F    G    H   I   J    K    L    M  }
-     #0, '1', '2', '3', #0, '1', '2', #0, #0, '2', '2', '4', '5',
-    { N    O   P    Q    R    S    T    U   V    W   X    Y   X  }
-     '5', #0, '1', '2', '6', '2', '3', #0, '1', #0, '2', #0, '2',
-     #0, #0, #0, #0, #0, #0,
-    { a   b    c    d    e   f    g    h   i   j    k    l    m  }
-     #0, '1', '2', '3', #0, '1', '2', #0, #0, '2', '2', '4', '5',
-    { n    o   p    q    r    s    t    u   v    w   x    y   x  }
-     '5', #0, '1', '2', '6', '2', '3', #0, '1', #0, '2', #0, '2',
-     #0, #0, #0, #0, #0, #0, #0, #0, #0, #0,
-     #0, #0, #0, #0, #0, #0, #0, #0, #0, #0,
-     #0, #0, #0, #0, #0, #0, #0, #0, #0, #0,
-     #0, #0, #0, #0, #0, #0, #0, #0, #0, #0,
-     #0, #0, #0, #0, #0, #0, #0, #0, #0, #0,
-     #0, #0, #0, #0, #0, #0, #0, #0, #0, #0,
-     #0, #0, #0, #0, #0, #0, #0, #0, #0, #0,
-     #0, #0, #0, #0, #0, #0, #0, #0, #0, #0,
-     #0, #0, #0, #0, #0, #0, #0, #0, #0, #0,
-     #0, #0, #0, #0, #0, #0, #0, #0, #0, #0,
-     #0, #0, #0, #0, #0, #0, #0, #0, #0, #0,
-     #0, #0, #0, #0, #0, #0, #0, #0, #0, #0,
-     #0, #0, #0, #0, #0, #0, #0, #0, #0, #0,
-     #0, #0, #0);
-begin
-  if S = '' then Exit;
-  SetLength(Result, 4);
-asm
-  push  edi
-  mov   edi, [Result]            { EDI => output string. }
-  mov   edi, [edi]
-  push  ebx
-  push  esi
-
-  mov   esi, S                   { ESI => input string. }
-  mov   dword ptr [edi], '0000'  { Initialize output string to '0000'. }
-  xor   eax, eax
-  mov   [edi+4], al              { Set null at end of string. }
-
-  mov   ecx, [esi-StrOffset].LStrRec.Length
-  or    ecx, ecx                 { Exit if null string. }
-  jz    @@Done
-
-  mov   al, [esi]                { Get first character of input string. }
-  inc   esi
-
-  push  ecx                      { Save ECX across call to CharUpper. }
-  push  eax                      { Push Char onto stack for CharUpper. }
-  call  CharUpper                { Uppercase AL. }
-  pop   ecx                      { Restore saved register. }
-
-  mov   [edi], al                { Store first output character. }
-  inc   edi
-
-  dec   ecx                      { One input character used. }
-  jz    @@Done                   { Was input string one char long?. }
-
-  mov   bh, 03h                  { Output max 3 chars beyond first. }
-  mov   edx, offset SoundexTable { EDX => Soundex table. }
-  xor   eax, eax                 { Prepare for address calc. }
-  xor   bl, bl                   { BL will be used to store 'previous char'. }
-
-@@Next:
-  mov   al, [esi]                { Get next char in AL. }
-  inc   esi
-  mov   al, [edx+eax]            { Get soundex code into AL. }
-  or    al, al                   { Is AL zero? }
-  jz    @@NoStore                { If yes, skip this char. }
-  cmp   bl, al                   { Is it the same as the previous stored char? }
-  je    @@NoStore                { If yes, skip this char. }
-  mov   [edi], al                { Store char to Dest. }
-  inc   edi
-  dec   bh                       { Decrement output counter. }
-  jz    @@Done                   { If zero, we're done. }
-  mov   bl, al                   { New previous character. }
-
-@@NoStore:
-  dec   ecx                      { Decrement input counter. }
-  jnz   @@Next
-
-@@Done:
-  pop   esi
-  pop   ebx
-  pop   edi
-end;
 end;
 
 function MakeLetterSetL(const S : AnsiString) : Integer; register;
