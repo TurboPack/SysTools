@@ -207,14 +207,12 @@ asm
 end;
 
 procedure ExchangeLongInts(var I, J : Integer);
-register;
-asm
-  mov  ecx, [eax]
-  push ecx
-  mov  ecx, [edx]
-  mov  [eax], ecx
-  pop  ecx
-  mov  [edx], ecx
+var
+  iTemp: Integer;
+begin
+  iTemp := I;
+  I := J;
+  J := iTemp;
 end;
 
 procedure ExchangeStructs(var I, J; Size : Cardinal);

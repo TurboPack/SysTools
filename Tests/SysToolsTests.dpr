@@ -17,7 +17,8 @@ program SysToolsTests;
 uses
   DUnitTestRunner,
   TestStBase in 'TestStBase.pas',
-  StBase in '..\source\StBase.pas';
+  StBase in '..\source\StBase.pas',
+  TestStUtils in 'TestStUtils.pas';
 
 {$R *.RES}
 
