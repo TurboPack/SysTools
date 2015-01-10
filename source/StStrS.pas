@@ -133,9 +133,6 @@ function CenterChS(const S : ShortString; C : AnsiChar; Len : Cardinal) : ShortS
 function CenterS(const S : ShortString; Len : Cardinal) : ShortString;
   {-Pad a string on the left and right with spaces.}
 
-function DetabS(const S : ShortString; TabSize : Byte) : ShortString;
-  {-Expand tabs in a string to blanks.}
-
 function ScrambleS(const S, Key : ShortString) : ShortString;
   {-Encrypt / Decrypt string with enhanced XOR encryption.}
 
@@ -740,78 +737,6 @@ function CenterS(const S : ShortString; Len : Cardinal) : ShortString;
   {-Pad a string on the left and right with spaces.}
 begin
   Result := CenterChS(S, ' ', Len);
-end;
-
-function DetabS(const S : ShortString; TabSize : Byte) : ShortString;
-  {-Expand tabs in a string to blanks.}
-register;
-asm
-  push   ebx
-  push   edi
-  push   esi
-
-  mov    edi, ecx           { EDI => output string }
-  mov    esi, eax           { ESI => input string }
-  xor    ecx, ecx           { Default input length = 0 }
-  and    edx, 0FFh          { Default output length = 0 in DH, DL is Tabsize }
-  xor    eax, eax
-  mov    cl, [esi]          { Get input length }
-  inc    esi
-  or     edx, edx           { TabSize = 0? }
-  jnz    @@DefLength
-  mov    ecx, edx           { Return zero length string if TabSize = 0 }
-
-@@DefLength:
-  mov    [edi], cl          { Store default output length }
-  inc    edi
-  or     ecx, ecx
-  jz     @@Done             { Done if empty input string }
-  mov    ah, 09h            { Store tab in AH }
-  mov    bl, 255            { Maximum length of output }
-
-@@Next:
-  mov    al, [esi]          { Next input character }
-  inc    esi
-  cmp    al, ah             { Is it a tab? }
-  jz     @@Tab              { Yes, compute next tab stop }
-  mov    [edi], al          { No, store to output }
-  inc    edi
-  inc    dh                 { Increment output length }
-  cmp    dh, bl             { 255 characters max }
-  jz     @@StoreLen
-  dec    cl
-  jnz    @@Next             { Next character while Olen <= 255 }
-  jmp    @@StoreLen         { Loop termination }
-
-@@Tab:
-  mov    bh, cl             { Save input counter }
-  mov    al, dh             { Current output length in AL }
-  and    eax, 0FFh          { Clear top byte }
-  div    dl                 { OLen DIV TabSize in AL }
-  inc    al                 { Round up to next tab position }
-  mul    dl                 { Next tab position in AX }
-  or     ah, ah             { AX > 255? }
-  jnz    @@StoreLen         { Can't store it }
-  sub    al, dh             { Count of blanks to insert }
-  add    dh, al             { New output length in DH }
-  mov    cl, al             { Loop counter for blanks }
-  mov    ax, 0920h          { Tab in AH, Blank in AL }
-  rep    stosb              { Store blanks }
-  mov    cl, bh             { Restore input position }
-  dec    cl
-  jnz    @@Next             { Back for next input }
-
-@@StoreLen:
-  xor    eax, eax
-  mov    al, dh
-  sub    edi, eax
-  dec    edi
-  mov    [edi], dh           { Store final length }
-
-@@Done:
-  pop    esi
-  pop    edi
-  pop    ebx
 end;
 
 function ScrambleS(const S, Key : ShortString) : ShortString;
