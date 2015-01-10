@@ -118,7 +118,7 @@ procedure ExchangeBytes(var I, J : Byte);
 procedure ExchangeLongInts(var I, J : Integer);
   {-Exchange the values in two long integers}
 
-procedure ExchangeStructs(var I, J; Size : Cardinal);
+procedure ExchangeStructs(var I, J; Size : Integer);
   {-Exchange the values in two structures}
 
 
@@ -215,55 +215,17 @@ begin
   J := iTemp;
 end;
 
-procedure ExchangeStructs(var I, J; Size : Cardinal);
-register;
-asm
-  push edi
-  push ebx
-  push ecx
-  shr  ecx, 2
-  jz   @@LessThanFour
+procedure ExchangeStructs(var I, J; Size : Integer);
+var
+  pTemp: TBytes;
+begin
+  if Size <= 0 then
+    Exit;
 
-@@AgainDWords:
-  mov  ebx, [eax]
-  mov  edi, [edx]
-  mov  [edx], ebx
-  mov  [eax], edi
-  add  eax, 4
-  add  edx, 4
-  dec  ecx
-  jnz  @@AgainDWords
-
-@@LessThanFour:
-  pop  ecx
-  and  ecx, $3
-  jz   @@Done
-  mov  bl, [eax]
-  mov  bh, [edx]
-  mov  [edx], bl
-  mov  [eax], bh
-  inc  eax
-  inc  edx
-  dec  ecx
-  jz   @@Done
-
-  mov  bl, [eax]
-  mov  bh, [edx]
-  mov  [edx], bl
-  mov  [eax], bh
-  inc  eax
-  inc  edx
-  dec  ecx
-  jz   @@Done
-
-  mov  bl, [eax]
-  mov  bh, [edx]
-  mov  [edx], bl
-  mov  [eax], bh
-
-@@Done:
-  pop  ebx
-  pop  edi
+  pTemp := TBytes.Create(Size);
+  Move(I, pTemp[0], Length(pTemp));
+  Move(J, I, Length(pTemp));
+  Move(I, pTemp[0], Length(pTemp));
 end;
 
 procedure FillWord(var Dest; Count : Cardinal; Filler : Word);
