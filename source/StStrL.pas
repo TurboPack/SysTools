@@ -149,9 +149,6 @@ function CenterChL(const S : String; C : Char; Len : Cardinal) : String;
 function CenterL(const S : String; Len : Cardinal) : String;
   {-Pad a string on the left and right with spaces.}
 
-function EntabL(const S : AnsiString; TabSize : Byte) : AnsiString;
-  {-Convert blanks in a string to tabs.}
-
 function DetabL(const S : AnsiString; TabSize : Byte) : AnsiString;
   {-Expand tabs in a string to blanks.}
 
@@ -747,102 +744,6 @@ function CenterL(const S : String; Len : Cardinal) : String;
   {-Pad a string on the left and right with spaces.}
 begin
   Result := CenterChL(S, ' ', Len);
-end;
-
-function EntabL(const S : AnsiString; TabSize : Byte) : AnsiString;   //TODO-UNICODE
-  {-Convert blanks in a string to tabs.}
-var
-  InLen, OutLen : Cardinal;
-begin
-  if S = '' then Exit;
-  InLen := Length(S);
-  OutLen := 0;
-  SetLength(Result, InLen);
-asm
-  push   ebx                   { Save registers }
-  push   edi
-  push   esi
-
-  mov    edi, [Result]
-  mov    edi, [edi]
-  xor    ecx, ecx
-  add    cl, TabSize
-  jz     @@Done
-
-  mov    esi, S
-  xor    ebx, ebx              { Zero EBX and EDX }
-  xor    edx, edx
-  inc    edx                   { Set output length to 1 }
-
-@@Next:
-  or     ebx, ebx
-  je     @@NoTab               { Jump to NoTab if spacecount is zero }
-  mov    eax, edx              { IPos to EAX }
-  push   edx
-  xor    edx, edx
-  div    ecx
-  cmp    edx, 1                { Is mod = 1? }
-  pop    edx
-  jne    @@NoTab               { If not, no tab }
-
-  sub    edi, ebx
-  sub    OutLen, ebx
-  inc    OutLen
-  xor    ebx, ebx              { Reset spacecount }
-  mov    byte ptr [edi], 9h    { Store a tab }
-  inc    edi
-
-@@NoTab:
-  mov    al, [esi]             { Get next input character }
-  inc    esi
-  cmp    edx, InLen            { End of string? }
-  jg     @@Done                { Yes, done }
-  inc    ebx                   { Increment SpaceCount }
-  cmp    al, 20h               { Is character a space? }
-  jz     @@Store               { Yes, store it for now }
-  xor    ebx, ebx              { Reset SpaceCount }
-  cmp    al, 27h               { Is it a quote? }
-  jz     @@Quotes              { Yep, enter quote loop }
-  cmp    al, 22h               { Is it a doublequote? }
-  jnz    @@Store               { Nope, store it }
-
-@@Quotes:
-  mov    ah, al                { Save quote start }
-
-@@NextQ:
-  mov    [edi], al             { Store quoted character }
-  inc    edi
-  inc    OutLen
-  mov    al, [esi]             { Get next character }
-  inc    esi
-  inc    edx                   { Increment Ipos }
-
-  cmp    edx, ecx              { At end of line? }
-  jae    @@Store               { If so, exit quote loop }
-
-  cmp    al, ah                { Matching end quote? }
-  jnz    @@NextQ               { Nope, stay in quote loop }
-
-  cmp    al, 27h               { Single quote? }
-  jz     @@Store               { Exit quote loop }
-
-  cmp    byte ptr [esi-2],'\'  { Previous character an escape? }
-  jz     @@NextQ               { Stay in if so }
-
-@@Store:
-  mov    [edi], al             { Store last character }
-  inc    edi
-  inc    OutLen
-  inc    edx                   { Increment input position }
-  jmp    @@Next                { Repeat while characters left }
-
-@@Done:
-  mov    byte ptr [edi], 0h
-  pop    esi
-  pop    edi
-  pop    ebx
-end;
-  SetLength(Result, OutLen);
 end;
 
 function DetabL(const S : AnsiString; TabSize : Byte) : AnsiString;   //TODO-UNICODE
