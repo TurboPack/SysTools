@@ -437,7 +437,7 @@ begin
     if Row >= Rows then
       RaiseContainerError(stscBadIndex);
 {$ENDIF}
-    HugeMove(vmGetRowData(Row, False)^, RowValue, vmRowSize);
+    Move(vmGetRowData(Row, False)^, RowValue, vmRowSize);
 {$IFDEF ThreadSafe}
   finally
     LeaveCS;
@@ -484,7 +484,7 @@ begin
     if Row >= Rows then
       RaiseContainerError(stscBadIndex);
 {$ENDIF}
-    HugeMove(RowValue, vmGetRowData(Row, True)^, vmRowSize);
+    Move(RowValue, vmGetRowData(Row, True)^, vmRowSize);
 {$IFDEF ThreadSafe}
   finally
     LeaveCS;
@@ -611,7 +611,7 @@ begin
   try
     for I := 0 to FCacheRows-1 do
       with vmCache^[I] do
-        HugeGetMem(crRowData, vmRowSize);
+        GetMem(crRowData, vmRowSize);
   except
     vmDeallocateCache;
     raise;
@@ -778,7 +778,7 @@ begin
       {allocate new buffers if any}
       for I := FCacheRows to CacheRows-1 do
         with NewCache^[I] do
-          HugeGetMem(crRowData, vmRowSize);
+          GetMem(crRowData, vmRowSize);
 
       {transfer old cache buffers to new array}
       for I := 0 to FCacheRows-1 do

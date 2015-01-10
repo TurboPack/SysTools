@@ -311,7 +311,7 @@ begin
     HugeFreeMem(laData, FCount*FElSize);
     FCount := RowCount;
     FElSize := ElSize;
-    HugeGetMem(laData, RowCount*ElSize);
+    GetMem(laData, RowCount*ElSize);
     Clear;
   end;
 end;
@@ -332,7 +332,7 @@ begin
   FCount := Elements;
   FElSize := ElementSize;
 
-  HugeGetMem(laData, Elements*Integer(ElementSize));
+  GetMem(laData, Elements*Integer(ElementSize));
   Clear;
 end;
 
@@ -478,7 +478,7 @@ begin
     CurFData := laData;
 
     {allocate data block of new size}
-    HugeGetMem(laData, NewSize);
+    GetMem(laData, NewSize);
 
     FCount := Elements;
 
@@ -487,7 +487,7 @@ begin
       Clear;
       NewSize := CurSize;
     end;
-    HugeMove(CurFData^, laData^, NewSize);
+    Move(CurFData^, laData^, NewSize);
 
     {free original data area}
     HugeFreeMem(CurFData, CurSize);
@@ -681,7 +681,7 @@ begin
               HugeFreeMem(laData, FCount*FElSize);
               FCount := NumElements;
               FElSize := ElementSize;
-              HugeGetMem(laData, NumElements*ElementSize);
+              GetMem(laData, NumElements*ElementSize);
               Clear;
             end;
           ElementsStorable := ReadBoolean;
@@ -854,7 +854,7 @@ begin
       FCols := ColCount;
       FCount := RowCount*ColCount;
       lmRowSize := ColCount*ElSize;
-      HugeGetMem(lmData, FCount*Integer(ElSize));
+      GetMem(lmData, FCount*Integer(ElSize));
       Clear;
     end;
 end;
@@ -878,7 +878,7 @@ begin
   ProductOverflow(FCount, ElementSize) then
     RaiseContainerError(stscBadSize);
 
-  HugeGetMem(lmData, FCount*Integer(ElementSize));
+  GetMem(lmData, FCount*Integer(ElementSize));
   Clear;
 end;
 
@@ -1050,7 +1050,7 @@ begin
     CurFData := lmData;
 
     {allocate data block of new size}
-    HugeGetMem(NewFData, NewSize);
+    GetMem(NewFData, NewSize);
 
     {allocate a buffer to transfer row data}
     if NewRowSize > CurRowSize then
@@ -1058,7 +1058,7 @@ begin
     else
       BufSize := CurRowSize;
     try
-      HugeGetMem(RowData, BufSize);
+      GetMem(RowData, BufSize);
     except
       HugeFreeMem(NewFData, NewSize);
     end;
@@ -1112,7 +1112,7 @@ begin
     CurFData := lmData;
 
     {allocate data block of new size}
-    HugeGetMem(lmData, NewSize);
+    GetMem(lmData, NewSize);
 
     FCount := Integer(Rows)*Integer(FCols);
     FRows := Rows;
@@ -1122,7 +1122,7 @@ begin
       Clear;
       NewSize := CurSize;
     end;
-    HugeMove(CurFData^, lmData^, NewSize);
+    Move(CurFData^, lmData^, NewSize);
 
     {free original data area}
     HugeFreeMem(CurFData, CurSize);
@@ -1344,7 +1344,7 @@ begin
               FCols := NumCols;
               FCount := Integer(NumRows)*NumCols;
               lmRowSize := Integer(NumCols)*Integer(ElementSize);
-              HugeGetMem(lmData, FCount*Integer(ElementSize));
+              GetMem(lmData, FCount*Integer(ElementSize));
               Clear;
             end;
           ElementsStorable := ReadBoolean;

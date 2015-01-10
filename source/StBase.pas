@@ -402,12 +402,6 @@ function DestroyNode(Container : TStContainer; Node : TStNode;
 procedure HugeFillStruc(var ADest; ADestSize: Integer; const ASource; ASourceSize: Integer);
   {-Fill huge memory block with structure value}
 
-procedure HugeMove(const Src; var Dest; Count : Integer);
-  {-Copy huge memory block to another}
-
-procedure HugeGetMem(var P : Pointer; Size : Integer);
-  {-Get huge memory block allocation}
-
 procedure HugeFreeMem(var P : Pointer; Size : Integer);
   {-Free huge memory block allocation}
 {.Z-}
@@ -553,16 +547,6 @@ begin
     FreeMem(P, Size);
     P := nil;
   end;
-end;
-
-procedure HugeGetMem(var P : Pointer; Size : Integer);
-begin
-  GetMem(P, Size);
-end;
-
-procedure HugeMove(const Src; var Dest; Count : Integer);
-begin
-  Move(Src, Dest, Count);
 end;
 
 function ProductOverflow(A, B : Integer) : Boolean;

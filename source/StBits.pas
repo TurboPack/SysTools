@@ -323,7 +323,7 @@ begin
       {Get new data area and transfer data}
       OldBits := btBits;
       try
-        HugeGetMem(Pointer(btBits), btBlockSize);
+        GetMem(Pointer(btBits), btBlockSize);
       except
         btBlockSize := OldBlockSize;
         btBits := OldBits;
@@ -336,7 +336,7 @@ begin
         BlockSize := OldBlockSize;
       end else
         BlockSize := btBlockSize;
-      HugeMove(OldBits^, btBits^, BlockSize);
+      Move(OldBits^, btBits^, BlockSize);
 
       {Free old data area}
       HugeFreeMem(Pointer(OldBits), OldBlockSize);
@@ -417,7 +417,7 @@ begin
     if (not Assigned(B)) or (B.Max <> FMax) then
       RaiseContainerError(stscBadType);
 
-    HugeMove(B.btBits^, btBits^, btBlockSize);
+    Move(B.btBits^, btBits^, btBlockSize);
     FCount := B.FCount;
 {$IFDEF ThreadSafe}
   finally
@@ -438,7 +438,7 @@ begin
 
   FMax := Max;
   btBlockSize := (Max+8) div 8;
-  HugeGetMem(Pointer(btBits), btBlockSize);
+  GetMem(Pointer(btBits), btBlockSize);
   Clear;
 end;
 
