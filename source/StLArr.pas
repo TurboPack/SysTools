@@ -132,7 +132,7 @@ type
   {.Z+}
   protected
     {property instance variables}
-    FElSize   : Integer;    {Size of each array element}               
+    FElSize   : Integer;    {Size of each array element}
     FCols     : Cardinal;   {Number of columns}
     FRows     : Cardinal;   {Number of rows}
     FElStorable : boolean;     {True if elements can be stored directly}
@@ -207,6 +207,9 @@ type
 {======================================================================}
 
 implementation
+
+uses
+  SysUtils;
 
 function AssignArrayData(Container : TStContainer;
                      var Data;
@@ -344,6 +347,9 @@ begin
 end;
 
 procedure TStLArray.Exchange(El1, El2 : Integer);
+var
+  pEl1: TBytes;
+  pEl2: TBytes;
 begin
 {$IFDEF ThreadSafe}
   EnterCS;
@@ -353,50 +359,15 @@ begin
     if (El1 < 0) or (El1 >= Count) or (El2 < 0) or (El2 >= Count) then
       RaiseContainerError(stscBadIndex);
 {$ENDIF}
-    asm
-      mov eax,Self
-      push ebx
-      push esi
-      push edi
+   SetLength(pEl1, FElSize);
+   SetLength(pEl2, FElSize);
 
-      mov esi,El1
-      mov edi,El2
-      mov ecx,TStLArray([eax]).FElSize
-      mov edx,TStLArray([eax]).laData
-      db $0F,$AF,$F1            {imul esi,ecx, compiler bug workaround}
-      add esi,edx
-      db $0F,$AF,$F9            {imul edi,ecx, compiler bug workaround}
-      add edi,edx
-      mov edx,ecx
-      shr ecx,2
-      jz @2
+   Get(El1, pEl1[0]);
+   Get(El2, pEl2[0]);
 
-  @1: mov eax,[esi]             {avoid xchg instruction, which is slow}
-      mov ebx,[edi]
-      mov [esi],ebx
-      mov [edi],eax
-      add esi,4
-      add edi,4
-      dec ecx
-      jnz @1
+   Put(El1, pEl2[0]);
+   Put(El2, pEl1[0]);
 
-  @2: mov ecx,edx
-      and ecx,3
-      jz @4
-
-  @3: mov al,[esi]              {avoid xchg instruction, which is slow}
-      mov bl,[edi]
-      mov [esi],bl
-      mov [edi],al
-      inc esi
-      inc edi
-      dec ecx
-      jnz @3
-
-  @4: pop edi
-      pop esi
-      pop ebx
-    end;
 {$IFDEF ThreadSafe}
   finally
     LeaveCS;
@@ -420,11 +391,6 @@ begin
 end;
 
 procedure TStLArray.Get(El : Integer; var Value);
-(* model for code below
-begin
-  move((PChar(laData)+El*FElSize)^, Value, FElSize);
-end;
-*)
 begin
 {$IFDEF ThreadSafe}
   EnterCS;
@@ -434,24 +400,7 @@ begin
     if (El < 0) or (El >= Count) then
       RaiseContainerError(stscBadIndex);
 {$ENDIF}
-    asm
-      mov eax,Self
-      push esi
-      push edi
-      mov edi,Value
-      mov ecx,TStLArray([eax]).FElSize
-      mov esi,El
-      db $0F,$AF,$F1     {imul esi,ecx, compiler bug workaround}
-      add esi,TStLArray([eax]).laData
-      mov eax,ecx
-      shr ecx,2
-      rep movsd
-      mov ecx,eax
-      and ecx,3
-      rep movsb
-      pop edi
-      pop esi
-    end;
+     Move((PByte(laData) + El * FElSize)^, Value, FElSize);
 {$IFDEF ThreadSafe}
   finally
     LeaveCS;
@@ -499,11 +448,6 @@ begin
 end;
 
 procedure TStLArray.Put(El : Integer; const Value);
-(* model for assembly language below
-begin
-  move(Value, (PChar(laData)+Row*FElSize)^, FElSize);
-end;
-*)
 begin
 {$IFDEF ThreadSafe}
   EnterCS;
@@ -513,24 +457,7 @@ begin
     if (El < 0) or (El >= Count) then
       RaiseContainerError(stscBadIndex);
 {$ENDIF}
-    asm
-      mov eax,Self
-      push esi
-      push edi
-      mov esi,Value
-      mov ecx,TStLArray([eax]).FElSize
-      mov edi,El
-      db $0F,$AF,$F9            {imul edi,ecx, compiler bug workaround}
-      add edi,TStLArray([eax]).laData
-      mov eax,ecx
-      shr ecx,2
-      rep movsd
-      mov ecx,eax
-      and ecx,3
-      rep movsb
-      pop edi
-      pop esi
-    end;
+     Move(Value, (PByte(laData)+ El * FElSize)^, FElSize);
 {$IFDEF ThreadSafe}
   finally
     LeaveCS;
@@ -890,6 +817,9 @@ begin
 end;
 
 procedure TStLMatrix.ExchangeRows(Row1, Row2 : Cardinal);
+var
+  pRow1: TBytes;
+  pRow2: TBytes;
 begin
 {$IFDEF ThreadSafe}
   EnterCS;
@@ -899,50 +829,15 @@ begin
     if (Row1 >= Rows) or (Row2 >= Rows) then
       RaiseContainerError(stscBadIndex);
 {$ENDIF}
-    asm
-      mov eax,Self
-      push ebx
-      push esi
-      push edi
+   SetLength(pRow1, lmRowSize);
+   SetLength(pRow2, lmRowSize);
 
-      mov esi,Row1
-      mov edi,Row2
-      mov ecx,TStLMatrix([eax]).lmRowSize
-      mov edx,TStLMatrix([eax]).lmData
-      db $0F,$AF,$F1            {imul esi,ecx, compiler bug workaround}
-      add esi,edx
-      db $0F,$AF,$F9            {imul edi,ecx, compiler bug workaround}
-      add edi,edx
-      mov edx,ecx
-      shr ecx,2
-      jz @2
+   GetRow(Row1, pRow1[0]);
+   GetRow(Row2, pRow2[0]);
 
-  @1: mov eax,[esi]             {avoid xchg instruction, which is slow}
-      mov ebx,[edi]
-      mov [esi],ebx
-      mov [edi],eax
-      add esi,4
-      add edi,4
-      dec ecx
-      jnz @1
+   PutRow(Row1, pRow2[0]);
+   PutRow(Row2, pRow1[0]);
 
-  @2: mov ecx,edx
-      and ecx,3
-      jz @4
-
-  @3: mov al,[esi]              {avoid xchg instruction, which is slow}
-      mov bl,[edi]
-      mov [esi],bl
-      mov [edi],al
-      inc esi
-      inc edi
-      dec ecx
-      jnz @3
-
-  @4: pop edi
-      pop esi
-      pop ebx
-    end;
 {$IFDEF ThreadSafe}
   finally
     LeaveCS;
@@ -965,11 +860,6 @@ begin
 end;
 
 procedure TStLMatrix.Get(Row, Col : Cardinal; var Value);
-(* model for assembly language below
-begin
-  move((PChar(lmData)+(Row*FCols+Col)*FElSize)^, Value, FElSize);
-end;
-*)
 begin
 {$IFDEF ThreadSafe}
   EnterCS;
@@ -977,26 +867,7 @@ begin
 {$ENDIF}
     if (Row >= Rows) or (Col >= Cols) then
       RaiseContainerError(stscBadIndex);
-    asm
-      mov eax,Self
-      push esi
-      push edi
-      mov edi,Value
-      mov esi,Row
-      imul esi,TStLMatrix([eax]).FCols
-      add esi,Col
-      mov ecx,TStLMatrix([eax]).FElSize
-      db $0F,$AF,$F1     {imul esi,ecx, compiler bug workaround}
-      add esi,TStLMatrix([eax]).lmData
-      mov eax,ecx
-      shr ecx,2
-      rep movsd
-      mov ecx,eax
-      and ecx,3
-      rep movsb
-      pop edi
-      pop esi
-    end;
+    Move((PByte(lmData)+ Integer((Row * FCols + Col)) * FElSize)^, Value, FElSize);
 {$IFDEF ThreadSafe}
   finally
     LeaveCS;
@@ -1134,11 +1005,6 @@ begin
 end;
 
 procedure TStLMatrix.Put(Row, Col : Cardinal; const Value);
-(* model for assembly language below
-begin
-  move(Value, (PChar(lmData)+(Row*FCols+Col)*FElSize)^, FElSize);
-end;
-*)
 begin
 {$IFDEF ThreadSafe}
   EnterCS;
@@ -1148,26 +1014,7 @@ begin
     if (Row >= Rows) or (Col >= Cols) then
       RaiseContainerError(stscBadIndex);
 {$ENDIF}
-    asm
-      mov eax,Self
-      push esi
-      push edi
-      mov esi,Value
-      mov edi,Row
-      imul edi, TStLMatrix([eax]).FCols
-      add edi,Col
-      mov ecx,TStLMatrix([eax]).FElSize
-      db $0F,$AF,$F9     {imul edi,ecx, compiler bug workaround}
-      add edi,TStLMatrix([eax]).lmData
-      mov eax,ecx
-      shr ecx,2
-      rep movsd
-      mov ecx,eax
-      and ecx,3
-      rep movsb
-      pop edi
-      pop esi
-    end;
+    Move(Value, (PByte(lmData)+ Integer((Row * FCols + Col)) * FElSize)^, FElSize);
 {$IFDEF ThreadSafe}
   finally
     LeaveCS;

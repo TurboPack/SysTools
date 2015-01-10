@@ -192,7 +192,7 @@ function AnsiELFHashStr(const S : AnsiString; Size : Integer) : Integer;
 implementation
 
 uses
-  AnsiStrings;
+  AnsiStrings, Generics.Defaults;
 
 {$IFDEF ThreadSafe}
 var
@@ -263,36 +263,8 @@ begin
 end;
 
 function AnsiHashStr(const S : AnsiString; Size : Integer) : Integer;
-  {32-bit huge string}
-register;
-asm
-  push ebx
-  push esi
-  push edi
-  mov esi,S
-  mov edi,Size
-  xor ebx,ebx      {ebx will be hash}
-  or esi,esi       {empty literal string comes in as a nil pointer}
-  jz @2
-  mov edx,[esi-4]  {edx = length}
-  or edx,edx       {length zero?}
-  jz @2
-  xor ecx,ecx      {ecx is shift counter}
-@1:xor eax,eax
-  mov al,[esi]     {eax = character}
-  inc esi
-  rol eax,cl       {rotate character}
-  xor ebx,eax      {xor with hash}
-  inc ecx          {increment shift counter (rol uses only bottom 5 bits)}
-  dec edx
-  jnz @1
-@2:mov eax,ebx
-  xor edx,edx
-  div edi          {edi = Size}
-  mov eax,edx      {return hash mod size}
-  pop edi
-  pop esi
-  pop ebx
+begin
+  Result := BobJenkinsHash(S[1], Length(S) * SizeOf(S[1]), 0);
 end;
 
 function AnsiHashText(const S : AnsiString; Size : Integer) : Integer;
