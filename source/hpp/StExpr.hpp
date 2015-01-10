@@ -1,8 +1,8 @@
 ﻿// CodeGear C++Builder
-// Copyright (c) 1995, 2014 by Embarcadero Technologies, Inc.
+// Copyright (c) 1995, 2015 by Embarcadero Technologies, Inc.
 // All rights reserved
 
-// (DO NOT EDIT: machine generated header) 'StExpr.pas' rev: 28.00 (Windows)
+// (DO NOT EDIT: machine generated header) 'StExpr.pas' rev: 29.00 (Windows)
 
 #ifndef StexprHPP
 #define StexprHPP
@@ -12,18 +12,18 @@
 #pragma option -w-      // All warnings off
 #pragma option -Vx      // Zero-length empty class member 
 #pragma pack(push,8)
-#include <System.hpp>	// Pascal unit
-#include <SysInit.hpp>	// Pascal unit
-#include <Winapi.Windows.hpp>	// Pascal unit
-#include <System.Classes.hpp>	// Pascal unit
-#include <Vcl.Controls.hpp>	// Pascal unit
-#include <Winapi.Messages.hpp>	// Pascal unit
-#include <Vcl.StdCtrls.hpp>	// Pascal unit
-#include <System.SysUtils.hpp>	// Pascal unit
-#include <System.Math.hpp>	// Pascal unit
-#include <StBase.hpp>	// Pascal unit
-#include <StConst.hpp>	// Pascal unit
-#include <StMath.hpp>	// Pascal unit
+#include <System.hpp>
+#include <SysInit.hpp>
+#include <Winapi.Windows.hpp>
+#include <System.Classes.hpp>
+#include <Vcl.Controls.hpp>
+#include <Winapi.Messages.hpp>
+#include <Vcl.StdCtrls.hpp>
+#include <System.SysUtils.hpp>
+#include <System.Math.hpp>
+#include <StBase.hpp>
+#include <StConst.hpp>
+#include <StMath.hpp>
 
 //-- user supplied -----------------------------------------------------------
 

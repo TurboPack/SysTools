@@ -1,7 +1,7 @@
 ﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
     <PropertyGroup>
         <ProjectGuid>{15107451-A238-447C-B560-DC1A706279A3}</ProjectGuid>
-        <ProjectVersion>16.1</ProjectVersion>
+        <ProjectVersion>17.1</ProjectVersion>
         <FrameworkType>VCL</FrameworkType>
         <MainSource>SysToolsDBCR.cpp</MainSource>
         <Base>True</Base>
@@ -15,11 +15,6 @@
     </PropertyGroup>
     <PropertyGroup Condition="('$(Platform)'=='Android' and '$(Base)'=='true') or '$(Base_Android)'!=''">
         <Base_Android>true</Base_Android>
-        <CfgParent>Base</CfgParent>
-        <Base>true</Base>
-    </PropertyGroup>
-    <PropertyGroup Condition="('$(Platform)'=='iOSDevice' and '$(Base)'=='true') or '$(Base_iOSDevice)'!=''">
-        <Base_iOSDevice>true</Base_iOSDevice>
         <CfgParent>Base</CfgParent>
         <Base>true</Base>
     </PropertyGroup>
@@ -38,6 +33,16 @@
         <CfgParent>Base</CfgParent>
         <Base>true</Base>
     </PropertyGroup>
+    <PropertyGroup Condition="('$(Platform)'=='iOSDevice64' and '$(Base)'=='true') or '$(Base_iOSDevice64)'!=''">
+        <Base_iOSDevice64>true</Base_iOSDevice64>
+        <CfgParent>Base</CfgParent>
+        <Base>true</Base>
+    </PropertyGroup>
+    <PropertyGroup Condition="('$(Platform)'=='iOSDevice32' and '$(Base)'=='true') or '$(Base_iOSDevice32)'!=''">
+        <Base_iOSDevice32>true</Base_iOSDevice32>
+        <CfgParent>Base</CfgParent>
+        <Base>true</Base>
+    </PropertyGroup>
     <PropertyGroup Condition="'$(Config)'=='Debug' or '$(Cfg_1)'!=''">
         <Cfg_1>true</Cfg_1>
         <CfgParent>Base</CfgParent>
@@ -49,9 +54,33 @@
         <Cfg_1>true</Cfg_1>
         <Base>true</Base>
     </PropertyGroup>
+    <PropertyGroup Condition="('$(Platform)'=='iOSDevice64' and '$(Cfg_1)'=='true') or '$(Cfg_1_iOSDevice64)'!=''">
+        <Cfg_1_iOSDevice64>true</Cfg_1_iOSDevice64>
+        <CfgParent>Cfg_1</CfgParent>
+        <Cfg_1>true</Cfg_1>
+        <Base>true</Base>
+    </PropertyGroup>
+    <PropertyGroup Condition="('$(Platform)'=='iOSDevice32' and '$(Cfg_1)'=='true') or '$(Cfg_1_iOSDevice32)'!=''">
+        <Cfg_1_iOSDevice32>true</Cfg_1_iOSDevice32>
+        <CfgParent>Cfg_1</CfgParent>
+        <Cfg_1>true</Cfg_1>
+        <Base>true</Base>
+    </PropertyGroup>
     <PropertyGroup Condition="'$(Config)'=='Release' or '$(Cfg_2)'!=''">
         <Cfg_2>true</Cfg_2>
         <CfgParent>Base</CfgParent>
+        <Base>true</Base>
+    </PropertyGroup>
+    <PropertyGroup Condition="('$(Platform)'=='iOSDevice64' and '$(Cfg_2)'=='true') or '$(Cfg_2_iOSDevice64)'!=''">
+        <Cfg_2_iOSDevice64>true</Cfg_2_iOSDevice64>
+        <CfgParent>Cfg_2</CfgParent>
+        <Cfg_2>true</Cfg_2>
+        <Base>true</Base>
+    </PropertyGroup>
+    <PropertyGroup Condition="('$(Platform)'=='iOSDevice32' and '$(Cfg_2)'=='true') or '$(Cfg_2_iOSDevice32)'!=''">
+        <Cfg_2_iOSDevice32>true</Cfg_2_iOSDevice32>
+        <CfgParent>Cfg_2</CfgParent>
+        <Cfg_2>true</Cfg_2>
         <Base>true</Base>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Base)'!=''">
@@ -81,10 +110,8 @@
         <ILINK_TranslatedLibraryPath>$(BDSLIB)\$(PLATFORM)\release\$(LANGDIR);$(ILINK_TranslatedLibraryPath)</ILINK_TranslatedLibraryPath>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Base_Android)'!=''">
+        <EnabledSysJars>android-support-v4.dex.jar;apk-expansion.dex.jar;cloud-messaging.dex.jar;fmx.dex.jar;google-analytics-v2.dex.jar;google-play-billing.dex.jar;google-play-licensing.dex.jar;google-play-services.dex.jar</EnabledSysJars>
         <PackageImports>AbbreviaCR;bindcomp;bindcompdbx;bindcompfmx;bindengine;CloudService;CustomIPTransport;DataSnapClient;DataSnapCommon;DataSnapFireDAC;DataSnapNativeClient;DataSnapProviderClient;dbexpress;dbrtl;dbxcds;DbxClientDriver;DbxCommonDriver;DBXInterBaseDriver;DBXSqliteDriver;dsnap;dsnapxml;emsclient;emsclientfiredac;FireDAC;FireDACCommon;FireDACCommonDriver;FireDACDBXDriver;FireDACDSDriver;FireDACIBDriver;FireDACSqliteDriver;fmx;fmxFireDAC;FMXTee;FmxTeeUI;ibxpress;IndyCore;IndyIPClient;IndyIPCommon;IndyIPServer;IndyProtocols;IndySystem;inet;RESTBackendComponents;RESTComponents;rtl;soapmidas;soaprtl;soapserver;tethering;xmlrtl;$(PackageImports)</PackageImports>
-    </PropertyGroup>
-    <PropertyGroup Condition="'$(Base_iOSDevice)'!=''">
-        <PackageImports>AbbreviaCR;bindcomp;bindcompdbx;bindcompfmx;bindengine;CloudService;CustomIPTransport;DataSnapClient;DataSnapCommon;DataSnapFireDAC;DataSnapNativeClient;DataSnapProviderClient;dbexpress;dbrtl;dbxcds;DbxClientDriver;DbxCommonDriver;DBXInterBaseDriver;DBXSqliteDriver;dsnap;dsnapxml;emsclient;emsclientfiredac;FireDAC;FireDACCommon;FireDACCommonDriver;FireDACDBXDriver;FireDACDSDriver;FireDACIBDriver;FireDACSqliteDriver;fmx;fmxase;fmxFireDAC;FMXTee;FmxTeeUI;ibxpress;IndyCore;IndyIPClient;IndyIPCommon;IndyIPServer;IndyProtocols;IndySystem;inet;RESTBackendComponents;RESTComponents;rtl;soapmidas;soaprtl;soapserver;tethering;xmlrtl;$(PackageImports)</PackageImports>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Base_OSX32)'!=''">
         <PackageImports>AbbreviaCR;bindcomp;bindcompdbx;bindcompfmx;bindengine;CloudService;CustomIPTransport;DataSnapClient;DataSnapCommon;DataSnapFireDAC;DataSnapIndy10ServerTransport;DataSnapNativeClient;DataSnapProviderClient;DataSnapServer;DataSnapServerMidas;dbexpress;dbrtl;dbxcds;DbxClientDriver;DbxCommonDriver;DBXFirebirdDriver;DBXInformixDriver;DBXInterBaseDriver;DBXMySQLDriver;DBXOracleDriver;DBXSqliteDriver;DBXSybaseASADriver;dsnap;dsnapxml;emsclient;emsclientfiredac;FireDAC;FireDACASADriver;FireDACCommon;FireDACCommonDriver;FireDACDBXDriver;FireDACDSDriver;FireDACIBDriver;FireDACMSSQLDriver;FireDACMySQLDriver;FireDACODBCDriver;FireDACOracleDriver;FireDACPgDriver;FireDACSqliteDriver;fmx;fmxase;fmxdae;fmxFireDAC;fmxobj;FMXTee;FmxTeeUI;ibxpress;IndyCore;IndyIPClient;IndyIPCommon;IndyIPServer;IndyProtocols;IndySystem;inet;inetdb;inetdbxpress;RESTBackendComponents;RESTComponents;rtl;soapmidas;soaprtl;soapserver;tethering;xmlrtl;$(PackageImports)</PackageImports>
@@ -100,6 +127,28 @@
     <PropertyGroup Condition="'$(Base_Win64)'!=''">
         <PackageImports>AbbreviaCR;AbbreviaVCLC;adortl;bindcomp;bindcompdbx;bindcompfmx;bindcompvcl;bindengine;CloudService;CustomIPTransport;DataSnapClient;DataSnapCommon;DataSnapConnectors;DatasnapConnectorsFreePascal;DataSnapFireDAC;DataSnapIndy10ServerTransport;DataSnapNativeClient;DataSnapProviderClient;DataSnapServer;DataSnapServerMidas;dbexpress;dbrtl;dbxcds;DbxClientDriver;DbxCommonDriver;DBXDb2Driver;DBXFirebirdDriver;DBXInformixDriver;DBXInterBaseDriver;DBXMSSQLDriver;DBXMySQLDriver;DBXOdbcDriver;DBXOracleDriver;DBXSqliteDriver;DBXSybaseASADriver;DBXSybaseASEDriver;dsnap;dsnapcon;dsnapxml;emsclient;emsclientfiredac;FireDAC;FireDACADSDriver;FireDACASADriver;FireDACCommon;FireDACCommonDriver;FireDACDb2Driver;FireDACDBXDriver;FireDACDSDriver;FireDACIBDriver;FireDACInfxDriver;FireDACMSAccDriver;FireDACMSSQLDriver;FireDACMySQLDriver;FireDACODBCDriver;FireDACOracleDriver;FireDACPgDriver;FireDACSqliteDriver;fmx;fmxase;fmxdae;fmxFireDAC;fmxobj;FMXTee;FmxTeeUI;ibxpress;IndyCore;IndyIPClient;IndyIPCommon;IndyIPServer;IndyProtocols;IndySystem;inet;inetdb;inetdbxpress;Intraweb;MetropolisUILiveTile;OrpheusCR;OrpheusDBCR;RESTBackendComponents;RESTComponents;rtl;soapmidas;soaprtl;soapserver;SynEditCR;Tee;TeeDB;TeeUI;tethering;vcl;vclactnband;vcldb;vcldsnap;vclFireDAC;vclib;vclie;vclimg;VCLRESTComponents;vclribbon;VclSmp;vcltouch;vclx;xmlrtl;$(PackageImports)</PackageImports>
         <IncludePath>$(BDSINCLUDE)\windows\vcl;$(IncludePath)</IncludePath>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Base_iOSDevice64)'!=''">
+        <Base_iOSDevice>true</Base_iOSDevice>
+        <PackageImports>AbbreviaCR;bindcomp;bindcompdbx;bindcompfmx;bindengine;CloudService;CustomIPTransport;DataSnapClient;DataSnapCommon;DataSnapFireDAC;DataSnapNativeClient;DataSnapProviderClient;dbexpress;dbrtl;dbxcds;DbxClientDriver;DbxCommonDriver;DBXInterBaseDriver;DBXSqliteDriver;dsnap;dsnapxml;emsclient;emsclientfiredac;FireDAC;FireDACCommon;FireDACCommonDriver;FireDACDBXDriver;FireDACDSDriver;FireDACIBDriver;FireDACSqliteDriver;fmx;fmxase;fmxFireDAC;FMXTee;FmxTeeUI;ibxpress;IndyCore;IndyIPClient;IndyIPCommon;IndyIPServer;IndyProtocols;IndySystem;inet;RESTBackendComponents;RESTComponents;rtl;soapmidas;soaprtl;soapserver;tethering;xmlrtl;$(PackageImports);$(PackageImports)</PackageImports>
+        <VerInfo_BundleId>$(MSBuildProjectName)</VerInfo_BundleId>
+        <VerInfo_UIDeviceFamily>iPhoneAndiPad</VerInfo_UIDeviceFamily>
+        <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
+        <CfgParent>Base</CfgParent>
+        <Base>true</Base>
+        <VerInfo_Keys>CFBundleName=$(MSBuildProjectName);CFBundleDevelopmentRegion=en;CFBundleDisplayName=$(MSBuildProjectName);CFBundleIdentifier=$(MSBuildProjectName);CFBundleInfoDictionaryVersion=7.1;CFBundleVersion=1.0.0.0;CFBundlePackageType=APPL;CFBundleSignature=????;LSRequiresIPhoneOS=true;CFBundleAllowMixedLocalizations=YES;CFBundleExecutable=$(MSBuildProjectName);UIDeviceFamily=iPhone &amp; iPad;CFBundleResourceSpecification=ResourceRules.plist</VerInfo_Keys>
+        <BT_BuildType>Debug</BT_BuildType>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Base_iOSDevice32)'!=''">
+        <Base_iOSDevice>true</Base_iOSDevice>
+        <PackageImports>AbbreviaCR;bindcomp;bindcompdbx;bindcompfmx;bindengine;CloudService;CustomIPTransport;DataSnapClient;DataSnapCommon;DataSnapFireDAC;DataSnapNativeClient;DataSnapProviderClient;dbexpress;dbrtl;dbxcds;DbxClientDriver;DbxCommonDriver;DBXInterBaseDriver;DBXSqliteDriver;dsnap;dsnapxml;emsclient;emsclientfiredac;FireDAC;FireDACCommon;FireDACCommonDriver;FireDACDBXDriver;FireDACDSDriver;FireDACIBDriver;FireDACSqliteDriver;fmx;fmxase;fmxFireDAC;FMXTee;FmxTeeUI;ibxpress;IndyCore;IndyIPClient;IndyIPCommon;IndyIPServer;IndyProtocols;IndySystem;inet;RESTBackendComponents;RESTComponents;rtl;soapmidas;soaprtl;soapserver;tethering;xmlrtl;$(PackageImports);$(PackageImports)</PackageImports>
+        <VerInfo_BundleId>$(MSBuildProjectName)</VerInfo_BundleId>
+        <VerInfo_UIDeviceFamily>iPhoneAndiPad</VerInfo_UIDeviceFamily>
+        <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
+        <CfgParent>Base</CfgParent>
+        <Base>true</Base>
+        <VerInfo_Keys>CFBundleName=$(MSBuildProjectName);CFBundleDevelopmentRegion=en;CFBundleDisplayName=$(MSBuildProjectName);CFBundleIdentifier=$(MSBuildProjectName);CFBundleInfoDictionaryVersion=7.1;CFBundleVersion=1.0.0.0;CFBundlePackageType=APPL;CFBundleSignature=????;LSRequiresIPhoneOS=true;CFBundleAllowMixedLocalizations=YES;CFBundleExecutable=$(MSBuildProjectName);UIDeviceFamily=iPhone &amp; iPad;CFBundleResourceSpecification=ResourceRules.plist</VerInfo_Keys>
+        <BT_BuildType>Debug</BT_BuildType>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_1)'!=''">
         <BCC_OptimizeForSpeed>false</BCC_OptimizeForSpeed>
@@ -127,14 +176,44 @@
         <VerInfo_Locale>1033</VerInfo_Locale>
         <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
     </PropertyGroup>
+    <PropertyGroup Condition="'$(Cfg_1_iOSDevice64)'!=''">
+        <DCC_RemoteDebug>true</DCC_RemoteDebug>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Cfg_1_iOSDevice32)'!=''">
+        <DCC_RemoteDebug>true</DCC_RemoteDebug>
+    </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_2)'!=''">
         <Defines>NDEBUG;$(Defines)</Defines>
         <TASM_Debugging>None</TASM_Debugging>
     </PropertyGroup>
+    <PropertyGroup Condition="'$(Cfg_2_iOSDevice64)'!=''">
+        <DCC_RemoteDebug>true</DCC_RemoteDebug>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Cfg_2_iOSDevice32)'!=''">
+        <DCC_RemoteDebug>true</DCC_RemoteDebug>
+    </PropertyGroup>
     <ItemGroup>
+        <PackageImport Include="dbrtl.bpi">
+            <BuildOrder>9</BuildOrder>
+        </PackageImport>
+        <PackageImport Include="rtl.bpi">
+            <BuildOrder>1</BuildOrder>
+        </PackageImport>
+        <PackageImport Include="SysToolsCR.bpi">
+            <BuildOrder>2</BuildOrder>
+        </PackageImport>
         <CppCompile Include="SysToolsDBCR.cpp">
             <BuildOrder>0</BuildOrder>
         </CppCompile>
+        <PackageImport Include="vcl.bpi">
+            <BuildOrder>7</BuildOrder>
+        </PackageImport>
+        <PackageImport Include="vcldb.bpi">
+            <BuildOrder>10</BuildOrder>
+        </PackageImport>
+        <PackageImport Include="vclx.bpi">
+            <BuildOrder>8</BuildOrder>
+        </PackageImport>
         <DelphiCompile Include="..\..\source\StDb2DBC.pas">
             <BuildOrder>3</BuildOrder>
         </DelphiCompile>
@@ -147,24 +226,6 @@
         <DelphiCompile Include="..\..\source\StExport.pas">
             <BuildOrder>6</BuildOrder>
         </DelphiCompile>
-        <PackageImport Include="SysToolsCR.bpi">
-            <BuildOrder>2</BuildOrder>
-        </PackageImport>
-        <PackageImport Include="dbrtl.bpi">
-            <BuildOrder>9</BuildOrder>
-        </PackageImport>
-        <PackageImport Include="rtl.bpi">
-            <BuildOrder>1</BuildOrder>
-        </PackageImport>
-        <PackageImport Include="vcl.bpi">
-            <BuildOrder>7</BuildOrder>
-        </PackageImport>
-        <PackageImport Include="vcldb.bpi">
-            <BuildOrder>10</BuildOrder>
-        </PackageImport>
-        <PackageImport Include="vclx.bpi">
-            <BuildOrder>8</BuildOrder>
-        </PackageImport>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>
@@ -199,12 +260,13 @@
                     <Excluded_Packages Name="C:\Program Files (x86)\Raize\CS5\Bin\CodeSiteExpressPkg_Design210.bpl">Datei C:\Program Files (x86)\Raize\CS5\Bin\CodeSiteExpressPkg_Design210.bpl nicht gefunden</Excluded_Packages>
                 </Excluded_Packages>
             </CPlusPlusBuilder.Personality>
-            <Deployment>
+            <Deployment Version="1">
                 <DeployFile Condition="'$(UsingDelphiRTL)'=='true'" LocalName="$(BDS)\bin64\borlndmm.dll" Class="DependencyModule">
                     <Platform Name="Win64">
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
+                <DeployFile LocalName="..\..\..\..\..\Public\Documents\Embarcadero\Studio\15.0\BPL\Package1.tds" Configuration="Debug" Class="DebugSymbols"/>
                 <DeployFile Condition="'$(DynamicRTL)'=='true' And '$(Multithreaded)'=='true'" LocalName="$(BDS)\bin\cc32160mt.dll" Class="DependencyModule">
                     <Platform Name="Win32">
                         <Overwrite>true</Overwrite>
@@ -221,6 +283,12 @@
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
+                <DeployFile LocalName="..\..\..\..\..\Public\Documents\Embarcadero\Studio\15.0\BPL\SysToolsDBCR.bpl" Configuration="Debug" Class="ProjectOutput">
+                    <Platform Name="Win32">
+                        <RemoteName>SysToolsDBCR.bpl</RemoteName>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
                 <DeployFile Condition="'$(DynamicRTL)'=='true' And '$(Multithreaded)'=='true'" LocalName="$(BDS)\bin64\cc64160mt.dll" Class="DependencyModule">
                     <Platform Name="Win64">
                         <Overwrite>true</Overwrite>
@@ -234,12 +302,6 @@
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
-                <DeployFile LocalName="..\..\..\..\..\Public\Documents\Embarcadero\Studio\15.0\BPL\SysToolsDBCR.bpl" Configuration="Debug" Class="ProjectOutput">
-                    <Platform Name="Win32">
-                        <RemoteName>SysToolsDBCR.bpl</RemoteName>
-                        <Overwrite>true</Overwrite>
-                    </Platform>
-                </DeployFile>
                 <DeployFile Condition="'$(DynamicRTL)'=='true'" LocalName="$(BDS)\Redist\osx32\libcgstl.dylib" Class="DependencyModule">
                     <Platform Name="OSX32">
                         <Overwrite>true</Overwrite>
@@ -250,7 +312,6 @@
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
-                <DeployFile LocalName="..\..\..\..\..\Public\Documents\Embarcadero\Studio\15.0\BPL\Package1.tds" Configuration="Debug" Class="DebugSymbols"/>
                 <DeployFile LocalName="C:\Users\Public\Documents\Embarcadero\Studio\15.0\BPL\SysToolsDBCR.bpl" Configuration="Debug" Class="ProjectOutput">
                     <Platform Name="Win32">
                         <RemoteName>SysToolsDBCR.bpl</RemoteName>
@@ -268,7 +329,7 @@
                     </Platform>
                 </DeployFile>
                 <DeployClass Required="true" Name="DependencyPackage">
-                    <Platform Name="iOSDevice">
+                    <Platform Name="iOSDevice64">
                         <Operation>1</Operation>
                         <Extensions>.dylib</Extensions>
                     </Platform>
@@ -284,6 +345,10 @@
                         <Operation>1</Operation>
                         <Extensions>.dylib</Extensions>
                     </Platform>
+                    <Platform Name="iOSDevice32">
+                        <Operation>1</Operation>
+                        <Extensions>.dylib</Extensions>
+                    </Platform>
                 </DeployClass>
                 <DeployClass Name="DependencyModule">
                     <Platform Name="OSX32">
@@ -296,16 +361,23 @@
                     </Platform>
                 </DeployClass>
                 <DeployClass Name="iPad_Launch2048">
-                    <Platform Name="iOSDevice">
+                    <Platform Name="iOSDevice64">
                         <Operation>1</Operation>
                     </Platform>
                     <Platform Name="iOSSimulator">
                         <Operation>1</Operation>
                     </Platform>
+                    <Platform Name="iOSDevice32">
+                        <Operation>1</Operation>
+                    </Platform>
                 </DeployClass>
                 <DeployClass Name="ProjectOSXInfoPList"/>
                 <DeployClass Name="ProjectiOSDeviceDebug">
-                    <Platform Name="iOSDevice">
+                    <Platform Name="iOSDevice64">
+                        <RemoteDir>..\$(PROJECTNAME).app.dSYM\Contents\Resources\DWARF</RemoteDir>
+                        <Operation>1</Operation>
+                    </Platform>
+                    <Platform Name="iOSDevice32">
                         <RemoteDir>..\$(PROJECTNAME).app.dSYM\Contents\Resources\DWARF</RemoteDir>
                         <Operation>1</Operation>
                     </Platform>
@@ -323,10 +395,13 @@
                     </Platform>
                 </DeployClass>
                 <DeployClass Name="ProjectiOSResource">
-                    <Platform Name="iOSDevice">
+                    <Platform Name="iOSDevice64">
                         <Operation>1</Operation>
                     </Platform>
                     <Platform Name="iOSSimulator">
+                        <Operation>1</Operation>
+                    </Platform>
+                    <Platform Name="iOSDevice32">
                         <Operation>1</Operation>
                     </Platform>
                 </DeployClass>
@@ -338,10 +413,13 @@
                     </Platform>
                 </DeployClass>
                 <DeployClass Name="iPhone_Launch640">
-                    <Platform Name="iOSDevice">
+                    <Platform Name="iOSDevice64">
                         <Operation>1</Operation>
                     </Platform>
                     <Platform Name="iOSSimulator">
+                        <Operation>1</Operation>
+                    </Platform>
+                    <Platform Name="iOSDevice32">
                         <Operation>1</Operation>
                     </Platform>
                 </DeployClass>
@@ -358,10 +436,13 @@
                     </Platform>
                 </DeployClass>
                 <DeployClass Name="iPhone_Launch320">
-                    <Platform Name="iOSDevice">
+                    <Platform Name="iOSDevice64">
                         <Operation>1</Operation>
                     </Platform>
                     <Platform Name="iOSSimulator">
+                        <Operation>1</Operation>
+                    </Platform>
+                    <Platform Name="iOSDevice32">
                         <Operation>1</Operation>
                     </Platform>
                 </DeployClass>
@@ -427,10 +508,13 @@
                 </DeployClass>
                 <DeployClass Name="ProjectiOSInfoPList"/>
                 <DeployClass Name="iPad_Launch1024">
-                    <Platform Name="iOSDevice">
+                    <Platform Name="iOSDevice64">
                         <Operation>1</Operation>
                     </Platform>
                     <Platform Name="iOSSimulator">
+                        <Operation>1</Operation>
+                    </Platform>
+                    <Platform Name="iOSDevice32">
                         <Operation>1</Operation>
                     </Platform>
                 </DeployClass>
@@ -448,19 +532,22 @@
                 </DeployClass>
                 <DeployClass Name="ProjectiOSDeviceResourceRules"/>
                 <DeployClass Name="iPad_Launch768">
-                    <Platform Name="iOSDevice">
+                    <Platform Name="iOSDevice64">
                         <Operation>1</Operation>
                     </Platform>
                     <Platform Name="iOSSimulator">
                         <Operation>1</Operation>
                     </Platform>
-                </DeployClass>
-                <DeployClass Required="true" Name="ProjectOutput">
-                    <Platform Name="iOSDevice">
+                    <Platform Name="iOSDevice32">
                         <Operation>1</Operation>
                     </Platform>
+                </DeployClass>
+                <DeployClass Required="true" Name="ProjectOutput">
                     <Platform Name="Android">
                         <RemoteDir>library\lib\armeabi-v7a</RemoteDir>
+                        <Operation>1</Operation>
+                    </Platform>
+                    <Platform Name="iOSDevice64">
                         <Operation>1</Operation>
                     </Platform>
                     <Platform Name="Win32">
@@ -470,6 +557,9 @@
                         <Operation>1</Operation>
                     </Platform>
                     <Platform Name="iOSSimulator">
+                        <Operation>1</Operation>
+                    </Platform>
+                    <Platform Name="iOSDevice32">
                         <Operation>1</Operation>
                     </Platform>
                 </DeployClass>
@@ -486,10 +576,10 @@
                     </Platform>
                 </DeployClass>
                 <DeployClass Name="File">
-                    <Platform Name="iOSDevice">
+                    <Platform Name="Android">
                         <Operation>0</Operation>
                     </Platform>
-                    <Platform Name="Android">
+                    <Platform Name="iOSDevice64">
                         <Operation>0</Operation>
                     </Platform>
                     <Platform Name="Win32">
@@ -501,12 +591,18 @@
                     <Platform Name="iOSSimulator">
                         <Operation>0</Operation>
                     </Platform>
+                    <Platform Name="iOSDevice32">
+                        <Operation>0</Operation>
+                    </Platform>
                 </DeployClass>
                 <DeployClass Name="iPhone_Launch640x1136">
-                    <Platform Name="iOSDevice">
+                    <Platform Name="iOSDevice64">
                         <Operation>1</Operation>
                     </Platform>
                     <Platform Name="iOSSimulator">
+                        <Operation>1</Operation>
+                    </Platform>
+                    <Platform Name="iOSDevice32">
                         <Operation>1</Operation>
                     </Platform>
                 </DeployClass>
@@ -523,10 +619,13 @@
                     </Platform>
                 </DeployClass>
                 <DeployClass Name="iPad_Launch1536">
-                    <Platform Name="iOSDevice">
+                    <Platform Name="iOSDevice64">
                         <Operation>1</Operation>
                     </Platform>
                     <Platform Name="iOSSimulator">
+                        <Operation>1</Operation>
+                    </Platform>
+                    <Platform Name="iOSDevice32">
                         <Operation>1</Operation>
                     </Platform>
                 </DeployClass>
@@ -547,16 +646,18 @@
                         <Operation>1</Operation>
                     </Platform>
                 </DeployClass>
+                <ProjectRoot Platform="iOSDevice32" Name="$(PROJECTNAME).app"/>
                 <ProjectRoot Platform="Android" Name="$(PROJECTNAME)"/>
-                <ProjectRoot Platform="iOSDevice" Name="$(PROJECTNAME).app"/>
                 <ProjectRoot Platform="Win32" Name="$(PROJECTNAME)"/>
+                <ProjectRoot Platform="iOSDevice64" Name="$(PROJECTNAME).app"/>
                 <ProjectRoot Platform="OSX32" Name="$(PROJECTNAME)"/>
                 <ProjectRoot Platform="iOSSimulator" Name="$(PROJECTNAME).app"/>
                 <ProjectRoot Platform="Win64" Name="$(PROJECTNAME)"/>
             </Deployment>
             <Platforms>
                 <Platform value="Android">False</Platform>
-                <Platform value="iOSDevice">False</Platform>
+                <Platform value="iOSDevice32">False</Platform>
+                <Platform value="iOSDevice64">False</Platform>
                 <Platform value="OSX32">False</Platform>
                 <Platform value="Win32">True</Platform>
                 <Platform value="Win64">False</Platform>
