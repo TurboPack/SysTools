@@ -54,7 +54,7 @@
         <DesignOnlyPackage>true</DesignOnlyPackage>
         <DCC_GenerateStackFrames>true</DCC_GenerateStackFrames>
         <VerInfo_Keys>CompanyName=;FileDescription=;FileVersion=1.0.0.0;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProductName=;ProductVersion=1.0.0.0;Comments=</VerInfo_Keys>
-        <DCC_Description>TurboPower SysTools DB Designtime package</DCC_Description>
+        <DCC_Description>TurboPower SysTools Delphi DB Designtime package</DCC_Description>
         <DCC_WriteableConstants>true</DCC_WriteableConstants>
         <DCC_Namespace>System;Xml;Data;Datasnap;Web;Soap;$(DCC_Namespace)</DCC_Namespace>
         <DCC_Optimize>false</DCC_Optimize>
