@@ -119,12 +119,6 @@ const
 
 const
 {.Z+}
-  {used by CompareLetterSets for estimating word similarity}
-  StLetterValues : array['A'..'Z'] of Byte = (
-    3 {A} , 6 {B} , 5 {C} , 4 {D} , 3 {E} , 5 {F} , 5 {G} , 4 {H} , 3 {I} ,
-    8 {J} , 7 {K} , 4 {L} , 5 {M} , 3 {N} , 3 {O} , 5 {P} , 7 {Q} , 4 {R} ,
-    3 {S} , 3 {T} , 4 {U} , 6 {V} , 5 {W} , 8 {X} , 8 {Y} , 9 {Z} );
-
   StHexDigits  : array[0..$F] of AnsiChar = '0123456789ABCDEF';
   DosDelimSet  : set of AnsiChar = ['\', ':', #0];
   StHexDigitsW : WideString = '0123456789ABCDEF';
@@ -409,9 +403,6 @@ procedure HugeFreeMem(var P : Pointer; Size : Integer);
 
 {---General comparison and searching---}
 
-function CompareLetterSets(Set1, Set2 : Integer) : Cardinal;
-  {-Return the sum of the values of the letters common to Set1 and Set2.}
-
 function CompStruct(const S1, S2; Size : Cardinal) : Integer;
   {-Compare two fixed size structures.}
 
@@ -559,41 +550,6 @@ asm
   mov ecx,True
 @1:
   mov eax,ecx
-end;
-
-function CompareLetterSets(Set1, Set2 : Integer) : Cardinal;
-  {-Returns the sum of the values of the letters common to Set1 and Set2.}
-asm
-  push   ebx                       { Save registers }
-  push   edi
-  and    eax, edx                  { EAX = EAX and EDX }
-  xor    edx, edx                  { Zero EDX }
-  mov    ecx, ('Z'-'A')            { Set up counter }
-  mov    edi, offset StLetterValues{ Point EBX to table }
-  xor    ebx, ebx
-  jmp    @@Start
-
-@@Next:
-  dec    ecx                       { Decrement counter }
-  shl    eax, 1                    { Shift next bit into position }
-
-@@Start:
-  test   eax, 2000000h             { Test 26th bit }
-  jnz    @@Add                     { If set, add corresponding letter value }
-  or     ecx, ecx
-  jz     @@Exit                    { Done if ECX is zero }
-  jmp    @@Next                    { Test next bit }
-
-@@Add:
-  mov    bl, [ecx+edi]             { Do table lookup }
-  add    edx, ebx                  { Add value to result }
-  or     ecx, ecx
-  jnz    @@Next                    { Test next bit }
-
-@@Exit:
-  mov    eax, edx                  { Move EDX to result }
-  pop    edi                       { Restore registers }
-  pop    ebx
 end;
 
 function CompStruct(const S1, S2; Size : Cardinal) : Integer;
