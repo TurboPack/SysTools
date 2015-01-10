@@ -121,12 +121,8 @@ procedure ExchangeLongInts(var I, J : Integer);
 procedure ExchangeStructs(var I, J; Size : Integer);
   {-Exchange the values in two structures}
 
-
 procedure FillWord(var ADest; ACount: Integer; AFiller : Word);
   {-Fill memory with a word-sized filler}
-
-procedure FillStruct(var Dest; Count : Cardinal; var Filler; FillerSize : Cardinal);
-  {-Fill memory with a variable sized filler}
 
 function AddWordToPtr(P : Pointer; W : Word) : Pointer;
   {-Add a word to a pointer.}
@@ -239,36 +235,6 @@ begin
     Move(AFiller, pDest^, SizeOf(AFiller));
     Inc(NativeInt(pDest), SizeOf(AFiller));
   end;
-end;
-
-procedure FillStruct(var Dest; Count : Cardinal; var Filler;
-  FillerSize : Cardinal);
-register;
-asm
-  or   edx, edx
-  jz   @@Exit
-
-  push edi
-  push esi
-  push ebx
-  mov  edi, eax
-  mov  ebx, ecx
-
-@@NextStruct:
-  mov  esi, ebx
-  mov  ecx, FillerSize
-  shr  ecx, 1
-  rep  movsw
-  adc  ecx, ecx
-  rep  movsb
-  dec  edx
-  jnz  @@NextStruct
-
-  pop  ebx
-  pop  esi
-  pop  edi
-
-@@Exit:
 end;
 
 function AddWordToPtr(P : Pointer; W : Word) : Pointer;

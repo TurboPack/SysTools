@@ -70,7 +70,8 @@ begin
   pStruct.Right := 2;
 
   iWord := 3;
-  FillWord(pStruct, SizeOf(pStruct), iWord);
+//  FillWord(pStruct, SizeOf(pStruct), iWord);
+  FillWord(pStruct, 2, iWord);
 
   Check(pStruct.Left = 3);
   Check(pStruct.Right = 3);
