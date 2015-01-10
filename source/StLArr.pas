@@ -259,7 +259,7 @@ begin
   try
 {$ENDIF}
     C := FCount;
-    HugeFillChar(laData^, C*FElSize, 0);
+    FillChar(laData^, C*FElSize, 0);
 {$IFDEF ThreadSafe}
   finally
     LeaveCS;
@@ -800,7 +800,7 @@ begin
   EnterCS;
   try
 {$ENDIF}
-    HugeFillChar(lmData^, FCount*FElSize, 0);
+    FillChar(lmData^, FCount*FElSize, 0);
 {$IFDEF ThreadSafe}
   finally
     LeaveCS;
@@ -1065,7 +1065,7 @@ begin
 
     {transfer rows from old array to new}
     if Cols > CurCols then
-      HugeFillChar(RowData^, BufSize, 0);
+      FillChar(RowData^, BufSize, 0);
     for R := 0 to FRows-1 do begin
       FCols := CurCols;
       lmRowSize := CurRowSize;

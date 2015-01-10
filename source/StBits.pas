@@ -332,7 +332,7 @@ begin
       end;
 
       if OldBlockSize < btBlockSize then begin
-        HugeFillChar(btByte(OldBlockSize)^, btBlockSize-OldBlockSize, 0);
+        FillChar(btByte(OldBlockSize)^, btBlockSize-OldBlockSize, 0);
         BlockSize := OldBlockSize;
       end else
         BlockSize := btBlockSize;
@@ -354,7 +354,7 @@ begin
   EnterCS;
   try
 {$ENDIF}
-    HugeFillChar(btBits^, btBlockSize, 0);
+    FillChar(btBits^, btBlockSize, 0);
     FCount := 0;
 {$IFDEF ThreadSafe}
   finally
@@ -689,7 +689,7 @@ begin
   EnterCS;
   try
 {$ENDIF}
-    HugeFillChar(btBits^, btBlockSize, $FF);
+    FillChar(btBits^, btBlockSize, $FF);
     FCount := FMax+1;
 {$IFDEF ThreadSafe}
   finally

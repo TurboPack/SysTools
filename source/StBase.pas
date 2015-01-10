@@ -399,9 +399,6 @@ function DestroyNode(Container : TStContainer; Node : TStNode;
 
 {.Z+}
 {---Huge memory routines---}
-procedure HugeFillChar(var Dest; Count : Integer; Value : Byte);
-  {-Fill huge memory block with byte value}
-
 procedure HugeFillStruc(var ADest; ADestSize: Integer; const ASource; ASourceSize: Integer);
   {-Fill huge memory block with structure value}
 
@@ -532,11 +529,6 @@ begin
   Container.DisposeNodeData(Node);
   Node.Free;
   Result := True;
-end;
-
-procedure HugeFillChar(var Dest; Count : Integer; Value : Byte);
-begin
-  FillChar(Dest, Count, Value);
 end;
 
 procedure HugeFillStruc(var ADest; ADestSize: Integer; const ASource; ASourceSize: Integer);

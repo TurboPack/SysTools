@@ -215,7 +215,7 @@ begin
     vmInvalidateCache;
     vmCacheCnt := 1;
     with vmCache^[0] do begin
-      HugeFillChar(crRowData^, vmRowSize, 0);
+      FillChar(crRowData^, vmRowSize, 0);
       crRow := 0;
       crTime := vmIncCacheTime;
       crDirty := 0;
