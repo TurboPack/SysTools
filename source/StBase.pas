@@ -403,9 +403,6 @@ procedure HugeFreeMem(var P : Pointer; Size : Integer);
 
 {---General comparison and searching---}
 
-function CompStruct(const S1, S2; Size : Cardinal) : Integer;
-  {-Compare two fixed size structures.}
-
 function Search(const Buffer; BufLength : Cardinal; const Match;
                 MatLength : Cardinal; var Pos : Cardinal) : Boolean;
   {-Search a buffer for the specified pattern of bytes.}
@@ -551,30 +548,6 @@ asm
 @1:
   mov eax,ecx
 end;
-
-function CompStruct(const S1, S2; Size : Cardinal) : Integer;
-  {-Compare two fixed size structures}
-asm
-  push   edi
-  push   esi
-  mov    esi, eax
-  mov    edi, edx
-  xor    eax, eax
-  or     ecx, ecx
-  jz     @@CSDone
-
-  repe   cmpsb
-  je     @@CSDone
-
-  inc    eax
-  ja     @@CSDone
-  or     eax, -1
-
-@@CSDone:
-  pop    esi
-  pop    edi
-end;
-
 
 function Search(const Buffer; BufLength : Cardinal; const Match;
                 MatLength : Cardinal; var Pos : Cardinal) : Boolean;
