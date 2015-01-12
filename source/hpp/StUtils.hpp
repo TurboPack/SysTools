@@ -1,8 +1,8 @@
 ﻿// CodeGear C++Builder
-// Copyright (c) 1995, 2015 by Embarcadero Technologies, Inc.
+// Copyright (c) 1995, 2014 by Embarcadero Technologies, Inc.
 // All rights reserved
 
-// (DO NOT EDIT: machine generated header) 'StUtils.pas' rev: 29.00 (Windows)
+// (DO NOT EDIT: machine generated header) 'StUtils.pas' rev: 28.00 (Windows)
 
 #ifndef StutilsHPP
 #define StutilsHPP
@@ -12,15 +12,15 @@
 #pragma option -w-      // All warnings off
 #pragma option -Vx      // Zero-length empty class member 
 #pragma pack(push,8)
-#include <System.hpp>
-#include <SysInit.hpp>
-#include <Winapi.Windows.hpp>
-#include <System.SysUtils.hpp>
-#include <System.Classes.hpp>
-#include <StConst.hpp>
-#include <StBase.hpp>
-#include <StDate.hpp>
-#include <StStrL.hpp>
+#include <System.hpp>	// Pascal unit
+#include <SysInit.hpp>	// Pascal unit
+#include <Winapi.Windows.hpp>	// Pascal unit
+#include <System.SysUtils.hpp>	// Pascal unit
+#include <System.Classes.hpp>	// Pascal unit
+#include <StConst.hpp>	// Pascal unit
+#include <StBase.hpp>	// Pascal unit
+#include <StDate.hpp>	// Pascal unit
+#include <StStrL.hpp>	// Pascal unit
 
 //-- user supplied -----------------------------------------------------------
 
@@ -41,11 +41,9 @@ extern DELPHI_PACKAGE void __fastcall SetLongFlag(int &Flags, int FlagMask);
 extern DELPHI_PACKAGE void __fastcall ClearLongFlag(int &Flags, int FlagMask);
 extern DELPHI_PACKAGE bool __fastcall LongFlagIsSet(int Flags, int FlagMask);
 extern DELPHI_PACKAGE void __fastcall ExchangeBytes(System::Byte &I, System::Byte &J);
-extern DELPHI_PACKAGE void __fastcall ExchangeWords(System::Word &I, System::Word &J);
 extern DELPHI_PACKAGE void __fastcall ExchangeLongInts(int &I, int &J);
-extern DELPHI_PACKAGE void __fastcall ExchangeStructs(void *I, void *J, unsigned Size);
-extern DELPHI_PACKAGE void __fastcall FillWord(void *Dest, unsigned Count, System::Word Filler);
-extern DELPHI_PACKAGE void __fastcall FillStruct(void *Dest, unsigned Count, void *Filler, unsigned FillerSize);
+extern DELPHI_PACKAGE void __fastcall ExchangeStructs(void *I, void *J, int Size);
+extern DELPHI_PACKAGE void __fastcall FillWord(void *ADest, int ACount, System::Word AFiller);
 extern DELPHI_PACKAGE void * __fastcall AddWordToPtr(void * P, System::Word W);
 extern DELPHI_PACKAGE System::Word __fastcall MakeWord(System::Byte H, System::Byte L);
 extern DELPHI_PACKAGE System::Word __fastcall MinWord(System::Word A, System::Word B);

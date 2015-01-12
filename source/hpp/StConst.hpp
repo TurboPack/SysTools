@@ -1,8 +1,8 @@
 ﻿// CodeGear C++Builder
-// Copyright (c) 1995, 2015 by Embarcadero Technologies, Inc.
+// Copyright (c) 1995, 2014 by Embarcadero Technologies, Inc.
 // All rights reserved
 
-// (DO NOT EDIT: machine generated header) 'StConst.pas' rev: 29.00 (Windows)
+// (DO NOT EDIT: machine generated header) 'StConst.pas' rev: 28.00 (Windows)
 
 #ifndef StconstHPP
 #define StconstHPP
@@ -12,9 +12,9 @@
 #pragma option -w-      // All warnings off
 #pragma option -Vx      // Zero-length empty class member 
 #pragma pack(push,8)
-#include <System.hpp>
-#include <SysInit.hpp>
-#include <System.SysUtils.hpp>
+#include <System.hpp>	// Pascal unit
+#include <SysInit.hpp>	// Pascal unit
+#include <System.SysUtils.hpp>	// Pascal unit
 
 //-- user supplied -----------------------------------------------------------
 

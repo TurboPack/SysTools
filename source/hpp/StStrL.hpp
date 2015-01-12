@@ -1,8 +1,8 @@
 ﻿// CodeGear C++Builder
-// Copyright (c) 1995, 2015 by Embarcadero Technologies, Inc.
+// Copyright (c) 1995, 2014 by Embarcadero Technologies, Inc.
 // All rights reserved
 
-// (DO NOT EDIT: machine generated header) 'StStrL.pas' rev: 29.00 (Windows)
+// (DO NOT EDIT: machine generated header) 'StStrL.pas' rev: 28.00 (Windows)
 
 #ifndef StstrlHPP
 #define StstrlHPP
@@ -12,13 +12,13 @@
 #pragma option -w-      // All warnings off
 #pragma option -Vx      // Zero-length empty class member 
 #pragma pack(push,8)
-#include <System.hpp>
-#include <SysInit.hpp>
-#include <Winapi.Windows.hpp>
-#include <System.Classes.hpp>
-#include <System.SysUtils.hpp>
-#include <StConst.hpp>
-#include <StBase.hpp>
+#include <System.hpp>	// Pascal unit
+#include <SysInit.hpp>	// Pascal unit
+#include <Winapi.Windows.hpp>	// Pascal unit
+#include <System.Classes.hpp>	// Pascal unit
+#include <System.SysUtils.hpp>	// Pascal unit
+#include <StConst.hpp>	// Pascal unit
+#include <StBase.hpp>	// Pascal unit
 
 //-- user supplied -----------------------------------------------------------
 
@@ -66,8 +66,6 @@ extern DELPHI_PACKAGE System::UnicodeString __fastcall TrimL(const System::Unico
 extern DELPHI_PACKAGE System::UnicodeString __fastcall TrimSpacesL(const System::UnicodeString S);
 extern DELPHI_PACKAGE System::UnicodeString __fastcall CenterChL(const System::UnicodeString S, System::WideChar C, unsigned Len);
 extern DELPHI_PACKAGE System::UnicodeString __fastcall CenterL(const System::UnicodeString S, unsigned Len);
-extern DELPHI_PACKAGE System::AnsiString __fastcall EntabL(const System::AnsiString S, System::Byte TabSize);
-extern DELPHI_PACKAGE System::AnsiString __fastcall DetabL(const System::AnsiString S, System::Byte TabSize);
 extern DELPHI_PACKAGE System::AnsiString __fastcall ScrambleL(const System::AnsiString S, const System::AnsiString Key);
 extern DELPHI_PACKAGE System::UnicodeString __fastcall SubstituteL(const System::UnicodeString S, const System::UnicodeString FromStr, const System::UnicodeString ToStr);
 extern DELPHI_PACKAGE System::UnicodeString __fastcall FilterL(const System::UnicodeString S, const System::UnicodeString Filters);
@@ -82,8 +80,6 @@ extern DELPHI_PACKAGE System::UnicodeString __fastcall ExtractAsciiL(unsigned N,
 extern DELPHI_PACKAGE void __fastcall WordWrapL(const System::UnicodeString InSt, System::UnicodeString &OutSt, System::UnicodeString &Overlap, int Margin, bool PadToMargin);
 extern DELPHI_PACKAGE int __fastcall CompStringL(const System::UnicodeString S1, const System::UnicodeString S2);
 extern DELPHI_PACKAGE int __fastcall CompUCStringL(const System::UnicodeString S1, const System::UnicodeString S2);
-extern DELPHI_PACKAGE System::AnsiString __fastcall SoundexL(const System::AnsiString S);
-extern DELPHI_PACKAGE int __fastcall MakeLetterSetL(const System::AnsiString S);
 extern DELPHI_PACKAGE void __fastcall BMMakeTableL(const System::UnicodeString MatchString, Stbase::BTable &BT)/* overload */;
 extern DELPHI_PACKAGE bool __fastcall BMSearchL(void *Buffer, unsigned BufLength, Stbase::BTable &BT, const System::UnicodeString MatchString, /* out */ unsigned &Pos)/* overload */;
 extern DELPHI_PACKAGE bool __fastcall BMSearchUCL(void *Buffer, unsigned BufLength, Stbase::BTable &BT, const System::UnicodeString MatchString, unsigned &Pos);

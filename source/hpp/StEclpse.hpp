@@ -1,8 +1,8 @@
 ﻿// CodeGear C++Builder
-// Copyright (c) 1995, 2015 by Embarcadero Technologies, Inc.
+// Copyright (c) 1995, 2014 by Embarcadero Technologies, Inc.
 // All rights reserved
 
-// (DO NOT EDIT: machine generated header) 'StEclpse.pas' rev: 29.00 (Windows)
+// (DO NOT EDIT: machine generated header) 'StEclpse.pas' rev: 28.00 (Windows)
 
 #ifndef SteclpseHPP
 #define SteclpseHPP
@@ -12,15 +12,15 @@
 #pragma option -w-      // All warnings off
 #pragma option -Vx      // Zero-length empty class member 
 #pragma pack(push,8)
-#include <System.hpp>
-#include <SysInit.hpp>
-#include <System.Math.hpp>
-#include <StBase.hpp>
-#include <StList.hpp>
-#include <StDate.hpp>
-#include <StAstro.hpp>
-#include <StMath.hpp>
-#include <System.Classes.hpp>
+#include <System.hpp>	// Pascal unit
+#include <SysInit.hpp>	// Pascal unit
+#include <System.Math.hpp>	// Pascal unit
+#include <StBase.hpp>	// Pascal unit
+#include <StList.hpp>	// Pascal unit
+#include <StDate.hpp>	// Pascal unit
+#include <StAstro.hpp>	// Pascal unit
+#include <StMath.hpp>	// Pascal unit
+#include <System.Classes.hpp>	// Pascal unit
 
 //-- user supplied -----------------------------------------------------------
 

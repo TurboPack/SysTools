@@ -1,8 +1,8 @@
 ﻿// CodeGear C++Builder
-// Copyright (c) 1995, 2015 by Embarcadero Technologies, Inc.
+// Copyright (c) 1995, 2014 by Embarcadero Technologies, Inc.
 // All rights reserved
 
-// (DO NOT EDIT: machine generated header) 'StStrS.pas' rev: 29.00 (Windows)
+// (DO NOT EDIT: machine generated header) 'StStrS.pas' rev: 28.00 (Windows)
 
 #ifndef StstrsHPP
 #define StstrsHPP
@@ -12,13 +12,13 @@
 #pragma option -w-      // All warnings off
 #pragma option -Vx      // Zero-length empty class member 
 #pragma pack(push,8)
-#include <System.hpp>
-#include <SysInit.hpp>
-#include <Winapi.Windows.hpp>
-#include <System.Classes.hpp>
-#include <System.SysUtils.hpp>
-#include <StConst.hpp>
-#include <StBase.hpp>
+#include <System.hpp>	// Pascal unit
+#include <SysInit.hpp>	// Pascal unit
+#include <Winapi.Windows.hpp>	// Pascal unit
+#include <System.Classes.hpp>	// Pascal unit
+#include <System.SysUtils.hpp>	// Pascal unit
+#include <StConst.hpp>	// Pascal unit
+#include <StBase.hpp>	// Pascal unit
 
 //-- user supplied -----------------------------------------------------------
 
@@ -55,8 +55,6 @@ extern DELPHI_PACKAGE System::ShortString __fastcall TrimTrailS(const System::Sh
 extern DELPHI_PACKAGE System::ShortString __fastcall TrimS(const System::ShortString &S);
 extern DELPHI_PACKAGE System::ShortString __fastcall CenterChS(const System::ShortString &S, char C, unsigned Len);
 extern DELPHI_PACKAGE System::ShortString __fastcall CenterS(const System::ShortString &S, unsigned Len);
-extern DELPHI_PACKAGE System::ShortString __fastcall EntabS(const System::ShortString &S, System::Byte TabSize);
-extern DELPHI_PACKAGE System::ShortString __fastcall DetabS(const System::ShortString &S, System::Byte TabSize);
 extern DELPHI_PACKAGE System::ShortString __fastcall ScrambleS(const System::ShortString &S, const System::ShortString &Key);
 extern DELPHI_PACKAGE System::ShortString __fastcall SubstituteS(const System::ShortString &S, const System::ShortString &FromStr, const System::ShortString &ToStr);
 extern DELPHI_PACKAGE System::ShortString __fastcall FilterS(const System::ShortString &S, const System::ShortString &Filters);
@@ -70,13 +68,6 @@ extern DELPHI_PACKAGE unsigned __fastcall AsciiCountS(const System::ShortString 
 extern DELPHI_PACKAGE bool __fastcall AsciiPositionS(unsigned N, const System::ShortString &S, const System::ShortString &WordDelims, char Quote, unsigned &Pos);
 extern DELPHI_PACKAGE System::ShortString __fastcall ExtractAsciiS(unsigned N, const System::ShortString &S, const System::ShortString &WordDelims, char Quote);
 extern DELPHI_PACKAGE void __fastcall WordWrapS(const System::ShortString &InSt, System::SmallString<255> &OutSt, const int OutSt_High, System::SmallString<255> &Overlap, const int Overlap_High, unsigned Margin, bool PadToMargin);
-extern DELPHI_PACKAGE int __fastcall CompStringS(const System::ShortString &S1, const System::ShortString &S2);
-extern DELPHI_PACKAGE int __fastcall CompUCStringS(const System::ShortString &S1, const System::ShortString &S2);
-extern DELPHI_PACKAGE System::ShortString __fastcall SoundexS(const System::ShortString &S);
-extern DELPHI_PACKAGE int __fastcall MakeLetterSetS(const System::ShortString &S);
-extern DELPHI_PACKAGE void __fastcall BMMakeTableS(const System::ShortString &MatchString, Stbase::BTable &BT);
-extern DELPHI_PACKAGE bool __fastcall BMSearchS(void *Buffer, unsigned BufLength, Stbase::BTable &BT, const System::ShortString &MatchString, unsigned &Pos);
-extern DELPHI_PACKAGE bool __fastcall BMSearchUCS(void *Buffer, unsigned BufLength, Stbase::BTable &BT, const System::ShortString &MatchString, unsigned &Pos);
 extern DELPHI_PACKAGE System::ShortString __fastcall DefaultExtensionS(const System::ShortString &Name, const System::ShortString &Ext);
 extern DELPHI_PACKAGE System::ShortString __fastcall ForceExtensionS(const System::ShortString &Name, const System::ShortString &Ext);
 extern DELPHI_PACKAGE System::ShortString __fastcall JustFilenameS(const System::ShortString &PathName);

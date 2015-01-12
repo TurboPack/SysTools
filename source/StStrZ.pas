@@ -602,30 +602,15 @@ begin
 end;
 
 function CharStrZ(Dest : PAnsiChar; C : AnsiChar; Len : Cardinal) : PAnsiChar;
-register;
-asm
-  push    edi            { Save EDI-about to change it }
-  push    eax            { Save Dest pointer for return }
-  mov     edi, eax       { Point EDI to Dest }
-
-  mov     dh, dl         { Dup character 4 times }
-  mov     eax, edx
-  shl     eax, $10
-  mov     ax, dx
-
-  mov     edx, ecx       { Save Len }
-
-  shr     ecx, 2         { Store dword char chunks first }
-  rep     stosd
-  mov     ecx, edx       { Store remaining characters }
-  and     ecx, 3
-  rep     stosb
-
-  xor     al,al          { Add null terminator }
-  mov     [edi], al
-
-  pop     eax            { Return Dest pointer }
-  pop     edi            { Restore orig value of EDI }
+var
+  iCount: Integer;
+begin
+  for iCount := 0 to Len - 1 do
+  begin
+    Dest^ := C;
+    Inc(NativeInt(Dest));
+  end;
+  Dest^ := #0;
 end;
 
 function PadChPrimZ(S : PAnsiChar; C : AnsiChar; Len : Cardinal) : PAnsiChar;

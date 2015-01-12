@@ -1,8 +1,8 @@
 ﻿// CodeGear C++Builder
-// Copyright (c) 1995, 2015 by Embarcadero Technologies, Inc.
+// Copyright (c) 1995, 2014 by Embarcadero Technologies, Inc.
 // All rights reserved
 
-// (DO NOT EDIT: machine generated header) 'StBase.pas' rev: 29.00 (Windows)
+// (DO NOT EDIT: machine generated header) 'StBase.pas' rev: 28.00 (Windows)
 
 #ifndef StbaseHPP
 #define StbaseHPP
@@ -12,15 +12,15 @@
 #pragma option -w-      // All warnings off
 #pragma option -Vx      // Zero-length empty class member 
 #pragma pack(push,8)
-#include <System.hpp>
-#include <SysInit.hpp>
-#include <Winapi.Windows.hpp>
-#include <System.Classes.hpp>
-#include <System.SysUtils.hpp>
-#include <Winapi.Messages.hpp>
-#include <Vcl.StdCtrls.hpp>
-#include <StConst.hpp>
-#include <Vcl.Controls.hpp>
+#include <System.hpp>	// Pascal unit
+#include <SysInit.hpp>	// Pascal unit
+#include <Winapi.Windows.hpp>	// Pascal unit
+#include <System.Classes.hpp>	// Pascal unit
+#include <System.SysUtils.hpp>	// Pascal unit
+#include <Winapi.Messages.hpp>	// Pascal unit
+#include <Vcl.StdCtrls.hpp>	// Pascal unit
+#include <StConst.hpp>	// Pascal unit
+#include <Vcl.Controls.hpp>	// Pascal unit
 
 //-- user supplied -----------------------------------------------------------
 
@@ -837,7 +837,6 @@ static const int StMaxBlockSize = int(2147483647);
 static const System::Word StMaxFileLen = System::Word(0x104);
 static const System::Int8 StRLEMaxCount = System::Int8(0x7f);
 static const System::Byte StRLERunMode = System::Byte(0x80);
-extern DELPHI_PACKAGE System::StaticArray<System::Byte, 26> StLetterValues;
 extern DELPHI_PACKAGE System::StaticArray<char, 16> StHexDigits;
 extern DELPHI_PACKAGE System::Set<char, _DELPHI_SET_CHAR(0), _DELPHI_SET_CHAR(255)> DosDelimSet;
 extern DELPHI_PACKAGE System::WideString StHexDigitsW;
@@ -847,22 +846,9 @@ extern DELPHI_PACKAGE void __fastcall RaiseStError(EStExceptionClass ExceptionCl
 extern DELPHI_PACKAGE void __fastcall RaiseStWin32Error(EStExceptionClass ExceptionClass, int Code);
 extern DELPHI_PACKAGE void __fastcall RaiseStWin32ErrorEx(EStExceptionClass ExceptionClass, int Code, System::UnicodeString Info);
 extern DELPHI_PACKAGE bool __fastcall DestroyNode(TStContainer* Container, TStNode* Node, void * OtherData);
-extern DELPHI_PACKAGE void __fastcall HugeFillChar(void *Dest, int Count, System::Byte Value);
-extern DELPHI_PACKAGE int __fastcall HugeCompressRLE(const void *InBuffer, int InLen, void *OutBuffer);
-extern DELPHI_PACKAGE int __fastcall HugeDecompressRLE(const void *InBuffer, int InLen, void *OutBuffer, int OutLen);
-extern DELPHI_PACKAGE void __fastcall HugeFillStruc(void *Dest, int Count, const void *Value, unsigned ValSize);
+extern DELPHI_PACKAGE void __fastcall HugeFillStruc(void *ADest, int ADestSize, const void *ASource, int ASourceSize);
 extern DELPHI_PACKAGE void __fastcall HugeFreeMem(void * &P, int Size);
-extern DELPHI_PACKAGE void __fastcall HugeGetMem(void * &P, int Size);
-extern DELPHI_PACKAGE void __fastcall HugeMove(const void *Src, void *Dest, int Count);
-extern DELPHI_PACKAGE char __fastcall Upcase(char C)/* overload */;
-extern DELPHI_PACKAGE System::WideChar __fastcall Upcase(System::WideChar C)/* overload */;
-extern DELPHI_PACKAGE char __fastcall LoCase(char C)/* overload */;
-extern DELPHI_PACKAGE System::WideChar __fastcall LoCase(System::WideChar C)/* overload */;
 extern DELPHI_PACKAGE bool __fastcall ProductOverflow(int A, int B);
-extern DELPHI_PACKAGE unsigned __fastcall CompareLetterSets(int Set1, int Set2);
-extern DELPHI_PACKAGE int __fastcall CompStruct(const void *S1, const void *S2, unsigned Size);
-extern DELPHI_PACKAGE bool __fastcall Search(const void *Buffer, unsigned BufLength, const void *Match, unsigned MatLength, unsigned &Pos);
-extern DELPHI_PACKAGE bool __fastcall SearchUC(const void *Buffer, unsigned BufLength, const void *Match, unsigned MatLength, unsigned &Pos);
 extern DELPHI_PACKAGE void __fastcall ValLongInt(System::UnicodeString S, int &LI, int &ErrorCode);
 extern DELPHI_PACKAGE void __fastcall ValSmallint(const System::UnicodeString S, short &SI, int &ErrorCode);
 extern DELPHI_PACKAGE void __fastcall ValWord(const System::UnicodeString S, System::Word &Wd, int &ErrorCode);

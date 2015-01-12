@@ -1,8 +1,8 @@
 ﻿// CodeGear C++Builder
-// Copyright (c) 1995, 2015 by Embarcadero Technologies, Inc.
+// Copyright (c) 1995, 2014 by Embarcadero Technologies, Inc.
 // All rights reserved
 
-// (DO NOT EDIT: machine generated header) 'StMoney.pas' rev: 29.00 (Windows)
+// (DO NOT EDIT: machine generated header) 'StMoney.pas' rev: 28.00 (Windows)
 
 #ifndef StmoneyHPP
 #define StmoneyHPP
@@ -12,16 +12,16 @@
 #pragma option -w-      // All warnings off
 #pragma option -Vx      // Zero-length empty class member 
 #pragma pack(push,8)
-#include <System.hpp>
-#include <SysInit.hpp>
-#include <Winapi.Windows.hpp>
-#include <System.SysUtils.hpp>
-#include <System.Classes.hpp>
-#include <StConst.hpp>
-#include <StBase.hpp>
-#include <StStrms.hpp>
-#include <StDecMth.hpp>
-#include <StIniStm.hpp>
+#include <System.hpp>	// Pascal unit
+#include <SysInit.hpp>	// Pascal unit
+#include <Winapi.Windows.hpp>	// Pascal unit
+#include <System.SysUtils.hpp>	// Pascal unit
+#include <System.Classes.hpp>	// Pascal unit
+#include <StConst.hpp>	// Pascal unit
+#include <StBase.hpp>	// Pascal unit
+#include <StStrms.hpp>	// Pascal unit
+#include <StDecMth.hpp>	// Pascal unit
+#include <StIniStm.hpp>	// Pascal unit
 
 //-- user supplied -----------------------------------------------------------
 
