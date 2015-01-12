@@ -463,7 +463,7 @@ function WordPosZ(S, WordDelims, AWord : PAnsiChar;
 implementation
 
 uses
-  AnsiStrings;
+  Math, AnsiStrings;
 
 function HexBZ(Dest : PAnsiChar; B : Byte) : PAnsiChar;
     {-Return hex string for byte}
@@ -605,12 +605,14 @@ function CharStrZ(Dest : PAnsiChar; C : AnsiChar; Len : Cardinal) : PAnsiChar;
 var
   iCount: Integer;
 begin
+  Len := Min(Len, AnsiStrings.StrLen(Dest));
   for iCount := 0 to Len - 1 do
   begin
     Dest^ := C;
     Inc(NativeInt(Dest));
   end;
   Dest^ := #0;
+  Result := Dest;
 end;
 
 function PadChPrimZ(S : PAnsiChar; C : AnsiChar; Len : Cardinal) : PAnsiChar;
