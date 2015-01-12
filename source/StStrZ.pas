@@ -605,7 +605,9 @@ function CharStrZ(Dest : PAnsiChar; C : AnsiChar; Len : Cardinal) : PAnsiChar;
 var
   iCount: Integer;
 begin
-  Len := Min(Len, AnsiStrings.StrLen(Dest));
+  if Dest = nil then
+    Exit(nil);
+
   for iCount := 0 to Len - 1 do
   begin
     Dest^ := C;
@@ -616,35 +618,25 @@ begin
 end;
 
 function PadChPrimZ(S : PAnsiChar; C : AnsiChar; Len : Cardinal) : PAnsiChar;
-register;
-asm
-  push   eax
-  push   ebx
-  push   edi
+var
+  iCount: Integer;
+  bAfterNull: Boolean;
+begin
+  if S = nil then
+    Exit(nil);
 
-  mov    edi, eax
-  mov    ebx, ecx
-  xor    eax, eax
-  or     ecx, -1
-  repne  scasb
-  not    ecx
-  dec    ecx
-  dec    edi
-  mov    eax, ebx
-  sub    eax, ecx
-  jbe    @@ExitPoint
+  bAfterNull := False;
+  for iCount := 0 to Len - 1 do
+  begin
+    if S^ = #0 then
+      bAfterNull := True;
 
-  mov    ecx, eax
-  mov    eax, edx
-  rep    stosb
-
-@@ExitPoint:
-  xor    eax, eax
-  mov    [edi], al
-
-  pop    edi
-  pop    ebx
-  pop    eax
+    if bAfterNull then
+      S^ := C;
+    Inc(NativeInt(S));
+  end;
+  S^ := #0;
+  Result := S;
 end;
 
 function PadPrimZ(S : PAnsiChar; Len : Cardinal) : PAnsiChar;
