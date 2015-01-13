@@ -36,16 +36,16 @@ public:
 
 //-- var, const, procedure ---------------------------------------------------
 static const int StrOffset = int(0xc);
-extern DELPHI_PACKAGE System::AnsiString __fastcall HexBL(System::Byte B);
-extern DELPHI_PACKAGE System::AnsiString __fastcall HexWL(System::Word W);
-extern DELPHI_PACKAGE System::AnsiString __fastcall HexLL(int L);
-extern DELPHI_PACKAGE System::AnsiString __fastcall HexPtrL(void * P);
-extern DELPHI_PACKAGE System::AnsiString __fastcall BinaryBL(System::Byte B);
-extern DELPHI_PACKAGE System::AnsiString __fastcall BinaryWL(System::Word W);
-extern DELPHI_PACKAGE System::AnsiString __fastcall BinaryLL(int L);
-extern DELPHI_PACKAGE System::AnsiString __fastcall OctalBL(System::Byte B);
-extern DELPHI_PACKAGE System::AnsiString __fastcall OctalWL(System::Word W);
-extern DELPHI_PACKAGE System::AnsiString __fastcall OctalLL(int L);
+extern DELPHI_PACKAGE System::UnicodeString __fastcall HexBL(System::Byte B);
+extern DELPHI_PACKAGE System::UnicodeString __fastcall HexWL(System::Word W);
+extern DELPHI_PACKAGE System::UnicodeString __fastcall HexLL(int L);
+extern DELPHI_PACKAGE System::UnicodeString __fastcall HexPtrL(void * P);
+extern DELPHI_PACKAGE System::UnicodeString __fastcall BinaryBL(System::Byte B);
+extern DELPHI_PACKAGE System::UnicodeString __fastcall BinaryWL(System::Word W);
+extern DELPHI_PACKAGE System::UnicodeString __fastcall BinaryLL(int L);
+extern DELPHI_PACKAGE System::UnicodeString __fastcall OctalBL(System::Byte B);
+extern DELPHI_PACKAGE System::UnicodeString __fastcall OctalWL(System::Word W);
+extern DELPHI_PACKAGE System::UnicodeString __fastcall OctalLL(int L);
 extern DELPHI_PACKAGE bool __fastcall Str2Int16L(const System::UnicodeString S, short &I);
 extern DELPHI_PACKAGE bool __fastcall Str2WordL(const System::UnicodeString S, System::Word &I);
 extern DELPHI_PACKAGE bool __fastcall Str2LongL(const System::UnicodeString S, int &I);
@@ -66,7 +66,7 @@ extern DELPHI_PACKAGE System::UnicodeString __fastcall TrimL(const System::Unico
 extern DELPHI_PACKAGE System::UnicodeString __fastcall TrimSpacesL(const System::UnicodeString S);
 extern DELPHI_PACKAGE System::UnicodeString __fastcall CenterChL(const System::UnicodeString S, System::WideChar C, unsigned Len);
 extern DELPHI_PACKAGE System::UnicodeString __fastcall CenterL(const System::UnicodeString S, unsigned Len);
-extern DELPHI_PACKAGE System::AnsiString __fastcall ScrambleL(const System::AnsiString S, const System::AnsiString Key);
+extern DELPHI_PACKAGE System::UnicodeString __fastcall ScrambleL(const System::UnicodeString S, const System::UnicodeString Key);
 extern DELPHI_PACKAGE System::UnicodeString __fastcall SubstituteL(const System::UnicodeString S, const System::UnicodeString FromStr, const System::UnicodeString ToStr);
 extern DELPHI_PACKAGE System::UnicodeString __fastcall FilterL(const System::UnicodeString S, const System::UnicodeString Filters);
 extern DELPHI_PACKAGE bool __fastcall CharExistsL(const System::UnicodeString S, System::WideChar C);

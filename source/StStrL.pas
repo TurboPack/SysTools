@@ -58,34 +58,34 @@ const
 
   {-------- Numeric conversion -----------}
 
-function HexBL(B : Byte) : AnsiString;
+function HexBL(B : Byte) : string;
   {-Return the hex string for a byte.}
 
-function HexWL(W : Word) : AnsiString;
+function HexWL(W : Word) : string;
   {-Return the hex string for a word.}
 
-function HexLL(L : Integer) : AnsiString;
+function HexLL(L : Integer) : string;
   {-Return the hex string for a long integer.}
 
-function HexPtrL(P : Pointer) : AnsiString;
+function HexPtrL(P : Pointer) : string;
   {-Return the hex string for a pointer.}
 
-function BinaryBL(B : Byte) : AnsiString;
+function BinaryBL(B : Byte) : string;
   {-Return a binary string for a byte.}
 
-function BinaryWL(W : Word) : AnsiString;
+function BinaryWL(W : Word) : string;
   {-Return the binary string for a word.}
 
-function BinaryLL(L : Integer) : AnsiString;
+function BinaryLL(L : Integer) : string;
   {-Return the binary string for a long integer.}
 
-function OctalBL(B : Byte) : AnsiString;
+function OctalBL(B : Byte) : string;
   {-Return an octal string for a byte.}
 
-function OctalWL(W : Word) : AnsiString;
+function OctalWL(W : Word) : string;
   {-Return an octal string for a word.}
 
-function OctalLL(L : Integer) : AnsiString;
+function OctalLL(L : Integer) : string;
   {-Return an octal string for a long integer.}
 
 function Str2Int16L(const S : string; var I : SmallInt) : Boolean;
@@ -149,7 +149,7 @@ function CenterChL(const S : String; C : Char; Len : Cardinal) : String;
 function CenterL(const S : String; Len : Cardinal) : String;
   {-Pad a string on the left and right with spaces.}
 
-function ScrambleL(const S, Key : AnsiString) : AnsiString;
+function ScrambleL(const S, Key : string) : string;
   {-Encrypt / Decrypt string with enhanced XOR encryption.}
 
 function SubstituteL(const S, FromStr, ToStr : String) : String;
@@ -394,7 +394,7 @@ implementation
 
   {-------- Numeric conversion -----------}
 
-function HexBL(B : Byte) : AnsiString;
+function HexBL(B : Byte) : string;
   {-Return the hex string for a byte.}
 begin
   SetLength(Result, 2);
@@ -402,7 +402,7 @@ begin
   Result[2] := StHexDigits[B and $F];
 end;
 
-function HexWL(W : Word) : AnsiString;
+function HexWL(W : Word) : string;
   {-Return the hex string for a word.}
 begin
   SetLength(Result, 4);
@@ -412,21 +412,21 @@ begin
   Result[4] := StHexDigits[lo(W) and $F];
 end;
 
-function HexLL(L : Integer) : AnsiString;
+function HexLL(L : Integer) : string;
   {-Return the hex string for a long integer.}
 begin
   SetLength(Result, 8);
   Result := HexWL(HiWord(DWORD(L))) + HexWL(LoWord(DWORD(L)));         {!!.02}
 end;
 
-function HexPtrL(P : Pointer) : AnsiString;
+function HexPtrL(P : Pointer) : string;
   {-Return the hex string for a pointer.}
 begin
   SetLength(Result, 9);
   Result := ':' + HexLL(Integer(P));
 end;
 
-function BinaryBL(B : Byte) : AnsiString;
+function BinaryBL(B : Byte) : string;
   {-Return a binary string for a byte.}
 var
   I, N : Word;
@@ -439,7 +439,7 @@ begin
   end;
 end;
 
-function BinaryWL(W : Word) : AnsiString;
+function BinaryWL(W : Word) : string;
   {-Return the binary string for a word.}
 var
   I, N : Word;
@@ -452,7 +452,7 @@ begin
   end;
 end;
 
-function BinaryLL(L : Integer) : AnsiString;
+function BinaryLL(L : Integer) : string;
   {-Return the binary string for a long integer.}
 var
   I : Integer;
@@ -466,7 +466,7 @@ begin
   end;
 end;
 
-function OctalBL(B : Byte) : AnsiString;
+function OctalBL(B : Byte) : string;
   {-Return an octal string for a byte.}
 var
   I : Word;
@@ -478,7 +478,7 @@ begin
   end;
 end;
 
-function OctalWL(W : Word) : AnsiString;
+function OctalWL(W : Word) : string;
   {-Return an octal string for a word.}
 var
   I : Word;
@@ -490,7 +490,7 @@ begin
   end;
 end;
 
-function OctalLL(L : Integer) : AnsiString;
+function OctalLL(L : Integer) : string;
   {-Return an octal string for a long integer.}
 var
   I : Word;
@@ -737,7 +737,7 @@ begin
   Result := CenterChL(S, ' ', Len);
 end;
 
-function ScrambleL(const S, Key : AnsiString) : AnsiString;
+function ScrambleL(const S, Key : string) : string;
   {-Encrypt / Decrypt string with enhanced XOR encryption.}
 var
   I, J, LKey, LStr : Cardinal;
@@ -753,7 +753,7 @@ begin
     if J = 0 then
       J := LKey;
     if (S[I] <> Key[J]) then
-      Result[I] := AnsiChar(Byte(S[I]) xor Byte(Key[J]));
+      Result[I] := Char(Byte(S[I]) xor Byte(Key[J]));
     Inc(I);
     Dec(J);
   end;

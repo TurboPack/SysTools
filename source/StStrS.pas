@@ -379,18 +379,18 @@ function HexBS(B : Byte) : ShortString;
   {-Return the hex string for a byte.}
 begin
   Result[0] := #2;
-  Result[1] := StHexDigits[B shr 4];
-  Result[2] := StHexDigits[B and $F];
+  Result[1] := StHexDigitsA[B shr 4];
+  Result[2] := StHexDigitsA[B and $F];
 end;
 
 function HexWS(W : Word) : ShortString;
   {-Return the hex string for a word.}
 begin
   Result[0] := #4;
-  Result[1] := StHexDigits[hi(W) shr 4];
-  Result[2] := StHexDigits[hi(W) and $F];
-  Result[3] := StHexDigits[lo(W) shr 4];
-  Result[4] := StHexDigits[lo(W) and $F];
+  Result[1] := StHexDigitsA[hi(W) shr 4];
+  Result[2] := StHexDigitsA[hi(W) and $F];
+  Result[3] := StHexDigitsA[lo(W) shr 4];
+  Result[4] := StHexDigitsA[lo(W) and $F];
 end;
 
 function HexLS(L : Integer) : ShortString;
@@ -413,7 +413,7 @@ begin
   N := 1;
   Result[0] := #8;
   for I := 7 downto 0 do begin
-    Result[N] := StHexDigits[Ord(B and (1 shl I) <> 0)]; {0 or 1}
+    Result[N] := StHexDigitsA[Ord(B and (1 shl I) <> 0)]; {0 or 1}
     Inc(N);
   end;
 end;
@@ -426,7 +426,7 @@ begin
   N := 1;
   Result[0] := #16;
   for I := 15 downto 0 do begin
-    Result[N] := StHexDigits[Ord(W and (1 shl I) <> 0)]; {0 or 1}
+    Result[N] := StHexDigitsA[Ord(W and (1 shl I) <> 0)]; {0 or 1}
     Inc(N);
   end;
 end;
@@ -440,7 +440,7 @@ begin
   N := 1;
   Result[0] := #32;
   for I := 31 downto 0 do begin
-    Result[N] := StHexDigits[Ord(L and Integer(1 shl I) <> 0)]; {0 or 1}
+    Result[N] := StHexDigitsA[Ord(L and Integer(1 shl I) <> 0)]; {0 or 1}
     Inc(N);
   end;
 end;
@@ -452,7 +452,7 @@ var
 begin
   Result[0] := #3;
   for I := 0 to 2 do begin
-    Result[3-I] := StHexDigits[B and 7];
+    Result[3-I] := StHexDigitsA[B and 7];
     B := B shr 3;
   end;
 end;
@@ -464,7 +464,7 @@ var
 begin
   Result[0] := #6;
   for I := 0 to 5 do begin
-    Result[6-I] := StHexDigits[W and 7];
+    Result[6-I] := StHexDigitsA[W and 7];
     W := W shr 3;
   end;
 end;
@@ -476,7 +476,7 @@ var
 begin
   Result[0] := #12;
   for I := 0 to 11 do begin
-    Result[12-I] := StHexDigits[L and 7];
+    Result[12-I] := StHexDigitsA[L and 7];
     L := L shr 3;
   end;
 end;

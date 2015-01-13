@@ -469,9 +469,9 @@ function HexBZ(Dest : PAnsiChar; B : Byte) : PAnsiChar;
     {-Return hex string for byte}
 begin
   Result := Dest;
-  Dest^ := StHexDigits[B shr 4];
+  Dest^ := StHexDigitsA[B shr 4];
   Inc(Dest);
-  Dest^ := StHexDigits[B and $F];
+  Dest^ := StHexDigitsA[B and $F];
   Inc(Dest);
   Dest^ := #0;
 end;
@@ -480,9 +480,9 @@ function HexBZ(Dest : PWideChar; B : Byte) : PWideChar;
     {-Return hex string for byte}
 begin
   Result := Dest;
-  Dest^ := WideChar(StHexDigits[B shr 4]);
+  Dest^ := WideChar(StHexDigitsA[B shr 4]);
   Inc(Dest);
-  Dest^ := WideChar(StHexDigits[B and $F]);
+  Dest^ := WideChar(StHexDigitsA[B and $F]);
   Inc(Dest);
   Dest^ := #0;
 end;
@@ -491,13 +491,13 @@ function HexWZ(Dest : PAnsiChar; W : Word) : PAnsiChar;
   {-Return hex string for word}
 begin
   Result := Dest;
-  Dest^ := StHexDigits[hi(W) shr 4];
+  Dest^ := StHexDigitsA[hi(W) shr 4];
   Inc(Dest);
-  Dest^ := StHexDigits[hi(W) and $F];
+  Dest^ := StHexDigitsA[hi(W) and $F];
   Inc(Dest);
-  Dest^ := StHexDigits[lo(W) shr 4];
+  Dest^ := StHexDigitsA[lo(W) shr 4];
   Inc(Dest);
-  Dest^ := StHexDigits[lo(W) and $F];
+  Dest^ := StHexDigitsA[lo(W) and $F];
   Inc(Dest);
   Dest^ := #0;
 end;
@@ -530,7 +530,7 @@ var
 begin
   Result := Dest;
   for I := 7 downto 0 do begin
-    Dest^ := StHexDigits[Ord(B and (1 shl I) <> 0)]; {0 or 1}
+    Dest^ := StHexDigitsA[Ord(B and (1 shl I) <> 0)]; {0 or 1}
     Inc(Dest);
   end;
   Dest^ := #0;
@@ -543,7 +543,7 @@ var
 begin
   Result := Dest;
   for I := 15 downto 0 do begin
-    Dest^ := StHexDigits[Ord(W and (1 shl I) <> 0)]; {0 or 1}
+    Dest^ := StHexDigitsA[Ord(W and (1 shl I) <> 0)]; {0 or 1}
     Inc(Dest);
   end;
   Dest^ := #0;
@@ -556,7 +556,7 @@ var
 begin
   Result := Dest;
   for I := 31 downto 0 do begin
-    Dest^ := StHexDigits[Ord(L and Integer(1 shl I) <> 0)]; {0 or 1}
+    Dest^ := StHexDigitsA[Ord(L and Integer(1 shl I) <> 0)]; {0 or 1}
     Inc(Dest);
   end;
   Dest^ := #0;
@@ -569,7 +569,7 @@ var
 begin
   Result := Dest;
   for I := 0 to 2 do begin
-    Dest[2-I] := StHexDigits[B and 7];
+    Dest[2-I] := StHexDigitsA[B and 7];
     B := B shr 3;
   end;
   Dest[3] := #0;
@@ -582,7 +582,7 @@ var
 begin
   Result := Dest;
   for I := 0 to 5 do begin
-    Dest[5-I] := StHexDigits[W and 7];
+    Dest[5-I] := StHexDigitsA[W and 7];
     W := W shr 3;
   end;
   Dest[6] := #0;
@@ -595,7 +595,7 @@ var
 begin
   Result := Dest;
   for I := 0 to 11 do begin
-    Dest[11-I] := StHexDigits[L and 7];
+    Dest[11-I] := StHexDigitsA[L and 7];
     L := L shr 3;
   end;
   Dest[12] := #0;

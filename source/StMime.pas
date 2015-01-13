@@ -655,8 +655,8 @@ var
   begin
     if W > 73 then AddWordToOutBuf;
     WordBuf[W] := '=';
-    WordBuf[W+1] := StHexDigits[B shr 4];
-    WordBuf[W+2] := StHexDigits[B and $F];
+    WordBuf[W+1] := StHexDigitsA[B shr 4];
+    WordBuf[W+2] := StHexDigitsA[B and $F];
     Inc(W, 3)
   end;
 

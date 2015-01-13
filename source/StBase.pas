@@ -119,7 +119,8 @@ const
 
 const
 {.Z+}
-  StHexDigits  : array[0..$F] of AnsiChar = '0123456789ABCDEF';
+  StHexDigitsA  : array[0..$F] of AnsiChar = '0123456789ABCDEF';
+  StHexDigits  : array[0..$F] of Char = '0123456789ABCDEF';
   DosDelimSet  : set of AnsiChar = ['\', ':', #0];
   StHexDigitsW : WideString = '0123456789ABCDEF';
   DosDelimSetW : WideString = '\:';

@@ -960,7 +960,7 @@ begin
 
   for I := 1 to Size do begin
     Index := I*2;
-    S := HexBL(Byte(PAnsiChar(Value)[I-1]));
+    S := ShortString(HexBL(Byte(PAnsiChar(Value)[I-1])));
     Result[(Index)-1] := S[1];
     Result[Index] := S[2];
   end;
