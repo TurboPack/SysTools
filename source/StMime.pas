@@ -50,7 +50,6 @@ uses
   Classes,
   StConst,
   StBase,
-  StStrZ,
   StStrL,
   StOStr;
 
@@ -1316,7 +1315,7 @@ type
 var
   I, Pos, ScanSize, StmOffset : Integer;
   NewAtt : TStAttachment;
-  ScanStream : TMemoryStream;
+  ScanStream : TStringStream;
   FoundPos : Cardinal;
   SearchString : AnsiString;//array[0..80] of Char;
   TempBuf : AnsiString; //array[0..80] of Char;
@@ -1338,20 +1337,20 @@ begin
   Stream.Seek(0, soFromBeginning);
 
   { Create memory stream for search }
-  ScanStream := TMemoryStream.Create;
+  ScanStream := TStringStream.Create;
   try
     ScanStream.SetSize(StmSize);
     StmOffset := Stream.Position;
     ScanSize := ScanStream.CopyFrom(Stream, Min(StmSize,
       (Stream.Size - Stream.Position)));
 
-    SearchString := #13#10'begin'; //  StrPCopy(SearchString, #13#10'begin');
-    BMMakeTableZ(PAnsiChar(SearchString), BMT);
+    SearchString := #13#10'begin';
+    BMMakeTableL(SearchString, BMT);
     ScanStream.Position := 0;
 
     while True do begin
       { Look for an old style attachment -- process appropriately }
-      if BMSearchZ(ScanStream.Memory^, ScanSize, BMT, PAnsiChar(SearchString), FoundPos) then begin
+      if BMSearchL(ScanStream.Memory^, ScanSize, BMT, SearchString, FoundPos) then begin
 
         FillChar(TempBuf, SizeOf(TempBuf), #0);
         Pos := FoundPos + 2;
@@ -1565,12 +1564,12 @@ begin
       FBoundaryUsed := True;
       AnsiStrings.StrPCopy(SearchString, AnsiString('--' + Boundary));
     end;
-    BMMakeTableZ(SearchString, BMT);
+    BMMakeTableL(SearchString, BMT);
     ScanStream.Position := 0;
 
     while True do begin
       { Look for a Mime boundary -- process appropriately }
-      if BMSearchZ(ScanStream.Memory^, ScanSize, BMT, SearchString, FoundPos) then begin
+      if BMSearchL(ScanStream.Memory^, ScanSize, BMT, SearchString, FoundPos) then begin
 
         Pos := FoundPos + AnsiStrings.StrLen(SearchString);
 
@@ -1595,7 +1594,7 @@ begin
           Inc(FoundPos, 2);
 
           { Get this out of the way for subsequent searches }
-          BMMakeTableZ(SearchString, BMT);
+          BMMakeTableL(SearchString, BMT);
         end;
 
         if not Assigned(TTree) then InitTree;

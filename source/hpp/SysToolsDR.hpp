@@ -57,7 +57,6 @@
 #include <StSort.hpp>	// Pascal unit
 #include <StStat.hpp>	// Pascal unit
 #include <StStrL.hpp>	// Pascal unit
-#include <StStrZ.hpp>	// Pascal unit
 #include <StText.hpp>	// Pascal unit
 #include <StTree.hpp>	// Pascal unit
 #include <StUranus.hpp>	// Pascal unit

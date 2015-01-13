@@ -144,7 +144,6 @@
         <DCCReference Include="..\..\source\StSort.pas"/>
         <DCCReference Include="..\..\source\StStat.pas"/>
         <DCCReference Include="..\..\source\StStrL.pas"/>
-        <DCCReference Include="..\..\source\StStrZ.pas"/>
         <DCCReference Include="..\..\source\StText.pas"/>
         <DCCReference Include="..\..\source\StTree.pas"/>
         <DCCReference Include="..\..\source\StUranus.pas"/>

@@ -19,7 +19,6 @@
 #include <System.Classes.hpp>	// Pascal unit
 #include <StConst.hpp>	// Pascal unit
 #include <StBase.hpp>	// Pascal unit
-#include <StStrZ.hpp>	// Pascal unit
 #include <StStrL.hpp>	// Pascal unit
 #include <StOStr.hpp>	// Pascal unit
 
