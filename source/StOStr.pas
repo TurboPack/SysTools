@@ -88,24 +88,24 @@ type
     procedure FixCursor(Pos, Size : Cardinal; Delete : Boolean);
     function  Get(Index : Cardinal) : Char;
     function  GetAsciiCount : Cardinal;
-    function  GetAsShortStr : ShortString;
+    function  GetAsShortStr : string;
     function  GetCursorPos : Cardinal;
-    function  GetDelimiters : AnsiString;
+    function  GetDelimiters : string;
     function  GetLength : Cardinal;
     function  GetRelativePos(Pos : Cardinal) : Cardinal;
     function  GetSoundex : string;
     function  GetWordCount : Cardinal;
     procedure Put(Index : Cardinal; Item : Char);
     procedure SetAllocLength(Value : Cardinal);
-    procedure SetAsShortStr(Value : ShortString);
+    procedure SetAsShortStr(const Value : string);
     procedure SetCursorPos(Value : Cardinal);
-    procedure SetDelimiters(Value : AnsiString);
+    procedure SetDelimiters(Value : string);
     procedure SetItems(Value : TStringList);
     function  SuggestSize(Size : Cardinal) : Cardinal;
     procedure TempToString;
     procedure UpdateCursor(Pos : Cardinal);
-    function  GetAsLongStr : AnsiString;
-    procedure SetAsLongStr(Value : AnsiString);
+    function  GetAsLongStr : string;
+    procedure SetAsLongStr(Value : string);
     function  GetAsVariant : Variant;
     procedure SetAsVariant(Value : Variant);
     function MakeTerminator(var Terminator : PChar) : Integer;       {!!.01}
@@ -114,15 +114,15 @@ type
   public
     constructor Create;
     constructor CreateAlloc(Size : Cardinal); virtual;
-    constructor CreateS(const S : AnsiString); virtual;
+    constructor CreateS(const S : string); virtual;
     constructor CreateZ(const S : PChar); virtual;
     constructor CreateV(const S : Variant); virtual;
     destructor Destroy; override;
     procedure AppendPChar(S : PChar);
-    procedure AppendString(S : AnsiString);
+    procedure AppendString(S : string);
     function  AsciiPosition(N : Cardinal; var Pos : Cardinal) : Boolean;
-    function  BMSearch(const S : AnsiString; var Pos : Cardinal) : Boolean;
-    function  BMSearchUC(const S : AnsiString; var Pos : Cardinal) : Boolean;
+    function  BMSearch(const S : string; var Pos : Cardinal) : Boolean;
+    function  BMSearchUC(const S : string; var Pos : Cardinal) : Boolean;
     procedure Center(Size : Cardinal);
     procedure CenterCh(const C : Char; Size : Cardinal);
     function  CharCount(const C : Char) : Cardinal;
@@ -139,8 +139,8 @@ type
     procedure DeleteWordAtCursor;
     procedure Detab;
     procedure Entab;
-    function  ExtractAscii(N : Cardinal) : AnsiString;
-    function  ExtractWord(N : Cardinal) : AnsiString;
+    function  ExtractAscii(N : Cardinal) : string;
+    function  ExtractWord(N : Cardinal) : string;
     procedure Filter(const Filters : PChar);
     function  GetAsciiAtCursor : string;
     function  GetAsciiAtCursorZ(Dest : PChar) : PChar;
@@ -150,7 +150,7 @@ type
     procedure InsertLineTerminatorAtCursor;
     procedure InsertLineTerminator(Pos : Cardinal);
     procedure InsertPCharAtCursor(S : PChar);
-    procedure InsertStringAtCursor(S : AnsiString);
+    procedure InsertStringAtCursor(S : string);
     procedure ItemsToString;
     procedure LeftPad(Size : Cardinal);
     procedure LeftPadCh(const C : Char; Size : Cardinal);
@@ -160,7 +160,7 @@ type
     procedure Pad(Size : Cardinal);
     procedure PadCh(const C : Char; Size : Cardinal);
     procedure ResetCursor;
-    procedure Scramble(const Key : AnsiString);
+    procedure Scramble(const Key : string);
     procedure SetAsPChar(S : PChar);
     function  SizeAsciiAtCursor(InclTrailers : Boolean) : Cardinal;
     function  SizeWordAtCursor(InclTrailers : Boolean) : Cardinal;
@@ -170,8 +170,8 @@ type
     procedure StringToItems;
     procedure StripLineTerminators;
     procedure StrStDelete(const Pos, Length : Cardinal);
-    procedure StrStInsert(const S : AnsiString; Pos : Cardinal);
-    function  StrStPos(const S : AnsiString; var Pos : Cardinal) : Boolean;
+    procedure StrStInsert(const S : string; Pos : Cardinal);
+    function  StrStPos(const S : string; var Pos : Cardinal) : Boolean;
     procedure Substitute(FromStr, ToStr : PChar);
     procedure Trim;
     procedure TrimLead;
@@ -184,17 +184,17 @@ type
       read FAlloc write SetAllocLength;
     property AsciiCount : Cardinal
       read GetAsciiCount;
-    property AsLongStr : AnsiString
+    property AsLongStr : string
       read GetAsLongStr write SetAsLongStr;
     property AsVariant : Variant
       read GetAsVariant write SetAsVariant;
-    property AsShortStr : ShortString
+    property AsShortStr : string
       read GetAsShortStr write SetAsShortStr;
     property AtIndex[Index: Cardinal]: Char
       read Get write Put; default;
     property CursorPos : Cardinal
       read GetCursorPos write SetCursorPos;
-    property Delimiters : AnsiString
+    property Delimiters : string
       read GetDelimiters write SetDelimiters;
     property EnableCursor : Boolean
       read FEnableCursor write FEnableCursor;
@@ -264,10 +264,10 @@ constructor TStString.CreateV(const S : Variant);
 {- Create string object and copy variant into it. }
 var
   Len : Cardinal;
-  Temp : AnsiString;
+  Temp : string;
 begin
   Create;
-  Temp := AnsiString(S);
+  Temp := string(S);
   Len := System.Length(Temp);
   FString := StrAlloc(SuggestSize(Len));
   if Assigned(FString) then begin
@@ -277,7 +277,7 @@ begin
   ResetCursor;
 end;
 
-constructor TStString.CreateS(const S : AnsiString);
+constructor TStString.CreateS(const S : string);
 {- Create string object and copy string into it. }
 begin
   Create;
@@ -321,7 +321,7 @@ begin
   StrCopy(Temp, S);
 end;
 
-procedure TStString.AppendString(S : AnsiString);
+procedure TStString.AppendString(S : string);
 {- Appends string to end of string. }
 var
   Temp : PChar;
@@ -353,7 +353,7 @@ begin
   if FResetRepeat then FRepeatValue := DefRepeatValue;
 end;
 
-function TStString.BMSearch(const S : AnsiString; var Pos : Cardinal) : Boolean;
+function TStString.BMSearch(const S : string; var Pos : Cardinal) : Boolean;
 {- Performs case sensitive BM search on string. }
 var
   I : Cardinal;
@@ -381,7 +381,7 @@ begin
   end;
 end;
 
-function TStString.BMSearchUC(const S : AnsiString; var Pos : Cardinal) : Boolean;
+function TStString.BMSearchUC(const S : string; var Pos : Cardinal) : Boolean;
 {- Performs case insensitive BM search on string. }
 var
   I : Cardinal;
@@ -605,7 +605,7 @@ begin
   ResetCursor;
 end;
 
-function TStString.ExtractAscii(N : Cardinal) : AnsiString;
+function TStString.ExtractAscii(N : Cardinal) : string;
 {- Extracts the N'th word in string. }
 var
   OldCursor : PChar;
@@ -620,7 +620,7 @@ begin
   FCursor := OldCursor;
 end;
 
-function TStString.ExtractWord(N : Cardinal) : AnsiString;
+function TStString.ExtractWord(N : Cardinal) : string;
 {- Extracts the N'th word in string. }
 var
   OldCursor : PChar;
@@ -824,7 +824,7 @@ begin
   FString := PChar(StrStInsertL(FString, S, Pos));
 end;
 
-procedure TStString.InsertStringAtCursor(S : AnsiString);
+procedure TStString.InsertStringAtCursor(S : string);
 {- Inserts string at cursor position. }
 var
   Pos, Len : Cardinal;
@@ -848,7 +848,7 @@ var
   Temp : string;
 begin
   Temp := FItems.Text;
-  SetAsPChar(PChar(AnsiString(Temp)));
+  SetAsPChar(PChar(string(Temp)));
 end;
 
 procedure TStString.LeftPad(Size : Cardinal);
@@ -881,7 +881,7 @@ begin
   FCursor := FString;
 end;
 
-procedure TStString.Scramble(const Key : AnsiString);
+procedure TStString.Scramble(const Key : string);
 {- Encrypts / Decrypts string. }
 var
   Temp : PChar;
@@ -1024,7 +1024,7 @@ begin
   FixCursor(AdjPos, Length, True);
 end;
 
-procedure TStString.StrStInsert(const S : AnsiString; Pos : Cardinal);
+procedure TStString.StrStInsert(const S : string; Pos : Cardinal);
 {- Insert string at Pos. }
 var
   AdjPos, Len : Cardinal;
@@ -1044,7 +1044,7 @@ begin
   FixCursor(AdjPos, Len, False);
 end;
 
-function TStString.StrStPos(const S : AnsiString; var Pos : Cardinal) : Boolean;
+function TStString.StrStPos(const S : string; var Pos : Cardinal) : Boolean;
 {- Search for substring in string. }
 var
   I : Cardinal;
@@ -1199,7 +1199,7 @@ begin
         Cur := Anchor;
       end;
     until EndFound;
-    FItems.Text := string(AnsiString(FTemp));
+    FItems.Text := string(string(FTemp));
     StrDispose(FTemp);
   end else begin
     StringToItems;
@@ -1238,7 +1238,7 @@ begin
   Result := AsciiCountL(FString, FDelimiters, FQuote);
 end;
 
-function TStString.GetAsShortStr : ShortString;
+function TStString.GetAsShortStr : string;
 {- Provide short string output. }
 begin
   Result := StrPas(FString);
@@ -1251,7 +1251,7 @@ begin
   if FOneBased then Inc(Result);
 end;
 
-function TStString.GetDelimiters : AnsiString;
+function TStString.GetDelimiters : string;
 {- Return string with current delimiters. }
 begin
   Result := StrPas(FDelimiters);
@@ -1335,11 +1335,10 @@ begin
   end;
 end;
 
-procedure TStString.SetAsShortStr(Value : ShortString);
+procedure TStString.SetAsShortStr(const Value : string);
 {- Copy short string into string object. }
 begin
-  CheckAlloc(Byte(Value[0]));
-  StrPCopy(FString, Value);
+  FString := PChar(Value);
   ResetCursor;
 end;
 
@@ -1350,7 +1349,7 @@ begin
   if FOneBased then Dec(FCursor);
 end;
 
-procedure TStString.SetDelimiters(Value : AnsiString);
+procedure TStString.SetDelimiters(Value : string);
 {- Set the delimiters. }
 begin
   StrDispose(FDelimiters);
@@ -1368,7 +1367,7 @@ end;
 procedure TStString.StringToItems;
 {- Copies string into items -- respects line terminators. }
 begin
-  FItems.Text := string(AnsiString(FString));
+  FItems.Text := string(string(FString));
 end;
 
 function TStString.SuggestSize(Size : Cardinal) : Cardinal;
@@ -1398,13 +1397,13 @@ begin
     FCursor := FString + Pos;
 end;
 
-function TStString.GetAsLongStr : AnsiString;
+function TStString.GetAsLongStr : string;
 {- Provide output as long string. }
 begin
   Result := FString;
 end;
 
-procedure TStString.SetAsLongStr(Value : AnsiString);
+procedure TStString.SetAsLongStr(Value : string);
 {- Copy long string into string object. }
 begin
   CheckAlloc(System.Length(Value));
@@ -1421,9 +1420,9 @@ end;
 procedure TStString.SetAsVariant(Value : Variant);
 {- Copy variant into string object. }
 var
-  Temp : AnsiString;
+  Temp : string;
 begin
-  Temp := AnsiString(Value);
+  Temp := string(Value);
   CheckAlloc(System.Length(Temp));
   StrCopy(FString, PChar(Temp));
   ResetCursor;

@@ -1625,7 +1625,7 @@ begin
         try
           with OStr do begin
             { Check for another boundary in buffer }
-            if not BMSearchUC(AnsiString(FBoundary), BoundPos) then
+            if not BMSearchUC(FBoundary, BoundPos) then
               BoundPos := SizeOf(TempBuf);
             Delimiters := ' :;='#13#10;
             Quote := '"';
