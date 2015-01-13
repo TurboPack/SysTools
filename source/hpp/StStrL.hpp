@@ -136,6 +136,9 @@ extern DELPHI_PACKAGE bool __fastcall IsStrAlphaL(const System::UnicodeString S)
 extern DELPHI_PACKAGE bool __fastcall IsStrNumericL(const System::UnicodeString S, const System::UnicodeString Numbers);
 extern DELPHI_PACKAGE bool __fastcall IsStrAlphaNumericL(const System::UnicodeString S, const System::UnicodeString Numbers);
 extern DELPHI_PACKAGE bool __fastcall StrWithinL(const System::UnicodeString S, const System::UnicodeString SearchStr, unsigned Start, unsigned &Position);
+extern DELPHI_PACKAGE System::UnicodeString __fastcall EntabL(const System::UnicodeString S, System::Byte TabSize);
+extern DELPHI_PACKAGE System::UnicodeString __fastcall DetabL(const System::UnicodeString S, System::Byte TabSize);
+extern DELPHI_PACKAGE int __fastcall MakeLetterSetL(const System::UnicodeString S);
 }	/* namespace Ststrl */
 #if !defined(DELPHIHEADER_NO_IMPLICIT_NAMESPACE_USE) && !defined(NO_USING_NAMESPACE_STSTRL)
 using namespace Ststrl;

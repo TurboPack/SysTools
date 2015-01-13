@@ -98,7 +98,7 @@
         <DCCReference Include="TestStBase.pas"/>
         <DCCReference Include="..\source\StBase.pas"/>
         <DCCReference Include="TestStUtils.pas"/>
-        <DCCReference Include="TestStStrZ.pas"/>
+        <DCCReference Include="TestStStrL.pas"/>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>

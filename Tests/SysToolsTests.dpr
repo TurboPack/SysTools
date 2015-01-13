@@ -19,7 +19,7 @@ uses
   TestStBase in 'TestStBase.pas',
   StBase in '..\source\StBase.pas',
   TestStUtils in 'TestStUtils.pas',
-  TestStStrZ in 'TestStStrZ.pas';
+  TestStStrL in 'TestStStrL.pas';
 
 {$R *.RES}
 

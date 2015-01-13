@@ -1621,7 +1621,7 @@ begin
         end;
 
         { Init for token search }
-        OStr := TStString.CreateZ(AnsiStrings.StrLCopy(TempBuf, ScanStream.Memory, SizeOf(TempBuf)-1));
+        OStr := TStString.CreateZ(PChar(AnsiStrings.StrLCopy(TempBuf, ScanStream.Memory, SizeOf(TempBuf)-1)));
         try
           with OStr do begin
             { Check for another boundary in buffer }
@@ -1642,7 +1642,7 @@ begin
             { These tokens belong to the next section }
             if OStr.CursorPos > BoundPos then Break;
 
-            OStr.GetWordAtCursorZ(AttToken);
+            OStr.GetWordAtCursorZ(PChar(PAnsiChar(@AttToken)));
 
             { Process tag appropriately }
             if TTree.SearchUC(AttToken, TTag) then begin

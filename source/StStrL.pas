@@ -149,6 +149,12 @@ function CenterChL(const S : String; C : Char; Len : Cardinal) : String;
 function CenterL(const S : String; Len : Cardinal) : String;
   {-Pad a string on the left and right with spaces.}
 
+function EntabL(const S : string; TabSize : Byte) : string;
+  {-Convert blanks in a string to tabs.}
+
+function DetabL(const S : string; TabSize : Byte) : string;
+  {-Expand tabs in a string to blanks.}
+
 function ScrambleL(const S, Key : string) : string;
   {-Encrypt / Decrypt string with enhanced XOR encryption.}
 
@@ -387,10 +393,14 @@ function TrimCharsL(const S, Chars : String) : String;
 
 function WordPosL(const S, WordDelims, AWord : String;
                   N : Cardinal; var Position : Cardinal) : Boolean;
-  {-returns the Occurrence instance of a word within a string}
 
+function MakeLetterSetL(const S : string) : Integer;
+  {-Return a bit-mapped long storing the individual letters contained in S.}
 
 implementation
+
+uses
+  Character;
 
   {-------- Numeric conversion -----------}
 
@@ -2615,6 +2625,68 @@ begin
     Result := True;
   end else
     Result := False;
+end;
+
+function EntabL(const S : string; TabSize : Byte) : string;   //TODO-UNICODE
+  {-Convert blanks in a string to tabs.}
+begin
+  Result := S.Replace(StringOfChar(' ', TabSize), #9, [rfReplaceAll]);
+end;
+
+function DetabL(const S : string; TabSize : Byte) : string;
+  {-Expand tabs in a string to blanks.}
+begin
+  Result := S.Replace(#9, StringOfChar(' ', TabSize), [rfReplaceAll]);
+end;
+
+function MakeLetterSetL(const S : string) : Integer;
+  {-Return a bit-mapped long storing the individual letters contained in S.}
+var
+  cChar: Char;
+  iBit: Integer;
+  function GetBitNumber(const AChar: Char): Integer;
+  begin
+    case AChar of
+      'A': Result := 0;
+      'B': Result := 1;
+      'C': Result := 2;
+      'D': Result := 3;
+      'E': Result := 4;
+      'F': Result := 5;
+      'G': Result := 6;
+      'H': Result := 7;
+      'I': Result := 8;
+      'J': Result := 9;
+      'K': Result := 10;
+      'L': Result := 11;
+      'M': Result := 12;
+      'N': Result := 13;
+      'O': Result := 14;
+      'P': Result := 15;
+      'Q': Result := 16;
+      'R': Result := 17;
+      'S': Result := 18;
+      'T': Result := 19;
+      'U': Result := 20;
+      'V': Result := 21;
+      'W': Result := 22;
+      'X': Result := 23;
+      'Y': Result := 24;
+      'Z': Result := 25;
+      else
+        Result := -1;
+    end;
+  end;
+begin
+  Result := 0;
+  for cChar in S do
+  begin
+    if not cChar.IsLetter then
+      Continue;
+    iBit := GetBitNumber(cChar.ToUpper);
+    iBit := 1 shl iBit;
+    Result := Result or iBit;
+  end;
 end;
 
 
