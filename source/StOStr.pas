@@ -763,7 +763,7 @@ begin
      ltNone :;
      ltCR, ltLF, ltOther :begin
        Result := 2;
-       GetMem(Terminator, Result);
+       GetMem(Terminator, Result * SizeOf(Char));
        case LineTerminator of
          ltCR    : StrCopy(Terminator, #13);
          ltLF    : StrCopy(Terminator, #10);
@@ -775,7 +775,7 @@ begin
      end;
      ltCRLF : begin
        Result := 3;
-       GetMem(Terminator, Result);
+       GetMem(Terminator, Result * SizeOf(Char));
        StrCopy(Terminator, #13#10);
      end;
   end;
@@ -793,7 +793,7 @@ begin
   CheckAlloc(GetLength + 2);
   Pos := FCursor - FString;
   FString := PChar(StrStInsertL(FString, Terminator, Pos));
-  FreeMem(Terminator, TermSiz);
+  FreeMem(Terminator, TermSiz * SizeOf(Char));
 end;
 
 procedure TStString.InsertLineTerminator(Pos : Cardinal);
@@ -809,7 +809,7 @@ begin
   AdjPos := Pos;
   if FOneBased then Dec(AdjPos);
   FString := PChar(StrStInsertL(FString, Terminator, AdjPos));
-  FreeMem(Terminator, TermSiz);
+  FreeMem(Terminator, TermSiz * SizeOf(Char));
 end;
 
 
@@ -1007,7 +1007,7 @@ begin
   else begin
     TermSiz := MakeTerminator(Terminator);
     Substitute(Terminator, ' ');
-    FreeMem(Terminator, TermSiz);
+    FreeMem(Terminator, TermSiz * SizeOf(Char));
   end;
   ResetCursor;
 end;
@@ -1148,7 +1148,7 @@ var
 begin
   Terminator := nil;
   TermSiz := MakeTerminator(Terminator);
-  GetMem(TermPlusSpace, TermSiz + 1);
+  GetMem(TermPlusSpace, (TermSiz + 1) * SizeOf(Char));
   StrCopy(TermPlusSpace, Terminator);
   StrCat(TermPlusSpace, ' ');
 
@@ -1204,8 +1204,8 @@ begin
   end else begin
     StringToItems;
   end;
-  FreeMem(Terminator, TermSiz);
-  FreeMem(TermPlusSpace, TermSiz + 1);
+  FreeMem(Terminator, TermSiz * SizeOf(Char));
+  FreeMem(TermPlusSpace, (TermSiz + 1) *  SizeOf(Char));
 end;
 
 
