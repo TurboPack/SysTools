@@ -16,7 +16,6 @@
 #include <SysInit.hpp>	// Pascal unit
 #include <Winapi.Windows.hpp>	// Pascal unit
 #include <System.SysUtils.hpp>	// Pascal unit
-#include <StStrS.hpp>	// Pascal unit
 #include <StStrL.hpp>	// Pascal unit
 #include <StConst.hpp>	// Pascal unit
 #include <StBase.hpp>	// Pascal unit

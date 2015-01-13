@@ -56,11 +56,11 @@ typedef TStPatRecord *PStPatRecord;
 struct DECLSPEC_DRECORD TStPatRecord
 {
 public:
-	System::ShortString *StrPtr;
+	System::UnicodeString *StrPtr;
 	TStPatRecord *NestedPattern;
 	TStPatRecord *NextPattern;
 	TStTokens Token;
-	char OneChar;
+	System::WideChar OneChar;
 	bool NextOK;
 };
 #pragma pack(pop)
@@ -108,76 +108,76 @@ protected:
 	Ststrms::TStAnsiTextStream* FInTextStream;
 	unsigned FInFileSize;
 	System::Classes::TStream* FInputStream;
-	char *FInLineBuf;
+	System::WideChar *FInLineBuf;
 	unsigned FInLineCount;
 	unsigned FInLineNum;
-	char FInLineTermChar;
+	System::WideChar FInLineTermChar;
 	Stbase::TStLineTerminator FInLineTerminator;
 	int FInLineLength;
 	bool FLineNumbers;
 	unsigned FLinesPerSec;
 	unsigned FMatchCount;
 	System::Classes::TStringList* FMatchPatSL;
-	char *FMatchPatStr;
+	System::WideChar *FMatchPatStr;
 	TStPatRecord *FMatchPatPtr;
 	unsigned FMaxLineLength;
 	TStNodeHeap* FNodes;
 	TStOnMatchEvent FOnMatch;
 	int FOutLineLength;
-	char FOutLineTermChar;
+	System::WideChar FOutLineTermChar;
 	Stbase::TStLineTerminator FOutLineTerminator;
 	unsigned FReplaceCount;
 	System::Classes::TStringList* FReplacePatSL;
-	char *FReplacePatStr;
+	System::WideChar *FReplacePatStr;
 	TStPatRecord *FReplacePatPtr;
 	TStOnRegExProgEvent FOnProgress;
 	System::Classes::TStream* FOutputStream;
 	Ststrms::TStAnsiTextStream* FOutTextStream;
-	char *FOutLineBuf;
+	System::WideChar *FOutLineBuf;
 	TStOutputOptions FOutputOptions;
 	System::Classes::TStringList* FSelAvoidPatSL;
-	char *FSelAvoidPatStr;
+	System::WideChar *FSelAvoidPatStr;
 	TStPatRecord *FSelAvoidPatPtr;
 	unsigned FSelectCount;
-	void __fastcall AddTokenToPattern(PStPatRecord &PatRec, PStPatRecord LastPatRec, TStTokens Token, System::ShortString &S);
-	void __fastcall AddTokenToReplace(PStPatRecord &PatRec, PStPatRecord LastPatRec, TStTokens Token, const System::ShortString &S);
-	char * __fastcall AppendS(char * Dest, char * S1, char * S2, unsigned Count);
+	void __fastcall AddTokenToPattern(PStPatRecord &PatRec, PStPatRecord LastPatRec, TStTokens Token, System::UnicodeString S);
+	void __fastcall AddTokenToReplace(PStPatRecord &PatRec, PStPatRecord LastPatRec, TStTokens Token, const System::UnicodeString S);
+	System::WideChar * __fastcall AppendS(System::WideChar * Dest, System::WideChar * S1, System::WideChar * S2, unsigned Count);
 	bool __fastcall BuildAllPatterns(void);
-	bool __fastcall BuildPatternStr(char * &PStr, int &Len, System::Classes::TStringList* SL);
-	System::AnsiString __fastcall ConvertMaskToRegEx(const System::AnsiString S);
+	bool __fastcall BuildPatternStr(System::WideChar * &PStr, int &Len, System::Classes::TStringList* SL);
+	System::UnicodeString __fastcall ConvertMaskToRegEx(const System::UnicodeString S);
 	void __fastcall DisposeItems(PStPatRecord &Data);
-	void __fastcall InsertLineNumber(char * Dest, const char * S, int LineNum);
-	bool __fastcall GetPattern(char * &Pattern, PStPatRecord &PatList);
-	bool __fastcall GetReplace(char * Pattern, PStPatRecord &PatList);
-	int __fastcall MakePattern(char * &Pattern, int Start, char Delim, bool &TagOn, PStPatRecord &PatList);
-	int __fastcall MakeReplacePattern(char * Pattern, int Start, char Delim, PStPatRecord &PatList);
-	bool __fastcall FindMatch(char * &Buf, PStPatRecord PatPtr, TMatchPosition &REPosition);
-	bool __fastcall MatchOnePatternElement(char * &Buf, int &I, bool &TagOn, int &TagNum, PStPatRecord PatPtr);
-	bool __fastcall ProcessLine(char * Buf, int Len, int LineNum, bool CheckOnly, TMatchPosition &REPosition);
-	int __fastcall SearchMatchPattern(char * &Buf, int OffSet, bool &TagOn, int &TagNum, PStPatRecord PatPtr);
+	void __fastcall InsertLineNumber(System::WideChar * Dest, const System::WideChar * S, int LineNum);
+	bool __fastcall GetPattern(System::WideChar * &Pattern, PStPatRecord &PatList);
+	bool __fastcall GetReplace(System::WideChar * Pattern, PStPatRecord &PatList);
+	int __fastcall MakePattern(System::WideChar * &Pattern, int Start, System::WideChar Delim, bool &TagOn, PStPatRecord &PatList);
+	int __fastcall MakeReplacePattern(System::WideChar * Pattern, int Start, System::WideChar Delim, PStPatRecord &PatList);
+	bool __fastcall FindMatch(System::WideChar * &Buf, PStPatRecord PatPtr, TMatchPosition &REPosition);
+	bool __fastcall MatchOnePatternElement(System::WideChar * &Buf, int &I, bool &TagOn, int &TagNum, PStPatRecord PatPtr);
+	bool __fastcall ProcessLine(System::WideChar * Buf, int Len, int LineNum, bool CheckOnly, TMatchPosition &REPosition);
+	int __fastcall SearchMatchPattern(System::WideChar * &Buf, int OffSet, bool &TagOn, int &TagNum, PStPatRecord PatPtr);
 	void __fastcall SetMatchPatSL(System::Classes::TStringList* Value);
 	void __fastcall SetOptions(TStOutputOptions Value);
 	void __fastcall SetReplacePatSL(System::Classes::TStringList* Value);
 	void __fastcall SetSelAvoidPatSL(System::Classes::TStringList* Value);
-	void __fastcall SubLine(char * Buf);
-	bool __fastcall SubLineFindTag(char * Buf, int I, int IEnd, int TagNum, TStFlag &Flags, int &IStart, int &IStop);
-	bool __fastcall SubLineMatchOne(char * Buf, TStFlag &Flags, bool &TagOn, int &I, int &TagNum, PStPatRecord PatPtr);
-	int __fastcall SubLineMatchPattern(char * Buf, TStFlag &Flags, bool &TagOn, int &TagNum, int OffSet, PStPatRecord PatPtr);
-	void __fastcall SubLineWrite(char * Buf, char * S, PStPatRecord RepRec, int I, int IEnd, TStFlag &Flags);
+	void __fastcall SubLine(System::WideChar * Buf);
+	bool __fastcall SubLineFindTag(System::WideChar * Buf, int I, int IEnd, int TagNum, TStFlag &Flags, int &IStart, int &IStop);
+	bool __fastcall SubLineMatchOne(System::WideChar * Buf, TStFlag &Flags, bool &TagOn, int &I, int &TagNum, PStPatRecord PatPtr);
+	int __fastcall SubLineMatchPattern(System::WideChar * Buf, TStFlag &Flags, bool &TagOn, int &TagNum, int OffSet, PStPatRecord PatPtr);
+	void __fastcall SubLineWrite(System::WideChar * Buf, System::WideChar * S, PStPatRecord RepRec, int I, int IEnd, TStFlag &Flags);
 	
 public:
 	__property System::Classes::TStream* InputStream = {read=FInputStream, write=FInputStream};
 	__property System::Classes::TStream* OutputStream = {read=FOutputStream, write=FOutputStream};
 	__fastcall TStStreamRegEx(void);
 	__fastcall virtual ~TStStreamRegEx(void);
-	bool __fastcall CheckString(const System::AnsiString S, TMatchPosition &REPosition);
-	bool __fastcall FileMasksToRegEx(System::AnsiString Masks);
+	bool __fastcall CheckString(const System::UnicodeString S, TMatchPosition &REPosition);
+	bool __fastcall FileMasksToRegEx(System::UnicodeString Masks);
 	bool __fastcall Execute(void);
-	bool __fastcall ReplaceString(System::AnsiString &S, TMatchPosition &REPosition);
+	bool __fastcall ReplaceString(System::UnicodeString &S, TMatchPosition &REPosition);
 	__property bool Avoid = {read=FAvoid, write=FAvoid, nodefault};
 	__property bool IgnoreCase = {read=FIgnoreCase, write=FIgnoreCase, nodefault};
 	__property int InFixedLineLength = {read=FInLineLength, write=FInLineLength, nodefault};
-	__property char InLineTermChar = {read=FInLineTermChar, write=FInLineTermChar, nodefault};
+	__property System::WideChar InLineTermChar = {read=FInLineTermChar, write=FInLineTermChar, nodefault};
 	__property Stbase::TStLineTerminator InLineTerminator = {read=FInLineTerminator, write=FInLineTerminator, nodefault};
 	__property unsigned LineCount = {read=FInLineCount, nodefault};
 	__property bool LineNumbers = {read=FLineNumbers, write=FLineNumbers, nodefault};
@@ -190,7 +190,7 @@ public:
 	__property TStOnMatchEvent OnMatch = {read=FOnMatch, write=FOnMatch};
 	__property TStOnRegExProgEvent OnProgress = {read=FOnProgress, write=FOnProgress};
 	__property int OutFixedLineLength = {read=FOutLineLength, write=FOutLineLength, nodefault};
-	__property char OutLineTermChar = {read=FOutLineTermChar, write=FOutLineTermChar, nodefault};
+	__property System::WideChar OutLineTermChar = {read=FOutLineTermChar, write=FOutLineTermChar, nodefault};
 	__property Stbase::TStLineTerminator OutLineTerminator = {read=FOutLineTerminator, write=FOutLineTerminator, nodefault};
 	__property TStOutputOptions OutputOptions = {read=FOutputOptions, write=SetOptions, nodefault};
 	__property System::Classes::TStringList* ReplacePattern = {read=FReplacePatSL, write=SetReplacePatSL};
@@ -209,7 +209,7 @@ protected:
 	unsigned FInFileSize;
 	System::Classes::TFileStream* FInFileStream;
 	unsigned FInLineCount;
-	char FInLineTermChar;
+	System::WideChar FInLineTermChar;
 	Stbase::TStLineTerminator FInLineTerminator;
 	int FInFixedLineLength;
 	System::UnicodeString FInputFile;
@@ -217,7 +217,7 @@ protected:
 	unsigned FLinesPerSec;
 	unsigned FMatchCount;
 	System::Classes::TStringList* FMatchPatSL;
-	char *FMatchPatStr;
+	System::WideChar *FMatchPatStr;
 	TStPatRecord *FMatchPatPtr;
 	unsigned FMaxLineLength;
 	TStNodeHeap* FNodes;
@@ -225,18 +225,18 @@ protected:
 	TStOnMatchEvent FOnMatch;
 	System::Classes::TFileStream* FOutFileStream;
 	Ststrms::TStAnsiTextStream* FOutTextStream;
-	char *FOutLineBuf;
+	System::WideChar *FOutLineBuf;
 	int FOutFixedLineLength;
-	char FOutLineTermChar;
+	System::WideChar FOutLineTermChar;
 	Stbase::TStLineTerminator FOutLineTerminator;
 	System::UnicodeString FOutputFile;
 	TStOutputOptions FOutputOptions;
 	unsigned FReplaceCount;
 	System::Classes::TStringList* FReplacePatSL;
-	char *FReplacePatStr;
+	System::WideChar *FReplacePatStr;
 	TStPatRecord *FReplacePatPtr;
 	System::Classes::TStringList* FSelAvoidPatSL;
-	char *FSelAvoidPatStr;
+	System::WideChar *FSelAvoidPatStr;
 	TStPatRecord *FSelAvoidPatPtr;
 	unsigned FSelectCount;
 	TStStreamRegEx* FStream;
@@ -249,10 +249,10 @@ protected:
 public:
 	__fastcall virtual TStRegEx(System::Classes::TComponent* AOwner);
 	__fastcall virtual ~TStRegEx(void);
-	bool __fastcall CheckString(const System::AnsiString S, TMatchPosition &REPosition);
-	bool __fastcall FileMasksToRegEx(const System::AnsiString Masks);
+	bool __fastcall CheckString(const System::UnicodeString S, TMatchPosition &REPosition);
+	bool __fastcall FileMasksToRegEx(const System::UnicodeString Masks);
 	bool __fastcall Execute(void);
-	bool __fastcall ReplaceString(System::AnsiString &S, TMatchPosition &REPosition);
+	bool __fastcall ReplaceString(System::UnicodeString &S, TMatchPosition &REPosition);
 	__property unsigned LineCount = {read=FInLineCount, nodefault};
 	__property unsigned LinesMatched = {read=FMatchCount, nodefault};
 	__property unsigned LinesPerSecond = {read=FLinesPerSec, nodefault};
@@ -264,7 +264,7 @@ __published:
 	__property bool Avoid = {read=FAvoid, write=FAvoid, default=0};
 	__property bool IgnoreCase = {read=FIgnoreCase, write=FIgnoreCase, default=0};
 	__property int InFixedLineLength = {read=FInFixedLineLength, write=FInFixedLineLength, default=80};
-	__property char InLineTermChar = {read=FInLineTermChar, write=FInLineTermChar, default=10};
+	__property System::WideChar InLineTermChar = {read=FInLineTermChar, write=FInLineTermChar, default=10};
 	__property Stbase::TStLineTerminator InLineTerminator = {read=FInLineTerminator, write=FInLineTerminator, default=3};
 	__property System::UnicodeString InputFile = {read=FInputFile, write=FInputFile};
 	__property bool LineNumbers = {read=FLineNumbers, write=FLineNumbers, default=0};
@@ -272,7 +272,7 @@ __published:
 	__property TStOnMatchEvent OnMatch = {read=FOnMatch, write=FOnMatch};
 	__property TStOnRegExProgEvent OnProgress = {read=FOnProgress, write=FOnProgress};
 	__property int OutFixedLineLength = {read=FOutFixedLineLength, write=FOutFixedLineLength, default=80};
-	__property char OutLineTermChar = {read=FOutLineTermChar, write=FOutLineTermChar, default=10};
+	__property System::WideChar OutLineTermChar = {read=FOutLineTermChar, write=FOutLineTermChar, default=10};
 	__property Stbase::TStLineTerminator OutLineTerminator = {read=FOutLineTerminator, write=FOutLineTerminator, default=3};
 	__property System::UnicodeString OutputFile = {read=FOutputFile, write=FOutputFile};
 	__property TStOutputOptions OutputOptions = {read=FOutputOptions, write=SetOptions, nodefault};
@@ -282,8 +282,8 @@ __published:
 
 
 //-- var, const, procedure ---------------------------------------------------
-extern DELPHI_PACKAGE System::SmallString<31> StWordDelimString;
-extern DELPHI_PACKAGE System::SmallString<19> StHexDigitString;
+extern DELPHI_PACKAGE System::UnicodeString StWordDelimString;
+extern DELPHI_PACKAGE System::UnicodeString StHexDigitString;
 }	/* namespace Stregex */
 #if !defined(DELPHIHEADER_NO_IMPLICIT_NAMESPACE_USE) && !defined(NO_USING_NAMESPACE_STREGEX)
 using namespace Stregex;

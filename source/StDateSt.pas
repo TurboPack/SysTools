@@ -39,7 +39,6 @@ interface
 
 uses
   Windows, SysUtils,
-  StStrS,
   StStrL,
   StConst,
   StBase,
@@ -901,11 +900,11 @@ var
       MCT : Char;
     begin
       {find first matching mask character}
-      OK := StrChPosS(Temp, MC, I);
+      OK := StrChPosL(Temp, MC, I);
       MCT := MC;
       if NOT OK then begin
         MCT := MC.ToUpper;
-        OK := StrChPosS(Temp, MCT, I);
+        OK := StrChPosL(Temp, MCT, I);
       end;
       if NOT OK then
         Exit;
@@ -935,7 +934,7 @@ var
 
     if ExcludeDOW then begin
       {remove day-of-week and any junk that follows}
-      if (StrChPosS(Temp, WeekDayOnly,I)) then begin
+      if (StrChPosL(Temp, WeekDayOnly,I)) then begin
         Stop := False;
         WC := I+1;
         while (WC <= Length(Temp)) AND (NOT Stop) do
@@ -947,7 +946,7 @@ var
         end;
         if (NOT ShortNames) then
           Dec(WC);
-        Temp := StrStDeleteS(Temp, I, WC);
+        Temp := StrStDeleteL(Temp, I, WC);
       end;
     end
     else if ShortNames then
@@ -1029,14 +1028,14 @@ var
 //      SetLength(Dest,sizeof(wldSub1));
 //      FillChar(Dest[1], SizeOf(wldSub1), 0);
       Dest := StringOfChar(#0, Succ(High(wldSub1))); //SZ: not length! [*]
-      if NOT (StrChPosS(wLongDate, '''',I)) then
+      if NOT (StrChPosL(wLongDate, '''',I)) then
         Exit;
 
       {delete the first quote}
-      wLongDate := StrChDeleteS(wLongDate, I);
+      wLongDate := StrChDeleteL(wLongDate, I);
 
       {assure that there is another quote}
-      if NOT (StrChPosS(wLongDate, '''',P)) then
+      if NOT (StrChPosL(wLongDate, '''',P)) then
         Exit;
 
       {copy substring into Dest, replace substring with SubChar}
@@ -1097,7 +1096,7 @@ var
       case wLongDate[I] of
         '.', ',' :
           if wLongDate[I+1] <> ' ' then
-            wLongDate := StrChInsertS(wLongDate, ' ', I+1);
+            wLongDate := StrChInsertL(wLongDate, ' ', I+1);
       end;
     end;
   end;

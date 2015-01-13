@@ -83,6 +83,7 @@
 #include <StList.hpp>	// Pascal unit
 #include <StDict.hpp>	// Pascal unit
 #include <StTree.hpp>	// Pascal unit
+#include <StRegEx.hpp>	// Pascal unit
 #include <StDateSt.hpp>	// Pascal unit
 #include <StAstro.hpp>	// Pascal unit
 #include <StBCD.hpp>	// Pascal unit

@@ -19,7 +19,7 @@
 #include <StConst.hpp>	// Pascal unit
 #include <StBase.hpp>	// Pascal unit
 #include <StDate.hpp>	// Pascal unit
-#include <StStrS.hpp>	// Pascal unit
+#include <StStrL.hpp>	// Pascal unit
 #include <StDateSt.hpp>	// Pascal unit
 #include <StMath.hpp>	// Pascal unit
 

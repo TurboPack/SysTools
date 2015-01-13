@@ -111,7 +111,6 @@ uses
   StStat,
   StStrL,
   StStrms,
-  StStrS,
   StStrZ,
   StText,
   StTree,

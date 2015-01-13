@@ -108,7 +108,6 @@ contains
   StSort in '..\..\source\StSort.pas',
   StStat in '..\..\source\StStat.pas',
   StStrL in '..\..\source\StStrL.pas',
-  StStrS in '..\..\source\StStrS.pas',
   StStrZ in '..\..\source\StStrZ.pas',
   StText in '..\..\source\StText.pas',
   StTree in '..\..\source\StTree.pas',

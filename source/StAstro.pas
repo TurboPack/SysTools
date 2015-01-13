@@ -53,7 +53,7 @@ interface
 
 uses
   Windows, SysUtils,
-  StConst, StBase, StDate, StStrS, StDateSt, StMath;
+  StConst, StBase, StDate, StStrL, StDateSt, StMath;
 
 type
   TStTwilight = (ttCivil, ttNautical, ttAstronomical);
@@ -1754,7 +1754,7 @@ begin
 
   if abs(DC) < 10 then begin
     Str(DR:2:0, DS);
-    DS := TrimLeadS(DS);
+    DS := TrimLeadL(DS);
     if DC < 0 then begin
       if DC > -1 then
         DS := '- 0'
@@ -1764,7 +1764,7 @@ begin
       DS := '+ ' + DS;
   end else begin
     Str(DR:3:0, DS);
-    DS := TrimLeadS(DS);
+    DS := TrimLeadL(DS);
     if DC < 0 then begin
       Delete(DS,1,1);
       DS := '-' + DS;
