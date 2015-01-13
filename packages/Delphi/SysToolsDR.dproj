@@ -157,7 +157,6 @@
         <DCCReference Include="..\..\source\StBarPN.pas"/>
         <DCCReference Include="..\..\source\StwmDCpy.pas"/>
         <DCCReference Include="..\..\source\StToHTML.pas"/>
-        <DCCReference Include="..\..\source\StStrW.pas"/>
         <DCCReference Include="..\..\source\StSpawn.pas"/>
         <DCCReference Include="..\..\source\StStrms.pas"/>
         <DCCReference Include="..\..\source\StNet.pas"/>
@@ -241,6 +240,12 @@
                 <Platform value="Win64">True</Platform>
             </Platforms>
             <Deployment Version="1">
+                <DeployFile LocalName="C:\Users\Public\Documents\Embarcadero\Studio\15.0\Bpl\SysToolsDR.bpl" Configuration="Debug" Class="ProjectOutput">
+                    <Platform Name="Win32">
+                        <RemoteName>SysToolsDR.bpl</RemoteName>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
                 <DeployClass Required="true" Name="DependencyPackage">
                     <Platform Name="iOSDevice">
                         <Operation>1</Operation>
@@ -521,14 +526,14 @@
                         <Operation>1</Operation>
                     </Platform>
                 </DeployClass>
-                <ProjectRoot Platform="iOSDevice32" Name="$(PROJECTNAME).app"/>
+                <ProjectRoot Platform="iOSSimulator" Name="$(PROJECTNAME).app"/>
                 <ProjectRoot Platform="Android" Name="$(PROJECTNAME)"/>
                 <ProjectRoot Platform="iOSDevice" Name="$(PROJECTNAME).app"/>
                 <ProjectRoot Platform="Win32" Name="$(PROJECTNAME)"/>
                 <ProjectRoot Platform="iOSDevice64" Name="$(PROJECTNAME).app"/>
-                <ProjectRoot Platform="Win64" Name="$(PROJECTNAME)"/>
-                <ProjectRoot Platform="iOSSimulator" Name="$(PROJECTNAME).app"/>
                 <ProjectRoot Platform="OSX32" Name="$(PROJECTNAME)"/>
+                <ProjectRoot Platform="Win64" Name="$(PROJECTNAME)"/>
+                <ProjectRoot Platform="iOSDevice32" Name="$(PROJECTNAME).app"/>
             </Deployment>
             <UnitTesting>
                 <TestProjectName>C:\Projects\EMBT\SysTools\Tests\SysToolsTests.dproj</TestProjectName>

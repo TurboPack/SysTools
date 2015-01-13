@@ -94,7 +94,6 @@
 #include <StNet.hpp>	// Pascal unit
 #include <StPQueue.hpp>	// Pascal unit
 #include <StStat.hpp>	// Pascal unit
-#include <StStrW.hpp>	// Pascal unit
 #include <StMoney.hpp>	// Pascal unit
 #include <StRandom.hpp>	// Pascal unit
 #include <StExpLog.hpp>	// Pascal unit

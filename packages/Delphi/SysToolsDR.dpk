@@ -121,7 +121,6 @@ contains
   StBarPN in '..\..\source\StBarPN.pas',
   StwmDCpy in '..\..\source\StwmDCpy.pas',
   StToHTML in '..\..\source\StToHTML.pas',
-  StStrW in '..\..\source\StStrW.pas',
   StSpawn in '..\..\source\StSpawn.pas',
   StStrms in '..\..\source\StStrms.pas',
   StNet in '..\..\source\StNet.pas',

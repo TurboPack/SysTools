@@ -112,7 +112,6 @@ uses
   StStrL,
   StStrms,
   StStrS,
-  StStrW,
   StStrZ,
   StText,
   StTree,

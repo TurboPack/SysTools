@@ -70,7 +70,6 @@
 #include <StBarPN.hpp>	// Pascal unit
 #include <StWmDCpy.hpp>	// Pascal unit
 #include <StToHTML.hpp>	// Pascal unit
-#include <StStrW.hpp>	// Pascal unit
 #include <StSpawn.hpp>	// Pascal unit
 #include <StStrms.hpp>	// Pascal unit
 #include <StNet.hpp>	// Pascal unit
