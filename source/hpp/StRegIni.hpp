@@ -86,7 +86,7 @@ protected:
 	bool __fastcall WriteIniData(const System::UnicodeString ValueName, System::UnicodeString Data);
 	int __fastcall ReadIniData(const System::UnicodeString ValueName, System::UnicodeString &Value, System::UnicodeString Default);
 	int __fastcall WriteRegData(HKEY Key, const System::UnicodeString ValueName, void * Data, unsigned DType, int Size);
-	int __fastcall ReadRegData(HKEY Key, const System::UnicodeString ValueName, void * Data, int Size, unsigned DType);
+	int __fastcall ReadRegData(HKEY Key, const System::UnicodeString ValueName, System::PByte Data, int Size, unsigned DType);
 	
 public:
 	__fastcall virtual TStRegIni(System::UnicodeString RootName, bool IsIniFile);

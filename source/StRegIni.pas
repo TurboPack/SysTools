@@ -145,7 +145,7 @@ type
                           DType : DWORD; Size : Integer) : Integer;
       {-write data to the registry}
 
-    function ReadRegData(Key : HKey; const ValueName : string; Data : Pointer;
+    function ReadRegData(Key : HKey; const ValueName : string; Data : PByte;
                          Size : Integer; DType : DWORD) : Integer;
       {-read data from the registry}
 
@@ -650,7 +650,7 @@ end;
 
 {==========================================================================}
 
-function TStRegIni.ReadRegData(Key : HKey; const ValueName : string; Data : Pointer;
+function TStRegIni.ReadRegData(Key : HKey; const ValueName : string; Data : PByte;
                                Size : Integer; DType : DWORD) : Integer;
   {-read a value from the registry}
 var
