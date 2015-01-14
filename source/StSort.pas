@@ -717,22 +717,8 @@ end;
 
 procedure TStSorter.sorMoveElement(Src, Dest : Pointer); assembler;
   {-Copy one record to another location, non-overlapping}
-register;
-asm
-  {eax = Self, edx = Src, ecx = Dest}
-  push esi
-  mov esi,Src
-  mov edx,edi
-  mov edi,Dest
-  mov ecx,TStSorter([eax]).FRecLen
-  mov eax,ecx
-  shr ecx,2
-  rep movsd
-  mov ecx,eax
-  and ecx,3
-  rep movsb
-  mov edi,edx
-  pop esi
+begin
+  Move(Src^, Dest^, FRecLen);
 end;
 
 procedure TStSorter.sorOpenMergeFiles;
