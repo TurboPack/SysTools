@@ -59,7 +59,6 @@ extern DELPHI_PACKAGE double __fastcall HarmonicMean(double const *Data, const i
 extern DELPHI_PACKAGE double __fastcall HarmonicMean16(const void *Data, int NData);
 extern DELPHI_PACKAGE double __fastcall Largest(double const *Data, const int Data_High, int K);
 extern DELPHI_PACKAGE double __fastcall Largest16(const void *Data, int NData, int K);
-extern DELPHI_PACKAGE double __fastcall LargestSort(double const *Data, const int Data_High, int K);
 extern DELPHI_PACKAGE double __fastcall Median(double const *Data, const int Data_High);
 extern DELPHI_PACKAGE double __fastcall Median16(const void *Data, int NData);
 extern DELPHI_PACKAGE double __fastcall Mode(double const *Data, const int Data_High);
@@ -76,7 +75,6 @@ extern DELPHI_PACKAGE int __fastcall Rank(double Number, double const *Data, con
 extern DELPHI_PACKAGE int __fastcall Rank16(double Number, const void *Data, int NData, bool Ascending);
 extern DELPHI_PACKAGE double __fastcall Smallest(double const *Data, const int Data_High, int K);
 extern DELPHI_PACKAGE double __fastcall Smallest16(const void *Data, int NData, int K);
-extern DELPHI_PACKAGE double __fastcall SmallestSort(double const *Data, const int Data_High, int K);
 extern DELPHI_PACKAGE double __fastcall TrimMean(double const *Data, const int Data_High, double Percent);
 extern DELPHI_PACKAGE double __fastcall TrimMean16(const void *Data, int NData, double Percent);
 extern DELPHI_PACKAGE void __fastcall LinEst(double const *KnownY, const int KnownY_High, double const *KnownX, const int KnownX_High, TStLinEst &LF, bool ErrorStats);

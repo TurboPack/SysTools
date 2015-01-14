@@ -487,7 +487,6 @@ function JupSatsHi(AJD : Double; Shadows : Boolean) : TStJupSats;
 var
   I      : Integer;
   SunPos : SunCoordsRec;
-  STUT   : TStDateTimeRec;
   JupPos : TStEclipticalCord;
 
   SatX   : array[1..5] of Double;
@@ -497,7 +496,6 @@ var
   TD1,
   TD2,
   Angle,        {Temporary Double values}
-  LTime,        {Tau}
   AJDT,         {AJD adjusted for light time (Tau)}
   JupX,
   JupY,

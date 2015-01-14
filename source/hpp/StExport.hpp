@@ -20,7 +20,6 @@
 #include <Data.DB.hpp>	// Pascal unit
 #include <Data.DBConsts.hpp>	// Pascal unit
 #include <StBase.hpp>	// Pascal unit
-#include <StStrms.hpp>	// Pascal unit
 #include <StTxtDat.hpp>	// Pascal unit
 
 //-- user supplied -----------------------------------------------------------

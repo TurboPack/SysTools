@@ -37,7 +37,7 @@ interface
 
 uses
   Windows, SysUtils, Classes, DB, DbConsts,
-  StBase, StStrms, StTxtDat;
+  StBase, StTxtDat;
 
 const
   DefaultDateFmt = 'mm/dd/yyyy';
@@ -147,6 +147,10 @@ type
   end;
 
 implementation
+
+uses
+  StStrms;
+
 {
   TFieldType = (ftUnknown, ftString, ftSmallint, ftInteger, ftWord,
     ftBoolean, ftFloat, ftCurrency, ftBCD, ftDate, ftTime, ftDateTime,

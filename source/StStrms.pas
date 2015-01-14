@@ -81,7 +81,6 @@ type
 
    end;
 
-type
 {!!.01 - moved to StBase.pas }
 (*
   TStLineTerminator = ( {possible line terminators...}

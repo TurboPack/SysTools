@@ -467,7 +467,13 @@ begin
   FillChar(InBuf, SizeOf(InBuf), #0);
   WS := $FF;
   Decoding := True;
+{$IFDEF WIN32}
   Keeper := False;
+{$ELSE}
+{$IFDEF DEBUG}
+  Keeper := False;
+{$ENDIF}
+{$ENDIF}
 
   { Skip any CR/LF's to get to the encoded stuff }
   while True do begin
