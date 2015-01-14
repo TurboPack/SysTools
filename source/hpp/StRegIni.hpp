@@ -94,8 +94,8 @@ public:
 	void __fastcall SetPrimary(System::UnicodeString Value);
 	System::UnicodeString __fastcall GetPrimary(void);
 	int __fastcall GetDataInfo(HKEY Key, const System::UnicodeString ValueName, int &Size, unsigned &DType);
-	System::AnsiString __fastcall BytesToString(System::PByte Value, unsigned Size);
-	bool __fastcall StringToBytes(const System::AnsiString IString, void *Value, unsigned Size);
+	System::UnicodeString __fastcall BytesToString(System::PByte Value, unsigned Size);
+	bool __fastcall StringToBytes(const System::UnicodeString IString, void *Value, unsigned Size);
 	System::UnicodeString __fastcall GetFullKeyPath(void);
 	void __fastcall WriteBoolean(const System::UnicodeString ValueName, bool Value);
 	bool __fastcall ReadBoolean(const System::UnicodeString ValueName, bool Default);

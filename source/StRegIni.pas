@@ -163,9 +163,9 @@ type
                          var Size : Integer; var DType : DWORD) : Integer;
       {-get size and type of data for entry in registry}
 
-    function BytesToString(Value : PByte; Size : Cardinal) : AnsiString;
+    function BytesToString(Value : PByte; Size : Cardinal) : string;
       {-converts byte array to string with no spaces}
-    function StringToBytes(const IString : AnsiString; var Value; Size : Cardinal) : Boolean;
+    function StringToBytes(const IString : string; var Value; Size : Cardinal) : Boolean;
       {-converts string (by groups of 2 char) to byte values}
 
 
@@ -953,19 +953,20 @@ end;
 
 {==========================================================================}
 
-function TStRegIni.BytesToString(Value : PByte; Size : Cardinal) : AnsiString;
+function TStRegIni.BytesToString(Value : PByte; Size : Cardinal) : string;
   {-convert byte array to string, no spaces or hex enunciators, e.g., '$'}
 var
   I,
   Index  : Cardinal;
-  S      : String[3];
+  S      : string;
 
 begin
-  SetLength(Result,2*Size);
+  SetLength(Result, 2 * Size);
 
-  for I := 1 to Size do begin
-    Index := I*2;
-    S := ShortString(HexBL(Byte(PAnsiChar(Value)[I-1])));
+  for I := 1 to Size do
+  begin
+    Index := I * 2;
+    S := HexBL(Value[I-1]);
     Result[(Index)-1] := S[1];
     Result[Index] := S[2];
   end;
@@ -973,19 +974,17 @@ end;
 
 {==========================================================================}
 
-function TStRegIni.StringToBytes(const IString : AnsiString; var Value; Size : Cardinal) : Boolean;
+function TStRegIni.StringToBytes(const IString : string; var Value; Size : Cardinal) : Boolean;
   {-convert string (by groups of 2 char) to byte values}
 var
   Code,
   Index,
   I     : Integer;
-  Q     : array[1..MaxByteArraySize] of byte;
-  S     : array[1..3] of AnsiChar;
+  Q     : array[1..MaxByteArraySize] of Byte;
+  S     : array[1..3] of Char;
 begin
-  if ((Length(IString) div 2) <> Integer(Size)) then begin
-    Result := False;
-    Exit;
-  end;
+  if ((Length(IString) div 2) <> Integer(Size)) then
+    Exit(False);
 
   Result := True;
   for I := 1 to Size do begin
@@ -993,11 +992,9 @@ begin
     S[1] := '$';
     S[2] := IString[Index];
     S[3] := IString[Index+1];
-    Val(string(S),Q[I],Code);
-    if (Code <> 0) then begin
-      Result := False;
-      Exit;
-    end;
+    Val(S,Q[I],Code);
+    if Code <> 0 then
+      Exit(False);
  end;
   Move(Q, Value, Size);
 end;
@@ -1063,11 +1060,11 @@ begin
   try
 {$ENDIF}
     if (riType = riIniType) then begin
-      DefVals := string(BytesToString(PByte(@Default), Size));
+      DefVals := BytesToString(PByte(@Default), Size);
       Len := ReadIniData(ValueName, Values, DefVals);
       if (Len mod 2 = 0) then begin
         {covert string, if possible, to series of bytes}
-        if not (StringToBytes(AnsiString(Values), PByte(Value), Size)) then
+        if not (StringToBytes(Values, PByte(Value), Size)) then
           Move(Default, PByte(Value), Size);
       end else
         Move(Default, PByte(Value), Size);
@@ -1209,7 +1206,7 @@ begin
               REG_BINARY   : begin
                                if (ValSize > MaxByteArraySize) then
                                  RaiseRegIniError(stscByteArrayTooLarge);
-                               Result := string(BytesToString(PByte(@LResult),ValSize));
+                               Result := BytesToString(PByte(@LResult),ValSize);
                              end;
               REG_DWORD    : begin
                                TmpVal := DWORD(LResult^);
@@ -1808,7 +1805,7 @@ begin
                                     TS := string(sBuffer);
                                   end
                                   else
-                                    TS := string(BytesToString(PByte(LResult),DSize));
+                                    TS := BytesToString(PByte(LResult),DSize);
                                   S := S + TS;
                                   SKV.AddObject(S,BmpBinary);
                                 end;
