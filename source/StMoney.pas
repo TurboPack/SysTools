@@ -37,6 +37,8 @@ unit StMoney;
 
 interface
 
+{$IFDEF WIN32}
+
 uses
   Windows, SysUtils, Classes,
 
@@ -323,7 +325,11 @@ date=<date>
       read FExchangeRates write FExchangeRates;
   end;
 
+{$ENDIF}
+
 implementation
+
+{$IFDEF WIN32}
 
 var
   ExchBaseDate : TDateTime; // the base date for exchange rates
@@ -1519,5 +1525,8 @@ end;
 
 initialization
   ExchBaseDate := EncodeDate(1980, 1, 1);
+
+{$ENDIF}
+
 end.
 

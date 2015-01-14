@@ -98,6 +98,7 @@ type
       property Seed2 : integer read FSeed2 write rcSetSeed2;
   end;
 
+{$IFDEF WIN32}
   TStRandomMother = class(TStRandomBase)
     private
       FNminus4 : integer;
@@ -112,6 +113,7 @@ type
       function AsFloat : double; override;
       property Seed : integer write rsSetSeed;
   end;
+{$ENDIF}
 
 implementation
 
@@ -604,6 +606,7 @@ end;
 {====================================================================}
 
 
+{$IFDEF WIN32}
 {===TStRandomMother==================================================}
 constructor TStRandomMother.Create(aSeed : integer);
 begin
@@ -696,6 +699,7 @@ begin
 end;
 {$IFDEF SaveQPlus}
 {$Q+}
+{$ENDIF}
 {$ENDIF}
 {====================================================================}
 

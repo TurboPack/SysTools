@@ -794,7 +794,7 @@ end;
 { Write log string to log buffer }
 procedure TStGeneralLog.WriteLogString(const LogString : AnsiString);
 begin
-  AddLogEntry($FFFFFFFF, leString, DWORD(LogString), Length(LogString));
+  AddLogEntry($FFFFFFFF, leString, NativeInt(LogString), Length(LogString));
 end;
 
 end.

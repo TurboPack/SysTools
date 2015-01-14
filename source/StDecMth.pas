@@ -37,6 +37,8 @@ unit StDecMth;
 
 interface
 
+{$IFDEF WIN32}
+
 {Note: StDecMth declares and implements TStDecimal. This is a fixed-
        point value with a total of 38 significant digits of which
        16 are to the right of the decimal point.}
@@ -115,7 +117,11 @@ type
         {-returns Self as a string, sets Self from a string}
   end;
 
+{$ENDIF}
+
 implementation
+
+{$IFDEF WIN32}
 
 uses
   StConst,
@@ -1300,5 +1306,7 @@ begin
   Int128Add(FInt, MinusOne);
 end;
 {====================================================================}
+
+{$ENDIF}
 
 end.
