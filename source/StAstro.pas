@@ -1704,8 +1704,8 @@ function HoursMin(RA : Double) : String;
   {-convert RA to formatted hh:mm:ss string}
 var
   HR, MR  : Double;
-  HS, MS  : string[12];
-
+  HS, MS  : string;
+  sBuffer: ShortString;
 begin
   if abs(RA) >= 360.0 then
     RA := Frac(RA / 360.0) * 360;
@@ -1715,27 +1715,33 @@ begin
   HR := Int(RA / 15.0);
   MR  := Frac(RA / 15.0) * 60;
 
-  Str(MR:5:2, MS);
+  Str(MR:5:2, sBuffer);
+  MS := string(sBuffer);
   if MS = '60.00' then begin
     MS := '00.00';
     HR := HR + 1;
     if HR = 24 then
       HS := '0'
     else
-      Str(HR:2:0, HS);
+    begin
+      Str(HR:2:0, sBuffer);
+      HS := string(sBuffer);
+    end;
   end else begin
     if MS[1] = ' ' then
       MS[1] := '0';
-    Str(Hr:2:0, HS);
+    Str(Hr:2:0, sBuffer);
+    HS := string(sBuffer)
   end;
-  Result := string(HS) + ' ' + string(MS);
+  Result := HS + ' ' + MS;
 end;
 
 function DegsMin(DC : Double) : String;
   {-convert Declination to formatted +/-dd:mm:ss string}
 var
   DR, MR  : Double;
-  DS, MS  : string[12];
+  DS, MS  : string;
+  sBuffer: ShortString;
 begin
   if abs(DC) > 90 then
     DC := Frac(DC / 90.0) * 90.0;
@@ -1743,7 +1749,8 @@ begin
   DR := Int(DC);
   MR := Frac(abs(DC)) * 60;
 
-  Str(MR:4:1, MS);
+  Str(MR:4:1, sBuffer);
+  MS := string(sBuffer);
   if MS = '60.0' then begin
     MS := '00.0';
     if DC >= 0 then
@@ -1753,17 +1760,19 @@ begin
   end;
 
   if abs(DC) < 10 then begin
-    Str(DR:2:0, DS);
+    Str(DR:2:0, sBuffer);
+    DS := string(sBuffer);
     DS := TrimLeadL(DS);
     if DC < 0 then begin
       if DC > -1 then
         DS := '- 0'
       else
-        DS := '- ' + ShortString(DS[2]);
+        DS := '- ' + DS[2];
     end else
       DS := '+ ' + DS;
   end else begin
-    Str(DR:3:0, DS);
+    Str(DR:3:0, sBuffer);
+    DS := string(sBuffer);
     DS := TrimLeadL(DS);
     if DC < 0 then begin
       Delete(DS,1,1);

@@ -848,7 +848,7 @@ var
   Temp : string;
 begin
   Temp := FItems.Text;
-  SetAsPChar(PChar(string(Temp)));
+  SetAsPChar(PChar(Temp));
 end;
 
 procedure TStString.LeftPad(Size : Cardinal);
@@ -1199,7 +1199,7 @@ begin
         Cur := Anchor;
       end;
     until EndFound;
-    FItems.Text := string(string(FTemp));
+    FItems.Text := FTemp;
     StrDispose(FTemp);
   end else begin
     StringToItems;
@@ -1290,7 +1290,7 @@ begin
       try
         GetWordAtCursorZ(Temp);
         Result := StrUtils.Soundex(Temp);
-        FItems.Add(string(Result));
+        FItems.Add(Result);
       finally
         StrDispose(Temp);
       end;
@@ -1367,7 +1367,7 @@ end;
 procedure TStString.StringToItems;
 {- Copies string into items -- respects line terminators. }
 begin
-  FItems.Text := string(string(FString));
+  FItems.Text := FString;
 end;
 
 function TStString.SuggestSize(Size : Cardinal) : Cardinal;

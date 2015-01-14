@@ -55,7 +55,7 @@ uses
 
 const
   AttachmentFileMode = (fmOpenRead or fmShareDenyWrite);
-  CRLFStr : array[0..1] of AnsiChar = #13#10;
+  CRLFStr : array[0..1] of Char = #13#10;
   DefStContentDisposition = 'attachment';
   DefStContentType = 'application/octet-stream';
   DefStMimeEncoding = 'base64';
@@ -276,11 +276,8 @@ type
 
 implementation
 
-uses
-  AnsiStrings;
-
 const
-  StUUTable : array[0..63] of AnsiChar = (#96, #33, #34, #35, #36, #37,
+  StUUTable : array[0..63] of Char = (#96, #33, #34, #35, #36, #37,
         #38, #39, #40, #41, #42, #43, #44, #45, #46, #47, #48, #49,
         #50, #51, #52, #53, #54, #55, #56, #57, #58, #59, #60, #61,
         #62, #63, #64, #65, #66, #67, #68, #69, #70, #71, #72, #73,
@@ -288,7 +285,7 @@ const
         #86, #87, #88, #89, #90, #91, #92, #93, #94, #95);
 
 const
-  St64Table : array[0..63] of AnsiChar = ( #65,  #66,  #67,  #68,  #69,
+  St64Table : array[0..63] of Char = ( #65,  #66,  #67,  #68,  #69,
          #70,  #71,  #72,  #73,  #74,  #75,  #76,  #77,  #78,  #79,
          #80,  #81,  #82,  #83,  #84,  #85,  #86,  #87,  #88,  #89,
          #90,  #97,  #98,  #99, #100, #101, #102, #103, #104, #105,
@@ -314,7 +311,7 @@ type
 
   PStTernaryNode = ^TStTernaryNode;
   TStTernaryNode = record
-    SplitChar : AnsiChar;
+    SplitChar : Char;
     LoKid, EqKid, HiKid : PStTernaryNode;
   end;
 
@@ -322,13 +319,13 @@ type
   private
     Root : PStTernaryNode;
     pData : Pointer;
-    function Insert(P : PStTernaryNode; C : PAnsiChar) : PStTernaryNode;
+    function Insert(P : PStTernaryNode; C : PChar) : PStTernaryNode;
     class procedure DeleteSubTree(Root : PStTernaryNode);
     function NewNode : PStTernaryNode;
   public
     destructor Destroy; override;
-    procedure InsertStr(C : PAnsiChar; Data : Pointer);
-    function SearchUC(C : PAnsiChar; var Data : Pointer) : Boolean;
+    procedure InsertStr(C : PChar; Data : Pointer);
+    function SearchUC(C : PChar; var Data : Pointer) : Boolean;
   end;
 
 { TStTernaryTree }
@@ -354,7 +351,7 @@ begin
   Result := AllocMem(SizeOf(TStTernaryNode));
 end;
 
-function TStTernaryTree.Insert(P : PStTernaryNode; C : PAnsiChar) : PStTernaryNode;
+function TStTernaryTree.Insert(P : PStTernaryNode; C : PChar) : PStTernaryNode;
 begin
   if P = nil then begin
     P := NewNode;
@@ -380,16 +377,16 @@ begin
   Result := P;
 end;
 
-procedure TStTernaryTree.InsertStr(C : PAnsiChar; Data : Pointer);
+procedure TStTernaryTree.InsertStr(C : PChar; Data : Pointer);
 begin
   pData := Data;
   Root := Insert(Root, C);
 end;
 
-function TStTernaryTree.SearchUC(C : PAnsiChar; var Data : Pointer) : Boolean;
+function TStTernaryTree.SearchUC(C : PChar; var Data : Pointer) : Boolean;
 var
   P : PStTernaryNode;
-  CU : AnsiChar;
+  CU : Char;
 begin
   P := Root;
   while P <> nil do begin
@@ -622,8 +619,8 @@ end;
 procedure TStQuotedStream.EncodeToStream(InStream, OutStream : TStream);
 var
   O, W : Integer;
-  WordBuf, OutBuf : array[0..80] of AnsiChar;
-  CurChar : AnsiChar;
+  WordBuf, OutBuf : array[0..80] of Char;
+  CurChar : Char;
 
   procedure SendLine;
   begin
@@ -654,8 +651,8 @@ var
   begin
     if W > 73 then AddWordToOutBuf;
     WordBuf[W] := '=';
-    WordBuf[W+1] := StHexDigitsA[B shr 4];
-    WordBuf[W+2] := StHexDigitsA[B and $F];
+    WordBuf[W+1] := StHexDigits[B shr 4];
+    WordBuf[W+2] := StHexDigits[B and $F];
     Inc(W, 3)
   end;
 
@@ -718,7 +715,7 @@ begin
     end;
 
     { We're done }
-    if AnsiChar(InBuf[0]) = '`' then Exit;
+    if Char(InBuf[0]) = '`' then Exit;
 
     { Get count for this line }
     Len := (((InBuf[0] - $20) and $3F) * 4) div 3;
@@ -766,10 +763,10 @@ procedure TStUUStream.EncodeToStream(InStream, OutStream : TStream);
 var
   I, O, Count, Temp : Byte;
   InBuf  : array[1..45] of Byte;
-  OutBuf : array[0..63] of AnsiChar;
-  S : AnsiString;
+  OutBuf : array[0..63] of Char;
+  S : string;
 begin
-  S := AnsiString(Format('begin 600 %s'#13#10, [FCurrentFile]));
+  S := string(Format('begin 600 %s'#13#10, [FCurrentFile]));
   OutStream.Write(S[1], Length(S));
 
   { Encode and stream the attachment }
@@ -778,24 +775,24 @@ begin
     if Count <= 0 then Break;
     I := 1;
     O := 0;
-    OutBuf[O] := AnsiChar(StUUTable[Count and $3F]);
+    OutBuf[O] := Char(StUUTable[Count and $3F]);
     Inc(O);
     while I+2 <= Count do begin
       { Encode 1st byte }
       Temp := (InBuf[I] shr 2);
-      OutBuf[O] := AnsiChar(StUUTable[Temp and $3F]);
+      OutBuf[O] := Char(StUUTable[Temp and $3F]);
 
       { Encode 1st/2nd byte }
       Temp := (InBuf[I] shl 4) or (InBuf[I+1] shr 4);
-      OutBuf[O+1] := AnsiChar(StUUTable[Temp and $3F]);
+      OutBuf[O+1] := Char(StUUTable[Temp and $3F]);
 
       { Encode 2nd/3rd byte }
       Temp := (InBuf[I+1] shl 2) or (InBuf[I+2] shr 6);
-      OutBuf[O+2] := AnsiChar(StUUTable[Temp and $3F]);
+      OutBuf[O+2] := Char(StUUTable[Temp and $3F]);
 
       { Encode 3rd byte }
       Temp := (InBuf[I+2] and $3F);
-      OutBuf[O+3] := AnsiChar(StUUTable[Temp]);
+      OutBuf[O+3] := Char(StUUTable[Temp]);
 
       Inc(I, 3);
       Inc(O, 4);
@@ -804,19 +801,19 @@ begin
     { Are there odd bytes to add? }
     if (I <= Count) then begin
       Temp := (InBuf[I] shr 2);
-      OutBuf[O] := AnsiChar(StUUTable[Temp and $3F]);
+      OutBuf[O] := Char(StUUTable[Temp and $3F]);
 
       { One odd byte }
       if (I = Count) then begin
         Temp := (InBuf[I] shl 4) and $30;
-        OutBuf[O+1] := AnsiChar(StUUTable[Temp and $3F]);
+        OutBuf[O+1] := Char(StUUTable[Temp and $3F]);
         Inc(O, 2);
       { Two odd bytes }
       end else begin
         Temp := ((InBuf[I] shl 4) and $30) or ((InBuf[I+1] shr 4) and $0F);
-        OutBuf[O+1] := AnsiChar(StUUTable[Temp and $3F]);
+        OutBuf[O+1] := Char(StUUTable[Temp and $3F]);
         Temp := (InBuf[I+1] shl 2) and $3C;
-        OutBuf[O+2] := AnsiChar(StUUTable[Temp and $3F]);
+        OutBuf[O+2] := Char(StUUTable[Temp and $3F]);
         Inc(O, 3);
       end;
     end;
@@ -830,8 +827,8 @@ begin
   until Count < SizeOf(InBuf);
 
   { Add terminating end }
-  AnsiStrings.StrCopy(AnsiStrings.StrECopy(OutBuf, '`'#13#10), 'end'#13#10);
-  OutStream.Write(OutBuf, AnsiStrings.StrLen(OutBuf));
+  StrCopy(StrECopy(OutBuf, '`'#13#10), 'end'#13#10);
+  OutStream.Write(OutBuf, StrLen(OutBuf));
 end;
 
 { TStBase64Stream }
@@ -906,10 +903,10 @@ begin
       c3 := StD64Table[InBuf[I+2]];
       OutBuf[O] := ((c1 shl 2) or (c2 shr 4));
       Inc(O);
-      if AnsiChar(InBuf[I+2]) <> '=' then begin
+      if Char(InBuf[I+2]) <> '=' then begin
         OutBuf[O] := ((c2 shl 4) or (c3 shr 2));
         Inc(O);
-        if AnsiChar(InBuf[I+3]) <> '=' then begin
+        if Char(InBuf[I+3]) <> '=' then begin
           OutBuf[O] := ((c3 shl 6) or StD64Table[InBuf[I+3]]);
           Inc(O);
         end else
@@ -926,14 +923,14 @@ procedure TStBase64Stream.EncodeToStream(InStream, OutStream : TStream);
 var
   I, O, Count : Integer;
   InBuf  : array[1..45] of Byte;
-  OutBuf : array[0..62] of AnsiChar;
+  OutBuf : array[0..62] of Char;
   Temp : Byte;
-  S : AnsiString;
+  S : string;
 begin
   FillChar(OutBuf, Sizeof(OutBuf), #0);
 
   if not FOwner.MimeHeaders then begin
-    S := AnsiString(Format('begin-base64 600 %s'#13#10, [FCurrentFile]));
+    S := string(Format('begin-base64 600 %s'#13#10, [FCurrentFile]));
     OutStream.Write(S[1], Length(S));
   end;
 
@@ -946,19 +943,19 @@ begin
     while I <= (Count-2) do begin
       { Encode 1st byte }
       Temp := (InBuf[I] shr 2);
-      OutBuf[O] := AnsiChar(St64Table[Temp and $3F]);
+      OutBuf[O] := Char(St64Table[Temp and $3F]);
 
       { Encode 1st/2nd byte }
       Temp := (InBuf[I] shl 4) or (InBuf[I+1] shr 4);
-      OutBuf[O+1] := AnsiChar(St64Table[Temp and $3F]);
+      OutBuf[O+1] := Char(St64Table[Temp and $3F]);
 
       { Encode 2nd/3rd byte }
       Temp := (InBuf[I+1] shl 2) or (InBuf[I+2] shr 6);
-      OutBuf[O+2] := AnsiChar(St64Table[Temp and $3F]);
+      OutBuf[O+2] := Char(St64Table[Temp and $3F]);
 
       { Encode 3rd byte }
       Temp := (InBuf[I+2] and $3F);
-      OutBuf[O+3] := AnsiChar(St64Table[Temp]);
+      OutBuf[O+3] := Char(St64Table[Temp]);
 
       Inc(I, 3);
       Inc(O, 4);
@@ -967,19 +964,19 @@ begin
     { Are there odd bytes to add? }
     if (I <= Count) then begin
       Temp := (InBuf[I] shr 2);
-      OutBuf[O] := AnsiChar(St64Table[Temp and $3F]);
+      OutBuf[O] := Char(St64Table[Temp and $3F]);
 
       { One odd byte }
       if I = Count then begin
         Temp := (InBuf[I] shl 4) and $30;
-        OutBuf[O+1] := AnsiChar(St64Table[Temp and $3F]);
+        OutBuf[O+1] := Char(St64Table[Temp and $3F]);
         OutBuf[O+2] := '=';
       { Two odd bytes }
       end else begin
         Temp := ((InBuf[I] shl 4) and $30) or ((InBuf[I+1] shr 4) and $0F);
-        OutBuf[O+1] := AnsiChar(St64Table[Temp and $3F]);
+        OutBuf[O+1] := Char(St64Table[Temp and $3F]);
         Temp := (InBuf[I+1] shl 2) and $3C;
-        OutBuf[O+2] := AnsiChar(St64Table[Temp and $3F]);
+        OutBuf[O+2] := Char(St64Table[Temp and $3F]);
       end;
       { Add padding }
       OutBuf[O+3] := '=';
@@ -996,8 +993,8 @@ begin
 
   { Add terminating end if necessary }
   if not FOwner.MimeHeaders then begin
-    AnsiStrings.StrCopy(OutBuf, 'end'#13#10);
-    OutStream.Write(OutBuf, AnsiStrings.StrLen(OutBuf));
+    StrCopy(OutBuf, 'end'#13#10);
+    OutStream.Write(OutBuf, StrLen(OutBuf));
   end;
 end;
 
@@ -1146,11 +1143,11 @@ end;
 procedure TStMimeConverter.AddMimeFooters;
 var
   SavePos : Integer;
-  Temp : AnsiString;
+  Temp : string;
 begin
   SavePos := Stream.Position;
   Stream.Write(CRLFStr, SizeOf(CRLFStr));
-  Temp := AnsiString('--' + Boundary + '--');
+  Temp := string('--' + Boundary + '--');
   Stream.Write(Temp[1], Length(Temp));
   Stream.Write(CRLFStr, SizeOf(CRLFStr));
   Stream.Position := SavePos;
@@ -1158,29 +1155,29 @@ end;
 
 procedure TStMimeConverter.AddMimeHeaders(const AFileName : string);
 var
-  Temp: AnsiString;
+  Temp: string;
   Descr : string;
 begin
   Stream.Write(CRLFStr, SizeOf(CRLFStr));
-  Temp := AnsiString('--' + Boundary);
+  Temp := string('--' + Boundary);
   Stream.Write(Temp[1], Length(Temp));
   Stream.Write(CRLFStr, SizeOf(CRLFStr));
 
-  Temp := AnsiString(Format('Content-Type: %s; name="%s"'#13#10,
+  Temp := string(Format('Content-Type: %s; name="%s"'#13#10,
     [ContentType, ExtractFileName(AFileName)]));
   Stream.Write(Temp[1], Length(Temp));
 
-  Temp := AnsiString(Format('Content-Transfer-Encoding: %s'#13#10, [Encoding]));
+  Temp := string(Format('Content-Transfer-Encoding: %s'#13#10, [Encoding]));
   Stream.Write(Temp[1], Length(Temp));
 
   if ContentDescription = '' then
     Descr := ExtractFileName(AFileName)
   else
     Descr := ContentDescription;
-  Temp := AnsiString(Format('Content-Description: %s'#13#10, [Descr]));
+  Temp := string(Format('Content-Description: %s'#13#10, [Descr]));
   Stream.Write(Temp[1], Length(Temp));
 
-  Temp := AnsiString(Format('Content-Disposition: %s; filename="%s"'#13#10#13#10,
+  Temp := string(Format('Content-Disposition: %s; filename="%s"'#13#10#13#10,
     [ContentDisposition, ExtractFileName(AFileName)]));
   Stream.Write(Temp[1], Length(Temp));
 end;
@@ -1311,15 +1308,15 @@ procedure TStMimeConverter.FindOldAttachment;
 const
   StmSize = 32*1024;
 type
-  MemArray = array[0..(StmSize-1)] of AnsiChar;
+  MemArray = array[0..(StmSize-1)] of Char;
 var
   I, Pos, ScanSize, StmOffset : Integer;
   NewAtt : TStAttachment;
   ScanStream : TStringStream;
   FoundPos : Cardinal;
-  SearchString : AnsiString;//array[0..80] of Char;
-  TempBuf : AnsiString; //array[0..80] of Char;
-  TokenBuf : AnsiString; //array[0..80] of Char;
+  SearchString : string;//array[0..80] of Char;
+  TempBuf : string; //array[0..80] of Char;
+  TokenBuf : string; //array[0..80] of Char;
   TempWord : Word;
   BMT : BTable;
 
@@ -1362,17 +1359,17 @@ begin
         end;
 
         { Grab second word -- should be a number if this is an attachment }
-        TokenBuf := AnsiString(ExtractWordL(2, string(TempBuf), ' '));
+        TokenBuf := string(ExtractWordL(2, string(TempBuf), ' '));
         if Str2WordL(string(TokenBuf), TempWord) then begin
           { We've got an attachment }
           NewAtt := TStAttachment.Create;
           NewAtt.atStreamOffset := Pos;
-          TokenBuf := AnsiString(ExtractWordL(1, string(TempBuf), ' '));
+          TokenBuf := string(ExtractWordL(1, string(TempBuf), ' '));
           if CompStringL(string(TokenBuf), 'begin') = 0 then
             NewAtt.atEncoding := 'uuencoded'
           else
             NewAtt.atEncoding := 'base64';
-          TokenBuf := AnsiString(ExtractWordL(3, string(TempBuf), ' '));
+          TokenBuf := string(ExtractWordL(3, string(TempBuf), ' '));
           NewAtt.atFilename := string(TokenBuf);
           NewAtt.atOldStyle := True;
           Attachments.AddObject(NewAtt.atFileName, NewAtt);
@@ -1467,8 +1464,8 @@ const
   BufSize = 1024;
 var
   I : Integer;
-  Ptr : PAnsiChar;
-  TempBuf : array[0..BufSize] of AnsiChar;
+  Ptr : PChar;
+  TempBuf : array[0..BufSize] of Char;
 begin
   FillChar(TempBuf, SizeOf(TempBuf), #0);
   Stream.Position := Att.atStreamOffset;
@@ -1481,7 +1478,7 @@ begin
       end;
     end;
   end else begin
-    Ptr := AnsiStrings.StrPos(TempBuf, #13#10#13#10'');
+    Ptr := StrPos(TempBuf, #13#10#13#10'');
     Stream.Position := (Att.atStreamOffset + (Ptr - TempBuf));
   end;
 end;
@@ -1508,7 +1505,7 @@ procedure TStMimeConverter.ScanAttachments;
 const
   StmSize = 32*1024;
 type
-  MemArray = array[0..(StmSize-1)] of AnsiChar;
+  MemArray = array[0..(StmSize-1)] of Char;
 var
   I, Pos, ScanSize, StmOffset : Integer;
   TTree : TStTernaryTree;
@@ -1517,9 +1514,9 @@ var
   ScanStream : TMemoryStream;
   OStr : TStString;
   FoundPos, BoundPos : Cardinal;
-  SearchString : array[0..80] of AnsiChar;
-  TempBuf : array[0..1024] of AnsiChar;
-  AttToken : array[0..MaxMimeLine] of AnsiChar;
+  SearchString : array[0..80] of Char;
+  TempBuf : array[0..1024] of Char;
+  AttToken : array[0..MaxMimeLine] of Char;
   BMT : BTable;
 
   function Min(A, B : Integer) : Integer;
@@ -1559,10 +1556,10 @@ begin
 
     { If we have a boundary, use it -- if not, look for one }
     if FBoundary = '' then
-      AnsiStrings.StrCopy(SearchString, #13#10'--')
+      StrCopy(SearchString, #13#10'--')
     else begin
       FBoundaryUsed := True;
-      AnsiStrings.StrPCopy(SearchString, AnsiString('--' + Boundary));
+      StrPCopy(SearchString, string('--' + Boundary));
     end;
     BMMakeTableL(SearchString, BMT);
     ScanStream.Position := 0;
@@ -1571,7 +1568,7 @@ begin
       { Look for a Mime boundary -- process appropriately }
       if BMSearchL(ScanStream.Memory^, ScanSize, BMT, SearchString, FoundPos) then begin
 
-        Pos := FoundPos + AnsiStrings.StrLen(SearchString);
+        Pos := FoundPos + StrLen(SearchString);
 
         { Add add'l checks here -- look for the Boundary header entry first }
         { if that method fails, beef up this method against false positives a bit }
@@ -1587,8 +1584,8 @@ begin
             end;
             TempBuf[I] := MemArray(ScanStream.Memory^)[Pos+I];
           end;
-          Boundary := string(AnsiStrings.StrPas(TempBuf));
-          AnsiStrings.StrCopy(AnsiStrings.StrECopy(SearchString, '--'), TempBuf);
+          Boundary := string(StrPas(TempBuf));
+          StrCopy(StrECopy(SearchString, '--'), TempBuf);
 
           { Adjust to account for CR/LF searched on this go around }
           Inc(FoundPos, 2);
@@ -1620,7 +1617,7 @@ begin
         end;
 
         { Init for token search }
-        OStr := TStString.CreateZ(PChar(AnsiStrings.StrLCopy(TempBuf, ScanStream.Memory, SizeOf(TempBuf)-1)));
+        OStr := TStString.CreateZ(PChar(StrLCopy(TempBuf, ScanStream.Memory, SizeOf(TempBuf)-1)));
         try
           with OStr do begin
             { Check for another boundary in buffer }
@@ -1641,7 +1638,7 @@ begin
             { These tokens belong to the next section }
             if OStr.CursorPos > BoundPos then Break;
 
-            OStr.GetWordAtCursorZ(PChar(PAnsiChar(@AttToken)));
+            OStr.GetWordAtCursorZ(PChar(PChar(@AttToken)));
 
             { Process tag appropriately }
             if TTree.SearchUC(AttToken, TTag) then begin
@@ -1701,7 +1698,7 @@ begin
 
       end else begin
         if (ScanSize < StmSize) then Exit;
-        Stream.Seek(-AnsiStrings.StrLen(SearchString), soCurrent);
+        Stream.Seek(-StrLen(SearchString), soCurrent);
         StmOffset := Stream.Position;
         ScanStream.Position := 0;
         ScanSize := ScanStream.CopyFrom(Stream,

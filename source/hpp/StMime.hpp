@@ -221,7 +221,7 @@ public:
 
 //-- var, const, procedure ---------------------------------------------------
 static const System::Int8 AttachmentFileMode = System::Int8(0x20);
-extern DELPHI_PACKAGE System::StaticArray<char, 2> CRLFStr;
+extern DELPHI_PACKAGE System::StaticArray<System::WideChar, 2> CRLFStr;
 #define DefStContentDisposition L"attachment"
 #define DefStContentType L"application/octet-stream"
 #define DefStMimeEncoding L"base64"
