@@ -435,23 +435,23 @@ begin
 
   try
     if (FCaseSensitive) then begin
-      CommentDict.Hash  := AnsiHashStr;
-      CommentDict.Equal := AnsiCompareStr;
-      HTMLDict.Hash     := AnsiHashStr;
-      HTMLDict.Equal    := AnsiCompareStr;
-      KeywordsDict.Hash := AnsiHashStr;
-      KeywordsDict.Equal:= AnsiCompareStr;
-      StringDict.Hash   := AnsiHashStr;
-      StringDict.Equal  := AnsiCompareStr;
+      CommentDict.Hash  := HashStr;
+      CommentDict.Equal := CompareStr;
+      HTMLDict.Hash     := HashStr;
+      HTMLDict.Equal    := CompareStr;
+      KeywordsDict.Hash := HashStr;
+      KeywordsDict.Equal:= CompareStr;
+      StringDict.Hash   := HashStr;
+      StringDict.Equal  := CompareStr;
     end else begin
-      CommentDict.Hash  := AnsiHashText;
-      CommentDict.Equal := AnsiCompareText;
-      HTMLDict.Hash     := AnsiHashText;
-      HTMLDict.Equal    := AnsiCompareText;
-      KeywordsDict.Hash := AnsiHashText;
-      KeywordsDict.Equal:= AnsiCompareText;
-      StringDict.Hash   := AnsiHashText;
-      StringDict.Equal  := AnsiCompareText;
+      CommentDict.Hash  := HashText;
+      CommentDict.Equal := CompareText;
+      HTMLDict.Hash     := HashText;
+      HTMLDict.Equal    := CompareText;
+      KeywordsDict.Hash := HashText;
+      KeywordsDict.Equal:= CompareText;
+      StringDict.Hash   := HashText;
+      StringDict.Equal  := CompareText;
     end;
 
     {Add items from string lists to dictionaries}

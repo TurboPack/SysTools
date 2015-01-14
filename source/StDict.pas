@@ -95,7 +95,7 @@ type
 {.Z-}
 
   TDictHashFunc =
-    function(const S : AnsiString; Size : Integer) : Integer;
+    function(const S : string; Size : Integer) : Integer;
 
   TStDictionary = class(TStContainer)
 {.Z+}
@@ -179,20 +179,20 @@ type
   end;
 
 
-function AnsiHashText(const S : AnsiString; Size : Integer) : Integer;
+function HashText(const S : string; Size : Integer) : Integer;
   {-Case-insensitive hash function that uses the current language driver}
-function AnsiHashStr(const S : AnsiString; Size : Integer) : Integer;
+function HashStr(const S : string; Size : Integer) : Integer;
   {-Case-sensitive hash function}
-function AnsiELFHashText(const S : AnsiString; Size : Integer) : Integer;
+function ELFHashText(const S : string; Size : Integer) : Integer;
   {-Case-insensitive ELF hash function that uses the current language driver}
-function AnsiELFHashStr(const S : AnsiString; Size : Integer) : Integer;
+function ELFHashStr(const S : string; Size : Integer) : Integer;
   {-Case-sensitive ELF hash function}
 
 
 implementation
 
 uses
-  AnsiStrings, Generics.Defaults;
+  Generics.Defaults;
 
 {$IFDEF ThreadSafe}
 var
@@ -218,7 +218,7 @@ end;
 function HashElf(const Buf;  BufSize : Integer) : Integer;
 var
 //  Bytes : TByteArray absolute Buf;                                   {!!.02}
-  Bytes : PAnsiChar;                                                       {!!.02}
+  Bytes : PByte;                                                       {!!.02}
   I, X  : Integer;
 begin
   Bytes := @Buf;                                                       {!!.02}
@@ -233,16 +233,21 @@ begin
   end;
 end;
 
-function AnsiELFHashText(const S : AnsiString; Size : Integer) : Integer;
+function ELFHashText(const S : string; Size : Integer) : Integer;
 begin
-  Result := AnsiELFHashStr(AnsiUpperCase(S), Size);
+  Result := ELFHashStr(UpperCase(S), Size);
 end;
 
-function AnsiELFHashStr(const S : AnsiString; Size : Integer) : Integer;
+function ELFHashStr(const S : string; Size : Integer) : Integer;
 begin
-  Result := HashElf(S[1], Length(S)) mod Size;
-  if Result < 0 then
-    Inc(Result, Size);
+  if S <> '' then
+  begin
+    Result := HashElf(S[1], Length(S) * SizeOf(Char)) mod Size;
+    if Result < 0 then
+      Inc(Result, Size);
+  end
+  else
+    Result := 0;
 end;
 
 constructor TStDictNode.CreateStr(const Name : string; AData : Pointer);
@@ -262,14 +267,14 @@ begin
   Result := dnName;
 end;
 
-function AnsiHashStr(const S : AnsiString; Size : Integer) : Integer;
+function HashStr(const S : string; Size : Integer) : Integer;
 begin
   Result := BobJenkinsHash(S[1], Length(S) * SizeOf(S[1]), 0);
 end;
 
-function AnsiHashText(const S : AnsiString; Size : Integer) : Integer;
+function HashText(const S : string; Size : Integer) : Integer;
 begin
-  Result := AnsiHashStr(AnsiUpperCase(S), Size);
+  Result := HashStr(UpperCase(S), Size);
 end;
 
 function FindNodeData(Container : TStContainer;
@@ -405,8 +410,8 @@ constructor TStDictionary.Create(AHashSize : Integer);
 begin
   CreateContainer(TStDictNode, 0);
   {FHashSize := 0;}
-  FEqual := AnsiCompareText;
-  FHash := AnsiHashText;
+  FEqual := CompareText;
+  FHash := HashText;
   HashSize := AHashSize;
 end;
 
@@ -461,7 +466,7 @@ var
 begin
   Prev := nil;
   This := nil;
-  H := Hash(AnsiString(Name), HashSize);
+  H := Hash(Name, HashSize);
   T := dySymbols^[H];
   P := nil;
   while Assigned(T) do begin

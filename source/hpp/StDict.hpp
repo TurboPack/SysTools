@@ -51,7 +51,7 @@ typedef System::StaticArray<TStDictNode*, 536870911> TSymbolArray;
 
 typedef TSymbolArray *PSymbolArray;
 
-typedef int __fastcall (*TDictHashFunc)(const System::AnsiString S, int Size);
+typedef int __fastcall (*TDictHashFunc)(const System::UnicodeString S, int Size);
 
 class DELPHICLASS TStDictionary;
 class PASCALIMPLEMENTATION TStDictionary : public Stbase::TStContainer
@@ -99,10 +99,10 @@ public:
 
 
 //-- var, const, procedure ---------------------------------------------------
-extern DELPHI_PACKAGE int __fastcall AnsiELFHashText(const System::AnsiString S, int Size);
-extern DELPHI_PACKAGE int __fastcall AnsiELFHashStr(const System::AnsiString S, int Size);
-extern DELPHI_PACKAGE int __fastcall AnsiHashStr(const System::AnsiString S, int Size);
-extern DELPHI_PACKAGE int __fastcall AnsiHashText(const System::AnsiString S, int Size);
+extern DELPHI_PACKAGE int __fastcall ELFHashText(const System::UnicodeString S, int Size);
+extern DELPHI_PACKAGE int __fastcall ELFHashStr(const System::UnicodeString S, int Size);
+extern DELPHI_PACKAGE int __fastcall HashStr(const System::UnicodeString S, int Size);
+extern DELPHI_PACKAGE int __fastcall HashText(const System::UnicodeString S, int Size);
 }	/* namespace Stdict */
 #if !defined(DELPHIHEADER_NO_IMPLICIT_NAMESPACE_USE) && !defined(NO_USING_NAMESPACE_STDICT)
 using namespace Stdict;

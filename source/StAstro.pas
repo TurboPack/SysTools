@@ -1782,7 +1782,7 @@ begin
   end;
   if MS[1] = ' ' then
     MS[1] := '0';
-  Result := string(DS) + ' ' + string(MS);
+  Result := DS + ' ' + MS;
 end;
 
 function DateTimeToAJD(D : TDateTime) : Double;
