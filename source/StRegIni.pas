@@ -420,15 +420,18 @@ function TStRegIni.GetPrimary : string;
 begin
   if (riType = riIniType) then
     Result := StrPas(riRootName)
-  else begin
-    case riPrimaryKey of
-      HKEY_LOCAL_MACHINE : Result := RIMachine;
-      HKEY_USERS         : Result := RIUsers;
-      HKEY_CLASSES_ROOT  : Result := RIRoot;
-      HKEY_CURRENT_USER  : Result := RICUser;
+  else
+  begin
+    if riPrimaryKey = HKEY_LOCAL_MACHINE then
+      Result := RIMachine
+    else if riPrimaryKey = HKEY_USERS then
+      Result := RIUsers
+    else if riPrimaryKey = HKEY_CLASSES_ROOT then
+      Result := RIRoot
+    else if riPrimaryKey = HKEY_CURRENT_USER then
+      Result := RICUser
     else
       Result := 'Invalid primary key'
-    end;
   end;
 end;
 
@@ -673,14 +676,16 @@ begin
 {$ENDIF}
     if (riType = riIniType) then begin
       Result := StrPas(riRootName) + '\' + StrPas(riCurSubKey);
-    end else begin
-      case riPrimaryKey of
-
-        HKEY_LOCAL_MACHINE : Result := 'HKEY_LOCAL_MACHINE\';
-        HKEY_USERS         : Result := 'HKEY_USERS\';
-        HKEY_CLASSES_ROOT  : Result := 'HKEY_CLASSES_ROOT\';
-        HKEY_CURRENT_USER  : Result := 'HKEY_CURRENT_USER\';
-      end;
+    end else
+    begin
+      if riPrimaryKey = HKEY_LOCAL_MACHINE then
+         Result := 'HKEY_LOCAL_MACHINE\'
+      else if riPrimaryKey = HKEY_USERS then
+         Result := 'HKEY_USERS\'
+      else if riPrimaryKey = HKEY_CLASSES_ROOT then
+         Result := 'HKEY_CLASSES_ROOT\'
+      else if riPrimaryKey = HKEY_CURRENT_USER then
+         Result := 'HKEY_CURRENT_USER\';
       Result := Result + StrPas(riCurSubKey);
     end;
 {$IFDEF ThreadSafe}
