@@ -1,8 +1,8 @@
 ﻿// CodeGear C++Builder
-// Copyright (c) 1995, 2014 by Embarcadero Technologies, Inc.
+// Copyright (c) 1995, 2015 by Embarcadero Technologies, Inc.
 // All rights reserved
 
-// (DO NOT EDIT: machine generated header) 'StNetAPI.pas' rev: 28.00 (Windows)
+// (DO NOT EDIT: machine generated header) 'StNetAPI.pas' rev: 29.00 (Windows)
 
 #ifndef StnetapiHPP
 #define StnetapiHPP
@@ -12,15 +12,205 @@
 #pragma option -w-      // All warnings off
 #pragma option -Vx      // Zero-length empty class member 
 #pragma pack(push,8)
-#include <System.hpp>	// Pascal unit
-#include <SysInit.hpp>	// Pascal unit
-#include <Winapi.Windows.hpp>	// Pascal unit
-#include <StBase.hpp>	// Pascal unit
+#include <System.hpp>
+#include <SysInit.hpp>
+#include <Winapi.Windows.hpp>
+#include <StBase.hpp>
 
 //-- user supplied -----------------------------------------------------------
 
 namespace Stnetapi
 {
+//-- forward type declarations -----------------------------------------------
+struct TUSER_INFO_0;
+struct TUSER_INFO_1;
+struct TUSER_INFO_2;
+struct TUSER_INFO_3;
+struct TUSER_INFO_10;
+struct TUSER_INFO_11;
+struct TUSER_INFO_20;
+struct TUSER_INFO_21;
+struct TUSER_INFO_22;
+struct TUSER_INFO_1003;
+struct TUSER_INFO_1005;
+struct TUSER_INFO_1006;
+struct TUSER_INFO_1007;
+struct TUSER_INFO_1008;
+struct TUSER_INFO_1009;
+struct TUSER_INFO_1010;
+struct TUSER_INFO_1011;
+struct TUSER_INFO_1012;
+struct TUSER_INFO_1013;
+struct TUSER_INFO_1014;
+struct TUSER_INFO_1017;
+struct TUSER_INFO_1018;
+struct TUSER_INFO_1020;
+struct TUSER_INFO_1023;
+struct TUSER_INFO_1024;
+struct TUSER_INFO_1025;
+struct TUSER_INFO_1051;
+struct TUSER_INFO_1052;
+struct TUSER_INFO_1053;
+struct TUSER_MODALS_INFO_0;
+struct TUSER_MODALS_INFO_1;
+struct TUSER_MODALS_INFO_2;
+struct TUSER_MODALS_INFO_3;
+struct TUSER_MODALS_INFO_1001;
+struct TUSER_MODALS_INFO_1002;
+struct TUSER_MODALS_INFO_1003;
+struct TUSER_MODALS_INFO_1004;
+struct TUSER_MODALS_INFO_1005;
+struct TUSER_MODALS_INFO_1006;
+struct TUSER_MODALS_INFO_1007;
+struct TGROUP_INFO_0;
+struct TGROUP_INFO_1;
+struct TGROUP_INFO_2;
+struct TGROUP_INFO_1002;
+struct TGROUP_INFO_1005;
+struct TGROUP_USERS_INFO_0;
+struct TGROUP_USERS_INFO_1;
+struct TLOCALGROUP_INFO_0;
+struct TLOCALGROUP_INFO_1;
+struct TLOCALGROUP_INFO_1002;
+struct TLOCALGROUP_MEMBERS_INFO_0;
+struct TLOCALGROUP_MEMBERS_INFO_1;
+struct TLOCALGROUP_MEMBERS_INFO_2;
+struct TLOCALGROUP_MEMBERS_INFO_3;
+struct TLOCALGROUP_USERS_INFO_0;
+struct TNET_DISPLAY_USER;
+struct TNET_DISPLAY_MACHINE;
+struct TNET_DISPLAY_GROUP;
+struct TACCESS_INFO_0;
+struct TACCESS_INFO_1;
+struct TACCESS_INFO_1002;
+struct TACCESS_LIST;
+struct TNETLOGON_INFO_1;
+struct TNETLOGON_INFO_2;
+struct TNETLOGON_INFO_3;
+struct TNETLOGON_INFO_4;
+struct TSTD_ALERT;
+struct TADMIN_OTHER_INFO;
+struct TERRLOG_OTHER_INFO;
+struct TPRINT_OTHER_INFO;
+struct TUSER_OTHER_INFO;
+struct TShare_Info_0;
+struct TShare_Info_1;
+struct TShare_Info_2;
+struct TShare_Info_501;
+struct TShare_Info_502;
+struct TShare_Info_1004;
+struct TShare_Info_1005;
+struct TShare_Info_1006;
+struct TShare_Info_1501;
+struct TSession_Info_0;
+struct TSession_Info_1;
+struct TSession_Info_2;
+struct TSession_Info_10;
+struct TSession_Info_502;
+struct TConnection_Info_0;
+struct TConnection_Info_1;
+struct TFile_Info_2;
+struct TFile_Info_3;
+struct TMSG_INFO_0;
+struct TMSG_INFO_1;
+struct T_TIME_OF_DAY_INFO;
+struct TSERVER_INFO_100;
+struct TSERVER_INFO_101;
+struct TSERVER_INFO_102;
+struct TSERVER_INFO_402;
+struct TSERVER_INFO_403;
+struct TSERVER_INFO_502;
+struct TSERVER_INFO_503;
+struct TSERVER_INFO_599;
+struct TSERVER_INFO_598;
+struct TSERVER_INFO_1005;
+struct TSERVER_INFO_1107;
+struct TSERVER_INFO_1010;
+struct TSERVER_INFO_1016;
+struct TSERVER_INFO_1017;
+struct TSERVER_INFO_1018;
+struct TSERVER_INFO_1501;
+struct TSERVER_INFO_1502;
+struct TSERVER_INFO_1503;
+struct TSERVER_INFO_1506;
+struct TSERVER_INFO_1509;
+struct TSERVER_INFO_1510;
+struct TSERVER_INFO_1511;
+struct TSERVER_INFO_1512;
+struct TSERVER_INFO_1513;
+struct TSERVER_INFO_1514;
+struct TSERVER_INFO_1515;
+struct TSERVER_INFO_1516;
+struct TSERVER_INFO_1518;
+struct TSERVER_INFO_1520;
+struct TSERVER_INFO_1521;
+struct TSERVER_INFO_1522;
+struct TSERVER_INFO_1523;
+struct TSERVER_INFO_1524;
+struct TSERVER_INFO_1525;
+struct TSERVER_INFO_1528;
+struct TSERVER_INFO_1529;
+struct TSERVER_INFO_1530;
+struct TSERVER_INFO_1533;
+struct TSERVER_INFO_1534;
+struct TSERVER_INFO_1535;
+struct TSERVER_INFO_1536;
+struct TSERVER_INFO_1537;
+struct TSERVER_INFO_1538;
+struct TSERVER_INFO_1539;
+struct TSERVER_INFO_1540;
+struct TSERVER_INFO_1541;
+struct TSERVER_INFO_1542;
+struct TSERVER_INFO_1543;
+struct TSERVER_INFO_1544;
+struct TSERVER_INFO_1545;
+struct TSERVER_INFO_1546;
+struct TSERVER_INFO_1547;
+struct TSERVER_INFO_1548;
+struct TSERVER_INFO_1549;
+struct TSERVER_INFO_1550;
+struct TSERVER_INFO_1552;
+struct TSERVER_INFO_1553;
+struct TSERVER_INFO_1554;
+struct TSERVER_INFO_1555;
+struct TSERVER_INFO_1556;
+struct TSERVER_INFO_1557;
+struct TSERVER_INFO_1560;
+struct TSERVER_INFO_1561;
+struct TSERVER_INFO_1562;
+struct TSERVER_INFO_1563;
+struct TSERVER_INFO_1564;
+struct TSERVER_INFO_1565;
+struct TSERVER_INFO_1566;
+struct TSERVER_INFO_1567;
+struct TSERVER_INFO_1568;
+struct TSERVER_INFO_1569;
+struct TSERVER_INFO_1570;
+struct TSERVER_INFO_1571;
+struct TSERVER_INFO_1572;
+struct TSERVER_INFO_1573;
+struct TSERVER_INFO_1574;
+struct TSERVER_INFO_1575;
+struct TSERVER_INFO_1576;
+struct TSERVER_INFO_1577;
+struct TSERVER_INFO_1578;
+struct TSERVER_INFO_1579;
+struct TSERVER_INFO_1580;
+struct TSERVER_INFO_1581;
+struct TSERVER_INFO_1582;
+struct TSERVER_INFO_1583;
+struct TSERVER_INFO_1584;
+struct TSERVER_INFO_1585;
+struct TSERVER_INFO_1586;
+struct TSERVER_INFO_1587;
+struct TSERVER_INFO_1588;
+struct TSERVER_INFO_1589;
+struct TSERVER_INFO_1590;
+struct TSERVER_INFO_1591;
+struct TSERVER_INFO_1592;
+struct TSERVER_TRANSPORT_INFO_0;
+struct TSERVER_TRANSPORT_INFO_1;
+struct TLMWideChar;
 //-- type declarations -------------------------------------------------------
 typedef unsigned NET_API_STATUS;
 
@@ -114,7 +304,6 @@ typedef unsigned __stdcall (*TI_NetLogonControl2)(System::WideChar * ServerName,
 
 typedef int __stdcall (*TNetEnumerateTrustedDomains)(System::WideChar * ServerName, void * &Buffer);
 
-struct TUSER_INFO_0;
 typedef TUSER_INFO_0 *PUSER_INFO_0;
 
 struct DECLSPEC_DRECORD TUSER_INFO_0
@@ -124,7 +313,6 @@ public:
 };
 
 
-struct TUSER_INFO_1;
 typedef TUSER_INFO_1 *PUSER_INFO_1;
 
 struct DECLSPEC_DRECORD TUSER_INFO_1
@@ -141,7 +329,6 @@ public:
 };
 
 
-struct TUSER_INFO_2;
 typedef TUSER_INFO_2 *PUSER_INFO_2;
 
 struct DECLSPEC_DRECORD TUSER_INFO_2
@@ -174,7 +361,6 @@ public:
 };
 
 
-struct TUSER_INFO_3;
 typedef TUSER_INFO_3 *PUSER_INFO_3;
 
 struct DECLSPEC_DRECORD TUSER_INFO_3
@@ -212,7 +398,6 @@ public:
 };
 
 
-struct TUSER_INFO_10;
 typedef TUSER_INFO_10 *PUSER_INFO_10;
 
 struct DECLSPEC_DRECORD TUSER_INFO_10
@@ -225,7 +410,6 @@ public:
 };
 
 
-struct TUSER_INFO_11;
 typedef TUSER_INFO_11 *PUSER_INFO_11;
 
 struct DECLSPEC_DRECORD TUSER_INFO_11
@@ -254,7 +438,6 @@ public:
 };
 
 
-struct TUSER_INFO_20;
 typedef TUSER_INFO_20 *PUSER_INFO_20;
 
 struct DECLSPEC_DRECORD TUSER_INFO_20
@@ -268,7 +451,6 @@ public:
 };
 
 
-struct TUSER_INFO_21;
 typedef TUSER_INFO_21 *PUSER_INFO_21;
 
 struct DECLSPEC_DRECORD TUSER_INFO_21
@@ -278,7 +460,6 @@ public:
 };
 
 
-struct TUSER_INFO_22;
 typedef TUSER_INFO_22 *PUSER_INFO_22;
 
 struct DECLSPEC_DRECORD TUSER_INFO_22
@@ -311,7 +492,6 @@ public:
 };
 
 
-struct TUSER_INFO_1003;
 typedef TUSER_INFO_1003 *PUSER_INFO_1003;
 
 struct DECLSPEC_DRECORD TUSER_INFO_1003
@@ -321,7 +501,6 @@ public:
 };
 
 
-struct TUSER_INFO_1005;
 typedef TUSER_INFO_1005 *PUSER_INFO_1005;
 
 struct DECLSPEC_DRECORD TUSER_INFO_1005
@@ -331,7 +510,6 @@ public:
 };
 
 
-struct TUSER_INFO_1006;
 typedef TUSER_INFO_1006 *PUSER_INFO_1006;
 
 struct DECLSPEC_DRECORD TUSER_INFO_1006
@@ -341,7 +519,6 @@ public:
 };
 
 
-struct TUSER_INFO_1007;
 typedef TUSER_INFO_1007 *PUSER_INFO_1007;
 
 struct DECLSPEC_DRECORD TUSER_INFO_1007
@@ -351,7 +528,6 @@ public:
 };
 
 
-struct TUSER_INFO_1008;
 typedef TUSER_INFO_1008 *PUSER_INFO_1008;
 
 struct DECLSPEC_DRECORD TUSER_INFO_1008
@@ -361,7 +537,6 @@ public:
 };
 
 
-struct TUSER_INFO_1009;
 typedef TUSER_INFO_1009 *PUSER_INFO_1009;
 
 struct DECLSPEC_DRECORD TUSER_INFO_1009
@@ -371,7 +546,6 @@ public:
 };
 
 
-struct TUSER_INFO_1010;
 typedef TUSER_INFO_1010 *PUSER_INFO_1010;
 
 struct DECLSPEC_DRECORD TUSER_INFO_1010
@@ -381,7 +555,6 @@ public:
 };
 
 
-struct TUSER_INFO_1011;
 typedef TUSER_INFO_1011 *PUSER_INFO_1011;
 
 struct DECLSPEC_DRECORD TUSER_INFO_1011
@@ -391,7 +564,6 @@ public:
 };
 
 
-struct TUSER_INFO_1012;
 typedef TUSER_INFO_1012 *PUSER_INFO_1012;
 
 struct DECLSPEC_DRECORD TUSER_INFO_1012
@@ -401,7 +573,6 @@ public:
 };
 
 
-struct TUSER_INFO_1013;
 typedef TUSER_INFO_1013 *PUSER_INFO_1013;
 
 struct DECLSPEC_DRECORD TUSER_INFO_1013
@@ -411,7 +582,6 @@ public:
 };
 
 
-struct TUSER_INFO_1014;
 typedef TUSER_INFO_1014 *PUSER_INFO_1014;
 
 struct DECLSPEC_DRECORD TUSER_INFO_1014
@@ -421,7 +591,6 @@ public:
 };
 
 
-struct TUSER_INFO_1017;
 typedef TUSER_INFO_1017 *PUSER_INFO_1017;
 
 struct DECLSPEC_DRECORD TUSER_INFO_1017
@@ -431,7 +600,6 @@ public:
 };
 
 
-struct TUSER_INFO_1018;
 typedef TUSER_INFO_1018 *PUSER_INFO_1018;
 
 struct DECLSPEC_DRECORD TUSER_INFO_1018
@@ -441,7 +609,6 @@ public:
 };
 
 
-struct TUSER_INFO_1020;
 typedef TUSER_INFO_1020 *PUSER_INFO_1020;
 
 struct DECLSPEC_DRECORD TUSER_INFO_1020
@@ -452,7 +619,6 @@ public:
 };
 
 
-struct TUSER_INFO_1023;
 typedef TUSER_INFO_1023 *PUSER_INFO_1023;
 
 struct DECLSPEC_DRECORD TUSER_INFO_1023
@@ -462,7 +628,6 @@ public:
 };
 
 
-struct TUSER_INFO_1024;
 typedef TUSER_INFO_1024 *PUSER_INFO_1024;
 
 struct DECLSPEC_DRECORD TUSER_INFO_1024
@@ -472,7 +637,6 @@ public:
 };
 
 
-struct TUSER_INFO_1025;
 typedef TUSER_INFO_1025 *PUSER_INFO_1025;
 
 struct DECLSPEC_DRECORD TUSER_INFO_1025
@@ -482,7 +646,6 @@ public:
 };
 
 
-struct TUSER_INFO_1051;
 typedef TUSER_INFO_1051 *PUSER_INFO_1051;
 
 struct DECLSPEC_DRECORD TUSER_INFO_1051
@@ -492,7 +655,6 @@ public:
 };
 
 
-struct TUSER_INFO_1052;
 typedef TUSER_INFO_1052 *PUSER_INFO_1052;
 
 struct DECLSPEC_DRECORD TUSER_INFO_1052
@@ -502,7 +664,6 @@ public:
 };
 
 
-struct TUSER_INFO_1053;
 typedef TUSER_INFO_1053 *PUSER_INFO_1053;
 
 struct DECLSPEC_DRECORD TUSER_INFO_1053
@@ -512,7 +673,6 @@ public:
 };
 
 
-struct TUSER_MODALS_INFO_0;
 typedef TUSER_MODALS_INFO_0 *PUSER_MODALS_INFO_0;
 
 struct DECLSPEC_DRECORD TUSER_MODALS_INFO_0
@@ -526,7 +686,6 @@ public:
 };
 
 
-struct TUSER_MODALS_INFO_1;
 typedef TUSER_MODALS_INFO_1 *PUSER_MODALS_INFO_1;
 
 struct DECLSPEC_DRECORD TUSER_MODALS_INFO_1
@@ -537,7 +696,6 @@ public:
 };
 
 
-struct TUSER_MODALS_INFO_2;
 typedef TUSER_MODALS_INFO_2 *PUSER_MODALS_INFO_2;
 
 struct DECLSPEC_DRECORD TUSER_MODALS_INFO_2
@@ -548,7 +706,6 @@ public:
 };
 
 
-struct TUSER_MODALS_INFO_3;
 typedef TUSER_MODALS_INFO_3 *PUSER_MODALS_INFO_3;
 
 struct DECLSPEC_DRECORD TUSER_MODALS_INFO_3
@@ -560,7 +717,6 @@ public:
 };
 
 
-struct TUSER_MODALS_INFO_1001;
 typedef TUSER_MODALS_INFO_1001 *PUSER_MODALS_INFO_1001;
 
 struct DECLSPEC_DRECORD TUSER_MODALS_INFO_1001
@@ -570,7 +726,6 @@ public:
 };
 
 
-struct TUSER_MODALS_INFO_1002;
 typedef TUSER_MODALS_INFO_1002 *PUSER_MODALS_INFO_1002;
 
 struct DECLSPEC_DRECORD TUSER_MODALS_INFO_1002
@@ -580,7 +735,6 @@ public:
 };
 
 
-struct TUSER_MODALS_INFO_1003;
 typedef TUSER_MODALS_INFO_1003 *PUSER_MODALS_INFO_1003;
 
 struct DECLSPEC_DRECORD TUSER_MODALS_INFO_1003
@@ -590,7 +744,6 @@ public:
 };
 
 
-struct TUSER_MODALS_INFO_1004;
 typedef TUSER_MODALS_INFO_1004 *PUSER_MODALS_INFO_1004;
 
 struct DECLSPEC_DRECORD TUSER_MODALS_INFO_1004
@@ -600,7 +753,6 @@ public:
 };
 
 
-struct TUSER_MODALS_INFO_1005;
 typedef TUSER_MODALS_INFO_1005 *PUSER_MODALS_INFO_1005;
 
 struct DECLSPEC_DRECORD TUSER_MODALS_INFO_1005
@@ -610,7 +762,6 @@ public:
 };
 
 
-struct TUSER_MODALS_INFO_1006;
 typedef TUSER_MODALS_INFO_1006 *PUSER_MODALS_INFO_1006;
 
 struct DECLSPEC_DRECORD TUSER_MODALS_INFO_1006
@@ -620,7 +771,6 @@ public:
 };
 
 
-struct TUSER_MODALS_INFO_1007;
 typedef TUSER_MODALS_INFO_1007 *PUSER_MODALS_INFO_1007;
 
 struct DECLSPEC_DRECORD TUSER_MODALS_INFO_1007
@@ -630,7 +780,6 @@ public:
 };
 
 
-struct TGROUP_INFO_0;
 typedef TGROUP_INFO_0 *PGROUP_INFO_0;
 
 struct DECLSPEC_DRECORD TGROUP_INFO_0
@@ -640,7 +789,6 @@ public:
 };
 
 
-struct TGROUP_INFO_1;
 typedef TGROUP_INFO_1 *PGROUP_INFO_1;
 
 struct DECLSPEC_DRECORD TGROUP_INFO_1
@@ -651,7 +799,6 @@ public:
 };
 
 
-struct TGROUP_INFO_2;
 typedef TGROUP_INFO_2 *PGROUP_INFO_2;
 
 struct DECLSPEC_DRECORD TGROUP_INFO_2
@@ -664,7 +811,6 @@ public:
 };
 
 
-struct TGROUP_INFO_1002;
 typedef TGROUP_INFO_1002 *PGROUP_INFO_1002;
 
 struct DECLSPEC_DRECORD TGROUP_INFO_1002
@@ -674,7 +820,6 @@ public:
 };
 
 
-struct TGROUP_INFO_1005;
 typedef TGROUP_INFO_1005 *PGROUP_INFO_1005;
 
 struct DECLSPEC_DRECORD TGROUP_INFO_1005
@@ -684,7 +829,6 @@ public:
 };
 
 
-struct TGROUP_USERS_INFO_0;
 typedef TGROUP_USERS_INFO_0 *PGROUP_USERS_INFO_0;
 
 struct DECLSPEC_DRECORD TGROUP_USERS_INFO_0
@@ -694,7 +838,6 @@ public:
 };
 
 
-struct TGROUP_USERS_INFO_1;
 typedef TGROUP_USERS_INFO_1 *PGROUP_USERS_INFO_1;
 
 struct DECLSPEC_DRECORD TGROUP_USERS_INFO_1
@@ -705,7 +848,6 @@ public:
 };
 
 
-struct TLOCALGROUP_INFO_0;
 typedef TLOCALGROUP_INFO_0 *PLOCALGROUP_INFO_0;
 
 struct DECLSPEC_DRECORD TLOCALGROUP_INFO_0
@@ -715,7 +857,6 @@ public:
 };
 
 
-struct TLOCALGROUP_INFO_1;
 typedef TLOCALGROUP_INFO_1 *PLOCALGROUP_INFO_1;
 
 struct DECLSPEC_DRECORD TLOCALGROUP_INFO_1
@@ -726,7 +867,6 @@ public:
 };
 
 
-struct TLOCALGROUP_INFO_1002;
 typedef TLOCALGROUP_INFO_1002 *PLOCALGROUP_INFO_1002;
 
 struct DECLSPEC_DRECORD TLOCALGROUP_INFO_1002
@@ -736,7 +876,6 @@ public:
 };
 
 
-struct TLOCALGROUP_MEMBERS_INFO_0;
 typedef TLOCALGROUP_MEMBERS_INFO_0 *PLOCALGROUP_MEMBERS_INFO_0;
 
 struct DECLSPEC_DRECORD TLOCALGROUP_MEMBERS_INFO_0
@@ -746,7 +885,6 @@ public:
 };
 
 
-struct TLOCALGROUP_MEMBERS_INFO_1;
 typedef TLOCALGROUP_MEMBERS_INFO_1 *PLOCALGROUP_MEMBERS_INFO_1;
 
 struct DECLSPEC_DRECORD TLOCALGROUP_MEMBERS_INFO_1
@@ -758,7 +896,6 @@ public:
 };
 
 
-struct TLOCALGROUP_MEMBERS_INFO_2;
 typedef TLOCALGROUP_MEMBERS_INFO_2 *PLOCALGROUP_MEMBERS_INFO_2;
 
 struct DECLSPEC_DRECORD TLOCALGROUP_MEMBERS_INFO_2
@@ -770,7 +907,6 @@ public:
 };
 
 
-struct TLOCALGROUP_MEMBERS_INFO_3;
 typedef TLOCALGROUP_MEMBERS_INFO_3 *PLOCALGROUP_MEMBERS_INFO_3;
 
 struct DECLSPEC_DRECORD TLOCALGROUP_MEMBERS_INFO_3
@@ -780,7 +916,6 @@ public:
 };
 
 
-struct TLOCALGROUP_USERS_INFO_0;
 typedef TLOCALGROUP_USERS_INFO_0 *PLOCALGROUP_USERS_INFO_0;
 
 struct DECLSPEC_DRECORD TLOCALGROUP_USERS_INFO_0
@@ -790,7 +925,6 @@ public:
 };
 
 
-struct TNET_DISPLAY_USER;
 typedef TNET_DISPLAY_USER *PNET_DISPLAY_USER;
 
 struct DECLSPEC_DRECORD TNET_DISPLAY_USER
@@ -805,7 +939,6 @@ public:
 };
 
 
-struct TNET_DISPLAY_MACHINE;
 typedef TNET_DISPLAY_MACHINE *PNET_DISPLAY_MACHINE;
 
 struct DECLSPEC_DRECORD TNET_DISPLAY_MACHINE
@@ -819,7 +952,6 @@ public:
 };
 
 
-struct TNET_DISPLAY_GROUP;
 typedef TNET_DISPLAY_GROUP *PNET_DISPLAY_GROUP;
 
 struct DECLSPEC_DRECORD TNET_DISPLAY_GROUP
@@ -833,7 +965,6 @@ public:
 };
 
 
-struct TACCESS_INFO_0;
 typedef TACCESS_INFO_0 *PACCESS_INFO_0;
 
 struct DECLSPEC_DRECORD TACCESS_INFO_0
@@ -843,7 +974,6 @@ public:
 };
 
 
-struct TACCESS_INFO_1;
 typedef TACCESS_INFO_1 *PACCESS_INFO_1;
 
 struct DECLSPEC_DRECORD TACCESS_INFO_1
@@ -855,7 +985,6 @@ public:
 };
 
 
-struct TACCESS_INFO_1002;
 typedef TACCESS_INFO_1002 *PACCESS_INFO_1002;
 
 struct DECLSPEC_DRECORD TACCESS_INFO_1002
@@ -865,7 +994,6 @@ public:
 };
 
 
-struct TACCESS_LIST;
 typedef TACCESS_LIST *PACCESS_LIST;
 
 struct DECLSPEC_DRECORD TACCESS_LIST
@@ -876,7 +1004,6 @@ public:
 };
 
 
-struct TNETLOGON_INFO_1;
 typedef TNETLOGON_INFO_1 *PNETLOGON_INFO_1;
 
 struct DECLSPEC_DRECORD TNETLOGON_INFO_1
@@ -887,7 +1014,6 @@ public:
 };
 
 
-struct TNETLOGON_INFO_2;
 typedef TNETLOGON_INFO_2 *PNETLOGON_INFO_2;
 
 struct DECLSPEC_DRECORD TNETLOGON_INFO_2
@@ -900,7 +1026,6 @@ public:
 };
 
 
-struct TNETLOGON_INFO_3;
 typedef TNETLOGON_INFO_3 *PNETLOGON_INFO_3;
 
 struct DECLSPEC_DRECORD TNETLOGON_INFO_3
@@ -916,7 +1041,6 @@ public:
 };
 
 
-struct TNETLOGON_INFO_4;
 typedef TNETLOGON_INFO_4 *PNETLOGON_INFO_4;
 
 struct DECLSPEC_DRECORD TNETLOGON_INFO_4
@@ -931,7 +1055,6 @@ typedef unsigned __stdcall (*TNetAlertRaise)(System::WideChar * AlertEventName, 
 
 typedef unsigned __stdcall (*TNetAlertRaiseEx)(System::WideChar * AlertEventName, void * VariableInfo, unsigned VariableInfoSize, System::WideChar * ServiceName);
 
-struct TSTD_ALERT;
 typedef TSTD_ALERT *PSTD_ALERT;
 
 struct DECLSPEC_DRECORD TSTD_ALERT
@@ -943,7 +1066,6 @@ public:
 };
 
 
-struct TADMIN_OTHER_INFO;
 typedef TADMIN_OTHER_INFO *PADMIN_OTHER_INFO;
 
 struct DECLSPEC_DRECORD TADMIN_OTHER_INFO
@@ -954,7 +1076,6 @@ public:
 };
 
 
-struct TERRLOG_OTHER_INFO;
 typedef TERRLOG_OTHER_INFO *PERRLOG_OTHER_INFO;
 
 struct DECLSPEC_DRECORD TERRLOG_OTHER_INFO
@@ -965,7 +1086,6 @@ public:
 };
 
 
-struct TPRINT_OTHER_INFO;
 typedef TPRINT_OTHER_INFO *PPRINT_OTHER_INFO;
 
 struct DECLSPEC_DRECORD TPRINT_OTHER_INFO
@@ -978,7 +1098,6 @@ public:
 };
 
 
-struct TUSER_OTHER_INFO;
 typedef TUSER_OTHER_INFO *PUSER_OTHER_INFO;
 
 struct DECLSPEC_DRECORD TUSER_OTHER_INFO
@@ -1019,7 +1138,6 @@ typedef unsigned __stdcall (*TNetFileEnum)(System::WideChar * ServerName, System
 
 typedef unsigned __stdcall (*TNetFileGetInfo)(System::WideChar * ServerName, unsigned FileID, unsigned Level, void * &Buffer);
 
-struct TShare_Info_0;
 typedef TShare_Info_0 *PShare_Info_0;
 
 struct DECLSPEC_DRECORD TShare_Info_0
@@ -1029,7 +1147,6 @@ public:
 };
 
 
-struct TShare_Info_1;
 typedef TShare_Info_1 *PShare_Info_1;
 
 struct DECLSPEC_DRECORD TShare_Info_1
@@ -1041,7 +1158,6 @@ public:
 };
 
 
-struct TShare_Info_2;
 typedef TShare_Info_2 *PShare_Info_2;
 
 struct DECLSPEC_DRECORD TShare_Info_2
@@ -1058,7 +1174,6 @@ public:
 };
 
 
-struct TShare_Info_501;
 typedef TShare_Info_501 *PShare_Info_501;
 
 struct DECLSPEC_DRECORD TShare_Info_501
@@ -1071,7 +1186,6 @@ public:
 };
 
 
-struct TShare_Info_502;
 typedef TShare_Info_502 *PShare_Info_502;
 
 struct DECLSPEC_DRECORD TShare_Info_502
@@ -1090,7 +1204,6 @@ public:
 };
 
 
-struct TShare_Info_1004;
 typedef TShare_Info_1004 *PShare_Info_1004;
 
 struct DECLSPEC_DRECORD TShare_Info_1004
@@ -1100,7 +1213,6 @@ public:
 };
 
 
-struct TShare_Info_1005;
 typedef TShare_Info_1005 *PShare_Info_1005;
 
 struct DECLSPEC_DRECORD TShare_Info_1005
@@ -1110,7 +1222,6 @@ public:
 };
 
 
-struct TShare_Info_1006;
 typedef TShare_Info_1006 *PShare_Info_1006;
 
 struct DECLSPEC_DRECORD TShare_Info_1006
@@ -1120,7 +1231,6 @@ public:
 };
 
 
-struct TShare_Info_1501;
 typedef TShare_Info_1501 *PShare_Info_1501;
 
 struct DECLSPEC_DRECORD TShare_Info_1501
@@ -1131,7 +1241,6 @@ public:
 };
 
 
-struct TSession_Info_0;
 typedef TSession_Info_0 *PSession_Info_0;
 
 struct DECLSPEC_DRECORD TSession_Info_0
@@ -1141,7 +1250,6 @@ public:
 };
 
 
-struct TSession_Info_1;
 typedef TSession_Info_1 *PSession_Info_1;
 
 struct DECLSPEC_DRECORD TSession_Info_1
@@ -1156,7 +1264,6 @@ public:
 };
 
 
-struct TSession_Info_2;
 typedef TSession_Info_2 *PSession_Info_2;
 
 struct DECLSPEC_DRECORD TSession_Info_2
@@ -1172,7 +1279,6 @@ public:
 };
 
 
-struct TSession_Info_10;
 typedef TSession_Info_10 *PSession_Info_10;
 
 struct DECLSPEC_DRECORD TSession_Info_10
@@ -1185,7 +1291,6 @@ public:
 };
 
 
-struct TSession_Info_502;
 typedef TSession_Info_502 *PSession_Info_502;
 
 struct DECLSPEC_DRECORD TSession_Info_502
@@ -1202,7 +1307,6 @@ public:
 };
 
 
-struct TConnection_Info_0;
 typedef TConnection_Info_0 *PConnection_Info_0;
 
 struct DECLSPEC_DRECORD TConnection_Info_0
@@ -1212,7 +1316,6 @@ public:
 };
 
 
-struct TConnection_Info_1;
 typedef TConnection_Info_1 *PConnection_Info_1;
 
 struct DECLSPEC_DRECORD TConnection_Info_1
@@ -1228,7 +1331,6 @@ public:
 };
 
 
-struct TFile_Info_2;
 typedef TFile_Info_2 *PFile_Info_2;
 
 struct DECLSPEC_DRECORD TFile_Info_2
@@ -1238,7 +1340,6 @@ public:
 };
 
 
-struct TFile_Info_3;
 typedef TFile_Info_3 *PFile_Info_3;
 
 struct DECLSPEC_DRECORD TFile_Info_3
@@ -1254,7 +1355,7 @@ public:
 
 typedef unsigned __stdcall (*TNetMessageNameAdd)(System::WideChar * ServerName, System::WideChar * MsgName);
 
-typedef unsigned __stdcall (*TNetMessageNameEnum)(System::WideChar * ServerName, unsigned Level, void * &Buffer, unsigned PrefMaxLen, unsigned &EntriesRead, unsigned &TotalEntries, PDWORD ResumeHandle);
+typedef unsigned __stdcall (*TNetMessageNameEnum)(System::WideChar * ServerName, unsigned Level, void * &Buffer, unsigned PrefMaxLen, unsigned &EntriesRead, unsigned &TotalEntries, unsigned* ResumeHandle);
 
 typedef unsigned __stdcall (*TNetMessageNameGetInfo)(System::WideChar * ServerName, System::WideChar * MsgName, unsigned Level, void * &Buffer);
 
@@ -1262,7 +1363,6 @@ typedef unsigned __stdcall (*TNetMessageNameDel)(System::WideChar * ServerName, 
 
 typedef unsigned __stdcall (*TNetMessageBufferSend)(System::WideChar * ServerName, System::WideChar * MsgName, System::WideChar * FromName, void * Buffer, unsigned BufferLen);
 
-struct TMSG_INFO_0;
 typedef TMSG_INFO_0 *PMSG_INFO_0;
 
 struct DECLSPEC_DRECORD TMSG_INFO_0
@@ -1272,7 +1372,6 @@ public:
 };
 
 
-struct TMSG_INFO_1;
 typedef TMSG_INFO_1 *PMSG_INFO_1;
 
 struct DECLSPEC_DRECORD TMSG_INFO_1
@@ -1359,7 +1458,7 @@ public:
 	System::WideChar *sv102_comment;
 	unsigned sv102_users;
 	int sv102_disc;
-	BOOL sv102_hidden;
+	System::LongBool sv102_hidden;
 	unsigned sv102_announce;
 	unsigned sv102_anndelta;
 	unsigned sv102_licenses;
@@ -1460,11 +1559,11 @@ public:
 	unsigned sv502_sessconns;
 	unsigned sv502_maxpagedmemoryusage;
 	unsigned sv502_maxnonpagedmemoryusage;
-	BOOL sv502_enablesoftcompat;
-	BOOL sv502_enableforcedlogoff;
-	BOOL sv502_timesource;
-	BOOL sv502_acceptdownlevelapis;
-	BOOL sv502_lmannounce;
+	System::LongBool sv502_enablesoftcompat;
+	System::LongBool sv502_enableforcedlogoff;
+	System::LongBool sv502_timesource;
+	System::LongBool sv502_acceptdownlevelapis;
+	System::LongBool sv502_lmannounce;
 };
 
 
@@ -1484,11 +1583,11 @@ public:
 	unsigned sv503_sessconns;
 	unsigned sv503_maxpagedmemoryusage;
 	unsigned sv503_maxnonpagedmemoryusage;
-	BOOL sv503_enablesoftcompat;
-	BOOL sv503_enableforcedlogoff;
-	BOOL sv503_timesource;
-	BOOL sv503_acceptdownlevelapis;
-	BOOL sv503_lmannounce;
+	System::LongBool sv503_enablesoftcompat;
+	System::LongBool sv503_enableforcedlogoff;
+	System::LongBool sv503_timesource;
+	System::LongBool sv503_acceptdownlevelapis;
+	System::LongBool sv503_lmannounce;
 	System::WideChar *sv503_domain;
 	unsigned sv503_maxcopyreadlen;
 	unsigned sv503_maxcopywritelen;
@@ -1506,11 +1605,11 @@ public:
 	unsigned sv503_maxmpxct;
 	unsigned sv503_oplockbreakwait;
 	unsigned sv503_oplockbreakresponsewait;
-	BOOL sv503_enableoplocks;
-	BOOL sv503_enableoplockforceclose;
-	BOOL sv503_enablefcbopens;
-	BOOL sv503_enableraw;
-	BOOL sv503_enablesharednetdrives;
+	System::LongBool sv503_enableoplocks;
+	System::LongBool sv503_enableoplockforceclose;
+	System::LongBool sv503_enablefcbopens;
+	System::LongBool sv503_enableraw;
+	System::LongBool sv503_enablesharednetdrives;
 	unsigned sv503_minfreeconnections;
 	unsigned sv503_maxfreeconnections;
 };
@@ -1532,11 +1631,11 @@ public:
 	unsigned sv599_sessconns;
 	unsigned sv599_maxpagedmemoryusage;
 	unsigned sv599_maxnonpagedmemoryusage;
-	BOOL sv599_enablesoftcompat;
-	BOOL sv599_enableforcedlogoff;
-	BOOL sv599_timesource;
-	BOOL sv599_acceptdownlevelapis;
-	BOOL sv599_lmannounce;
+	System::LongBool sv599_enablesoftcompat;
+	System::LongBool sv599_enableforcedlogoff;
+	System::LongBool sv599_timesource;
+	System::LongBool sv599_acceptdownlevelapis;
+	System::LongBool sv599_lmannounce;
 	System::WideChar *sv599_domain;
 	unsigned sv599_maxcopyreadlen;
 	unsigned sv599_maxcopywritelen;
@@ -1554,11 +1653,11 @@ public:
 	unsigned sv599_maxmpxct;
 	unsigned sv599_oplockbreakwait;
 	unsigned sv599_oplockbreakresponsewait;
-	BOOL sv599_enableoplocks;
-	BOOL sv599_enableoplockforceclose;
-	BOOL sv599_enablefcbopens;
-	BOOL sv599_enableraw;
-	BOOL sv599_enablesharednetdrives;
+	System::LongBool sv599_enableoplocks;
+	System::LongBool sv599_enableoplockforceclose;
+	System::LongBool sv599_enablefcbopens;
+	System::LongBool sv599_enableraw;
+	System::LongBool sv599_enablesharednetdrives;
 	unsigned sv599_minfreeconnections;
 	unsigned sv599_maxfreeconnections;
 	unsigned sv599_initsesstable;
@@ -1595,8 +1694,8 @@ public:
 	unsigned sv598_mdlreadswitchover;
 	unsigned sv598_cachedopenlimit;
 	unsigned sv598_otherqueueaffinity;
-	BOOL sv598_restrictnullsessaccess;
-	BOOL sv598_enablewfw311directipx;
+	System::LongBool sv598_restrictnullsessaccess;
+	System::LongBool sv598_enablewfw311directipx;
 	unsigned sv598_queuesamplesecs;
 	unsigned sv598_balancecount;
 	unsigned sv598_preferredaffinity;
@@ -1606,13 +1705,13 @@ public:
 	unsigned sv598_maxfreepagedpoolchunks;
 	unsigned sv598_minpagedpoolchunksize;
 	unsigned sv598_maxpagedpoolchunksize;
-	BOOL sv598_sendsfrompreferredprocesso;
+	System::LongBool sv598_sendsfrompreferredprocesso;
 	unsigned sv598_cacheddirectorylimit;
 	unsigned sv598_maxcopylength;
-	BOOL sv598_enablebulktransfer;
-	BOOL sv598_enablecompression;
-	BOOL sv598_autosharewks;
-	BOOL sv598_autoshareserver;
+	System::LongBool sv598_enablebulktransfer;
+	System::LongBool sv598_enablecompression;
+	System::LongBool sv598_autosharewks;
+	System::LongBool sv598_autoshareserver;
 };
 
 
@@ -1640,7 +1739,7 @@ public:
 struct DECLSPEC_DRECORD TSERVER_INFO_1016
 {
 public:
-	BOOL sv1016_hidden;
+	System::LongBool sv1016_hidden;
 };
 
 
@@ -1724,28 +1823,28 @@ public:
 struct DECLSPEC_DRECORD TSERVER_INFO_1514
 {
 public:
-	BOOL sv1514_enablesoftcompat;
+	System::LongBool sv1514_enablesoftcompat;
 };
 
 
 struct DECLSPEC_DRECORD TSERVER_INFO_1515
 {
 public:
-	BOOL sv1515_enableforcedlogoff;
+	System::LongBool sv1515_enableforcedlogoff;
 };
 
 
 struct DECLSPEC_DRECORD TSERVER_INFO_1516
 {
 public:
-	BOOL sv1516_timesource;
+	System::LongBool sv1516_timesource;
 };
 
 
 struct DECLSPEC_DRECORD TSERVER_INFO_1518
 {
 public:
-	BOOL sv1518_lmannounce;
+	System::LongBool sv1518_lmannounce;
 };
 
 
@@ -1836,49 +1935,49 @@ public:
 struct DECLSPEC_DRECORD TSERVER_INFO_1536
 {
 public:
-	BOOL sv1536_enableoplocks;
+	System::LongBool sv1536_enableoplocks;
 };
 
 
 struct DECLSPEC_DRECORD TSERVER_INFO_1537
 {
 public:
-	BOOL sv1537_enableoplockforceclose;
+	System::LongBool sv1537_enableoplockforceclose;
 };
 
 
 struct DECLSPEC_DRECORD TSERVER_INFO_1538
 {
 public:
-	BOOL sv1538_enablefcbopens;
+	System::LongBool sv1538_enablefcbopens;
 };
 
 
 struct DECLSPEC_DRECORD TSERVER_INFO_1539
 {
 public:
-	BOOL sv1539_enableraw;
+	System::LongBool sv1539_enableraw;
 };
 
 
 struct DECLSPEC_DRECORD TSERVER_INFO_1540
 {
 public:
-	BOOL sv1540_enablesharednetdrives;
+	System::LongBool sv1540_enablesharednetdrives;
 };
 
 
 struct DECLSPEC_DRECORD TSERVER_INFO_1541
 {
 public:
-	BOOL sv1541_minfreeconnections;
+	System::LongBool sv1541_minfreeconnections;
 };
 
 
 struct DECLSPEC_DRECORD TSERVER_INFO_1542
 {
 public:
-	BOOL sv1542_maxfreeconnections;
+	System::LongBool sv1542_maxfreeconnections;
 };
 
 
@@ -2025,7 +2124,7 @@ public:
 struct DECLSPEC_DRECORD TSERVER_INFO_1566
 {
 public:
-	BOOL sv1566_removeduplicatesearches;
+	System::LongBool sv1566_removeduplicatesearches;
 };
 
 
@@ -2158,7 +2257,7 @@ public:
 struct DECLSPEC_DRECORD TSERVER_INFO_1585
 {
 public:
-	BOOL sv1585_sendsfrompreferredprocessor;
+	System::LongBool sv1585_sendsfrompreferredprocessor;
 };
 
 
@@ -2270,7 +2369,7 @@ typedef unsigned __stdcall (*TNetStatisticsGet)(System::WideChar * Server, Syste
 
 typedef Winapi::Windows::PSIDIdentifierAuthority __stdcall (*TGetSidIdentifierAuthority)(void * SID);
 
-typedef PDWORD __stdcall (*TGetSidSubAuthority)(void * SID, unsigned nSubAuthority);
+typedef unsigned* __stdcall (*TGetSidSubAuthority)(void * SID, unsigned nSubAuthority);
 
 typedef System::PByte __stdcall (*TGetSidSubAuthorityCount)(void * SID);
 
@@ -3239,7 +3338,7 @@ extern DELPHI_PACKAGE unsigned __fastcall StNetFileClose(System::UnicodeString S
 extern DELPHI_PACKAGE unsigned __fastcall StNetFileEnum(System::UnicodeString ServerName, System::UnicodeString BasePath, System::UnicodeString UserName, unsigned Level, void * &Buffer, unsigned PrefMexLen, unsigned &EntriesRead, unsigned &TotalEntries, unsigned &ResumeHandle);
 extern DELPHI_PACKAGE unsigned __fastcall StNetFileGetInfo(System::UnicodeString ServerName, unsigned FileID, unsigned Level, void * &Buffer);
 extern DELPHI_PACKAGE unsigned __fastcall StNetMessageNameAdd(System::UnicodeString ServerName, System::UnicodeString MsgName);
-extern DELPHI_PACKAGE unsigned __fastcall StNetMessageNameEnum(System::UnicodeString ServerName, unsigned Level, void * &Buffer, unsigned PrefMaxLen, unsigned &EntriesRead, unsigned &TotalEntries, PDWORD ResumeHandle);
+extern DELPHI_PACKAGE unsigned __fastcall StNetMessageNameEnum(System::UnicodeString ServerName, unsigned Level, void * &Buffer, unsigned PrefMaxLen, unsigned &EntriesRead, unsigned &TotalEntries, unsigned* ResumeHandle);
 extern DELPHI_PACKAGE unsigned __fastcall StNetMessageNameGetInfo(System::UnicodeString ServerName, System::UnicodeString MsgName, unsigned Level, void * &Buffer);
 extern DELPHI_PACKAGE unsigned __fastcall StNetMessageNameDel(System::UnicodeString ServerName, System::UnicodeString MsgName);
 extern DELPHI_PACKAGE unsigned __fastcall StNetMessageBufferSend(System::UnicodeString ServerName, System::UnicodeString MsgName, System::UnicodeString FromName, void * Buffer, unsigned BufferLen);

@@ -1,8 +1,8 @@
 ﻿// CodeGear C++Builder
-// Copyright (c) 1995, 2014 by Embarcadero Technologies, Inc.
+// Copyright (c) 1995, 2015 by Embarcadero Technologies, Inc.
 // All rights reserved
 
-// (DO NOT EDIT: machine generated header) 'StExport.pas' rev: 28.00 (Windows)
+// (DO NOT EDIT: machine generated header) 'StExport.pas' rev: 29.00 (Windows)
 
 #ifndef StexportHPP
 #define StexportHPP
@@ -12,24 +12,26 @@
 #pragma option -w-      // All warnings off
 #pragma option -Vx      // Zero-length empty class member 
 #pragma pack(push,8)
-#include <System.hpp>	// Pascal unit
-#include <SysInit.hpp>	// Pascal unit
-#include <Winapi.Windows.hpp>	// Pascal unit
-#include <System.SysUtils.hpp>	// Pascal unit
-#include <System.Classes.hpp>	// Pascal unit
-#include <Data.DB.hpp>	// Pascal unit
-#include <Data.DBConsts.hpp>	// Pascal unit
-#include <StBase.hpp>	// Pascal unit
-#include <StTxtDat.hpp>	// Pascal unit
+#include <System.hpp>
+#include <SysInit.hpp>
+#include <Winapi.Windows.hpp>
+#include <System.SysUtils.hpp>
+#include <System.Classes.hpp>
+#include <Data.DB.hpp>
+#include <Data.DBConsts.hpp>
+#include <StBase.hpp>
+#include <StTxtDat.hpp>
 
 //-- user supplied -----------------------------------------------------------
 
 namespace Stexport
 {
+//-- forward type declarations -----------------------------------------------
+class DELPHICLASS TStDBtoCSVExport;
+class DELPHICLASS TStDbSchemaGenerator;
 //-- type declarations -------------------------------------------------------
 typedef void __fastcall (__closure *TStExportProgressEvent)(System::TObject* Sender, int Index, bool &Abort);
 
-class DELPHICLASS TStDBtoCSVExport;
 class PASCALIMPLEMENTATION TStDBtoCSVExport : public System::TObject
 {
 	typedef System::TObject inherited;
@@ -83,7 +85,6 @@ public:
 };
 
 
-class DELPHICLASS TStDbSchemaGenerator;
 #pragma pack(push,4)
 class PASCALIMPLEMENTATION TStDbSchemaGenerator : public System::TObject
 {

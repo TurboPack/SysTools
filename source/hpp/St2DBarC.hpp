@@ -1,8 +1,8 @@
 ﻿// CodeGear C++Builder
-// Copyright (c) 1995, 2014 by Embarcadero Technologies, Inc.
+// Copyright (c) 1995, 2015 by Embarcadero Technologies, Inc.
 // All rights reserved
 
-// (DO NOT EDIT: machine generated header) 'St2DBarC.pas' rev: 28.00 (Windows)
+// (DO NOT EDIT: machine generated header) 'St2DBarC.pas' rev: 29.00 (Windows)
 
 #ifndef St2dbarcHPP
 #define St2dbarcHPP
@@ -12,25 +12,30 @@
 #pragma option -w-      // All warnings off
 #pragma option -Vx      // Zero-length empty class member 
 #pragma pack(push,8)
-#include <System.hpp>	// Pascal unit
-#include <SysInit.hpp>	// Pascal unit
-#include <Winapi.Windows.hpp>	// Pascal unit
-#include <Winapi.Messages.hpp>	// Pascal unit
-#include <System.SysUtils.hpp>	// Pascal unit
-#include <System.Classes.hpp>	// Pascal unit
-#include <Vcl.Controls.hpp>	// Pascal unit
-#include <Vcl.Graphics.hpp>	// Pascal unit
-#include <Vcl.StdCtrls.hpp>	// Pascal unit
-#include <System.Math.hpp>	// Pascal unit
-#include <Vcl.Clipbrd.hpp>	// Pascal unit
-#include <StConst.hpp>	// Pascal unit
-#include <System.UITypes.hpp>	// Pascal unit
-#include <System.Types.hpp>	// Pascal unit
+#include <System.hpp>
+#include <SysInit.hpp>
+#include <Winapi.Windows.hpp>
+#include <Winapi.Messages.hpp>
+#include <System.SysUtils.hpp>
+#include <System.Classes.hpp>
+#include <Vcl.Controls.hpp>
+#include <Vcl.Graphics.hpp>
+#include <Vcl.StdCtrls.hpp>
+#include <System.Math.hpp>
+#include <Vcl.Clipbrd.hpp>
+#include <StConst.hpp>
+#include <System.UITypes.hpp>
+#include <System.Types.hpp>
 
 //-- user supplied -----------------------------------------------------------
 
 namespace St2dbarc
 {
+//-- forward type declarations -----------------------------------------------
+class DELPHICLASS E2DBarcodeError;
+class DELPHICLASS TStCustom2DBarcode;
+class DELPHICLASS TStPDF417Barcode;
+class DELPHICLASS TStMaxiCodeBarcode;
 //-- type declarations -------------------------------------------------------
 enum DECLSPEC_DENUM TStDataMode : unsigned char { dmBinary, dmText, dmNumeric };
 
@@ -46,7 +51,6 @@ enum DECLSPEC_DENUM TStMaxiCodeECCPoly : unsigned char { epPrimary, epStandard, 
 
 enum DECLSPEC_DENUM TStMaxiCodeECCInterleave : unsigned char { imNone, imEven, imOdd };
 
-class DELPHICLASS E2DBarcodeError;
 #pragma pack(push,4)
 class PASCALIMPLEMENTATION E2DBarcodeError : public System::Sysutils::Exception
 {
@@ -71,7 +75,6 @@ public:
 
 #pragma pack(pop)
 
-class DELPHICLASS TStCustom2DBarcode;
 class PASCALIMPLEMENTATION TStCustom2DBarcode : public Vcl::Controls::TGraphicControl
 {
 	typedef Vcl::Controls::TGraphicControl inherited;
@@ -179,7 +182,6 @@ __published:
 };
 
 
-class DELPHICLASS TStPDF417Barcode;
 class PASCALIMPLEMENTATION TStPDF417Barcode : public TStCustom2DBarcode
 {
 	typedef TStCustom2DBarcode inherited;
@@ -262,7 +264,6 @@ public:
 };
 
 
-class DELPHICLASS TStMaxiCodeBarcode;
 class PASCALIMPLEMENTATION TStMaxiCodeBarcode : public TStCustom2DBarcode
 {
 	typedef TStCustom2DBarcode inherited;

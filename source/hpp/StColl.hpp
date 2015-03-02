@@ -1,8 +1,8 @@
 ﻿// CodeGear C++Builder
-// Copyright (c) 1995, 2014 by Embarcadero Technologies, Inc.
+// Copyright (c) 1995, 2015 by Embarcadero Technologies, Inc.
 // All rights reserved
 
-// (DO NOT EDIT: machine generated header) 'StColl.pas' rev: 28.00 (Windows)
+// (DO NOT EDIT: machine generated header) 'StColl.pas' rev: 29.00 (Windows)
 
 #ifndef StcollHPP
 #define StcollHPP
@@ -12,24 +12,27 @@
 #pragma option -w-      // All warnings off
 #pragma option -Vx      // Zero-length empty class member 
 #pragma pack(push,8)
-#include <System.hpp>	// Pascal unit
-#include <SysInit.hpp>	// Pascal unit
-#include <Winapi.Windows.hpp>	// Pascal unit
-#include <System.Classes.hpp>	// Pascal unit
-#include <StConst.hpp>	// Pascal unit
-#include <StBase.hpp>	// Pascal unit
-#include <StList.hpp>	// Pascal unit
+#include <System.hpp>
+#include <SysInit.hpp>
+#include <Winapi.Windows.hpp>
+#include <System.Classes.hpp>
+#include <StConst.hpp>
+#include <StBase.hpp>
+#include <StList.hpp>
 
 //-- user supplied -----------------------------------------------------------
 
 namespace Stcoll
 {
+//-- forward type declarations -----------------------------------------------
+class DELPHICLASS TPageDescriptor;
+class DELPHICLASS TStCollection;
+class DELPHICLASS TStSortedCollection;
 //-- type declarations -------------------------------------------------------
 typedef System::StaticArray<void *, 536870911> TPointerArray;
 
 typedef TPointerArray *PPointerArray;
 
-class DELPHICLASS TPageDescriptor;
 #pragma pack(push,4)
 class PASCALIMPLEMENTATION TPageDescriptor : public Stlist::TStListNode
 {
@@ -49,7 +52,6 @@ public:
 
 typedef bool __fastcall (*TCollIterateFunc)(Stbase::TStContainer* Container, void * Data, void * OtherData);
 
-class DELPHICLASS TStCollection;
 class PASCALIMPLEMENTATION TStCollection : public Stbase::TStContainer
 {
 	typedef Stbase::TStContainer inherited;
@@ -96,7 +98,6 @@ public:
 
 enum DECLSPEC_DENUM TSCSearch : unsigned char { SCSPageEmpty, SCSLessThanThisPage, SCSInThisPageRange, SCSFound, SCSGreaterThanThisPage };
 
-class DELPHICLASS TStSortedCollection;
 class PASCALIMPLEMENTATION TStSortedCollection : public TStCollection
 {
 	typedef TStCollection inherited;

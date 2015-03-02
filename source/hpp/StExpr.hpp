@@ -1,8 +1,8 @@
 ﻿// CodeGear C++Builder
-// Copyright (c) 1995, 2014 by Embarcadero Technologies, Inc.
+// Copyright (c) 1995, 2015 by Embarcadero Technologies, Inc.
 // All rights reserved
 
-// (DO NOT EDIT: machine generated header) 'StExpr.pas' rev: 28.00 (Windows)
+// (DO NOT EDIT: machine generated header) 'StExpr.pas' rev: 29.00 (Windows)
 
 #ifndef StexprHPP
 #define StexprHPP
@@ -12,23 +12,26 @@
 #pragma option -w-      // All warnings off
 #pragma option -Vx      // Zero-length empty class member 
 #pragma pack(push,8)
-#include <System.hpp>	// Pascal unit
-#include <SysInit.hpp>	// Pascal unit
-#include <Winapi.Windows.hpp>	// Pascal unit
-#include <System.Classes.hpp>	// Pascal unit
-#include <Vcl.Controls.hpp>	// Pascal unit
-#include <Winapi.Messages.hpp>	// Pascal unit
-#include <Vcl.StdCtrls.hpp>	// Pascal unit
-#include <System.SysUtils.hpp>	// Pascal unit
-#include <System.Math.hpp>	// Pascal unit
-#include <StBase.hpp>	// Pascal unit
-#include <StConst.hpp>	// Pascal unit
-#include <StMath.hpp>	// Pascal unit
+#include <System.hpp>
+#include <SysInit.hpp>
+#include <Winapi.Windows.hpp>
+#include <System.Classes.hpp>
+#include <Vcl.Controls.hpp>
+#include <Winapi.Messages.hpp>
+#include <Vcl.StdCtrls.hpp>
+#include <System.SysUtils.hpp>
+#include <System.Math.hpp>
+#include <StBase.hpp>
+#include <StConst.hpp>
+#include <StMath.hpp>
 
 //-- user supplied -----------------------------------------------------------
 
 namespace Stexpr
 {
+//-- forward type declarations -----------------------------------------------
+class DELPHICLASS TStExpression;
+class DELPHICLASS TStExpressionEdit;
 //-- type declarations -------------------------------------------------------
 typedef System::Extended *PStFloat;
 
@@ -52,7 +55,6 @@ typedef void __fastcall (__closure *TStGetIdentValueEvent)(System::TObject* Send
 
 enum DECLSPEC_DENUM TStToken : unsigned char { ssStart, ssInIdent, ssInNum, ssInSign, ssInExp, ssEol, ssNum, ssIdent, ssLPar, ssRPar, ssComma, ssPlus, ssMinus, ssTimes, ssDiv, ssEqual, ssPower };
 
-class DELPHICLASS TStExpression;
 class PASCALIMPLEMENTATION TStExpression : public Stbase::TStComponent
 {
 	typedef Stbase::TStComponent inherited;
@@ -127,7 +129,6 @@ __published:
 
 typedef void __fastcall (__closure *TStExprErrorEvent)(System::TObject* Sender, int ErrorNumber, const System::UnicodeString ErrorStr);
 
-class DELPHICLASS TStExpressionEdit;
 class PASCALIMPLEMENTATION TStExpressionEdit : public Stbase::TStBaseEdit
 {
 	typedef Stbase::TStBaseEdit inherited;

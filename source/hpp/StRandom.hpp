@@ -1,8 +1,8 @@
 ﻿// CodeGear C++Builder
-// Copyright (c) 1995, 2014 by Embarcadero Technologies, Inc.
+// Copyright (c) 1995, 2015 by Embarcadero Technologies, Inc.
 // All rights reserved
 
-// (DO NOT EDIT: machine generated header) 'StRandom.pas' rev: 28.00 (Windows)
+// (DO NOT EDIT: machine generated header) 'StRandom.pas' rev: 29.00 (Windows)
 
 #ifndef StrandomHPP
 #define StrandomHPP
@@ -12,19 +12,23 @@
 #pragma option -w-      // All warnings off
 #pragma option -Vx      // Zero-length empty class member 
 #pragma pack(push,8)
-#include <System.hpp>	// Pascal unit
-#include <SysInit.hpp>	// Pascal unit
-#include <Winapi.Windows.hpp>	// Pascal unit
-#include <System.SysUtils.hpp>	// Pascal unit
-#include <System.Classes.hpp>	// Pascal unit
-#include <StBase.hpp>	// Pascal unit
+#include <System.hpp>
+#include <SysInit.hpp>
+#include <Winapi.Windows.hpp>
+#include <System.SysUtils.hpp>
+#include <System.Classes.hpp>
+#include <StBase.hpp>
 
 //-- user supplied -----------------------------------------------------------
 
 namespace Strandom
 {
-//-- type declarations -------------------------------------------------------
+//-- forward type declarations -----------------------------------------------
 class DELPHICLASS TStRandomBase;
+class DELPHICLASS TStRandomSystem;
+class DELPHICLASS TStRandomCombined;
+class DELPHICLASS TStRandomMother;
+//-- type declarations -------------------------------------------------------
 #pragma pack(push,4)
 class PASCALIMPLEMENTATION TStRandomBase : public System::TObject
 {
@@ -57,7 +61,6 @@ public:
 
 #pragma pack(pop)
 
-class DELPHICLASS TStRandomSystem;
 #pragma pack(push,4)
 class PASCALIMPLEMENTATION TStRandomSystem : public TStRandomBase
 {
@@ -80,7 +83,6 @@ public:
 
 #pragma pack(pop)
 
-class DELPHICLASS TStRandomCombined;
 #pragma pack(push,4)
 class PASCALIMPLEMENTATION TStRandomCombined : public TStRandomBase
 {
@@ -106,7 +108,6 @@ public:
 
 #pragma pack(pop)
 
-class DELPHICLASS TStRandomMother;
 #pragma pack(push,4)
 class PASCALIMPLEMENTATION TStRandomMother : public TStRandomBase
 {

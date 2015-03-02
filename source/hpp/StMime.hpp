@@ -1,8 +1,8 @@
 ﻿// CodeGear C++Builder
-// Copyright (c) 1995, 2014 by Embarcadero Technologies, Inc.
+// Copyright (c) 1995, 2015 by Embarcadero Technologies, Inc.
 // All rights reserved
 
-// (DO NOT EDIT: machine generated header) 'StMime.pas' rev: 28.00 (Windows)
+// (DO NOT EDIT: machine generated header) 'StMime.pas' rev: 29.00 (Windows)
 
 #ifndef StmimeHPP
 #define StmimeHPP
@@ -12,20 +12,28 @@
 #pragma option -w-      // All warnings off
 #pragma option -Vx      // Zero-length empty class member 
 #pragma pack(push,8)
-#include <System.hpp>	// Pascal unit
-#include <SysInit.hpp>	// Pascal unit
-#include <Winapi.Windows.hpp>	// Pascal unit
-#include <System.SysUtils.hpp>	// Pascal unit
-#include <System.Classes.hpp>	// Pascal unit
-#include <StConst.hpp>	// Pascal unit
-#include <StBase.hpp>	// Pascal unit
-#include <StStrL.hpp>	// Pascal unit
-#include <StOStr.hpp>	// Pascal unit
+#include <System.hpp>
+#include <SysInit.hpp>
+#include <Winapi.Windows.hpp>
+#include <System.SysUtils.hpp>
+#include <System.Classes.hpp>
+#include <StConst.hpp>
+#include <StBase.hpp>
+#include <StStrL.hpp>
+#include <StOStr.hpp>
 
 //-- user supplied -----------------------------------------------------------
 
 namespace Stmime
 {
+//-- forward type declarations -----------------------------------------------
+class DELPHICLASS TStConvertStream;
+class DELPHICLASS TStRawStream;
+class DELPHICLASS TStQuotedStream;
+class DELPHICLASS TStUUStream;
+class DELPHICLASS TStBase64Stream;
+class DELPHICLASS TStAttachment;
+class DELPHICLASS TStMimeConverter;
 //-- type declarations -------------------------------------------------------
 enum DECLSPEC_DENUM TStConvertState : unsigned char { csStarted, csProgressing, csFinished };
 
@@ -33,8 +41,6 @@ typedef void __fastcall (__closure *TStProgressEvent)(System::TObject* Sender, T
 
 typedef void __fastcall (__closure *TStSaveAsEvent)(System::TObject* Sender, System::UnicodeString &FileName);
 
-class DELPHICLASS TStConvertStream;
-class DELPHICLASS TStMimeConverter;
 class PASCALIMPLEMENTATION TStConvertStream : public System::TObject
 {
 	typedef System::TObject inherited;
@@ -57,7 +63,6 @@ public:
 };
 
 
-class DELPHICLASS TStRawStream;
 class PASCALIMPLEMENTATION TStRawStream : public TStConvertStream
 {
 	typedef TStConvertStream inherited;
@@ -72,7 +77,6 @@ public:
 };
 
 
-class DELPHICLASS TStQuotedStream;
 class PASCALIMPLEMENTATION TStQuotedStream : public TStConvertStream
 {
 	typedef TStConvertStream inherited;
@@ -87,7 +91,6 @@ public:
 };
 
 
-class DELPHICLASS TStUUStream;
 class PASCALIMPLEMENTATION TStUUStream : public TStConvertStream
 {
 	typedef TStConvertStream inherited;
@@ -102,7 +105,6 @@ public:
 };
 
 
-class DELPHICLASS TStBase64Stream;
 class PASCALIMPLEMENTATION TStBase64Stream : public TStConvertStream
 {
 	typedef TStConvertStream inherited;
@@ -119,7 +121,6 @@ public:
 
 typedef System::TMetaClass* TStConverterClass;
 
-class DELPHICLASS TStAttachment;
 #pragma pack(push,4)
 class PASCALIMPLEMENTATION TStAttachment : public System::TObject
 {

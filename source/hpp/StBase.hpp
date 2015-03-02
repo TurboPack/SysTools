@@ -1,8 +1,8 @@
 ﻿// CodeGear C++Builder
-// Copyright (c) 1995, 2014 by Embarcadero Technologies, Inc.
+// Copyright (c) 1995, 2015 by Embarcadero Technologies, Inc.
 // All rights reserved
 
-// (DO NOT EDIT: machine generated header) 'StBase.pas' rev: 28.00 (Windows)
+// (DO NOT EDIT: machine generated header) 'StBase.pas' rev: 29.00 (Windows)
 
 #ifndef StbaseHPP
 #define StbaseHPP
@@ -12,26 +12,52 @@
 #pragma option -w-      // All warnings off
 #pragma option -Vx      // Zero-length empty class member 
 #pragma pack(push,8)
-#include <System.hpp>	// Pascal unit
-#include <SysInit.hpp>	// Pascal unit
-#include <Winapi.Windows.hpp>	// Pascal unit
-#include <System.Classes.hpp>	// Pascal unit
-#include <System.SysUtils.hpp>	// Pascal unit
-#include <Winapi.Messages.hpp>	// Pascal unit
-#include <Vcl.StdCtrls.hpp>	// Pascal unit
-#include <StConst.hpp>	// Pascal unit
-#include <Vcl.Controls.hpp>	// Pascal unit
+#include <System.hpp>
+#include <SysInit.hpp>
+#include <Winapi.Windows.hpp>
+#include <System.Classes.hpp>
+#include <System.SysUtils.hpp>
+#include <Winapi.Messages.hpp>
+#include <Vcl.StdCtrls.hpp>
+#include <StConst.hpp>
+#include <Vcl.Controls.hpp>
 
 //-- user supplied -----------------------------------------------------------
 
 namespace Stbase
 {
+//-- forward type declarations -----------------------------------------------
+class DELPHICLASS EStException;
+class DELPHICLASS EStContainerError;
+class DELPHICLASS EStSortError;
+class DELPHICLASS EStRegIniError;
+class DELPHICLASS EStBCDError;
+class DELPHICLASS EStStringError;
+class DELPHICLASS EStVersionInfoError;
+class DELPHICLASS EStNetException;
+class DELPHICLASS EStBarCodeError;
+class DELPHICLASS EStPNBarCodeError;
+class DELPHICLASS EStStatError;
+class DELPHICLASS EStFinError;
+class DELPHICLASS EStMimeError;
+class DELPHICLASS EStToHTMLError;
+class DELPHICLASS EStSpawnError;
+class DELPHICLASS EStMMFileError;
+class DELPHICLASS EStBufStreamError;
+class DELPHICLASS EStRegExError;
+class DELPHICLASS EStDecMathError;
+class DELPHICLASS EStPRNGError;
+class DELPHICLASS EStExprError;
+class DELPHICLASS TStNode;
+class DELPHICLASS TStContainer;
+struct TAssignRowData;
+class DELPHICLASS TStComponent;
+class DELPHICLASS TStBaseEdit;
 //-- type declarations -------------------------------------------------------
 enum DECLSPEC_DENUM TStLineTerminator : unsigned char { ltNone, ltCR, ltLF, ltCRLF, ltOther };
 
 typedef HWND TStHwnd;
 
-class DELPHICLASS EStException;
 #pragma pack(push,4)
 class PASCALIMPLEMENTATION EStException : public System::Sysutils::Exception
 {
@@ -65,7 +91,6 @@ public:
 
 typedef System::TMetaClass* EStExceptionClass;
 
-class DELPHICLASS EStContainerError;
 #pragma pack(push,4)
 class PASCALIMPLEMENTATION EStContainerError : public EStException
 {
@@ -94,7 +119,6 @@ public:
 
 #pragma pack(pop)
 
-class DELPHICLASS EStSortError;
 #pragma pack(push,4)
 class PASCALIMPLEMENTATION EStSortError : public EStException
 {
@@ -123,7 +147,6 @@ public:
 
 #pragma pack(pop)
 
-class DELPHICLASS EStRegIniError;
 #pragma pack(push,4)
 class PASCALIMPLEMENTATION EStRegIniError : public EStException
 {
@@ -152,7 +175,6 @@ public:
 
 #pragma pack(pop)
 
-class DELPHICLASS EStBCDError;
 #pragma pack(push,4)
 class PASCALIMPLEMENTATION EStBCDError : public EStException
 {
@@ -181,7 +203,6 @@ public:
 
 #pragma pack(pop)
 
-class DELPHICLASS EStStringError;
 #pragma pack(push,4)
 class PASCALIMPLEMENTATION EStStringError : public EStException
 {
@@ -210,7 +231,6 @@ public:
 
 #pragma pack(pop)
 
-class DELPHICLASS EStVersionInfoError;
 #pragma pack(push,4)
 class PASCALIMPLEMENTATION EStVersionInfoError : public EStException
 {
@@ -239,7 +259,6 @@ public:
 
 #pragma pack(pop)
 
-class DELPHICLASS EStNetException;
 #pragma pack(push,4)
 class PASCALIMPLEMENTATION EStNetException : public EStException
 {
@@ -268,7 +287,6 @@ public:
 
 #pragma pack(pop)
 
-class DELPHICLASS EStBarCodeError;
 #pragma pack(push,4)
 class PASCALIMPLEMENTATION EStBarCodeError : public EStException
 {
@@ -297,7 +315,6 @@ public:
 
 #pragma pack(pop)
 
-class DELPHICLASS EStPNBarCodeError;
 #pragma pack(push,4)
 class PASCALIMPLEMENTATION EStPNBarCodeError : public EStException
 {
@@ -326,7 +343,6 @@ public:
 
 #pragma pack(pop)
 
-class DELPHICLASS EStStatError;
 #pragma pack(push,4)
 class PASCALIMPLEMENTATION EStStatError : public EStException
 {
@@ -355,7 +371,6 @@ public:
 
 #pragma pack(pop)
 
-class DELPHICLASS EStFinError;
 #pragma pack(push,4)
 class PASCALIMPLEMENTATION EStFinError : public EStException
 {
@@ -384,7 +399,6 @@ public:
 
 #pragma pack(pop)
 
-class DELPHICLASS EStMimeError;
 #pragma pack(push,4)
 class PASCALIMPLEMENTATION EStMimeError : public EStException
 {
@@ -413,7 +427,6 @@ public:
 
 #pragma pack(pop)
 
-class DELPHICLASS EStToHTMLError;
 #pragma pack(push,4)
 class PASCALIMPLEMENTATION EStToHTMLError : public EStException
 {
@@ -442,7 +455,6 @@ public:
 
 #pragma pack(pop)
 
-class DELPHICLASS EStSpawnError;
 #pragma pack(push,4)
 class PASCALIMPLEMENTATION EStSpawnError : public EStException
 {
@@ -471,7 +483,6 @@ public:
 
 #pragma pack(pop)
 
-class DELPHICLASS EStMMFileError;
 #pragma pack(push,4)
 class PASCALIMPLEMENTATION EStMMFileError : public EStException
 {
@@ -500,7 +511,6 @@ public:
 
 #pragma pack(pop)
 
-class DELPHICLASS EStBufStreamError;
 #pragma pack(push,4)
 class PASCALIMPLEMENTATION EStBufStreamError : public EStException
 {
@@ -529,7 +539,6 @@ public:
 
 #pragma pack(pop)
 
-class DELPHICLASS EStRegExError;
 #pragma pack(push,4)
 class PASCALIMPLEMENTATION EStRegExError : public EStException
 {
@@ -558,7 +567,6 @@ public:
 
 #pragma pack(pop)
 
-class DELPHICLASS EStDecMathError;
 #pragma pack(push,4)
 class PASCALIMPLEMENTATION EStDecMathError : public EStException
 {
@@ -587,7 +595,6 @@ public:
 
 #pragma pack(pop)
 
-class DELPHICLASS EStPRNGError;
 #pragma pack(push,4)
 class PASCALIMPLEMENTATION EStPRNGError : public EStException
 {
@@ -616,7 +623,6 @@ public:
 
 #pragma pack(pop)
 
-class DELPHICLASS EStExprError;
 #pragma pack(push,4)
 class PASCALIMPLEMENTATION EStExprError : public EStException
 {
@@ -671,7 +677,6 @@ typedef TIntArray *PIntArray;
 
 typedef System::Extended TStFloat;
 
-class DELPHICLASS TStNode;
 #pragma pack(push,4)
 class PASCALIMPLEMENTATION TStNode : public System::Classes::TPersistent
 {
@@ -716,7 +721,6 @@ typedef int __fastcall (*TUntypedCompareFunc)(const void *El1, const void *El2);
 
 typedef void __fastcall (__closure *TStUntypedCompareEvent)(System::TObject* Sender, const void *El1, const void *El2, int &Compare);
 
-class DELPHICLASS TStContainer;
 typedef bool __fastcall (*TIterateFunc)(TStContainer* Container, TStNode* Node, void * OtherData);
 
 typedef bool __fastcall (*TIteratePointerFunc)(TStContainer* Container, void * Data, void * OtherData);
@@ -793,7 +797,6 @@ public:
 };
 
 
-class DELPHICLASS TStComponent;
 class PASCALIMPLEMENTATION TStComponent : public System::Classes::TComponent
 {
 	typedef System::Classes::TComponent inherited;
@@ -811,7 +814,6 @@ public:
 };
 
 
-class DELPHICLASS TStBaseEdit;
 class PASCALIMPLEMENTATION TStBaseEdit : public Vcl::Stdctrls::TEdit
 {
 	typedef Vcl::Stdctrls::TEdit inherited;

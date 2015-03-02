@@ -1,8 +1,8 @@
 ﻿// CodeGear C++Builder
-// Copyright (c) 1995, 2014 by Embarcadero Technologies, Inc.
+// Copyright (c) 1995, 2015 by Embarcadero Technologies, Inc.
 // All rights reserved
 
-// (DO NOT EDIT: machine generated header) 'StGenLog.pas' rev: 28.00 (Windows)
+// (DO NOT EDIT: machine generated header) 'StGenLog.pas' rev: 29.00 (Windows)
 
 #ifndef StgenlogHPP
 #define StgenlogHPP
@@ -12,23 +12,25 @@
 #pragma option -w-      // All warnings off
 #pragma option -Vx      // Zero-length empty class member 
 #pragma pack(push,8)
-#include <System.hpp>	// Pascal unit
-#include <SysInit.hpp>	// Pascal unit
-#include <Winapi.Windows.hpp>	// Pascal unit
-#include <System.SysUtils.hpp>	// Pascal unit
-#include <System.Classes.hpp>	// Pascal unit
-#include <StBase.hpp>	// Pascal unit
+#include <System.hpp>
+#include <SysInit.hpp>
+#include <Winapi.Windows.hpp>
+#include <System.SysUtils.hpp>
+#include <System.Classes.hpp>
+#include <StBase.hpp>
 
 //-- user supplied -----------------------------------------------------------
 
 namespace Stgenlog
 {
+//-- forward type declarations -----------------------------------------------
+struct TStLogRec;
+class DELPHICLASS TStGeneralLog;
 //-- type declarations -------------------------------------------------------
 typedef void __fastcall (__closure *TStGetLogStringEvent)(System::TObject* Sender, const unsigned D1, const unsigned D2, const unsigned D3, const unsigned D4, System::AnsiString &LogString);
 
 enum DECLSPEC_DENUM TStWriteMode : unsigned char { wmOverwrite, wmAppend };
 
-struct TStLogRec;
 typedef TStLogRec *PStLogRec;
 
 struct DECLSPEC_DRECORD TStLogRec
@@ -50,7 +52,6 @@ enum DECLSPEC_DENUM StGenOptions : unsigned char { goSuppressEnableMsg, goSuppre
 
 typedef System::Set<StGenOptions, StGenOptions::goSuppressEnableMsg, StGenOptions::goSuppressDisableMsg> StGenOptionSet;
 
-class DELPHICLASS TStGeneralLog;
 class PASCALIMPLEMENTATION TStGeneralLog : public Stbase::TStComponent
 {
 	typedef Stbase::TStComponent inherited;

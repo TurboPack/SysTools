@@ -1,8 +1,8 @@
 ﻿// CodeGear C++Builder
-// Copyright (c) 1995, 2014 by Embarcadero Technologies, Inc.
+// Copyright (c) 1995, 2015 by Embarcadero Technologies, Inc.
 // All rights reserved
 
-// (DO NOT EDIT: machine generated header) 'StDict.pas' rev: 28.00 (Windows)
+// (DO NOT EDIT: machine generated header) 'StDict.pas' rev: 29.00 (Windows)
 
 #ifndef StdictHPP
 #define StdictHPP
@@ -12,20 +12,22 @@
 #pragma option -w-      // All warnings off
 #pragma option -Vx      // Zero-length empty class member 
 #pragma pack(push,8)
-#include <System.hpp>	// Pascal unit
-#include <SysInit.hpp>	// Pascal unit
-#include <Winapi.Windows.hpp>	// Pascal unit
-#include <System.SysUtils.hpp>	// Pascal unit
-#include <System.Classes.hpp>	// Pascal unit
-#include <StConst.hpp>	// Pascal unit
-#include <StBase.hpp>	// Pascal unit
+#include <System.hpp>
+#include <SysInit.hpp>
+#include <Winapi.Windows.hpp>
+#include <System.SysUtils.hpp>
+#include <System.Classes.hpp>
+#include <StConst.hpp>
+#include <StBase.hpp>
 
 //-- user supplied -----------------------------------------------------------
 
 namespace Stdict
 {
-//-- type declarations -------------------------------------------------------
+//-- forward type declarations -----------------------------------------------
 class DELPHICLASS TStDictNode;
+class DELPHICLASS TStDictionary;
+//-- type declarations -------------------------------------------------------
 #pragma pack(push,4)
 class PASCALIMPLEMENTATION TStDictNode : public Stbase::TStNode
 {
@@ -51,9 +53,8 @@ typedef System::StaticArray<TStDictNode*, 536870911> TSymbolArray;
 
 typedef TSymbolArray *PSymbolArray;
 
-typedef int __fastcall (*TDictHashFunc)(const System::UnicodeString S, int Size);
+typedef int __fastcall (*TDictHashFunc)(const System::UnicodeString S);
 
-class DELPHICLASS TStDictionary;
 class PASCALIMPLEMENTATION TStDictionary : public Stbase::TStContainer
 {
 	typedef Stbase::TStContainer inherited;
@@ -101,8 +102,8 @@ public:
 //-- var, const, procedure ---------------------------------------------------
 extern DELPHI_PACKAGE int __fastcall ELFHashText(const System::UnicodeString S, int Size);
 extern DELPHI_PACKAGE int __fastcall ELFHashStr(const System::UnicodeString S, int Size);
-extern DELPHI_PACKAGE int __fastcall HashStr(const System::UnicodeString S, int Size);
-extern DELPHI_PACKAGE int __fastcall HashText(const System::UnicodeString S, int Size);
+extern DELPHI_PACKAGE int __fastcall HashStr(const System::UnicodeString S);
+extern DELPHI_PACKAGE int __fastcall HashText(const System::UnicodeString S);
 }	/* namespace Stdict */
 #if !defined(DELPHIHEADER_NO_IMPLICIT_NAMESPACE_USE) && !defined(NO_USING_NAMESPACE_STDICT)
 using namespace Stdict;

@@ -1,8 +1,8 @@
 ﻿// CodeGear C++Builder
-// Copyright (c) 1995, 2014 by Embarcadero Technologies, Inc.
+// Copyright (c) 1995, 2015 by Embarcadero Technologies, Inc.
 // All rights reserved
 
-// (DO NOT EDIT: machine generated header) 'StAbout0.pas' rev: 28.00 (Windows)
+// (DO NOT EDIT: machine generated header) 'StAbout0.pas' rev: 29.00 (Windows)
 
 #ifndef Stabout0HPP
 #define Stabout0HPP
@@ -12,28 +12,30 @@
 #pragma option -w-      // All warnings off
 #pragma option -Vx      // Zero-length empty class member 
 #pragma pack(push,8)
-#include <System.hpp>	// Pascal unit
-#include <SysInit.hpp>	// Pascal unit
-#include <Winapi.Windows.hpp>	// Pascal unit
-#include <DesignIntf.hpp>	// Pascal unit
-#include <DesignEditors.hpp>	// Pascal unit
-#include <Winapi.Messages.hpp>	// Pascal unit
-#include <System.SysUtils.hpp>	// Pascal unit
-#include <System.Classes.hpp>	// Pascal unit
-#include <Vcl.Graphics.hpp>	// Pascal unit
-#include <Vcl.Controls.hpp>	// Pascal unit
-#include <Vcl.Forms.hpp>	// Pascal unit
-#include <Vcl.Dialogs.hpp>	// Pascal unit
-#include <Vcl.StdCtrls.hpp>	// Pascal unit
-#include <Vcl.ExtCtrls.hpp>	// Pascal unit
-#include <StConst.hpp>	// Pascal unit
+#include <System.hpp>
+#include <SysInit.hpp>
+#include <Winapi.Windows.hpp>
+#include <DesignIntf.hpp>
+#include <DesignEditors.hpp>
+#include <Winapi.Messages.hpp>
+#include <System.SysUtils.hpp>
+#include <System.Classes.hpp>
+#include <Vcl.Graphics.hpp>
+#include <Vcl.Controls.hpp>
+#include <Vcl.Forms.hpp>
+#include <Vcl.Dialogs.hpp>
+#include <Vcl.StdCtrls.hpp>
+#include <Vcl.ExtCtrls.hpp>
+#include <StConst.hpp>
 
 //-- user supplied -----------------------------------------------------------
 
 namespace Stabout0
 {
-//-- type declarations -------------------------------------------------------
+//-- forward type declarations -----------------------------------------------
 class DELPHICLASS TStAboutForm;
+class DELPHICLASS TStVersionProperty;
+//-- type declarations -------------------------------------------------------
 class PASCALIMPLEMENTATION TStAboutForm : public Vcl::Forms::TForm
 {
 	typedef Vcl::Forms::TForm inherited;
@@ -62,7 +64,6 @@ public:
 };
 
 
-class DELPHICLASS TStVersionProperty;
 #pragma pack(push,4)
 class PASCALIMPLEMENTATION TStVersionProperty : public Designeditors::TStringProperty
 {

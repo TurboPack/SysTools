@@ -1,8 +1,8 @@
 ﻿// CodeGear C++Builder
-// Copyright (c) 1995, 2014 by Embarcadero Technologies, Inc.
+// Copyright (c) 1995, 2015 by Embarcadero Technologies, Inc.
 // All rights reserved
 
-// (DO NOT EDIT: machine generated header) 'StDb2DBC.pas' rev: 28.00 (Windows)
+// (DO NOT EDIT: machine generated header) 'StDb2DBC.pas' rev: 29.00 (Windows)
 
 #ifndef Stdb2dbcHPP
 #define Stdb2dbcHPP
@@ -12,23 +12,25 @@
 #pragma option -w-      // All warnings off
 #pragma option -Vx      // Zero-length empty class member 
 #pragma pack(push,8)
-#include <System.hpp>	// Pascal unit
-#include <SysInit.hpp>	// Pascal unit
-#include <Winapi.Windows.hpp>	// Pascal unit
-#include <Winapi.Messages.hpp>	// Pascal unit
-#include <System.SysUtils.hpp>	// Pascal unit
-#include <System.Classes.hpp>	// Pascal unit
-#include <St2DBarC.hpp>	// Pascal unit
-#include <Data.DB.hpp>	// Pascal unit
-#include <Vcl.DBCtrls.hpp>	// Pascal unit
-#include <Vcl.Controls.hpp>	// Pascal unit
+#include <System.hpp>
+#include <SysInit.hpp>
+#include <Winapi.Windows.hpp>
+#include <Winapi.Messages.hpp>
+#include <System.SysUtils.hpp>
+#include <System.Classes.hpp>
+#include <St2DBarC.hpp>
+#include <Data.DB.hpp>
+#include <Vcl.DBCtrls.hpp>
+#include <Vcl.Controls.hpp>
 
 //-- user supplied -----------------------------------------------------------
 
 namespace Stdb2dbc
 {
-//-- type declarations -------------------------------------------------------
+//-- forward type declarations -----------------------------------------------
 class DELPHICLASS TStDbPDF417Barcode;
+class DELPHICLASS TStDbMaxiCodeBarcode;
+//-- type declarations -------------------------------------------------------
 class PASCALIMPLEMENTATION TStDbPDF417Barcode : public St2dbarc::TStPDF417Barcode
 {
 	typedef St2dbarc::TStPDF417Barcode inherited;
@@ -58,7 +60,6 @@ __published:
 };
 
 
-class DELPHICLASS TStDbMaxiCodeBarcode;
 class PASCALIMPLEMENTATION TStDbMaxiCodeBarcode : public St2dbarc::TStMaxiCodeBarcode
 {
 	typedef St2dbarc::TStMaxiCodeBarcode inherited;

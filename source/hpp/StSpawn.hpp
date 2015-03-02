@@ -1,8 +1,8 @@
 ﻿// CodeGear C++Builder
-// Copyright (c) 1995, 2014 by Embarcadero Technologies, Inc.
+// Copyright (c) 1995, 2015 by Embarcadero Technologies, Inc.
 // All rights reserved
 
-// (DO NOT EDIT: machine generated header) 'StSpawn.pas' rev: 28.00 (Windows)
+// (DO NOT EDIT: machine generated header) 'StSpawn.pas' rev: 29.00 (Windows)
 
 #ifndef StspawnHPP
 #define StspawnHPP
@@ -12,23 +12,25 @@
 #pragma option -w-      // All warnings off
 #pragma option -Vx      // Zero-length empty class member 
 #pragma pack(push,8)
-#include <System.hpp>	// Pascal unit
-#include <SysInit.hpp>	// Pascal unit
-#include <System.SysUtils.hpp>	// Pascal unit
-#include <Winapi.Windows.hpp>	// Pascal unit
-#include <Vcl.ExtCtrls.hpp>	// Pascal unit
-#include <Winapi.Messages.hpp>	// Pascal unit
-#include <System.Classes.hpp>	// Pascal unit
-#include <Winapi.ShellAPI.hpp>	// Pascal unit
-#include <StBase.hpp>	// Pascal unit
-#include <StConst.hpp>	// Pascal unit
+#include <System.hpp>
+#include <SysInit.hpp>
+#include <System.SysUtils.hpp>
+#include <Winapi.Windows.hpp>
+#include <Vcl.ExtCtrls.hpp>
+#include <Winapi.Messages.hpp>
+#include <System.Classes.hpp>
+#include <Winapi.ShellAPI.hpp>
+#include <StBase.hpp>
+#include <StConst.hpp>
 
 //-- user supplied -----------------------------------------------------------
 
 namespace Stspawn
 {
-//-- type declarations -------------------------------------------------------
+//-- forward type declarations -----------------------------------------------
 class DELPHICLASS TStWaitThread;
+class DELPHICLASS TStSpawnApplication;
+//-- type declarations -------------------------------------------------------
 class PASCALIMPLEMENTATION TStWaitThread : public System::Classes::TThread
 {
 	typedef System::Classes::TThread inherited;
@@ -56,7 +58,6 @@ typedef void __fastcall (__closure *TStSpawnCompletedEvent)(System::TObject* Sen
 
 typedef void __fastcall (__closure *TStSpawnTimeOutEvent)(System::TObject* Sender);
 
-class DELPHICLASS TStSpawnApplication;
 class PASCALIMPLEMENTATION TStSpawnApplication : public Stbase::TStComponent
 {
 	typedef Stbase::TStComponent inherited;

@@ -1,8 +1,8 @@
 ﻿// CodeGear C++Builder
-// Copyright (c) 1995, 2014 by Embarcadero Technologies, Inc.
+// Copyright (c) 1995, 2015 by Embarcadero Technologies, Inc.
 // All rights reserved
 
-// (DO NOT EDIT: machine generated header) 'StStrms.pas' rev: 28.00 (Windows)
+// (DO NOT EDIT: machine generated header) 'StStrms.pas' rev: 29.00 (Windows)
 
 #ifndef StstrmsHPP
 #define StstrmsHPP
@@ -12,22 +12,25 @@
 #pragma option -w-      // All warnings off
 #pragma option -Vx      // Zero-length empty class member 
 #pragma pack(push,8)
-#include <System.hpp>	// Pascal unit
-#include <SysInit.hpp>	// Pascal unit
-#include <Winapi.Windows.hpp>	// Pascal unit
-#include <System.SysUtils.hpp>	// Pascal unit
-#include <System.Classes.hpp>	// Pascal unit
-#include <StBase.hpp>	// Pascal unit
-#include <StConst.hpp>	// Pascal unit
+#include <System.hpp>
+#include <SysInit.hpp>
+#include <Winapi.Windows.hpp>
+#include <System.SysUtils.hpp>
+#include <System.Classes.hpp>
+#include <StBase.hpp>
+#include <StConst.hpp>
 
 //-- user supplied -----------------------------------------------------------
 
 namespace Ststrms
 {
+//-- forward type declarations -----------------------------------------------
+class DELPHICLASS TStBufferedStream;
+class DELPHICLASS TStAnsiTextStream;
+class DELPHICLASS TStMemoryMappedFile;
 //-- type declarations -------------------------------------------------------
 typedef int TStMemSize;
 
-class DELPHICLASS TStBufferedStream;
 class PASCALIMPLEMENTATION TStBufferedStream : public System::Classes::TStream
 {
 	typedef System::Classes::TStream inherited;
@@ -75,7 +78,6 @@ public:
 };
 
 
-class DELPHICLASS TStAnsiTextStream;
 class PASCALIMPLEMENTATION TStAnsiTextStream : public TStBufferedStream
 {
 	typedef TStBufferedStream inherited;
@@ -124,7 +126,6 @@ public:
 };
 
 
-class DELPHICLASS TStMemoryMappedFile;
 #pragma pack(push,4)
 class PASCALIMPLEMENTATION TStMemoryMappedFile : public System::Classes::TStream
 {

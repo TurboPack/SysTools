@@ -1,8 +1,8 @@
 ﻿// CodeGear C++Builder
-// Copyright (c) 1995, 2014 by Embarcadero Technologies, Inc.
+// Copyright (c) 1995, 2015 by Embarcadero Technologies, Inc.
 // All rights reserved
 
-// (DO NOT EDIT: machine generated header) 'StMerge.pas' rev: 28.00 (Windows)
+// (DO NOT EDIT: machine generated header) 'StMerge.pas' rev: 29.00 (Windows)
 
 #ifndef StmergeHPP
 #define StmergeHPP
@@ -12,22 +12,23 @@
 #pragma option -w-      // All warnings off
 #pragma option -Vx      // Zero-length empty class member 
 #pragma pack(push,8)
-#include <System.hpp>	// Pascal unit
-#include <SysInit.hpp>	// Pascal unit
-#include <Winapi.Windows.hpp>	// Pascal unit
-#include <System.SysUtils.hpp>	// Pascal unit
-#include <System.Classes.hpp>	// Pascal unit
+#include <System.hpp>
+#include <SysInit.hpp>
+#include <Winapi.Windows.hpp>
+#include <System.SysUtils.hpp>
+#include <System.Classes.hpp>
 
 //-- user supplied -----------------------------------------------------------
 
 namespace Stmerge
 {
+//-- forward type declarations -----------------------------------------------
+class DELPHICLASS TStTextMerge;
 //-- type declarations -------------------------------------------------------
 typedef void __fastcall (__closure *TStGotMergeTagEvent)(System::TObject* Sender, System::AnsiString Tag, System::AnsiString &Value, bool &Discard);
 
 typedef void __fastcall (*TStMergeProgressEvent)(System::TObject* Sender, int Index, bool &Abort);
 
-class DELPHICLASS TStTextMerge;
 class PASCALIMPLEMENTATION TStTextMerge : public System::TObject
 {
 	typedef System::TObject inherited;

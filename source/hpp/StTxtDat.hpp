@@ -1,8 +1,8 @@
 ﻿// CodeGear C++Builder
-// Copyright (c) 1995, 2014 by Embarcadero Technologies, Inc.
+// Copyright (c) 1995, 2015 by Embarcadero Technologies, Inc.
 // All rights reserved
 
-// (DO NOT EDIT: machine generated header) 'StTxtDat.pas' rev: 28.00 (Windows)
+// (DO NOT EDIT: machine generated header) 'StTxtDat.pas' rev: 29.00 (Windows)
 
 #ifndef SttxtdatHPP
 #define SttxtdatHPP
@@ -12,20 +12,26 @@
 #pragma option -w-      // All warnings off
 #pragma option -Vx      // Zero-length empty class member 
 #pragma pack(push,8)
-#include <System.hpp>	// Pascal unit
-#include <SysInit.hpp>	// Pascal unit
-#include <System.SysUtils.hpp>	// Pascal unit
-#include <System.Classes.hpp>	// Pascal unit
-#include <System.TypInfo.hpp>	// Pascal unit
-#include <StConst.hpp>	// Pascal unit
-#include <StBase.hpp>	// Pascal unit
-#include <StStrms.hpp>	// Pascal unit
-#include <StStrL.hpp>	// Pascal unit
+#include <System.hpp>
+#include <SysInit.hpp>
+#include <System.SysUtils.hpp>
+#include <System.Classes.hpp>
+#include <System.TypInfo.hpp>
+#include <StConst.hpp>
+#include <StBase.hpp>
+#include <StStrms.hpp>
+#include <StStrL.hpp>
 
 //-- user supplied -----------------------------------------------------------
 
 namespace Sttxtdat
 {
+//-- forward type declarations -----------------------------------------------
+class DELPHICLASS TStDataField;
+class DELPHICLASS TStDataFieldList;
+class DELPHICLASS TStTextDataSchema;
+class DELPHICLASS TStTextDataRecord;
+class DELPHICLASS TStTextDataRecordSet;
 //-- type declarations -------------------------------------------------------
 enum DECLSPEC_DENUM TStSchemaLayoutType : unsigned char { ltUnknown, ltFixed, ltVarying };
 
@@ -33,7 +39,6 @@ enum DECLSPEC_DENUM TStSchemaFieldType : unsigned char { sftUnknown, sftChar, sf
 
 typedef void __fastcall (__closure *TStOnQuoteFieldEvent)(System::TObject* Sender, System::UnicodeString &Field);
 
-class DELPHICLASS TStDataField;
 #pragma pack(push,4)
 class PASCALIMPLEMENTATION TStDataField : public System::TObject
 {
@@ -67,7 +72,6 @@ public:
 
 #pragma pack(pop)
 
-class DELPHICLASS TStDataFieldList;
 #pragma pack(push,4)
 class PASCALIMPLEMENTATION TStDataFieldList : public System::TObject
 {
@@ -100,7 +104,6 @@ public:
 
 #pragma pack(pop)
 
-class DELPHICLASS TStTextDataSchema;
 #pragma pack(push,4)
 class PASCALIMPLEMENTATION TStTextDataSchema : public System::TObject
 {
@@ -168,7 +171,6 @@ public:
 
 #pragma pack(pop)
 
-class DELPHICLASS TStTextDataRecord;
 class PASCALIMPLEMENTATION TStTextDataRecord : public System::TObject
 {
 	typedef System::TObject inherited;
@@ -216,7 +218,6 @@ public:
 };
 
 
-class DELPHICLASS TStTextDataRecordSet;
 #pragma pack(push,4)
 class PASCALIMPLEMENTATION TStTextDataRecordSet : public System::TObject
 {

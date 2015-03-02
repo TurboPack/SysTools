@@ -1,8 +1,8 @@
 ﻿// CodeGear C++Builder
-// Copyright (c) 1995, 2014 by Embarcadero Technologies, Inc.
+// Copyright (c) 1995, 2015 by Embarcadero Technologies, Inc.
 // All rights reserved
 
-// (DO NOT EDIT: machine generated header) 'StNet.pas' rev: 28.00 (Windows)
+// (DO NOT EDIT: machine generated header) 'StNet.pas' rev: 29.00 (Windows)
 
 #ifndef StnetHPP
 #define StnetHPP
@@ -12,19 +12,27 @@
 #pragma option -w-      // All warnings off
 #pragma option -Vx      // Zero-length empty class member 
 #pragma pack(push,8)
-#include <System.hpp>	// Pascal unit
-#include <SysInit.hpp>	// Pascal unit
-#include <Winapi.Windows.hpp>	// Pascal unit
-#include <System.Classes.hpp>	// Pascal unit
-#include <StBase.hpp>	// Pascal unit
-#include <StDate.hpp>	// Pascal unit
-#include <StNetAPI.hpp>	// Pascal unit
-#include <StConst.hpp>	// Pascal unit
+#include <System.hpp>
+#include <SysInit.hpp>
+#include <Winapi.Windows.hpp>
+#include <System.Classes.hpp>
+#include <StBase.hpp>
+#include <StDate.hpp>
+#include <StNetAPI.hpp>
+#include <StConst.hpp>
 
 //-- user supplied -----------------------------------------------------------
 
 namespace Stnet
 {
+//-- forward type declarations -----------------------------------------------
+struct TStSidRecord;
+class DELPHICLASS TStNetItem;
+class DELPHICLASS TStNetUserItem;
+class DELPHICLASS TStNetGroupItem;
+class DELPHICLASS TStNetShareItem;
+class DELPHICLASS TStNetServerItem;
+class DELPHICLASS TStNetwork;
 //-- type declarations -------------------------------------------------------
 enum DECLSPEC_DENUM TStNetItemType : unsigned char { nitUnknown, nitLocalUser, nitGlobalUser, nitLocalGroup, nitGlobalGroup, nitComputer, nitInterdomainTrust, nitWorkstationTrust, nitServerTrust, nitShare };
 
@@ -58,8 +66,6 @@ public:
 };
 
 
-class DELPHICLASS TStNetItem;
-class DELPHICLASS TStNetwork;
 #pragma pack(push,4)
 class PASCALIMPLEMENTATION TStNetItem : public System::TObject
 {
@@ -86,7 +92,6 @@ public:
 
 #pragma pack(pop)
 
-class DELPHICLASS TStNetUserItem;
 #pragma pack(push,4)
 class PASCALIMPLEMENTATION TStNetUserItem : public TStNetItem
 {
@@ -194,7 +199,6 @@ public:
 
 #pragma pack(pop)
 
-class DELPHICLASS TStNetGroupItem;
 #pragma pack(push,4)
 class PASCALIMPLEMENTATION TStNetGroupItem : public TStNetItem
 {
@@ -235,7 +239,6 @@ public:
 
 #pragma pack(pop)
 
-class DELPHICLASS TStNetShareItem;
 #pragma pack(push,4)
 class PASCALIMPLEMENTATION TStNetShareItem : public TStNetItem
 {
@@ -257,7 +260,6 @@ public:
 
 #pragma pack(pop)
 
-class DELPHICLASS TStNetServerItem;
 #pragma pack(push,4)
 class PASCALIMPLEMENTATION TStNetServerItem : public TStNetItem
 {

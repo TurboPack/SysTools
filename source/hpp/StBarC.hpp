@@ -1,8 +1,8 @@
 ﻿// CodeGear C++Builder
-// Copyright (c) 1995, 2014 by Embarcadero Technologies, Inc.
+// Copyright (c) 1995, 2015 by Embarcadero Technologies, Inc.
 // All rights reserved
 
-// (DO NOT EDIT: machine generated header) 'StBarC.pas' rev: 28.00 (Windows)
+// (DO NOT EDIT: machine generated header) 'StBarC.pas' rev: 29.00 (Windows)
 
 #ifndef StbarcHPP
 #define StbarcHPP
@@ -12,24 +12,28 @@
 #pragma option -w-      // All warnings off
 #pragma option -Vx      // Zero-length empty class member 
 #pragma pack(push,8)
-#include <System.hpp>	// Pascal unit
-#include <SysInit.hpp>	// Pascal unit
-#include <Winapi.Windows.hpp>	// Pascal unit
-#include <System.Classes.hpp>	// Pascal unit
-#include <Vcl.Clipbrd.hpp>	// Pascal unit
-#include <Vcl.Controls.hpp>	// Pascal unit
-#include <Vcl.Graphics.hpp>	// Pascal unit
-#include <Winapi.Messages.hpp>	// Pascal unit
-#include <System.SysUtils.hpp>	// Pascal unit
-#include <StBase.hpp>	// Pascal unit
-#include <StConst.hpp>	// Pascal unit
-#include <System.UITypes.hpp>	// Pascal unit
-#include <System.Types.hpp>	// Pascal unit
+#include <System.hpp>
+#include <SysInit.hpp>
+#include <Winapi.Windows.hpp>
+#include <System.Classes.hpp>
+#include <Vcl.Clipbrd.hpp>
+#include <Vcl.Controls.hpp>
+#include <Vcl.Graphics.hpp>
+#include <Winapi.Messages.hpp>
+#include <System.SysUtils.hpp>
+#include <StBase.hpp>
+#include <StConst.hpp>
+#include <System.UITypes.hpp>
+#include <System.Types.hpp>
 
 //-- user supplied -----------------------------------------------------------
 
 namespace Stbarc
 {
+//-- forward type declarations -----------------------------------------------
+class DELPHICLASS TStBarData;
+class DELPHICLASS TStBarCodeInfo;
+class DELPHICLASS TStBarCode;
 //-- type declarations -------------------------------------------------------
 enum DECLSPEC_DENUM TStBarKind : unsigned char { bkSpace, bkBar, bkThreeQuarterBar, bkHalfBar, bkGuard, bkSupplement, bkBlankSpace };
 
@@ -37,7 +41,6 @@ typedef System::Set<TStBarKind, TStBarKind::bkSpace, TStBarKind::bkBlankSpace> T
 
 typedef System::StaticArray<System::Byte, 255> TStDigitArray;
 
-class DELPHICLASS TStBarData;
 #pragma pack(push,4)
 class PASCALIMPLEMENTATION TStBarData : public System::TObject
 {
@@ -56,7 +59,6 @@ public:
 
 #pragma pack(pop)
 
-class DELPHICLASS TStBarCodeInfo;
 #pragma pack(push,4)
 class PASCALIMPLEMENTATION TStBarCodeInfo : public System::TObject
 {
@@ -85,7 +87,6 @@ enum DECLSPEC_DENUM TStBarCodeType : unsigned char { bcUPC_A, bcUPC_E, bcEAN_8, 
 
 enum DECLSPEC_DENUM TStCode128CodeSubset : unsigned char { csCodeA, csCodeB, csCodeC };
 
-class DELPHICLASS TStBarCode;
 class PASCALIMPLEMENTATION TStBarCode : public Vcl::Controls::TGraphicControl
 {
 	typedef Vcl::Controls::TGraphicControl inherited;

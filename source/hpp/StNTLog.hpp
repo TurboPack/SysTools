@@ -1,8 +1,8 @@
 ﻿// CodeGear C++Builder
-// Copyright (c) 1995, 2014 by Embarcadero Technologies, Inc.
+// Copyright (c) 1995, 2015 by Embarcadero Technologies, Inc.
 // All rights reserved
 
-// (DO NOT EDIT: machine generated header) 'StNTLog.pas' rev: 28.00 (Windows)
+// (DO NOT EDIT: machine generated header) 'StNTLog.pas' rev: 29.00 (Windows)
 
 #ifndef StntlogHPP
 #define StntlogHPP
@@ -12,22 +12,24 @@
 #pragma option -w-      // All warnings off
 #pragma option -Vx      // Zero-length empty class member 
 #pragma pack(push,8)
-#include <System.hpp>	// Pascal unit
-#include <SysInit.hpp>	// Pascal unit
-#include <Winapi.Windows.hpp>	// Pascal unit
-#include <System.SysUtils.hpp>	// Pascal unit
-#include <System.Classes.hpp>	// Pascal unit
-#include <System.Win.Registry.hpp>	// Pascal unit
-#include <StBase.hpp>	// Pascal unit
+#include <System.hpp>
+#include <SysInit.hpp>
+#include <Winapi.Windows.hpp>
+#include <System.SysUtils.hpp>
+#include <System.Classes.hpp>
+#include <System.Win.Registry.hpp>
+#include <StBase.hpp>
 
 //-- user supplied -----------------------------------------------------------
 
 namespace Stntlog
 {
+//-- forward type declarations -----------------------------------------------
+struct TStNTEventLogRec;
+class DELPHICLASS TStNTEventLog;
 //-- type declarations -------------------------------------------------------
 enum DECLSPEC_DENUM TStNTEventType : unsigned char { etSuccess, etError, etWarning, etInfo, etAuditSuccess, etAuditFailure };
 
-struct TStNTEventLogRec;
 typedef TStNTEventLogRec *PStNTEventLogRec;
 
 struct DECLSPEC_DRECORD TStNTEventLogRec
@@ -64,7 +66,6 @@ struct DECLSPEC_DRECORD TStNTEventLogRec
 
 typedef void __fastcall (__closure *TStReadRecordEvent)(System::TObject* Sender, const TStNTEventLogRec &EventRec, bool &Abort);
 
-class DELPHICLASS TStNTEventLog;
 class PASCALIMPLEMENTATION TStNTEventLog : public Stbase::TStComponent
 {
 	typedef Stbase::TStComponent inherited;

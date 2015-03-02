@@ -1,8 +1,8 @@
 ﻿// CodeGear C++Builder
-// Copyright (c) 1995, 2014 by Embarcadero Technologies, Inc.
+// Copyright (c) 1995, 2015 by Embarcadero Technologies, Inc.
 // All rights reserved
 
-// (DO NOT EDIT: machine generated header) 'StNVLMat.pas' rev: 28.00 (Windows)
+// (DO NOT EDIT: machine generated header) 'StNVLMat.pas' rev: 29.00 (Windows)
 
 #ifndef StnvlmatHPP
 #define StnvlmatHPP
@@ -12,20 +12,21 @@
 #pragma option -w-      // All warnings off
 #pragma option -Vx      // Zero-length empty class member 
 #pragma pack(push,8)
-#include <System.hpp>	// Pascal unit
-#include <SysInit.hpp>	// Pascal unit
-#include <Winapi.Windows.hpp>	// Pascal unit
-#include <System.Classes.hpp>	// Pascal unit
-#include <StBase.hpp>	// Pascal unit
-#include <StLArr.hpp>	// Pascal unit
-#include <StNVCont.hpp>	// Pascal unit
+#include <System.hpp>
+#include <SysInit.hpp>
+#include <Winapi.Windows.hpp>
+#include <System.Classes.hpp>
+#include <StBase.hpp>
+#include <StLArr.hpp>
+#include <StNVCont.hpp>
 
 //-- user supplied -----------------------------------------------------------
 
 namespace Stnvlmat
 {
-//-- type declarations -------------------------------------------------------
+//-- forward type declarations -----------------------------------------------
 class DELPHICLASS TStNVLMatrix;
+//-- type declarations -------------------------------------------------------
 class PASCALIMPLEMENTATION TStNVLMatrix : public Stnvcont::TStNVContainerBase
 {
 	typedef Stnvcont::TStNVContainerBase inherited;

@@ -94,8 +94,7 @@ type
   PSymbolArray = ^TSymbolArray;
 {.Z-}
 
-  TDictHashFunc =
-    function(const S : string; Size : Integer) : Integer;
+  TDictHashFunc = function(const S : string) : Integer;
 
   TStDictionary = class(TStContainer)
 {.Z+}
@@ -179,9 +178,9 @@ type
   end;
 
 
-function HashText(const S : string; Size : Integer) : Integer;
+function HashText(const S : string) : Integer;
   {-Case-insensitive hash function that uses the current language driver}
-function HashStr(const S : string; Size : Integer) : Integer;
+function HashStr(const S : string) : Integer;
   {-Case-sensitive hash function}
 function ELFHashText(const S : string; Size : Integer) : Integer;
   {-Case-insensitive ELF hash function that uses the current language driver}
@@ -192,7 +191,7 @@ function ELFHashStr(const S : string; Size : Integer) : Integer;
 implementation
 
 uses
-  Generics.Defaults;
+  System.Hash, Generics.Defaults;
 
 {$IFDEF ThreadSafe}
 var
@@ -267,14 +266,14 @@ begin
   Result := dnName;
 end;
 
-function HashStr(const S : string; Size : Integer) : Integer;
+function HashStr(const S : string) : Integer;
 begin
-  Result := BobJenkinsHash(S[1], Length(S) * SizeOf(S[1]), 0);
+  Result := THashBobJenkins.GetHashValue(S);
 end;
 
-function HashText(const S : string; Size : Integer) : Integer;
+function HashText(const S : string) : Integer;
 begin
-  Result := HashStr(UpperCase(S), Size);
+  Result := HashStr(UpperCase(S));
 end;
 
 function FindNodeData(Container : TStContainer;
@@ -466,7 +465,7 @@ var
 begin
   Prev := nil;
   This := nil;
-  H := Hash(Name, HashSize);
+  H := Hash(Name);
   T := dySymbols^[H];
   P := nil;
   while Assigned(T) do begin

@@ -1,8 +1,8 @@
 ﻿// CodeGear C++Builder
-// Copyright (c) 1995, 2014 by Embarcadero Technologies, Inc.
+// Copyright (c) 1995, 2015 by Embarcadero Technologies, Inc.
 // All rights reserved
 
-// (DO NOT EDIT: machine generated header) 'StPtrns.pas' rev: 28.00 (Windows)
+// (DO NOT EDIT: machine generated header) 'StPtrns.pas' rev: 29.00 (Windows)
 
 #ifndef StptrnsHPP
 #define StptrnsHPP
@@ -12,18 +12,22 @@
 #pragma option -w-      // All warnings off
 #pragma option -Vx      // Zero-length empty class member 
 #pragma pack(push,8)
-#include <System.hpp>	// Pascal unit
-#include <SysInit.hpp>	// Pascal unit
-#include <Winapi.Windows.hpp>	// Pascal unit
-#include <System.SysUtils.hpp>	// Pascal unit
-#include <System.Classes.hpp>	// Pascal unit
+#include <System.hpp>
+#include <SysInit.hpp>
+#include <Winapi.Windows.hpp>
+#include <System.SysUtils.hpp>
+#include <System.Classes.hpp>
 
 //-- user supplied -----------------------------------------------------------
 
 namespace Stptrns
 {
-//-- type declarations -------------------------------------------------------
+//-- forward type declarations -----------------------------------------------
 class DELPHICLASS TStSingleton;
+class DELPHICLASS TStMediator;
+class DELPHICLASS TStObserver;
+class DELPHICLASS TStChain;
+//-- type declarations -------------------------------------------------------
 #pragma pack(push,4)
 class PASCALIMPLEMENTATION TStSingleton : public System::TObject
 {
@@ -47,7 +51,6 @@ public:
 
 typedef void __fastcall (__closure *TStMediatorAction)(System::TObject* aInputData, System::TObject* aResultData);
 
-class DELPHICLASS TStMediator;
 #pragma pack(push,4)
 class PASCALIMPLEMENTATION TStMediator : public System::TObject
 {
@@ -73,7 +76,6 @@ public:
 
 typedef void __fastcall (__closure *TStObserverAction)(System::TObject* aInputData);
 
-class DELPHICLASS TStObserver;
 #pragma pack(push,4)
 class PASCALIMPLEMENTATION TStObserver : public System::TObject
 {
@@ -101,7 +103,6 @@ public:
 
 typedef void __fastcall (__closure *TStChainAction)(System::TObject* aInputData, System::TObject* aResultData, bool &aStopNow);
 
-class DELPHICLASS TStChain;
 #pragma pack(push,4)
 class PASCALIMPLEMENTATION TStChain : public System::TObject
 {

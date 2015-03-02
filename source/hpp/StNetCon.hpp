@@ -1,8 +1,8 @@
 ﻿// CodeGear C++Builder
-// Copyright (c) 1995, 2014 by Embarcadero Technologies, Inc.
+// Copyright (c) 1995, 2015 by Embarcadero Technologies, Inc.
 // All rights reserved
 
-// (DO NOT EDIT: machine generated header) 'StNetCon.pas' rev: 28.00 (Windows)
+// (DO NOT EDIT: machine generated header) 'StNetCon.pas' rev: 29.00 (Windows)
 
 #ifndef StnetconHPP
 #define StnetconHPP
@@ -12,16 +12,18 @@
 #pragma option -w-      // All warnings off
 #pragma option -Vx      // Zero-length empty class member 
 #pragma pack(push,8)
-#include <System.hpp>	// Pascal unit
-#include <SysInit.hpp>	// Pascal unit
-#include <Winapi.Windows.hpp>	// Pascal unit
-#include <System.Classes.hpp>	// Pascal unit
-#include <StBase.hpp>	// Pascal unit
+#include <System.hpp>
+#include <SysInit.hpp>
+#include <Winapi.Windows.hpp>
+#include <System.Classes.hpp>
+#include <StBase.hpp>
 
 //-- user supplied -----------------------------------------------------------
 
 namespace Stnetcon
 {
+//-- forward type declarations -----------------------------------------------
+class DELPHICLASS TStNetConnection;
 //-- type declarations -------------------------------------------------------
 enum DECLSPEC_DENUM TStNetConnectOptions : unsigned char { coUseConnectDialog, coPersistentConnection, coReadOnlyPath, coUseMRU, coHideRestoreBox, coPromptForAccount, coAlwaysPromptForAccount, coRedirectIfNeeded };
 
@@ -39,7 +41,6 @@ typedef void __fastcall (__closure *TOnDisconnectFailEvent)(System::TObject* Sen
 
 typedef void __fastcall (__closure *TOnDisconnectCancelEvent)(System::TObject* Sender, unsigned ErrorCode);
 
-class DELPHICLASS TStNetConnection;
 class PASCALIMPLEMENTATION TStNetConnection : public Stbase::TStComponent
 {
 	typedef Stbase::TStComponent inherited;
