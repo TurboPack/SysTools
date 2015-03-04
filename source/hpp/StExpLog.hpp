@@ -33,6 +33,7 @@ class PASCALIMPLEMENTATION TStExceptionLog : public Stbase::TStComponent
 	typedef Stbase::TStComponent inherited;
 	
 private:
+	static TStExceptionLog* ExpLog;
 	bool FEnabled;
 	System::Sysutils::TFileName FFileName;
 	System::UnicodeString FRipInfo;
@@ -52,7 +53,6 @@ __published:
 
 
 //-- var, const, procedure ---------------------------------------------------
-extern DELPHI_PACKAGE TStExceptionLog* ExpLog;
 }	/* namespace Stexplog */
 #if !defined(DELPHIHEADER_NO_IMPLICIT_NAMESPACE_USE) && !defined(NO_USING_NAMESPACE_STEXPLOG)
 using namespace Stexplog;

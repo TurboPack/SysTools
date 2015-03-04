@@ -59,8 +59,6 @@
 #include <Vcl.DBLogDlg.hpp>	// (vcldb)
 #include <Vcl.DBPWDlg.hpp>	// (vcldb)
 #include <Vcl.DBCtrls.hpp>	// (vcldb)
-#include <StBarC.hpp>	// (SysToolsDR)
-#include <StStrL.hpp>	// (SysToolsDR)
 
 //-- user supplied -----------------------------------------------------------
 

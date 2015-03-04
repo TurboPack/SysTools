@@ -45,7 +45,9 @@ type
     var PutInLog : Boolean) of object;
 
   TStExceptionLog = class(TStComponent)
-  private
+  strict private class var
+    ExpLog : TStExceptionLog;
+  strict private
     { Property variables }
     FEnabled : Boolean;
     FFileName : TFileName;
@@ -65,9 +67,6 @@ type
     property OnExceptionFilter : TStOnExceptionFilter
       read FOnExceptionFilter write FOnExceptionFilter;
   end;
-
-const
-  ExpLog : TStExceptionLog = nil;
 
 implementation
 
@@ -91,7 +90,5 @@ begin
   if Assigned(FOnExceptionFilter) then
     FOnExceptionFilter(Self, E, PutInLog);
 end;
-
-initialization
 
 end.

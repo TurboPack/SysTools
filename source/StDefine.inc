@@ -34,19 +34,6 @@
 { required compiler options, so options specified here might be overridden  }
 { by hardcoded options in the source file.                                  }
 
-{$IFNDEF LINUX}
-{---Global compiler defines for 32-bit OS's---}
-{$A+} {Word Align Data}
-{$H+} {Huge string support}
-{$Q+} {Overflow check}
-{$R+} {Range check}
-{$S-} {Stack check}
-{$T-} {Typed @ check}
-{$V-} {Var strings}
-{$B-} {Incomplete boolean evaluation}
-{$J+} {Writeable Typed Constants}
-{$ENDIF LINUX}
-
 {$DEFINE ThreadSafe}
 { This define determines whether SysTools operations are safe in a 32-bit   }
 { multi-threaded application. Leaving it undefined will improved performance}

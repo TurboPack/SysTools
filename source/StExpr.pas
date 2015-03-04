@@ -84,7 +84,7 @@ type
     ssStart, ssInIdent, ssInNum, ssInSign, ssInExp, ssEol, ssNum, ssIdent,
     ssLPar, ssRPar, ssComma, ssPlus, ssMinus, ssTimes, ssDiv, ssEqual, ssPower);
 
-const
+var
   {Note: see Initialization section!}
   StExprOperators : array[ssLPar..ssPower] of Char = '(),+-*/=^';
   {.Z-}

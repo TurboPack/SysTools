@@ -62,8 +62,6 @@
 #include <Vcl.DBCtrls.hpp>	// (vcldb)
 #include <StConst.hpp>	// (SysToolsDR)
 #include <StBase.hpp>	// (SysToolsDR)
-#include <StBarC.hpp>	// (SysToolsDR)
-#include <StStrL.hpp>	// (SysToolsDR)
 
 //-- user supplied -----------------------------------------------------------
 

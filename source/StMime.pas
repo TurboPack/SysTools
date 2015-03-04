@@ -1095,7 +1095,7 @@ begin
   end;
 end;
 
-const
+var
   Converters : TConverterList = nil;
 
   function GetConverters : TConverterList;
