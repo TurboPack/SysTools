@@ -56,7 +56,7 @@ package SysToolsDR;
 {$IMAGEBASE $400000}
 {$DEFINE DEBUG}
 {$ENDIF IMPLICITBUILDING}
-{$DESCRIPTION 'TurboPower SysTools Delphi Runtime package'}
+{$DESCRIPTION 'TurboPack SysTools Delphi Runtime package'}
 {$RUNONLY}
 {$IMPLICITBUILD OFF}
 

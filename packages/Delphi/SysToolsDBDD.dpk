@@ -56,7 +56,7 @@ package SysToolsDBDD;
 {$IMAGEBASE $400000}
 {$DEFINE DEBUG}
 {$ENDIF IMPLICITBUILDING}
-{$DESCRIPTION 'TurboPower SysTools Delphi DB Designtime package'}
+{$DESCRIPTION 'TurboPack SysTools Delphi DB Designtime package'}
 {$DESIGNONLY}
 {$IMPLICITBUILD OFF}
 
