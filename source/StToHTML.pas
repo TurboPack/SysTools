@@ -1,4 +1,4 @@
-// Upgraded to Delphi 2009: Sebastian Zierer
+ï»¿// Upgraded to Delphi 2009: Sebastian Zierer
 
 (* ***** BEGIN LICENSE BLOCK *****
  * Version: MPL 1.1
@@ -280,16 +280,16 @@ begin
     Add('&=&amp;');
     Add('<=&lt;');
     Add('>=&gt;');
-    Add('¡=&iexcl;');
-    Add('¢=&cent;');
-    Add('£=&pound;');
-    Add('©=&copy;');
-    Add('®=&reg;');
-    Add('±=&plusmn;');
-    Add('¼=&frac14;');
-    Add('½=&frac12;');
-    Add('¾=&frac34;');
-    Add('÷=&divide;');
+    Add('Â¡=&iexcl;');
+    Add('Â¢=&cent;');
+    Add('Â£=&pound;');
+    Add('Â©=&copy;');
+    Add('Â®=&reg;');
+    Add('Â±=&plusmn;');
+    Add('Â¼=&frac14;');
+    Add('Â½=&frac12;');
+    Add('Â¾=&frac34;');
+    Add('Ã·=&divide;');
   end;
 end;
 
@@ -812,16 +812,16 @@ begin
     Add('&=&amp;');
     Add('<=&lt;');
     Add('>=&gt;');
-    Add('¡=&iexcl;');
-    Add('¢=&cent;');
-    Add('£=&pound;');
-    Add('©=&copy;');
-    Add('®=&reg;');
-    Add('±=&plusmn;');
-    Add('¼=&frac14;');
-    Add('½=&frac12;');
-    Add('¾=&frac34;');
-    Add('÷=&divide;');
+    Add('Â¡=&iexcl;');
+    Add('Â¢=&cent;');
+    Add('Â£=&pound;');
+    Add('Â©=&copy;');
+    Add('Â®=&reg;');
+    Add('Â±=&plusmn;');
+    Add('Â¼=&frac14;');
+    Add('Â½=&frac12;');
+    Add('Â¾=&frac34;');
+    Add('Ã·=&divide;');
   end;
 end;
 
