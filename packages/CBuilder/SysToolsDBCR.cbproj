@@ -1,7 +1,7 @@
 ﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
     <PropertyGroup>
         <ProjectGuid>{15107451-A238-447C-B560-DC1A706279A3}</ProjectGuid>
-        <ProjectVersion>17.1</ProjectVersion>
+        <ProjectVersion>17.2</ProjectVersion>
         <FrameworkType>VCL</FrameworkType>
         <MainSource>SysToolsDBCR.cpp</MainSource>
         <Base>True</Base>
@@ -59,16 +59,16 @@
         <DCC_OutputNeverBuildDcps>true</DCC_OutputNeverBuildDcps>
         <ILINK_Description>TurboPack SysTools CBuilder DB Runtime package</ILINK_Description>
         <VerInfo_Keys>CompanyName=;FileDescription=;FileVersion=1.0.0.0;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProductName=;ProductVersion=1.0.0.0;Comments=</VerInfo_Keys>
-        <DCC_HppOutput>..\..\source\hpp</DCC_HppOutput>
+        <DCC_HppOutput>..\..\source\hpp\$(Platform)\$(Config)</DCC_HppOutput>
         <RuntimeOnlyPackage>true</RuntimeOnlyPackage>
         <ProjectType>CppPackage</ProjectType>
         <DCC_Namespace>System;Xml;Data;Datasnap;Web;Soap;Vcl;Vcl.Imaging;Vcl.Touch;Vcl.Samples;Vcl.Shell;$(DCC_Namespace)</DCC_Namespace>
         <Multithreaded>true</Multithreaded>
         <DCC_UnitSearchPath>..\..\source;$(DCC_UnitSearchPath)</DCC_UnitSearchPath>
         <ILINK_GenerateLibFile>true</ILINK_GenerateLibFile>
-        <IncludePath>..\..\source\;C:\Projects\EMBT\SysTools\packages\CBuilder\;$(IncludePath)</IncludePath>
+        <IncludePath>..\..\source\;$(IncludePath)</IncludePath>
         <ILINK_GenerateImportLibrary>true</ILINK_GenerateImportLibrary>
-        <ILINK_LibraryPath>..\..\source\;C:\Projects\EMBT\SysTools\packages\CBuilder\;$(ILINK_LibraryPath)</ILINK_LibraryPath>
+        <ILINK_LibraryPath>..\..\source\;$(ILINK_LibraryPath)</ILINK_LibraryPath>
         <SanitizedProjectName>SysToolsDBCR</SanitizedProjectName>
         <VerInfo_Locale>1031</VerInfo_Locale>
         <_TCHARMapping>char</_TCHARMapping>
@@ -611,14 +611,14 @@
                         <Operation>1</Operation>
                     </Platform>
                 </DeployClass>
-                <ProjectRoot Platform="OSX32" Name="$(PROJECTNAME)"/>
+                <ProjectRoot Platform="iOSDevice32" Name="$(PROJECTNAME).app"/>
                 <ProjectRoot Platform="Android" Name="$(PROJECTNAME)"/>
                 <ProjectRoot Platform="iOSDevice" Name="$(PROJECTNAME).app"/>
                 <ProjectRoot Platform="Win32" Name="$(PROJECTNAME)"/>
                 <ProjectRoot Platform="iOSDevice64" Name="$(PROJECTNAME).app"/>
+                <ProjectRoot Platform="OSX32" Name="$(PROJECTNAME)"/>
                 <ProjectRoot Platform="Win64" Name="$(PROJECTNAME)"/>
                 <ProjectRoot Platform="iOSSimulator" Name="$(PROJECTNAME).app"/>
-                <ProjectRoot Platform="iOSDevice32" Name="$(PROJECTNAME).app"/>
             </Deployment>
             <Platforms>
                 <Platform value="Android">False</Platform>

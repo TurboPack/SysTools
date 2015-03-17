@@ -3,11 +3,11 @@
         <ProjectGuid>{F6A9A3C6-1BD0-4D8A-B66C-F1518C175C87}</ProjectGuid>
         <MainSource>SysToolsDBDD.dpk</MainSource>
         <Base>True</Base>
-        <Config Condition="'$(Config)'==''">Debug</Config>
+        <Config Condition="'$(Config)'==''">Release</Config>
         <TargetedPlatforms>1</TargetedPlatforms>
         <AppType>Package</AppType>
         <FrameworkType>None</FrameworkType>
-        <ProjectVersion>17.1</ProjectVersion>
+        <ProjectVersion>17.2</ProjectVersion>
         <Platform Condition="'$(Platform)'==''">Win32</Platform>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Config)'=='Base' or '$(Base)'!=''">
@@ -45,7 +45,7 @@
         <Base>true</Base>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Base)'!=''">
-        <DCC_HppOutput>..\..\source\hpp</DCC_HppOutput>
+        <DCC_HppOutput>..\..\source\hpp\$(Platform)\$(Config)</DCC_HppOutput>
         <DCC_DcuOutput>.\$(Platform)\$(Config)</DCC_DcuOutput>
         <DCC_CBuilderOutput>All</DCC_CBuilderOutput>
         <SanitizedProjectName>SysToolsDBDD</SanitizedProjectName>
@@ -171,6 +171,16 @@
                     <Platform Name="OSX32">
                         <Overwrite>true</Overwrite>
                     </Platform>
+                </DeployFile>
+                <DeployFile LocalName="$(BDS)\Redist\osx32\libcgunwind.1.0.dylib" Class="DependencyModule">
+                    <Platform Name="OSX32">
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                    <Platform Name="iOSSimulator">
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="$(BDS)\Redist\iossim32\libcgunwind.1.0.dylib" Class="DependencyModule">
                     <Platform Name="iOSSimulator">
                         <Overwrite>true</Overwrite>
                     </Platform>
@@ -493,14 +503,14 @@
                         <Operation>1</Operation>
                     </Platform>
                 </DeployClass>
-                <ProjectRoot Platform="iOSSimulator" Name="$(PROJECTNAME).app"/>
+                <ProjectRoot Platform="iOSDevice32" Name="$(PROJECTNAME).app"/>
                 <ProjectRoot Platform="Android" Name="$(PROJECTNAME)"/>
                 <ProjectRoot Platform="iOSDevice" Name="$(PROJECTNAME).app"/>
                 <ProjectRoot Platform="Win32" Name="$(PROJECTNAME)"/>
                 <ProjectRoot Platform="iOSDevice64" Name="$(PROJECTNAME).app"/>
                 <ProjectRoot Platform="Win64" Name="$(PROJECTNAME)"/>
+                <ProjectRoot Platform="iOSSimulator" Name="$(PROJECTNAME).app"/>
                 <ProjectRoot Platform="OSX32" Name="$(PROJECTNAME)"/>
-                <ProjectRoot Platform="iOSDevice32" Name="$(PROJECTNAME).app"/>
             </Deployment>
         </BorlandProject>
         <ProjectFileVersion>12</ProjectFileVersion>

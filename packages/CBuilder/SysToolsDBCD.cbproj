@@ -1,7 +1,7 @@
 ﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
     <PropertyGroup>
         <ProjectGuid>{92FE50A1-D942-44F8-9062-49C48562D9CE}</ProjectGuid>
-        <ProjectVersion>17.1</ProjectVersion>
+        <ProjectVersion>17.2</ProjectVersion>
         <FrameworkType>None</FrameworkType>
         <MainSource>SysToolsDBCD.cpp</MainSource>
         <Base>True</Base>
@@ -70,7 +70,7 @@
         <VerInfo_Locale>1031</VerInfo_Locale>
         <DCC_UnitSearchPath>..\..\source;$(DCC_UnitSearchPath)</DCC_UnitSearchPath>
         <DCC_Namespace>System;Xml;Data;Datasnap;Web;Soap;Vcl;$(DCC_Namespace)</DCC_Namespace>
-        <DCC_HppOutput>..\..\source\hpp</DCC_HppOutput>
+        <DCC_HppOutput>..\..\source\hpp\$(Platform)\$(Config)</DCC_HppOutput>
         <_TCHARMapping>char</_TCHARMapping>
         <DCC_CBuilderOutput>All</DCC_CBuilderOutput>
         <DynamicRTL>true</DynamicRTL>
@@ -194,6 +194,16 @@
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
+                <DeployFile LocalName="$(BDS)\Redist\iossim32\libcgunwind.1.0.dylib" Class="DependencyModule">
+                    <Platform Name="iOSSimulator">
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile Condition="'$(DynamicRTL)'=='true' And '$(Multithreaded)'=='true'" LocalName="$(BDS)\bin\cc32220mt.dll" Class="DependencyModule">
+                    <Platform Name="Win32">
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
                 <DeployFile LocalName="..\..\..\..\..\Public\Documents\Embarcadero\Studio\15.0\BPL\Package1.tds" Configuration="Debug" Class="DebugSymbols"/>
                 <DeployFile Condition="'$(DynamicRTL)'=='true' And '$(Multithreaded)'=='true'" LocalName="$(BDS)\bin\cc32160mt.dll" Class="DependencyModule">
                     <Platform Name="Win32">
@@ -207,11 +217,6 @@
                 </DeployFile>
                 <DeployFile Condition="'$(DynamicRTL)'=='true'" LocalName="$(BDS)\Redist\osx32\libcgcrtl.dylib" Class="DependencyModule">
                     <Platform Name="OSX32">
-                        <Overwrite>true</Overwrite>
-                    </Platform>
-                </DeployFile>
-                <DeployFile Condition="'$(DynamicRTL)'=='true' And '$(Multithreaded)'=='true'" LocalName="$(BDS)\bin\cc32220mt.dll" Class="DependencyModule">
-                    <Platform Name="Win32">
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
@@ -257,6 +262,11 @@
                 </DeployFile>
                 <DeployFile Condition="'$(UsingDelphiRTL)'=='true'" LocalName="$(BDS)\bin\borlndmm.dll" Class="DependencyModule">
                     <Platform Name="Win32">
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="$(BDS)\Redist\osx32\libcgunwind.1.0.dylib" Class="DependencyModule">
+                    <Platform Name="OSX32">
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
@@ -594,14 +604,14 @@
                         <Operation>1</Operation>
                     </Platform>
                 </DeployClass>
-                <ProjectRoot Platform="iOSSimulator" Name="$(PROJECTNAME).app"/>
+                <ProjectRoot Platform="iOSDevice32" Name="$(PROJECTNAME).app"/>
                 <ProjectRoot Platform="Android" Name="$(PROJECTNAME)"/>
                 <ProjectRoot Platform="iOSDevice" Name="$(PROJECTNAME).app"/>
                 <ProjectRoot Platform="Win32" Name="$(PROJECTNAME)"/>
                 <ProjectRoot Platform="iOSDevice64" Name="$(PROJECTNAME).app"/>
                 <ProjectRoot Platform="Win64" Name="$(PROJECTNAME)"/>
+                <ProjectRoot Platform="iOSSimulator" Name="$(PROJECTNAME).app"/>
                 <ProjectRoot Platform="OSX32" Name="$(PROJECTNAME)"/>
-                <ProjectRoot Platform="iOSDevice32" Name="$(PROJECTNAME).app"/>
             </Deployment>
             <Platforms>
                 <Platform value="Android">False</Platform>

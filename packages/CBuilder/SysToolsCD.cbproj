@@ -1,7 +1,7 @@
 ﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
     <PropertyGroup>
         <ProjectGuid>{85909404-D906-451C-87F9-2536B3E6C13E}</ProjectGuid>
-        <ProjectVersion>17.1</ProjectVersion>
+        <ProjectVersion>17.2</ProjectVersion>
         <FrameworkType>VCL</FrameworkType>
         <MainSource>SysToolsCD.cpp</MainSource>
         <Base>True</Base>
@@ -59,7 +59,7 @@
         <VerInfo_Keys>CompanyName=;FileDescription=;FileVersion=1.0.0.0;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProductName=;ProductVersion=1.0.0.0;Comments=</VerInfo_Keys>
         <SanitizedProjectName>SysToolsCD</SanitizedProjectName>
         <DCC_UnitSearchPath>..\..\source;$(DCC_UnitSearchPath)</DCC_UnitSearchPath>
-        <DCC_HppOutput>..\..\source\hpp</DCC_HppOutput>
+        <DCC_HppOutput>..\..\source\hpp\$(Platform)\$(Config)</DCC_HppOutput>
         <ILINK_Description>TurboPack SysTools CBuilder Designtime package</ILINK_Description>
         <ProjectType>CppPackage</ProjectType>
         <DCC_Namespace>System;Xml;Data;Datasnap;Web;Soap;Vcl;Vcl.Imaging;Vcl.Touch;Vcl.Samples;Vcl.Shell;$(DCC_Namespace)</DCC_Namespace>
@@ -221,6 +221,12 @@
                     </Platform>
                 </DeployFile>
                 <DeployFile LocalName="..\..\..\..\..\Public\Documents\Embarcadero\Studio\15.0\BPL\Package1.tds" Configuration="Debug" Class="DebugSymbols"/>
+                <DeployFile LocalName="..\..\..\..\..\Public\Documents\Embarcadero\Studio\15.0\BPL\SysToolsCD.bpl" Configuration="Debug" Class="ProjectOutput">
+                    <Platform Name="Win32">
+                        <RemoteName>SysToolsCD.bpl</RemoteName>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
                 <DeployFile Condition="'$(DynamicRTL)'=='true' And '$(Multithreaded)'=='true'" LocalName="$(BDS)\bin\cc32160mt.dll" Class="DependencyModule">
                     <Platform Name="Win32">
                         <Overwrite>true</Overwrite>
@@ -228,12 +234,6 @@
                 </DeployFile>
                 <DeployFile Condition="'$(DynamicRTL)'=='true'" LocalName="$(BDS)\Redist\osx32\libcgcrtl.dylib" Class="DependencyModule">
                     <Platform Name="OSX32">
-                        <Overwrite>true</Overwrite>
-                    </Platform>
-                </DeployFile>
-                <DeployFile LocalName="..\..\..\..\..\Public\Documents\Embarcadero\Studio\15.0\BPL\SysToolsCD.bpl" Configuration="Debug" Class="ProjectOutput">
-                    <Platform Name="Win32">
-                        <RemoteName>SysToolsCD.bpl</RemoteName>
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
@@ -615,14 +615,14 @@
                         <Operation>1</Operation>
                     </Platform>
                 </DeployClass>
-                <ProjectRoot Platform="iOSSimulator" Name="$(PROJECTNAME).app"/>
+                <ProjectRoot Platform="iOSDevice32" Name="$(PROJECTNAME).app"/>
                 <ProjectRoot Platform="Android" Name="$(PROJECTNAME)"/>
                 <ProjectRoot Platform="iOSDevice" Name="$(PROJECTNAME).app"/>
                 <ProjectRoot Platform="Win32" Name="$(PROJECTNAME)"/>
                 <ProjectRoot Platform="iOSDevice64" Name="$(PROJECTNAME).app"/>
                 <ProjectRoot Platform="Win64" Name="$(PROJECTNAME)"/>
+                <ProjectRoot Platform="iOSSimulator" Name="$(PROJECTNAME).app"/>
                 <ProjectRoot Platform="OSX32" Name="$(PROJECTNAME)"/>
-                <ProjectRoot Platform="iOSDevice32" Name="$(PROJECTNAME).app"/>
             </Deployment>
             <Platforms>
                 <Platform value="Android">False</Platform>

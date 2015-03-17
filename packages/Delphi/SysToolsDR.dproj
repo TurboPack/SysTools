@@ -3,11 +3,11 @@
         <ProjectGuid>{A7C2257E-A11C-4672-A884-DB43F939536C}</ProjectGuid>
         <MainSource>SysToolsDR.dpk</MainSource>
         <Base>True</Base>
-        <Config Condition="'$(Config)'==''">Debug</Config>
+        <Config Condition="'$(Config)'==''">Release</Config>
         <TargetedPlatforms>3</TargetedPlatforms>
         <AppType>Package</AppType>
         <FrameworkType>VCL</FrameworkType>
-        <ProjectVersion>17.1</ProjectVersion>
+        <ProjectVersion>17.2</ProjectVersion>
         <Platform Condition="'$(Platform)'==''">Win32</Platform>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Config)'=='Base' or '$(Base)'!=''">
@@ -45,7 +45,7 @@
         <Base>true</Base>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Base)'!=''">
-        <DCC_HppOutput>..\..\source\hpp</DCC_HppOutput>
+        <DCC_HppOutput>..\..\source\hpp\$(Platform)\$(Config)</DCC_HppOutput>
         <DCC_DcuOutput>.\$(Platform)\$(Config)</DCC_DcuOutput>
         <DCC_CBuilderOutput>All</DCC_CBuilderOutput>
         <SanitizedProjectName>SysToolsDR</SanitizedProjectName>
@@ -562,14 +562,14 @@
                         <Operation>1</Operation>
                     </Platform>
                 </DeployClass>
-                <ProjectRoot Platform="iOSDevice32" Name="$(PROJECTNAME).app"/>
+                <ProjectRoot Platform="Win64" Name="$(PROJECTNAME)"/>
                 <ProjectRoot Platform="Android" Name="$(PROJECTNAME)"/>
                 <ProjectRoot Platform="iOSDevice" Name="$(PROJECTNAME).app"/>
                 <ProjectRoot Platform="Win32" Name="$(PROJECTNAME)"/>
                 <ProjectRoot Platform="iOSDevice64" Name="$(PROJECTNAME).app"/>
                 <ProjectRoot Platform="OSX32" Name="$(PROJECTNAME)"/>
                 <ProjectRoot Platform="iOSSimulator" Name="$(PROJECTNAME).app"/>
-                <ProjectRoot Platform="Win64" Name="$(PROJECTNAME)"/>
+                <ProjectRoot Platform="iOSDevice32" Name="$(PROJECTNAME).app"/>
             </Deployment>
             <UnitTesting>
                 <TestProjectName>C:\Projects\EMBT\SysTools\Tests\SysToolsTests.dproj</TestProjectName>
