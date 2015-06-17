@@ -53,8 +53,23 @@ steps:
 
   3. Add the source subdirectory (e.g., d:\systools\source) to the
      IDE's library path. For CBuilder, add the hpp subdirectory
-     (e.g., d:\systools\source\hpp) to the IDE's system include path.
+     (e.g., d:\systools\source\hpp\Win32\Release) to the IDE's system include path.
 
   4. Open & install the designtime package specific to the IDE being
      used. The IDE should notify you the components have been
      installed.
+
+     
+==============================================
+
+4. Issue with C++Builder under Win64
+
+If you compile with C++Builder under Win64 and receive an error like:
+
+[ilink64 Error] Error: Unresolved external 'vtable for...
+
+you should add the following lines to your cpp file:
+
+#ifdef _WIN64
+#pragma comment(lib, "%packagename%")
+#endif           
