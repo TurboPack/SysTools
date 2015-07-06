@@ -541,10 +541,11 @@ end;
 {---primitives for converting strings to integers---}
 procedure ValLongInt(S : string; var LI : Integer; var ErrorCode : integer);
 var
-  LenS   : byte absolute S;
+  LenS   : Integer;
   Offset : Integer;
   NBCInx : Integer;
 begin
+  LenS := S.Length;
   {trim trailing spaces}
   while (LenS > 0) and (S[LenS] = ' ') do
     dec(LenS);
