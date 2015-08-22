@@ -57,7 +57,7 @@ package SysToolsDR;
 {$DEFINE RELEASE}
 {$ENDIF IMPLICITBUILDING}
 {$DESCRIPTION 'TurboPack SysTools Delphi Runtime package'}
-{$LIBSUFFIX '220'}
+{$LIBSUFFIX '230'}
 {$RUNONLY}
 {$IMPLICITBUILD OFF}
 

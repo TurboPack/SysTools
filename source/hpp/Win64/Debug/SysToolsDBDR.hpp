@@ -2,7 +2,7 @@
 // Copyright (c) 1995, 2015 by Embarcadero Technologies, Inc.
 // All rights reserved
 
-// (DO NOT EDIT: machine generated header) 'SysToolsDBDR.dpk' rev: 29.00 (Windows)
+// (DO NOT EDIT: machine generated header) 'SysToolsDBDR.dpk' rev: 30.00 (Windows)
 
 #ifndef SystoolsdbdrHPP
 #define SystoolsdbdrHPP
@@ -63,14 +63,15 @@
 #include <Winapi.Imm.hpp>	// (rtl)
 #include <Vcl.ActnList.hpp>	// (vcl)
 #include <Winapi.TpcShrd.hpp>	// (rtl)
+#include <System.Win.ComConst.hpp>	// (rtl)
+#include <System.Win.ComObj.hpp>	// (rtl)
+#include <Winapi.MsCTF.hpp>	// (rtl)
 #include <Winapi.Dwmapi.hpp>	// (rtl)
 #include <System.Win.Crtl.hpp>	// (rtl)
 #include <System.ZLib.hpp>	// (rtl)
 #include <Vcl.GraphUtil.hpp>	// (vcl)
 #include <Winapi.MsInkAut.hpp>	// (rtl)
 #include <Winapi.PenInputPanel.hpp>	// (rtl)
-#include <System.Win.ComConst.hpp>	// (rtl)
-#include <System.Win.ComObj.hpp>	// (rtl)
 #include <Winapi.Qos.hpp>	// (rtl)
 #include <Winapi.Winsock2.hpp>	// (rtl)
 #include <Winapi.IpExport.hpp>	// (rtl)
@@ -104,6 +105,7 @@
 #include <Vcl.Menus.hpp>	// (vcl)
 #include <System.Win.Taskbar.hpp>	// (rtl)
 #include <System.Win.TaskbarCore.hpp>	// (rtl)
+#include <Winapi.ShellScaling.hpp>	// (rtl)
 #include <Winapi.FlatSB.hpp>	// (rtl)
 #include <Vcl.Forms.hpp>	// (vcl)
 #include <Vcl.Clipbrd.hpp>	// (vcl)
