@@ -553,6 +553,7 @@ begin
   if (LenS = 0) then begin
     LI := 0;
     ErrorCode := -1;
+    Exit;
   end;
   {from now on S must have at least one non-blank char}
 
