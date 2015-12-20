@@ -57,7 +57,7 @@ package SysToolsDD;
 {$DEFINE RELEASE}
 {$ENDIF IMPLICITBUILDING}
 {$DESCRIPTION 'TurboPack SysTools Delphi Designtime package'}
-{$LIBSUFFIX '230'}
+{$LIBSUFFIX '240'}
 {$DESIGNONLY}
 {$IMPLICITBUILD OFF}
 
