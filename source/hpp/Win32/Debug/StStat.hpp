@@ -1,8 +1,8 @@
 ﻿// CodeGear C++Builder
-// Copyright (c) 1995, 2015 by Embarcadero Technologies, Inc.
+// Copyright (c) 1995, 2016 by Embarcadero Technologies, Inc.
 // All rights reserved
 
-// (DO NOT EDIT: machine generated header) 'StStat.pas' rev: 30.00 (Windows)
+// (DO NOT EDIT: machine generated header) 'StStat.pas' rev: 31.00 (Windows)
 
 #ifndef StstatHPP
 #define StstatHPP
@@ -44,58 +44,58 @@ public:
 
 
 //-- var, const, procedure ---------------------------------------------------
-extern DELPHI_PACKAGE double __fastcall AveDev(double const *Data, const int Data_High);
+extern DELPHI_PACKAGE double __fastcall AveDev(const double *Data, const int Data_High);
 extern DELPHI_PACKAGE double __fastcall AveDev16(const void *Data, int NData);
 extern DELPHI_PACKAGE double __fastcall Confidence(double Alpha, double StandardDev, int Size);
-extern DELPHI_PACKAGE double __fastcall Correlation(double const *Data1, const int Data1_High, double const *Data2, const int Data2_High);
+extern DELPHI_PACKAGE double __fastcall Correlation(const double *Data1, const int Data1_High, const double *Data2, const int Data2_High);
 extern DELPHI_PACKAGE double __fastcall Correlation16(const void *Data1, const void *Data2, int NData);
-extern DELPHI_PACKAGE double __fastcall Covariance(double const *Data1, const int Data1_High, double const *Data2, const int Data2_High);
+extern DELPHI_PACKAGE double __fastcall Covariance(const double *Data1, const int Data1_High, const double *Data2, const int Data2_High);
 extern DELPHI_PACKAGE double __fastcall Covariance16(const void *Data1, const void *Data2, int NData);
-extern DELPHI_PACKAGE double __fastcall DevSq(double const *Data, const int Data_High);
+extern DELPHI_PACKAGE double __fastcall DevSq(const double *Data, const int Data_High);
 extern DELPHI_PACKAGE double __fastcall DevSq16(const void *Data, int NData);
-extern DELPHI_PACKAGE void __fastcall Frequency(double const *Data, const int Data_High, double const *Bins, const int Bins_High, int *Counts, const int Counts_High);
+extern DELPHI_PACKAGE void __fastcall Frequency(const double *Data, const int Data_High, const double *Bins, const int Bins_High, int *Counts, const int Counts_High);
 extern DELPHI_PACKAGE void __fastcall Frequency16(const void *Data, int NData, const void *Bins, int NBins, void *Counts);
-extern DELPHI_PACKAGE double __fastcall GeometricMean(double const *Data, const int Data_High);
+extern DELPHI_PACKAGE double __fastcall GeometricMean(const double *Data, const int Data_High);
 extern DELPHI_PACKAGE double __fastcall GeometricMean16(const void *Data, int NData);
-extern DELPHI_PACKAGE double __fastcall HarmonicMean(double const *Data, const int Data_High);
+extern DELPHI_PACKAGE double __fastcall HarmonicMean(const double *Data, const int Data_High);
 extern DELPHI_PACKAGE double __fastcall HarmonicMean16(const void *Data, int NData);
-extern DELPHI_PACKAGE double __fastcall Largest(double const *Data, const int Data_High, int K);
+extern DELPHI_PACKAGE double __fastcall Largest(const double *Data, const int Data_High, int K);
 extern DELPHI_PACKAGE double __fastcall Largest16(const void *Data, int NData, int K);
-extern DELPHI_PACKAGE double __fastcall LargestSort(double const *Data, const int Data_High, int K);
-extern DELPHI_PACKAGE double __fastcall Median(double const *Data, const int Data_High);
+extern DELPHI_PACKAGE double __fastcall LargestSort(const double *Data, const int Data_High, int K);
+extern DELPHI_PACKAGE double __fastcall Median(const double *Data, const int Data_High);
 extern DELPHI_PACKAGE double __fastcall Median16(const void *Data, int NData);
-extern DELPHI_PACKAGE double __fastcall Mode(double const *Data, const int Data_High);
+extern DELPHI_PACKAGE double __fastcall Mode(const double *Data, const int Data_High);
 extern DELPHI_PACKAGE double __fastcall Mode16(const void *Data, int NData);
-extern DELPHI_PACKAGE double __fastcall Percentile(double const *Data, const int Data_High, double K);
+extern DELPHI_PACKAGE double __fastcall Percentile(const double *Data, const int Data_High, double K);
 extern DELPHI_PACKAGE double __fastcall Percentile16(const void *Data, int NData, double K);
-extern DELPHI_PACKAGE double __fastcall PercentRank(double const *Data, const int Data_High, double X);
+extern DELPHI_PACKAGE double __fastcall PercentRank(const double *Data, const int Data_High, double X);
 extern DELPHI_PACKAGE double __fastcall PercentRank16(const void *Data, int NData, double X);
 extern DELPHI_PACKAGE float __fastcall GammaLn(float X);
 extern DELPHI_PACKAGE System::Extended __fastcall Factorial(int N);
 extern DELPHI_PACKAGE System::Extended __fastcall Permutations(int Number, int NumberChosen);
 extern DELPHI_PACKAGE System::Extended __fastcall Combinations(int Number, int NumberChosen);
-extern DELPHI_PACKAGE int __fastcall Rank(double Number, double const *Data, const int Data_High, bool Ascending);
+extern DELPHI_PACKAGE int __fastcall Rank(double Number, const double *Data, const int Data_High, bool Ascending);
 extern DELPHI_PACKAGE int __fastcall Rank16(double Number, const void *Data, int NData, bool Ascending);
-extern DELPHI_PACKAGE double __fastcall Smallest(double const *Data, const int Data_High, int K);
+extern DELPHI_PACKAGE double __fastcall Smallest(const double *Data, const int Data_High, int K);
 extern DELPHI_PACKAGE double __fastcall Smallest16(const void *Data, int NData, int K);
-extern DELPHI_PACKAGE double __fastcall SmallestSort(double const *Data, const int Data_High, int K);
-extern DELPHI_PACKAGE double __fastcall TrimMean(double const *Data, const int Data_High, double Percent);
+extern DELPHI_PACKAGE double __fastcall SmallestSort(const double *Data, const int Data_High, int K);
+extern DELPHI_PACKAGE double __fastcall TrimMean(const double *Data, const int Data_High, double Percent);
 extern DELPHI_PACKAGE double __fastcall TrimMean16(const void *Data, int NData, double Percent);
-extern DELPHI_PACKAGE void __fastcall LinEst(double const *KnownY, const int KnownY_High, double const *KnownX, const int KnownX_High, TStLinEst &LF, bool ErrorStats);
+extern DELPHI_PACKAGE void __fastcall LinEst(const double *KnownY, const int KnownY_High, const double *KnownX, const int KnownX_High, TStLinEst &LF, bool ErrorStats);
 extern DELPHI_PACKAGE void __fastcall LinEst16(const void *KnownY, const void *KnownX, int NData, TStLinEst &LF, bool ErrorStats);
-extern DELPHI_PACKAGE void __fastcall LogEst(double const *KnownY, const int KnownY_High, double const *KnownX, const int KnownX_High, TStLinEst &LF, bool ErrorStats);
+extern DELPHI_PACKAGE void __fastcall LogEst(const double *KnownY, const int KnownY_High, const double *KnownX, const int KnownX_High, TStLinEst &LF, bool ErrorStats);
 extern DELPHI_PACKAGE void __fastcall LogEst16(const void *KnownY, const void *KnownX, int NData, TStLinEst &LF, bool ErrorStats);
-extern DELPHI_PACKAGE double __fastcall Forecast(double X, double const *KnownY, const int KnownY_High, double const *KnownX, const int KnownX_High);
+extern DELPHI_PACKAGE double __fastcall Forecast(double X, const double *KnownY, const int KnownY_High, const double *KnownX, const int KnownX_High);
 extern DELPHI_PACKAGE double __fastcall Forecast16(double X, const void *KnownY, const void *KnownX, int NData);
-extern DELPHI_PACKAGE double __fastcall ForecastExponential(double X, double const *KnownY, const int KnownY_High, double const *KnownX, const int KnownX_High);
+extern DELPHI_PACKAGE double __fastcall ForecastExponential(double X, const double *KnownY, const int KnownY_High, const double *KnownX, const int KnownX_High);
 extern DELPHI_PACKAGE double __fastcall ForecastExponential16(double X, const void *KnownY, const void *KnownX, int NData);
-extern DELPHI_PACKAGE double __fastcall Intercept(double const *KnownY, const int KnownY_High, double const *KnownX, const int KnownX_High);
+extern DELPHI_PACKAGE double __fastcall Intercept(const double *KnownY, const int KnownY_High, const double *KnownX, const int KnownX_High);
 extern DELPHI_PACKAGE double __fastcall Intercept16(const void *KnownY, const void *KnownX, int NData);
-extern DELPHI_PACKAGE double __fastcall RSquared(double const *KnownY, const int KnownY_High, double const *KnownX, const int KnownX_High);
+extern DELPHI_PACKAGE double __fastcall RSquared(const double *KnownY, const int KnownY_High, const double *KnownX, const int KnownX_High);
 extern DELPHI_PACKAGE double __fastcall RSquared16(const void *KnownY, const void *KnownX, int NData);
-extern DELPHI_PACKAGE double __fastcall Slope(double const *KnownY, const int KnownY_High, double const *KnownX, const int KnownX_High);
+extern DELPHI_PACKAGE double __fastcall Slope(const double *KnownY, const int KnownY_High, const double *KnownX, const int KnownX_High);
 extern DELPHI_PACKAGE double __fastcall Slope16(const void *KnownY, const void *KnownX, int NData);
-extern DELPHI_PACKAGE double __fastcall StandardErrorY(double const *KnownY, const int KnownY_High, double const *KnownX, const int KnownX_High);
+extern DELPHI_PACKAGE double __fastcall StandardErrorY(const double *KnownY, const int KnownY_High, const double *KnownX, const int KnownX_High);
 extern DELPHI_PACKAGE double __fastcall StandardErrorY16(const void *KnownY, const void *KnownX, int NData);
 extern DELPHI_PACKAGE float __fastcall BetaDist(float X, float Alpha, float Beta, float A, float B);
 extern DELPHI_PACKAGE float __fastcall BetaInv(float Probability, float Alpha, float Beta, float A, float B);

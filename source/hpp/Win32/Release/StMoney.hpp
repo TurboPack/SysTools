@@ -1,8 +1,8 @@
 ﻿// CodeGear C++Builder
-// Copyright (c) 1995, 2015 by Embarcadero Technologies, Inc.
+// Copyright (c) 1995, 2016 by Embarcadero Technologies, Inc.
 // All rights reserved
 
-// (DO NOT EDIT: machine generated header) 'StMoney.pas' rev: 30.00 (Windows)
+// (DO NOT EDIT: machine generated header) 'StMoney.pas' rev: 31.00 (Windows)
 
 #ifndef StmoneyHPP
 #define StmoneyHPP
@@ -70,7 +70,7 @@ class PASCALIMPLEMENTATION TStCurrencyList : public System::TObject
 	typedef System::TObject inherited;
 	
 public:
-	TStCurrency* operator[](int Index) { return Items[Index]; }
+	TStCurrency* operator[](int Index) { return this->Items[Index]; }
 	
 private:
 	System::Classes::TStringList* FItems;

@@ -1,8 +1,8 @@
 ﻿// CodeGear C++Builder
-// Copyright (c) 1995, 2015 by Embarcadero Technologies, Inc.
+// Copyright (c) 1995, 2016 by Embarcadero Technologies, Inc.
 // All rights reserved
 
-// (DO NOT EDIT: machine generated header) 'St2DBarC.pas' rev: 30.00 (Windows)
+// (DO NOT EDIT: machine generated header) 'St2DBarC.pas' rev: 31.00 (Windows)
 
 #ifndef St2dbarcHPP
 #define St2dbarcHPP
@@ -58,17 +58,17 @@ class PASCALIMPLEMENTATION E2DBarcodeError : public System::Sysutils::Exception
 	
 public:
 	/* Exception.Create */ inline __fastcall E2DBarcodeError(const System::UnicodeString Msg) : System::Sysutils::Exception(Msg) { }
-	/* Exception.CreateFmt */ inline __fastcall E2DBarcodeError(const System::UnicodeString Msg, System::TVarRec const *Args, const int Args_High) : System::Sysutils::Exception(Msg, Args, Args_High) { }
+	/* Exception.CreateFmt */ inline __fastcall E2DBarcodeError(const System::UnicodeString Msg, const System::TVarRec *Args, const int Args_High) : System::Sysutils::Exception(Msg, Args, Args_High) { }
 	/* Exception.CreateRes */ inline __fastcall E2DBarcodeError(NativeUInt Ident)/* overload */ : System::Sysutils::Exception(Ident) { }
 	/* Exception.CreateRes */ inline __fastcall E2DBarcodeError(System::PResStringRec ResStringRec)/* overload */ : System::Sysutils::Exception(ResStringRec) { }
-	/* Exception.CreateResFmt */ inline __fastcall E2DBarcodeError(NativeUInt Ident, System::TVarRec const *Args, const int Args_High)/* overload */ : System::Sysutils::Exception(Ident, Args, Args_High) { }
-	/* Exception.CreateResFmt */ inline __fastcall E2DBarcodeError(System::PResStringRec ResStringRec, System::TVarRec const *Args, const int Args_High)/* overload */ : System::Sysutils::Exception(ResStringRec, Args, Args_High) { }
+	/* Exception.CreateResFmt */ inline __fastcall E2DBarcodeError(NativeUInt Ident, const System::TVarRec *Args, const int Args_High)/* overload */ : System::Sysutils::Exception(Ident, Args, Args_High) { }
+	/* Exception.CreateResFmt */ inline __fastcall E2DBarcodeError(System::PResStringRec ResStringRec, const System::TVarRec *Args, const int Args_High)/* overload */ : System::Sysutils::Exception(ResStringRec, Args, Args_High) { }
 	/* Exception.CreateHelp */ inline __fastcall E2DBarcodeError(const System::UnicodeString Msg, int AHelpContext) : System::Sysutils::Exception(Msg, AHelpContext) { }
-	/* Exception.CreateFmtHelp */ inline __fastcall E2DBarcodeError(const System::UnicodeString Msg, System::TVarRec const *Args, const int Args_High, int AHelpContext) : System::Sysutils::Exception(Msg, Args, Args_High, AHelpContext) { }
+	/* Exception.CreateFmtHelp */ inline __fastcall E2DBarcodeError(const System::UnicodeString Msg, const System::TVarRec *Args, const int Args_High, int AHelpContext) : System::Sysutils::Exception(Msg, Args, Args_High, AHelpContext) { }
 	/* Exception.CreateResHelp */ inline __fastcall E2DBarcodeError(NativeUInt Ident, int AHelpContext)/* overload */ : System::Sysutils::Exception(Ident, AHelpContext) { }
 	/* Exception.CreateResHelp */ inline __fastcall E2DBarcodeError(System::PResStringRec ResStringRec, int AHelpContext)/* overload */ : System::Sysutils::Exception(ResStringRec, AHelpContext) { }
-	/* Exception.CreateResFmtHelp */ inline __fastcall E2DBarcodeError(System::PResStringRec ResStringRec, System::TVarRec const *Args, const int Args_High, int AHelpContext)/* overload */ : System::Sysutils::Exception(ResStringRec, Args, Args_High, AHelpContext) { }
-	/* Exception.CreateResFmtHelp */ inline __fastcall E2DBarcodeError(NativeUInt Ident, System::TVarRec const *Args, const int Args_High, int AHelpContext)/* overload */ : System::Sysutils::Exception(Ident, Args, Args_High, AHelpContext) { }
+	/* Exception.CreateResFmtHelp */ inline __fastcall E2DBarcodeError(System::PResStringRec ResStringRec, const System::TVarRec *Args, const int Args_High, int AHelpContext)/* overload */ : System::Sysutils::Exception(ResStringRec, Args, Args_High, AHelpContext) { }
+	/* Exception.CreateResFmtHelp */ inline __fastcall E2DBarcodeError(NativeUInt Ident, const System::TVarRec *Args, const int Args_High, int AHelpContext)/* overload */ : System::Sysutils::Exception(Ident, Args, Args_High, AHelpContext) { }
 	/* Exception.Destroy */ inline __fastcall virtual ~E2DBarcodeError(void) { }
 	
 };
@@ -202,7 +202,7 @@ protected:
 	void __fastcall CalculateECC(int NumCodewords, int ECCLen);
 	void __fastcall CalculateSize(int &XSize, int &YSize);
 	unsigned __fastcall CodewordToBitmask(int RowNumber, int Codeword);
-	void __fastcall ConvertBytesToBase900(System::Byte const *S, const int S_High, int *A, const int A_High);
+	void __fastcall ConvertBytesToBase900(const System::Byte *S, const int S_High, int *A, const int A_High);
 	void __fastcall ConvertToBase900(const System::UnicodeString S, int *A, const int A_High, int &LenA);
 	virtual void __fastcall DrawBarcode(void);
 	void __fastcall DrawCodeword(int RowNumber, int ColNumber, int WorkBarHeight, System::UnicodeString Pattern);

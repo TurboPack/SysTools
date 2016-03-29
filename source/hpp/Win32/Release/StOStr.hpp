@@ -1,8 +1,8 @@
 ﻿// CodeGear C++Builder
-// Copyright (c) 1995, 2015 by Embarcadero Technologies, Inc.
+// Copyright (c) 1995, 2016 by Embarcadero Technologies, Inc.
 // All rights reserved
 
-// (DO NOT EDIT: machine generated header) 'StOStr.pas' rev: 30.00 (Windows)
+// (DO NOT EDIT: machine generated header) 'StOStr.pas' rev: 31.00 (Windows)
 
 #ifndef StostrHPP
 #define StostrHPP
@@ -34,7 +34,7 @@ class PASCALIMPLEMENTATION TStString : public System::Classes::TPersistent
 	typedef System::Classes::TPersistent inherited;
 	
 public:
-	System::WideChar operator[](unsigned Index) { return AtIndex[Index]; }
+	System::WideChar operator[](unsigned Index) { return this->AtIndex[Index]; }
 	
 protected:
 	unsigned FAlloc;

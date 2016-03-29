@@ -1,8 +1,8 @@
 ﻿// CodeGear C++Builder
-// Copyright (c) 1995, 2015 by Embarcadero Technologies, Inc.
+// Copyright (c) 1995, 2016 by Embarcadero Technologies, Inc.
 // All rights reserved
 
-// (DO NOT EDIT: machine generated header) 'StBits.pas' rev: 30.00 (Windows)
+// (DO NOT EDIT: machine generated header) 'StBits.pas' rev: 31.00 (Windows)
 
 #ifndef StbitsHPP
 #define StbitsHPP
@@ -34,7 +34,7 @@ class PASCALIMPLEMENTATION TStBits : public Stbase::TStContainer
 	typedef Stbase::TStContainer inherited;
 	
 public:
-	bool operator[](int N) { return Items[N]; }
+	bool operator[](int N) { return this->Items[N]; }
 	
 protected:
 	int FMax;

@@ -1,8 +1,8 @@
 ﻿// CodeGear C++Builder
-// Copyright (c) 1995, 2015 by Embarcadero Technologies, Inc.
+// Copyright (c) 1995, 2016 by Embarcadero Technologies, Inc.
 // All rights reserved
 
-// (DO NOT EDIT: machine generated header) 'StFIN.pas' rev: 30.00 (Windows)
+// (DO NOT EDIT: machine generated header) 'StFIN.pas' rev: 31.00 (Windows)
 
 #ifndef StfinHPP
 #define StfinHPP
@@ -54,21 +54,21 @@ extern DELPHI_PACKAGE System::Extended __fastcall DollarToFraction(System::Exten
 extern DELPHI_PACKAGE System::UnicodeString __fastcall DollarToFractionStr(System::Extended FracDollar, int Fraction);
 extern DELPHI_PACKAGE System::Extended __fastcall EffectiveInterestRate(System::Extended NominalRate, TStFrequency Frequency);
 extern DELPHI_PACKAGE System::Extended __fastcall FutureValue(System::Extended Rate, int NPeriods, System::Extended Pmt, System::Extended PV, TStFrequency Frequency, TStPaymentTime Timing);
-extern DELPHI_PACKAGE System::Extended __fastcall FutureValueSchedule(System::Extended Principal, double const *Schedule, const int Schedule_High);
+extern DELPHI_PACKAGE System::Extended __fastcall FutureValueSchedule(System::Extended Principal, const double *Schedule, const int Schedule_High);
 extern DELPHI_PACKAGE System::Extended __fastcall FutureValueSchedule16(System::Extended Principal, const void *Schedule, int NRates);
 extern DELPHI_PACKAGE System::Extended __fastcall InterestRate(int NPeriods, System::Extended Pmt, System::Extended PV, System::Extended FV, TStFrequency Frequency, TStPaymentTime Timing, System::Extended Guess);
-extern DELPHI_PACKAGE System::Extended __fastcall InternalRateOfReturn(double const *Values, const int Values_High, System::Extended Guess);
+extern DELPHI_PACKAGE System::Extended __fastcall InternalRateOfReturn(const double *Values, const int Values_High, System::Extended Guess);
 extern DELPHI_PACKAGE System::Extended __fastcall InternalRateOfReturn16(const void *Values, int NValues, System::Extended Guess);
 extern DELPHI_PACKAGE bool __fastcall IsCardValid(const System::UnicodeString S);
 extern DELPHI_PACKAGE System::Extended __fastcall ModifiedDuration(int Settlement, int Maturity, System::Extended Rate, System::Extended Yield, TStFrequency Frequency, TStBasis Basis);
-extern DELPHI_PACKAGE System::Extended __fastcall ModifiedIRR(double const *Values, const int Values_High, System::Extended FinanceRate, System::Extended ReinvestRate);
+extern DELPHI_PACKAGE System::Extended __fastcall ModifiedIRR(const double *Values, const int Values_High, System::Extended FinanceRate, System::Extended ReinvestRate);
 extern DELPHI_PACKAGE System::Extended __fastcall ModifiedIRR16(const void *Values, int NValues, System::Extended FinanceRate, System::Extended ReinvestRate);
-extern DELPHI_PACKAGE System::Extended __fastcall NetPresentValue(System::Extended Rate, double const *Values, const int Values_High);
+extern DELPHI_PACKAGE System::Extended __fastcall NetPresentValue(System::Extended Rate, const double *Values, const int Values_High);
 extern DELPHI_PACKAGE System::Extended __fastcall NetPresentValue16(System::Extended Rate, const void *Values, int NValues);
 extern DELPHI_PACKAGE System::Extended __fastcall NominalInterestRate(System::Extended EffectRate, TStFrequency Frequency);
-extern DELPHI_PACKAGE System::Extended __fastcall NonperiodicIRR(double const *Values, const int Values_High, int const *Dates, const int Dates_High, System::Extended Guess);
+extern DELPHI_PACKAGE System::Extended __fastcall NonperiodicIRR(const double *Values, const int Values_High, const int *Dates, const int Dates_High, System::Extended Guess);
 extern DELPHI_PACKAGE System::Extended __fastcall NonperiodicIRR16(const void *Values, const void *Dates, int NValues, System::Extended Guess);
-extern DELPHI_PACKAGE System::Extended __fastcall NonperiodicNPV(System::Extended Rate, double const *Values, const int Values_High, int const *Dates, const int Dates_High);
+extern DELPHI_PACKAGE System::Extended __fastcall NonperiodicNPV(System::Extended Rate, const double *Values, const int Values_High, const int *Dates, const int Dates_High);
 extern DELPHI_PACKAGE System::Extended __fastcall NonperiodicNPV16(System::Extended Rate, const void *Values, const void *Dates, int NValues);
 extern DELPHI_PACKAGE System::Extended __fastcall Payment(System::Extended Rate, int NPeriods, System::Extended PV, System::Extended FV, TStFrequency Frequency, TStPaymentTime Timing);
 extern DELPHI_PACKAGE int __fastcall Periods(System::Extended Rate, System::Extended Pmt, System::Extended PV, System::Extended FV, TStFrequency Frequency, TStPaymentTime Timing);

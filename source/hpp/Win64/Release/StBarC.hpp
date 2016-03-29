@@ -1,8 +1,8 @@
 ﻿// CodeGear C++Builder
-// Copyright (c) 1995, 2015 by Embarcadero Technologies, Inc.
+// Copyright (c) 1995, 2016 by Embarcadero Technologies, Inc.
 // All rights reserved
 
-// (DO NOT EDIT: machine generated header) 'StBarC.pas' rev: 30.00 (Windows)
+// (DO NOT EDIT: machine generated header) 'StBarC.pas' rev: 31.00 (Windows)
 
 #ifndef StbarcHPP
 #define StbarcHPP
@@ -62,7 +62,7 @@ class PASCALIMPLEMENTATION TStBarCodeInfo : public System::TObject
 	typedef System::TObject inherited;
 	
 public:
-	TStBarData* operator[](int Index) { return Bars[Index]; }
+	TStBarData* operator[](int Index) { return this->Bars[Index]; }
 	
 private:
 	System::Classes::TList* FBars;

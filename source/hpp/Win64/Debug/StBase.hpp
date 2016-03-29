@@ -1,8 +1,8 @@
 ﻿// CodeGear C++Builder
-// Copyright (c) 1995, 2015 by Embarcadero Technologies, Inc.
+// Copyright (c) 1995, 2016 by Embarcadero Technologies, Inc.
 // All rights reserved
 
-// (DO NOT EDIT: machine generated header) 'StBase.pas' rev: 30.00 (Windows)
+// (DO NOT EDIT: machine generated header) 'StBase.pas' rev: 31.00 (Windows)
 
 #ifndef StbaseHPP
 #define StbaseHPP
@@ -67,21 +67,21 @@ protected:
 	
 public:
 	__fastcall EStException(int Ident, System::Word Dummy);
-	__fastcall EStException(int Ident, System::TVarRec const *Args, const int Args_High, System::Word Dummy);
+	__fastcall EStException(int Ident, const System::TVarRec *Args, const int Args_High, System::Word Dummy);
 	__property int ErrorCode = {read=FErrorCode, write=FErrorCode, nodefault};
 public:
 	/* Exception.Create */ inline __fastcall EStException(const System::UnicodeString Msg) : System::Sysutils::Exception(Msg) { }
-	/* Exception.CreateFmt */ inline __fastcall EStException(const System::UnicodeString Msg, System::TVarRec const *Args, const int Args_High) : System::Sysutils::Exception(Msg, Args, Args_High) { }
+	/* Exception.CreateFmt */ inline __fastcall EStException(const System::UnicodeString Msg, const System::TVarRec *Args, const int Args_High) : System::Sysutils::Exception(Msg, Args, Args_High) { }
 	/* Exception.CreateRes */ inline __fastcall EStException(NativeUInt Ident)/* overload */ : System::Sysutils::Exception(Ident) { }
 	/* Exception.CreateRes */ inline __fastcall EStException(System::PResStringRec ResStringRec)/* overload */ : System::Sysutils::Exception(ResStringRec) { }
-	/* Exception.CreateResFmt */ inline __fastcall EStException(NativeUInt Ident, System::TVarRec const *Args, const int Args_High)/* overload */ : System::Sysutils::Exception(Ident, Args, Args_High) { }
-	/* Exception.CreateResFmt */ inline __fastcall EStException(System::PResStringRec ResStringRec, System::TVarRec const *Args, const int Args_High)/* overload */ : System::Sysutils::Exception(ResStringRec, Args, Args_High) { }
+	/* Exception.CreateResFmt */ inline __fastcall EStException(NativeUInt Ident, const System::TVarRec *Args, const int Args_High)/* overload */ : System::Sysutils::Exception(Ident, Args, Args_High) { }
+	/* Exception.CreateResFmt */ inline __fastcall EStException(System::PResStringRec ResStringRec, const System::TVarRec *Args, const int Args_High)/* overload */ : System::Sysutils::Exception(ResStringRec, Args, Args_High) { }
 	/* Exception.CreateHelp */ inline __fastcall EStException(const System::UnicodeString Msg, int AHelpContext) : System::Sysutils::Exception(Msg, AHelpContext) { }
-	/* Exception.CreateFmtHelp */ inline __fastcall EStException(const System::UnicodeString Msg, System::TVarRec const *Args, const int Args_High, int AHelpContext) : System::Sysutils::Exception(Msg, Args, Args_High, AHelpContext) { }
+	/* Exception.CreateFmtHelp */ inline __fastcall EStException(const System::UnicodeString Msg, const System::TVarRec *Args, const int Args_High, int AHelpContext) : System::Sysutils::Exception(Msg, Args, Args_High, AHelpContext) { }
 	/* Exception.CreateResHelp */ inline __fastcall EStException(NativeUInt Ident, int AHelpContext)/* overload */ : System::Sysutils::Exception(Ident, AHelpContext) { }
 	/* Exception.CreateResHelp */ inline __fastcall EStException(System::PResStringRec ResStringRec, int AHelpContext)/* overload */ : System::Sysutils::Exception(ResStringRec, AHelpContext) { }
-	/* Exception.CreateResFmtHelp */ inline __fastcall EStException(System::PResStringRec ResStringRec, System::TVarRec const *Args, const int Args_High, int AHelpContext)/* overload */ : System::Sysutils::Exception(ResStringRec, Args, Args_High, AHelpContext) { }
-	/* Exception.CreateResFmtHelp */ inline __fastcall EStException(NativeUInt Ident, System::TVarRec const *Args, const int Args_High, int AHelpContext)/* overload */ : System::Sysutils::Exception(Ident, Args, Args_High, AHelpContext) { }
+	/* Exception.CreateResFmtHelp */ inline __fastcall EStException(System::PResStringRec ResStringRec, const System::TVarRec *Args, const int Args_High, int AHelpContext)/* overload */ : System::Sysutils::Exception(ResStringRec, Args, Args_High, AHelpContext) { }
+	/* Exception.CreateResFmtHelp */ inline __fastcall EStException(NativeUInt Ident, const System::TVarRec *Args, const int Args_High, int AHelpContext)/* overload */ : System::Sysutils::Exception(Ident, Args, Args_High, AHelpContext) { }
 	/* Exception.Destroy */ inline __fastcall virtual ~EStException(void) { }
 	
 };
@@ -95,21 +95,21 @@ class PASCALIMPLEMENTATION EStContainerError : public EStException
 	
 public:
 	/* EStException.CreateResTP */ inline __fastcall EStContainerError(int Ident, System::Word Dummy) : EStException(Ident, Dummy) { }
-	/* EStException.CreateResFmtTP */ inline __fastcall EStContainerError(int Ident, System::TVarRec const *Args, const int Args_High, System::Word Dummy) : EStException(Ident, Args, Args_High, Dummy) { }
+	/* EStException.CreateResFmtTP */ inline __fastcall EStContainerError(int Ident, const System::TVarRec *Args, const int Args_High, System::Word Dummy) : EStException(Ident, Args, Args_High, Dummy) { }
 	
 public:
 	/* Exception.Create */ inline __fastcall EStContainerError(const System::UnicodeString Msg) : EStException(Msg) { }
-	/* Exception.CreateFmt */ inline __fastcall EStContainerError(const System::UnicodeString Msg, System::TVarRec const *Args, const int Args_High) : EStException(Msg, Args, Args_High) { }
+	/* Exception.CreateFmt */ inline __fastcall EStContainerError(const System::UnicodeString Msg, const System::TVarRec *Args, const int Args_High) : EStException(Msg, Args, Args_High) { }
 	/* Exception.CreateRes */ inline __fastcall EStContainerError(NativeUInt Ident)/* overload */ : EStException(Ident) { }
 	/* Exception.CreateRes */ inline __fastcall EStContainerError(System::PResStringRec ResStringRec)/* overload */ : EStException(ResStringRec) { }
-	/* Exception.CreateResFmt */ inline __fastcall EStContainerError(NativeUInt Ident, System::TVarRec const *Args, const int Args_High)/* overload */ : EStException(Ident, Args, Args_High) { }
-	/* Exception.CreateResFmt */ inline __fastcall EStContainerError(System::PResStringRec ResStringRec, System::TVarRec const *Args, const int Args_High)/* overload */ : EStException(ResStringRec, Args, Args_High) { }
+	/* Exception.CreateResFmt */ inline __fastcall EStContainerError(NativeUInt Ident, const System::TVarRec *Args, const int Args_High)/* overload */ : EStException(Ident, Args, Args_High) { }
+	/* Exception.CreateResFmt */ inline __fastcall EStContainerError(System::PResStringRec ResStringRec, const System::TVarRec *Args, const int Args_High)/* overload */ : EStException(ResStringRec, Args, Args_High) { }
 	/* Exception.CreateHelp */ inline __fastcall EStContainerError(const System::UnicodeString Msg, int AHelpContext) : EStException(Msg, AHelpContext) { }
-	/* Exception.CreateFmtHelp */ inline __fastcall EStContainerError(const System::UnicodeString Msg, System::TVarRec const *Args, const int Args_High, int AHelpContext) : EStException(Msg, Args, Args_High, AHelpContext) { }
+	/* Exception.CreateFmtHelp */ inline __fastcall EStContainerError(const System::UnicodeString Msg, const System::TVarRec *Args, const int Args_High, int AHelpContext) : EStException(Msg, Args, Args_High, AHelpContext) { }
 	/* Exception.CreateResHelp */ inline __fastcall EStContainerError(NativeUInt Ident, int AHelpContext)/* overload */ : EStException(Ident, AHelpContext) { }
 	/* Exception.CreateResHelp */ inline __fastcall EStContainerError(System::PResStringRec ResStringRec, int AHelpContext)/* overload */ : EStException(ResStringRec, AHelpContext) { }
-	/* Exception.CreateResFmtHelp */ inline __fastcall EStContainerError(System::PResStringRec ResStringRec, System::TVarRec const *Args, const int Args_High, int AHelpContext)/* overload */ : EStException(ResStringRec, Args, Args_High, AHelpContext) { }
-	/* Exception.CreateResFmtHelp */ inline __fastcall EStContainerError(NativeUInt Ident, System::TVarRec const *Args, const int Args_High, int AHelpContext)/* overload */ : EStException(Ident, Args, Args_High, AHelpContext) { }
+	/* Exception.CreateResFmtHelp */ inline __fastcall EStContainerError(System::PResStringRec ResStringRec, const System::TVarRec *Args, const int Args_High, int AHelpContext)/* overload */ : EStException(ResStringRec, Args, Args_High, AHelpContext) { }
+	/* Exception.CreateResFmtHelp */ inline __fastcall EStContainerError(NativeUInt Ident, const System::TVarRec *Args, const int Args_High, int AHelpContext)/* overload */ : EStException(Ident, Args, Args_High, AHelpContext) { }
 	/* Exception.Destroy */ inline __fastcall virtual ~EStContainerError(void) { }
 	
 };
@@ -121,21 +121,21 @@ class PASCALIMPLEMENTATION EStSortError : public EStException
 	
 public:
 	/* EStException.CreateResTP */ inline __fastcall EStSortError(int Ident, System::Word Dummy) : EStException(Ident, Dummy) { }
-	/* EStException.CreateResFmtTP */ inline __fastcall EStSortError(int Ident, System::TVarRec const *Args, const int Args_High, System::Word Dummy) : EStException(Ident, Args, Args_High, Dummy) { }
+	/* EStException.CreateResFmtTP */ inline __fastcall EStSortError(int Ident, const System::TVarRec *Args, const int Args_High, System::Word Dummy) : EStException(Ident, Args, Args_High, Dummy) { }
 	
 public:
 	/* Exception.Create */ inline __fastcall EStSortError(const System::UnicodeString Msg) : EStException(Msg) { }
-	/* Exception.CreateFmt */ inline __fastcall EStSortError(const System::UnicodeString Msg, System::TVarRec const *Args, const int Args_High) : EStException(Msg, Args, Args_High) { }
+	/* Exception.CreateFmt */ inline __fastcall EStSortError(const System::UnicodeString Msg, const System::TVarRec *Args, const int Args_High) : EStException(Msg, Args, Args_High) { }
 	/* Exception.CreateRes */ inline __fastcall EStSortError(NativeUInt Ident)/* overload */ : EStException(Ident) { }
 	/* Exception.CreateRes */ inline __fastcall EStSortError(System::PResStringRec ResStringRec)/* overload */ : EStException(ResStringRec) { }
-	/* Exception.CreateResFmt */ inline __fastcall EStSortError(NativeUInt Ident, System::TVarRec const *Args, const int Args_High)/* overload */ : EStException(Ident, Args, Args_High) { }
-	/* Exception.CreateResFmt */ inline __fastcall EStSortError(System::PResStringRec ResStringRec, System::TVarRec const *Args, const int Args_High)/* overload */ : EStException(ResStringRec, Args, Args_High) { }
+	/* Exception.CreateResFmt */ inline __fastcall EStSortError(NativeUInt Ident, const System::TVarRec *Args, const int Args_High)/* overload */ : EStException(Ident, Args, Args_High) { }
+	/* Exception.CreateResFmt */ inline __fastcall EStSortError(System::PResStringRec ResStringRec, const System::TVarRec *Args, const int Args_High)/* overload */ : EStException(ResStringRec, Args, Args_High) { }
 	/* Exception.CreateHelp */ inline __fastcall EStSortError(const System::UnicodeString Msg, int AHelpContext) : EStException(Msg, AHelpContext) { }
-	/* Exception.CreateFmtHelp */ inline __fastcall EStSortError(const System::UnicodeString Msg, System::TVarRec const *Args, const int Args_High, int AHelpContext) : EStException(Msg, Args, Args_High, AHelpContext) { }
+	/* Exception.CreateFmtHelp */ inline __fastcall EStSortError(const System::UnicodeString Msg, const System::TVarRec *Args, const int Args_High, int AHelpContext) : EStException(Msg, Args, Args_High, AHelpContext) { }
 	/* Exception.CreateResHelp */ inline __fastcall EStSortError(NativeUInt Ident, int AHelpContext)/* overload */ : EStException(Ident, AHelpContext) { }
 	/* Exception.CreateResHelp */ inline __fastcall EStSortError(System::PResStringRec ResStringRec, int AHelpContext)/* overload */ : EStException(ResStringRec, AHelpContext) { }
-	/* Exception.CreateResFmtHelp */ inline __fastcall EStSortError(System::PResStringRec ResStringRec, System::TVarRec const *Args, const int Args_High, int AHelpContext)/* overload */ : EStException(ResStringRec, Args, Args_High, AHelpContext) { }
-	/* Exception.CreateResFmtHelp */ inline __fastcall EStSortError(NativeUInt Ident, System::TVarRec const *Args, const int Args_High, int AHelpContext)/* overload */ : EStException(Ident, Args, Args_High, AHelpContext) { }
+	/* Exception.CreateResFmtHelp */ inline __fastcall EStSortError(System::PResStringRec ResStringRec, const System::TVarRec *Args, const int Args_High, int AHelpContext)/* overload */ : EStException(ResStringRec, Args, Args_High, AHelpContext) { }
+	/* Exception.CreateResFmtHelp */ inline __fastcall EStSortError(NativeUInt Ident, const System::TVarRec *Args, const int Args_High, int AHelpContext)/* overload */ : EStException(Ident, Args, Args_High, AHelpContext) { }
 	/* Exception.Destroy */ inline __fastcall virtual ~EStSortError(void) { }
 	
 };
@@ -147,21 +147,21 @@ class PASCALIMPLEMENTATION EStRegIniError : public EStException
 	
 public:
 	/* EStException.CreateResTP */ inline __fastcall EStRegIniError(int Ident, System::Word Dummy) : EStException(Ident, Dummy) { }
-	/* EStException.CreateResFmtTP */ inline __fastcall EStRegIniError(int Ident, System::TVarRec const *Args, const int Args_High, System::Word Dummy) : EStException(Ident, Args, Args_High, Dummy) { }
+	/* EStException.CreateResFmtTP */ inline __fastcall EStRegIniError(int Ident, const System::TVarRec *Args, const int Args_High, System::Word Dummy) : EStException(Ident, Args, Args_High, Dummy) { }
 	
 public:
 	/* Exception.Create */ inline __fastcall EStRegIniError(const System::UnicodeString Msg) : EStException(Msg) { }
-	/* Exception.CreateFmt */ inline __fastcall EStRegIniError(const System::UnicodeString Msg, System::TVarRec const *Args, const int Args_High) : EStException(Msg, Args, Args_High) { }
+	/* Exception.CreateFmt */ inline __fastcall EStRegIniError(const System::UnicodeString Msg, const System::TVarRec *Args, const int Args_High) : EStException(Msg, Args, Args_High) { }
 	/* Exception.CreateRes */ inline __fastcall EStRegIniError(NativeUInt Ident)/* overload */ : EStException(Ident) { }
 	/* Exception.CreateRes */ inline __fastcall EStRegIniError(System::PResStringRec ResStringRec)/* overload */ : EStException(ResStringRec) { }
-	/* Exception.CreateResFmt */ inline __fastcall EStRegIniError(NativeUInt Ident, System::TVarRec const *Args, const int Args_High)/* overload */ : EStException(Ident, Args, Args_High) { }
-	/* Exception.CreateResFmt */ inline __fastcall EStRegIniError(System::PResStringRec ResStringRec, System::TVarRec const *Args, const int Args_High)/* overload */ : EStException(ResStringRec, Args, Args_High) { }
+	/* Exception.CreateResFmt */ inline __fastcall EStRegIniError(NativeUInt Ident, const System::TVarRec *Args, const int Args_High)/* overload */ : EStException(Ident, Args, Args_High) { }
+	/* Exception.CreateResFmt */ inline __fastcall EStRegIniError(System::PResStringRec ResStringRec, const System::TVarRec *Args, const int Args_High)/* overload */ : EStException(ResStringRec, Args, Args_High) { }
 	/* Exception.CreateHelp */ inline __fastcall EStRegIniError(const System::UnicodeString Msg, int AHelpContext) : EStException(Msg, AHelpContext) { }
-	/* Exception.CreateFmtHelp */ inline __fastcall EStRegIniError(const System::UnicodeString Msg, System::TVarRec const *Args, const int Args_High, int AHelpContext) : EStException(Msg, Args, Args_High, AHelpContext) { }
+	/* Exception.CreateFmtHelp */ inline __fastcall EStRegIniError(const System::UnicodeString Msg, const System::TVarRec *Args, const int Args_High, int AHelpContext) : EStException(Msg, Args, Args_High, AHelpContext) { }
 	/* Exception.CreateResHelp */ inline __fastcall EStRegIniError(NativeUInt Ident, int AHelpContext)/* overload */ : EStException(Ident, AHelpContext) { }
 	/* Exception.CreateResHelp */ inline __fastcall EStRegIniError(System::PResStringRec ResStringRec, int AHelpContext)/* overload */ : EStException(ResStringRec, AHelpContext) { }
-	/* Exception.CreateResFmtHelp */ inline __fastcall EStRegIniError(System::PResStringRec ResStringRec, System::TVarRec const *Args, const int Args_High, int AHelpContext)/* overload */ : EStException(ResStringRec, Args, Args_High, AHelpContext) { }
-	/* Exception.CreateResFmtHelp */ inline __fastcall EStRegIniError(NativeUInt Ident, System::TVarRec const *Args, const int Args_High, int AHelpContext)/* overload */ : EStException(Ident, Args, Args_High, AHelpContext) { }
+	/* Exception.CreateResFmtHelp */ inline __fastcall EStRegIniError(System::PResStringRec ResStringRec, const System::TVarRec *Args, const int Args_High, int AHelpContext)/* overload */ : EStException(ResStringRec, Args, Args_High, AHelpContext) { }
+	/* Exception.CreateResFmtHelp */ inline __fastcall EStRegIniError(NativeUInt Ident, const System::TVarRec *Args, const int Args_High, int AHelpContext)/* overload */ : EStException(Ident, Args, Args_High, AHelpContext) { }
 	/* Exception.Destroy */ inline __fastcall virtual ~EStRegIniError(void) { }
 	
 };
@@ -173,21 +173,21 @@ class PASCALIMPLEMENTATION EStBCDError : public EStException
 	
 public:
 	/* EStException.CreateResTP */ inline __fastcall EStBCDError(int Ident, System::Word Dummy) : EStException(Ident, Dummy) { }
-	/* EStException.CreateResFmtTP */ inline __fastcall EStBCDError(int Ident, System::TVarRec const *Args, const int Args_High, System::Word Dummy) : EStException(Ident, Args, Args_High, Dummy) { }
+	/* EStException.CreateResFmtTP */ inline __fastcall EStBCDError(int Ident, const System::TVarRec *Args, const int Args_High, System::Word Dummy) : EStException(Ident, Args, Args_High, Dummy) { }
 	
 public:
 	/* Exception.Create */ inline __fastcall EStBCDError(const System::UnicodeString Msg) : EStException(Msg) { }
-	/* Exception.CreateFmt */ inline __fastcall EStBCDError(const System::UnicodeString Msg, System::TVarRec const *Args, const int Args_High) : EStException(Msg, Args, Args_High) { }
+	/* Exception.CreateFmt */ inline __fastcall EStBCDError(const System::UnicodeString Msg, const System::TVarRec *Args, const int Args_High) : EStException(Msg, Args, Args_High) { }
 	/* Exception.CreateRes */ inline __fastcall EStBCDError(NativeUInt Ident)/* overload */ : EStException(Ident) { }
 	/* Exception.CreateRes */ inline __fastcall EStBCDError(System::PResStringRec ResStringRec)/* overload */ : EStException(ResStringRec) { }
-	/* Exception.CreateResFmt */ inline __fastcall EStBCDError(NativeUInt Ident, System::TVarRec const *Args, const int Args_High)/* overload */ : EStException(Ident, Args, Args_High) { }
-	/* Exception.CreateResFmt */ inline __fastcall EStBCDError(System::PResStringRec ResStringRec, System::TVarRec const *Args, const int Args_High)/* overload */ : EStException(ResStringRec, Args, Args_High) { }
+	/* Exception.CreateResFmt */ inline __fastcall EStBCDError(NativeUInt Ident, const System::TVarRec *Args, const int Args_High)/* overload */ : EStException(Ident, Args, Args_High) { }
+	/* Exception.CreateResFmt */ inline __fastcall EStBCDError(System::PResStringRec ResStringRec, const System::TVarRec *Args, const int Args_High)/* overload */ : EStException(ResStringRec, Args, Args_High) { }
 	/* Exception.CreateHelp */ inline __fastcall EStBCDError(const System::UnicodeString Msg, int AHelpContext) : EStException(Msg, AHelpContext) { }
-	/* Exception.CreateFmtHelp */ inline __fastcall EStBCDError(const System::UnicodeString Msg, System::TVarRec const *Args, const int Args_High, int AHelpContext) : EStException(Msg, Args, Args_High, AHelpContext) { }
+	/* Exception.CreateFmtHelp */ inline __fastcall EStBCDError(const System::UnicodeString Msg, const System::TVarRec *Args, const int Args_High, int AHelpContext) : EStException(Msg, Args, Args_High, AHelpContext) { }
 	/* Exception.CreateResHelp */ inline __fastcall EStBCDError(NativeUInt Ident, int AHelpContext)/* overload */ : EStException(Ident, AHelpContext) { }
 	/* Exception.CreateResHelp */ inline __fastcall EStBCDError(System::PResStringRec ResStringRec, int AHelpContext)/* overload */ : EStException(ResStringRec, AHelpContext) { }
-	/* Exception.CreateResFmtHelp */ inline __fastcall EStBCDError(System::PResStringRec ResStringRec, System::TVarRec const *Args, const int Args_High, int AHelpContext)/* overload */ : EStException(ResStringRec, Args, Args_High, AHelpContext) { }
-	/* Exception.CreateResFmtHelp */ inline __fastcall EStBCDError(NativeUInt Ident, System::TVarRec const *Args, const int Args_High, int AHelpContext)/* overload */ : EStException(Ident, Args, Args_High, AHelpContext) { }
+	/* Exception.CreateResFmtHelp */ inline __fastcall EStBCDError(System::PResStringRec ResStringRec, const System::TVarRec *Args, const int Args_High, int AHelpContext)/* overload */ : EStException(ResStringRec, Args, Args_High, AHelpContext) { }
+	/* Exception.CreateResFmtHelp */ inline __fastcall EStBCDError(NativeUInt Ident, const System::TVarRec *Args, const int Args_High, int AHelpContext)/* overload */ : EStException(Ident, Args, Args_High, AHelpContext) { }
 	/* Exception.Destroy */ inline __fastcall virtual ~EStBCDError(void) { }
 	
 };
@@ -199,21 +199,21 @@ class PASCALIMPLEMENTATION EStStringError : public EStException
 	
 public:
 	/* EStException.CreateResTP */ inline __fastcall EStStringError(int Ident, System::Word Dummy) : EStException(Ident, Dummy) { }
-	/* EStException.CreateResFmtTP */ inline __fastcall EStStringError(int Ident, System::TVarRec const *Args, const int Args_High, System::Word Dummy) : EStException(Ident, Args, Args_High, Dummy) { }
+	/* EStException.CreateResFmtTP */ inline __fastcall EStStringError(int Ident, const System::TVarRec *Args, const int Args_High, System::Word Dummy) : EStException(Ident, Args, Args_High, Dummy) { }
 	
 public:
 	/* Exception.Create */ inline __fastcall EStStringError(const System::UnicodeString Msg) : EStException(Msg) { }
-	/* Exception.CreateFmt */ inline __fastcall EStStringError(const System::UnicodeString Msg, System::TVarRec const *Args, const int Args_High) : EStException(Msg, Args, Args_High) { }
+	/* Exception.CreateFmt */ inline __fastcall EStStringError(const System::UnicodeString Msg, const System::TVarRec *Args, const int Args_High) : EStException(Msg, Args, Args_High) { }
 	/* Exception.CreateRes */ inline __fastcall EStStringError(NativeUInt Ident)/* overload */ : EStException(Ident) { }
 	/* Exception.CreateRes */ inline __fastcall EStStringError(System::PResStringRec ResStringRec)/* overload */ : EStException(ResStringRec) { }
-	/* Exception.CreateResFmt */ inline __fastcall EStStringError(NativeUInt Ident, System::TVarRec const *Args, const int Args_High)/* overload */ : EStException(Ident, Args, Args_High) { }
-	/* Exception.CreateResFmt */ inline __fastcall EStStringError(System::PResStringRec ResStringRec, System::TVarRec const *Args, const int Args_High)/* overload */ : EStException(ResStringRec, Args, Args_High) { }
+	/* Exception.CreateResFmt */ inline __fastcall EStStringError(NativeUInt Ident, const System::TVarRec *Args, const int Args_High)/* overload */ : EStException(Ident, Args, Args_High) { }
+	/* Exception.CreateResFmt */ inline __fastcall EStStringError(System::PResStringRec ResStringRec, const System::TVarRec *Args, const int Args_High)/* overload */ : EStException(ResStringRec, Args, Args_High) { }
 	/* Exception.CreateHelp */ inline __fastcall EStStringError(const System::UnicodeString Msg, int AHelpContext) : EStException(Msg, AHelpContext) { }
-	/* Exception.CreateFmtHelp */ inline __fastcall EStStringError(const System::UnicodeString Msg, System::TVarRec const *Args, const int Args_High, int AHelpContext) : EStException(Msg, Args, Args_High, AHelpContext) { }
+	/* Exception.CreateFmtHelp */ inline __fastcall EStStringError(const System::UnicodeString Msg, const System::TVarRec *Args, const int Args_High, int AHelpContext) : EStException(Msg, Args, Args_High, AHelpContext) { }
 	/* Exception.CreateResHelp */ inline __fastcall EStStringError(NativeUInt Ident, int AHelpContext)/* overload */ : EStException(Ident, AHelpContext) { }
 	/* Exception.CreateResHelp */ inline __fastcall EStStringError(System::PResStringRec ResStringRec, int AHelpContext)/* overload */ : EStException(ResStringRec, AHelpContext) { }
-	/* Exception.CreateResFmtHelp */ inline __fastcall EStStringError(System::PResStringRec ResStringRec, System::TVarRec const *Args, const int Args_High, int AHelpContext)/* overload */ : EStException(ResStringRec, Args, Args_High, AHelpContext) { }
-	/* Exception.CreateResFmtHelp */ inline __fastcall EStStringError(NativeUInt Ident, System::TVarRec const *Args, const int Args_High, int AHelpContext)/* overload */ : EStException(Ident, Args, Args_High, AHelpContext) { }
+	/* Exception.CreateResFmtHelp */ inline __fastcall EStStringError(System::PResStringRec ResStringRec, const System::TVarRec *Args, const int Args_High, int AHelpContext)/* overload */ : EStException(ResStringRec, Args, Args_High, AHelpContext) { }
+	/* Exception.CreateResFmtHelp */ inline __fastcall EStStringError(NativeUInt Ident, const System::TVarRec *Args, const int Args_High, int AHelpContext)/* overload */ : EStException(Ident, Args, Args_High, AHelpContext) { }
 	/* Exception.Destroy */ inline __fastcall virtual ~EStStringError(void) { }
 	
 };
@@ -225,21 +225,21 @@ class PASCALIMPLEMENTATION EStVersionInfoError : public EStException
 	
 public:
 	/* EStException.CreateResTP */ inline __fastcall EStVersionInfoError(int Ident, System::Word Dummy) : EStException(Ident, Dummy) { }
-	/* EStException.CreateResFmtTP */ inline __fastcall EStVersionInfoError(int Ident, System::TVarRec const *Args, const int Args_High, System::Word Dummy) : EStException(Ident, Args, Args_High, Dummy) { }
+	/* EStException.CreateResFmtTP */ inline __fastcall EStVersionInfoError(int Ident, const System::TVarRec *Args, const int Args_High, System::Word Dummy) : EStException(Ident, Args, Args_High, Dummy) { }
 	
 public:
 	/* Exception.Create */ inline __fastcall EStVersionInfoError(const System::UnicodeString Msg) : EStException(Msg) { }
-	/* Exception.CreateFmt */ inline __fastcall EStVersionInfoError(const System::UnicodeString Msg, System::TVarRec const *Args, const int Args_High) : EStException(Msg, Args, Args_High) { }
+	/* Exception.CreateFmt */ inline __fastcall EStVersionInfoError(const System::UnicodeString Msg, const System::TVarRec *Args, const int Args_High) : EStException(Msg, Args, Args_High) { }
 	/* Exception.CreateRes */ inline __fastcall EStVersionInfoError(NativeUInt Ident)/* overload */ : EStException(Ident) { }
 	/* Exception.CreateRes */ inline __fastcall EStVersionInfoError(System::PResStringRec ResStringRec)/* overload */ : EStException(ResStringRec) { }
-	/* Exception.CreateResFmt */ inline __fastcall EStVersionInfoError(NativeUInt Ident, System::TVarRec const *Args, const int Args_High)/* overload */ : EStException(Ident, Args, Args_High) { }
-	/* Exception.CreateResFmt */ inline __fastcall EStVersionInfoError(System::PResStringRec ResStringRec, System::TVarRec const *Args, const int Args_High)/* overload */ : EStException(ResStringRec, Args, Args_High) { }
+	/* Exception.CreateResFmt */ inline __fastcall EStVersionInfoError(NativeUInt Ident, const System::TVarRec *Args, const int Args_High)/* overload */ : EStException(Ident, Args, Args_High) { }
+	/* Exception.CreateResFmt */ inline __fastcall EStVersionInfoError(System::PResStringRec ResStringRec, const System::TVarRec *Args, const int Args_High)/* overload */ : EStException(ResStringRec, Args, Args_High) { }
 	/* Exception.CreateHelp */ inline __fastcall EStVersionInfoError(const System::UnicodeString Msg, int AHelpContext) : EStException(Msg, AHelpContext) { }
-	/* Exception.CreateFmtHelp */ inline __fastcall EStVersionInfoError(const System::UnicodeString Msg, System::TVarRec const *Args, const int Args_High, int AHelpContext) : EStException(Msg, Args, Args_High, AHelpContext) { }
+	/* Exception.CreateFmtHelp */ inline __fastcall EStVersionInfoError(const System::UnicodeString Msg, const System::TVarRec *Args, const int Args_High, int AHelpContext) : EStException(Msg, Args, Args_High, AHelpContext) { }
 	/* Exception.CreateResHelp */ inline __fastcall EStVersionInfoError(NativeUInt Ident, int AHelpContext)/* overload */ : EStException(Ident, AHelpContext) { }
 	/* Exception.CreateResHelp */ inline __fastcall EStVersionInfoError(System::PResStringRec ResStringRec, int AHelpContext)/* overload */ : EStException(ResStringRec, AHelpContext) { }
-	/* Exception.CreateResFmtHelp */ inline __fastcall EStVersionInfoError(System::PResStringRec ResStringRec, System::TVarRec const *Args, const int Args_High, int AHelpContext)/* overload */ : EStException(ResStringRec, Args, Args_High, AHelpContext) { }
-	/* Exception.CreateResFmtHelp */ inline __fastcall EStVersionInfoError(NativeUInt Ident, System::TVarRec const *Args, const int Args_High, int AHelpContext)/* overload */ : EStException(Ident, Args, Args_High, AHelpContext) { }
+	/* Exception.CreateResFmtHelp */ inline __fastcall EStVersionInfoError(System::PResStringRec ResStringRec, const System::TVarRec *Args, const int Args_High, int AHelpContext)/* overload */ : EStException(ResStringRec, Args, Args_High, AHelpContext) { }
+	/* Exception.CreateResFmtHelp */ inline __fastcall EStVersionInfoError(NativeUInt Ident, const System::TVarRec *Args, const int Args_High, int AHelpContext)/* overload */ : EStException(Ident, Args, Args_High, AHelpContext) { }
 	/* Exception.Destroy */ inline __fastcall virtual ~EStVersionInfoError(void) { }
 	
 };
@@ -251,21 +251,21 @@ class PASCALIMPLEMENTATION EStNetException : public EStException
 	
 public:
 	/* EStException.CreateResTP */ inline __fastcall EStNetException(int Ident, System::Word Dummy) : EStException(Ident, Dummy) { }
-	/* EStException.CreateResFmtTP */ inline __fastcall EStNetException(int Ident, System::TVarRec const *Args, const int Args_High, System::Word Dummy) : EStException(Ident, Args, Args_High, Dummy) { }
+	/* EStException.CreateResFmtTP */ inline __fastcall EStNetException(int Ident, const System::TVarRec *Args, const int Args_High, System::Word Dummy) : EStException(Ident, Args, Args_High, Dummy) { }
 	
 public:
 	/* Exception.Create */ inline __fastcall EStNetException(const System::UnicodeString Msg) : EStException(Msg) { }
-	/* Exception.CreateFmt */ inline __fastcall EStNetException(const System::UnicodeString Msg, System::TVarRec const *Args, const int Args_High) : EStException(Msg, Args, Args_High) { }
+	/* Exception.CreateFmt */ inline __fastcall EStNetException(const System::UnicodeString Msg, const System::TVarRec *Args, const int Args_High) : EStException(Msg, Args, Args_High) { }
 	/* Exception.CreateRes */ inline __fastcall EStNetException(NativeUInt Ident)/* overload */ : EStException(Ident) { }
 	/* Exception.CreateRes */ inline __fastcall EStNetException(System::PResStringRec ResStringRec)/* overload */ : EStException(ResStringRec) { }
-	/* Exception.CreateResFmt */ inline __fastcall EStNetException(NativeUInt Ident, System::TVarRec const *Args, const int Args_High)/* overload */ : EStException(Ident, Args, Args_High) { }
-	/* Exception.CreateResFmt */ inline __fastcall EStNetException(System::PResStringRec ResStringRec, System::TVarRec const *Args, const int Args_High)/* overload */ : EStException(ResStringRec, Args, Args_High) { }
+	/* Exception.CreateResFmt */ inline __fastcall EStNetException(NativeUInt Ident, const System::TVarRec *Args, const int Args_High)/* overload */ : EStException(Ident, Args, Args_High) { }
+	/* Exception.CreateResFmt */ inline __fastcall EStNetException(System::PResStringRec ResStringRec, const System::TVarRec *Args, const int Args_High)/* overload */ : EStException(ResStringRec, Args, Args_High) { }
 	/* Exception.CreateHelp */ inline __fastcall EStNetException(const System::UnicodeString Msg, int AHelpContext) : EStException(Msg, AHelpContext) { }
-	/* Exception.CreateFmtHelp */ inline __fastcall EStNetException(const System::UnicodeString Msg, System::TVarRec const *Args, const int Args_High, int AHelpContext) : EStException(Msg, Args, Args_High, AHelpContext) { }
+	/* Exception.CreateFmtHelp */ inline __fastcall EStNetException(const System::UnicodeString Msg, const System::TVarRec *Args, const int Args_High, int AHelpContext) : EStException(Msg, Args, Args_High, AHelpContext) { }
 	/* Exception.CreateResHelp */ inline __fastcall EStNetException(NativeUInt Ident, int AHelpContext)/* overload */ : EStException(Ident, AHelpContext) { }
 	/* Exception.CreateResHelp */ inline __fastcall EStNetException(System::PResStringRec ResStringRec, int AHelpContext)/* overload */ : EStException(ResStringRec, AHelpContext) { }
-	/* Exception.CreateResFmtHelp */ inline __fastcall EStNetException(System::PResStringRec ResStringRec, System::TVarRec const *Args, const int Args_High, int AHelpContext)/* overload */ : EStException(ResStringRec, Args, Args_High, AHelpContext) { }
-	/* Exception.CreateResFmtHelp */ inline __fastcall EStNetException(NativeUInt Ident, System::TVarRec const *Args, const int Args_High, int AHelpContext)/* overload */ : EStException(Ident, Args, Args_High, AHelpContext) { }
+	/* Exception.CreateResFmtHelp */ inline __fastcall EStNetException(System::PResStringRec ResStringRec, const System::TVarRec *Args, const int Args_High, int AHelpContext)/* overload */ : EStException(ResStringRec, Args, Args_High, AHelpContext) { }
+	/* Exception.CreateResFmtHelp */ inline __fastcall EStNetException(NativeUInt Ident, const System::TVarRec *Args, const int Args_High, int AHelpContext)/* overload */ : EStException(Ident, Args, Args_High, AHelpContext) { }
 	/* Exception.Destroy */ inline __fastcall virtual ~EStNetException(void) { }
 	
 };
@@ -277,21 +277,21 @@ class PASCALIMPLEMENTATION EStBarCodeError : public EStException
 	
 public:
 	/* EStException.CreateResTP */ inline __fastcall EStBarCodeError(int Ident, System::Word Dummy) : EStException(Ident, Dummy) { }
-	/* EStException.CreateResFmtTP */ inline __fastcall EStBarCodeError(int Ident, System::TVarRec const *Args, const int Args_High, System::Word Dummy) : EStException(Ident, Args, Args_High, Dummy) { }
+	/* EStException.CreateResFmtTP */ inline __fastcall EStBarCodeError(int Ident, const System::TVarRec *Args, const int Args_High, System::Word Dummy) : EStException(Ident, Args, Args_High, Dummy) { }
 	
 public:
 	/* Exception.Create */ inline __fastcall EStBarCodeError(const System::UnicodeString Msg) : EStException(Msg) { }
-	/* Exception.CreateFmt */ inline __fastcall EStBarCodeError(const System::UnicodeString Msg, System::TVarRec const *Args, const int Args_High) : EStException(Msg, Args, Args_High) { }
+	/* Exception.CreateFmt */ inline __fastcall EStBarCodeError(const System::UnicodeString Msg, const System::TVarRec *Args, const int Args_High) : EStException(Msg, Args, Args_High) { }
 	/* Exception.CreateRes */ inline __fastcall EStBarCodeError(NativeUInt Ident)/* overload */ : EStException(Ident) { }
 	/* Exception.CreateRes */ inline __fastcall EStBarCodeError(System::PResStringRec ResStringRec)/* overload */ : EStException(ResStringRec) { }
-	/* Exception.CreateResFmt */ inline __fastcall EStBarCodeError(NativeUInt Ident, System::TVarRec const *Args, const int Args_High)/* overload */ : EStException(Ident, Args, Args_High) { }
-	/* Exception.CreateResFmt */ inline __fastcall EStBarCodeError(System::PResStringRec ResStringRec, System::TVarRec const *Args, const int Args_High)/* overload */ : EStException(ResStringRec, Args, Args_High) { }
+	/* Exception.CreateResFmt */ inline __fastcall EStBarCodeError(NativeUInt Ident, const System::TVarRec *Args, const int Args_High)/* overload */ : EStException(Ident, Args, Args_High) { }
+	/* Exception.CreateResFmt */ inline __fastcall EStBarCodeError(System::PResStringRec ResStringRec, const System::TVarRec *Args, const int Args_High)/* overload */ : EStException(ResStringRec, Args, Args_High) { }
 	/* Exception.CreateHelp */ inline __fastcall EStBarCodeError(const System::UnicodeString Msg, int AHelpContext) : EStException(Msg, AHelpContext) { }
-	/* Exception.CreateFmtHelp */ inline __fastcall EStBarCodeError(const System::UnicodeString Msg, System::TVarRec const *Args, const int Args_High, int AHelpContext) : EStException(Msg, Args, Args_High, AHelpContext) { }
+	/* Exception.CreateFmtHelp */ inline __fastcall EStBarCodeError(const System::UnicodeString Msg, const System::TVarRec *Args, const int Args_High, int AHelpContext) : EStException(Msg, Args, Args_High, AHelpContext) { }
 	/* Exception.CreateResHelp */ inline __fastcall EStBarCodeError(NativeUInt Ident, int AHelpContext)/* overload */ : EStException(Ident, AHelpContext) { }
 	/* Exception.CreateResHelp */ inline __fastcall EStBarCodeError(System::PResStringRec ResStringRec, int AHelpContext)/* overload */ : EStException(ResStringRec, AHelpContext) { }
-	/* Exception.CreateResFmtHelp */ inline __fastcall EStBarCodeError(System::PResStringRec ResStringRec, System::TVarRec const *Args, const int Args_High, int AHelpContext)/* overload */ : EStException(ResStringRec, Args, Args_High, AHelpContext) { }
-	/* Exception.CreateResFmtHelp */ inline __fastcall EStBarCodeError(NativeUInt Ident, System::TVarRec const *Args, const int Args_High, int AHelpContext)/* overload */ : EStException(Ident, Args, Args_High, AHelpContext) { }
+	/* Exception.CreateResFmtHelp */ inline __fastcall EStBarCodeError(System::PResStringRec ResStringRec, const System::TVarRec *Args, const int Args_High, int AHelpContext)/* overload */ : EStException(ResStringRec, Args, Args_High, AHelpContext) { }
+	/* Exception.CreateResFmtHelp */ inline __fastcall EStBarCodeError(NativeUInt Ident, const System::TVarRec *Args, const int Args_High, int AHelpContext)/* overload */ : EStException(Ident, Args, Args_High, AHelpContext) { }
 	/* Exception.Destroy */ inline __fastcall virtual ~EStBarCodeError(void) { }
 	
 };
@@ -303,21 +303,21 @@ class PASCALIMPLEMENTATION EStPNBarCodeError : public EStException
 	
 public:
 	/* EStException.CreateResTP */ inline __fastcall EStPNBarCodeError(int Ident, System::Word Dummy) : EStException(Ident, Dummy) { }
-	/* EStException.CreateResFmtTP */ inline __fastcall EStPNBarCodeError(int Ident, System::TVarRec const *Args, const int Args_High, System::Word Dummy) : EStException(Ident, Args, Args_High, Dummy) { }
+	/* EStException.CreateResFmtTP */ inline __fastcall EStPNBarCodeError(int Ident, const System::TVarRec *Args, const int Args_High, System::Word Dummy) : EStException(Ident, Args, Args_High, Dummy) { }
 	
 public:
 	/* Exception.Create */ inline __fastcall EStPNBarCodeError(const System::UnicodeString Msg) : EStException(Msg) { }
-	/* Exception.CreateFmt */ inline __fastcall EStPNBarCodeError(const System::UnicodeString Msg, System::TVarRec const *Args, const int Args_High) : EStException(Msg, Args, Args_High) { }
+	/* Exception.CreateFmt */ inline __fastcall EStPNBarCodeError(const System::UnicodeString Msg, const System::TVarRec *Args, const int Args_High) : EStException(Msg, Args, Args_High) { }
 	/* Exception.CreateRes */ inline __fastcall EStPNBarCodeError(NativeUInt Ident)/* overload */ : EStException(Ident) { }
 	/* Exception.CreateRes */ inline __fastcall EStPNBarCodeError(System::PResStringRec ResStringRec)/* overload */ : EStException(ResStringRec) { }
-	/* Exception.CreateResFmt */ inline __fastcall EStPNBarCodeError(NativeUInt Ident, System::TVarRec const *Args, const int Args_High)/* overload */ : EStException(Ident, Args, Args_High) { }
-	/* Exception.CreateResFmt */ inline __fastcall EStPNBarCodeError(System::PResStringRec ResStringRec, System::TVarRec const *Args, const int Args_High)/* overload */ : EStException(ResStringRec, Args, Args_High) { }
+	/* Exception.CreateResFmt */ inline __fastcall EStPNBarCodeError(NativeUInt Ident, const System::TVarRec *Args, const int Args_High)/* overload */ : EStException(Ident, Args, Args_High) { }
+	/* Exception.CreateResFmt */ inline __fastcall EStPNBarCodeError(System::PResStringRec ResStringRec, const System::TVarRec *Args, const int Args_High)/* overload */ : EStException(ResStringRec, Args, Args_High) { }
 	/* Exception.CreateHelp */ inline __fastcall EStPNBarCodeError(const System::UnicodeString Msg, int AHelpContext) : EStException(Msg, AHelpContext) { }
-	/* Exception.CreateFmtHelp */ inline __fastcall EStPNBarCodeError(const System::UnicodeString Msg, System::TVarRec const *Args, const int Args_High, int AHelpContext) : EStException(Msg, Args, Args_High, AHelpContext) { }
+	/* Exception.CreateFmtHelp */ inline __fastcall EStPNBarCodeError(const System::UnicodeString Msg, const System::TVarRec *Args, const int Args_High, int AHelpContext) : EStException(Msg, Args, Args_High, AHelpContext) { }
 	/* Exception.CreateResHelp */ inline __fastcall EStPNBarCodeError(NativeUInt Ident, int AHelpContext)/* overload */ : EStException(Ident, AHelpContext) { }
 	/* Exception.CreateResHelp */ inline __fastcall EStPNBarCodeError(System::PResStringRec ResStringRec, int AHelpContext)/* overload */ : EStException(ResStringRec, AHelpContext) { }
-	/* Exception.CreateResFmtHelp */ inline __fastcall EStPNBarCodeError(System::PResStringRec ResStringRec, System::TVarRec const *Args, const int Args_High, int AHelpContext)/* overload */ : EStException(ResStringRec, Args, Args_High, AHelpContext) { }
-	/* Exception.CreateResFmtHelp */ inline __fastcall EStPNBarCodeError(NativeUInt Ident, System::TVarRec const *Args, const int Args_High, int AHelpContext)/* overload */ : EStException(Ident, Args, Args_High, AHelpContext) { }
+	/* Exception.CreateResFmtHelp */ inline __fastcall EStPNBarCodeError(System::PResStringRec ResStringRec, const System::TVarRec *Args, const int Args_High, int AHelpContext)/* overload */ : EStException(ResStringRec, Args, Args_High, AHelpContext) { }
+	/* Exception.CreateResFmtHelp */ inline __fastcall EStPNBarCodeError(NativeUInt Ident, const System::TVarRec *Args, const int Args_High, int AHelpContext)/* overload */ : EStException(Ident, Args, Args_High, AHelpContext) { }
 	/* Exception.Destroy */ inline __fastcall virtual ~EStPNBarCodeError(void) { }
 	
 };
@@ -329,21 +329,21 @@ class PASCALIMPLEMENTATION EStStatError : public EStException
 	
 public:
 	/* EStException.CreateResTP */ inline __fastcall EStStatError(int Ident, System::Word Dummy) : EStException(Ident, Dummy) { }
-	/* EStException.CreateResFmtTP */ inline __fastcall EStStatError(int Ident, System::TVarRec const *Args, const int Args_High, System::Word Dummy) : EStException(Ident, Args, Args_High, Dummy) { }
+	/* EStException.CreateResFmtTP */ inline __fastcall EStStatError(int Ident, const System::TVarRec *Args, const int Args_High, System::Word Dummy) : EStException(Ident, Args, Args_High, Dummy) { }
 	
 public:
 	/* Exception.Create */ inline __fastcall EStStatError(const System::UnicodeString Msg) : EStException(Msg) { }
-	/* Exception.CreateFmt */ inline __fastcall EStStatError(const System::UnicodeString Msg, System::TVarRec const *Args, const int Args_High) : EStException(Msg, Args, Args_High) { }
+	/* Exception.CreateFmt */ inline __fastcall EStStatError(const System::UnicodeString Msg, const System::TVarRec *Args, const int Args_High) : EStException(Msg, Args, Args_High) { }
 	/* Exception.CreateRes */ inline __fastcall EStStatError(NativeUInt Ident)/* overload */ : EStException(Ident) { }
 	/* Exception.CreateRes */ inline __fastcall EStStatError(System::PResStringRec ResStringRec)/* overload */ : EStException(ResStringRec) { }
-	/* Exception.CreateResFmt */ inline __fastcall EStStatError(NativeUInt Ident, System::TVarRec const *Args, const int Args_High)/* overload */ : EStException(Ident, Args, Args_High) { }
-	/* Exception.CreateResFmt */ inline __fastcall EStStatError(System::PResStringRec ResStringRec, System::TVarRec const *Args, const int Args_High)/* overload */ : EStException(ResStringRec, Args, Args_High) { }
+	/* Exception.CreateResFmt */ inline __fastcall EStStatError(NativeUInt Ident, const System::TVarRec *Args, const int Args_High)/* overload */ : EStException(Ident, Args, Args_High) { }
+	/* Exception.CreateResFmt */ inline __fastcall EStStatError(System::PResStringRec ResStringRec, const System::TVarRec *Args, const int Args_High)/* overload */ : EStException(ResStringRec, Args, Args_High) { }
 	/* Exception.CreateHelp */ inline __fastcall EStStatError(const System::UnicodeString Msg, int AHelpContext) : EStException(Msg, AHelpContext) { }
-	/* Exception.CreateFmtHelp */ inline __fastcall EStStatError(const System::UnicodeString Msg, System::TVarRec const *Args, const int Args_High, int AHelpContext) : EStException(Msg, Args, Args_High, AHelpContext) { }
+	/* Exception.CreateFmtHelp */ inline __fastcall EStStatError(const System::UnicodeString Msg, const System::TVarRec *Args, const int Args_High, int AHelpContext) : EStException(Msg, Args, Args_High, AHelpContext) { }
 	/* Exception.CreateResHelp */ inline __fastcall EStStatError(NativeUInt Ident, int AHelpContext)/* overload */ : EStException(Ident, AHelpContext) { }
 	/* Exception.CreateResHelp */ inline __fastcall EStStatError(System::PResStringRec ResStringRec, int AHelpContext)/* overload */ : EStException(ResStringRec, AHelpContext) { }
-	/* Exception.CreateResFmtHelp */ inline __fastcall EStStatError(System::PResStringRec ResStringRec, System::TVarRec const *Args, const int Args_High, int AHelpContext)/* overload */ : EStException(ResStringRec, Args, Args_High, AHelpContext) { }
-	/* Exception.CreateResFmtHelp */ inline __fastcall EStStatError(NativeUInt Ident, System::TVarRec const *Args, const int Args_High, int AHelpContext)/* overload */ : EStException(Ident, Args, Args_High, AHelpContext) { }
+	/* Exception.CreateResFmtHelp */ inline __fastcall EStStatError(System::PResStringRec ResStringRec, const System::TVarRec *Args, const int Args_High, int AHelpContext)/* overload */ : EStException(ResStringRec, Args, Args_High, AHelpContext) { }
+	/* Exception.CreateResFmtHelp */ inline __fastcall EStStatError(NativeUInt Ident, const System::TVarRec *Args, const int Args_High, int AHelpContext)/* overload */ : EStException(Ident, Args, Args_High, AHelpContext) { }
 	/* Exception.Destroy */ inline __fastcall virtual ~EStStatError(void) { }
 	
 };
@@ -355,21 +355,21 @@ class PASCALIMPLEMENTATION EStFinError : public EStException
 	
 public:
 	/* EStException.CreateResTP */ inline __fastcall EStFinError(int Ident, System::Word Dummy) : EStException(Ident, Dummy) { }
-	/* EStException.CreateResFmtTP */ inline __fastcall EStFinError(int Ident, System::TVarRec const *Args, const int Args_High, System::Word Dummy) : EStException(Ident, Args, Args_High, Dummy) { }
+	/* EStException.CreateResFmtTP */ inline __fastcall EStFinError(int Ident, const System::TVarRec *Args, const int Args_High, System::Word Dummy) : EStException(Ident, Args, Args_High, Dummy) { }
 	
 public:
 	/* Exception.Create */ inline __fastcall EStFinError(const System::UnicodeString Msg) : EStException(Msg) { }
-	/* Exception.CreateFmt */ inline __fastcall EStFinError(const System::UnicodeString Msg, System::TVarRec const *Args, const int Args_High) : EStException(Msg, Args, Args_High) { }
+	/* Exception.CreateFmt */ inline __fastcall EStFinError(const System::UnicodeString Msg, const System::TVarRec *Args, const int Args_High) : EStException(Msg, Args, Args_High) { }
 	/* Exception.CreateRes */ inline __fastcall EStFinError(NativeUInt Ident)/* overload */ : EStException(Ident) { }
 	/* Exception.CreateRes */ inline __fastcall EStFinError(System::PResStringRec ResStringRec)/* overload */ : EStException(ResStringRec) { }
-	/* Exception.CreateResFmt */ inline __fastcall EStFinError(NativeUInt Ident, System::TVarRec const *Args, const int Args_High)/* overload */ : EStException(Ident, Args, Args_High) { }
-	/* Exception.CreateResFmt */ inline __fastcall EStFinError(System::PResStringRec ResStringRec, System::TVarRec const *Args, const int Args_High)/* overload */ : EStException(ResStringRec, Args, Args_High) { }
+	/* Exception.CreateResFmt */ inline __fastcall EStFinError(NativeUInt Ident, const System::TVarRec *Args, const int Args_High)/* overload */ : EStException(Ident, Args, Args_High) { }
+	/* Exception.CreateResFmt */ inline __fastcall EStFinError(System::PResStringRec ResStringRec, const System::TVarRec *Args, const int Args_High)/* overload */ : EStException(ResStringRec, Args, Args_High) { }
 	/* Exception.CreateHelp */ inline __fastcall EStFinError(const System::UnicodeString Msg, int AHelpContext) : EStException(Msg, AHelpContext) { }
-	/* Exception.CreateFmtHelp */ inline __fastcall EStFinError(const System::UnicodeString Msg, System::TVarRec const *Args, const int Args_High, int AHelpContext) : EStException(Msg, Args, Args_High, AHelpContext) { }
+	/* Exception.CreateFmtHelp */ inline __fastcall EStFinError(const System::UnicodeString Msg, const System::TVarRec *Args, const int Args_High, int AHelpContext) : EStException(Msg, Args, Args_High, AHelpContext) { }
 	/* Exception.CreateResHelp */ inline __fastcall EStFinError(NativeUInt Ident, int AHelpContext)/* overload */ : EStException(Ident, AHelpContext) { }
 	/* Exception.CreateResHelp */ inline __fastcall EStFinError(System::PResStringRec ResStringRec, int AHelpContext)/* overload */ : EStException(ResStringRec, AHelpContext) { }
-	/* Exception.CreateResFmtHelp */ inline __fastcall EStFinError(System::PResStringRec ResStringRec, System::TVarRec const *Args, const int Args_High, int AHelpContext)/* overload */ : EStException(ResStringRec, Args, Args_High, AHelpContext) { }
-	/* Exception.CreateResFmtHelp */ inline __fastcall EStFinError(NativeUInt Ident, System::TVarRec const *Args, const int Args_High, int AHelpContext)/* overload */ : EStException(Ident, Args, Args_High, AHelpContext) { }
+	/* Exception.CreateResFmtHelp */ inline __fastcall EStFinError(System::PResStringRec ResStringRec, const System::TVarRec *Args, const int Args_High, int AHelpContext)/* overload */ : EStException(ResStringRec, Args, Args_High, AHelpContext) { }
+	/* Exception.CreateResFmtHelp */ inline __fastcall EStFinError(NativeUInt Ident, const System::TVarRec *Args, const int Args_High, int AHelpContext)/* overload */ : EStException(Ident, Args, Args_High, AHelpContext) { }
 	/* Exception.Destroy */ inline __fastcall virtual ~EStFinError(void) { }
 	
 };
@@ -381,21 +381,21 @@ class PASCALIMPLEMENTATION EStMimeError : public EStException
 	
 public:
 	/* EStException.CreateResTP */ inline __fastcall EStMimeError(int Ident, System::Word Dummy) : EStException(Ident, Dummy) { }
-	/* EStException.CreateResFmtTP */ inline __fastcall EStMimeError(int Ident, System::TVarRec const *Args, const int Args_High, System::Word Dummy) : EStException(Ident, Args, Args_High, Dummy) { }
+	/* EStException.CreateResFmtTP */ inline __fastcall EStMimeError(int Ident, const System::TVarRec *Args, const int Args_High, System::Word Dummy) : EStException(Ident, Args, Args_High, Dummy) { }
 	
 public:
 	/* Exception.Create */ inline __fastcall EStMimeError(const System::UnicodeString Msg) : EStException(Msg) { }
-	/* Exception.CreateFmt */ inline __fastcall EStMimeError(const System::UnicodeString Msg, System::TVarRec const *Args, const int Args_High) : EStException(Msg, Args, Args_High) { }
+	/* Exception.CreateFmt */ inline __fastcall EStMimeError(const System::UnicodeString Msg, const System::TVarRec *Args, const int Args_High) : EStException(Msg, Args, Args_High) { }
 	/* Exception.CreateRes */ inline __fastcall EStMimeError(NativeUInt Ident)/* overload */ : EStException(Ident) { }
 	/* Exception.CreateRes */ inline __fastcall EStMimeError(System::PResStringRec ResStringRec)/* overload */ : EStException(ResStringRec) { }
-	/* Exception.CreateResFmt */ inline __fastcall EStMimeError(NativeUInt Ident, System::TVarRec const *Args, const int Args_High)/* overload */ : EStException(Ident, Args, Args_High) { }
-	/* Exception.CreateResFmt */ inline __fastcall EStMimeError(System::PResStringRec ResStringRec, System::TVarRec const *Args, const int Args_High)/* overload */ : EStException(ResStringRec, Args, Args_High) { }
+	/* Exception.CreateResFmt */ inline __fastcall EStMimeError(NativeUInt Ident, const System::TVarRec *Args, const int Args_High)/* overload */ : EStException(Ident, Args, Args_High) { }
+	/* Exception.CreateResFmt */ inline __fastcall EStMimeError(System::PResStringRec ResStringRec, const System::TVarRec *Args, const int Args_High)/* overload */ : EStException(ResStringRec, Args, Args_High) { }
 	/* Exception.CreateHelp */ inline __fastcall EStMimeError(const System::UnicodeString Msg, int AHelpContext) : EStException(Msg, AHelpContext) { }
-	/* Exception.CreateFmtHelp */ inline __fastcall EStMimeError(const System::UnicodeString Msg, System::TVarRec const *Args, const int Args_High, int AHelpContext) : EStException(Msg, Args, Args_High, AHelpContext) { }
+	/* Exception.CreateFmtHelp */ inline __fastcall EStMimeError(const System::UnicodeString Msg, const System::TVarRec *Args, const int Args_High, int AHelpContext) : EStException(Msg, Args, Args_High, AHelpContext) { }
 	/* Exception.CreateResHelp */ inline __fastcall EStMimeError(NativeUInt Ident, int AHelpContext)/* overload */ : EStException(Ident, AHelpContext) { }
 	/* Exception.CreateResHelp */ inline __fastcall EStMimeError(System::PResStringRec ResStringRec, int AHelpContext)/* overload */ : EStException(ResStringRec, AHelpContext) { }
-	/* Exception.CreateResFmtHelp */ inline __fastcall EStMimeError(System::PResStringRec ResStringRec, System::TVarRec const *Args, const int Args_High, int AHelpContext)/* overload */ : EStException(ResStringRec, Args, Args_High, AHelpContext) { }
-	/* Exception.CreateResFmtHelp */ inline __fastcall EStMimeError(NativeUInt Ident, System::TVarRec const *Args, const int Args_High, int AHelpContext)/* overload */ : EStException(Ident, Args, Args_High, AHelpContext) { }
+	/* Exception.CreateResFmtHelp */ inline __fastcall EStMimeError(System::PResStringRec ResStringRec, const System::TVarRec *Args, const int Args_High, int AHelpContext)/* overload */ : EStException(ResStringRec, Args, Args_High, AHelpContext) { }
+	/* Exception.CreateResFmtHelp */ inline __fastcall EStMimeError(NativeUInt Ident, const System::TVarRec *Args, const int Args_High, int AHelpContext)/* overload */ : EStException(Ident, Args, Args_High, AHelpContext) { }
 	/* Exception.Destroy */ inline __fastcall virtual ~EStMimeError(void) { }
 	
 };
@@ -407,21 +407,21 @@ class PASCALIMPLEMENTATION EStToHTMLError : public EStException
 	
 public:
 	/* EStException.CreateResTP */ inline __fastcall EStToHTMLError(int Ident, System::Word Dummy) : EStException(Ident, Dummy) { }
-	/* EStException.CreateResFmtTP */ inline __fastcall EStToHTMLError(int Ident, System::TVarRec const *Args, const int Args_High, System::Word Dummy) : EStException(Ident, Args, Args_High, Dummy) { }
+	/* EStException.CreateResFmtTP */ inline __fastcall EStToHTMLError(int Ident, const System::TVarRec *Args, const int Args_High, System::Word Dummy) : EStException(Ident, Args, Args_High, Dummy) { }
 	
 public:
 	/* Exception.Create */ inline __fastcall EStToHTMLError(const System::UnicodeString Msg) : EStException(Msg) { }
-	/* Exception.CreateFmt */ inline __fastcall EStToHTMLError(const System::UnicodeString Msg, System::TVarRec const *Args, const int Args_High) : EStException(Msg, Args, Args_High) { }
+	/* Exception.CreateFmt */ inline __fastcall EStToHTMLError(const System::UnicodeString Msg, const System::TVarRec *Args, const int Args_High) : EStException(Msg, Args, Args_High) { }
 	/* Exception.CreateRes */ inline __fastcall EStToHTMLError(NativeUInt Ident)/* overload */ : EStException(Ident) { }
 	/* Exception.CreateRes */ inline __fastcall EStToHTMLError(System::PResStringRec ResStringRec)/* overload */ : EStException(ResStringRec) { }
-	/* Exception.CreateResFmt */ inline __fastcall EStToHTMLError(NativeUInt Ident, System::TVarRec const *Args, const int Args_High)/* overload */ : EStException(Ident, Args, Args_High) { }
-	/* Exception.CreateResFmt */ inline __fastcall EStToHTMLError(System::PResStringRec ResStringRec, System::TVarRec const *Args, const int Args_High)/* overload */ : EStException(ResStringRec, Args, Args_High) { }
+	/* Exception.CreateResFmt */ inline __fastcall EStToHTMLError(NativeUInt Ident, const System::TVarRec *Args, const int Args_High)/* overload */ : EStException(Ident, Args, Args_High) { }
+	/* Exception.CreateResFmt */ inline __fastcall EStToHTMLError(System::PResStringRec ResStringRec, const System::TVarRec *Args, const int Args_High)/* overload */ : EStException(ResStringRec, Args, Args_High) { }
 	/* Exception.CreateHelp */ inline __fastcall EStToHTMLError(const System::UnicodeString Msg, int AHelpContext) : EStException(Msg, AHelpContext) { }
-	/* Exception.CreateFmtHelp */ inline __fastcall EStToHTMLError(const System::UnicodeString Msg, System::TVarRec const *Args, const int Args_High, int AHelpContext) : EStException(Msg, Args, Args_High, AHelpContext) { }
+	/* Exception.CreateFmtHelp */ inline __fastcall EStToHTMLError(const System::UnicodeString Msg, const System::TVarRec *Args, const int Args_High, int AHelpContext) : EStException(Msg, Args, Args_High, AHelpContext) { }
 	/* Exception.CreateResHelp */ inline __fastcall EStToHTMLError(NativeUInt Ident, int AHelpContext)/* overload */ : EStException(Ident, AHelpContext) { }
 	/* Exception.CreateResHelp */ inline __fastcall EStToHTMLError(System::PResStringRec ResStringRec, int AHelpContext)/* overload */ : EStException(ResStringRec, AHelpContext) { }
-	/* Exception.CreateResFmtHelp */ inline __fastcall EStToHTMLError(System::PResStringRec ResStringRec, System::TVarRec const *Args, const int Args_High, int AHelpContext)/* overload */ : EStException(ResStringRec, Args, Args_High, AHelpContext) { }
-	/* Exception.CreateResFmtHelp */ inline __fastcall EStToHTMLError(NativeUInt Ident, System::TVarRec const *Args, const int Args_High, int AHelpContext)/* overload */ : EStException(Ident, Args, Args_High, AHelpContext) { }
+	/* Exception.CreateResFmtHelp */ inline __fastcall EStToHTMLError(System::PResStringRec ResStringRec, const System::TVarRec *Args, const int Args_High, int AHelpContext)/* overload */ : EStException(ResStringRec, Args, Args_High, AHelpContext) { }
+	/* Exception.CreateResFmtHelp */ inline __fastcall EStToHTMLError(NativeUInt Ident, const System::TVarRec *Args, const int Args_High, int AHelpContext)/* overload */ : EStException(Ident, Args, Args_High, AHelpContext) { }
 	/* Exception.Destroy */ inline __fastcall virtual ~EStToHTMLError(void) { }
 	
 };
@@ -433,21 +433,21 @@ class PASCALIMPLEMENTATION EStSpawnError : public EStException
 	
 public:
 	/* EStException.CreateResTP */ inline __fastcall EStSpawnError(int Ident, System::Word Dummy) : EStException(Ident, Dummy) { }
-	/* EStException.CreateResFmtTP */ inline __fastcall EStSpawnError(int Ident, System::TVarRec const *Args, const int Args_High, System::Word Dummy) : EStException(Ident, Args, Args_High, Dummy) { }
+	/* EStException.CreateResFmtTP */ inline __fastcall EStSpawnError(int Ident, const System::TVarRec *Args, const int Args_High, System::Word Dummy) : EStException(Ident, Args, Args_High, Dummy) { }
 	
 public:
 	/* Exception.Create */ inline __fastcall EStSpawnError(const System::UnicodeString Msg) : EStException(Msg) { }
-	/* Exception.CreateFmt */ inline __fastcall EStSpawnError(const System::UnicodeString Msg, System::TVarRec const *Args, const int Args_High) : EStException(Msg, Args, Args_High) { }
+	/* Exception.CreateFmt */ inline __fastcall EStSpawnError(const System::UnicodeString Msg, const System::TVarRec *Args, const int Args_High) : EStException(Msg, Args, Args_High) { }
 	/* Exception.CreateRes */ inline __fastcall EStSpawnError(NativeUInt Ident)/* overload */ : EStException(Ident) { }
 	/* Exception.CreateRes */ inline __fastcall EStSpawnError(System::PResStringRec ResStringRec)/* overload */ : EStException(ResStringRec) { }
-	/* Exception.CreateResFmt */ inline __fastcall EStSpawnError(NativeUInt Ident, System::TVarRec const *Args, const int Args_High)/* overload */ : EStException(Ident, Args, Args_High) { }
-	/* Exception.CreateResFmt */ inline __fastcall EStSpawnError(System::PResStringRec ResStringRec, System::TVarRec const *Args, const int Args_High)/* overload */ : EStException(ResStringRec, Args, Args_High) { }
+	/* Exception.CreateResFmt */ inline __fastcall EStSpawnError(NativeUInt Ident, const System::TVarRec *Args, const int Args_High)/* overload */ : EStException(Ident, Args, Args_High) { }
+	/* Exception.CreateResFmt */ inline __fastcall EStSpawnError(System::PResStringRec ResStringRec, const System::TVarRec *Args, const int Args_High)/* overload */ : EStException(ResStringRec, Args, Args_High) { }
 	/* Exception.CreateHelp */ inline __fastcall EStSpawnError(const System::UnicodeString Msg, int AHelpContext) : EStException(Msg, AHelpContext) { }
-	/* Exception.CreateFmtHelp */ inline __fastcall EStSpawnError(const System::UnicodeString Msg, System::TVarRec const *Args, const int Args_High, int AHelpContext) : EStException(Msg, Args, Args_High, AHelpContext) { }
+	/* Exception.CreateFmtHelp */ inline __fastcall EStSpawnError(const System::UnicodeString Msg, const System::TVarRec *Args, const int Args_High, int AHelpContext) : EStException(Msg, Args, Args_High, AHelpContext) { }
 	/* Exception.CreateResHelp */ inline __fastcall EStSpawnError(NativeUInt Ident, int AHelpContext)/* overload */ : EStException(Ident, AHelpContext) { }
 	/* Exception.CreateResHelp */ inline __fastcall EStSpawnError(System::PResStringRec ResStringRec, int AHelpContext)/* overload */ : EStException(ResStringRec, AHelpContext) { }
-	/* Exception.CreateResFmtHelp */ inline __fastcall EStSpawnError(System::PResStringRec ResStringRec, System::TVarRec const *Args, const int Args_High, int AHelpContext)/* overload */ : EStException(ResStringRec, Args, Args_High, AHelpContext) { }
-	/* Exception.CreateResFmtHelp */ inline __fastcall EStSpawnError(NativeUInt Ident, System::TVarRec const *Args, const int Args_High, int AHelpContext)/* overload */ : EStException(Ident, Args, Args_High, AHelpContext) { }
+	/* Exception.CreateResFmtHelp */ inline __fastcall EStSpawnError(System::PResStringRec ResStringRec, const System::TVarRec *Args, const int Args_High, int AHelpContext)/* overload */ : EStException(ResStringRec, Args, Args_High, AHelpContext) { }
+	/* Exception.CreateResFmtHelp */ inline __fastcall EStSpawnError(NativeUInt Ident, const System::TVarRec *Args, const int Args_High, int AHelpContext)/* overload */ : EStException(Ident, Args, Args_High, AHelpContext) { }
 	/* Exception.Destroy */ inline __fastcall virtual ~EStSpawnError(void) { }
 	
 };
@@ -459,21 +459,21 @@ class PASCALIMPLEMENTATION EStMMFileError : public EStException
 	
 public:
 	/* EStException.CreateResTP */ inline __fastcall EStMMFileError(int Ident, System::Word Dummy) : EStException(Ident, Dummy) { }
-	/* EStException.CreateResFmtTP */ inline __fastcall EStMMFileError(int Ident, System::TVarRec const *Args, const int Args_High, System::Word Dummy) : EStException(Ident, Args, Args_High, Dummy) { }
+	/* EStException.CreateResFmtTP */ inline __fastcall EStMMFileError(int Ident, const System::TVarRec *Args, const int Args_High, System::Word Dummy) : EStException(Ident, Args, Args_High, Dummy) { }
 	
 public:
 	/* Exception.Create */ inline __fastcall EStMMFileError(const System::UnicodeString Msg) : EStException(Msg) { }
-	/* Exception.CreateFmt */ inline __fastcall EStMMFileError(const System::UnicodeString Msg, System::TVarRec const *Args, const int Args_High) : EStException(Msg, Args, Args_High) { }
+	/* Exception.CreateFmt */ inline __fastcall EStMMFileError(const System::UnicodeString Msg, const System::TVarRec *Args, const int Args_High) : EStException(Msg, Args, Args_High) { }
 	/* Exception.CreateRes */ inline __fastcall EStMMFileError(NativeUInt Ident)/* overload */ : EStException(Ident) { }
 	/* Exception.CreateRes */ inline __fastcall EStMMFileError(System::PResStringRec ResStringRec)/* overload */ : EStException(ResStringRec) { }
-	/* Exception.CreateResFmt */ inline __fastcall EStMMFileError(NativeUInt Ident, System::TVarRec const *Args, const int Args_High)/* overload */ : EStException(Ident, Args, Args_High) { }
-	/* Exception.CreateResFmt */ inline __fastcall EStMMFileError(System::PResStringRec ResStringRec, System::TVarRec const *Args, const int Args_High)/* overload */ : EStException(ResStringRec, Args, Args_High) { }
+	/* Exception.CreateResFmt */ inline __fastcall EStMMFileError(NativeUInt Ident, const System::TVarRec *Args, const int Args_High)/* overload */ : EStException(Ident, Args, Args_High) { }
+	/* Exception.CreateResFmt */ inline __fastcall EStMMFileError(System::PResStringRec ResStringRec, const System::TVarRec *Args, const int Args_High)/* overload */ : EStException(ResStringRec, Args, Args_High) { }
 	/* Exception.CreateHelp */ inline __fastcall EStMMFileError(const System::UnicodeString Msg, int AHelpContext) : EStException(Msg, AHelpContext) { }
-	/* Exception.CreateFmtHelp */ inline __fastcall EStMMFileError(const System::UnicodeString Msg, System::TVarRec const *Args, const int Args_High, int AHelpContext) : EStException(Msg, Args, Args_High, AHelpContext) { }
+	/* Exception.CreateFmtHelp */ inline __fastcall EStMMFileError(const System::UnicodeString Msg, const System::TVarRec *Args, const int Args_High, int AHelpContext) : EStException(Msg, Args, Args_High, AHelpContext) { }
 	/* Exception.CreateResHelp */ inline __fastcall EStMMFileError(NativeUInt Ident, int AHelpContext)/* overload */ : EStException(Ident, AHelpContext) { }
 	/* Exception.CreateResHelp */ inline __fastcall EStMMFileError(System::PResStringRec ResStringRec, int AHelpContext)/* overload */ : EStException(ResStringRec, AHelpContext) { }
-	/* Exception.CreateResFmtHelp */ inline __fastcall EStMMFileError(System::PResStringRec ResStringRec, System::TVarRec const *Args, const int Args_High, int AHelpContext)/* overload */ : EStException(ResStringRec, Args, Args_High, AHelpContext) { }
-	/* Exception.CreateResFmtHelp */ inline __fastcall EStMMFileError(NativeUInt Ident, System::TVarRec const *Args, const int Args_High, int AHelpContext)/* overload */ : EStException(Ident, Args, Args_High, AHelpContext) { }
+	/* Exception.CreateResFmtHelp */ inline __fastcall EStMMFileError(System::PResStringRec ResStringRec, const System::TVarRec *Args, const int Args_High, int AHelpContext)/* overload */ : EStException(ResStringRec, Args, Args_High, AHelpContext) { }
+	/* Exception.CreateResFmtHelp */ inline __fastcall EStMMFileError(NativeUInt Ident, const System::TVarRec *Args, const int Args_High, int AHelpContext)/* overload */ : EStException(Ident, Args, Args_High, AHelpContext) { }
 	/* Exception.Destroy */ inline __fastcall virtual ~EStMMFileError(void) { }
 	
 };
@@ -485,21 +485,21 @@ class PASCALIMPLEMENTATION EStBufStreamError : public EStException
 	
 public:
 	/* EStException.CreateResTP */ inline __fastcall EStBufStreamError(int Ident, System::Word Dummy) : EStException(Ident, Dummy) { }
-	/* EStException.CreateResFmtTP */ inline __fastcall EStBufStreamError(int Ident, System::TVarRec const *Args, const int Args_High, System::Word Dummy) : EStException(Ident, Args, Args_High, Dummy) { }
+	/* EStException.CreateResFmtTP */ inline __fastcall EStBufStreamError(int Ident, const System::TVarRec *Args, const int Args_High, System::Word Dummy) : EStException(Ident, Args, Args_High, Dummy) { }
 	
 public:
 	/* Exception.Create */ inline __fastcall EStBufStreamError(const System::UnicodeString Msg) : EStException(Msg) { }
-	/* Exception.CreateFmt */ inline __fastcall EStBufStreamError(const System::UnicodeString Msg, System::TVarRec const *Args, const int Args_High) : EStException(Msg, Args, Args_High) { }
+	/* Exception.CreateFmt */ inline __fastcall EStBufStreamError(const System::UnicodeString Msg, const System::TVarRec *Args, const int Args_High) : EStException(Msg, Args, Args_High) { }
 	/* Exception.CreateRes */ inline __fastcall EStBufStreamError(NativeUInt Ident)/* overload */ : EStException(Ident) { }
 	/* Exception.CreateRes */ inline __fastcall EStBufStreamError(System::PResStringRec ResStringRec)/* overload */ : EStException(ResStringRec) { }
-	/* Exception.CreateResFmt */ inline __fastcall EStBufStreamError(NativeUInt Ident, System::TVarRec const *Args, const int Args_High)/* overload */ : EStException(Ident, Args, Args_High) { }
-	/* Exception.CreateResFmt */ inline __fastcall EStBufStreamError(System::PResStringRec ResStringRec, System::TVarRec const *Args, const int Args_High)/* overload */ : EStException(ResStringRec, Args, Args_High) { }
+	/* Exception.CreateResFmt */ inline __fastcall EStBufStreamError(NativeUInt Ident, const System::TVarRec *Args, const int Args_High)/* overload */ : EStException(Ident, Args, Args_High) { }
+	/* Exception.CreateResFmt */ inline __fastcall EStBufStreamError(System::PResStringRec ResStringRec, const System::TVarRec *Args, const int Args_High)/* overload */ : EStException(ResStringRec, Args, Args_High) { }
 	/* Exception.CreateHelp */ inline __fastcall EStBufStreamError(const System::UnicodeString Msg, int AHelpContext) : EStException(Msg, AHelpContext) { }
-	/* Exception.CreateFmtHelp */ inline __fastcall EStBufStreamError(const System::UnicodeString Msg, System::TVarRec const *Args, const int Args_High, int AHelpContext) : EStException(Msg, Args, Args_High, AHelpContext) { }
+	/* Exception.CreateFmtHelp */ inline __fastcall EStBufStreamError(const System::UnicodeString Msg, const System::TVarRec *Args, const int Args_High, int AHelpContext) : EStException(Msg, Args, Args_High, AHelpContext) { }
 	/* Exception.CreateResHelp */ inline __fastcall EStBufStreamError(NativeUInt Ident, int AHelpContext)/* overload */ : EStException(Ident, AHelpContext) { }
 	/* Exception.CreateResHelp */ inline __fastcall EStBufStreamError(System::PResStringRec ResStringRec, int AHelpContext)/* overload */ : EStException(ResStringRec, AHelpContext) { }
-	/* Exception.CreateResFmtHelp */ inline __fastcall EStBufStreamError(System::PResStringRec ResStringRec, System::TVarRec const *Args, const int Args_High, int AHelpContext)/* overload */ : EStException(ResStringRec, Args, Args_High, AHelpContext) { }
-	/* Exception.CreateResFmtHelp */ inline __fastcall EStBufStreamError(NativeUInt Ident, System::TVarRec const *Args, const int Args_High, int AHelpContext)/* overload */ : EStException(Ident, Args, Args_High, AHelpContext) { }
+	/* Exception.CreateResFmtHelp */ inline __fastcall EStBufStreamError(System::PResStringRec ResStringRec, const System::TVarRec *Args, const int Args_High, int AHelpContext)/* overload */ : EStException(ResStringRec, Args, Args_High, AHelpContext) { }
+	/* Exception.CreateResFmtHelp */ inline __fastcall EStBufStreamError(NativeUInt Ident, const System::TVarRec *Args, const int Args_High, int AHelpContext)/* overload */ : EStException(Ident, Args, Args_High, AHelpContext) { }
 	/* Exception.Destroy */ inline __fastcall virtual ~EStBufStreamError(void) { }
 	
 };
@@ -511,21 +511,21 @@ class PASCALIMPLEMENTATION EStRegExError : public EStException
 	
 public:
 	/* EStException.CreateResTP */ inline __fastcall EStRegExError(int Ident, System::Word Dummy) : EStException(Ident, Dummy) { }
-	/* EStException.CreateResFmtTP */ inline __fastcall EStRegExError(int Ident, System::TVarRec const *Args, const int Args_High, System::Word Dummy) : EStException(Ident, Args, Args_High, Dummy) { }
+	/* EStException.CreateResFmtTP */ inline __fastcall EStRegExError(int Ident, const System::TVarRec *Args, const int Args_High, System::Word Dummy) : EStException(Ident, Args, Args_High, Dummy) { }
 	
 public:
 	/* Exception.Create */ inline __fastcall EStRegExError(const System::UnicodeString Msg) : EStException(Msg) { }
-	/* Exception.CreateFmt */ inline __fastcall EStRegExError(const System::UnicodeString Msg, System::TVarRec const *Args, const int Args_High) : EStException(Msg, Args, Args_High) { }
+	/* Exception.CreateFmt */ inline __fastcall EStRegExError(const System::UnicodeString Msg, const System::TVarRec *Args, const int Args_High) : EStException(Msg, Args, Args_High) { }
 	/* Exception.CreateRes */ inline __fastcall EStRegExError(NativeUInt Ident)/* overload */ : EStException(Ident) { }
 	/* Exception.CreateRes */ inline __fastcall EStRegExError(System::PResStringRec ResStringRec)/* overload */ : EStException(ResStringRec) { }
-	/* Exception.CreateResFmt */ inline __fastcall EStRegExError(NativeUInt Ident, System::TVarRec const *Args, const int Args_High)/* overload */ : EStException(Ident, Args, Args_High) { }
-	/* Exception.CreateResFmt */ inline __fastcall EStRegExError(System::PResStringRec ResStringRec, System::TVarRec const *Args, const int Args_High)/* overload */ : EStException(ResStringRec, Args, Args_High) { }
+	/* Exception.CreateResFmt */ inline __fastcall EStRegExError(NativeUInt Ident, const System::TVarRec *Args, const int Args_High)/* overload */ : EStException(Ident, Args, Args_High) { }
+	/* Exception.CreateResFmt */ inline __fastcall EStRegExError(System::PResStringRec ResStringRec, const System::TVarRec *Args, const int Args_High)/* overload */ : EStException(ResStringRec, Args, Args_High) { }
 	/* Exception.CreateHelp */ inline __fastcall EStRegExError(const System::UnicodeString Msg, int AHelpContext) : EStException(Msg, AHelpContext) { }
-	/* Exception.CreateFmtHelp */ inline __fastcall EStRegExError(const System::UnicodeString Msg, System::TVarRec const *Args, const int Args_High, int AHelpContext) : EStException(Msg, Args, Args_High, AHelpContext) { }
+	/* Exception.CreateFmtHelp */ inline __fastcall EStRegExError(const System::UnicodeString Msg, const System::TVarRec *Args, const int Args_High, int AHelpContext) : EStException(Msg, Args, Args_High, AHelpContext) { }
 	/* Exception.CreateResHelp */ inline __fastcall EStRegExError(NativeUInt Ident, int AHelpContext)/* overload */ : EStException(Ident, AHelpContext) { }
 	/* Exception.CreateResHelp */ inline __fastcall EStRegExError(System::PResStringRec ResStringRec, int AHelpContext)/* overload */ : EStException(ResStringRec, AHelpContext) { }
-	/* Exception.CreateResFmtHelp */ inline __fastcall EStRegExError(System::PResStringRec ResStringRec, System::TVarRec const *Args, const int Args_High, int AHelpContext)/* overload */ : EStException(ResStringRec, Args, Args_High, AHelpContext) { }
-	/* Exception.CreateResFmtHelp */ inline __fastcall EStRegExError(NativeUInt Ident, System::TVarRec const *Args, const int Args_High, int AHelpContext)/* overload */ : EStException(Ident, Args, Args_High, AHelpContext) { }
+	/* Exception.CreateResFmtHelp */ inline __fastcall EStRegExError(System::PResStringRec ResStringRec, const System::TVarRec *Args, const int Args_High, int AHelpContext)/* overload */ : EStException(ResStringRec, Args, Args_High, AHelpContext) { }
+	/* Exception.CreateResFmtHelp */ inline __fastcall EStRegExError(NativeUInt Ident, const System::TVarRec *Args, const int Args_High, int AHelpContext)/* overload */ : EStException(Ident, Args, Args_High, AHelpContext) { }
 	/* Exception.Destroy */ inline __fastcall virtual ~EStRegExError(void) { }
 	
 };
@@ -537,21 +537,21 @@ class PASCALIMPLEMENTATION EStDecMathError : public EStException
 	
 public:
 	/* EStException.CreateResTP */ inline __fastcall EStDecMathError(int Ident, System::Word Dummy) : EStException(Ident, Dummy) { }
-	/* EStException.CreateResFmtTP */ inline __fastcall EStDecMathError(int Ident, System::TVarRec const *Args, const int Args_High, System::Word Dummy) : EStException(Ident, Args, Args_High, Dummy) { }
+	/* EStException.CreateResFmtTP */ inline __fastcall EStDecMathError(int Ident, const System::TVarRec *Args, const int Args_High, System::Word Dummy) : EStException(Ident, Args, Args_High, Dummy) { }
 	
 public:
 	/* Exception.Create */ inline __fastcall EStDecMathError(const System::UnicodeString Msg) : EStException(Msg) { }
-	/* Exception.CreateFmt */ inline __fastcall EStDecMathError(const System::UnicodeString Msg, System::TVarRec const *Args, const int Args_High) : EStException(Msg, Args, Args_High) { }
+	/* Exception.CreateFmt */ inline __fastcall EStDecMathError(const System::UnicodeString Msg, const System::TVarRec *Args, const int Args_High) : EStException(Msg, Args, Args_High) { }
 	/* Exception.CreateRes */ inline __fastcall EStDecMathError(NativeUInt Ident)/* overload */ : EStException(Ident) { }
 	/* Exception.CreateRes */ inline __fastcall EStDecMathError(System::PResStringRec ResStringRec)/* overload */ : EStException(ResStringRec) { }
-	/* Exception.CreateResFmt */ inline __fastcall EStDecMathError(NativeUInt Ident, System::TVarRec const *Args, const int Args_High)/* overload */ : EStException(Ident, Args, Args_High) { }
-	/* Exception.CreateResFmt */ inline __fastcall EStDecMathError(System::PResStringRec ResStringRec, System::TVarRec const *Args, const int Args_High)/* overload */ : EStException(ResStringRec, Args, Args_High) { }
+	/* Exception.CreateResFmt */ inline __fastcall EStDecMathError(NativeUInt Ident, const System::TVarRec *Args, const int Args_High)/* overload */ : EStException(Ident, Args, Args_High) { }
+	/* Exception.CreateResFmt */ inline __fastcall EStDecMathError(System::PResStringRec ResStringRec, const System::TVarRec *Args, const int Args_High)/* overload */ : EStException(ResStringRec, Args, Args_High) { }
 	/* Exception.CreateHelp */ inline __fastcall EStDecMathError(const System::UnicodeString Msg, int AHelpContext) : EStException(Msg, AHelpContext) { }
-	/* Exception.CreateFmtHelp */ inline __fastcall EStDecMathError(const System::UnicodeString Msg, System::TVarRec const *Args, const int Args_High, int AHelpContext) : EStException(Msg, Args, Args_High, AHelpContext) { }
+	/* Exception.CreateFmtHelp */ inline __fastcall EStDecMathError(const System::UnicodeString Msg, const System::TVarRec *Args, const int Args_High, int AHelpContext) : EStException(Msg, Args, Args_High, AHelpContext) { }
 	/* Exception.CreateResHelp */ inline __fastcall EStDecMathError(NativeUInt Ident, int AHelpContext)/* overload */ : EStException(Ident, AHelpContext) { }
 	/* Exception.CreateResHelp */ inline __fastcall EStDecMathError(System::PResStringRec ResStringRec, int AHelpContext)/* overload */ : EStException(ResStringRec, AHelpContext) { }
-	/* Exception.CreateResFmtHelp */ inline __fastcall EStDecMathError(System::PResStringRec ResStringRec, System::TVarRec const *Args, const int Args_High, int AHelpContext)/* overload */ : EStException(ResStringRec, Args, Args_High, AHelpContext) { }
-	/* Exception.CreateResFmtHelp */ inline __fastcall EStDecMathError(NativeUInt Ident, System::TVarRec const *Args, const int Args_High, int AHelpContext)/* overload */ : EStException(Ident, Args, Args_High, AHelpContext) { }
+	/* Exception.CreateResFmtHelp */ inline __fastcall EStDecMathError(System::PResStringRec ResStringRec, const System::TVarRec *Args, const int Args_High, int AHelpContext)/* overload */ : EStException(ResStringRec, Args, Args_High, AHelpContext) { }
+	/* Exception.CreateResFmtHelp */ inline __fastcall EStDecMathError(NativeUInt Ident, const System::TVarRec *Args, const int Args_High, int AHelpContext)/* overload */ : EStException(Ident, Args, Args_High, AHelpContext) { }
 	/* Exception.Destroy */ inline __fastcall virtual ~EStDecMathError(void) { }
 	
 };
@@ -563,21 +563,21 @@ class PASCALIMPLEMENTATION EStPRNGError : public EStException
 	
 public:
 	/* EStException.CreateResTP */ inline __fastcall EStPRNGError(int Ident, System::Word Dummy) : EStException(Ident, Dummy) { }
-	/* EStException.CreateResFmtTP */ inline __fastcall EStPRNGError(int Ident, System::TVarRec const *Args, const int Args_High, System::Word Dummy) : EStException(Ident, Args, Args_High, Dummy) { }
+	/* EStException.CreateResFmtTP */ inline __fastcall EStPRNGError(int Ident, const System::TVarRec *Args, const int Args_High, System::Word Dummy) : EStException(Ident, Args, Args_High, Dummy) { }
 	
 public:
 	/* Exception.Create */ inline __fastcall EStPRNGError(const System::UnicodeString Msg) : EStException(Msg) { }
-	/* Exception.CreateFmt */ inline __fastcall EStPRNGError(const System::UnicodeString Msg, System::TVarRec const *Args, const int Args_High) : EStException(Msg, Args, Args_High) { }
+	/* Exception.CreateFmt */ inline __fastcall EStPRNGError(const System::UnicodeString Msg, const System::TVarRec *Args, const int Args_High) : EStException(Msg, Args, Args_High) { }
 	/* Exception.CreateRes */ inline __fastcall EStPRNGError(NativeUInt Ident)/* overload */ : EStException(Ident) { }
 	/* Exception.CreateRes */ inline __fastcall EStPRNGError(System::PResStringRec ResStringRec)/* overload */ : EStException(ResStringRec) { }
-	/* Exception.CreateResFmt */ inline __fastcall EStPRNGError(NativeUInt Ident, System::TVarRec const *Args, const int Args_High)/* overload */ : EStException(Ident, Args, Args_High) { }
-	/* Exception.CreateResFmt */ inline __fastcall EStPRNGError(System::PResStringRec ResStringRec, System::TVarRec const *Args, const int Args_High)/* overload */ : EStException(ResStringRec, Args, Args_High) { }
+	/* Exception.CreateResFmt */ inline __fastcall EStPRNGError(NativeUInt Ident, const System::TVarRec *Args, const int Args_High)/* overload */ : EStException(Ident, Args, Args_High) { }
+	/* Exception.CreateResFmt */ inline __fastcall EStPRNGError(System::PResStringRec ResStringRec, const System::TVarRec *Args, const int Args_High)/* overload */ : EStException(ResStringRec, Args, Args_High) { }
 	/* Exception.CreateHelp */ inline __fastcall EStPRNGError(const System::UnicodeString Msg, int AHelpContext) : EStException(Msg, AHelpContext) { }
-	/* Exception.CreateFmtHelp */ inline __fastcall EStPRNGError(const System::UnicodeString Msg, System::TVarRec const *Args, const int Args_High, int AHelpContext) : EStException(Msg, Args, Args_High, AHelpContext) { }
+	/* Exception.CreateFmtHelp */ inline __fastcall EStPRNGError(const System::UnicodeString Msg, const System::TVarRec *Args, const int Args_High, int AHelpContext) : EStException(Msg, Args, Args_High, AHelpContext) { }
 	/* Exception.CreateResHelp */ inline __fastcall EStPRNGError(NativeUInt Ident, int AHelpContext)/* overload */ : EStException(Ident, AHelpContext) { }
 	/* Exception.CreateResHelp */ inline __fastcall EStPRNGError(System::PResStringRec ResStringRec, int AHelpContext)/* overload */ : EStException(ResStringRec, AHelpContext) { }
-	/* Exception.CreateResFmtHelp */ inline __fastcall EStPRNGError(System::PResStringRec ResStringRec, System::TVarRec const *Args, const int Args_High, int AHelpContext)/* overload */ : EStException(ResStringRec, Args, Args_High, AHelpContext) { }
-	/* Exception.CreateResFmtHelp */ inline __fastcall EStPRNGError(NativeUInt Ident, System::TVarRec const *Args, const int Args_High, int AHelpContext)/* overload */ : EStException(Ident, Args, Args_High, AHelpContext) { }
+	/* Exception.CreateResFmtHelp */ inline __fastcall EStPRNGError(System::PResStringRec ResStringRec, const System::TVarRec *Args, const int Args_High, int AHelpContext)/* overload */ : EStException(ResStringRec, Args, Args_High, AHelpContext) { }
+	/* Exception.CreateResFmtHelp */ inline __fastcall EStPRNGError(NativeUInt Ident, const System::TVarRec *Args, const int Args_High, int AHelpContext)/* overload */ : EStException(Ident, Args, Args_High, AHelpContext) { }
 	/* Exception.Destroy */ inline __fastcall virtual ~EStPRNGError(void) { }
 	
 };
@@ -595,21 +595,21 @@ public:
 	__property int ErrorColumn = {read=FErrorCol, nodefault};
 public:
 	/* EStException.CreateResTP */ inline __fastcall EStExprError(int Ident, System::Word Dummy) : EStException(Ident, Dummy) { }
-	/* EStException.CreateResFmtTP */ inline __fastcall EStExprError(int Ident, System::TVarRec const *Args, const int Args_High, System::Word Dummy) : EStException(Ident, Args, Args_High, Dummy) { }
+	/* EStException.CreateResFmtTP */ inline __fastcall EStExprError(int Ident, const System::TVarRec *Args, const int Args_High, System::Word Dummy) : EStException(Ident, Args, Args_High, Dummy) { }
 	
 public:
 	/* Exception.Create */ inline __fastcall EStExprError(const System::UnicodeString Msg) : EStException(Msg) { }
-	/* Exception.CreateFmt */ inline __fastcall EStExprError(const System::UnicodeString Msg, System::TVarRec const *Args, const int Args_High) : EStException(Msg, Args, Args_High) { }
+	/* Exception.CreateFmt */ inline __fastcall EStExprError(const System::UnicodeString Msg, const System::TVarRec *Args, const int Args_High) : EStException(Msg, Args, Args_High) { }
 	/* Exception.CreateRes */ inline __fastcall EStExprError(NativeUInt Ident)/* overload */ : EStException(Ident) { }
 	/* Exception.CreateRes */ inline __fastcall EStExprError(System::PResStringRec ResStringRec)/* overload */ : EStException(ResStringRec) { }
-	/* Exception.CreateResFmt */ inline __fastcall EStExprError(NativeUInt Ident, System::TVarRec const *Args, const int Args_High)/* overload */ : EStException(Ident, Args, Args_High) { }
-	/* Exception.CreateResFmt */ inline __fastcall EStExprError(System::PResStringRec ResStringRec, System::TVarRec const *Args, const int Args_High)/* overload */ : EStException(ResStringRec, Args, Args_High) { }
+	/* Exception.CreateResFmt */ inline __fastcall EStExprError(NativeUInt Ident, const System::TVarRec *Args, const int Args_High)/* overload */ : EStException(Ident, Args, Args_High) { }
+	/* Exception.CreateResFmt */ inline __fastcall EStExprError(System::PResStringRec ResStringRec, const System::TVarRec *Args, const int Args_High)/* overload */ : EStException(ResStringRec, Args, Args_High) { }
 	/* Exception.CreateHelp */ inline __fastcall EStExprError(const System::UnicodeString Msg, int AHelpContext) : EStException(Msg, AHelpContext) { }
-	/* Exception.CreateFmtHelp */ inline __fastcall EStExprError(const System::UnicodeString Msg, System::TVarRec const *Args, const int Args_High, int AHelpContext) : EStException(Msg, Args, Args_High, AHelpContext) { }
+	/* Exception.CreateFmtHelp */ inline __fastcall EStExprError(const System::UnicodeString Msg, const System::TVarRec *Args, const int Args_High, int AHelpContext) : EStException(Msg, Args, Args_High, AHelpContext) { }
 	/* Exception.CreateResHelp */ inline __fastcall EStExprError(NativeUInt Ident, int AHelpContext)/* overload */ : EStException(Ident, AHelpContext) { }
 	/* Exception.CreateResHelp */ inline __fastcall EStExprError(System::PResStringRec ResStringRec, int AHelpContext)/* overload */ : EStException(ResStringRec, AHelpContext) { }
-	/* Exception.CreateResFmtHelp */ inline __fastcall EStExprError(System::PResStringRec ResStringRec, System::TVarRec const *Args, const int Args_High, int AHelpContext)/* overload */ : EStException(ResStringRec, Args, Args_High, AHelpContext) { }
-	/* Exception.CreateResFmtHelp */ inline __fastcall EStExprError(NativeUInt Ident, System::TVarRec const *Args, const int Args_High, int AHelpContext)/* overload */ : EStException(Ident, Args, Args_High, AHelpContext) { }
+	/* Exception.CreateResFmtHelp */ inline __fastcall EStExprError(System::PResStringRec ResStringRec, const System::TVarRec *Args, const int Args_High, int AHelpContext)/* overload */ : EStException(ResStringRec, Args, Args_High, AHelpContext) { }
+	/* Exception.CreateResFmtHelp */ inline __fastcall EStExprError(NativeUInt Ident, const System::TVarRec *Args, const int Args_High, int AHelpContext)/* overload */ : EStException(Ident, Args, Args_High, AHelpContext) { }
 	/* Exception.Destroy */ inline __fastcall virtual ~EStExprError(void) { }
 	
 };

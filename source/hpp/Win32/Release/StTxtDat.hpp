@@ -1,8 +1,8 @@
 ﻿// CodeGear C++Builder
-// Copyright (c) 1995, 2015 by Embarcadero Technologies, Inc.
+// Copyright (c) 1995, 2016 by Embarcadero Technologies, Inc.
 // All rights reserved
 
-// (DO NOT EDIT: machine generated header) 'StTxtDat.pas' rev: 30.00 (Windows)
+// (DO NOT EDIT: machine generated header) 'StTxtDat.pas' rev: 31.00 (Windows)
 
 #ifndef SttxtdatHPP
 #define SttxtdatHPP
@@ -78,7 +78,7 @@ class PASCALIMPLEMENTATION TStDataFieldList : public System::TObject
 	typedef System::TObject inherited;
 	
 public:
-	TStDataField* operator[](int Index) { return Fields[Index]; }
+	TStDataField* operator[](int Index) { return this->Fields[Index]; }
 	
 private:
 	System::Classes::TStringList* FList;
@@ -110,7 +110,7 @@ class PASCALIMPLEMENTATION TStTextDataSchema : public System::TObject
 	typedef System::TObject inherited;
 	
 public:
-	TStDataField* operator[](int Index) { return Fields[Index]; }
+	TStDataField* operator[](int Index) { return this->Fields[Index]; }
 	
 private:
 	System::WideChar FCommentDelimiter;

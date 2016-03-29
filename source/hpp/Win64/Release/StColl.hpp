@@ -1,8 +1,8 @@
 ﻿// CodeGear C++Builder
-// Copyright (c) 1995, 2015 by Embarcadero Technologies, Inc.
+// Copyright (c) 1995, 2016 by Embarcadero Technologies, Inc.
 // All rights reserved
 
-// (DO NOT EDIT: machine generated header) 'StColl.pas' rev: 30.00 (Windows)
+// (DO NOT EDIT: machine generated header) 'StColl.pas' rev: 31.00 (Windows)
 
 #ifndef StcollHPP
 #define StcollHPP
@@ -55,7 +55,7 @@ class PASCALIMPLEMENTATION TStCollection : public Stbase::TStContainer
 	typedef Stbase::TStContainer inherited;
 	
 public:
-	void * operator[](int Index) { return Items[Index]; }
+	void * operator[](int Index) { return this->Items[Index]; }
 	
 protected:
 	Stlist::TStList* colPageList;
