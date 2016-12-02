@@ -78,6 +78,10 @@ type
     procedure btSetMax(Max : Integer);
     procedure btRecount;
     function btByte(I : Integer) : PByte;
+    procedure SetByte(I: Integer; B: Byte);
+    function  GetByte(I: Integer): Byte;
+    function  GetAsString: AnsiString;
+    procedure SetAsString(S: AnsiString);
 
   {.Z-}
   public
@@ -115,6 +119,10 @@ type
       {-Toggle bit N}
     procedure ControlBit(N : Integer; State : Boolean);
       {-Set or clear bit N according to State}
+    procedure MoveBit(SrcBitset : TStBits; SrcN, DestN: Integer);
+      {used to remap bit positions}
+    procedure MapBits(SrcBitSet: TStBits; DestMap : Array of Integer);
+      {copy bit set, and move bits into different positions in the new bitset} 
     function BitIsSet(N : Integer) : Boolean;
       {-Return True if bit N is set}
 
@@ -155,6 +163,13 @@ type
       read BitIsSet
       write ControlBit;
       default;
+    property Bytes[N : Integer] : byte {gives direct access to bytes}
+      {-Read or write Nth byte in set}
+      read GetByte
+      write SetByte;
+    property AsString : AnsiString {gives access as longstring}
+      read GetAsString
+      write SetAsString;
   end;
 
 
@@ -226,6 +241,28 @@ begin
   end;
 {$ENDIF}
 end;
+procedure TStBits.MoveBit(SrcBitset : TStBits; SrcN, DestN: Integer);
+begin
+{$IFDEF ThreadSafe}
+  EnterClassCS;
+  EnterCS;
+  SrcBitSet.EnterCS;
+  try
+{$ENDIF}
+    if (not Assigned(SrcBitSet)) or (SrcN > FMax) or (SrcBitSet.Max < SrcN) then
+      RaiseContainerError(stscBadType);
+    if SrcBitset.BitIsSet(SrcN)
+      then SetBit(DestN)
+      else ClearBit(DestN);
+    //btRecount;
+{$IFDEF ThreadSafe}
+  finally
+    SrcBitSet.LeaveCS;
+    LeaveCS;
+    LeaveClassCS;
+  end;
+{$ENDIF}
+end;
 
 function TStBits.BitIsSet(N : Integer) : Boolean;
 begin
@@ -248,6 +285,99 @@ end;
 function TStBits.btByte(I : Integer) : PByte;
 begin
   Result := PByte(PAnsiChar(btBits)+I);
+end;
+function TStBits.GetByte(I : Integer) : Byte;
+  var P : PByte;
+begin
+{$IFDEF ThreadSafe}
+  EnterCS;
+  try
+{$ENDIF}
+{$IFOPT R+}
+    if (I < 0) or (I >= btBlockSize) then
+      RaiseContainerError(stscBadIndex);
+{$ENDIF}
+    P := btByte(I);
+    Result := P^;
+{$IFDEF ThreadSafe}
+  finally
+    LeaveCS;
+  end;
+{$ENDIF}
+end;
+
+function TStBits.GetAsString : ansistring;
+{very inefficient!}
+  var P : PByte; i:Integer;
+begin
+{$IFDEF ThreadSafe}
+  EnterCS;
+  try
+{$ENDIF}
+    Result:='';
+    for i:=0 to btBlockSize-1 do begin
+      P := btByte(I);
+      Result := Result+ ansichar(P^);
+    end;
+{$IFDEF ThreadSafe}
+  finally
+    LeaveCS;
+  end;
+{$ENDIF}
+end;
+
+procedure TStBits.SetAsString(S:AnsiString);
+{very inefficient!}
+  var P : PByte; I: Integer;
+begin
+{$IFDEF ThreadSafe}
+  EnterCS;
+  try
+{$ENDIF}
+{$IFOPT R+}
+    if (length(S) <> btBlockSize) then
+      RaiseContainerError(stscBadType);
+{$ENDIF}
+    for i:=1 to length(S) do begin
+      P:=btByte(i-1);
+      P^:=byte(S[i]);
+    end;
+{$IFDEF ThreadSafe}
+  finally
+    LeaveCS;
+  end;
+{$ENDIF}
+end;
+
+procedure TStBits.SetByte(I : Integer; B:byte);
+  var P : PByte;
+begin
+{$IFDEF ThreadSafe}
+  EnterCS;
+  try
+{$ENDIF}
+{$IFOPT R+}
+    if (I < 0) or (I >= btBlockSize) then
+      RaiseContainerError(stscBadIndex);
+{$ENDIF}
+    P := btByte(I);
+    P^ := B;
+{$IFDEF ThreadSafe}
+  finally
+    LeaveCS;
+  end;
+{$ENDIF}
+end;
+
+procedure TStBits.MapBits(SrcBitset: TStBits; DestMap : Array of Integer);
+  var N: Integer;
+begin
+  if (not Assigned(SrcBitset)) or (SrcBitset.Max <> FMax) then
+    RaiseContainerError(stscBadType);
+
+  for N:=0 to High(DestMap) do begin
+    MoveBit(SrcBitset, N, DestMap[N]);
+  end;
 end;
 
 procedure TStBits.btRecount;
@@ -339,7 +469,7 @@ begin
       Move(OldBits^, btBits^, BlockSize);
 
       {Free old data area}
-      HugeFreeMem(Pointer(OldBits), OldBlockSize);
+      FreeMem(Pointer(OldBits), OldBlockSize);
     end;
 {$IFDEF ThreadSafe}
   finally
@@ -445,7 +575,7 @@ end;
 destructor TStBits.Destroy;
 begin
   if Assigned(btBits) then
-    HugeFreeMem(Pointer(btBits), btBlockSize);
+    FreeMem(Pointer(btBits), btBlockSize);
 
   {Prevent calling Clear}
   IncNodeProtection;
