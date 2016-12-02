@@ -43,6 +43,10 @@ protected:
 	void __fastcall btSetMax(int Max);
 	void __fastcall btRecount(void);
 	System::PByte __fastcall btByte(int I);
+	void __fastcall SetByte(int I, System::Byte B);
+	System::Byte __fastcall GetByte(int I);
+	System::AnsiString __fastcall GetAsString(void);
+	void __fastcall SetAsString(System::AnsiString S);
 	
 public:
 	__fastcall virtual TStBits(int Max);
@@ -60,6 +64,8 @@ public:
 	void __fastcall ClearBit(int N);
 	void __fastcall ToggleBit(int N);
 	void __fastcall ControlBit(int N, bool State);
+	void __fastcall MoveBit(TStBits* SrcBitset, int SrcN, int DestN);
+	void __fastcall MapBits(TStBits* SrcBitSet, int *DestMap, const int DestMap_High);
 	bool __fastcall BitIsSet(int N);
 	int __fastcall FirstSet(void);
 	int __fastcall LastSet(void);
@@ -73,6 +79,8 @@ public:
 	int __fastcall IterateFrom(TBitIterateFunc Action, bool UseSetBits, bool Up, void * OtherData, int From);
 	__property int Max = {read=FMax, write=btSetMax, nodefault};
 	__property bool Items[int N] = {read=BitIsSet, write=ControlBit/*, default*/};
+	__property System::Byte Bytes[int N] = {read=GetByte, write=SetByte};
+	__property System::AnsiString AsString = {read=GetAsString, write=SetAsString};
 public:
 	/* TStContainer.CreateContainer */ inline __fastcall TStBits(Stbase::TStNodeClass NodeClass, int Dummy) : Stbase::TStContainer(NodeClass, Dummy) { }
 	
