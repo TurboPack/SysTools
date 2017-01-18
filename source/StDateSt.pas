@@ -646,7 +646,7 @@ var
         //SZ Tmp[J] := St[I];
         Tmp := Tmp + St[I];
 //        Inc(J);
-//        Inc(I);
+        Inc(I);
       end;
       Tmp := TrimRight(Tmp);
 
