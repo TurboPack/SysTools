@@ -23,7 +23,7 @@ namespace Stregdb
 //-- forward type declarations -----------------------------------------------
 //-- type declarations -------------------------------------------------------
 //-- var, const, procedure ---------------------------------------------------
-extern DELPHI_PACKAGE void __fastcall Register(void);
+extern DELPHI_PACKAGE void __fastcall Register();
 }	/* namespace Stregdb */
 #if !defined(DELPHIHEADER_NO_IMPLICIT_NAMESPACE_USE) && !defined(NO_USING_NAMESPACE_STREGDB)
 using namespace Stregdb;

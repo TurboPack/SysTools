@@ -67,7 +67,7 @@ extern DELPHI_PACKAGE int DefaultYear;
 extern DELPHI_PACKAGE System::Int8 DefaultMonth;
 extern DELPHI_PACKAGE bool __fastcall IsLeapYear(int Year);
 extern DELPHI_PACKAGE int __fastcall ResolveEpoch(int Year, int Epoch);
-extern DELPHI_PACKAGE int __fastcall CurrentDate(void);
+extern DELPHI_PACKAGE int __fastcall CurrentDate();
 extern DELPHI_PACKAGE int __fastcall DaysInMonth(int Month, int Year, int Epoch);
 extern DELPHI_PACKAGE bool __fastcall ValidDate(int Day, int Month, int Year, int Epoch);
 extern DELPHI_PACKAGE int __fastcall DMYtoStDate(int Day, int Month, int Year, int Epoch);
@@ -85,7 +85,7 @@ extern DELPHI_PACKAGE TStDayType __fastcall DayOfWeekDMY(int Day, int Month, int
 extern DELPHI_PACKAGE void __fastcall StTimeToHMS(int T, System::Byte &Hours, System::Byte &Minutes, System::Byte &Seconds);
 extern DELPHI_PACKAGE int __fastcall HMStoStTime(System::Byte Hours, System::Byte Minutes, System::Byte Seconds);
 extern DELPHI_PACKAGE bool __fastcall ValidTime(int Hours, int Minutes, int Seconds);
-extern DELPHI_PACKAGE int __fastcall CurrentTime(void);
+extern DELPHI_PACKAGE int __fastcall CurrentTime();
 extern DELPHI_PACKAGE void __fastcall TimeDiff(int Time1, int Time2, System::Byte &Hours, System::Byte &Minutes, System::Byte &Seconds);
 extern DELPHI_PACKAGE int __fastcall IncTime(int T, System::Byte Hours, System::Byte Minutes, System::Byte Seconds);
 extern DELPHI_PACKAGE int __fastcall DecTime(int T, System::Byte Hours, System::Byte Minutes, System::Byte Seconds);

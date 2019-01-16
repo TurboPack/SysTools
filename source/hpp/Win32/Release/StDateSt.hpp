@@ -67,7 +67,7 @@ extern DELPHI_PACKAGE System::UnicodeString __fastcall CurrentTimeString(const S
 extern DELPHI_PACKAGE System::UnicodeString __fastcall InternationalDate(bool ForceCentury);
 extern DELPHI_PACKAGE System::UnicodeString __fastcall InternationalLongDate(bool ShortNames, bool ExcludeDOW);
 extern DELPHI_PACKAGE System::UnicodeString __fastcall InternationalTime(bool ShowSeconds);
-extern DELPHI_PACKAGE void __fastcall ResetInternationalInfo(void);
+extern DELPHI_PACKAGE void __fastcall ResetInternationalInfo();
 }	/* namespace Stdatest */
 #if !defined(DELPHIHEADER_NO_IMPLICIT_NAMESPACE_USE) && !defined(NO_USING_NAMESPACE_STDATEST)
 using namespace Stdatest;

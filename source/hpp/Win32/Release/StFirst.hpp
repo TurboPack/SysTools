@@ -28,8 +28,8 @@ namespace Stfirst
 //-- forward type declarations -----------------------------------------------
 //-- type declarations -------------------------------------------------------
 //-- var, const, procedure ---------------------------------------------------
-extern DELPHI_PACKAGE bool __fastcall IsFirstInstance(void);
-extern DELPHI_PACKAGE void __fastcall ActivateFirstCommandLine(void);
+extern DELPHI_PACKAGE bool __fastcall IsFirstInstance();
+extern DELPHI_PACKAGE void __fastcall ActivateFirstCommandLine();
 extern DELPHI_PACKAGE void __fastcall ActivateFirst(System::WideChar * AString);
 }	/* namespace Stfirst */
 #if !defined(DELPHIHEADER_NO_IMPLICIT_NAMESPACE_USE) && !defined(NO_USING_NAMESPACE_STFIRST)

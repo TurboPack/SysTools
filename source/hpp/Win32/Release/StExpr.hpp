@@ -35,7 +35,7 @@ class DELPHICLASS TStExpressionEdit;
 //-- type declarations -------------------------------------------------------
 typedef System::Extended *PStFloat;
 
-typedef System::Extended __fastcall (*TStFunction0Param)(void);
+typedef System::Extended __fastcall (*TStFunction0Param)();
 
 typedef System::Extended __fastcall (*TStFunction1Param)(System::Extended Value1);
 
@@ -43,7 +43,7 @@ typedef System::Extended __fastcall (*TStFunction2Param)(System::Extended Value1
 
 typedef System::Extended __fastcall (*TStFunction3Param)(System::Extended Value1, System::Extended Value2, System::Extended Value3);
 
-typedef System::Extended __fastcall (__closure *TStMethod0Param)(void);
+typedef System::Extended __fastcall (__closure *TStMethod0Param)();
 
 typedef System::Extended __fastcall (__closure *TStMethod1Param)(System::Extended Value1);
 

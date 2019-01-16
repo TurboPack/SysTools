@@ -72,7 +72,7 @@ extern DELPHI_PACKAGE bool __fastcall FileMatchesMask(const System::UnicodeStrin
 extern DELPHI_PACKAGE Stdate::TStDateTimeRec __fastcall FileTimeToStDateTime(int FileTime);
 extern DELPHI_PACKAGE int __fastcall FindNthSlash(const System::UnicodeString Path, int n);
 extern DELPHI_PACKAGE bool __fastcall FlushOsBuffers(int Handle);
-extern DELPHI_PACKAGE System::UnicodeString __fastcall GetCurrentUser(void);
+extern DELPHI_PACKAGE System::UnicodeString __fastcall GetCurrentUser();
 extern DELPHI_PACKAGE DiskClass __fastcall GetDiskClass(System::WideChar Drive);
 extern DELPHI_PACKAGE bool __fastcall GetDiskInfo(System::WideChar Drive, unsigned &ClustersAvailable, unsigned &TotalClusters, unsigned &BytesPerSector, unsigned &SectorsPerCluster);
 extern DELPHI_PACKAGE bool __fastcall GetDiskSpace(System::WideChar Drive, System::Comp &UserSpaceAvail, System::Comp &TotalSpaceAvail, System::Comp &DiskSize);
@@ -81,7 +81,7 @@ extern DELPHI_PACKAGE System::TDateTime __fastcall GetFileLastAccess(const Syste
 extern DELPHI_PACKAGE System::TDateTime __fastcall GetFileLastModify(const System::UnicodeString FileName);
 extern DELPHI_PACKAGE System::UnicodeString __fastcall GetHomeFolder(bool aForceSlash);
 extern DELPHI_PACKAGE System::UnicodeString __fastcall GetLongPath(const System::UnicodeString APath);
-extern DELPHI_PACKAGE System::UnicodeString __fastcall GetMachineName(void);
+extern DELPHI_PACKAGE System::UnicodeString __fastcall GetMachineName();
 extern DELPHI_PACKAGE unsigned __fastcall GetMediaID(System::WideChar Drive, MediaIDType &MediaIDRec);
 extern DELPHI_PACKAGE System::UnicodeString __fastcall GetParentFolder(const System::UnicodeString APath, bool aForceSlash);
 extern DELPHI_PACKAGE System::UnicodeString __fastcall GetShortPath(const System::UnicodeString APath);
