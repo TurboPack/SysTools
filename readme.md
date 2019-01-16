@@ -45,7 +45,7 @@ TurboPack SysTools package names have the following form:
 
 ------
 
-# 3. Installation
+## 3. Installation
 
 SysTools is available via the [GetIt Package Manager](http://docwiki.embarcadero.com/RADStudio/en/Installing_a_Package_Using_GetIt_Package_Manager) where you can quickly and easily install and uninstall it.
 
@@ -67,7 +67,7 @@ steps:
      
 -----
 
-4. Issue with C++Builder under Win64
+## 4. Issue with C++Builder under Win64
 
 If you compile with C++Builder under Win64 and receive an error like:
 
