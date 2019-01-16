@@ -1338,7 +1338,12 @@ end;
 procedure TStString.SetAsShortStr(const Value : string);
 {- Copy short string into string object. }
 begin
-  FString := PChar(Value);
+  FString := StrAlloc(SuggestSize(System.Length(Value)));
+  if Assigned(FString) then
+  begin
+    FAlloc := SuggestSize(System.Length(Value));
+    StrPCopy(FString, Value);
+  end;
   ResetCursor;
 end;
 

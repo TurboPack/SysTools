@@ -1170,6 +1170,9 @@ var
   PaintHeight   : Integer;
 
 begin
+  XPos := 0;
+  YPos := 0;
+
   { Initialize the canvas }
   FBitmap.Width := BCWidth;
   FBitmap.Height := BCHeight;
@@ -1184,7 +1187,6 @@ begin
   TextWidth := FBitmap.Canvas.TextWidth (Caption);
 
   { determine x position of the caption }
-  XPos := 0;
   case FAlignment of
     taLeftJustify :
       XPos := 0;
@@ -1204,7 +1206,6 @@ begin
     for the barcode painting. }
   TopOffset := 0;
   BottomOffset := 0;
-  YPos := 0;
   case FCaptionLayout of
     tlBottom :
       begin
@@ -3650,7 +3651,8 @@ var
   OldLevel : Integer;
 
 begin
-  NewLevel := -1;
+  NewLevel := 0;
+
   case v of
     ecAuto   : NewLevel := -1;
     ecLevel0 : NewLevel := 0;

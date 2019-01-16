@@ -2,7 +2,7 @@
 // Copyright (c) 1995, 2016 by Embarcadero Technologies, Inc.
 // All rights reserved
 
-// (DO NOT EDIT: machine generated header) 'StRegIni.pas' rev: 31.00 (Windows)
+// (DO NOT EDIT: machine generated header) 'StRegIni.pas' rev: 32.00 (Windows)
 
 #ifndef StreginiHPP
 #define StreginiHPP
@@ -65,9 +65,9 @@ protected:
 	HKEY riHoldPrimary;
 	HKEY riPrimaryKey;
 	HKEY riRemoteKey;
-	System::WideChar *riCurSubKey;
-	System::WideChar *riTrueString;
-	System::WideChar *riFalseString;
+	System::UnicodeString riCurSubKey;
+	System::UnicodeString riTrueString;
+	System::UnicodeString riFalseString;
 	_RTL_CRITICAL_SECTION riThreadSafe;
 	_SECURITY_ATTRIBUTES __fastcall GetAttributes(void);
 	void __fastcall SetAttributes(const _SECURITY_ATTRIBUTES &Value);
@@ -78,7 +78,7 @@ protected:
 	System::UnicodeString FCurSubKey;
 	_SECURITY_ATTRIBUTES FriSecAttr;
 	bool FIsIniFile;
-	System::WideChar *riRootName;
+	System::UnicodeString riRootName;
 	Vcl::Graphics::TBitmap* BmpText;
 	Vcl::Graphics::TBitmap* BmpBinary;
 	HKEY __fastcall OpenRegKey(void);

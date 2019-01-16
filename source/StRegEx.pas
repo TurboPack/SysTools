@@ -1042,13 +1042,14 @@ var
         GetMem(ABuf, L * SizeOf(Char));
         try
           StrPCopy(ABuf, S);
-          if (FSelAvoidPatPtr <> nil) then begin
-            Result := False;
+          if (FSelAvoidPatPtr <> nil) then
+          begin
             if (not Avoid) then
               Result := FindMatch(ABuf, FSelAvoidPatPtr, REPosition)
             else
               Result := not(FindMatch(ABuf, FSelAvoidPatPtr, REPosition));
-          end else
+          end
+          else
             Result := True;
 
           if Result then begin
@@ -1215,15 +1216,16 @@ begin
       if (BuildPatternStr(FMatchPatStr, Len, FMatchPatSL)) then begin
         if (Len > 0) then
           GetPattern(FMatchPatStr, FMatchPatPtr)
-        else begin
+        else
+        begin
           DisposeItems(FMatchPatPtr);
           FMatchPatPtr := nil;
         end;
-        Result := True;
-      end else begin
+      end
+      else
+      begin
         DisposeItems(FMatchPatPtr);
         FMatchPatPtr := nil;
-        Result := False;
       end;
       Result := True;
     end else

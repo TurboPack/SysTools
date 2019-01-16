@@ -2,7 +2,7 @@
 // Copyright (c) 1995, 2016 by Embarcadero Technologies, Inc.
 // All rights reserved
 
-// (DO NOT EDIT: machine generated header) 'St2DBarC.pas' rev: 31.00 (Windows)
+// (DO NOT EDIT: machine generated header) 'St2DBarC.pas' rev: 32.00 (Windows)
 
 #ifndef St2dbarcHPP
 #define St2dbarcHPP

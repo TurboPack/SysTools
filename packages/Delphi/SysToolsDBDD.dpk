@@ -57,7 +57,7 @@ package SysToolsDBDD;
 {$DEFINE RELEASE}
 {$ENDIF IMPLICITBUILDING}
 {$DESCRIPTION 'TurboPack SysTools Delphi DB Designtime package'}
-{$LIBSUFFIX '240'}
+{$LIBSUFFIX '250'}
 {$DESIGNONLY}
 {$IMPLICITBUILD OFF}
 

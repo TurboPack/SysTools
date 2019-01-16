@@ -89,9 +89,9 @@ type
     riPrimaryKey     : HKey;
     riRemoteKey      : HKey;
 
-    riCurSubKey,
-    riTrueString,
-    riFalseString    : PChar;
+    riCurSubKey      : string;
+    riTrueString     : string;
+    riFalseString    : string;
 
 {$IFDEF ThreadSafe}
     riThreadSafe     : TRTLCriticalSection;
@@ -118,7 +118,7 @@ type
     FriSecAttr       : TSecurityAttributes;
     FIsIniFile       : Boolean;
 
-    riRootName       : PChar;
+    riRootName       : string;
 
     BmpText,
     BmpBinary        : TBitMap;
@@ -300,16 +300,13 @@ begin
 
   {get False string from resource}
   S := SysToolsStr(stscFalseString);
-  riFalseString := StrAlloc(Length(S)); // GetMem(riFalseString,Length(S)+1);
-  StrPCopy(riFalseString,S);
+  riFalseString := S;
 
   {get True string from resource}
   S := SysToolsStr(stscTrueString);
-  riTrueString := StrAlloc(Length(S)); // GetMem(riTrueString,Length(S)+1);
-  StrPCopy(riTrueString,S);
+  riTrueString := S;
 
-  riCurSubKey := StrAlloc(1); // GetMem(riCurSubKey,1);
-  riCurSubKey[0] := #0;
+  riCurSubKey := #0;
 
   BmpText   := TBitMap.Create;
   BmpBinary := TBitMap.Create;
@@ -320,8 +317,7 @@ begin
   {setup ini file/primary key via riRootName}
   if (IsIniFile) then begin
     riType := riIniType;
-    riRootName := StrAlloc(Length(RootName)); // GetMem(riRootName,Length(RootName)+1);
-    StrPCopy(riRootName,RootName);
+    riRootName := RootName;
   end else begin
     riType := riRegType;
 
@@ -365,15 +361,6 @@ begin
   if (riRemoteKey <> 0) then
     RegCloseRemoteKey;
 
-  if (riRootName <> nil) then
-    FreeMem(riRootName,StrLen(riRootName)+1);
-  if (riFalseString <> nil) then
-    FreeMem(riFalseString,StrLen(riFalseString)+1);
-  if (riTrueString <> nil) then
-    FreeMem(riTrueString,StrLen(riTrueString)+1);
-  if (riCurSubKey <> nil) then
-    FreeMem(riCurSubKey,StrLen(riCurSubKey)+1);
-
   BmpText.Free;
   BmpBinary.Free;
 
@@ -389,14 +376,14 @@ end;
 procedure TStRegIni.SetPrimary(Value : string);
   {-change working Ini file or top level key in registry}
 begin
-  if riType = riIniType then begin
-    if CompareText(Value,StrPas(riRootName)) = 0 then Exit;
-
-    if (riRootName <> nil) then
-      StrDispose(riRootName); // FreeMem(riRootName,StrLen(riRootName)+1);
-    riRootName := StrAlloc(Length(Value)); //GetMem(riRootName,Length(Value)+1);
-    StrPCopy(riRootName,Value);
-  end else begin
+  if riType = riIniType then
+  begin
+    if CompareText(Value, riRootName) = 0 then
+      Exit;
+    riRootName := Value;
+  end
+  else
+  begin
     if (riRemoteKey <> 0) then
       RegCloseRemoteKey;
 
@@ -419,7 +406,7 @@ function TStRegIni.GetPrimary : string;
   {-return working Ini file or top level registry key}
 begin
   if (riType = riIniType) then
-    Result := StrPas(riRootName)
+    Result := riRootName
   else
   begin
     if riPrimaryKey = HKEY_LOCAL_MACHINE then
@@ -496,11 +483,8 @@ end;
 procedure TStRegIni.SetCurSubKey(Value : string);
   {-set name of working Ini file section or registry subkey}
 begin
-  if (riCurSubKey <> nil) then
-    StrDispose(riCurSubKey); // FreeMem(riCurSubKey,StrLen(riCurSubKey)+1);
   FCurSubKey := Value;
-  riCurSubKey := StrAlloc(Length(Value)); // GetMem(riCurSubKey,Length(Value)+1);
-  StrPCopy(riCurSubKey,Value);
+  riCurSubKey := Value;
 end;
 
 {==========================================================================}
@@ -514,14 +498,14 @@ begin
   Disposition := 0;
   if (riMode = riSet) then begin
     {Keys are created with all key access privilages and as non-volatile}
-    ECode := RegCreateKeyEx(riPrimaryKey, riCurSubKey,0,nil,
+    ECode := RegCreateKeyEx(riPrimaryKey, PChar(riCurSubKey),0,nil,
         REG_OPTION_NON_VOLATILE,KEY_ALL_ACCESS,@FriSecAttr,
         Result,@Disposition);
     if (ECode <> ERROR_SUCCESS) then
       RaiseRegIniErrorFmt(stscCreateKeyFail, [ECode]);
   end else begin
     {Read operations limit key access to read only}
-    ECode := RegOpenKeyEx(riPrimaryKey,riCurSubKey, 0, KEY_READ,Result);
+    ECode := RegOpenKeyEx(riPrimaryKey, PChar(riCurSubKey), 0, KEY_READ,Result);
     if (ECode <> ERROR_SUCCESS) then
       RaiseRegIniErrorFmt(stscOpenKeyFail, [ECode]);
   end;
@@ -561,8 +545,8 @@ begin
     strPCopy(PValueName, ValueName);
     strPCopy(PData, Data);
 
-    Result := WritePrivateProfileString(riCurSubKey, PValueName,
-                                        PData, riRootName)
+    Result := WritePrivateProfileString(PChar(riCurSubKey), PValueName,
+                                        PData, PChar(riRootName))
   finally
     if PValueName <> nil then
       StrDispose(PValueName); // FreeMem(PValueName, VNLen);
@@ -591,8 +575,8 @@ begin
     StrPCopy(PVName,ValueName);
     StrPCopy(PDefault,Default);
 
-    GetPrivateProfileString(riCurSubKey,PVName,PDefault,
-        PValue,Length(PValue)-1,riRootName);
+    GetPrivateProfileString(PChar(riCurSubKey),PVName,PDefault,
+        PValue,Length(PValue)-1, PChar(riRootName));
 
     Value := StrPas(PValue);
     Result := Length(Value);
@@ -675,7 +659,7 @@ begin
   try
 {$ENDIF}
     if (riType = riIniType) then begin
-      Result := StrPas(riRootName) + '\' + StrPas(riCurSubKey);
+      Result := riRootName + '\' + riCurSubKey;
     end else
     begin
       if riPrimaryKey = HKEY_LOCAL_MACHINE then
@@ -686,7 +670,7 @@ begin
          Result := 'HKEY_CLASSES_ROOT\'
       else if riPrimaryKey = HKEY_CURRENT_USER then
          Result := 'HKEY_CURRENT_USER\';
-      Result := Result + StrPas(riCurSubKey);
+      Result := Result + riCurSubKey;
     end;
 {$IFDEF ThreadSafe}
   finally
@@ -713,9 +697,9 @@ begin
 {$ENDIF}
     if (riType = riIniType) then begin
       if (Value) then
-        wResult := WriteIniData(ValueName, StrPas(riTrueString))
+        wResult := WriteIniData(ValueName, riTrueString)
       else
-        wResult := WriteIniData(ValueName, StrPas(riFalseString));
+        wResult := WriteIniData(ValueName, riFalseString);
       if (NOT wResult) then
         RaiseRegIniError(stscIniWriteFail);
     end else begin
@@ -760,14 +744,14 @@ begin
 {$ENDIF}
     if (riType = riIniType) then begin
       if Default then
-        ReadIniData(ValueName,Value,StrPas(riTrueString))
+        ReadIniData(ValueName,Value, riTrueString)
       else
-        ReadIniData(ValueName,Value,StrPas(riFalseString));
+        ReadIniData(ValueName,Value, riFalseString);
 
-      if (CompareText(Value,StrPas(riFalseString)) = 0) then
+      if (CompareText(Value, riFalseString) = 0) then
         Result := False
       else begin
-        if (CompareText(Value,StrPas(riTrueString)) = 0) then
+        if (CompareText(Value, riTrueString) = 0) then
           Result := True
         else begin
           Val(Value,IVal,Code);
@@ -808,7 +792,7 @@ begin
             {convert data, if possible, to Boolean}
             case (ValType) of
               REG_SZ,
-              REG_EXPAND_SZ : Result := StrIComp(PChar(LResult),riFalseString) <> 0;
+              REG_EXPAND_SZ : Result := StrIComp(PChar(LResult), PChar(riFalseString)) <> 0;
               REG_BINARY,
               REG_DWORD     : Result := (Integer(LResult^) <> 0);
             else
@@ -1549,23 +1533,23 @@ begin
       try
         StrPCopy(PSKey,KeyName);
         {Create Section with temporary value}
-        if (NOT WritePrivateProfileString(PSKey,TempValueName,' ',riRootName)) then
+        if (NOT WritePrivateProfileString(PSKey,TempValueName,' ', PChar(riRootName))) then
           RaiseRegIniError(stscCreateKeyFail);
         {Delete temporary value but leave section intact}
-        if (NOT WritePrivateProfileString(PSKey,TempValueName,nil,riRootName)) then
+        if (NOT WritePrivateProfileString(PSKey,TempValueName,nil, PChar(riRootName))) then
           RaiseRegIniError(stscIniWriteFail);
       finally
         StrDispose(PSKey); // FreeMem(PSKey,Length(KeyName)+1);
       end;
     end else begin
       HoldKey := 0;
-      PCSKey := StrAlloc(Length(KeyName) + Integer(StrLen(riCurSubKey)) + 2); // GetMem(PCSKey, Length(KeyName)+1 + Integer(strlen(riCurSubkey))+2);
+      PCSKey := StrAlloc(Length(KeyName) + Integer(Length(riCurSubKey)) + 2); // GetMem(PCSKey, Length(KeyName)+1 + Integer(strlen(riCurSubkey))+2);
       PSKey := StrAlloc(Length(KeyName)); // GetMem(PSKey, Length(KeyName)+1);
       try
         PCSKey[0] := #0;
         StrPCopy(PSKey,KeyName);
-        if riCurSubKey[0] <> #0 then
-          strcat(Strcopy(PCSKey, riCurSubKey), '\');
+        if riCurSubKey <> '' then
+          strcat(Strcopy(PCSKey, PChar(riCurSubKey)), '\');
         strcat(PCSKey, PSKey);
         if (riRemoteKey <> 0) then begin
           HoldKey := riPrimaryKey;
@@ -1652,13 +1636,13 @@ begin
 
     if (riType = riIniType) then begin
       Buffer[0] := #0;
-      if (riCurSubKey[0] = #0) then begin
+      if (riCurSubKey = '') then begin
         {Get section names in ini file}
-        Sections := GetPrivateProfileSectionNames(Buffer,MaxBufSize,riRootName);
+        Sections := GetPrivateProfileSectionNames(Buffer,MaxBufSize, PChar(riRootName));
       end else
         {get value names in specified section}
-        Sections := GetPrivateProfileString(riCurSubKey,nil,#0,
-                    Buffer,MaxBufSize,riRootName);
+        Sections := GetPrivateProfileString(PChar(riCurSubKey),nil,#0,
+                    Buffer,MaxBufSize, PChar(riRootName));
 
       {parse Section Names from Buffer string}
       if (Sections > 0) then begin
@@ -1918,7 +1902,7 @@ begin
           {remove section KeyName from INI file}
           if (NumSubKeys > 0) AND (NOT DeleteSubKeys) then
             RaiseRegIniErrorFmt(stscKeyHasSubKeys,[NumSubKeys]);
-          if (NOT WritePrivateProfileString(PSKey,nil,nil,riRootName)) then
+          if (NOT WritePrivateProfileString(PSKey,nil,nil, PChar(riRootName))) then
             RaiseRegIniError(stscIniDeleteFail);
         finally
           ASL.Free;
@@ -1988,7 +1972,7 @@ begin
     try
       StrPCopy(PVName,valueName);
       if (riType = riIniType) then begin
-        if (NOT WritePrivateProfileString(riCurSubKey,PVName,nil,riRootName)) then
+        if (NOT WritePrivateProfileString(PChar(riCurSubKey),PVName,nil, PChar(riRootName))) then
           RaiseRegIniError(stscIniDelValueFail);
       end else begin
         Key := OpenRegKey;
@@ -2120,7 +2104,7 @@ begin
     try
       StrPCopy(KN, KeyName);
       if (riType = riIniType) then begin
-        GetPrivateProfileString(KN, nil, '$KDNE1234', PV, 10, riRootName);
+        GetPrivateProfileString(KN, nil, '$KDNE1234', PV, 10, PChar(riRootName));
         Result := StrIComp(PV, '$KDNE1234') <> 0;
       end else begin
          Result := RegOpenKeyEx(riPrimaryKey,KN,0,KEY_READ,HK) = ERROR_SUCCESS;
@@ -2348,7 +2332,7 @@ begin
           S := TSL[I];
           P := pos('=',S);
           Delete(S,P,Length(S)-P+1);
-          WritePrivateProfileString(PChar(SubKey),PChar(S), PChar(TSL.Values[S]),riRootName);
+          WritePrivateProfileString(PChar(SubKey),PChar(S), PChar(TSL.Values[S]), PChar(riRootName));
         end;
       finally
         TSL.Free;

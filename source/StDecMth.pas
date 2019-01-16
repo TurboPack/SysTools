@@ -674,6 +674,7 @@ begin
   {if the number of decimal places is -1, it's a special signal to
    perform the rounding to an integer, but not to multiply the result
    by 10^16 at the end; the caller is AsInt, in other words}
+  AddOne := False;
   if (aDecPl >= 0) then
     NeedInt := false
   else begin
@@ -687,7 +688,6 @@ begin
     Exit;
 
   {perform the required rounding}
-  AddOne := false;   // keep the compiler happy
   case aRound of
     rmNormal :
       begin

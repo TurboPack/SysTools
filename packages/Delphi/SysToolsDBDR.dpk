@@ -57,7 +57,7 @@ package SysToolsDBDR;
 {$DEFINE RELEASE}
 {$ENDIF IMPLICITBUILDING}
 {$DESCRIPTION 'TurboPack SysTools Delphi DB Runtime package'}
-{$LIBSUFFIX '240'}
+{$LIBSUFFIX '250'}
 {$RUNONLY}
 {$IMPLICITBUILD OFF}
 
