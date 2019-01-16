@@ -1,8 +1,8 @@
 ﻿// CodeGear C++Builder
-// Copyright (c) 1995, 2016 by Embarcadero Technologies, Inc.
+// Copyright (c) 1995, 2017 by Embarcadero Technologies, Inc.
 // All rights reserved
 
-// (DO NOT EDIT: machine generated header) 'StDb2DBC.pas' rev: 32.00 (Windows)
+// (DO NOT EDIT: machine generated header) 'StDb2DBC.pas' rev: 33.00 (Windows)
 
 #ifndef Stdb2dbcHPP
 #define Stdb2dbcHPP
@@ -40,16 +40,16 @@ protected:
 	Vcl::Dbctrls::TFieldDataLink* FCodeDataLink;
 	void __fastcall CaptionDataChange(System::TObject* Sender);
 	void __fastcall CodeDataChange(System::TObject* Sender);
-	System::UnicodeString __fastcall GetCaptionDataField(void);
-	System::UnicodeString __fastcall GetCodeDataField(void);
-	Data::Db::TDataSource* __fastcall GetDataSource(void);
+	System::UnicodeString __fastcall GetCaptionDataField();
+	System::UnicodeString __fastcall GetCodeDataField();
+	Data::Db::TDataSource* __fastcall GetDataSource();
 	void __fastcall SetCaptionDataField(const System::UnicodeString Value);
 	void __fastcall SetCodeDataField(const System::UnicodeString Value);
 	void __fastcall SetDataSource(Data::Db::TDataSource* Value);
 	
 public:
 	__fastcall virtual TStDbPDF417Barcode(System::Classes::TComponent* AOwner);
-	__fastcall virtual ~TStDbPDF417Barcode(void);
+	__fastcall virtual ~TStDbPDF417Barcode();
 	
 __published:
 	__property Code = {stored=false, default=0};
@@ -73,12 +73,12 @@ protected:
 	void __fastcall CaptionDataChange(System::TObject* Sender);
 	void __fastcall CodeDataChange(System::TObject* Sender);
 	void __fastcall CountryCodeChange(System::TObject* Sender);
-	System::UnicodeString __fastcall GetCaptionDataField(void);
-	System::UnicodeString __fastcall GetCodeDataField(void);
-	System::UnicodeString __fastcall GetCountryCodeDataField(void);
-	Data::Db::TDataSource* __fastcall GetDataSource(void);
-	System::UnicodeString __fastcall GetPostalCodeDataField(void);
-	System::UnicodeString __fastcall GetServiceClassDataField(void);
+	System::UnicodeString __fastcall GetCaptionDataField();
+	System::UnicodeString __fastcall GetCodeDataField();
+	System::UnicodeString __fastcall GetCountryCodeDataField();
+	Data::Db::TDataSource* __fastcall GetDataSource();
+	System::UnicodeString __fastcall GetPostalCodeDataField();
+	System::UnicodeString __fastcall GetServiceClassDataField();
 	void __fastcall PostalCodeChange(System::TObject* Sender);
 	void __fastcall ServiceClassChange(System::TObject* Sender);
 	void __fastcall SetCaptionDataField(const System::UnicodeString Value);
@@ -90,7 +90,7 @@ protected:
 	
 public:
 	__fastcall virtual TStDbMaxiCodeBarcode(System::Classes::TComponent* AOwner);
-	__fastcall virtual ~TStDbMaxiCodeBarcode(void);
+	__fastcall virtual ~TStDbMaxiCodeBarcode();
 	
 __published:
 	__property Code = {stored=false, default=0};

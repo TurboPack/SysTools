@@ -1,8 +1,8 @@
 ﻿// CodeGear C++Builder
-// Copyright (c) 1995, 2016 by Embarcadero Technologies, Inc.
+// Copyright (c) 1995, 2017 by Embarcadero Technologies, Inc.
 // All rights reserved
 
-// (DO NOT EDIT: machine generated header) 'StDbPNBC.pas' rev: 32.00 (Windows)
+// (DO NOT EDIT: machine generated header) 'StDbPNBC.pas' rev: 33.00 (Windows)
 
 #ifndef StdbpnbcHPP
 #define StdbpnbcHPP
@@ -40,14 +40,14 @@ class PASCALIMPLEMENTATION TStDbPNBarCode : public Stbarpn::TStPNBarCode
 protected:
 	Vcl::Dbctrls::TFieldDataLink* FDataLink;
 	void __fastcall DataChange(System::TObject* Sender);
-	System::UnicodeString __fastcall GetDataField(void);
-	Data::Db::TDataSource* __fastcall GetDataSource(void);
+	System::UnicodeString __fastcall GetDataField();
+	Data::Db::TDataSource* __fastcall GetDataSource();
 	void __fastcall SetDataField(const System::UnicodeString Value);
 	void __fastcall SetDataSource(Data::Db::TDataSource* Value);
 	
 public:
 	__fastcall virtual TStDbPNBarCode(System::Classes::TComponent* AOwner);
-	__fastcall virtual ~TStDbPNBarCode(void);
+	__fastcall virtual ~TStDbPNBarCode();
 	
 __published:
 	__property PostalCode = {stored=false, default=0};

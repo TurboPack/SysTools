@@ -1,8 +1,8 @@
 ﻿// CodeGear C++Builder
-// Copyright (c) 1995, 2016 by Embarcadero Technologies, Inc.
+// Copyright (c) 1995, 2017 by Embarcadero Technologies, Inc.
 // All rights reserved
 
-// (DO NOT EDIT: machine generated header) 'StIniStm.pas' rev: 32.00 (Windows)
+// (DO NOT EDIT: machine generated header) 'StIniStm.pas' rev: 33.00 (Windows)
 
 #ifndef StinistmHPP
 #define StinistmHPP
@@ -38,13 +38,13 @@ private:
 	
 protected:
 	void __fastcall GotoSection(const System::UnicodeString Section);
-	void __fastcall UpdateSections(void);
+	void __fastcall UpdateSections();
 	void __fastcall WriteSectionName(const System::UnicodeString Section);
 	void __fastcall WriteValue(const System::UnicodeString Key, const System::UnicodeString Value);
 	
 public:
 	__fastcall TStIniStream(System::Classes::TStream* aStream);
-	__fastcall virtual ~TStIniStream(void);
+	__fastcall virtual ~TStIniStream();
 	bool __fastcall SectionExists(const System::UnicodeString Section);
 	System::UnicodeString __fastcall ReadString(const System::UnicodeString Section, const System::UnicodeString Ident, const System::UnicodeString Default);
 	void __fastcall WriteString(const System::UnicodeString Section, const System::UnicodeString Ident, const System::UnicodeString Value);

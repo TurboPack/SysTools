@@ -1,8 +1,8 @@
 ﻿// CodeGear C++Builder
-// Copyright (c) 1995, 2016 by Embarcadero Technologies, Inc.
+// Copyright (c) 1995, 2017 by Embarcadero Technologies, Inc.
 // All rights reserved
 
-// (DO NOT EDIT: machine generated header) 'StSpawn.pas' rev: 32.00 (Windows)
+// (DO NOT EDIT: machine generated header) 'StSpawn.pas' rev: 33.00 (Windows)
 
 #ifndef StspawnHPP
 #define StspawnHPP
@@ -37,14 +37,14 @@ class PASCALIMPLEMENTATION TStWaitThread : public System::Classes::TThread
 	
 protected:
 	int FTimeOut;
-	virtual void __fastcall Execute(void);
+	virtual void __fastcall Execute();
 	
 public:
 	NativeUInt CancelWaitEvent;
 	unsigned WaitResult;
 	Winapi::Windows::TWOHandleArray *WaitFors;
 	__fastcall TStWaitThread(NativeUInt aInst, NativeUInt CancelIt, int ATimeOut);
-	__fastcall virtual ~TStWaitThread(void);
+	__fastcall virtual ~TStWaitThread();
 };
 
 
@@ -95,9 +95,9 @@ protected:
 	
 public:
 	__fastcall virtual TStSpawnApplication(System::Classes::TComponent* AOwner);
-	__fastcall virtual ~TStSpawnApplication(void);
-	void __fastcall CancelWait(void);
-	NativeUInt __fastcall Execute(void);
+	__fastcall virtual ~TStSpawnApplication();
+	void __fastcall CancelWait();
+	NativeUInt __fastcall Execute();
 	
 __published:
 	__property System::UnicodeString DefaultDir = {read=FDefaultDir, write=SetDefaultDir};

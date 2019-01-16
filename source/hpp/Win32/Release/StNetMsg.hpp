@@ -1,8 +1,8 @@
 ﻿// CodeGear C++Builder
-// Copyright (c) 1995, 2016 by Embarcadero Technologies, Inc.
+// Copyright (c) 1995, 2017 by Embarcadero Technologies, Inc.
 // All rights reserved
 
-// (DO NOT EDIT: machine generated header) 'StNetMsg.pas' rev: 32.00 (Windows)
+// (DO NOT EDIT: machine generated header) 'StNetMsg.pas' rev: 33.00 (Windows)
 
 #ifndef StnetmsgHPP
 #define StnetmsgHPP
@@ -38,16 +38,16 @@ private:
 	System::Classes::TNotifyEvent FOnMessageSent;
 	
 protected:
-	System::UnicodeString __fastcall GetServer(void);
+	System::UnicodeString __fastcall GetServer();
 	void __fastcall SetServer(System::UnicodeString Value);
 	
 public:
 	__fastcall virtual TStNetMessage(System::Classes::TComponent* AOwner);
-	__fastcall virtual ~TStNetMessage(void);
+	__fastcall virtual ~TStNetMessage();
 	void __fastcall AddAlias(System::UnicodeString AName);
-	System::Classes::TStringList* __fastcall AliasNames(void);
+	System::Classes::TStringList* __fastcall AliasNames();
 	void __fastcall RemoveAlias(System::UnicodeString AName);
-	void __fastcall Send(void);
+	void __fastcall Send();
 	
 __published:
 	__property System::UnicodeString MsgFrom = {read=FMsgFrom, write=FMsgFrom};

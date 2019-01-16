@@ -1,8 +1,8 @@
 ﻿// CodeGear C++Builder
-// Copyright (c) 1995, 2016 by Embarcadero Technologies, Inc.
+// Copyright (c) 1995, 2017 by Embarcadero Technologies, Inc.
 // All rights reserved
 
-// (DO NOT EDIT: machine generated header) 'StNVCont.pas' rev: 32.00 (Windows)
+// (DO NOT EDIT: machine generated header) 'StNVCont.pas' rev: 33.00 (Windows)
 
 #ifndef StnvcontHPP
 #define StnvcontHPP
@@ -39,10 +39,10 @@ class PASCALIMPLEMENTATION TStNVContainerBase : public Stbase::TStComponent
 	typedef Stbase::TStComponent inherited;
 	
 protected:
-	virtual Stbase::TStCompareEvent __fastcall GetOnCompare(void);
-	virtual TStDisposeDataEvent __fastcall GetOnDisposeData(void);
-	virtual TStLoadDataEvent __fastcall GetOnLoadData(void);
-	virtual TStStoreDataEvent __fastcall GetOnStoreData(void);
+	virtual Stbase::TStCompareEvent __fastcall GetOnCompare();
+	virtual TStDisposeDataEvent __fastcall GetOnDisposeData();
+	virtual TStLoadDataEvent __fastcall GetOnLoadData();
+	virtual TStStoreDataEvent __fastcall GetOnStoreData();
 	virtual void __fastcall SetOnCompare(Stbase::TStCompareEvent Value);
 	virtual void __fastcall SetOnDisposeData(TStDisposeDataEvent Value);
 	virtual void __fastcall SetOnLoadData(TStLoadDataEvent Value);
@@ -53,7 +53,7 @@ protected:
 	__property TStStoreDataEvent OnStoreData = {read=GetOnStoreData, write=SetOnStoreData};
 public:
 	/* TComponent.Create */ inline __fastcall virtual TStNVContainerBase(System::Classes::TComponent* AOwner) : Stbase::TStComponent(AOwner) { }
-	/* TComponent.Destroy */ inline __fastcall virtual ~TStNVContainerBase(void) { }
+	/* TComponent.Destroy */ inline __fastcall virtual ~TStNVContainerBase() { }
 	
 };
 

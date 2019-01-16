@@ -1,8 +1,8 @@
 ﻿// CodeGear C++Builder
-// Copyright (c) 1995, 2016 by Embarcadero Technologies, Inc.
+// Copyright (c) 1995, 2017 by Embarcadero Technologies, Inc.
 // All rights reserved
 
-// (DO NOT EDIT: machine generated header) 'StPtrns.pas' rev: 32.00 (Windows)
+// (DO NOT EDIT: machine generated header) 'StPtrns.pas' rev: 33.00 (Windows)
 
 #ifndef StptrnsHPP
 #define StptrnsHPP
@@ -38,12 +38,12 @@ private:
 	
 public:
 	__classmethod virtual System::TObject* __fastcall NewInstance();
-	virtual void __fastcall FreeInstance(void);
-	virtual void __fastcall AllocResources(void);
-	virtual void __fastcall FreeResources(void);
+	virtual void __fastcall FreeInstance();
+	virtual void __fastcall AllocResources();
+	virtual void __fastcall FreeResources();
 public:
-	/* TObject.Create */ inline __fastcall TStSingleton(void) : System::TObject() { }
-	/* TObject.Destroy */ inline __fastcall virtual ~TStSingleton(void) { }
+	/* TObject.Create */ inline __fastcall TStSingleton() : System::TObject() { }
+	/* TObject.Destroy */ inline __fastcall virtual ~TStSingleton() { }
 	
 };
 
@@ -60,11 +60,11 @@ private:
 	System::Classes::TStringList* FEventTable;
 	
 protected:
-	int __fastcall GetCount(void);
+	int __fastcall GetCount();
 	
 public:
-	__fastcall TStMediator(void);
-	__fastcall virtual ~TStMediator(void);
+	__fastcall TStMediator();
+	__fastcall virtual ~TStMediator();
 	void __fastcall Add(const System::UnicodeString aEventName, TStMediatorAction aHandler);
 	void __fastcall Remove(const System::UnicodeString aEventName);
 	void __fastcall Handle(const System::UnicodeString aEventName, System::TObject* aInputData, System::TObject* aResultData);
@@ -87,11 +87,11 @@ private:
 protected:
 	TStObserverAction __fastcall GetObserver(int Index);
 	void __fastcall SetObserver(int Index, TStObserverAction InObserver);
-	int __fastcall GetCount(void);
+	int __fastcall GetCount();
 	
 public:
-	__fastcall TStObserver(void);
-	__fastcall virtual ~TStObserver(void);
+	__fastcall TStObserver();
+	__fastcall virtual ~TStObserver();
 	void __fastcall Add(TStObserverAction aHandler);
 	void __fastcall Remove(int aIndex);
 	void __fastcall Notify(System::TObject* aInputData);
@@ -114,11 +114,11 @@ private:
 protected:
 	TStChainAction __fastcall GetHandler(int Index);
 	void __fastcall SetHandler(int Index, TStChainAction InHandler);
-	int __fastcall GetCount(void);
+	int __fastcall GetCount();
 	
 public:
-	__fastcall TStChain(void);
-	__fastcall virtual ~TStChain(void);
+	__fastcall TStChain();
+	__fastcall virtual ~TStChain();
 	void __fastcall Add(TStChainAction aHandler);
 	void __fastcall Remove(int aIndex);
 	void __fastcall Handle(System::TObject* aInputData, System::TObject* aResultData);

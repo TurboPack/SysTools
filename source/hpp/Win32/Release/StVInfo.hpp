@@ -1,8 +1,8 @@
 ﻿// CodeGear C++Builder
-// Copyright (c) 1995, 2016 by Embarcadero Technologies, Inc.
+// Copyright (c) 1995, 2017 by Embarcadero Technologies, Inc.
 // All rights reserved
 
-// (DO NOT EDIT: machine generated header) 'StVInfo.pas' rev: 32.00 (Windows)
+// (DO NOT EDIT: machine generated header) 'StVInfo.pas' rev: 33.00 (Windows)
 
 #ifndef StvinfoHPP
 #define StvinfoHPP
@@ -71,34 +71,34 @@ protected:
 	double FProductVersionFloat;
 	int FTranslationValue;
 	bool VInfoLoaded;
-	System::UnicodeString __fastcall GetComments(void);
-	System::UnicodeString __fastcall GetCompanyName(void);
-	System::TDateTime __fastcall GetFileDate(void);
-	System::UnicodeString __fastcall GetFileDescription(void);
-	unsigned __fastcall GetFileFlags(void);
-	unsigned __fastcall GetFileFlagsMask(void);
-	unsigned __fastcall GetFileMajorVersion(void);
-	unsigned __fastcall GetFileMinorVersion(void);
-	unsigned __fastcall GetFileOS(void);
-	unsigned __fastcall GetFileSubtype(void);
-	unsigned __fastcall GetFileType(void);
-	System::UnicodeString __fastcall GetFileVersion(void);
-	double __fastcall GetFileVersionFloat(void);
-	System::UnicodeString __fastcall GetInternalName(void);
-	int __fastcall GetLanguageCount(void);
-	System::UnicodeString __fastcall GetLanguageName(void);
-	System::UnicodeString __fastcall GetLegalCopyright(void);
-	System::UnicodeString __fastcall GetLegalTrademark(void);
-	System::UnicodeString __fastcall GetOriginalFilename(void);
-	unsigned __fastcall GetProductMajorVersion(void);
-	unsigned __fastcall GetProductMinorVersion(void);
-	System::UnicodeString __fastcall GetProductName(void);
-	System::UnicodeString __fastcall GetProductVersion(void);
-	double __fastcall GetProductVersionFloat(void);
-	int __fastcall GetTranslationValue(void);
+	System::UnicodeString __fastcall GetComments();
+	System::UnicodeString __fastcall GetCompanyName();
+	System::TDateTime __fastcall GetFileDate();
+	System::UnicodeString __fastcall GetFileDescription();
+	unsigned __fastcall GetFileFlags();
+	unsigned __fastcall GetFileFlagsMask();
+	unsigned __fastcall GetFileMajorVersion();
+	unsigned __fastcall GetFileMinorVersion();
+	unsigned __fastcall GetFileOS();
+	unsigned __fastcall GetFileSubtype();
+	unsigned __fastcall GetFileType();
+	System::UnicodeString __fastcall GetFileVersion();
+	double __fastcall GetFileVersionFloat();
+	System::UnicodeString __fastcall GetInternalName();
+	int __fastcall GetLanguageCount();
+	System::UnicodeString __fastcall GetLanguageName();
+	System::UnicodeString __fastcall GetLegalCopyright();
+	System::UnicodeString __fastcall GetLegalTrademark();
+	System::UnicodeString __fastcall GetOriginalFilename();
+	unsigned __fastcall GetProductMajorVersion();
+	unsigned __fastcall GetProductMinorVersion();
+	System::UnicodeString __fastcall GetProductName();
+	System::UnicodeString __fastcall GetProductVersion();
+	double __fastcall GetProductVersionFloat();
+	int __fastcall GetTranslationValue();
 	void __fastcall SetFileName(const System::UnicodeString Value);
 	System::UnicodeString __fastcall LoadVersionInfo(const System::UnicodeString Key);
-	virtual void __fastcall Loaded(void);
+	virtual void __fastcall Loaded();
 	System::Word __fastcall GetFileVerSubPart(int Index);
 	System::Word __fastcall GetProdVerSubPart(int Index);
 	__property System::UnicodeString Comments = {read=GetComments};
@@ -138,7 +138,7 @@ protected:
 	
 public:
 	__fastcall virtual TStCustomVersionInfo(System::Classes::TComponent* AOwner);
-	__fastcall virtual ~TStCustomVersionInfo(void);
+	__fastcall virtual ~TStCustomVersionInfo();
 	System::UnicodeString __fastcall GetKeyValue(const System::UnicodeString Key);
 };
 
@@ -186,7 +186,7 @@ __published:
 	__property FileName = {default=0};
 public:
 	/* TStCustomVersionInfo.Create */ inline __fastcall virtual TStVersionInfo(System::Classes::TComponent* AOwner) : TStCustomVersionInfo(AOwner) { }
-	/* TStCustomVersionInfo.Destroy */ inline __fastcall virtual ~TStVersionInfo(void) { }
+	/* TStCustomVersionInfo.Destroy */ inline __fastcall virtual ~TStVersionInfo() { }
 	
 };
 

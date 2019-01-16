@@ -1,8 +1,8 @@
 ﻿// CodeGear C++Builder
-// Copyright (c) 1995, 2016 by Embarcadero Technologies, Inc.
+// Copyright (c) 1995, 2017 by Embarcadero Technologies, Inc.
 // All rights reserved
 
-// (DO NOT EDIT: machine generated header) 'StDbBarC.pas' rev: 32.00 (Windows)
+// (DO NOT EDIT: machine generated header) 'StDbBarC.pas' rev: 33.00 (Windows)
 
 #ifndef StdbbarcHPP
 #define StdbbarcHPP
@@ -40,14 +40,14 @@ class PASCALIMPLEMENTATION TStDbBarCode : public Stbarc::TStBarCode
 protected:
 	Vcl::Dbctrls::TFieldDataLink* FDataLink;
 	void __fastcall DataChange(System::TObject* Sender);
-	System::UnicodeString __fastcall GetDataField(void);
-	Data::Db::TDataSource* __fastcall GetDataSource(void);
+	System::UnicodeString __fastcall GetDataField();
+	Data::Db::TDataSource* __fastcall GetDataSource();
 	void __fastcall SetDataField(const System::UnicodeString Value);
 	void __fastcall SetDataSource(Data::Db::TDataSource* Value);
 	
 public:
 	__fastcall virtual TStDbBarCode(System::Classes::TComponent* AOwner);
-	__fastcall virtual ~TStDbBarCode(void);
+	__fastcall virtual ~TStDbBarCode();
 	
 __published:
 	__property Code = {stored=false, default=0};

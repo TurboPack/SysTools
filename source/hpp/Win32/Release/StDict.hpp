@@ -1,8 +1,8 @@
 ﻿// CodeGear C++Builder
-// Copyright (c) 1995, 2016 by Embarcadero Technologies, Inc.
+// Copyright (c) 1995, 2017 by Embarcadero Technologies, Inc.
 // All rights reserved
 
-// (DO NOT EDIT: machine generated header) 'StDict.pas' rev: 32.00 (Windows)
+// (DO NOT EDIT: machine generated header) 'StDict.pas' rev: 33.00 (Windows)
 
 #ifndef StdictHPP
 #define StdictHPP
@@ -36,11 +36,11 @@ class PASCALIMPLEMENTATION TStDictNode : public Stbase::TStNode
 protected:
 	TStDictNode* dnNext;
 	System::UnicodeString dnName;
-	System::UnicodeString __fastcall GetName(void);
+	System::UnicodeString __fastcall GetName();
 	
 public:
 	__fastcall TStDictNode(const System::UnicodeString Name, void * AData);
-	__fastcall virtual ~TStDictNode(void);
+	__fastcall virtual ~TStDictNode();
 	__property System::UnicodeString Name = {read=GetName};
 public:
 	/* TStNode.Create */ inline __fastcall virtual TStDictNode(void * AData) : Stbase::TStNode(AData) { }
@@ -73,10 +73,10 @@ protected:
 	
 public:
 	__fastcall virtual TStDictionary(int AHashSize);
-	__fastcall virtual ~TStDictionary(void);
+	__fastcall virtual ~TStDictionary();
 	DYNAMIC void __fastcall LoadFromStream(System::Classes::TStream* S);
 	DYNAMIC void __fastcall StoreToStream(System::Classes::TStream* S);
-	virtual void __fastcall Clear(void);
+	virtual void __fastcall Clear();
 	virtual int __fastcall DoEqual(const System::UnicodeString String1, const System::UnicodeString String2);
 	bool __fastcall Exists(const System::UnicodeString Name, void * &Data);
 	void __fastcall Add(const System::UnicodeString Name, void * Data);

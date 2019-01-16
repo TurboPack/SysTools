@@ -1,8 +1,8 @@
 ﻿// CodeGear C++Builder
-// Copyright (c) 1995, 2016 by Embarcadero Technologies, Inc.
+// Copyright (c) 1995, 2017 by Embarcadero Technologies, Inc.
 // All rights reserved
 
-// (DO NOT EDIT: machine generated header) 'StExpLog.pas' rev: 32.00 (Windows)
+// (DO NOT EDIT: machine generated header) 'StExpLog.pas' rev: 33.00 (Windows)
 
 #ifndef StexplogHPP
 #define StexplogHPP
@@ -41,7 +41,7 @@ private:
 	
 public:
 	__fastcall virtual TStExceptionLog(System::Classes::TComponent* Owner);
-	__fastcall virtual ~TStExceptionLog(void);
+	__fastcall virtual ~TStExceptionLog();
 	virtual void __fastcall DoExceptionFilter(System::Sysutils::Exception* E, bool &PutInLog);
 	
 __published:

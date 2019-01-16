@@ -1,8 +1,8 @@
 ﻿// CodeGear C++Builder
-// Copyright (c) 1995, 2016 by Embarcadero Technologies, Inc.
+// Copyright (c) 1995, 2017 by Embarcadero Technologies, Inc.
 // All rights reserved
 
-// (DO NOT EDIT: machine generated header) 'StMime.pas' rev: 32.00 (Windows)
+// (DO NOT EDIT: machine generated header) 'StMime.pas' rev: 33.00 (Windows)
 
 #ifndef StmimeHPP
 #define StmimeHPP
@@ -58,7 +58,7 @@ public:
 	__property System::UnicodeString CurrentFile = {read=FCurrentFile, write=FCurrentFile};
 	__property TStProgressEvent OnProgress = {read=FOnProgress, write=FOnProgress};
 public:
-	/* TObject.Destroy */ inline __fastcall virtual ~TStConvertStream(void) { }
+	/* TObject.Destroy */ inline __fastcall virtual ~TStConvertStream() { }
 	
 };
 
@@ -72,7 +72,7 @@ public:
 	virtual void __fastcall DecodeToStream(System::Classes::TStream* InStream, System::Classes::TStream* OutStream);
 	virtual void __fastcall EncodeToStream(System::Classes::TStream* InStream, System::Classes::TStream* OutStream);
 public:
-	/* TObject.Destroy */ inline __fastcall virtual ~TStRawStream(void) { }
+	/* TObject.Destroy */ inline __fastcall virtual ~TStRawStream() { }
 	
 };
 
@@ -86,7 +86,7 @@ public:
 	virtual void __fastcall DecodeToStream(System::Classes::TStream* InStream, System::Classes::TStream* OutStream);
 	virtual void __fastcall EncodeToStream(System::Classes::TStream* InStream, System::Classes::TStream* OutStream);
 public:
-	/* TObject.Destroy */ inline __fastcall virtual ~TStQuotedStream(void) { }
+	/* TObject.Destroy */ inline __fastcall virtual ~TStQuotedStream() { }
 	
 };
 
@@ -100,7 +100,7 @@ public:
 	virtual void __fastcall DecodeToStream(System::Classes::TStream* InStream, System::Classes::TStream* OutStream);
 	virtual void __fastcall EncodeToStream(System::Classes::TStream* InStream, System::Classes::TStream* OutStream);
 public:
-	/* TObject.Destroy */ inline __fastcall virtual ~TStUUStream(void) { }
+	/* TObject.Destroy */ inline __fastcall virtual ~TStUUStream() { }
 	
 };
 
@@ -114,7 +114,7 @@ public:
 	virtual void __fastcall DecodeToStream(System::Classes::TStream* InStream, System::Classes::TStream* OutStream);
 	virtual void __fastcall EncodeToStream(System::Classes::TStream* InStream, System::Classes::TStream* OutStream);
 public:
-	/* TObject.Destroy */ inline __fastcall virtual ~TStBase64Stream(void) { }
+	/* TObject.Destroy */ inline __fastcall virtual ~TStBase64Stream() { }
 	
 };
 
@@ -146,8 +146,8 @@ public:
 	__property int atSize = {read=FSize, write=FSize, nodefault};
 	__property int atStreamOffset = {read=FStreamOffset, write=FStreamOffset, nodefault};
 public:
-	/* TObject.Create */ inline __fastcall TStAttachment(void) : System::TObject() { }
-	/* TObject.Destroy */ inline __fastcall virtual ~TStAttachment(void) { }
+	/* TObject.Create */ inline __fastcall TStAttachment() : System::TObject() { }
+	/* TObject.Destroy */ inline __fastcall virtual ~TStAttachment() { }
 	
 };
 
@@ -173,34 +173,34 @@ protected:
 	System::Classes::TMemoryStream* FInternalStream;
 	TStProgressEvent FOnProgress;
 	TStSaveAsEvent FOnSaveAs;
-	void __fastcall AddMimeFooters(void);
+	void __fastcall AddMimeFooters();
 	void __fastcall AddMimeHeaders(const System::UnicodeString AFileName);
-	void __fastcall DeleteAttachments(void);
+	void __fastcall DeleteAttachments();
 	void __fastcall ForceType(TStConverterClass ConverterType);
-	System::UnicodeString __fastcall GetBoundary(void);
-	System::Classes::TStream* __fastcall GetStream(void);
-	void __fastcall InitConverter(void);
+	System::UnicodeString __fastcall GetBoundary();
+	System::Classes::TStream* __fastcall GetStream();
+	void __fastcall InitConverter();
 	void __fastcall SetBoundary(System::UnicodeString Value);
 	void __fastcall SetConverter(TStConvertStream* Value);
 	void __fastcall SetEncoding(System::UnicodeString Value);
 	void __fastcall SetStream(System::Classes::TStream* Value);
-	void __fastcall FindOldAttachment(void);
-	DYNAMIC System::UnicodeString __fastcall GenerateBoundary(void);
+	void __fastcall FindOldAttachment();
+	DYNAMIC System::UnicodeString __fastcall GenerateBoundary();
 	DYNAMIC void __fastcall PositionForExtract(TStAttachment* Att);
 	DYNAMIC void __fastcall Progress(System::TObject* Sender, TStConvertState Status, System::Byte PercentDone);
 	void __fastcall SaveAs(System::UnicodeString &FileName);
-	void __fastcall ScanAttachments(void);
+	void __fastcall ScanAttachments();
 	
 public:
-	__fastcall TStMimeConverter(void);
+	__fastcall TStMimeConverter();
 	__fastcall virtual TStMimeConverter(System::Classes::TStream* AStream);
-	__fastcall virtual ~TStMimeConverter(void);
+	__fastcall virtual ~TStMimeConverter();
 	void __fastcall AddFileAttachment(const System::UnicodeString AFileName);
 	DYNAMIC void __fastcall AddStreamAttachment(System::Classes::TStream* AStream, const System::UnicodeString AFileName);
 	DYNAMIC void __fastcall ExtractAttachment(const System::UnicodeString Attachment);
 	DYNAMIC void __fastcall ExtractAttachmentIndex(int Index);
 	DYNAMIC void __fastcall ExtractToStream(int Index, System::Classes::TStream* AStream);
-	void __fastcall ExtractAttachments(void);
+	void __fastcall ExtractAttachments();
 	void __fastcall FillConverterList(System::Classes::TStrings* List);
 	System::UnicodeString __fastcall GetTag(const System::UnicodeString Description);
 	__classmethod void __fastcall RegisterConverter(const System::UnicodeString ATag, const System::UnicodeString ADesc, TStConverterClass AClass);

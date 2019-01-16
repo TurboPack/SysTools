@@ -1,8 +1,8 @@
 ﻿// CodeGear C++Builder
-// Copyright (c) 1995, 2016 by Embarcadero Technologies, Inc.
+// Copyright (c) 1995, 2017 by Embarcadero Technologies, Inc.
 // All rights reserved
 
-// (DO NOT EDIT: machine generated header) 'StStrms.pas' rev: 32.00 (Windows)
+// (DO NOT EDIT: machine generated header) 'StStrms.pas' rev: 33.00 (Windows)
 
 #ifndef StstrmsHPP
 #define StstrmsHPP
@@ -47,16 +47,16 @@ private:
 	
 protected:
 	void __fastcall bsSetStream(System::Classes::TStream* aValue);
-	virtual void __fastcall bsInitForNewStream(void);
+	virtual void __fastcall bsInitForNewStream();
 	bool __fastcall bsReadChar(char &aCh);
-	void __fastcall bsReadFromStream(void);
-	void __fastcall bsWriteToStream(void);
+	void __fastcall bsReadFromStream();
+	void __fastcall bsWriteToStream();
 	virtual void __fastcall SetSize(int NewSize)/* overload */;
 	
 public:
 	__fastcall TStBufferedStream(System::Classes::TStream* aStream);
-	__fastcall TStBufferedStream(void);
-	__fastcall virtual ~TStBufferedStream(void);
+	__fastcall TStBufferedStream();
+	__fastcall virtual ~TStBufferedStream();
 	virtual int __fastcall Read(void *Buffer, int Count)/* overload */;
 	virtual int __fastcall Seek(int Offset, System::Word Origin)/* overload */;
 	virtual int __fastcall Write(const void *Buffer, int Count)/* overload */;
@@ -95,19 +95,19 @@ private:
 	int FLineInxTop;
 	
 protected:
-	int __fastcall atsGetLineCount(void);
+	int __fastcall atsGetLineCount();
 	void __fastcall atsSetLineTerm(Stbase::TStLineTerminator aValue);
 	void __fastcall atsSetLineEndCh(char aValue);
 	void __fastcall atsSetLineLen(int aValue);
 	void __fastcall atsGetLine(int &aStartPos, int &aEndPos, int &aLen);
-	void __fastcall atsResetLineIndex(void);
-	virtual void __fastcall bsInitForNewStream(void);
+	void __fastcall atsResetLineIndex();
+	virtual void __fastcall bsInitForNewStream();
 	
 public:
 	__fastcall TStAnsiTextStream(System::Classes::TStream* aStream);
-	__fastcall virtual ~TStAnsiTextStream(void);
-	bool __fastcall AtEndOfStream(void);
-	System::AnsiString __fastcall ReadLine(void);
+	__fastcall virtual ~TStAnsiTextStream();
+	bool __fastcall AtEndOfStream();
+	System::AnsiString __fastcall ReadLine();
 	int __fastcall ReadLineArray(char * aCharArray, int aLen);
 	char * __fastcall ReadLineZ(char * aSt, int aMaxLen);
 	int __fastcall SeekNearestLine(int aOffset);
@@ -121,7 +121,7 @@ public:
 	__property char LineTermChar = {read=FLineEndCh, write=atsSetLineEndCh, nodefault};
 	__property Stbase::TStLineTerminator LineTerminator = {read=FLineTerm, write=atsSetLineTerm, nodefault};
 public:
-	/* TStBufferedStream.CreateEmpty */ inline __fastcall TStAnsiTextStream(void) : TStBufferedStream() { }
+	/* TStBufferedStream.CreateEmpty */ inline __fastcall TStAnsiTextStream() : TStBufferedStream() { }
 	
 };
 
@@ -143,11 +143,11 @@ protected:
 	unsigned FPos;
 	bool FReadOnly;
 	bool FSharedData;
-	unsigned __fastcall GetDataSize(void);
+	unsigned __fastcall GetDataSize();
 	
 public:
 	__fastcall TStMemoryMappedFile(const System::UnicodeString FileName, unsigned MaxSize, bool ReadOnly, bool SharedData);
-	__fastcall virtual ~TStMemoryMappedFile(void);
+	__fastcall virtual ~TStMemoryMappedFile();
 	virtual int __fastcall Read(void *Buffer, int Count)/* overload */;
 	virtual int __fastcall Seek(int Offset, System::Word Origin)/* overload */;
 	virtual int __fastcall Write(const void *Buffer, int Count)/* overload */;

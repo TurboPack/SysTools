@@ -1,8 +1,8 @@
 ﻿// CodeGear C++Builder
-// Copyright (c) 1995, 2016 by Embarcadero Technologies, Inc.
+// Copyright (c) 1995, 2017 by Embarcadero Technologies, Inc.
 // All rights reserved
 
-// (DO NOT EDIT: machine generated header) 'StNTLog.pas' rev: 32.00 (Windows)
+// (DO NOT EDIT: machine generated header) 'StNTLog.pas' rev: 33.00 (Windows)
 
 #ifndef StntlogHPP
 #define StntlogHPP
@@ -83,23 +83,23 @@ private:
 	
 protected:
 	void __fastcall elAddEntry(const TStNTEventType EventType, unsigned EventCategory, unsigned EventID, System::Classes::TStrings* const Strings, void * DataPtr, unsigned DataSize);
-	void __fastcall elCloseLog(void);
-	void __fastcall elOpenLog(void);
-	unsigned __fastcall GetLogCount(void);
+	void __fastcall elCloseLog();
+	void __fastcall elOpenLog();
+	unsigned __fastcall GetLogCount();
 	System::UnicodeString __fastcall GetLogs(int Index);
-	unsigned __fastcall GetRecordCount(void);
+	unsigned __fastcall GetRecordCount();
 	void __fastcall SetComputerName(const System::UnicodeString Value);
 	void __fastcall SetLogName(const System::UnicodeString Value);
 	
 public:
 	__fastcall virtual TStNTEventLog(System::Classes::TComponent* AOwner);
-	__fastcall virtual ~TStNTEventLog(void);
+	__fastcall virtual ~TStNTEventLog();
 	void __fastcall AddEntry(const TStNTEventType EventType, unsigned EventCategory, unsigned EventID);
 	void __fastcall AddEntryEx(const TStNTEventType EventType, unsigned EventCategory, unsigned EventID, System::Classes::TStrings* const Strings, void * DataPtr, unsigned DataSize);
 	void __fastcall ClearLog(const System::Sysutils::TFileName BackupName);
 	void __fastcall CreateBackup(const System::Sysutils::TFileName BackupName);
 	void __fastcall ReadLog(const bool Reverse);
-	void __fastcall RefreshLogList(void);
+	void __fastcall RefreshLogList();
 	__property unsigned LogCount = {read=GetLogCount, nodefault};
 	__property System::UnicodeString Logs[int Index] = {read=GetLogs};
 	__property unsigned RecordCount = {read=GetRecordCount, nodefault};

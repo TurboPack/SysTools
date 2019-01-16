@@ -1,8 +1,8 @@
 ﻿// CodeGear C++Builder
-// Copyright (c) 1995, 2016 by Embarcadero Technologies, Inc.
+// Copyright (c) 1995, 2017 by Embarcadero Technologies, Inc.
 // All rights reserved
 
-// (DO NOT EDIT: machine generated header) 'StBits.pas' rev: 32.00 (Windows)
+// (DO NOT EDIT: machine generated header) 'StBits.pas' rev: 33.00 (Windows)
 
 #ifndef StbitsHPP
 #define StbitsHPP
@@ -41,22 +41,22 @@ protected:
 	int btBlockSize;
 	System::Byte *btBits;
 	void __fastcall btSetMax(int Max);
-	void __fastcall btRecount(void);
+	void __fastcall btRecount();
 	System::PByte __fastcall btByte(int I);
 	void __fastcall SetByte(int I, System::Byte B);
 	System::Byte __fastcall GetByte(int I);
-	System::AnsiString __fastcall GetAsString(void);
+	System::AnsiString __fastcall GetAsString();
 	void __fastcall SetAsString(System::AnsiString S);
 	
 public:
 	__fastcall virtual TStBits(int Max);
-	__fastcall virtual ~TStBits(void);
+	__fastcall virtual ~TStBits();
 	DYNAMIC void __fastcall LoadFromStream(System::Classes::TStream* S);
 	DYNAMIC void __fastcall StoreToStream(System::Classes::TStream* S);
-	virtual void __fastcall Clear(void);
+	virtual void __fastcall Clear();
 	void __fastcall CopyBits(TStBits* B);
-	void __fastcall SetBits(void);
-	void __fastcall InvertBits(void);
+	void __fastcall SetBits();
+	void __fastcall InvertBits();
 	void __fastcall OrBits(TStBits* B);
 	void __fastcall AndBits(TStBits* B);
 	void __fastcall SubBits(TStBits* B);
@@ -67,10 +67,10 @@ public:
 	void __fastcall MoveBit(TStBits* SrcBitset, int SrcN, int DestN);
 	void __fastcall MapBits(TStBits* SrcBitSet, int *DestMap, const int DestMap_High);
 	bool __fastcall BitIsSet(int N);
-	int __fastcall FirstSet(void);
-	int __fastcall LastSet(void);
-	int __fastcall FirstClear(void);
-	int __fastcall LastClear(void);
+	int __fastcall FirstSet();
+	int __fastcall LastSet();
+	int __fastcall FirstClear();
+	int __fastcall LastClear();
 	int __fastcall NextSet(int N);
 	int __fastcall PrevSet(int N);
 	int __fastcall NextClear(int N);

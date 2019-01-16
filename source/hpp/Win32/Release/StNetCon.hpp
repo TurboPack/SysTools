@@ -1,8 +1,8 @@
 ﻿// CodeGear C++Builder
-// Copyright (c) 1995, 2016 by Embarcadero Technologies, Inc.
+// Copyright (c) 1995, 2017 by Embarcadero Technologies, Inc.
 // All rights reserved
 
-// (DO NOT EDIT: machine generated header) 'StNetCon.pas' rev: 32.00 (Windows)
+// (DO NOT EDIT: machine generated header) 'StNetCon.pas' rev: 33.00 (Windows)
 
 #ifndef StnetconHPP
 #define StnetconHPP
@@ -61,14 +61,14 @@ protected:
 	TOnDisconnectCancelEvent FOnDisconnectCancel;
 	
 private:
-	System::UnicodeString __fastcall GetServerName(void);
+	System::UnicodeString __fastcall GetServerName();
 	void __fastcall SetServerName(System::UnicodeString Value);
 	
 public:
 	__fastcall virtual TStNetConnection(System::Classes::TComponent* AOwner);
-	__fastcall virtual ~TStNetConnection(void);
-	unsigned __fastcall Connect(void);
-	unsigned __fastcall Disconnect(void);
+	__fastcall virtual ~TStNetConnection();
+	unsigned __fastcall Connect();
+	unsigned __fastcall Disconnect();
 	__property System::UnicodeString Password = {read=FPassword, write=FPassword};
 	__property System::UnicodeString UserName = {read=FUserName, write=FUserName};
 	

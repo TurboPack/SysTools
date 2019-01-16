@@ -1,8 +1,8 @@
 ﻿// CodeGear C++Builder
-// Copyright (c) 1995, 2016 by Embarcadero Technologies, Inc.
+// Copyright (c) 1995, 2017 by Embarcadero Technologies, Inc.
 // All rights reserved
 
-// (DO NOT EDIT: machine generated header) 'StBarC.pas' rev: 32.00 (Windows)
+// (DO NOT EDIT: machine generated header) 'StBarC.pas' rev: 33.00 (Windows)
 
 #ifndef StbarcHPP
 #define StbarcHPP
@@ -52,8 +52,8 @@ public:
 	__property TStBarKindSet Kind = {read=FKind, write=FKind, nodefault};
 	__property int Modules = {read=FModules, write=FModules, nodefault};
 public:
-	/* TObject.Create */ inline __fastcall TStBarData(void) : System::TObject() { }
-	/* TObject.Destroy */ inline __fastcall virtual ~TStBarData(void) { }
+	/* TObject.Create */ inline __fastcall TStBarData() : System::TObject() { }
+	/* TObject.Destroy */ inline __fastcall virtual ~TStBarData() { }
 	
 };
 
@@ -70,13 +70,13 @@ public:
 private:
 	System::Classes::TList* FBars;
 	TStBarData* __fastcall GetBars(int Index);
-	int __fastcall GetCount(void);
+	int __fastcall GetCount();
 	
 public:
-	__fastcall virtual TStBarCodeInfo(void);
-	__fastcall virtual ~TStBarCodeInfo(void);
+	__fastcall virtual TStBarCodeInfo();
+	__fastcall virtual ~TStBarCodeInfo();
 	void __fastcall Add(int ModuleCount, TStBarKindSet BarKind);
-	void __fastcall Clear(void);
+	void __fastcall Clear();
 	__property TStBarData* Bars[int Index] = {read=GetBars/*, default*/};
 	__property int Count = {read=GetCount, nodefault};
 };
@@ -114,8 +114,8 @@ protected:
 	int bcNormalWidth;
 	int bcSpaceWidth;
 	int bcSupplementWidth;
-	System::UnicodeString __fastcall GetCode(void);
-	System::UnicodeString __fastcall GetVersion(void);
+	System::UnicodeString __fastcall GetCode();
+	System::UnicodeString __fastcall GetVersion();
 	void __fastcall SetAddCheckChar(bool Value);
 	void __fastcall SetBarCodeType(TStBarCodeType Value);
 	void __fastcall SetBarColor(System::Uitypes::TColor Value);
@@ -131,21 +131,21 @@ protected:
 	void __fastcall SetSupplementalCode(const System::UnicodeString Value);
 	void __fastcall SetTallGuardBars(bool Value);
 	void __fastcall SetVersion(const System::UnicodeString Value);
-	void __fastcall CalcBarCode(void);
-	void __fastcall CalcBarCodeWidth(void);
+	void __fastcall CalcBarCode();
+	void __fastcall CalcBarCodeWidth();
 	int __fastcall DrawBar(int XPos, int YPos, int AWidth, int AHeight);
 	void __fastcall DrawBarCode(const System::Types::TRect &R);
 	int __fastcall GetDigits(System::UnicodeString Characters);
 	void __fastcall PaintPrim(const System::Types::TRect &R);
 	double __fastcall SmallestLineWidth(int PixelsPerInch);
 	MESSAGE void __fastcall CMTextChanged(Winapi::Messages::TMessage &Msg);
-	virtual void __fastcall Loaded(void);
-	virtual void __fastcall Paint(void);
+	virtual void __fastcall Loaded();
+	virtual void __fastcall Paint();
 	
 public:
 	__fastcall virtual TStBarCode(System::Classes::TComponent* AOwner);
-	__fastcall virtual ~TStBarCode(void);
-	void __fastcall CopyToClipboard(void);
+	__fastcall virtual ~TStBarCode();
+	void __fastcall CopyToClipboard();
 	void __fastcall GetCheckCharacters(const System::UnicodeString S, int &C, int &K);
 	double __fastcall GetBarCodeWidth(Vcl::Graphics::TCanvas* ACanvas);
 	void __fastcall PaintToCanvas(Vcl::Graphics::TCanvas* ACanvas, const System::Types::TRect &ARect);

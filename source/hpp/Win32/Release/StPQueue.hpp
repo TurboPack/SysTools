@@ -1,8 +1,8 @@
 ﻿// CodeGear C++Builder
-// Copyright (c) 1995, 2016 by Embarcadero Technologies, Inc.
+// Copyright (c) 1995, 2017 by Embarcadero Technologies, Inc.
 // All rights reserved
 
-// (DO NOT EDIT: machine generated header) 'StPQueue.pas' rev: 32.00 (Windows)
+// (DO NOT EDIT: machine generated header) 'StPQueue.pas' rev: 33.00 (Windows)
 
 #ifndef StpqueueHPP
 #define StpqueueHPP
@@ -40,7 +40,7 @@ protected:
 	int pqCapacity;
 	int pqDelta;
 	virtual void __fastcall ForEachPointer(Stbase::TIteratePointerFunc Action, void * OtherData);
-	virtual bool __fastcall StoresPointers(void);
+	virtual bool __fastcall StoresPointers();
 	void __fastcall Expand(int Need);
 	void __fastcall InsertMin(int I, void * Data);
 	void __fastcall InsertMax(int I, void * Data);
@@ -48,17 +48,17 @@ protected:
 	
 public:
 	__fastcall virtual TStPQueue(int InitCapacity, int Delta);
-	__fastcall virtual ~TStPQueue(void);
+	__fastcall virtual ~TStPQueue();
 	DYNAMIC void __fastcall LoadFromStream(System::Classes::TStream* S);
 	DYNAMIC void __fastcall StoreToStream(System::Classes::TStream* S);
-	virtual void __fastcall Clear(void);
+	virtual void __fastcall Clear();
 	void __fastcall Insert(void * Data);
-	void * __fastcall DeleteMin(void);
-	void * __fastcall DeleteMax(void);
+	void * __fastcall DeleteMin();
+	void * __fastcall DeleteMax();
 	virtual void __fastcall Assign(System::Classes::TPersistent* Source);
 	void __fastcall Join(TStPQueue* Q);
 	void * __fastcall Iterate(Stbase::TIteratePointerFunc Action, void * OtherData);
-	bool __fastcall Test(void);
+	bool __fastcall Test();
 public:
 	/* TStContainer.CreateContainer */ inline __fastcall TStPQueue(Stbase::TStNodeClass NodeClass, int Dummy) : Stbase::TStContainer(NodeClass, Dummy) { }
 	

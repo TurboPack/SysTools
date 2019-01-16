@@ -1,8 +1,8 @@
 ﻿// CodeGear C++Builder
-// Copyright (c) 1995, 2016 by Embarcadero Technologies, Inc.
+// Copyright (c) 1995, 2017 by Embarcadero Technologies, Inc.
 // All rights reserved
 
-// (DO NOT EDIT: machine generated header) 'StDecMth.pas' rev: 32.00 (Windows)
+// (DO NOT EDIT: machine generated header) 'StDecMth.pas' rev: 33.00 (Windows)
 
 #ifndef StdecmthHPP
 #define StdecmthHPP
@@ -36,34 +36,34 @@ private:
 	TStInt128 FInt;
 	
 protected:
-	System::AnsiString __fastcall dcGetAsStr(void);
+	System::AnsiString __fastcall dcGetAsStr();
 	void __fastcall dcSetFromStr(const System::AnsiString aValue);
 	
 public:
-	__fastcall TStDecimal(void);
-	__fastcall virtual ~TStDecimal(void);
+	__fastcall TStDecimal();
+	__fastcall virtual ~TStDecimal();
 	int __fastcall Compare(TStDecimal* X);
-	bool __fastcall IsNegative(void);
-	bool __fastcall IsOne(void);
-	bool __fastcall IsPositive(void);
-	bool __fastcall IsZero(void);
-	void __fastcall SetToOne(void);
-	void __fastcall SetToZero(void);
+	bool __fastcall IsNegative();
+	bool __fastcall IsOne();
+	bool __fastcall IsPositive();
+	bool __fastcall IsZero();
+	void __fastcall SetToOne();
+	void __fastcall SetToZero();
 	void __fastcall Assign(TStDecimal* X);
 	void __fastcall AssignFromFloat(double aValue);
 	void __fastcall AssignFromInt(int aValue);
-	double __fastcall AsFloat(void);
+	double __fastcall AsFloat();
 	int __fastcall AsInt(TStRoundMethod aRound);
-	void __fastcall Abs(void);
+	void __fastcall Abs();
 	void __fastcall Add(TStDecimal* X);
-	void __fastcall AddOne(void);
-	void __fastcall ChangeSign(void);
+	void __fastcall AddOne();
+	void __fastcall ChangeSign();
 	void __fastcall Divide(TStDecimal* X);
 	void __fastcall Multiply(TStDecimal* X);
 	void __fastcall RaiseToPower(int N);
 	void __fastcall Round(TStRoundMethod aRound, int aDecPl);
 	void __fastcall Subtract(TStDecimal* X);
-	void __fastcall SubtractOne(void);
+	void __fastcall SubtractOne();
 	__property System::AnsiString AsString = {read=dcGetAsStr, write=dcSetFromStr};
 };
 

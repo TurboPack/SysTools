@@ -1,8 +1,8 @@
 ﻿// CodeGear C++Builder
-// Copyright (c) 1995, 2016 by Embarcadero Technologies, Inc.
+// Copyright (c) 1995, 2017 by Embarcadero Technologies, Inc.
 // All rights reserved
 
-// (DO NOT EDIT: machine generated header) 'StNetPfm.pas' rev: 32.00 (Windows)
+// (DO NOT EDIT: machine generated header) 'StNetPfm.pas' rev: 33.00 (Windows)
 
 #ifndef StnetpfmHPP
 #define StnetpfmHPP
@@ -44,16 +44,16 @@ private:
 	unsigned FOptDataSize;
 	
 protected:
-	TStCPFlagsSet __fastcall GetFlags(void);
-	unsigned __fastcall GetSpeed(void);
-	unsigned __fastcall GetDelay(void);
-	unsigned __fastcall GetOptDataSize(void);
+	TStCPFlagsSet __fastcall GetFlags();
+	unsigned __fastcall GetSpeed();
+	unsigned __fastcall GetDelay();
+	unsigned __fastcall GetOptDataSize();
 	void __fastcall SetLocalName(System::UnicodeString Value);
 	void __fastcall SetRemoteName(System::UnicodeString Value);
 	void __fastcall SetProviderName(System::UnicodeString Value);
 	
 public:
-	void __fastcall QueryPerformance(void);
+	void __fastcall QueryPerformance();
 	__property TStCPFlagsSet Flags = {read=GetFlags, nodefault};
 	__property unsigned Speed = {read=GetSpeed, nodefault};
 	__property unsigned Delay = {read=GetDelay, nodefault};
@@ -65,7 +65,7 @@ __published:
 	__property System::UnicodeString ProviderName = {read=FProviderName, write=SetProviderName};
 public:
 	/* TComponent.Create */ inline __fastcall virtual TStNetPerformance(System::Classes::TComponent* AOwner) : Stbase::TStComponent(AOwner) { }
-	/* TComponent.Destroy */ inline __fastcall virtual ~TStNetPerformance(void) { }
+	/* TComponent.Destroy */ inline __fastcall virtual ~TStNetPerformance() { }
 	
 };
 

@@ -1,8 +1,8 @@
 ﻿// CodeGear C++Builder
-// Copyright (c) 1995, 2016 by Embarcadero Technologies, Inc.
+// Copyright (c) 1995, 2017 by Embarcadero Technologies, Inc.
 // All rights reserved
 
-// (DO NOT EDIT: machine generated header) 'StOStr.pas' rev: 32.00 (Windows)
+// (DO NOT EDIT: machine generated header) 'StOStr.pas' rev: 33.00 (Windows)
 
 #ifndef StostrHPP
 #define StostrHPP
@@ -61,17 +61,17 @@ protected:
 	void __fastcall AllocTemp(unsigned Size);
 	void __fastcall BMMakeTable(System::WideChar * S);
 	void __fastcall CheckAlloc(unsigned Size);
-	System::WideChar * __fastcall DesiredCursor(void);
+	System::WideChar * __fastcall DesiredCursor();
 	void __fastcall FixCursor(unsigned Pos, unsigned Size, bool Delete);
 	System::WideChar __fastcall Get(unsigned Index);
-	unsigned __fastcall GetAsciiCount(void);
-	System::UnicodeString __fastcall GetAsShortStr(void);
-	unsigned __fastcall GetCursorPos(void);
-	System::UnicodeString __fastcall GetDelimiters(void);
-	unsigned __fastcall GetLength(void);
+	unsigned __fastcall GetAsciiCount();
+	System::UnicodeString __fastcall GetAsShortStr();
+	unsigned __fastcall GetCursorPos();
+	System::UnicodeString __fastcall GetDelimiters();
+	unsigned __fastcall GetLength();
 	unsigned __fastcall GetRelativePos(unsigned Pos);
-	System::UnicodeString __fastcall GetSoundex(void);
-	unsigned __fastcall GetWordCount(void);
+	System::UnicodeString __fastcall GetSoundex();
+	unsigned __fastcall GetWordCount();
 	void __fastcall Put(unsigned Index, System::WideChar Item);
 	void __fastcall SetAllocLength(unsigned Value);
 	void __fastcall SetAsShortStr(const System::UnicodeString Value);
@@ -79,21 +79,21 @@ protected:
 	void __fastcall SetDelimiters(System::UnicodeString Value);
 	void __fastcall SetItems(System::Classes::TStringList* Value);
 	unsigned __fastcall SuggestSize(unsigned Size);
-	void __fastcall TempToString(void);
+	void __fastcall TempToString();
 	void __fastcall UpdateCursor(unsigned Pos);
-	System::UnicodeString __fastcall GetAsLongStr(void);
+	System::UnicodeString __fastcall GetAsLongStr();
 	void __fastcall SetAsLongStr(System::UnicodeString Value);
-	System::Variant __fastcall GetAsVariant(void);
+	System::Variant __fastcall GetAsVariant();
 	void __fastcall SetAsVariant(const System::Variant &Value);
 	int __fastcall MakeTerminator(System::WideChar * &Terminator);
 	
 public:
-	__fastcall TStString(void);
+	__fastcall TStString();
 	__fastcall virtual TStString(unsigned Size);
 	__fastcall virtual TStString(const System::UnicodeString S);
 	__fastcall virtual TStString(const System::WideChar * S);
 	__fastcall virtual TStString(const System::Variant &S);
-	__fastcall virtual ~TStString(void);
+	__fastcall virtual ~TStString();
 	void __fastcall AppendPChar(System::WideChar * S);
 	void __fastcall AppendString(System::UnicodeString S);
 	bool __fastcall AsciiPosition(unsigned N, unsigned &Pos);
@@ -104,38 +104,38 @@ public:
 	unsigned __fastcall CharCount(const System::WideChar C);
 	bool __fastcall CharExists(const System::WideChar C);
 	void __fastcall CharStr(const System::WideChar C, unsigned Size);
-	void __fastcall ClearItems(void);
-	void __fastcall CursorNextWord(void);
-	void __fastcall CursorNextWordPrim(void);
-	void __fastcall CursorPrevWord(void);
-	void __fastcall CursorPrevWordPrim(void);
-	void __fastcall CursorToEnd(void);
-	void __fastcall DeleteAsciiAtCursor(void);
+	void __fastcall ClearItems();
+	void __fastcall CursorNextWord();
+	void __fastcall CursorNextWordPrim();
+	void __fastcall CursorPrevWord();
+	void __fastcall CursorPrevWordPrim();
+	void __fastcall CursorToEnd();
+	void __fastcall DeleteAsciiAtCursor();
 	void __fastcall DeleteAtCursor(unsigned Length);
-	void __fastcall DeleteWordAtCursor(void);
-	void __fastcall Detab(void);
-	void __fastcall Entab(void);
+	void __fastcall DeleteWordAtCursor();
+	void __fastcall Detab();
+	void __fastcall Entab();
 	System::UnicodeString __fastcall ExtractAscii(unsigned N);
 	System::UnicodeString __fastcall ExtractWord(unsigned N);
 	void __fastcall Filter(const System::WideChar * Filters);
-	System::UnicodeString __fastcall GetAsciiAtCursor(void);
+	System::UnicodeString __fastcall GetAsciiAtCursor();
 	System::WideChar * __fastcall GetAsciiAtCursorZ(System::WideChar * Dest);
 	System::WideChar * __fastcall GetAsPChar(System::WideChar * Dest);
-	System::UnicodeString __fastcall GetWordAtCursor(void);
+	System::UnicodeString __fastcall GetWordAtCursor();
 	System::WideChar * __fastcall GetWordAtCursorZ(System::WideChar * Dest);
-	void __fastcall InsertLineTerminatorAtCursor(void);
+	void __fastcall InsertLineTerminatorAtCursor();
 	void __fastcall InsertLineTerminator(unsigned Pos);
 	void __fastcall InsertPCharAtCursor(System::WideChar * S);
 	void __fastcall InsertStringAtCursor(System::UnicodeString S);
-	void __fastcall ItemsToString(void);
+	void __fastcall ItemsToString();
 	void __fastcall LeftPad(unsigned Size);
 	void __fastcall LeftPadCh(const System::WideChar C, unsigned Size);
-	int __fastcall MakeLetterSet(void);
+	int __fastcall MakeLetterSet();
 	void __fastcall MoveCursor(int Delta);
-	void __fastcall Pack(void);
+	void __fastcall Pack();
 	void __fastcall Pad(unsigned Size);
 	void __fastcall PadCh(const System::WideChar C, unsigned Size);
-	void __fastcall ResetCursor(void);
+	void __fastcall ResetCursor();
 	void __fastcall Scramble(const System::UnicodeString Key);
 	void __fastcall SetAsPChar(System::WideChar * S);
 	unsigned __fastcall SizeAsciiAtCursor(bool InclTrailers);
@@ -143,18 +143,18 @@ public:
 	void __fastcall StrChDelete(unsigned Pos);
 	void __fastcall StrChInsert(const System::WideChar C, unsigned Pos);
 	bool __fastcall StrChPos(const System::WideChar C, int &Pos);
-	void __fastcall StringToItems(void);
-	void __fastcall StripLineTerminators(void);
+	void __fastcall StringToItems();
+	void __fastcall StripLineTerminators();
 	void __fastcall StrStDelete(const unsigned Pos, const unsigned Length);
 	void __fastcall StrStInsert(const System::UnicodeString S, unsigned Pos);
 	bool __fastcall StrStPos(const System::UnicodeString S, unsigned &Pos);
 	void __fastcall Substitute(System::WideChar * FromStr, System::WideChar * ToStr);
-	void __fastcall Trim(void);
-	void __fastcall TrimLead(void);
-	void __fastcall TrimSpaces(void);
-	void __fastcall TrimTrail(void);
+	void __fastcall Trim();
+	void __fastcall TrimLead();
+	void __fastcall TrimSpaces();
+	void __fastcall TrimTrail();
 	bool __fastcall WordPosition(unsigned N, unsigned &Pos);
-	void __fastcall WrapToItems(void);
+	void __fastcall WrapToItems();
 	__property unsigned AllocLength = {read=FAlloc, write=SetAllocLength, nodefault};
 	__property unsigned AsciiCount = {read=GetAsciiCount, nodefault};
 	__property System::UnicodeString AsLongStr = {read=GetAsLongStr, write=SetAsLongStr};

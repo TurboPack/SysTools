@@ -1,8 +1,8 @@
 ﻿// CodeGear C++Builder
-// Copyright (c) 1995, 2016 by Embarcadero Technologies, Inc.
+// Copyright (c) 1995, 2017 by Embarcadero Technologies, Inc.
 // All rights reserved
 
-// (DO NOT EDIT: machine generated header) 'StNVBits.pas' rev: 32.00 (Windows)
+// (DO NOT EDIT: machine generated header) 'StNVBits.pas' rev: 33.00 (Windows)
 
 #ifndef StnvbitsHPP
 #define StnvbitsHPP
@@ -35,14 +35,14 @@ protected:
 	Stbits::TStBits* FContainer;
 	int FMaxBits;
 	void __fastcall SetMaxBits(int Value);
-	virtual Stnvcont::TStLoadDataEvent __fastcall GetOnLoadData(void);
-	virtual Stnvcont::TStStoreDataEvent __fastcall GetOnStoreData(void);
+	virtual Stnvcont::TStLoadDataEvent __fastcall GetOnLoadData();
+	virtual Stnvcont::TStStoreDataEvent __fastcall GetOnStoreData();
 	virtual void __fastcall SetOnLoadData(Stnvcont::TStLoadDataEvent Value);
 	virtual void __fastcall SetOnStoreData(Stnvcont::TStStoreDataEvent Value);
 	
 public:
 	__fastcall virtual TStNVBits(System::Classes::TComponent* AOwner);
-	__fastcall virtual ~TStNVBits(void);
+	__fastcall virtual ~TStNVBits();
 	__property Stbits::TStBits* Container = {read=FContainer};
 	
 __published:

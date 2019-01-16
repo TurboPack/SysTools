@@ -1,8 +1,8 @@
 ﻿// CodeGear C++Builder
-// Copyright (c) 1995, 2016 by Embarcadero Technologies, Inc.
+// Copyright (c) 1995, 2017 by Embarcadero Technologies, Inc.
 // All rights reserved
 
-// (DO NOT EDIT: machine generated header) 'StList.pas' rev: 32.00 (Windows)
+// (DO NOT EDIT: machine generated header) 'StList.pas' rev: 33.00 (Windows)
 
 #ifndef StlistHPP
 #define StlistHPP
@@ -40,7 +40,7 @@ protected:
 public:
 	__fastcall virtual TStListNode(void * AData);
 public:
-	/* TPersistent.Destroy */ inline __fastcall virtual ~TStListNode(void) { }
+	/* TPersistent.Destroy */ inline __fastcall virtual ~TStListNode() { }
 	
 };
 
@@ -59,13 +59,13 @@ protected:
 	int lsLastI;
 	TStListNode* lsLastP;
 	virtual void __fastcall ForEachPointer(Stbase::TIteratePointerFunc Action, void * OtherData);
-	virtual bool __fastcall StoresPointers(void);
+	virtual bool __fastcall StoresPointers();
 	
 public:
 	__fastcall virtual TStList(Stbase::TStNodeClass NodeClass);
 	DYNAMIC void __fastcall LoadFromStream(System::Classes::TStream* S);
 	DYNAMIC void __fastcall StoreToStream(System::Classes::TStream* S);
-	virtual void __fastcall Clear(void);
+	virtual void __fastcall Clear();
 	TStListNode* __fastcall Append(void * Data);
 	TStListNode* __fastcall Insert(void * Data);
 	TStListNode* __fastcall Place(void * Data, TStListNode* P);
@@ -75,7 +75,7 @@ public:
 	virtual void __fastcall Assign(System::Classes::TPersistent* Source);
 	void __fastcall Join(TStListNode* P, TStList* L);
 	TStList* __fastcall Split(TStListNode* P);
-	void __fastcall Sort(void);
+	void __fastcall Sort();
 	void __fastcall Delete(TStListNode* P);
 	TStListNode* __fastcall Next(TStListNode* P);
 	TStListNode* __fastcall Prev(TStListNode* P);
@@ -90,7 +90,7 @@ public:
 	__property TStListNode* Items[int Index] = {read=Nth/*, default*/};
 public:
 	/* TStContainer.CreateContainer */ inline __fastcall TStList(Stbase::TStNodeClass NodeClass, int Dummy) : Stbase::TStContainer(NodeClass, Dummy) { }
-	/* TStContainer.Destroy */ inline __fastcall virtual ~TStList(void) { }
+	/* TStContainer.Destroy */ inline __fastcall virtual ~TStList() { }
 	
 };
 

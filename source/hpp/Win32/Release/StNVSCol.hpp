@@ -1,8 +1,8 @@
 ﻿// CodeGear C++Builder
-// Copyright (c) 1995, 2016 by Embarcadero Technologies, Inc.
+// Copyright (c) 1995, 2017 by Embarcadero Technologies, Inc.
 // All rights reserved
 
-// (DO NOT EDIT: machine generated header) 'StNVSCol.pas' rev: 32.00 (Windows)
+// (DO NOT EDIT: machine generated header) 'StNVSCol.pas' rev: 33.00 (Windows)
 
 #ifndef StnvscolHPP
 #define StnvscolHPP
@@ -37,11 +37,11 @@ protected:
 	int FPageElements;
 	void __fastcall SetDuplicates(bool Value);
 	void __fastcall SetPageElements(int Value);
-	void __fastcall RecreateContainer(void);
-	virtual Stbase::TStCompareEvent __fastcall GetOnCompare(void);
-	virtual Stnvcont::TStDisposeDataEvent __fastcall GetOnDisposeData(void);
-	virtual Stnvcont::TStLoadDataEvent __fastcall GetOnLoadData(void);
-	virtual Stnvcont::TStStoreDataEvent __fastcall GetOnStoreData(void);
+	void __fastcall RecreateContainer();
+	virtual Stbase::TStCompareEvent __fastcall GetOnCompare();
+	virtual Stnvcont::TStDisposeDataEvent __fastcall GetOnDisposeData();
+	virtual Stnvcont::TStLoadDataEvent __fastcall GetOnLoadData();
+	virtual Stnvcont::TStStoreDataEvent __fastcall GetOnStoreData();
 	virtual void __fastcall SetOnCompare(Stbase::TStCompareEvent Value);
 	virtual void __fastcall SetOnDisposeData(Stnvcont::TStDisposeDataEvent Value);
 	virtual void __fastcall SetOnLoadData(Stnvcont::TStLoadDataEvent Value);
@@ -49,7 +49,7 @@ protected:
 	
 public:
 	__fastcall virtual TStNVSortedCollection(System::Classes::TComponent* AOwner);
-	__fastcall virtual ~TStNVSortedCollection(void);
+	__fastcall virtual ~TStNVSortedCollection();
 	__property Stcoll::TStSortedCollection* Container = {read=FContainer};
 	
 __published:

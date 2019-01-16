@@ -1,8 +1,8 @@
 ﻿// CodeGear C++Builder
-// Copyright (c) 1995, 2016 by Embarcadero Technologies, Inc.
+// Copyright (c) 1995, 2017 by Embarcadero Technologies, Inc.
 // All rights reserved
 
-// (DO NOT EDIT: machine generated header) 'StWmDCpy.pas' rev: 32.00 (Windows)
+// (DO NOT EDIT: machine generated header) 'StWmDCpy.pas' rev: 33.00 (Windows)
 
 #ifndef StwmdcpyHPP
 #define StwmdcpyHPP
@@ -45,7 +45,7 @@ protected:
 	
 public:
 	__fastcall virtual TStWMDataCopy(System::Classes::TComponent* AOwner);
-	__fastcall virtual ~TStWMDataCopy(void);
+	__fastcall virtual ~TStWMDataCopy();
 	
 __published:
 	__property TStOnDataReceivedEvent OnDataReceived = {read=FOnDataReceived, write=FOnDataReceived};

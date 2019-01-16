@@ -1,8 +1,8 @@
 ﻿// CodeGear C++Builder
-// Copyright (c) 1995, 2016 by Embarcadero Technologies, Inc.
+// Copyright (c) 1995, 2017 by Embarcadero Technologies, Inc.
 // All rights reserved
 
-// (DO NOT EDIT: machine generated header) 'StDQue.pas' rev: 32.00 (Windows)
+// (DO NOT EDIT: machine generated header) 'StDQue.pas' rev: 33.00 (Windows)
 
 #ifndef StdqueHPP
 #define StdqueHPP
@@ -33,17 +33,17 @@ class PASCALIMPLEMENTATION TStDQue : public Stlist::TStList
 	
 public:
 	void __fastcall PushTail(void * Data);
-	void __fastcall PopTail(void);
+	void __fastcall PopTail();
 	void __fastcall PeekTail(void * &Data);
 	void __fastcall PushHead(void * Data);
-	void __fastcall PopHead(void);
+	void __fastcall PopHead();
 	void __fastcall PeekHead(void * &Data);
 public:
 	/* TStList.Create */ inline __fastcall virtual TStDQue(Stbase::TStNodeClass NodeClass) : Stlist::TStList(NodeClass) { }
 	
 public:
 	/* TStContainer.CreateContainer */ inline __fastcall TStDQue(Stbase::TStNodeClass NodeClass, int Dummy) : Stlist::TStList(NodeClass, Dummy) { }
-	/* TStContainer.Destroy */ inline __fastcall virtual ~TStDQue(void) { }
+	/* TStContainer.Destroy */ inline __fastcall virtual ~TStDQue() { }
 	
 };
 

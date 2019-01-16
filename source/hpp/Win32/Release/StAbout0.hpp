@@ -1,8 +1,8 @@
 ﻿// CodeGear C++Builder
-// Copyright (c) 1995, 2016 by Embarcadero Technologies, Inc.
+// Copyright (c) 1995, 2017 by Embarcadero Technologies, Inc.
 // All rights reserved
 
-// (DO NOT EDIT: machine generated header) 'StAbout0.pas' rev: 32.00 (Windows)
+// (DO NOT EDIT: machine generated header) 'StAbout0.pas' rev: 33.00 (Windows)
 
 #ifndef Stabout0HPP
 #define Stabout0HPP
@@ -56,7 +56,7 @@ __published:
 public:
 	/* TCustomForm.Create */ inline __fastcall virtual TStAboutForm(System::Classes::TComponent* AOwner) : Vcl::Forms::TForm(AOwner) { }
 	/* TCustomForm.CreateNew */ inline __fastcall virtual TStAboutForm(System::Classes::TComponent* AOwner, int Dummy) : Vcl::Forms::TForm(AOwner, Dummy) { }
-	/* TCustomForm.Destroy */ inline __fastcall virtual ~TStAboutForm(void) { }
+	/* TCustomForm.Destroy */ inline __fastcall virtual ~TStAboutForm() { }
 	
 public:
 	/* TWinControl.CreateParented */ inline __fastcall TStAboutForm(HWND ParentWindow) : Vcl::Forms::TForm(ParentWindow) { }
@@ -70,11 +70,11 @@ class PASCALIMPLEMENTATION TStVersionProperty : public Designeditors::TStringPro
 	typedef Designeditors::TStringProperty inherited;
 	
 public:
-	virtual Designintf::TPropertyAttributes __fastcall GetAttributes(void);
-	virtual void __fastcall Edit(void);
+	virtual Designintf::TPropertyAttributes __fastcall GetAttributes();
+	virtual void __fastcall Edit();
 public:
 	/* TPropertyEditor.Create */ inline __fastcall virtual TStVersionProperty(const Designintf::_di_IDesigner ADesigner, int APropCount) : Designeditors::TStringProperty(ADesigner, APropCount) { }
-	/* TPropertyEditor.Destroy */ inline __fastcall virtual ~TStVersionProperty(void) { }
+	/* TPropertyEditor.Destroy */ inline __fastcall virtual ~TStVersionProperty() { }
 	
 };
 

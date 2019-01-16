@@ -1,8 +1,8 @@
 ﻿// CodeGear C++Builder
-// Copyright (c) 1995, 2016 by Embarcadero Technologies, Inc.
+// Copyright (c) 1995, 2017 by Embarcadero Technologies, Inc.
 // All rights reserved
 
-// (DO NOT EDIT: machine generated header) 'StNVLAry.pas' rev: 32.00 (Windows)
+// (DO NOT EDIT: machine generated header) 'StNVLAry.pas' rev: 33.00 (Windows)
 
 #ifndef StnvlaryHPP
 #define StnvlaryHPP
@@ -35,15 +35,15 @@ protected:
 	Stlarr::TStLArray* FContainer;
 	int FElementCount;
 	unsigned FElementSize;
-	bool __fastcall GetStoreable(void);
+	bool __fastcall GetStoreable();
 	void __fastcall SetElementCount(int Value);
 	void __fastcall SetElementSize(unsigned Value);
 	void __fastcall SetStoreable(bool Value);
-	void __fastcall RecreateContainer(void);
-	virtual Stbase::TStCompareEvent __fastcall GetOnCompare(void);
-	virtual Stnvcont::TStDisposeDataEvent __fastcall GetOnDisposeData(void);
-	virtual Stnvcont::TStLoadDataEvent __fastcall GetOnLoadData(void);
-	virtual Stnvcont::TStStoreDataEvent __fastcall GetOnStoreData(void);
+	void __fastcall RecreateContainer();
+	virtual Stbase::TStCompareEvent __fastcall GetOnCompare();
+	virtual Stnvcont::TStDisposeDataEvent __fastcall GetOnDisposeData();
+	virtual Stnvcont::TStLoadDataEvent __fastcall GetOnLoadData();
+	virtual Stnvcont::TStStoreDataEvent __fastcall GetOnStoreData();
 	virtual void __fastcall SetOnCompare(Stbase::TStCompareEvent Value);
 	virtual void __fastcall SetOnDisposeData(Stnvcont::TStDisposeDataEvent Value);
 	virtual void __fastcall SetOnLoadData(Stnvcont::TStLoadDataEvent Value);
@@ -51,7 +51,7 @@ protected:
 	
 public:
 	__fastcall virtual TStNVLArray(System::Classes::TComponent* AOwner);
-	__fastcall virtual ~TStNVLArray(void);
+	__fastcall virtual ~TStNVLArray();
 	__property Stlarr::TStLArray* Container = {read=FContainer};
 	
 __published:

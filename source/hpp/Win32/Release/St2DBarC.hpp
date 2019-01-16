@@ -1,8 +1,8 @@
 ﻿// CodeGear C++Builder
-// Copyright (c) 1995, 2016 by Embarcadero Technologies, Inc.
+// Copyright (c) 1995, 2017 by Embarcadero Technologies, Inc.
 // All rights reserved
 
-// (DO NOT EDIT: machine generated header) 'St2DBarC.pas' rev: 32.00 (Windows)
+// (DO NOT EDIT: machine generated header) 'St2DBarC.pas' rev: 33.00 (Windows)
 
 #ifndef St2dbarcHPP
 #define St2dbarcHPP
@@ -69,7 +69,7 @@ public:
 	/* Exception.CreateResHelp */ inline __fastcall E2DBarcodeError(System::PResStringRec ResStringRec, int AHelpContext)/* overload */ : System::Sysutils::Exception(ResStringRec, AHelpContext) { }
 	/* Exception.CreateResFmtHelp */ inline __fastcall E2DBarcodeError(System::PResStringRec ResStringRec, const System::TVarRec *Args, const int Args_High, int AHelpContext)/* overload */ : System::Sysutils::Exception(ResStringRec, Args, Args_High, AHelpContext) { }
 	/* Exception.CreateResFmtHelp */ inline __fastcall E2DBarcodeError(NativeUInt Ident, const System::TVarRec *Args, const int Args_High, int AHelpContext)/* overload */ : System::Sysutils::Exception(Ident, Args, Args_High, AHelpContext) { }
-	/* Exception.Destroy */ inline __fastcall virtual ~E2DBarcodeError(void) { }
+	/* Exception.Destroy */ inline __fastcall virtual ~E2DBarcodeError() { }
 	
 };
 
@@ -100,14 +100,14 @@ protected:
 	Vcl::Graphics::TBitmap* FBitmap;
 	virtual int __fastcall CalculateBarCodeWidth(int PaintableWidth) = 0 ;
 	virtual int __fastcall CalculateBarCodeHeight(int PaintableHeight) = 0 ;
-	virtual void __fastcall DrawBarcode(void) = 0 ;
+	virtual void __fastcall DrawBarcode() = 0 ;
 	void __fastcall GenerateBarcodeBitmap(int BCWidth, int BCHeight);
-	virtual void __fastcall GenerateCodewords(void) = 0 ;
-	int __fastcall GetBarCodeHeight(void);
-	int __fastcall GetBarCodeWidth(void);
+	virtual void __fastcall GenerateCodewords() = 0 ;
+	int __fastcall GetBarCodeHeight();
+	int __fastcall GetBarCodeWidth();
 	void __fastcall GetCurrentResolution(int &ResX, int &ResY);
-	System::UnicodeString __fastcall GetVersion(void);
-	virtual void __fastcall Paint(void);
+	System::UnicodeString __fastcall GetVersion();
+	virtual void __fastcall Paint();
 	void __fastcall SetAlignment(const System::Classes::TAlignment v);
 	void __fastcall SetBackgroundColor(const System::Uitypes::TColor v);
 	virtual void __fastcall SetBarHeight(const int v);
@@ -125,8 +125,8 @@ protected:
 	
 public:
 	__fastcall virtual TStCustom2DBarcode(System::Classes::TComponent* AOwner);
-	__fastcall virtual ~TStCustom2DBarcode(void);
-	void __fastcall CopyToClipboard(void);
+	__fastcall virtual ~TStCustom2DBarcode();
+	void __fastcall CopyToClipboard();
 	void __fastcall CopyToClipboardRes(int ResX, int ResY);
 	void __fastcall PaintToCanvas(Vcl::Graphics::TCanvas* ACanvas, const System::Types::TPoint &Position);
 	void __fastcall PaintToCanvasRes(Vcl::Graphics::TCanvas* ACanvas, const System::Types::TPoint &Position, int ResX, int ResY);
@@ -204,7 +204,7 @@ protected:
 	unsigned __fastcall CodewordToBitmask(int RowNumber, int Codeword);
 	void __fastcall ConvertBytesToBase900(const System::Byte *S, const int S_High, int *A, const int A_High);
 	void __fastcall ConvertToBase900(const System::UnicodeString S, int *A, const int A_High, int &LenA);
-	virtual void __fastcall DrawBarcode(void);
+	virtual void __fastcall DrawBarcode();
 	void __fastcall DrawCodeword(int RowNumber, int ColNumber, int WorkBarHeight, System::UnicodeString Pattern);
 	void __fastcall DrawCodewordBitmask(int RowNumber, int ColNumber, int WorkBarHeight, unsigned Bitmask);
 	void __fastcall DrawLeftRowIndicator(int RowNumber, int WorkBarHeight, int NumRows, int NumCols);
@@ -214,10 +214,10 @@ protected:
 	void __fastcall EncodeBinary(int &Position, int CodeLen);
 	void __fastcall EncodeNumeric(int &Position, int CodeLen);
 	void __fastcall EncodeText(int &Position, int CodeLen);
-	virtual void __fastcall GenerateCodewords(void);
+	virtual void __fastcall GenerateCodewords();
 	void __fastcall GetNextCharacter(int &NewChar, bool &Codeword, int &Position, int CodeLen);
-	TStPDF417ECCLevels __fastcall GetPDF417ECCLevel(void);
-	int __fastcall GetRealErrorLevel(void);
+	TStPDF417ECCLevels __fastcall GetPDF417ECCLevel();
+	int __fastcall GetRealErrorLevel();
 	bool __fastcall GoodForNumericCompaction(int Position, int CodeLen, int &Count);
 	bool __fastcall GoodForTextCompaction(int Position, int CodeLen, int &Count);
 	bool __fastcall IsNumericString(const System::UnicodeString S);
@@ -229,7 +229,7 @@ protected:
 	void __fastcall SetPDF417ECCLevel(const TStPDF417ECCLevels v);
 	virtual void __fastcall SetRelativeBarHeight(const bool v);
 	void __fastcall SetTruncated(const bool v);
-	void __fastcall TextToCodewords(void);
+	void __fastcall TextToCodewords();
 	
 public:
 	__fastcall virtual TStPDF417Barcode(System::Classes::TComponent* AOwner);
@@ -259,7 +259,7 @@ __published:
 	__property Color = {default=0};
 	__property Font;
 public:
-	/* TStCustom2DBarcode.Destroy */ inline __fastcall virtual ~TStPDF417Barcode(void) { }
+	/* TStCustom2DBarcode.Destroy */ inline __fastcall virtual ~TStPDF417Barcode() { }
 	
 };
 
@@ -293,13 +293,13 @@ protected:
 	void __fastcall AddCodeword(int Value);
 	virtual int __fastcall CalculateBarCodeWidth(int PaintableWidth);
 	virtual int __fastcall CalculateBarCodeHeight(int PaintableHeight);
-	virtual void __fastcall DrawBarcode(void);
-	void __fastcall DrawFinder(void);
+	virtual void __fastcall DrawBarcode();
+	void __fastcall DrawFinder();
 	void __fastcall DrawHex(int XPos, int YPos);
-	virtual void __fastcall GenerateCodewords(void);
-	void __fastcall GenerateECC(void);
+	virtual void __fastcall GenerateCodewords();
+	void __fastcall GenerateECC();
 	void __fastcall GetNextCharacter(int &NewChar, bool &Codeword, int &Position, int CodeLen);
-	void __fastcall GetSizes(void);
+	void __fastcall GetSizes();
 	void __fastcall GetSizesEx(int ResX, int ResY);
 	void __fastcall PlotCell(int Row, int Col);
 	void __fastcall SetAutoScale(const bool v);
@@ -311,7 +311,7 @@ protected:
 	void __fastcall SetMode(const TStMaxiCodeMode v);
 	void __fastcall SetHorPixelsPerMM(const System::Extended v);
 	void __fastcall SetVerPixelsPerMM(const System::Extended v);
-	void __fastcall TextToCodewords(void);
+	void __fastcall TextToCodewords();
 	
 public:
 	__fastcall virtual TStMaxiCodeBarcode(System::Classes::TComponent* AOwner);
@@ -342,7 +342,7 @@ __published:
 	__property Color = {default=0};
 	__property Font;
 public:
-	/* TStCustom2DBarcode.Destroy */ inline __fastcall virtual ~TStMaxiCodeBarcode(void) { }
+	/* TStCustom2DBarcode.Destroy */ inline __fastcall virtual ~TStMaxiCodeBarcode() { }
 	
 };
 

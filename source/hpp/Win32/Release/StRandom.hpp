@@ -1,8 +1,8 @@
 ﻿// CodeGear C++Builder
-// Copyright (c) 1995, 2016 by Embarcadero Technologies, Inc.
+// Copyright (c) 1995, 2017 by Embarcadero Technologies, Inc.
 // All rights reserved
 
-// (DO NOT EDIT: machine generated header) 'StRandom.pas' rev: 32.00 (Windows)
+// (DO NOT EDIT: machine generated header) 'StRandom.pas' rev: 33.00 (Windows)
 
 #ifndef StrandomHPP
 #define StrandomHPP
@@ -36,14 +36,14 @@ class PASCALIMPLEMENTATION TStRandomBase : public System::TObject
 	
 protected:
 	double __fastcall rbMarsagliaGamma(double aShape);
-	double __fastcall rbMontyPythonNormal(void);
+	double __fastcall rbMontyPythonNormal();
 	
 public:
-	virtual double __fastcall AsFloat(void) = 0 ;
+	virtual double __fastcall AsFloat() = 0 ;
 	int __fastcall AsInt(int aUpperLimit);
 	int __fastcall AsIntInRange(int aLowerLimit, int aUpperLimit);
 	double __fastcall AsBeta(double aShape1, double aShape2);
-	double __fastcall AsCauchy(void);
+	double __fastcall AsCauchy();
 	double __fastcall AsChiSquared(int aFreedom);
 	double __fastcall AsErlang(double aMean, int aOrder);
 	double __fastcall AsExponential(double aMean);
@@ -54,8 +54,8 @@ public:
 	double __fastcall AsT(int aFreedom);
 	double __fastcall AsWeibull(double aShape, double aScale);
 public:
-	/* TObject.Create */ inline __fastcall TStRandomBase(void) : System::TObject() { }
-	/* TObject.Destroy */ inline __fastcall virtual ~TStRandomBase(void) { }
+	/* TObject.Create */ inline __fastcall TStRandomBase() : System::TObject() { }
+	/* TObject.Destroy */ inline __fastcall virtual ~TStRandomBase() { }
 	
 };
 
@@ -74,10 +74,10 @@ protected:
 	
 public:
 	__fastcall TStRandomSystem(int aSeed);
-	virtual double __fastcall AsFloat(void);
+	virtual double __fastcall AsFloat();
 	__property int Seed = {read=FSeed, write=rsSetSeed, nodefault};
 public:
-	/* TObject.Destroy */ inline __fastcall virtual ~TStRandomSystem(void) { }
+	/* TObject.Destroy */ inline __fastcall virtual ~TStRandomSystem() { }
 	
 };
 
@@ -98,11 +98,11 @@ protected:
 	
 public:
 	__fastcall TStRandomCombined(int aSeed1, int aSeed2);
-	virtual double __fastcall AsFloat(void);
+	virtual double __fastcall AsFloat();
 	__property int Seed1 = {read=FSeed1, write=rcSetSeed1, nodefault};
 	__property int Seed2 = {read=FSeed2, write=rcSetSeed2, nodefault};
 public:
-	/* TObject.Destroy */ inline __fastcall virtual ~TStRandomCombined(void) { }
+	/* TObject.Destroy */ inline __fastcall virtual ~TStRandomCombined() { }
 	
 };
 
@@ -125,10 +125,10 @@ protected:
 	
 public:
 	__fastcall TStRandomMother(int aSeed);
-	virtual double __fastcall AsFloat(void);
+	virtual double __fastcall AsFloat();
 	__property int Seed = {write=rsSetSeed, nodefault};
 public:
-	/* TObject.Destroy */ inline __fastcall virtual ~TStRandomMother(void) { }
+	/* TObject.Destroy */ inline __fastcall virtual ~TStRandomMother() { }
 	
 };
 

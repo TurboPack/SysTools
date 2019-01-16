@@ -1,8 +1,8 @@
 ﻿// CodeGear C++Builder
-// Copyright (c) 1995, 2016 by Embarcadero Technologies, Inc.
+// Copyright (c) 1995, 2017 by Embarcadero Technologies, Inc.
 // All rights reserved
 
-// (DO NOT EDIT: machine generated header) 'StMerge.pas' rev: 32.00 (Windows)
+// (DO NOT EDIT: machine generated header) 'StMerge.pas' rev: 33.00 (Windows)
 
 #ifndef StmergeHPP
 #define StmergeHPP
@@ -57,9 +57,9 @@ protected:
 	void __fastcall SetTagStart(const System::AnsiString Value);
 	
 public:
-	__fastcall TStTextMerge(void);
-	__fastcall virtual ~TStTextMerge(void);
-	void __fastcall Merge(void);
+	__fastcall TStTextMerge();
+	__fastcall virtual ~TStTextMerge();
+	void __fastcall Merge();
 	void __fastcall LoadTemplateFromFile(const System::Sysutils::TFileName AFile);
 	void __fastcall LoadTemplateFromStream(System::Classes::TStream* AStream);
 	void __fastcall SaveTemplateToFile(const System::Sysutils::TFileName AFile);

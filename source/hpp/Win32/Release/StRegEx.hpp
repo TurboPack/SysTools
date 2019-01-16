@@ -1,8 +1,8 @@
 ﻿// CodeGear C++Builder
-// Copyright (c) 1995, 2016 by Embarcadero Technologies, Inc.
+// Copyright (c) 1995, 2017 by Embarcadero Technologies, Inc.
 // All rights reserved
 
-// (DO NOT EDIT: machine generated header) 'StRegEx.pas' rev: 32.00 (Windows)
+// (DO NOT EDIT: machine generated header) 'StRegEx.pas' rev: 33.00 (Windows)
 
 #ifndef StregexHPP
 #define StregexHPP
@@ -88,13 +88,13 @@ private:
 	TStPatRecord *FFreeList;
 	
 protected:
-	void __fastcall nhClearHeap(void);
+	void __fastcall nhClearHeap();
 	PStPatRecord __fastcall nhDeepCloneNode(PStPatRecord aNode);
 	
 public:
-	__fastcall TStNodeHeap(void);
-	__fastcall virtual ~TStNodeHeap(void);
-	PStPatRecord __fastcall AllocNode(void);
+	__fastcall TStNodeHeap();
+	__fastcall virtual ~TStNodeHeap();
+	PStPatRecord __fastcall AllocNode();
 	void __fastcall FreeNode(PStPatRecord aNode);
 	PStPatRecord __fastcall CloneNode(PStPatRecord aNode);
 };
@@ -145,7 +145,7 @@ protected:
 	void __fastcall AddTokenToPattern(PStPatRecord &PatRec, PStPatRecord LastPatRec, TStTokens Token, System::UnicodeString S);
 	void __fastcall AddTokenToReplace(PStPatRecord &PatRec, PStPatRecord LastPatRec, TStTokens Token, const System::UnicodeString S);
 	System::WideChar * __fastcall AppendS(System::WideChar * Dest, System::WideChar * S1, System::WideChar * S2, unsigned Count);
-	bool __fastcall BuildAllPatterns(void);
+	bool __fastcall BuildAllPatterns();
 	bool __fastcall BuildPatternStr(System::WideChar * &PStr, int &Len, System::Classes::TStringList* SL);
 	System::UnicodeString __fastcall ConvertMaskToRegEx(const System::UnicodeString S);
 	void __fastcall DisposeItems(PStPatRecord &Data);
@@ -171,11 +171,11 @@ protected:
 public:
 	__property System::Classes::TStream* InputStream = {read=FInputStream, write=FInputStream};
 	__property System::Classes::TStream* OutputStream = {read=FOutputStream, write=FOutputStream};
-	__fastcall TStStreamRegEx(void);
-	__fastcall virtual ~TStStreamRegEx(void);
+	__fastcall TStStreamRegEx();
+	__fastcall virtual ~TStStreamRegEx();
 	bool __fastcall CheckString(const System::UnicodeString S, TMatchPosition &REPosition);
 	bool __fastcall FileMasksToRegEx(System::UnicodeString Masks);
-	bool __fastcall Execute(void);
+	bool __fastcall Execute();
 	bool __fastcall ReplaceString(System::UnicodeString &S, TMatchPosition &REPosition);
 	__property bool Avoid = {read=FAvoid, write=FAvoid, nodefault};
 	__property bool IgnoreCase = {read=FIgnoreCase, write=FIgnoreCase, nodefault};
@@ -246,14 +246,14 @@ protected:
 	void __fastcall SetOptions(TStOutputOptions Value);
 	void __fastcall SetReplacePatSL(System::Classes::TStringList* Value);
 	void __fastcall SetSelAvoidPatSL(System::Classes::TStringList* Value);
-	void __fastcall SetStreamProperties(void);
+	void __fastcall SetStreamProperties();
 	
 public:
 	__fastcall virtual TStRegEx(System::Classes::TComponent* AOwner);
-	__fastcall virtual ~TStRegEx(void);
+	__fastcall virtual ~TStRegEx();
 	bool __fastcall CheckString(const System::UnicodeString S, TMatchPosition &REPosition);
 	bool __fastcall FileMasksToRegEx(const System::UnicodeString Masks);
-	bool __fastcall Execute(void);
+	bool __fastcall Execute();
 	bool __fastcall ReplaceString(System::UnicodeString &S, TMatchPosition &REPosition);
 	__property unsigned LineCount = {read=FInLineCount, nodefault};
 	__property unsigned LinesMatched = {read=FMatchCount, nodefault};

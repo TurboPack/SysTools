@@ -1,8 +1,8 @@
 ﻿// CodeGear C++Builder
-// Copyright (c) 1995, 2016 by Embarcadero Technologies, Inc.
+// Copyright (c) 1995, 2017 by Embarcadero Technologies, Inc.
 // All rights reserved
 
-// (DO NOT EDIT: machine generated header) 'StExpr.pas' rev: 32.00 (Windows)
+// (DO NOT EDIT: machine generated header) 'StExpr.pas' rev: 33.00 (Windows)
 
 #ifndef StexprHPP
 #define StexprHPP
@@ -75,42 +75,42 @@ protected:
 	System::UnicodeString eTokenStr;
 	System::Extended lhs;
 	System::Extended rhs;
-	int __fastcall GetAsInteger(void);
-	System::UnicodeString __fastcall GetAsString(void);
+	int __fastcall GetAsInteger();
+	System::UnicodeString __fastcall GetAsString();
 	int __fastcall FindIdent(System::UnicodeString Name);
-	void __fastcall StackClear(void);
-	int __fastcall StackCount(void);
+	void __fastcall StackClear();
+	int __fastcall StackCount();
 	void __fastcall StackPush(const System::Extended Value);
-	System::Extended __fastcall StackPeek(void);
-	System::Extended __fastcall StackPop(void);
-	bool __fastcall StackEmpty(void);
-	void __fastcall DoOnAddIdentifier(void);
-	void __fastcall GetBase(void);
-	void __fastcall GetExpression(void);
-	void __fastcall GetFactor(void);
-	void __fastcall GetFunction(void);
+	System::Extended __fastcall StackPeek();
+	System::Extended __fastcall StackPop();
+	bool __fastcall StackEmpty();
+	void __fastcall DoOnAddIdentifier();
+	void __fastcall GetBase();
+	void __fastcall GetExpression();
+	void __fastcall GetFactor();
+	void __fastcall GetFunction();
 	void __fastcall GetParams(int N);
-	void __fastcall GetTerm(void);
-	void __fastcall GetToken(void);
-	System::Extended __fastcall PopOperand(void);
+	void __fastcall GetTerm();
+	void __fastcall GetToken();
+	System::Extended __fastcall PopOperand();
 	void __fastcall RaiseExprError(int Code, int Column);
 	
 public:
 	__fastcall virtual TStExpression(System::Classes::TComponent* AOwner);
-	__fastcall virtual ~TStExpression(void);
-	System::Extended __fastcall AnalyzeExpression(void);
+	__fastcall virtual ~TStExpression();
+	System::Extended __fastcall AnalyzeExpression();
 	void __fastcall AddConstant(const System::UnicodeString Name, System::Extended Value);
 	void __fastcall AddFunction0Param(const System::UnicodeString Name, TStFunction0Param FunctionAddr);
 	void __fastcall AddFunction1Param(const System::UnicodeString Name, TStFunction1Param FunctionAddr);
 	void __fastcall AddFunction2Param(const System::UnicodeString Name, TStFunction2Param FunctionAddr);
 	void __fastcall AddFunction3Param(const System::UnicodeString Name, TStFunction3Param FunctionAddr);
-	void __fastcall AddInternalFunctions(void);
+	void __fastcall AddInternalFunctions();
 	void __fastcall AddMethod0Param(const System::UnicodeString Name, TStMethod0Param MethodAddr);
 	void __fastcall AddMethod1Param(const System::UnicodeString Name, TStMethod1Param MethodAddr);
 	void __fastcall AddMethod2Param(const System::UnicodeString Name, TStMethod2Param MethodAddr);
 	void __fastcall AddMethod3Param(const System::UnicodeString Name, TStMethod3Param MethodAddr);
 	void __fastcall AddVariable(const System::UnicodeString Name, PStFloat VariableAddr);
-	void __fastcall ClearIdentifiers(void);
+	void __fastcall ClearIdentifiers();
 	void __fastcall GetIdentList(System::Classes::TStrings* S);
 	void __fastcall RemoveIdentifier(const System::UnicodeString Name);
 	__property int AsInteger = {read=GetAsInteger, nodefault};
@@ -137,18 +137,18 @@ protected:
 	bool FAutoEval;
 	TStExpression* FExpr;
 	TStExprErrorEvent FOnError;
-	System::Classes::TNotifyEvent __fastcall GetOnAddIdentifier(void);
-	TStGetIdentValueEvent __fastcall GetOnGetIdentValue(void);
+	System::Classes::TNotifyEvent __fastcall GetOnAddIdentifier();
+	TStGetIdentValueEvent __fastcall GetOnGetIdentValue();
 	void __fastcall SetOnAddIdentifier(System::Classes::TNotifyEvent Value);
 	void __fastcall SetOnGetIdentValue(TStGetIdentValueEvent Value);
 	HIDESBASE MESSAGE void __fastcall CMExit(Winapi::Messages::TMessage &Msg);
-	void __fastcall DoEvaluate(void);
+	void __fastcall DoEvaluate();
 	DYNAMIC void __fastcall KeyPress(System::WideChar &Key);
 	
 public:
 	__fastcall virtual TStExpressionEdit(System::Classes::TComponent* AOwner);
-	__fastcall virtual ~TStExpressionEdit(void);
-	System::Extended __fastcall Evaluate(void);
+	__fastcall virtual ~TStExpressionEdit();
+	System::Extended __fastcall Evaluate();
 	__property TStExpression* Expr = {read=FExpr};
 	
 __published:

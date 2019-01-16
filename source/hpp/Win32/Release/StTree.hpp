@@ -1,8 +1,8 @@
 ﻿// CodeGear C++Builder
-// Copyright (c) 1995, 2016 by Embarcadero Technologies, Inc.
+// Copyright (c) 1995, 2017 by Embarcadero Technologies, Inc.
 // All rights reserved
 
-// (DO NOT EDIT: machine generated header) 'StTree.pas' rev: 32.00 (Windows)
+// (DO NOT EDIT: machine generated header) 'StTree.pas' rev: 33.00 (Windows)
 
 #ifndef SttreeHPP
 #define SttreeHPP
@@ -40,7 +40,7 @@ protected:
 public:
 	__fastcall virtual TStTreeNode(void * AData);
 public:
-	/* TPersistent.Destroy */ inline __fastcall virtual ~TStTreeNode(void) { }
+	/* TPersistent.Destroy */ inline __fastcall virtual ~TStTreeNode() { }
 	
 };
 
@@ -54,14 +54,14 @@ protected:
 	TStTreeNode* trRoot;
 	bool trIgnoreDups;
 	virtual void __fastcall ForEachPointer(Stbase::TIteratePointerFunc Action, void * OtherData);
-	virtual bool __fastcall StoresPointers(void);
+	virtual bool __fastcall StoresPointers();
 	void __fastcall trInsertNode(TStTreeNode* N);
 	
 public:
 	__fastcall virtual TStTree(Stbase::TStNodeClass NodeClass);
 	DYNAMIC void __fastcall LoadFromStream(System::Classes::TStream* S);
 	DYNAMIC void __fastcall StoreToStream(System::Classes::TStream* S);
-	virtual void __fastcall Clear(void);
+	virtual void __fastcall Clear();
 	TStTreeNode* __fastcall Insert(void * Data);
 	void __fastcall Delete(void * Data);
 	TStTreeNode* __fastcall Find(void * Data);
@@ -69,13 +69,13 @@ public:
 	void __fastcall Join(TStTree* T, bool IgnoreDups);
 	TStTree* __fastcall Split(void * Data);
 	TStTreeNode* __fastcall Iterate(Stbase::TIterateFunc Action, bool Up, void * OtherData);
-	TStTreeNode* __fastcall First(void);
-	TStTreeNode* __fastcall Last(void);
+	TStTreeNode* __fastcall First();
+	TStTreeNode* __fastcall Last();
 	TStTreeNode* __fastcall Next(TStTreeNode* N);
 	TStTreeNode* __fastcall Prev(TStTreeNode* N);
 public:
 	/* TStContainer.CreateContainer */ inline __fastcall TStTree(Stbase::TStNodeClass NodeClass, int Dummy) : Stbase::TStContainer(NodeClass, Dummy) { }
-	/* TStContainer.Destroy */ inline __fastcall virtual ~TStTree(void) { }
+	/* TStContainer.Destroy */ inline __fastcall virtual ~TStTree() { }
 	
 };
 

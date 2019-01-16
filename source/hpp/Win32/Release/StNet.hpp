@@ -1,8 +1,8 @@
 ﻿// CodeGear C++Builder
-// Copyright (c) 1995, 2016 by Embarcadero Technologies, Inc.
+// Copyright (c) 1995, 2017 by Embarcadero Technologies, Inc.
 // All rights reserved
 
-// (DO NOT EDIT: machine generated header) 'StNet.pas' rev: 32.00 (Windows)
+// (DO NOT EDIT: machine generated header) 'StNet.pas' rev: 33.00 (Windows)
 
 #ifndef StnetHPP
 #define StnetHPP
@@ -82,8 +82,8 @@ protected:
 	__fastcall TStNetItem(System::UnicodeString AName, System::UnicodeString AComment, System::UnicodeString AServer, TStNetItemType AItemType);
 	
 public:
-	__fastcall TStNetItem(void);
-	__fastcall virtual ~TStNetItem(void);
+	__fastcall TStNetItem();
+	__fastcall virtual ~TStNetItem();
 	__property System::UnicodeString Comment = {read=FComment};
 	__property TStNetItemType ItemType = {read=FItemType, nodefault};
 	__property System::UnicodeString Name = {read=FName};
@@ -107,32 +107,32 @@ private:
 	System::Classes::TStrings* FWorkStationList;
 	
 protected:
-	bool __fastcall GetAccountDisabled(void);
-	Stdate::TStDateTimeRec __fastcall GetAccountExpires(void);
-	unsigned __fastcall GetBadPasswordCount(void);
-	System::UnicodeString __fastcall GetDomain(void);
-	System::UnicodeString __fastcall GetFullName(void);
-	System::Classes::TStringList* __fastcall GetGroupItemList(void);
-	System::UnicodeString __fastcall GetHomeDirectory(void);
-	System::UnicodeString __fastcall GetHomeDrive(void);
-	Stdate::TStDateTimeRec __fastcall GetLastLogon(void);
-	Stdate::TStDateTimeRec __fastcall GetLastLogoff(void);
-	bool __fastcall GetLockedOut(void);
-	System::UnicodeString __fastcall GetName(void);
-	bool __fastcall GetNoUserPasswordChange(void);
-	unsigned __fastcall GetNumberOfLogons(void);
-	TStNetUserAuthPrivSet __fastcall GetOperatorPrivilege(void);
-	bool __fastcall GetPasswordNeverExpires(void);
-	bool __fastcall GetPasswordExpired(void);
-	Stdate::TStDateTimeRec __fastcall GetPasswordLastChanged(void);
-	bool __fastcall GetPasswordNotRequired(void);
-	TStNetItem* __fastcall GetPrimaryGroup(void);
-	System::UnicodeString __fastcall GetProfilePath(void);
-	TStSidRecord __fastcall GetSid(void);
-	System::UnicodeString __fastcall GetScriptPath(void);
-	System::UnicodeString __fastcall GetUserComment(void);
-	TStNetUserPrivType __fastcall GetUserPrivilege(void);
-	System::Classes::TStrings* __fastcall GetWorkstations(void);
+	bool __fastcall GetAccountDisabled();
+	Stdate::TStDateTimeRec __fastcall GetAccountExpires();
+	unsigned __fastcall GetBadPasswordCount();
+	System::UnicodeString __fastcall GetDomain();
+	System::UnicodeString __fastcall GetFullName();
+	System::Classes::TStringList* __fastcall GetGroupItemList();
+	System::UnicodeString __fastcall GetHomeDirectory();
+	System::UnicodeString __fastcall GetHomeDrive();
+	Stdate::TStDateTimeRec __fastcall GetLastLogon();
+	Stdate::TStDateTimeRec __fastcall GetLastLogoff();
+	bool __fastcall GetLockedOut();
+	System::UnicodeString __fastcall GetName();
+	bool __fastcall GetNoUserPasswordChange();
+	unsigned __fastcall GetNumberOfLogons();
+	TStNetUserAuthPrivSet __fastcall GetOperatorPrivilege();
+	bool __fastcall GetPasswordNeverExpires();
+	bool __fastcall GetPasswordExpired();
+	Stdate::TStDateTimeRec __fastcall GetPasswordLastChanged();
+	bool __fastcall GetPasswordNotRequired();
+	TStNetItem* __fastcall GetPrimaryGroup();
+	System::UnicodeString __fastcall GetProfilePath();
+	TStSidRecord __fastcall GetSid();
+	System::UnicodeString __fastcall GetScriptPath();
+	System::UnicodeString __fastcall GetUserComment();
+	TStNetUserPrivType __fastcall GetUserPrivilege();
+	System::Classes::TStrings* __fastcall GetWorkstations();
 	void __fastcall SetAccountDisabled(bool Value);
 	void __fastcall SetAccountExpires(const Stdate::TStDateTimeRec &Value);
 	void __fastcall SetComment(System::UnicodeString Value);
@@ -155,9 +155,9 @@ protected:
 	__fastcall TStNetUserItem(System::UnicodeString AName, System::UnicodeString AComment, System::UnicodeString AServer, System::UnicodeString AFullName, bool AGlobal, unsigned AID);
 	
 public:
-	__fastcall virtual ~TStNetUserItem(void);
-	void __fastcall Delete(void);
-	void __fastcall Refresh(void);
+	__fastcall virtual ~TStNetUserItem();
+	void __fastcall Delete();
+	void __fastcall Refresh();
 	void __fastcall AddToGroup(TStNetItem* AGroup);
 	void __fastcall RemoveFromGroup(TStNetItem* AGroup);
 	void __fastcall GetLogonHours(TStNetUserLogonTimes &LogonHours);
@@ -193,7 +193,7 @@ public:
 	__property TStNetUserPrivType UserPrivilege = {read=GetUserPrivilege, nodefault};
 	__property System::Classes::TStrings* Workstations = {read=GetWorkstations, write=SetWorkstations};
 public:
-	/* TStNetItem.Create */ inline __fastcall TStNetUserItem(void) : TStNetItem() { }
+	/* TStNetItem.Create */ inline __fastcall TStNetUserItem() : TStNetItem() { }
 	
 };
 
@@ -213,19 +213,19 @@ private:
 protected:
 	__fastcall TStNetGroupItem(System::UnicodeString AName, System::UnicodeString AComment, System::UnicodeString AServer, TStNetItemType AItemType);
 	__fastcall TStNetGroupItem(System::UnicodeString AName, System::UnicodeString AComment, System::UnicodeString AServer, unsigned AID);
-	System::Classes::TStringList* __fastcall GetGroupItemList(void);
-	System::UnicodeString __fastcall GetDomain(void);
-	TStSidRecord __fastcall GetSid(void);
-	System::UnicodeString __fastcall GetName(void);
+	System::Classes::TStringList* __fastcall GetGroupItemList();
+	System::UnicodeString __fastcall GetDomain();
+	TStSidRecord __fastcall GetSid();
+	System::UnicodeString __fastcall GetName();
 	void __fastcall SetComment(System::UnicodeString Value);
 	void __fastcall SetName(System::UnicodeString Value);
 	
 public:
-	__fastcall virtual ~TStNetGroupItem(void);
+	__fastcall virtual ~TStNetGroupItem();
 	void __fastcall AddToGroup(TStNetItem* AItem);
 	void __fastcall RemoveFromGroup(TStNetItem* AItem);
-	void __fastcall Delete(void);
-	void __fastcall Refresh(void);
+	void __fastcall Delete();
+	void __fastcall Refresh();
 	__property System::UnicodeString Comment = {read=FComment, write=SetComment};
 	__property System::UnicodeString Name = {read=GetName, write=SetName};
 	__property unsigned ID = {read=FID, nodefault};
@@ -233,7 +233,7 @@ public:
 	__property TStSidRecord Sid = {read=GetSid};
 	__property System::UnicodeString Domain = {read=GetDomain};
 public:
-	/* TStNetItem.Create */ inline __fastcall TStNetGroupItem(void) : TStNetItem() { }
+	/* TStNetItem.Create */ inline __fastcall TStNetGroupItem() : TStNetItem() { }
 	
 };
 
@@ -253,8 +253,8 @@ protected:
 public:
 	__property TStNetShareType ShareType = {read=FShareType, nodefault};
 public:
-	/* TStNetItem.Create */ inline __fastcall TStNetShareItem(void) : TStNetItem() { }
-	/* TStNetItem.Destroy */ inline __fastcall virtual ~TStNetShareItem(void) { }
+	/* TStNetItem.Create */ inline __fastcall TStNetShareItem() : TStNetItem() { }
+	/* TStNetItem.Destroy */ inline __fastcall virtual ~TStNetShareItem() { }
 	
 };
 
@@ -280,32 +280,32 @@ protected:
 	__fastcall TStNetServerItem(System::UnicodeString AName, System::UnicodeString AComment);
 	TStNetUserItem* __fastcall GetUser(System::UnicodeString AName);
 	TStNetGroupItem* __fastcall GetGroup(System::UnicodeString AName);
-	System::Classes::TStringList* __fastcall GetDriveList(void);
-	System::Classes::TStringList* __fastcall GetUserList(void);
-	System::Classes::TStringList* __fastcall GetGroupList(void);
-	System::Classes::TStringList* __fastcall GetShareList(void);
+	System::Classes::TStringList* __fastcall GetDriveList();
+	System::Classes::TStringList* __fastcall GetUserList();
+	System::Classes::TStringList* __fastcall GetGroupList();
+	System::Classes::TStringList* __fastcall GetShareList();
 	void __fastcall SetComment(System::UnicodeString Value);
-	unsigned __fastcall GetAnnounceRate(void);
-	unsigned __fastcall GetAnnounceRateDelta(void);
-	unsigned __fastcall GetDisconnectTime(void);
-	unsigned __fastcall GetMaxUsers(void);
-	TStNetServerPlatformType __fastcall GetPlatform(void);
-	TStNetServerSet __fastcall GetServerType(void);
-	System::UnicodeString __fastcall GetUserPath(void);
-	bool __fastcall GetVisible(void);
-	unsigned __fastcall GetVersion(void);
-	unsigned __fastcall GetMinPasswordLen(void);
-	unsigned __fastcall GetMaxPasswordAge(void);
-	unsigned __fastcall GetMinPasswordAge(void);
-	int __fastcall GetForceLogoff(void);
-	unsigned __fastcall GetPasswordHistoryLength(void);
-	TStNetServerRoleType __fastcall GetRole(void);
-	System::UnicodeString __fastcall GetPrimaryDC(void);
-	System::UnicodeString __fastcall GetDomainName(void);
-	TStSidRecord __fastcall GetDomainSid(void);
-	unsigned __fastcall GetLockOutDuration(void);
-	unsigned __fastcall GetLockoutObservationWindow(void);
-	unsigned __fastcall GetLockoutThreshold(void);
+	unsigned __fastcall GetAnnounceRate();
+	unsigned __fastcall GetAnnounceRateDelta();
+	unsigned __fastcall GetDisconnectTime();
+	unsigned __fastcall GetMaxUsers();
+	TStNetServerPlatformType __fastcall GetPlatform();
+	TStNetServerSet __fastcall GetServerType();
+	System::UnicodeString __fastcall GetUserPath();
+	bool __fastcall GetVisible();
+	unsigned __fastcall GetVersion();
+	unsigned __fastcall GetMinPasswordLen();
+	unsigned __fastcall GetMaxPasswordAge();
+	unsigned __fastcall GetMinPasswordAge();
+	int __fastcall GetForceLogoff();
+	unsigned __fastcall GetPasswordHistoryLength();
+	TStNetServerRoleType __fastcall GetRole();
+	System::UnicodeString __fastcall GetPrimaryDC();
+	System::UnicodeString __fastcall GetDomainName();
+	TStSidRecord __fastcall GetDomainSid();
+	unsigned __fastcall GetLockOutDuration();
+	unsigned __fastcall GetLockoutObservationWindow();
+	unsigned __fastcall GetLockoutThreshold();
 	void __fastcall SetMinPasswordLen(unsigned Value);
 	void __fastcall SetMaxPasswordAge(unsigned Value);
 	void __fastcall SetMinPasswordAge(unsigned Value);
@@ -319,16 +319,16 @@ protected:
 	void __fastcall SetDisconnectTime(unsigned Value);
 	void __fastcall SetMaxUsers(unsigned Value);
 	void __fastcall SetVisible(bool Value);
-	void __fastcall RefreshM0(void);
-	void __fastcall RefreshM1(void);
-	void __fastcall RefreshM2(void);
-	void __fastcall RefreshM3(void);
+	void __fastcall RefreshM0();
+	void __fastcall RefreshM1();
+	void __fastcall RefreshM2();
+	void __fastcall RefreshM3();
 	
 public:
-	__fastcall virtual ~TStNetServerItem(void);
+	__fastcall virtual ~TStNetServerItem();
 	TStNetGroupItem* __fastcall AddGroup(System::UnicodeString AName, System::UnicodeString ADescription, bool AGlobal);
 	TStNetUserItem* __fastcall AddUser(System::UnicodeString AName, System::UnicodeString APassword, bool AGlobal);
-	void __fastcall Refresh(void);
+	void __fastcall Refresh();
 	__property unsigned AnnounceRate = {read=GetAnnounceRate, write=SetAnnounceRate, nodefault};
 	__property unsigned AnnounceRateDelta = {read=GetAnnounceRateDelta, write=SetAnnounceRateDelta, nodefault};
 	__property System::UnicodeString Comment = {read=FComment, write=SetComment};
@@ -358,7 +358,7 @@ public:
 	__property System::Classes::TStringList* Groups = {read=GetGroupList};
 	__property System::Classes::TStringList* Shares = {read=GetShareList};
 public:
-	/* TStNetItem.Create */ inline __fastcall TStNetServerItem(void) : TStNetItem() { }
+	/* TStNetItem.Create */ inline __fastcall TStNetServerItem() : TStNetItem() { }
 	
 };
 
@@ -379,8 +379,8 @@ protected:
 	TStNetServerItem* __fastcall GetPrimaryDC(System::UnicodeString ADomain);
 	
 public:
-	__fastcall TStNetwork(void);
-	__fastcall virtual ~TStNetwork(void);
+	__fastcall TStNetwork();
+	__fastcall virtual ~TStNetwork();
 	__property TStNetServerItem* Server[System::UnicodeString AServer] = {read=GetServer};
 	__property TStNetUserItem* User[System::UnicodeString AServer][System::UnicodeString AName] = {read=GetUser};
 	__property TStNetGroupItem* Group[System::UnicodeString AServer][System::UnicodeString AName] = {read=GetGroup};

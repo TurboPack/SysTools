@@ -1,8 +1,8 @@
 ﻿// CodeGear C++Builder
-// Copyright (c) 1995, 2016 by Embarcadero Technologies, Inc.
+// Copyright (c) 1995, 2017 by Embarcadero Technologies, Inc.
 // All rights reserved
 
-// (DO NOT EDIT: machine generated header) 'StBase.pas' rev: 32.00 (Windows)
+// (DO NOT EDIT: machine generated header) 'StBase.pas' rev: 33.00 (Windows)
 
 #ifndef StbaseHPP
 #define StbaseHPP
@@ -83,7 +83,7 @@ public:
 	/* Exception.CreateResHelp */ inline __fastcall EStException(System::PResStringRec ResStringRec, int AHelpContext)/* overload */ : System::Sysutils::Exception(ResStringRec, AHelpContext) { }
 	/* Exception.CreateResFmtHelp */ inline __fastcall EStException(System::PResStringRec ResStringRec, const System::TVarRec *Args, const int Args_High, int AHelpContext)/* overload */ : System::Sysutils::Exception(ResStringRec, Args, Args_High, AHelpContext) { }
 	/* Exception.CreateResFmtHelp */ inline __fastcall EStException(NativeUInt Ident, const System::TVarRec *Args, const int Args_High, int AHelpContext)/* overload */ : System::Sysutils::Exception(Ident, Args, Args_High, AHelpContext) { }
-	/* Exception.Destroy */ inline __fastcall virtual ~EStException(void) { }
+	/* Exception.Destroy */ inline __fastcall virtual ~EStException() { }
 	
 };
 
@@ -113,7 +113,7 @@ public:
 	/* Exception.CreateResHelp */ inline __fastcall EStContainerError(System::PResStringRec ResStringRec, int AHelpContext)/* overload */ : EStException(ResStringRec, AHelpContext) { }
 	/* Exception.CreateResFmtHelp */ inline __fastcall EStContainerError(System::PResStringRec ResStringRec, const System::TVarRec *Args, const int Args_High, int AHelpContext)/* overload */ : EStException(ResStringRec, Args, Args_High, AHelpContext) { }
 	/* Exception.CreateResFmtHelp */ inline __fastcall EStContainerError(NativeUInt Ident, const System::TVarRec *Args, const int Args_High, int AHelpContext)/* overload */ : EStException(Ident, Args, Args_High, AHelpContext) { }
-	/* Exception.Destroy */ inline __fastcall virtual ~EStContainerError(void) { }
+	/* Exception.Destroy */ inline __fastcall virtual ~EStContainerError() { }
 	
 };
 
@@ -141,7 +141,7 @@ public:
 	/* Exception.CreateResHelp */ inline __fastcall EStSortError(System::PResStringRec ResStringRec, int AHelpContext)/* overload */ : EStException(ResStringRec, AHelpContext) { }
 	/* Exception.CreateResFmtHelp */ inline __fastcall EStSortError(System::PResStringRec ResStringRec, const System::TVarRec *Args, const int Args_High, int AHelpContext)/* overload */ : EStException(ResStringRec, Args, Args_High, AHelpContext) { }
 	/* Exception.CreateResFmtHelp */ inline __fastcall EStSortError(NativeUInt Ident, const System::TVarRec *Args, const int Args_High, int AHelpContext)/* overload */ : EStException(Ident, Args, Args_High, AHelpContext) { }
-	/* Exception.Destroy */ inline __fastcall virtual ~EStSortError(void) { }
+	/* Exception.Destroy */ inline __fastcall virtual ~EStSortError() { }
 	
 };
 
@@ -169,7 +169,7 @@ public:
 	/* Exception.CreateResHelp */ inline __fastcall EStRegIniError(System::PResStringRec ResStringRec, int AHelpContext)/* overload */ : EStException(ResStringRec, AHelpContext) { }
 	/* Exception.CreateResFmtHelp */ inline __fastcall EStRegIniError(System::PResStringRec ResStringRec, const System::TVarRec *Args, const int Args_High, int AHelpContext)/* overload */ : EStException(ResStringRec, Args, Args_High, AHelpContext) { }
 	/* Exception.CreateResFmtHelp */ inline __fastcall EStRegIniError(NativeUInt Ident, const System::TVarRec *Args, const int Args_High, int AHelpContext)/* overload */ : EStException(Ident, Args, Args_High, AHelpContext) { }
-	/* Exception.Destroy */ inline __fastcall virtual ~EStRegIniError(void) { }
+	/* Exception.Destroy */ inline __fastcall virtual ~EStRegIniError() { }
 	
 };
 
@@ -197,7 +197,7 @@ public:
 	/* Exception.CreateResHelp */ inline __fastcall EStBCDError(System::PResStringRec ResStringRec, int AHelpContext)/* overload */ : EStException(ResStringRec, AHelpContext) { }
 	/* Exception.CreateResFmtHelp */ inline __fastcall EStBCDError(System::PResStringRec ResStringRec, const System::TVarRec *Args, const int Args_High, int AHelpContext)/* overload */ : EStException(ResStringRec, Args, Args_High, AHelpContext) { }
 	/* Exception.CreateResFmtHelp */ inline __fastcall EStBCDError(NativeUInt Ident, const System::TVarRec *Args, const int Args_High, int AHelpContext)/* overload */ : EStException(Ident, Args, Args_High, AHelpContext) { }
-	/* Exception.Destroy */ inline __fastcall virtual ~EStBCDError(void) { }
+	/* Exception.Destroy */ inline __fastcall virtual ~EStBCDError() { }
 	
 };
 
@@ -225,7 +225,7 @@ public:
 	/* Exception.CreateResHelp */ inline __fastcall EStStringError(System::PResStringRec ResStringRec, int AHelpContext)/* overload */ : EStException(ResStringRec, AHelpContext) { }
 	/* Exception.CreateResFmtHelp */ inline __fastcall EStStringError(System::PResStringRec ResStringRec, const System::TVarRec *Args, const int Args_High, int AHelpContext)/* overload */ : EStException(ResStringRec, Args, Args_High, AHelpContext) { }
 	/* Exception.CreateResFmtHelp */ inline __fastcall EStStringError(NativeUInt Ident, const System::TVarRec *Args, const int Args_High, int AHelpContext)/* overload */ : EStException(Ident, Args, Args_High, AHelpContext) { }
-	/* Exception.Destroy */ inline __fastcall virtual ~EStStringError(void) { }
+	/* Exception.Destroy */ inline __fastcall virtual ~EStStringError() { }
 	
 };
 
@@ -253,7 +253,7 @@ public:
 	/* Exception.CreateResHelp */ inline __fastcall EStVersionInfoError(System::PResStringRec ResStringRec, int AHelpContext)/* overload */ : EStException(ResStringRec, AHelpContext) { }
 	/* Exception.CreateResFmtHelp */ inline __fastcall EStVersionInfoError(System::PResStringRec ResStringRec, const System::TVarRec *Args, const int Args_High, int AHelpContext)/* overload */ : EStException(ResStringRec, Args, Args_High, AHelpContext) { }
 	/* Exception.CreateResFmtHelp */ inline __fastcall EStVersionInfoError(NativeUInt Ident, const System::TVarRec *Args, const int Args_High, int AHelpContext)/* overload */ : EStException(Ident, Args, Args_High, AHelpContext) { }
-	/* Exception.Destroy */ inline __fastcall virtual ~EStVersionInfoError(void) { }
+	/* Exception.Destroy */ inline __fastcall virtual ~EStVersionInfoError() { }
 	
 };
 
@@ -281,7 +281,7 @@ public:
 	/* Exception.CreateResHelp */ inline __fastcall EStNetException(System::PResStringRec ResStringRec, int AHelpContext)/* overload */ : EStException(ResStringRec, AHelpContext) { }
 	/* Exception.CreateResFmtHelp */ inline __fastcall EStNetException(System::PResStringRec ResStringRec, const System::TVarRec *Args, const int Args_High, int AHelpContext)/* overload */ : EStException(ResStringRec, Args, Args_High, AHelpContext) { }
 	/* Exception.CreateResFmtHelp */ inline __fastcall EStNetException(NativeUInt Ident, const System::TVarRec *Args, const int Args_High, int AHelpContext)/* overload */ : EStException(Ident, Args, Args_High, AHelpContext) { }
-	/* Exception.Destroy */ inline __fastcall virtual ~EStNetException(void) { }
+	/* Exception.Destroy */ inline __fastcall virtual ~EStNetException() { }
 	
 };
 
@@ -309,7 +309,7 @@ public:
 	/* Exception.CreateResHelp */ inline __fastcall EStBarCodeError(System::PResStringRec ResStringRec, int AHelpContext)/* overload */ : EStException(ResStringRec, AHelpContext) { }
 	/* Exception.CreateResFmtHelp */ inline __fastcall EStBarCodeError(System::PResStringRec ResStringRec, const System::TVarRec *Args, const int Args_High, int AHelpContext)/* overload */ : EStException(ResStringRec, Args, Args_High, AHelpContext) { }
 	/* Exception.CreateResFmtHelp */ inline __fastcall EStBarCodeError(NativeUInt Ident, const System::TVarRec *Args, const int Args_High, int AHelpContext)/* overload */ : EStException(Ident, Args, Args_High, AHelpContext) { }
-	/* Exception.Destroy */ inline __fastcall virtual ~EStBarCodeError(void) { }
+	/* Exception.Destroy */ inline __fastcall virtual ~EStBarCodeError() { }
 	
 };
 
@@ -337,7 +337,7 @@ public:
 	/* Exception.CreateResHelp */ inline __fastcall EStPNBarCodeError(System::PResStringRec ResStringRec, int AHelpContext)/* overload */ : EStException(ResStringRec, AHelpContext) { }
 	/* Exception.CreateResFmtHelp */ inline __fastcall EStPNBarCodeError(System::PResStringRec ResStringRec, const System::TVarRec *Args, const int Args_High, int AHelpContext)/* overload */ : EStException(ResStringRec, Args, Args_High, AHelpContext) { }
 	/* Exception.CreateResFmtHelp */ inline __fastcall EStPNBarCodeError(NativeUInt Ident, const System::TVarRec *Args, const int Args_High, int AHelpContext)/* overload */ : EStException(Ident, Args, Args_High, AHelpContext) { }
-	/* Exception.Destroy */ inline __fastcall virtual ~EStPNBarCodeError(void) { }
+	/* Exception.Destroy */ inline __fastcall virtual ~EStPNBarCodeError() { }
 	
 };
 
@@ -365,7 +365,7 @@ public:
 	/* Exception.CreateResHelp */ inline __fastcall EStStatError(System::PResStringRec ResStringRec, int AHelpContext)/* overload */ : EStException(ResStringRec, AHelpContext) { }
 	/* Exception.CreateResFmtHelp */ inline __fastcall EStStatError(System::PResStringRec ResStringRec, const System::TVarRec *Args, const int Args_High, int AHelpContext)/* overload */ : EStException(ResStringRec, Args, Args_High, AHelpContext) { }
 	/* Exception.CreateResFmtHelp */ inline __fastcall EStStatError(NativeUInt Ident, const System::TVarRec *Args, const int Args_High, int AHelpContext)/* overload */ : EStException(Ident, Args, Args_High, AHelpContext) { }
-	/* Exception.Destroy */ inline __fastcall virtual ~EStStatError(void) { }
+	/* Exception.Destroy */ inline __fastcall virtual ~EStStatError() { }
 	
 };
 
@@ -393,7 +393,7 @@ public:
 	/* Exception.CreateResHelp */ inline __fastcall EStFinError(System::PResStringRec ResStringRec, int AHelpContext)/* overload */ : EStException(ResStringRec, AHelpContext) { }
 	/* Exception.CreateResFmtHelp */ inline __fastcall EStFinError(System::PResStringRec ResStringRec, const System::TVarRec *Args, const int Args_High, int AHelpContext)/* overload */ : EStException(ResStringRec, Args, Args_High, AHelpContext) { }
 	/* Exception.CreateResFmtHelp */ inline __fastcall EStFinError(NativeUInt Ident, const System::TVarRec *Args, const int Args_High, int AHelpContext)/* overload */ : EStException(Ident, Args, Args_High, AHelpContext) { }
-	/* Exception.Destroy */ inline __fastcall virtual ~EStFinError(void) { }
+	/* Exception.Destroy */ inline __fastcall virtual ~EStFinError() { }
 	
 };
 
@@ -421,7 +421,7 @@ public:
 	/* Exception.CreateResHelp */ inline __fastcall EStMimeError(System::PResStringRec ResStringRec, int AHelpContext)/* overload */ : EStException(ResStringRec, AHelpContext) { }
 	/* Exception.CreateResFmtHelp */ inline __fastcall EStMimeError(System::PResStringRec ResStringRec, const System::TVarRec *Args, const int Args_High, int AHelpContext)/* overload */ : EStException(ResStringRec, Args, Args_High, AHelpContext) { }
 	/* Exception.CreateResFmtHelp */ inline __fastcall EStMimeError(NativeUInt Ident, const System::TVarRec *Args, const int Args_High, int AHelpContext)/* overload */ : EStException(Ident, Args, Args_High, AHelpContext) { }
-	/* Exception.Destroy */ inline __fastcall virtual ~EStMimeError(void) { }
+	/* Exception.Destroy */ inline __fastcall virtual ~EStMimeError() { }
 	
 };
 
@@ -449,7 +449,7 @@ public:
 	/* Exception.CreateResHelp */ inline __fastcall EStToHTMLError(System::PResStringRec ResStringRec, int AHelpContext)/* overload */ : EStException(ResStringRec, AHelpContext) { }
 	/* Exception.CreateResFmtHelp */ inline __fastcall EStToHTMLError(System::PResStringRec ResStringRec, const System::TVarRec *Args, const int Args_High, int AHelpContext)/* overload */ : EStException(ResStringRec, Args, Args_High, AHelpContext) { }
 	/* Exception.CreateResFmtHelp */ inline __fastcall EStToHTMLError(NativeUInt Ident, const System::TVarRec *Args, const int Args_High, int AHelpContext)/* overload */ : EStException(Ident, Args, Args_High, AHelpContext) { }
-	/* Exception.Destroy */ inline __fastcall virtual ~EStToHTMLError(void) { }
+	/* Exception.Destroy */ inline __fastcall virtual ~EStToHTMLError() { }
 	
 };
 
@@ -477,7 +477,7 @@ public:
 	/* Exception.CreateResHelp */ inline __fastcall EStSpawnError(System::PResStringRec ResStringRec, int AHelpContext)/* overload */ : EStException(ResStringRec, AHelpContext) { }
 	/* Exception.CreateResFmtHelp */ inline __fastcall EStSpawnError(System::PResStringRec ResStringRec, const System::TVarRec *Args, const int Args_High, int AHelpContext)/* overload */ : EStException(ResStringRec, Args, Args_High, AHelpContext) { }
 	/* Exception.CreateResFmtHelp */ inline __fastcall EStSpawnError(NativeUInt Ident, const System::TVarRec *Args, const int Args_High, int AHelpContext)/* overload */ : EStException(Ident, Args, Args_High, AHelpContext) { }
-	/* Exception.Destroy */ inline __fastcall virtual ~EStSpawnError(void) { }
+	/* Exception.Destroy */ inline __fastcall virtual ~EStSpawnError() { }
 	
 };
 
@@ -505,7 +505,7 @@ public:
 	/* Exception.CreateResHelp */ inline __fastcall EStMMFileError(System::PResStringRec ResStringRec, int AHelpContext)/* overload */ : EStException(ResStringRec, AHelpContext) { }
 	/* Exception.CreateResFmtHelp */ inline __fastcall EStMMFileError(System::PResStringRec ResStringRec, const System::TVarRec *Args, const int Args_High, int AHelpContext)/* overload */ : EStException(ResStringRec, Args, Args_High, AHelpContext) { }
 	/* Exception.CreateResFmtHelp */ inline __fastcall EStMMFileError(NativeUInt Ident, const System::TVarRec *Args, const int Args_High, int AHelpContext)/* overload */ : EStException(Ident, Args, Args_High, AHelpContext) { }
-	/* Exception.Destroy */ inline __fastcall virtual ~EStMMFileError(void) { }
+	/* Exception.Destroy */ inline __fastcall virtual ~EStMMFileError() { }
 	
 };
 
@@ -533,7 +533,7 @@ public:
 	/* Exception.CreateResHelp */ inline __fastcall EStBufStreamError(System::PResStringRec ResStringRec, int AHelpContext)/* overload */ : EStException(ResStringRec, AHelpContext) { }
 	/* Exception.CreateResFmtHelp */ inline __fastcall EStBufStreamError(System::PResStringRec ResStringRec, const System::TVarRec *Args, const int Args_High, int AHelpContext)/* overload */ : EStException(ResStringRec, Args, Args_High, AHelpContext) { }
 	/* Exception.CreateResFmtHelp */ inline __fastcall EStBufStreamError(NativeUInt Ident, const System::TVarRec *Args, const int Args_High, int AHelpContext)/* overload */ : EStException(Ident, Args, Args_High, AHelpContext) { }
-	/* Exception.Destroy */ inline __fastcall virtual ~EStBufStreamError(void) { }
+	/* Exception.Destroy */ inline __fastcall virtual ~EStBufStreamError() { }
 	
 };
 
@@ -561,7 +561,7 @@ public:
 	/* Exception.CreateResHelp */ inline __fastcall EStRegExError(System::PResStringRec ResStringRec, int AHelpContext)/* overload */ : EStException(ResStringRec, AHelpContext) { }
 	/* Exception.CreateResFmtHelp */ inline __fastcall EStRegExError(System::PResStringRec ResStringRec, const System::TVarRec *Args, const int Args_High, int AHelpContext)/* overload */ : EStException(ResStringRec, Args, Args_High, AHelpContext) { }
 	/* Exception.CreateResFmtHelp */ inline __fastcall EStRegExError(NativeUInt Ident, const System::TVarRec *Args, const int Args_High, int AHelpContext)/* overload */ : EStException(Ident, Args, Args_High, AHelpContext) { }
-	/* Exception.Destroy */ inline __fastcall virtual ~EStRegExError(void) { }
+	/* Exception.Destroy */ inline __fastcall virtual ~EStRegExError() { }
 	
 };
 
@@ -589,7 +589,7 @@ public:
 	/* Exception.CreateResHelp */ inline __fastcall EStDecMathError(System::PResStringRec ResStringRec, int AHelpContext)/* overload */ : EStException(ResStringRec, AHelpContext) { }
 	/* Exception.CreateResFmtHelp */ inline __fastcall EStDecMathError(System::PResStringRec ResStringRec, const System::TVarRec *Args, const int Args_High, int AHelpContext)/* overload */ : EStException(ResStringRec, Args, Args_High, AHelpContext) { }
 	/* Exception.CreateResFmtHelp */ inline __fastcall EStDecMathError(NativeUInt Ident, const System::TVarRec *Args, const int Args_High, int AHelpContext)/* overload */ : EStException(Ident, Args, Args_High, AHelpContext) { }
-	/* Exception.Destroy */ inline __fastcall virtual ~EStDecMathError(void) { }
+	/* Exception.Destroy */ inline __fastcall virtual ~EStDecMathError() { }
 	
 };
 
@@ -617,7 +617,7 @@ public:
 	/* Exception.CreateResHelp */ inline __fastcall EStPRNGError(System::PResStringRec ResStringRec, int AHelpContext)/* overload */ : EStException(ResStringRec, AHelpContext) { }
 	/* Exception.CreateResFmtHelp */ inline __fastcall EStPRNGError(System::PResStringRec ResStringRec, const System::TVarRec *Args, const int Args_High, int AHelpContext)/* overload */ : EStException(ResStringRec, Args, Args_High, AHelpContext) { }
 	/* Exception.CreateResFmtHelp */ inline __fastcall EStPRNGError(NativeUInt Ident, const System::TVarRec *Args, const int Args_High, int AHelpContext)/* overload */ : EStException(Ident, Args, Args_High, AHelpContext) { }
-	/* Exception.Destroy */ inline __fastcall virtual ~EStPRNGError(void) { }
+	/* Exception.Destroy */ inline __fastcall virtual ~EStPRNGError() { }
 	
 };
 
@@ -651,7 +651,7 @@ public:
 	/* Exception.CreateResHelp */ inline __fastcall EStExprError(System::PResStringRec ResStringRec, int AHelpContext)/* overload */ : EStException(ResStringRec, AHelpContext) { }
 	/* Exception.CreateResFmtHelp */ inline __fastcall EStExprError(System::PResStringRec ResStringRec, const System::TVarRec *Args, const int Args_High, int AHelpContext)/* overload */ : EStException(ResStringRec, Args, Args_High, AHelpContext) { }
 	/* Exception.CreateResFmtHelp */ inline __fastcall EStExprError(NativeUInt Ident, const System::TVarRec *Args, const int Args_High, int AHelpContext)/* overload */ : EStException(Ident, Args, Args_High, AHelpContext) { }
-	/* Exception.Destroy */ inline __fastcall virtual ~EStExprError(void) { }
+	/* Exception.Destroy */ inline __fastcall virtual ~EStExprError() { }
 	
 };
 
@@ -689,7 +689,7 @@ public:
 	__fastcall virtual TStNode(void * AData);
 	__property void * Data = {read=FData, write=FData};
 public:
-	/* TPersistent.Destroy */ inline __fastcall virtual ~TStNode(void) { }
+	/* TPersistent.Destroy */ inline __fastcall virtual ~TStNode() { }
 	
 };
 
@@ -754,17 +754,17 @@ protected:
 	virtual void __fastcall ForEachUntypedVar(TIterateUntypedFunc Action, void * OtherData);
 	virtual void __fastcall GetArraySizes(unsigned &RowCount, unsigned &ColCount, unsigned &ElSize);
 	virtual void __fastcall SetArraySizes(unsigned RowCount, unsigned ColCount, unsigned ElSize);
-	virtual bool __fastcall StoresPointers(void);
-	virtual bool __fastcall StoresUntypedVars(void);
-	void __fastcall IncNodeProtection(void);
-	void __fastcall DecNodeProtection(void);
-	void __fastcall EnterCS(void);
-	void __fastcall LeaveCS(void);
+	virtual bool __fastcall StoresPointers();
+	virtual bool __fastcall StoresUntypedVars();
+	void __fastcall IncNodeProtection();
+	void __fastcall DecNodeProtection();
+	void __fastcall EnterCS();
+	void __fastcall LeaveCS();
 	
 public:
 	__fastcall TStContainer(TStNodeClass NodeClass, int Dummy);
-	__fastcall virtual ~TStContainer(void);
-	virtual void __fastcall Clear(void) = 0 ;
+	__fastcall virtual ~TStContainer();
+	virtual void __fastcall Clear() = 0 ;
 	void __fastcall DisposeNodeData(TStNode* P);
 	virtual int __fastcall DoCompare(void * Data1, void * Data2);
 	virtual void __fastcall DoDisposeData(void * Data);
@@ -784,7 +784,7 @@ public:
 	__property TStLoadDataEvent OnLoadData = {read=FOnLoadData, write=FOnLoadData};
 	__property TStStoreDataEvent OnStoreData = {read=FOnStoreData, write=FOnStoreData};
 public:
-	/* TObject.Create */ inline __fastcall TStContainer(void) : System::Classes::TPersistent() { }
+	/* TObject.Create */ inline __fastcall TStContainer() : System::Classes::TPersistent() { }
 	
 };
 
@@ -802,14 +802,14 @@ class PASCALIMPLEMENTATION TStComponent : public System::Classes::TComponent
 	typedef System::Classes::TComponent inherited;
 	
 protected:
-	System::UnicodeString __fastcall GetVersion(void);
+	System::UnicodeString __fastcall GetVersion();
 	void __fastcall SetVersion(const System::UnicodeString Value);
 	
 __published:
 	__property System::UnicodeString Version = {read=GetVersion, write=SetVersion, stored=false};
 public:
 	/* TComponent.Create */ inline __fastcall virtual TStComponent(System::Classes::TComponent* AOwner) : System::Classes::TComponent(AOwner) { }
-	/* TComponent.Destroy */ inline __fastcall virtual ~TStComponent(void) { }
+	/* TComponent.Destroy */ inline __fastcall virtual ~TStComponent() { }
 	
 };
 
@@ -819,7 +819,7 @@ class PASCALIMPLEMENTATION TStBaseEdit : public Vcl::Stdctrls::TEdit
 	typedef Vcl::Stdctrls::TEdit inherited;
 	
 protected:
-	System::UnicodeString __fastcall GetVersion(void);
+	System::UnicodeString __fastcall GetVersion();
 	void __fastcall SetVersion(const System::UnicodeString Value);
 	
 __published:
@@ -829,7 +829,7 @@ public:
 	
 public:
 	/* TWinControl.CreateParented */ inline __fastcall TStBaseEdit(HWND ParentWindow) : Vcl::Stdctrls::TEdit(ParentWindow) { }
-	/* TWinControl.Destroy */ inline __fastcall virtual ~TStBaseEdit(void) { }
+	/* TWinControl.Destroy */ inline __fastcall virtual ~TStBaseEdit() { }
 	
 };
 

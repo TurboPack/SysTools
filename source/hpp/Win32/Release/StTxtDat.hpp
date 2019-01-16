@@ -1,8 +1,8 @@
 ﻿// CodeGear C++Builder
-// Copyright (c) 1995, 2016 by Embarcadero Technologies, Inc.
+// Copyright (c) 1995, 2017 by Embarcadero Technologies, Inc.
 // All rights reserved
 
-// (DO NOT EDIT: machine generated header) 'StTxtDat.pas' rev: 32.00 (Windows)
+// (DO NOT EDIT: machine generated header) 'StTxtDat.pas' rev: 33.00 (Windows)
 
 #ifndef SttxtdatHPP
 #define SttxtdatHPP
@@ -50,7 +50,7 @@ protected:
 	System::UnicodeString FFieldName;
 	int FFieldOffset;
 	TStSchemaFieldType FFieldType;
-	System::UnicodeString __fastcall GetAsString(void);
+	System::UnicodeString __fastcall GetAsString();
 	void __fastcall SetFieldDecimals(const int Value);
 	void __fastcall SetFieldLen(const int Value);
 	void __fastcall SetFieldName(const System::UnicodeString Value);
@@ -65,8 +65,8 @@ public:
 	__property int FieldOffset = {read=FFieldOffset, write=SetFieldOffset, nodefault};
 	__property TStSchemaFieldType FieldType = {read=FFieldType, write=SetFieldType, nodefault};
 public:
-	/* TObject.Create */ inline __fastcall TStDataField(void) : System::TObject() { }
-	/* TObject.Destroy */ inline __fastcall virtual ~TStDataField(void) { }
+	/* TObject.Create */ inline __fastcall TStDataField() : System::TObject() { }
+	/* TObject.Destroy */ inline __fastcall virtual ~TStDataField() { }
 	
 };
 
@@ -84,18 +84,18 @@ private:
 	System::Classes::TStringList* FList;
 	
 protected:
-	int __fastcall GetCount(void);
+	int __fastcall GetCount();
 	TStDataField* __fastcall GetField(int Index);
 	TStDataField* __fastcall GetFieldByName(const System::UnicodeString FieldName);
 	void __fastcall SetField(int Index, TStDataField* const Value);
 	void __fastcall SetFieldByName(const System::UnicodeString FieldName, TStDataField* const Value);
 	
 public:
-	__fastcall TStDataFieldList(void);
-	__fastcall virtual ~TStDataFieldList(void);
+	__fastcall TStDataFieldList();
+	__fastcall virtual ~TStDataFieldList();
 	void __fastcall AddField(const System::UnicodeString FieldName, TStSchemaFieldType FieldType, int FieldLen, int FieldDecimals, int FieldOffset);
 	void __fastcall AddFieldStr(const System::UnicodeString FieldDef);
-	void __fastcall Clear(void);
+	void __fastcall Clear();
 	void __fastcall RemoveField(const System::UnicodeString FieldName);
 	__property int Count = {read=GetCount, nodefault};
 	__property TStDataField* Fields[int Index] = {read=GetField, write=SetField/*, default*/};
@@ -125,11 +125,11 @@ private:
 	TStDataFieldList* dsFieldList;
 	
 protected:
-	System::Classes::TStrings* __fastcall GetCaptions(void);
+	System::Classes::TStrings* __fastcall GetCaptions();
 	TStDataField* __fastcall GetField(int Index);
 	TStDataField* __fastcall GetFieldByName(const System::UnicodeString FieldName);
-	int __fastcall GetFieldCount(void);
-	System::Classes::TStrings* __fastcall GetSchema(void);
+	int __fastcall GetFieldCount();
+	System::Classes::TStrings* __fastcall GetSchema();
 	void __fastcall SetCommentDelimiter(const System::WideChar Value);
 	void __fastcall SetField(int Index, TStDataField* const Value);
 	void __fastcall SetFieldByName(const System::UnicodeString FieldName, TStDataField* const Value);
@@ -141,14 +141,14 @@ protected:
 	void __fastcall SetSchemaName(const System::UnicodeString Value);
 	
 public:
-	__fastcall TStTextDataSchema(void);
-	__fastcall virtual ~TStTextDataSchema(void);
+	__fastcall TStTextDataSchema();
+	__fastcall virtual ~TStTextDataSchema();
 	void __fastcall Assign(TStTextDataSchema* ASchema);
 	void __fastcall AddField(const System::UnicodeString FieldName, TStSchemaFieldType FieldType, int FieldLen, int FieldDecimals);
 	int __fastcall IndexOf(const System::UnicodeString FieldName);
 	void __fastcall RemoveField(const System::UnicodeString FieldName);
 	void __fastcall Update(System::Classes::TStrings* AList);
-	void __fastcall ClearFields(void);
+	void __fastcall ClearFields();
 	void __fastcall BuildSchema(System::Classes::TStrings* AList);
 	void __fastcall LoadFromFile(const System::Sysutils::TFileName AFileName);
 	void __fastcall LoadFromStream(System::Classes::TStream* AStream);
@@ -185,10 +185,10 @@ private:
 	
 protected:
 	System::UnicodeString __fastcall GetField(int Index);
-	int __fastcall GetFieldCount(void);
+	int __fastcall GetFieldCount();
 	System::UnicodeString __fastcall GetFieldByName(const System::UnicodeString FieldName);
-	System::Classes::TStrings* __fastcall GetFieldList(void);
-	System::Classes::TStrings* __fastcall GetValues(void);
+	System::Classes::TStrings* __fastcall GetFieldList();
+	System::Classes::TStrings* __fastcall GetValues();
 	void __fastcall SetField(int Index, const System::UnicodeString NewValue);
 	void __fastcall SetFieldByName(const System::UnicodeString FieldName, const System::UnicodeString NewValue);
 	void __fastcall SetQuoteAlways(const bool Value);
@@ -196,15 +196,15 @@ protected:
 	void __fastcall SetSchema(TStTextDataSchema* const Value);
 	
 public:
-	__fastcall TStTextDataRecord(void);
-	__fastcall virtual ~TStTextDataRecord(void);
+	__fastcall TStTextDataRecord();
+	__fastcall virtual ~TStTextDataRecord();
 	virtual void __fastcall BuildRecord(System::Classes::TStrings* Values, System::UnicodeString &NewRecord);
-	System::UnicodeString __fastcall GetRecord(void);
+	System::UnicodeString __fastcall GetRecord();
 	virtual void __fastcall DoQuote(System::UnicodeString &Value);
 	void __fastcall FillRecordFromArray(System::TVarRec *Values, const int Values_High);
 	void __fastcall FillRecordFromList(System::Classes::TStrings* Items);
 	void __fastcall FillRecordFromValues(System::Classes::TStrings* Values);
-	virtual void __fastcall MakeEmpty(void);
+	virtual void __fastcall MakeEmpty();
 	__property System::UnicodeString AsString = {read=GetRecord};
 	__property System::UnicodeString FieldByName[const System::UnicodeString FieldName] = {read=GetFieldByName, write=SetFieldByName};
 	__property int FieldCount = {read=GetFieldCount, nodefault};
@@ -233,34 +233,34 @@ private:
 	int FIgnoreStartingLines;
 	
 protected:
-	int __fastcall GetCount(void);
-	TStTextDataRecord* __fastcall GetCurrentRecord(void);
+	int __fastcall GetCount();
+	TStTextDataRecord* __fastcall GetCurrentRecord();
 	TStTextDataRecord* __fastcall GetRecord(int Index);
-	TStTextDataSchema* __fastcall GetSchema(void);
+	TStTextDataSchema* __fastcall GetSchema();
 	void __fastcall SetActive(const bool Value);
 	void __fastcall SetCurrentRecord(TStTextDataRecord* const Value);
 	void __fastcall SetRecord(int Index, TStTextDataRecord* const Value);
 	void __fastcall SetSchema(TStTextDataSchema* const Value);
 	
 public:
-	__fastcall TStTextDataRecordSet(void);
-	__fastcall virtual ~TStTextDataRecordSet(void);
-	void __fastcall Append(void);
+	__fastcall TStTextDataRecordSet();
+	__fastcall virtual ~TStTextDataRecordSet();
+	void __fastcall Append();
 	void __fastcall AppendArray(System::TVarRec *Values, const int Values_High);
 	void __fastcall AppendList(System::Classes::TStrings* Items);
 	void __fastcall AppendValues(System::Classes::TStrings* Values);
-	void __fastcall Clear(void);
-	void __fastcall Delete(void);
+	void __fastcall Clear();
+	void __fastcall Delete();
 	void __fastcall Insert(int Index);
 	void __fastcall InsertArray(int Index, System::TVarRec *Values, const int Values_High);
 	void __fastcall InsertList(int Index, System::Classes::TStrings* Items);
 	void __fastcall InsertValues(int Index, System::Classes::TStrings* Values);
-	bool __fastcall BOF(void);
-	bool __fastcall EOF(void);
-	void __fastcall First(void);
-	void __fastcall Last(void);
-	bool __fastcall Next(void);
-	bool __fastcall Prior(void);
+	bool __fastcall BOF();
+	bool __fastcall EOF();
+	void __fastcall First();
+	void __fastcall Last();
+	bool __fastcall Next();
+	bool __fastcall Prior();
 	void __fastcall LoadFromFile(const System::Sysutils::TFileName AFile);
 	void __fastcall LoadFromStream(System::Classes::TStream* AStream);
 	void __fastcall SaveToFile(const System::Sysutils::TFileName AFile);

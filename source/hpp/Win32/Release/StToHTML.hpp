@@ -1,8 +1,8 @@
 ﻿// CodeGear C++Builder
-// Copyright (c) 1995, 2016 by Embarcadero Technologies, Inc.
+// Copyright (c) 1995, 2017 by Embarcadero Technologies, Inc.
 // All rights reserved
 
-// (DO NOT EDIT: machine generated header) 'StToHTML.pas' rev: 32.00 (Windows)
+// (DO NOT EDIT: machine generated header) 'StToHTML.pas' rev: 33.00 (Windows)
 
 #ifndef SttohtmlHPP
 #define SttohtmlHPP
@@ -59,7 +59,7 @@ protected:
 	System::Classes::TStringList* FPageHeader;
 	System::Classes::TStringList* FStringMarkers;
 	System::UnicodeString FWordDelims;
-	bool __fastcall ParseBuffer(void);
+	bool __fastcall ParseBuffer();
 	void __fastcall SetCommentMarkers(System::Classes::TStringList* Value);
 	void __fastcall SetEmbeddedHTML(System::Classes::TStringList* Value);
 	void __fastcall SetKeywords(System::Classes::TStringList* Value);
@@ -82,9 +82,9 @@ public:
 	__property System::Classes::TStringList* PageHeader = {read=FPageHeader, write=SetPageHeader};
 	__property System::Classes::TStringList* StringMarkers = {read=FStringMarkers, write=SetStringMarkers};
 	__property System::UnicodeString WordDelimiters = {read=FWordDelims, write=FWordDelims};
-	__fastcall TStStreamToHTML(void);
-	__fastcall virtual ~TStStreamToHTML(void);
-	void __fastcall GenerateHTML(void);
+	__fastcall TStStreamToHTML();
+	__fastcall virtual ~TStStreamToHTML();
+	void __fastcall GenerateHTML();
 };
 
 
@@ -119,8 +119,8 @@ protected:
 	
 public:
 	__fastcall virtual TStFileToHTML(System::Classes::TComponent* AOwner);
-	__fastcall virtual ~TStFileToHTML(void);
-	void __fastcall Execute(void);
+	__fastcall virtual ~TStFileToHTML();
+	void __fastcall Execute();
 	
 __published:
 	__property bool CaseSensitive = {read=FCaseSensitive, write=FCaseSensitive, default=0};

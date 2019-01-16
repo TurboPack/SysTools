@@ -1,8 +1,8 @@
 ﻿// CodeGear C++Builder
-// Copyright (c) 1995, 2016 by Embarcadero Technologies, Inc.
+// Copyright (c) 1995, 2017 by Embarcadero Technologies, Inc.
 // All rights reserved
 
-// (DO NOT EDIT: machine generated header) 'StHASH.pas' rev: 32.00 (Windows)
+// (DO NOT EDIT: machine generated header) 'StHASH.pas' rev: 33.00 (Windows)
 
 #ifndef SthashHPP
 #define SthashHPP
@@ -38,11 +38,11 @@ protected:
 	void *hnValue;
 	unsigned hnValSize;
 	int FLRU;
-	void * __fastcall GetValue(void);
+	void * __fastcall GetValue();
 	
 public:
 	__fastcall virtual TStHashNode(const void *AValue, unsigned AValSize, void * AData);
-	__fastcall virtual ~TStHashNode(void);
+	__fastcall virtual ~TStHashNode();
 	__property void * Value = {read=GetValue};
 	__property int LRU = {read=FLRU, write=FLRU, nodefault};
 public:
@@ -81,14 +81,14 @@ protected:
 	void __fastcall htMoveToFront(int H, TStHashNode* Prev, TStHashNode* This);
 	void __fastcall htFindNode(const void *V, int &H, TStHashNode* &Prev, TStHashNode* &This);
 	void __fastcall htUpdateLRU(TStHashNode* This);
-	void __fastcall htDeleteOldestNode(void);
+	void __fastcall htDeleteOldestNode();
 	
 public:
 	__fastcall virtual TStHashTable(unsigned AValSize, int AHashSize);
-	__fastcall virtual ~TStHashTable(void);
+	__fastcall virtual ~TStHashTable();
 	DYNAMIC void __fastcall LoadFromStream(System::Classes::TStream* S);
 	DYNAMIC void __fastcall StoreToStream(System::Classes::TStream* S);
-	virtual void __fastcall Clear(void);
+	virtual void __fastcall Clear();
 	bool __fastcall Exists(const void *V, void * &Data);
 	void __fastcall Add(const void *V, void * Data);
 	void __fastcall Delete(const void *V);

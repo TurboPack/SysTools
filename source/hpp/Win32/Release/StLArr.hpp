@@ -1,8 +1,8 @@
 ﻿// CodeGear C++Builder
-// Copyright (c) 1995, 2016 by Embarcadero Technologies, Inc.
+// Copyright (c) 1995, 2017 by Embarcadero Technologies, Inc.
 // All rights reserved
 
-// (DO NOT EDIT: machine generated header) 'StLArr.pas' rev: 32.00 (Windows)
+// (DO NOT EDIT: machine generated header) 'StLArr.pas' rev: 33.00 (Windows)
 
 #ifndef StlarrHPP
 #define StlarrHPP
@@ -39,16 +39,16 @@ protected:
 	virtual void __fastcall ForEachUntypedVar(Stbase::TIterateUntypedFunc Action, void * OtherData);
 	virtual void __fastcall GetArraySizes(unsigned &RowCount, unsigned &ColCount, unsigned &ElSize);
 	virtual void __fastcall SetArraySizes(unsigned RowCount, unsigned ColCount, unsigned ElSize);
-	virtual bool __fastcall StoresUntypedVars(void);
+	virtual bool __fastcall StoresUntypedVars();
 	void __fastcall laSetCount(int Elements);
 	
 public:
 	__fastcall TStLArray(int Elements, unsigned ElementSize);
-	__fastcall virtual ~TStLArray(void);
+	__fastcall virtual ~TStLArray();
 	DYNAMIC void __fastcall LoadFromStream(System::Classes::TStream* S);
 	DYNAMIC void __fastcall StoreToStream(System::Classes::TStream* S);
 	virtual void __fastcall Assign(System::Classes::TPersistent* Source);
-	virtual void __fastcall Clear(void);
+	virtual void __fastcall Clear();
 	void __fastcall Fill(const void *Value);
 	void __fastcall Put(int El, const void *Value);
 	void __fastcall Get(int El, void *Value);
@@ -77,17 +77,17 @@ protected:
 	virtual void __fastcall ForEachUntypedVar(Stbase::TIterateUntypedFunc Action, void * OtherData);
 	virtual void __fastcall GetArraySizes(unsigned &RowCount, unsigned &ColCount, unsigned &ElSize);
 	virtual void __fastcall SetArraySizes(unsigned RowCount, unsigned ColCount, unsigned ElSize);
-	virtual bool __fastcall StoresUntypedVars(void);
+	virtual bool __fastcall StoresUntypedVars();
 	void __fastcall lmSetRows(unsigned Rows);
 	void __fastcall lmSetCols(unsigned Cols);
 	
 public:
 	__fastcall TStLMatrix(unsigned Rows, unsigned Cols, unsigned ElementSize);
-	__fastcall virtual ~TStLMatrix(void);
+	__fastcall virtual ~TStLMatrix();
 	DYNAMIC void __fastcall LoadFromStream(System::Classes::TStream* S);
 	DYNAMIC void __fastcall StoreToStream(System::Classes::TStream* S);
 	virtual void __fastcall Assign(System::Classes::TPersistent* Source);
-	virtual void __fastcall Clear(void);
+	virtual void __fastcall Clear();
 	void __fastcall Fill(const void *Value);
 	void __fastcall Put(unsigned Row, unsigned Col, const void *Value);
 	void __fastcall Get(unsigned Row, unsigned Col, void *Value);

@@ -1,8 +1,8 @@
 ﻿// CodeGear C++Builder
-// Copyright (c) 1995, 2016 by Embarcadero Technologies, Inc.
+// Copyright (c) 1995, 2017 by Embarcadero Technologies, Inc.
 // All rights reserved
 
-// (DO NOT EDIT: machine generated header) 'StRegIni.pas' rev: 32.00 (Windows)
+// (DO NOT EDIT: machine generated header) 'StRegIni.pas' rev: 33.00 (Windows)
 
 #ifndef StreginiHPP
 #define StreginiHPP
@@ -69,11 +69,11 @@ protected:
 	System::UnicodeString riTrueString;
 	System::UnicodeString riFalseString;
 	_RTL_CRITICAL_SECTION riThreadSafe;
-	_SECURITY_ATTRIBUTES __fastcall GetAttributes(void);
+	_SECURITY_ATTRIBUTES __fastcall GetAttributes();
 	void __fastcall SetAttributes(const _SECURITY_ATTRIBUTES &Value);
-	System::UnicodeString __fastcall GetCurSubKey(void);
+	System::UnicodeString __fastcall GetCurSubKey();
 	void __fastcall SetCurSubKey(System::UnicodeString Value);
-	bool __fastcall GetIsIniFile(void);
+	bool __fastcall GetIsIniFile();
 	void __fastcall ParseIniFile(System::Classes::TStrings* SList);
 	System::UnicodeString FCurSubKey;
 	_SECURITY_ATTRIBUTES FriSecAttr;
@@ -81,10 +81,10 @@ protected:
 	System::UnicodeString riRootName;
 	Vcl::Graphics::TBitmap* BmpText;
 	Vcl::Graphics::TBitmap* BmpBinary;
-	HKEY __fastcall OpenRegKey(void);
+	HKEY __fastcall OpenRegKey();
 	void __fastcall CloseRegKey(const HKEY Key);
-	void __fastcall EnterCS(void);
-	void __fastcall LeaveCS(void);
+	void __fastcall EnterCS();
+	void __fastcall LeaveCS();
 	bool __fastcall WriteIniData(const System::UnicodeString ValueName, System::UnicodeString Data);
 	int __fastcall ReadIniData(const System::UnicodeString ValueName, System::UnicodeString &Value, System::UnicodeString Default);
 	int __fastcall WriteRegData(HKEY Key, const System::UnicodeString ValueName, void * Data, unsigned DType, int Size);
@@ -92,13 +92,13 @@ protected:
 	
 public:
 	__fastcall virtual TStRegIni(System::UnicodeString RootName, bool IsIniFile);
-	__fastcall virtual ~TStRegIni(void);
+	__fastcall virtual ~TStRegIni();
 	void __fastcall SetPrimary(System::UnicodeString Value);
-	System::UnicodeString __fastcall GetPrimary(void);
+	System::UnicodeString __fastcall GetPrimary();
 	int __fastcall GetDataInfo(HKEY Key, const System::UnicodeString ValueName, int &Size, unsigned &DType);
 	System::UnicodeString __fastcall BytesToString(System::PByte Value, unsigned Size);
 	bool __fastcall StringToBytes(const System::UnicodeString IString, void *Value, unsigned Size);
-	System::UnicodeString __fastcall GetFullKeyPath(void);
+	System::UnicodeString __fastcall GetFullKeyPath();
 	void __fastcall WriteBoolean(const System::UnicodeString ValueName, bool Value);
 	bool __fastcall ReadBoolean(const System::UnicodeString ValueName, bool Default);
 	void __fastcall WriteInteger(const System::UnicodeString ValueName, unsigned Value);
@@ -129,7 +129,7 @@ public:
 	void __fastcall ReplaceKey(const System::UnicodeString SubKey, const System::UnicodeString InputFile, const System::UnicodeString SaveFile);
 	void __fastcall RestoreKey(const System::UnicodeString SubKey, const System::UnicodeString KeyFile, unsigned Options);
 	void __fastcall RegOpenRemoteKey(System::UnicodeString CompName);
-	void __fastcall RegCloseRemoteKey(void);
+	void __fastcall RegCloseRemoteKey();
 	__property _SECURITY_ATTRIBUTES Attributes = {read=GetAttributes, write=SetAttributes};
 	__property System::UnicodeString CurSubKey = {read=GetCurSubKey, write=SetCurSubKey};
 	__property bool IsIniFile = {read=GetIsIniFile, nodefault};

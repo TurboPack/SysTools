@@ -1,8 +1,8 @@
 ﻿// CodeGear C++Builder
-// Copyright (c) 1995, 2016 by Embarcadero Technologies, Inc.
+// Copyright (c) 1995, 2017 by Embarcadero Technologies, Inc.
 // All rights reserved
 
-// (DO NOT EDIT: machine generated header) 'StEclpse.pas' rev: 32.00 (Windows)
+// (DO NOT EDIT: machine generated header) 'StEclpse.pas' rev: 33.00 (Windows)
 
 #ifndef SteclpseHPP
 #define SteclpseHPP
@@ -122,7 +122,7 @@ public:
 	__property PStEclipseRecord Eclipses[int Idx] = {read=GetEclipse};
 public:
 	/* TStContainer.CreateContainer */ inline __fastcall TStEclipses(Stbase::TStNodeClass NodeClass, int Dummy) : Stlist::TStList(NodeClass, Dummy) { }
-	/* TStContainer.Destroy */ inline __fastcall virtual ~TStEclipses(void) { }
+	/* TStContainer.Destroy */ inline __fastcall virtual ~TStEclipses() { }
 	
 };
 

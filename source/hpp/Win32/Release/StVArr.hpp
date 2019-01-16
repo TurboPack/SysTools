@@ -1,8 +1,8 @@
 ﻿// CodeGear C++Builder
-// Copyright (c) 1995, 2016 by Embarcadero Technologies, Inc.
+// Copyright (c) 1995, 2017 by Embarcadero Technologies, Inc.
 // All rights reserved
 
-// (DO NOT EDIT: machine generated header) 'StVArr.pas' rev: 32.00 (Windows)
+// (DO NOT EDIT: machine generated header) 'StVArr.pas' rev: 33.00 (Windows)
 
 #ifndef StvarrHPP
 #define StvarrHPP
@@ -60,13 +60,13 @@ protected:
 	virtual void __fastcall ForEachUntypedVar(Stbase::TIterateUntypedFunc Action, void * OtherData);
 	virtual void __fastcall GetArraySizes(unsigned &RowCount, unsigned &ColCount, unsigned &ElSize);
 	virtual void __fastcall SetArraySizes(unsigned RowCount, unsigned ColCount, unsigned ElSize);
-	virtual bool __fastcall StoresUntypedVars(void);
+	virtual bool __fastcall StoresUntypedVars();
 	void __fastcall vmSetCacheRows(int CacheRows);
-	void __fastcall vmAllocateCache(void);
-	void __fastcall vmDeallocateCache(void);
-	void __fastcall vmInvalidateCache(void);
+	void __fastcall vmAllocateCache();
+	void __fastcall vmDeallocateCache();
+	void __fastcall vmInvalidateCache();
 	void __fastcall vmFlushCacheNode(int CacheIndex);
-	int __fastcall vmIncCacheTime(void);
+	int __fastcall vmIncCacheTime();
 	bool __fastcall vmSearchCache(unsigned Row, int &CacheIndex);
 	void * __fastcall vmGetRowData(unsigned Row, bool MakeDirty);
 	void __fastcall vmWriteRow(unsigned Row, void * Data, bool Seek);
@@ -74,13 +74,13 @@ protected:
 	
 public:
 	__fastcall virtual TStVMatrix(unsigned Rows, unsigned Cols, unsigned ElementSize, int CacheRows, const System::UnicodeString DataFile, System::Word OpenMode);
-	__fastcall virtual ~TStVMatrix(void);
-	void __fastcall FlushCache(void);
-	virtual int __fastcall HeaderSize(void);
-	virtual void __fastcall WriteHeader(void);
-	virtual void __fastcall ReadHeader(void);
+	__fastcall virtual ~TStVMatrix();
+	void __fastcall FlushCache();
+	virtual int __fastcall HeaderSize();
+	virtual void __fastcall WriteHeader();
+	virtual void __fastcall ReadHeader();
 	virtual void __fastcall Assign(System::Classes::TPersistent* Source);
-	virtual void __fastcall Clear(void);
+	virtual void __fastcall Clear();
 	void __fastcall Fill(const void *Value);
 	void __fastcall Put(unsigned Row, unsigned Col, const void *Value);
 	void __fastcall Get(unsigned Row, unsigned Col, void *Value);

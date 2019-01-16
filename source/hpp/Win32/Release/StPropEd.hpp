@@ -1,8 +1,8 @@
 ﻿// CodeGear C++Builder
-// Copyright (c) 1995, 2016 by Embarcadero Technologies, Inc.
+// Copyright (c) 1995, 2017 by Embarcadero Technologies, Inc.
 // All rights reserved
 
-// (DO NOT EDIT: machine generated header) 'StPropEd.pas' rev: 32.00 (Windows)
+// (DO NOT EDIT: machine generated header) 'StPropEd.pas' rev: 33.00 (Windows)
 
 #ifndef StpropedHPP
 #define StpropedHPP
@@ -34,11 +34,11 @@ class PASCALIMPLEMENTATION TStFileNameProperty : public Designeditors::TStringPr
 	typedef Designeditors::TStringProperty inherited;
 	
 public:
-	virtual Designintf::TPropertyAttributes __fastcall GetAttributes(void);
-	virtual void __fastcall Edit(void);
+	virtual Designintf::TPropertyAttributes __fastcall GetAttributes();
+	virtual void __fastcall Edit();
 public:
 	/* TPropertyEditor.Create */ inline __fastcall virtual TStFileNameProperty(const Designintf::_di_IDesigner ADesigner, int APropCount) : Designeditors::TStringProperty(ADesigner, APropCount) { }
-	/* TPropertyEditor.Destroy */ inline __fastcall virtual ~TStFileNameProperty(void) { }
+	/* TPropertyEditor.Destroy */ inline __fastcall virtual ~TStFileNameProperty() { }
 	
 };
 
@@ -50,11 +50,11 @@ class PASCALIMPLEMENTATION TStGenericFileNameProperty : public Designeditors::TS
 	typedef Designeditors::TStringProperty inherited;
 	
 public:
-	virtual Designintf::TPropertyAttributes __fastcall GetAttributes(void);
-	virtual void __fastcall Edit(void);
+	virtual Designintf::TPropertyAttributes __fastcall GetAttributes();
+	virtual void __fastcall Edit();
 public:
 	/* TPropertyEditor.Create */ inline __fastcall virtual TStGenericFileNameProperty(const Designintf::_di_IDesigner ADesigner, int APropCount) : Designeditors::TStringProperty(ADesigner, APropCount) { }
-	/* TPropertyEditor.Destroy */ inline __fastcall virtual ~TStGenericFileNameProperty(void) { }
+	/* TPropertyEditor.Destroy */ inline __fastcall virtual ~TStGenericFileNameProperty() { }
 	
 };
 

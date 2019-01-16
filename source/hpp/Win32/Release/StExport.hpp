@@ -1,8 +1,8 @@
 ﻿// CodeGear C++Builder
-// Copyright (c) 1995, 2016 by Embarcadero Technologies, Inc.
+// Copyright (c) 1995, 2017 by Embarcadero Technologies, Inc.
 // All rights reserved
 
-// (DO NOT EDIT: machine generated header) 'StExport.pas' rev: 32.00 (Windows)
+// (DO NOT EDIT: machine generated header) 'StExport.pas' rev: 33.00 (Windows)
 
 #ifndef StexportHPP
 #define StexportHPP
@@ -52,8 +52,8 @@ private:
 	Sttxtdat::TStOnQuoteFieldEvent FOnQuoteField;
 	
 protected:
-	System::UnicodeString __fastcall BuildCSVHeader(void);
-	System::UnicodeString __fastcall BuildCSVRec(void);
+	System::UnicodeString __fastcall BuildCSVHeader();
+	System::UnicodeString __fastcall BuildCSVRec();
 	void __fastcall SetDataSet(Data::Db::TDataSet* const Value);
 	void __fastcall SetFieldDelimiter(const System::WideChar Value);
 	void __fastcall SetIncludeHeader(const bool Value);
@@ -62,7 +62,7 @@ protected:
 	void __fastcall SetQuoteIfSpaces(const bool Value);
 	
 public:
-	__fastcall TStDBtoCSVExport(void);
+	__fastcall TStDBtoCSVExport();
 	virtual void __fastcall DoQuote(System::UnicodeString &Value);
 	void __fastcall ExportToStream(System::Classes::TStream* AStream);
 	void __fastcall ExportToFile(System::Sysutils::TFileName AFile);
@@ -80,7 +80,7 @@ public:
 	__property Sttxtdat::TStOnQuoteFieldEvent OnQuoteField = {read=FOnQuoteField, write=FOnQuoteField};
 	__property TStExportProgressEvent OnExportProgress = {read=FOnExportProgress, write=FOnExportProgress};
 public:
-	/* TObject.Destroy */ inline __fastcall virtual ~TStDBtoCSVExport(void) { }
+	/* TObject.Destroy */ inline __fastcall virtual ~TStDBtoCSVExport() { }
 	
 };
 
@@ -95,17 +95,17 @@ private:
 	Sttxtdat::TStTextDataSchema* FSchema;
 	
 protected:
-	System::WideChar __fastcall GetFieldDelimiter(void);
-	System::WideChar __fastcall GetQuoteDelimiter(void);
-	System::UnicodeString __fastcall GetSchemaName(void);
+	System::WideChar __fastcall GetFieldDelimiter();
+	System::WideChar __fastcall GetQuoteDelimiter();
+	System::UnicodeString __fastcall GetSchemaName();
 	void __fastcall SetDataSet(Data::Db::TDataSet* const Value);
 	void __fastcall SetFieldDelimiter(const System::WideChar Value);
 	void __fastcall SetQuoteDelimiter(const System::WideChar Value);
 	void __fastcall SetSchemaName(const System::UnicodeString Value);
 	
 public:
-	__fastcall TStDbSchemaGenerator(void);
-	__fastcall virtual ~TStDbSchemaGenerator(void);
+	__fastcall TStDbSchemaGenerator();
+	__fastcall virtual ~TStDbSchemaGenerator();
 	void __fastcall ExportToStream(System::Classes::TStream* AStream);
 	void __fastcall ExportToFile(System::Sysutils::TFileName AFile);
 	__property Data::Db::TDataSet* DataSet = {read=FDataSet, write=SetDataSet};

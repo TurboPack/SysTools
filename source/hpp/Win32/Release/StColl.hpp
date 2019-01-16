@@ -1,8 +1,8 @@
 ﻿// CodeGear C++Builder
-// Copyright (c) 1995, 2016 by Embarcadero Technologies, Inc.
+// Copyright (c) 1995, 2017 by Embarcadero Technologies, Inc.
 // All rights reserved
 
-// (DO NOT EDIT: machine generated header) 'StColl.pas' rev: 32.00 (Windows)
+// (DO NOT EDIT: machine generated header) 'StColl.pas' rev: 33.00 (Windows)
 
 #ifndef StcollHPP
 #define StcollHPP
@@ -45,7 +45,7 @@ protected:
 	
 public:
 	__fastcall virtual TPageDescriptor(void * AData);
-	__fastcall virtual ~TPageDescriptor(void);
+	__fastcall virtual ~TPageDescriptor();
 };
 
 #pragma pack(pop)
@@ -66,19 +66,19 @@ protected:
 	void __fastcall colAdjustPagesAfter(TPageDescriptor* N, int Delta);
 	void __fastcall colAtInsertInPage(TPageDescriptor* N, int PageIndex, void * AData);
 	void __fastcall colAtDeleteInPage(TPageDescriptor* N, int PageIndex);
-	int __fastcall colGetCount(void);
-	int __fastcall colGetEfficiency(void);
+	int __fastcall colGetCount();
+	int __fastcall colGetEfficiency();
 	virtual void __fastcall ForEachPointer(Stbase::TIteratePointerFunc Action, void * OtherData);
-	virtual bool __fastcall StoresPointers(void);
+	virtual bool __fastcall StoresPointers();
 	
 public:
 	__fastcall virtual TStCollection(int PageElements);
-	__fastcall virtual ~TStCollection(void);
+	__fastcall virtual ~TStCollection();
 	DYNAMIC void __fastcall LoadFromStream(System::Classes::TStream* S);
 	DYNAMIC void __fastcall StoreToStream(System::Classes::TStream* S);
-	virtual void __fastcall Clear(void);
+	virtual void __fastcall Clear();
 	virtual void __fastcall Assign(System::Classes::TPersistent* Source);
-	void __fastcall Pack(void);
+	void __fastcall Pack();
 	void * __fastcall At(int Index);
 	virtual int __fastcall IndexOf(void * Data);
 	void __fastcall AtInsert(int Index, void * Data);
@@ -115,7 +115,7 @@ public:
 	__property bool Duplicates = {read=FDuplicates, write=scSetDuplicates, nodefault};
 public:
 	/* TStCollection.Create */ inline __fastcall virtual TStSortedCollection(int PageElements) : TStCollection(PageElements) { }
-	/* TStCollection.Destroy */ inline __fastcall virtual ~TStSortedCollection(void) { }
+	/* TStCollection.Destroy */ inline __fastcall virtual ~TStSortedCollection() { }
 	
 public:
 	/* TStContainer.CreateContainer */ inline __fastcall TStSortedCollection(Stbase::TStNodeClass NodeClass, int Dummy) : TStCollection(NodeClass, Dummy) { }

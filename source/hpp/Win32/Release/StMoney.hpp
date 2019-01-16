@@ -1,8 +1,8 @@
 ﻿// CodeGear C++Builder
-// Copyright (c) 1995, 2016 by Embarcadero Technologies, Inc.
+// Copyright (c) 1995, 2017 by Embarcadero Technologies, Inc.
 // All rights reserved
 
-// (DO NOT EDIT: machine generated header) 'StMoney.pas' rev: 32.00 (Windows)
+// (DO NOT EDIT: machine generated header) 'StMoney.pas' rev: 33.00 (Windows)
 
 #ifndef StmoneyHPP
 #define StmoneyHPP
@@ -57,8 +57,8 @@ public:
 	__property System::UnicodeString UnitMajor = {read=FUnitMajor, write=FUnitMajor};
 	__property System::UnicodeString UnitMinor = {read=FUnitMinor, write=FUnitMinor};
 public:
-	/* TObject.Create */ inline __fastcall TStCurrency(void) : System::TObject() { }
-	/* TObject.Destroy */ inline __fastcall virtual ~TStCurrency(void) { }
+	/* TObject.Create */ inline __fastcall TStCurrency() : System::TObject() { }
+	/* TObject.Destroy */ inline __fastcall virtual ~TStCurrency() { }
 	
 };
 
@@ -76,7 +76,7 @@ private:
 	System::Classes::TStringList* FItems;
 	
 protected:
-	int __fastcall GetCount(void);
+	int __fastcall GetCount();
 	TStCurrency* __fastcall GetCurrency(const System::UnicodeString ISOName);
 	TStCurrency* __fastcall GetItem(int Index);
 	void __fastcall SetCurrency(const System::UnicodeString ISOName, TStCurrency* Value);
@@ -84,10 +84,10 @@ protected:
 	void __fastcall FreeCurrencyByIndex(int Index);
 	
 public:
-	__fastcall TStCurrencyList(void);
-	__fastcall virtual ~TStCurrencyList(void);
+	__fastcall TStCurrencyList();
+	__fastcall virtual ~TStCurrencyList();
 	void __fastcall Add(TStCurrency* ACurrency);
-	void __fastcall Clear(void);
+	void __fastcall Clear();
 	bool __fastcall Contains(TStCurrency* ACurrency);
 	bool __fastcall ContainsName(const System::UnicodeString ISOName);
 	void __fastcall Delete(const System::UnicodeString ISOName);
@@ -122,15 +122,15 @@ private:
 	void __fastcall SetRate(Stdecmth::TStDecimal* const Value);
 	
 public:
-	__fastcall TStExchangeRate(void);
-	__fastcall virtual ~TStExchangeRate(void);
+	__fastcall TStExchangeRate();
+	__fastcall virtual ~TStExchangeRate();
 	void __fastcall Assign(TStExchangeRate* ARate);
-	void __fastcall Clear(void);
+	void __fastcall Clear();
 	void __fastcall Convert(Stdecmth::TStDecimal* Amount, Stdecmth::TStDecimal* Result);
 	bool __fastcall EqualsRate(TStExchangeRate* aRate);
-	bool __fastcall IsValid(void);
+	bool __fastcall IsValid();
 	bool __fastcall SameSourceAndTarget(TStExchangeRate* aRate);
-	void __fastcall Update(void);
+	void __fastcall Update();
 	void __fastcall LoadFromList(System::Classes::TStrings* List);
 	void __fastcall SaveToList(System::Classes::TStrings* List);
 	__property TStConversionType ConversionType = {read=FConversionType, write=FConversionType, nodefault};
@@ -153,19 +153,19 @@ private:
 	
 protected:
 	void __fastcall DeleteRate(int Index);
-	int __fastcall GetCount(void);
+	int __fastcall GetCount();
 	TStExchangeRate* __fastcall GetRate(const System::UnicodeString Source, const System::UnicodeString Target);
 	TStExchangeRate* __fastcall GetItem(int Index);
 	virtual System::UnicodeString __fastcall MakeEntry(const System::UnicodeString Source, const System::UnicodeString Target);
 	void __fastcall ConvertPrim(const System::UnicodeString aSource, const System::UnicodeString aTarget, Stdecmth::TStDecimal* aAmount, bool aAllowTriangular);
 	
 public:
-	__fastcall TStExchangeRateList(void);
-	__fastcall virtual ~TStExchangeRateList(void);
+	__fastcall TStExchangeRateList();
+	__fastcall virtual ~TStExchangeRateList();
 	void __fastcall Add(TStExchangeRate* ARate);
 	void __fastcall AddByValues(const System::UnicodeString Source, const System::UnicodeString Target, const System::UnicodeString Intermediate, double Rate, TStConversionType ConversionType, System::TDateTime DateUpdated);
 	void __fastcall Assign(TStExchangeRateList* AList);
-	void __fastcall Clear(void);
+	void __fastcall Clear();
 	bool __fastcall Contains(TStExchangeRate* ARate);
 	bool __fastcall ContainsByName(const System::UnicodeString Source, const System::UnicodeString Target);
 	void __fastcall Convert(const System::UnicodeString Source, const System::UnicodeString Target, Stdecmth::TStDecimal* Amount, Stdecmth::TStDecimal* Result);
@@ -192,8 +192,8 @@ private:
 	Stdecmth::TStDecimal* FAmount;
 	System::UnicodeString FCurrency;
 	TStExchangeRateList* FExchangeRates;
-	double __fastcall GetAsFloat(void);
-	System::UnicodeString __fastcall GetAsString(void);
+	double __fastcall GetAsFloat();
+	System::UnicodeString __fastcall GetAsString();
 	void __fastcall SetAmount(Stdecmth::TStDecimal* const Value);
 	void __fastcall SetAsFloat(const double Value);
 	void __fastcall SetAsString(const System::UnicodeString Value);
@@ -201,8 +201,8 @@ private:
 	bool __fastcall ValidateCurrencies(TStMoney* Source, TStMoney* Dest);
 	
 public:
-	__fastcall TStMoney(void);
-	__fastcall virtual ~TStMoney(void);
+	__fastcall TStMoney();
+	__fastcall virtual ~TStMoney();
 	void __fastcall Assign(TStMoney* AMoney);
 	void __fastcall Abs(TStMoney* Result);
 	void __fastcall Add(TStMoney* Addend, TStMoney* Sum);
@@ -218,10 +218,10 @@ public:
 	bool __fastcall IsGreaterThanOrEqual(TStMoney* AMoney);
 	bool __fastcall IsLessThan(TStMoney* AMoney);
 	bool __fastcall IsLessThanOrEqual(TStMoney* AMoney);
-	bool __fastcall IsNegative(void);
+	bool __fastcall IsNegative();
 	bool __fastcall IsNotEqual(TStMoney* AMoney);
-	bool __fastcall IsPositive(void);
-	bool __fastcall IsZero(void);
+	bool __fastcall IsPositive();
+	bool __fastcall IsZero();
 	void __fastcall Convert(const System::UnicodeString Target, TStMoney* Result);
 	void __fastcall Round(Stdecmth::TStRoundMethod Method, int Decimals, TStMoney* Result);
 	__property Stdecmth::TStDecimal* Amount = {read=FAmount, write=SetAmount};

@@ -1,8 +1,8 @@
 ﻿// CodeGear C++Builder
-// Copyright (c) 1995, 2016 by Embarcadero Technologies, Inc.
+// Copyright (c) 1995, 2017 by Embarcadero Technologies, Inc.
 // All rights reserved
 
-// (DO NOT EDIT: machine generated header) 'StNVDict.pas' rev: 32.00 (Windows)
+// (DO NOT EDIT: machine generated header) 'StNVDict.pas' rev: 33.00 (Windows)
 
 #ifndef StnvdictHPP
 #define StnvdictHPP
@@ -34,20 +34,20 @@ class PASCALIMPLEMENTATION TStNVDictionary : public Stnvcont::TStNVContainerBase
 protected:
 	Stdict::TStDictionary* FContainer;
 	int FHashSize;
-	int __fastcall GetHashSize(void);
-	Stbase::TStStringCompareEvent __fastcall GetOnEqual(void);
+	int __fastcall GetHashSize();
+	Stbase::TStStringCompareEvent __fastcall GetOnEqual();
 	void __fastcall SetHashSize(int Value);
 	void __fastcall SetOnEqual(Stbase::TStStringCompareEvent Value);
-	virtual Stnvcont::TStDisposeDataEvent __fastcall GetOnDisposeData(void);
-	virtual Stnvcont::TStLoadDataEvent __fastcall GetOnLoadData(void);
-	virtual Stnvcont::TStStoreDataEvent __fastcall GetOnStoreData(void);
+	virtual Stnvcont::TStDisposeDataEvent __fastcall GetOnDisposeData();
+	virtual Stnvcont::TStLoadDataEvent __fastcall GetOnLoadData();
+	virtual Stnvcont::TStStoreDataEvent __fastcall GetOnStoreData();
 	virtual void __fastcall SetOnDisposeData(Stnvcont::TStDisposeDataEvent Value);
 	virtual void __fastcall SetOnLoadData(Stnvcont::TStLoadDataEvent Value);
 	virtual void __fastcall SetOnStoreData(Stnvcont::TStStoreDataEvent Value);
 	
 public:
 	__fastcall virtual TStNVDictionary(System::Classes::TComponent* AOwner);
-	__fastcall virtual ~TStNVDictionary(void);
+	__fastcall virtual ~TStNVDictionary();
 	__property Stdict::TStDictionary* Container = {read=FContainer};
 	
 __published:

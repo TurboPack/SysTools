@@ -1,8 +1,8 @@
 ﻿// CodeGear C++Builder
-// Copyright (c) 1995, 2016 by Embarcadero Technologies, Inc.
+// Copyright (c) 1995, 2017 by Embarcadero Technologies, Inc.
 // All rights reserved
 
-// (DO NOT EDIT: machine generated header) 'StGenLog.pas' rev: 32.00 (Windows)
+// (DO NOT EDIT: machine generated header) 'StGenLog.pas' rev: 33.00 (Windows)
 
 #ifndef StgenlogHPP
 #define StgenlogHPP
@@ -79,34 +79,34 @@ private:
 	
 protected:
 	virtual void __fastcall DoGetLogString(const unsigned D1, const unsigned D2, const unsigned D3, const unsigned D4, System::AnsiString &LogString);
-	bool __fastcall GetBufferEmpty(void);
-	unsigned __fastcall GetBufferFree(void);
-	unsigned __fastcall GetBufferSize(void);
-	bool __fastcall GetEnabled(void);
-	System::Sysutils::TFileName __fastcall GetFileName(void);
-	System::Byte __fastcall GetHighLevel(void);
-	StGenOptionSet __fastcall GetLogOptions(void);
-	TStWriteMode __fastcall GetWriteMode(void);
+	bool __fastcall GetBufferEmpty();
+	unsigned __fastcall GetBufferFree();
+	unsigned __fastcall GetBufferSize();
+	bool __fastcall GetEnabled();
+	System::Sysutils::TFileName __fastcall GetFileName();
+	System::Byte __fastcall GetHighLevel();
+	StGenOptionSet __fastcall GetLogOptions();
+	TStWriteMode __fastcall GetWriteMode();
 	void __fastcall SetBufferSize(const unsigned Value);
 	virtual void __fastcall SetEnabled(const bool Value);
 	virtual void __fastcall SetFileName(const System::Sysutils::TFileName Value);
 	void __fastcall SetHighLevel(const System::Byte Value);
 	void __fastcall SetLogOptions(const StGenOptionSet Value);
 	void __fastcall SetWriteMode(const TStWriteMode Value);
-	void __fastcall glCalcHighLevel(void);
+	void __fastcall glCalcHighLevel();
 	void __fastcall glCheckTempSize(unsigned SizeReq);
-	void __fastcall glHighLevelCheck(void);
-	void __fastcall glLockLog(void);
+	void __fastcall glHighLevelCheck();
+	void __fastcall glLockLog();
 	bool __fastcall glPopLogEntry(TStLogRec &LogRec);
 	System::UnicodeString __fastcall glTimeStamp(unsigned Mark);
-	void __fastcall glUnlockLog(void);
+	void __fastcall glUnlockLog();
 	
 public:
 	__fastcall virtual TStGeneralLog(System::Classes::TComponent* Owner);
-	__fastcall virtual ~TStGeneralLog(void);
+	__fastcall virtual ~TStGeneralLog();
 	void __fastcall AddLogEntry(const unsigned D1, const unsigned D2, const unsigned D3, const unsigned D4);
-	void __fastcall ClearBuffer(void);
-	virtual void __fastcall DumpLog(void);
+	void __fastcall ClearBuffer();
+	virtual void __fastcall DumpLog();
 	void __fastcall WriteLogString(const System::AnsiString LogString);
 	__property bool BufferEmpty = {read=GetBufferEmpty, nodefault};
 	__property unsigned BufferFree = {read=GetBufferFree, nodefault};

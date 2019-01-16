@@ -1,8 +1,8 @@
 ﻿// CodeGear C++Builder
-// Copyright (c) 1995, 2016 by Embarcadero Technologies, Inc.
+// Copyright (c) 1995, 2017 by Embarcadero Technologies, Inc.
 // All rights reserved
 
-// (DO NOT EDIT: machine generated header) 'StSort.pas' rev: 32.00 (Windows)
+// (DO NOT EDIT: machine generated header) 'StSort.pas' rev: 33.00 (Windows)
 
 #ifndef StsortHPP
 #define StsortHPP
@@ -80,30 +80,30 @@ protected:
 	void *sorBuffer;
 	void __fastcall sorAllocBuffer(int MaxHeap);
 	void __fastcall sorCreateNewMergeFile(int &Handle);
-	void __fastcall sorDeleteMergeFiles(void);
+	void __fastcall sorDeleteMergeFiles();
 	void * __fastcall sorElementPtr(int Index);
-	void __fastcall sorFlushOutBuffer(void);
-	void __fastcall sorFreeBuffer(void);
+	void __fastcall sorFlushOutBuffer();
+	void __fastcall sorFreeBuffer();
 	void __fastcall sorGetMergeElementPtr(int M);
-	int __fastcall sorGetNextElementIndex(void);
-	void __fastcall sorMergeFileGroup(void);
+	int __fastcall sorGetNextElementIndex();
+	void __fastcall sorMergeFileGroup();
 	void __fastcall sorMoveElement(void * Src, void * Dest);
-	void __fastcall sorOpenMergeFiles(void);
-	void __fastcall sorPrimaryMerge(void);
+	void __fastcall sorOpenMergeFiles();
+	void __fastcall sorPrimaryMerge();
 	void __fastcall sorRunSort(int L, int R);
 	void __fastcall sorStoreElement(void * Src);
-	void __fastcall sorStoreNewMergeFile(void);
+	void __fastcall sorStoreNewMergeFile();
 	void __fastcall sorSwapElements(int L, int R);
 	void __fastcall sorSetCompare(Stbase::TUntypedCompareFunc Comp);
-	void __fastcall EnterCS(void);
-	void __fastcall LeaveCS(void);
+	void __fastcall EnterCS();
+	void __fastcall LeaveCS();
 	
 public:
 	__fastcall virtual TStSorter(int MaxHeap, unsigned RecLen);
-	__fastcall virtual ~TStSorter(void);
+	__fastcall virtual ~TStSorter();
 	void __fastcall Put(const void *X);
 	bool __fastcall Get(void *X);
-	void __fastcall Reset(void);
+	void __fastcall Reset();
 	__property int Count = {read=FCount, nodefault};
 	__property Stbase::TUntypedCompareFunc Compare = {read=FCompare, write=sorSetCompare};
 	__property TMergeNameFunc MergeName = {read=FMergeName, write=FMergeName};
