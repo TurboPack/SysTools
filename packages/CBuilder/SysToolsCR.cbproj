@@ -1,12 +1,12 @@
 ﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
     <PropertyGroup>
         <ProjectGuid>{DD371604-B018-4214-93D2-AB5BB9BBDBC8}</ProjectGuid>
-        <ProjectVersion>18.5</ProjectVersion>
+        <ProjectVersion>18.6</ProjectVersion>
         <FrameworkType>VCL</FrameworkType>
         <MainSource>SysToolsCR.cpp</MainSource>
         <Base>True</Base>
         <Config Condition="'$(Config)'==''">Release</Config>
-        <Platform Condition="'$(Platform)'==''">Win32</Platform>
+        <Platform Condition="'$(Platform)'==''">Win64</Platform>
         <TargetedPlatforms>3</TargetedPlatforms>
         <AppType>Package</AppType>
         <TLIB_PageSize>64</TLIB_PageSize>
@@ -57,7 +57,7 @@
         <Base>true</Base>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Base)'!=''">
-        <DllSuffix>250</DllSuffix>
+        <DllSuffix>260</DllSuffix>
         <Multithreaded>true</Multithreaded>
         <RuntimeOnlyPackage>true</RuntimeOnlyPackage>
         <DCC_HppOutput>..\..\source\hpp\$(Platform)\$(Config)</DCC_HppOutput>
@@ -90,7 +90,7 @@
         <PackageImports>AbbreviaCR;bindcomp;bindcompdbx;bindcompfmx;bindengine;CloudService;CustomIPTransport;DataSnapClient;DataSnapCommon;DataSnapFireDAC;DataSnapIndy10ServerTransport;DataSnapNativeClient;DataSnapProviderClient;DataSnapServer;DataSnapServerMidas;dbexpress;dbrtl;dbxcds;DbxClientDriver;DbxCommonDriver;DBXFirebirdDriver;DBXInformixDriver;DBXInterBaseDriver;DBXMySQLDriver;DBXOracleDriver;DBXSqliteDriver;DBXSybaseASADriver;dsnap;dsnapxml;emsclient;emsclientfiredac;FireDAC;FireDACASADriver;FireDACCommon;FireDACCommonDriver;FireDACDBXDriver;FireDACDSDriver;FireDACIBDriver;FireDACMSSQLDriver;FireDACMySQLDriver;FireDACODBCDriver;FireDACOracleDriver;FireDACPgDriver;FireDACSqliteDriver;fmx;fmxase;fmxdae;fmxFireDAC;fmxobj;FMXTee;FmxTeeUI;ibxpress;IndyCore;IndyIPClient;IndyIPCommon;IndyIPServer;IndyProtocols;IndySystem;inet;inetdb;inetdbxpress;RESTBackendComponents;RESTComponents;rtl;soapmidas;soaprtl;soapserver;tethering;xmlrtl;$(PackageImports)</PackageImports>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Base_Win32)'!=''">
-        <VerInfo_Keys>CompanyName=;FileVersion=1.0.0.0;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProductVersion=1.0.0.0;Comments=;ProgramID=com.embarcadero.$(ModuleName);FileDescription=$(ModuleName);ProductName=$(ModuleName)</VerInfo_Keys>
+        <VerInfo_Keys>CompanyName=;FileVersion=1.0.0.0;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProductVersion=1.0.0.0;Comments=;ProgramID=com.embarcadero.$(MSBuildProjectName);FileDescription=$(MSBuildProjectName);ProductName=$(MSBuildProjectName)</VerInfo_Keys>
         <PackageImports>AbbreviaCR;AbbreviaVCLC;adortl;AsyncProCD;AsyncProCR;bcbie;bcbsmp;bindcomp;bindcompdbx;bindcompfmx;bindcompvcl;bindengine;CloudService;CustomIPTransport;DataSnapClient;DataSnapCommon;DataSnapConnectors;DatasnapConnectorsFreePascal;DataSnapFireDAC;DataSnapIndy10ServerTransport;DataSnapNativeClient;DataSnapProviderClient;DataSnapServer;DataSnapServerMidas;dbexpress;dbrtl;dbxcds;DbxClientDriver;DbxCommonDriver;DBXDb2Driver;DBXFirebirdDriver;DBXInformixDriver;DBXInterBaseDriver;DBXMSSQLDriver;DBXMySQLDriver;DBXOdbcDriver;DBXOracleDriver;DBXSqliteDriver;DBXSybaseASADriver;DBXSybaseASEDriver;dsnap;dsnapcon;dsnapxml;emsclient;emsclientfiredac;FireDAC;FireDACADSDriver;FireDACASADriver;FireDACCommon;FireDACCommonDriver;FireDACDb2Driver;FireDACDBXDriver;FireDACDSDriver;FireDACIBDriver;FireDACInfxDriver;FireDACMSAccDriver;FireDACMSSQLDriver;FireDACMySQLDriver;FireDACODBCDriver;FireDACOracleDriver;FireDACPgDriver;FireDACSqliteDriver;fmx;fmxase;fmxdae;fmxFireDAC;fmxobj;FMXTee;FmxTeeUI;ibxpress;IndyCore;IndyIPClient;IndyIPCommon;IndyIPServer;IndyProtocols;IndySystem;inet;inetdb;inetdbxpress;Intraweb;MetropolisUILiveTile;OrpheusCD;OrpheusCR;OrpheusDBCR;RESTBackendComponents;RESTComponents;rtl;soapmidas;soaprtl;soapserver;svn;SynEditCR;Tee;TeeDB;TeeUI;tethering;vcl;vclactnband;vcldb;vcldsnap;vclFireDAC;vclib;vclie;vclimg;VCLRESTComponents;vclribbon;VclSmp;vcltouch;vclx;xmlrtl;$(PackageImports)</PackageImports>
         <DCC_Namespace>Winapi;System.Win;Data.Win;Datasnap.Win;Web.Win;Soap.Win;Xml.Win;Bde;$(DCC_Namespace)</DCC_Namespace>
         <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
@@ -129,6 +129,7 @@
     <PropertyGroup Condition="'$(Cfg_1_Win32)'!=''">
         <VerInfo_Locale>1033</VerInfo_Locale>
         <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
+        <VerInfo_Keys>CompanyName=TurboPower;FileVersion=1.0.0.0;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProductVersion=1.0.0.0;Comments=;ProgramID=com.embarcadero.$(MSBuildProjectName);FileDescription=$(MSBuildProjectName);ProductName=$(MSBuildProjectName)</VerInfo_Keys>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_2)'!=''">
         <Defines>NDEBUG;$(Defines)</Defines>
@@ -144,12 +145,237 @@
         <PackageImport Include="rtl.bpi">
             <BuildOrder>1</BuildOrder>
         </PackageImport>
+        <CppCompile Include="SysToolsCR.cpp">
+            <BuildOrder>0</BuildOrder>
+        </CppCompile>
         <PackageImport Include="vcl.bpi">
             <BuildOrder>81</BuildOrder>
         </PackageImport>
         <PackageImport Include="vclx.bpi">
             <BuildOrder>84</BuildOrder>
         </PackageImport>
+        <DelphiCompile Include="..\..\source\St2DBarC.pas">
+            <BuildOrder>2</BuildOrder>
+        </DelphiCompile>
+        <DelphiCompile Include="..\..\source\StAstro.pas">
+            <BuildOrder>3</BuildOrder>
+        </DelphiCompile>
+        <DelphiCompile Include="..\..\source\StAstroP.pas">
+            <BuildOrder>4</BuildOrder>
+        </DelphiCompile>
+        <DelphiCompile Include="..\..\source\StBarC.pas">
+            <BuildOrder>5</BuildOrder>
+        </DelphiCompile>
+        <DelphiCompile Include="..\..\source\StBarPN.pas">
+            <BuildOrder>6</BuildOrder>
+        </DelphiCompile>
+        <DelphiCompile Include="..\..\source\StBase.pas">
+            <BuildOrder>7</BuildOrder>
+        </DelphiCompile>
+        <DelphiCompile Include="..\..\source\StBCD.pas">
+            <BuildOrder>8</BuildOrder>
+        </DelphiCompile>
+        <DelphiCompile Include="..\..\source\StBits.pas">
+            <BuildOrder>9</BuildOrder>
+        </DelphiCompile>
+        <DelphiCompile Include="..\..\source\StColl.pas">
+            <BuildOrder>10</BuildOrder>
+        </DelphiCompile>
+        <DelphiCompile Include="..\..\source\StConst.pas">
+            <BuildOrder>11</BuildOrder>
+        </DelphiCompile>
+        <DelphiCompile Include="..\..\source\StCRC.pas">
+            <BuildOrder>12</BuildOrder>
+        </DelphiCompile>
+        <DelphiCompile Include="..\..\source\StDate.pas">
+            <BuildOrder>13</BuildOrder>
+        </DelphiCompile>
+        <DelphiCompile Include="..\..\source\StDateSt.pas">
+            <BuildOrder>14</BuildOrder>
+        </DelphiCompile>
+        <DelphiCompile Include="..\..\source\StDecMth.pas">
+            <BuildOrder>15</BuildOrder>
+        </DelphiCompile>
+        <DelphiCompile Include="..\..\source\StDict.pas">
+            <BuildOrder>16</BuildOrder>
+        </DelphiCompile>
+        <DelphiCompile Include="..\..\source\StDque.pas">
+            <BuildOrder>17</BuildOrder>
+        </DelphiCompile>
+        <DelphiCompile Include="..\..\source\StExpLog.pas">
+            <BuildOrder>18</BuildOrder>
+        </DelphiCompile>
+        <DelphiCompile Include="..\..\source\StExpr.pas">
+            <BuildOrder>19</BuildOrder>
+        </DelphiCompile>
+        <DelphiCompile Include="..\..\source\StFIN.pas">
+            <BuildOrder>20</BuildOrder>
+        </DelphiCompile>
+        <DelphiCompile Include="..\..\source\StFirst.pas">
+            <BuildOrder>21</BuildOrder>
+        </DelphiCompile>
+        <DelphiCompile Include="..\..\source\StGenLog.pas">
+            <BuildOrder>22</BuildOrder>
+        </DelphiCompile>
+        <DelphiCompile Include="..\..\source\StHASH.pas">
+            <BuildOrder>23</BuildOrder>
+        </DelphiCompile>
+        <DelphiCompile Include="..\..\source\StIniStm.pas">
+            <BuildOrder>24</BuildOrder>
+        </DelphiCompile>
+        <DelphiCompile Include="..\..\source\StJup.pas">
+            <BuildOrder>25</BuildOrder>
+        </DelphiCompile>
+        <DelphiCompile Include="..\..\source\StJupsat.pas">
+            <BuildOrder>26</BuildOrder>
+        </DelphiCompile>
+        <DelphiCompile Include="..\..\source\StLArr.pas">
+            <BuildOrder>27</BuildOrder>
+        </DelphiCompile>
+        <DelphiCompile Include="..\..\source\StList.pas">
+            <BuildOrder>28</BuildOrder>
+        </DelphiCompile>
+        <DelphiCompile Include="..\..\source\StMars.pas">
+            <BuildOrder>29</BuildOrder>
+        </DelphiCompile>
+        <DelphiCompile Include="..\..\source\StMath.pas">
+            <BuildOrder>30</BuildOrder>
+        </DelphiCompile>
+        <DelphiCompile Include="..\..\source\StMerc.pas">
+            <BuildOrder>31</BuildOrder>
+        </DelphiCompile>
+        <DelphiCompile Include="..\..\source\StMerge.pas">
+            <BuildOrder>32</BuildOrder>
+        </DelphiCompile>
+        <DelphiCompile Include="..\..\source\StMime.pas">
+            <BuildOrder>33</BuildOrder>
+        </DelphiCompile>
+        <DelphiCompile Include="..\..\source\StMoney.pas">
+            <BuildOrder>34</BuildOrder>
+        </DelphiCompile>
+        <DelphiCompile Include="..\..\source\StNeptun.pas">
+            <BuildOrder>35</BuildOrder>
+        </DelphiCompile>
+        <DelphiCompile Include="..\..\source\StNet.pas">
+            <BuildOrder>36</BuildOrder>
+        </DelphiCompile>
+        <DelphiCompile Include="..\..\source\StNetApi.pas">
+            <BuildOrder>37</BuildOrder>
+        </DelphiCompile>
+        <DelphiCompile Include="..\..\source\StNetCon.pas">
+            <BuildOrder>38</BuildOrder>
+        </DelphiCompile>
+        <DelphiCompile Include="..\..\source\StNetMsg.pas">
+            <BuildOrder>39</BuildOrder>
+        </DelphiCompile>
+        <DelphiCompile Include="..\..\source\StNetPfm.pas">
+            <BuildOrder>40</BuildOrder>
+        </DelphiCompile>
+        <DelphiCompile Include="..\..\source\StNTLog.pas">
+            <BuildOrder>41</BuildOrder>
+        </DelphiCompile>
+        <DelphiCompile Include="..\..\source\StNVBits.pas">
+            <BuildOrder>42</BuildOrder>
+        </DelphiCompile>
+        <DelphiCompile Include="..\..\source\StNVColl.pas">
+            <BuildOrder>43</BuildOrder>
+        </DelphiCompile>
+        <DelphiCompile Include="..\..\source\StNVCont.pas">
+            <BuildOrder>44</BuildOrder>
+        </DelphiCompile>
+        <DelphiCompile Include="..\..\source\StNVDict.pas">
+            <BuildOrder>45</BuildOrder>
+        </DelphiCompile>
+        <DelphiCompile Include="..\..\source\StNVDQ.pas">
+            <BuildOrder>46</BuildOrder>
+        </DelphiCompile>
+        <DelphiCompile Include="..\..\source\StNVLAry.pas">
+            <BuildOrder>47</BuildOrder>
+        </DelphiCompile>
+        <DelphiCompile Include="..\..\source\StNVList.pas">
+            <BuildOrder>48</BuildOrder>
+        </DelphiCompile>
+        <DelphiCompile Include="..\..\source\StNVLMat.pas">
+            <BuildOrder>49</BuildOrder>
+        </DelphiCompile>
+        <DelphiCompile Include="..\..\source\StNVSCol.pas">
+            <BuildOrder>50</BuildOrder>
+        </DelphiCompile>
+        <DelphiCompile Include="..\..\source\StNVTree.pas">
+            <BuildOrder>51</BuildOrder>
+        </DelphiCompile>
+        <DelphiCompile Include="..\..\source\StOStr.pas">
+            <BuildOrder>52</BuildOrder>
+        </DelphiCompile>
+        <DelphiCompile Include="..\..\source\StPluto.pas">
+            <BuildOrder>53</BuildOrder>
+        </DelphiCompile>
+        <DelphiCompile Include="..\..\source\StPQueue.pas">
+            <BuildOrder>54</BuildOrder>
+        </DelphiCompile>
+        <DelphiCompile Include="..\..\source\StPtrns.pas">
+            <BuildOrder>55</BuildOrder>
+        </DelphiCompile>
+        <DelphiCompile Include="..\..\source\StRandom.pas">
+            <BuildOrder>56</BuildOrder>
+        </DelphiCompile>
+        <DelphiCompile Include="..\..\source\StRegEx.pas">
+            <BuildOrder>80</BuildOrder>
+        </DelphiCompile>
+        <DelphiCompile Include="..\..\source\StRegIni.pas">
+            <BuildOrder>58</BuildOrder>
+        </DelphiCompile>
+        <DelphiCompile Include="..\..\source\StSaturn.pas">
+            <BuildOrder>59</BuildOrder>
+        </DelphiCompile>
+        <DelphiCompile Include="..\..\source\StSort.pas">
+            <BuildOrder>60</BuildOrder>
+        </DelphiCompile>
+        <DelphiCompile Include="..\..\source\StSpawn.pas">
+            <BuildOrder>61</BuildOrder>
+        </DelphiCompile>
+        <DelphiCompile Include="..\..\source\StStat.pas">
+            <BuildOrder>62</BuildOrder>
+        </DelphiCompile>
+        <DelphiCompile Include="..\..\source\StStrL.pas">
+            <BuildOrder>80</BuildOrder>
+        </DelphiCompile>
+        <DelphiCompile Include="..\..\source\StStrms.pas">
+            <BuildOrder>64</BuildOrder>
+        </DelphiCompile>
+        <DelphiCompile Include="..\..\source\StSystem.pas">
+            <BuildOrder>68</BuildOrder>
+        </DelphiCompile>
+        <DelphiCompile Include="..\..\source\StText.pas">
+            <BuildOrder>69</BuildOrder>
+        </DelphiCompile>
+        <DelphiCompile Include="..\..\source\StToHTML.pas">
+            <BuildOrder>70</BuildOrder>
+        </DelphiCompile>
+        <DelphiCompile Include="..\..\source\StTree.pas">
+            <BuildOrder>71</BuildOrder>
+        </DelphiCompile>
+        <DelphiCompile Include="..\..\source\StTxtDat.pas">
+            <BuildOrder>72</BuildOrder>
+        </DelphiCompile>
+        <DelphiCompile Include="..\..\source\StUranus.pas">
+            <BuildOrder>73</BuildOrder>
+        </DelphiCompile>
+        <DelphiCompile Include="..\..\source\StUtils.pas">
+            <BuildOrder>74</BuildOrder>
+        </DelphiCompile>
+        <DelphiCompile Include="..\..\source\StVArr.pas">
+            <BuildOrder>75</BuildOrder>
+        </DelphiCompile>
+        <DelphiCompile Include="..\..\source\StVenus.pas">
+            <BuildOrder>76</BuildOrder>
+        </DelphiCompile>
+        <DelphiCompile Include="..\..\source\StVInfo.pas">
+            <BuildOrder>77</BuildOrder>
+        </DelphiCompile>
+        <DelphiCompile Include="..\..\source\StwmDCpy.pas">
+            <BuildOrder>78</BuildOrder>
+        </DelphiCompile>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>
@@ -179,7 +405,6 @@
                 <Excluded_Packages>
                     <Excluded_Packages Name="$(BDSBIN)\bcboffice2k260.bpl">Embarcadero C++Builder Office 2000 Servers Package</Excluded_Packages>
                     <Excluded_Packages Name="$(BDSBIN)\bcbofficexp260.bpl">Embarcadero C++Builder Office XP Servers Package</Excluded_Packages>
-                    <Excluded_Packages Name="$(BDSBIN)\DataExplorerDBXPluginEnt260.bpl">DBExpress Enterprise Data Explorer Integration</Excluded_Packages>
                     <Excluded_Packages Name="$(BDSBIN)\dcloffice2k260.bpl">Microsoft Office 2000 Sample Automation Server Wrapper Components</Excluded_Packages>
                     <Excluded_Packages Name="$(BDSBIN)\dclofficexp260.bpl">Microsoft Office XP Sample Automation Server Wrapper Components</Excluded_Packages>
                 </Excluded_Packages>
@@ -225,13 +450,13 @@
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
-                <DeployFile Condition="'$(DynamicRTL)'=='true' And '$(Multithreaded)'=='true'" LocalName="$(BDS)\bin64\cc64220mt.dll" Class="DependencyModule">
-                    <Platform Name="Win64">
+                <DeployFile Condition="'$(DynamicRTL)'=='true' And '$(Multithreaded)'=='true'" LocalName="$(BDS)\bin\cc32240mt.dll" Class="DependencyModule">
+                    <Platform Name="Win32">
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
-                <DeployFile Condition="'$(DynamicRTL)'=='true' And '$(Multithreaded)'=='true'" LocalName="$(BDS)\bin\cc32240mt.dll" Class="DependencyModule">
-                    <Platform Name="Win32">
+                <DeployFile Condition="'$(DynamicRTL)'=='true' And '$(Multithreaded)'=='true'" LocalName="$(BDS)\bin64\cc64220mt.dll" Class="DependencyModule">
+                    <Platform Name="Win64">
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
@@ -240,17 +465,13 @@
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
-                <DeployFile Condition="'$(DynamicRTL)'=='true' And '$(Multithreaded)'=='true'" LocalName="$(BDS)\bin64\cc64240mt.dll" Class="DependencyModule">
-                    <Platform Name="Win64">
+                <DeployFile LocalName="C:\Users\Public\Documents\Embarcadero\Studio\15.0\BPL\SysToolsCR.tds" Configuration="Debug" Class="DebugSymbols">
+                    <Platform Name="Win32">
+                        <RemoteName>SysToolsCR.tds</RemoteName>
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
                 <DeployFile Condition="'$(DynamicRTL)'=='true' And '$(Multithreaded)'!='true'" LocalName="$(BDS)\bin\cc32c240.dll" Class="DependencyModule">
-                    <Platform Name="Win32">
-                        <Overwrite>true</Overwrite>
-                    </Platform>
-                </DeployFile>
-                <DeployFile Condition="'$(DynamicRTL)'=='true' And '$(Multithreaded)'=='true'" LocalName="$(BDS)\bin\cc32220mt.dll" Class="DependencyModule">
                     <Platform Name="Win32">
                         <Overwrite>true</Overwrite>
                     </Platform>
@@ -260,9 +481,8 @@
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
-                <DeployFile LocalName="..\..\..\..\..\..\Public\Documents\Embarcadero\Studio\20.0\BPL\SysToolsCR260.bpl" Configuration="Release" Class="ProjectOutput">
+                <DeployFile Condition="'$(DynamicRTL)'=='true' And '$(Multithreaded)'=='true'" LocalName="$(BDS)\bin\cc32220mt.dll" Class="DependencyModule">
                     <Platform Name="Win32">
-                        <RemoteName>SysToolsCR.bpl</RemoteName>
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
@@ -367,11 +587,6 @@
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
-                <DeployFile Condition="'$(DynamicRTL)'=='true' And '$(Multithreaded)'=='true'" LocalName="$(BDS)\bin64\cc64230mt.dll" Class="DependencyModule">
-                    <Platform Name="Win64">
-                        <Overwrite>true</Overwrite>
-                    </Platform>
-                </DeployFile>
                 <DeployFile LocalName="C:\Users\Public\Documents\Embarcadero\Studio\15.0\BPL\SysToolsCR.bpl" Configuration="Debug" Class="ProjectOutput">
                     <Platform Name="Win32">
                         <RemoteName>SysToolsCR.bpl</RemoteName>
@@ -379,6 +594,11 @@
                     </Platform>
                 </DeployFile>
                 <DeployFile Condition="'$(DynamicRTL)'=='true' And '$(Multithreaded)'!='true'" LocalName="$(BDS)\bin64\cc64250.dll" Class="DependencyModule">
+                    <Platform Name="Win64">
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile Condition="'$(DynamicRTL)'=='true' And '$(Multithreaded)'=='true'" LocalName="$(BDS)\bin64\cc64230mt.dll" Class="DependencyModule">
                     <Platform Name="Win64">
                         <Overwrite>true</Overwrite>
                     </Platform>
