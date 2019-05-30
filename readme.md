@@ -7,9 +7,10 @@ You can still access [10.2 Tokyo]() and [10.1 Berlin]() versions too.
 
 ## Table of contents
 
-1.  Introduction
-2.  Package names
-3.  Installation
+1.  [Introduction](#1-introduction)
+2.  [Package names](#2-package-names)
+3.  [Installation](#3-installation)
+4.  [Issue with C++Builder under Win64](#4-issue-with-cbuilder-under-win64)
 
 -----
 
