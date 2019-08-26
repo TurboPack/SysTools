@@ -1,0 +1,87 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <ProjectGuid>{84267F72-5BBF-4949-A939-1F2F81D81742}</ProjectGuid>
+    </PropertyGroup>
+    <ItemGroup>
+        <Projects Include="SysToolsDR.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="SysToolsDD.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="SysToolsDBDR.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="SysToolsDBDD.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="..\..\..\Tests\SysToolsTests.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="SysToolsDR.dproj">
+            <Dependencies/>
+        </Projects>
+    </ItemGroup>
+    <ProjectExtensions>
+        <Borland.Personality>Default.Personality.12</Borland.Personality>
+        <Borland.ProjectType/>
+        <BorlandProject>
+            <Default.Personality/>
+        </BorlandProject>
+    </ProjectExtensions>
+    <Target Name="SysToolsDR">
+        <MSBuild Projects="SysToolsDR.dproj"/>
+    </Target>
+    <Target Name="SysToolsDR:Clean">
+        <MSBuild Projects="SysToolsDR.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="SysToolsDR:Make">
+        <MSBuild Projects="SysToolsDR.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="SysToolsDD">
+        <MSBuild Projects="SysToolsDD.dproj"/>
+    </Target>
+    <Target Name="SysToolsDD:Clean">
+        <MSBuild Projects="SysToolsDD.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="SysToolsDD:Make">
+        <MSBuild Projects="SysToolsDD.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="SysToolsDBDR">
+        <MSBuild Projects="SysToolsDBDR.dproj"/>
+    </Target>
+    <Target Name="SysToolsDBDR:Clean">
+        <MSBuild Projects="SysToolsDBDR.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="SysToolsDBDR:Make">
+        <MSBuild Projects="SysToolsDBDR.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="SysToolsDBDD">
+        <MSBuild Projects="SysToolsDBDD.dproj"/>
+    </Target>
+    <Target Name="SysToolsDBDD:Clean">
+        <MSBuild Projects="SysToolsDBDD.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="SysToolsDBDD:Make">
+        <MSBuild Projects="SysToolsDBDD.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="SysToolsTests">
+        <MSBuild Projects="..\..\..\Tests\SysToolsTests.dproj"/>
+    </Target>
+    <Target Name="SysToolsTests:Clean">
+        <MSBuild Projects="..\..\..\Tests\SysToolsTests.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="SysToolsTests:Make">
+        <MSBuild Projects="..\..\..\Tests\SysToolsTests.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Build">
+        <CallTarget Targets="SysToolsDR;SysToolsDD;SysToolsDBDR;SysToolsDBDD;SysToolsTests;SysToolsDR"/>
+    </Target>
+    <Target Name="Clean">
+        <CallTarget Targets="SysToolsDR:Clean;SysToolsDD:Clean;SysToolsDBDR:Clean;SysToolsDBDD:Clean;SysToolsTests:Clean;SysToolsDR:Clean"/>
+    </Target>
+    <Target Name="Make">
+        <CallTarget Targets="SysToolsDR:Make;SysToolsDD:Make;SysToolsDBDR:Make;SysToolsDBDD:Make;SysToolsTests:Make;SysToolsDR:Make"/>
+    </Target>
+    <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
+</Project>

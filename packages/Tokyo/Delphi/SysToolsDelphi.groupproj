@@ -15,7 +15,7 @@
         <Projects Include="SysToolsDBDD.dproj">
             <Dependencies/>
         </Projects>
-        <Projects Include="..\..\Tests\SysToolsTests.dproj">
+        <Projects Include="..\..\..\Tests\SysToolsTests.dproj">
             <Dependencies/>
         </Projects>
     </ItemGroup>
@@ -63,13 +63,13 @@
         <MSBuild Projects="SysToolsDBDD.dproj" Targets="Make"/>
     </Target>
     <Target Name="SysToolsTests">
-        <MSBuild Projects="..\..\Tests\SysToolsTests.dproj"/>
+        <MSBuild Projects="..\..\..\Tests\SysToolsTests.dproj"/>
     </Target>
     <Target Name="SysToolsTests:Clean">
-        <MSBuild Projects="..\..\Tests\SysToolsTests.dproj" Targets="Clean"/>
+        <MSBuild Projects="..\..\..\Tests\SysToolsTests.dproj" Targets="Clean"/>
     </Target>
     <Target Name="SysToolsTests:Make">
-        <MSBuild Projects="..\..\Tests\SysToolsTests.dproj" Targets="Make"/>
+        <MSBuild Projects="..\..\..\Tests\SysToolsTests.dproj" Targets="Make"/>
     </Target>
     <Target Name="Build">
         <CallTarget Targets="SysToolsDR;SysToolsDD;SysToolsDBDR;SysToolsDBDD;SysToolsTests"/>
