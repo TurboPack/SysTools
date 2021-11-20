@@ -1,7 +1,7 @@
 object StAboutForm: TStAboutForm
-  Left = 136
+  Left = 328
   Height = 304
-  Top = 207
+  Top = 192
   Width = 380
   BorderStyle = bsDialog
   Caption = 'About TurboPower Systools'

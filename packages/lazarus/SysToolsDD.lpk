@@ -12,10 +12,16 @@
         <UnitOutputDirectory Value="lib\$(TargetCPU)-$(TargetOS)"/>
       </SearchPaths>
       <Parsing>
+        <Style Value="1"/>
         <SyntaxOptions>
-          <SyntaxMode Value="delphi"/>
+          <SyntaxMode Value="Delphi"/>
         </SyntaxOptions>
       </Parsing>
+      <Other>
+        <Verbosity>
+          <ShowDebugInfo Value="True"/>
+        </Verbosity>
+      </Other>
     </CompilerOptions>
     <Files Count="82">
       <Item1>
@@ -32,7 +38,7 @@
       </Item3>
       <Item82>
         <Filename Value="delphi.proped.pp"/>
-        <UnitName Value="delphi.proped"/>
+        <UnitName Value="Delphi.PropEd"/>
       </Item82>
     </Files>
     <RequiredPkgs Count="3">
