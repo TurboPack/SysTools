@@ -331,7 +331,7 @@ function DeleteWithinL(const S, Delimiter : String) : String;
 function ExtractTokensL(const S, Delims: String;
                         QuoteChar  : Char;
                         AllowNulls : Boolean;
-                        Tokens     : TStrings) : Cardinal;
+                        Tokens     : TStrings) : Cardinal; overload;
 
 function IsChAlphaL(C : Char) : Boolean;
  {-Returns true if Ch is an alpha}
