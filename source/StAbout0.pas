@@ -84,7 +84,6 @@ implementation
 //  {$R *.lfm}
 //{$ENDIF}
 
-
 {*** TEsVersionProperty ***}
 
 function TStVersionProperty.GetAttributes: TPropertyAttributes;
