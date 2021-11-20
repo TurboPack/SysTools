@@ -1751,17 +1751,17 @@ function TStBarCode.GetDigits(Characters : string) : Integer;
     J : Integer;
 
   begin
-    case Ord(c) of
-      130     : bcDigits[bcDigitPos + 1] := 98;  {rest are manufactured characters}
-      131     : bcDigits[bcDigitPos + 1] := 97;
-      132     : bcDigits[bcDigitPos + 1] := 96;
-      133     : bcDigits[bcDigitPos + 1] := 98;
-      134     : bcDigits[bcDigitPos + 1] := 100;
-      135     : bcDigits[bcDigitPos + 1] := 99;
-      136     : bcDigits[bcDigitPos + 1] := 103;
-      137     : bcDigits[bcDigitPos + 1] := 104;
-      138     : bcDigits[bcDigitPos + 1] := 105;
-      139     : bcDigits[bcDigitPos + 1] := 106;
+    case c of
+      #130     : bcDigits[bcDigitPos + 1] := 98;  {rest are manufactured characters}
+      #131     : bcDigits[bcDigitPos + 1] := 97;
+      #132     : bcDigits[bcDigitPos + 1] := 96;
+      #133     : bcDigits[bcDigitPos + 1] := 98;
+      #134     : bcDigits[bcDigitPos + 1] := 100;
+      #135     : bcDigits[bcDigitPos + 1] := 99;
+      #136     : bcDigits[bcDigitPos + 1] := 103;
+      #137     : bcDigits[bcDigitPos + 1] := 104;
+      #138     : bcDigits[bcDigitPos + 1] := 105;
+      #139     : bcDigits[bcDigitPos + 1] := 106;
     else
       try
         J := StrToInt (Copy (Characters, Index, 2));
@@ -1818,17 +1818,17 @@ function TStBarCode.GetDigits(Characters : string) : Integer;
       '~'      : bcDigits[bcDigitPos + 1] := 94;
       else
       begin
-        case Ord(C) of
-          130     : bcDigits[bcDigitPos + 1] := 98; {rest are manufactured characters}
-          131     : bcDigits[bcDigitPos + 1] := 97;
-          132     : bcDigits[bcDigitPos + 1] := 96;
-          133     : bcDigits[bcDigitPos + 1] := 98;
-          134     : bcDigits[bcDigitPos + 1] := 100;
-          135     : bcDigits[bcDigitPos + 1] := 99;
-          136     : bcDigits[bcDigitPos + 1] := 103;
-          137     : bcDigits[bcDigitPos + 1] := 104;
-          138     : bcDigits[bcDigitPos + 1] := 105;
-          139     : bcDigits[bcDigitPos + 1] := 106;
+        case C of
+          #130     : bcDigits[bcDigitPos + 1] := 98; {rest are manufactured characters}
+          #131     : bcDigits[bcDigitPos + 1] := 97;
+          #132     : bcDigits[bcDigitPos + 1] := 96;
+          #133     : bcDigits[bcDigitPos + 1] := 98;
+          #134     : bcDigits[bcDigitPos + 1] := 100;
+          #135     : bcDigits[bcDigitPos + 1] := 99;
+          #136     : bcDigits[bcDigitPos + 1] := 103;
+          #137     : bcDigits[bcDigitPos + 1] := 104;
+          #138     : bcDigits[bcDigitPos + 1] := 105;
+          #139     : bcDigits[bcDigitPos + 1] := 106;
         else
           RaiseStError(EStBarCodeError, stscInvalidCharacter);
         end;

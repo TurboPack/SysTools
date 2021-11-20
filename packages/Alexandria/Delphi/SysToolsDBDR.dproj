@@ -4,10 +4,10 @@
         <AppType>Package</AppType>
         <Config Condition="'$(Config)'==''">Release</Config>
         <FrameworkType>VCL</FrameworkType>
-        <MainSource>SysToolsDR.dpk</MainSource>
+        <MainSource>SysToolsDBDR.dpk</MainSource>
         <Platform Condition="'$(Platform)'==''">Win32</Platform>
-        <ProjectGuid>{A7C2257E-A11C-4672-A884-DB43F939536C}</ProjectGuid>
-        <ProjectVersion>19.2</ProjectVersion>
+        <ProjectGuid>{5229F958-25D1-4A18-BC6A-34E9A5B1A7C1}</ProjectGuid>
+        <ProjectVersion>19.3</ProjectVersion>
         <TargetedPlatforms>3</TargetedPlatforms>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Config)'=='Base' or '$(Base)'!=''">
@@ -46,15 +46,16 @@
         <Base>true</Base>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Base)'!=''">
-        <SanitizedProjectName>SysToolsDR</SanitizedProjectName>
+        <SanitizedProjectName>SysToolsDBDR</SanitizedProjectName>
         <DCC_CBuilderOutput>All</DCC_CBuilderOutput>
         <DCC_DcuOutput>.\$(Platform)\$(Config)</DCC_DcuOutput>
-        <DCC_Description>TurboPack SysTools Delphi Runtime package</DCC_Description>
-        <DCC_ImageBase>00400000</DCC_ImageBase>
-        <DCC_Namespace>Vcl;Vcl.Imaging;Vcl.Touch;Vcl.Samples;Vcl.Shell;System;Xml;Data;Datasnap;Web;Soap;Winapi;$(DCC_Namespace)</DCC_Namespace>
+        <DCC_Description>TurboPack SysTools Delphi DB Runtime package</DCC_Description>
+        <DCC_ImageBase>02600000</DCC_ImageBase>
+        <DCC_Namespace>Vcl;Vcl.Imaging;Vcl.Touch;Vcl.Samples;Vcl.Shell;System;Xml;Data;Datasnap;Web;Soap;Winapi;Bde;$(DCC_Namespace)</DCC_Namespace>
         <DCC_OutputNeverBuildDcps>true</DCC_OutputNeverBuildDcps>
         <DCC_SymbolReferenceInfo>0</DCC_SymbolReferenceInfo>
-        <DllSuffix>270</DllSuffix>
+        <DCC_WriteableConstants>true</DCC_WriteableConstants>
+        <DllSuffix>280</DllSuffix>
         <GenDll>true</GenDll>
         <GenPackage>true</GenPackage>
         <RuntimeOnlyPackage>true</RuntimeOnlyPackage>
@@ -62,7 +63,7 @@
         <VerInfo_Locale>1031</VerInfo_Locale>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Base_Win32)'!=''">
-        <DCC_Namespace>System.Win;Data.Win;Datasnap.Win;Web.Win;Soap.Win;Xml.Win;Bde;$(DCC_Namespace)</DCC_Namespace>
+        <DCC_Namespace>System.Win;Data.Win;Datasnap.Win;Web.Win;Soap.Win;Xml.Win;$(DCC_Namespace)</DCC_Namespace>
         <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
         <VerInfo_Locale>1033</VerInfo_Locale>
     </PropertyGroup>
@@ -95,82 +96,13 @@
             <MainSource>MainSource</MainSource>
         </DelphiCompile>
         <DCCReference Include="vcl.dcp"/>
+        <DCCReference Include="vcldb.dcp"/>
         <DCCReference Include="vclx.dcp"/>
-        <DCCReference Include="..\..\..\source\StAstro.pas"/>
-        <DCCReference Include="..\..\..\source\StAstroP.pas"/>
-        <DCCReference Include="..\..\..\source\StBCD.pas"/>
-        <DCCReference Include="..\..\..\source\StBarC.pas"/>
-        <DCCReference Include="..\..\..\source\StBase.pas"/>
-        <DCCReference Include="..\..\..\source\StBits.pas"/>
-        <DCCReference Include="..\..\..\source\StColl.pas"/>
-        <DCCReference Include="..\..\..\source\StConst.pas"/>
-        <DCCReference Include="..\..\..\source\StCRC.pas"/>
-        <DCCReference Include="..\..\..\source\StDateSt.pas"/>
-        <DCCReference Include="..\..\..\source\StDict.pas"/>
-        <DCCReference Include="..\..\..\source\StDQue.pas"/>
-        <DCCReference Include="..\..\..\source\StEclpse.pas"/>
-        <DCCReference Include="..\..\..\source\StExpr.pas"/>
-        <DCCReference Include="..\..\..\source\StFIN.pas"/>
-        <DCCReference Include="..\..\..\source\StHASH.pas"/>
-        <DCCReference Include="..\..\..\source\StJup.pas"/>
-        <DCCReference Include="..\..\..\source\StJupsat.pas"/>
-        <DCCReference Include="..\..\..\source\StLArr.pas"/>
-        <DCCReference Include="..\..\..\source\StList.pas"/>
-        <DCCReference Include="..\..\..\source\StMars.pas"/>
-        <DCCReference Include="..\..\..\source\StMath.pas"/>
-        <DCCReference Include="..\..\..\source\StMerc.pas"/>
-        <DCCReference Include="..\..\..\source\StMime.pas"/>
-        <DCCReference Include="..\..\..\source\StNVBits.pas"/>
-        <DCCReference Include="..\..\..\source\StNVColl.pas"/>
-        <DCCReference Include="..\..\..\source\StNVCont.pas"/>
-        <DCCReference Include="..\..\..\source\StNVDQ.pas"/>
-        <DCCReference Include="..\..\..\source\StNVDict.pas"/>
-        <DCCReference Include="..\..\..\source\StNVLAry.pas"/>
-        <DCCReference Include="..\..\..\source\StNVLMat.pas"/>
-        <DCCReference Include="..\..\..\source\StNVList.pas"/>
-        <DCCReference Include="..\..\..\source\StNVSCol.pas"/>
-        <DCCReference Include="..\..\..\source\StNVTree.pas"/>
-        <DCCReference Include="..\..\..\source\StNeptun.pas"/>
-        <DCCReference Include="..\..\..\source\StOStr.pas"/>
-        <DCCReference Include="..\..\..\source\StPluto.pas"/>
-        <DCCReference Include="..\..\..\source\StPQueue.pas"/>
-        <DCCReference Include="..\..\..\source\StRegIni.pas"/>
-        <DCCReference Include="..\..\..\source\StSaturn.pas"/>
-        <DCCReference Include="..\..\..\source\StSort.pas"/>
-        <DCCReference Include="..\..\..\source\StStat.pas"/>
-        <DCCReference Include="..\..\..\source\StStrL.pas"/>
-        <DCCReference Include="..\..\..\source\StText.pas"/>
-        <DCCReference Include="..\..\..\source\StTree.pas"/>
-        <DCCReference Include="..\..\..\source\StUranus.pas"/>
-        <DCCReference Include="..\..\..\source\StUtils.pas"/>
-        <DCCReference Include="..\..\..\source\StVArr.pas"/>
-        <DCCReference Include="..\..\..\source\StVInfo.pas"/>
-        <DCCReference Include="..\..\..\source\StVenus.pas"/>
-        <DCCReference Include="..\..\..\source\StDate.pas"/>
-        <DCCReference Include="..\..\..\source\StBarPN.pas"/>
-        <DCCReference Include="..\..\..\source\StwmDCpy.pas"/>
-        <DCCReference Include="..\..\..\source\StToHTML.pas"/>
-        <DCCReference Include="..\..\..\source\StSpawn.pas"/>
-        <DCCReference Include="..\..\..\source\StStrms.pas"/>
-        <DCCReference Include="..\..\..\source\StNet.pas"/>
-        <DCCReference Include="..\..\..\source\StNetApi.pas"/>
-        <DCCReference Include="..\..\..\source\StNetCon.pas"/>
-        <DCCReference Include="..\..\..\source\StNetPfm.pas"/>
-        <DCCReference Include="..\..\..\source\StNetMsg.pas"/>
-        <DCCReference Include="..\..\..\source\StRegEx.pas"/>
-        <DCCReference Include="..\..\..\source\StFirst.pas"/>
-        <DCCReference Include="..\..\..\source\StMerge.pas"/>
-        <DCCReference Include="..\..\..\source\StDecMth.pas"/>
-        <DCCReference Include="..\..\..\source\StMoney.pas"/>
-        <DCCReference Include="..\..\..\source\StNTLog.pas"/>
-        <DCCReference Include="..\..\..\source\StGenLog.pas"/>
-        <DCCReference Include="..\..\..\source\StRandom.pas"/>
-        <DCCReference Include="..\..\..\source\StIniStm.pas"/>
-        <DCCReference Include="..\..\..\source\St2DBarC.pas"/>
-        <DCCReference Include="..\..\..\source\StTxtDat.pas"/>
-        <DCCReference Include="..\..\..\source\StSystem.pas"/>
-        <DCCReference Include="..\..\..\source\StPtrns.pas"/>
-        <DCCReference Include="..\..\..\source\StExpLog.pas"/>
+        <DCCReference Include="SysToolsDR.dcp"/>
+        <DCCReference Include="..\..\..\source\StDbBarC.pas"/>
+        <DCCReference Include="..\..\..\source\StDbPNBC.pas"/>
+        <DCCReference Include="..\..\..\source\StExport.pas"/>
+        <DCCReference Include="..\..\..\source\StDb2DBC.pas"/>
         <BuildConfiguration Include="Base">
             <Key>Base</Key>
         </BuildConfiguration>
@@ -189,9 +121,14 @@
         <BorlandProject>
             <Delphi.Personality>
                 <Source>
-                    <Source Name="MainSource">SysToolsDR.dpk</Source>
+                    <Source Name="MainSource">SysToolsDBDR.dpk</Source>
                 </Source>
-                <Excluded_Packages/>
+                <Excluded_Packages>
+                    <Excluded_Packages Name="$(BDSBIN)\bcboffice2k280.bpl">Embarcadero C++Builder-Package für Office 2000-Server</Excluded_Packages>
+                    <Excluded_Packages Name="$(BDSBIN)\bcbofficexp280.bpl">Embarcadero C++Builder-Package für Office XP-Server</Excluded_Packages>
+                    <Excluded_Packages Name="$(BDSBIN)\dcloffice2k280.bpl">Microsoft Office 2000 Beispiele für gekapselte Komponenten für Automatisierungsserver</Excluded_Packages>
+                    <Excluded_Packages Name="$(BDSBIN)\dclofficexp280.bpl">Microsoft Office XP Beispiele für gekapselte Komponenten für Automation Server</Excluded_Packages>
+                </Excluded_Packages>
                 <VersionInfo>
                     <VersionInfo Name="IncludeVerInfo">False</VersionInfo>
                     <VersionInfo Name="AutoIncBuild">False</VersionInfo>
@@ -223,16 +160,12 @@
             <Platforms>
                 <Platform value="Android">False</Platform>
                 <Platform value="Android64">False</Platform>
+                <Platform value="iOSDevice64">False</Platform>
                 <Platform value="Linux64">False</Platform>
                 <Platform value="OSX64">False</Platform>
                 <Platform value="Win32">True</Platform>
                 <Platform value="Win64">True</Platform>
-                <Platform value="iOSDevice64">False</Platform>
-                <Platform value="iOSSimulator">False</Platform>
             </Platforms>
-            <UnitTesting>
-                <TestProjectName>C:\Projects\EMBT\SysTools\Tests\SysToolsTests.dproj</TestProjectName>
-            </UnitTesting>
         </BorlandProject>
         <ProjectFileVersion>12</ProjectFileVersion>
     </ProjectExtensions>
