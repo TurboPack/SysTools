@@ -1270,7 +1270,7 @@ function TStString.GetRelativePos(Pos : Cardinal) : Cardinal;
 {- Return position relative to FString. }
 begin
   if FEnableCursor then
-    Result := Pos + FCursor - FString
+    Result := Pos + Cardinal(FCursor - FString)
   else
     Result := Pos;
 end;
@@ -1389,7 +1389,7 @@ procedure TStString.TempToString;
 {- Internal method -- copys temp to string. }
 begin
   FAlloc := FTempAlloc;
-  FCursor := (FCursor - FString) + FTemp;
+  FCursor := FTemp + (FCursor - FString);
   StrDispose(FString);
   FString := FTemp;
   FTemp := nil;
