@@ -74,18 +74,15 @@ type
   public
     function GetAttributes: TPropertyAttributes;  override;
     procedure Edit;override;
-
- {$IFnDEF FPC}
-  {$R *.dfm}
-{$ELSE}
-  {$R *.lfm}
-{$ENDIF}
   end;
 
 implementation
 
-{$R *.DFM}
-
+{$IFNDEF FPC}
+  {$R *.dfm}
+{$ELSE}
+  {$R *.lfm}
+{$ENDIF}
 
 {*** TEsVersionProperty ***}
 
