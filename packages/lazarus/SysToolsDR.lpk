@@ -1,0 +1,361 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CONFIG>
+  <Package Version="4">
+    <PathDelim Value="\"/>
+    <Name Value="SysToolsDR"/>
+    <Type Value="RunAndDesignTime"/>
+    <CompilerOptions>
+      <Version Value="11"/>
+      <PathDelim Value="\"/>
+      <SearchPaths>
+        <OtherUnitFiles Value="..\..\source;..\..\source\win"/>
+        <UnitOutputDirectory Value="lib\$(TargetCPU)-$(TargetOS)"/>
+      </SearchPaths>
+      <Parsing>
+        <SyntaxOptions>
+          <SyntaxMode Value="Delphi"/>
+        </SyntaxOptions>
+      </Parsing>
+    </CompilerOptions>
+    <Files Count="80">
+      <Item1>
+        <Filename Value="..\..\source\St2DBarC.pas"/>
+        <UnitName Value="St2DBarC"/>
+      </Item1>
+      <Item2>
+        <Filename Value="..\..\source\StAstro.pas"/>
+        <UnitName Value="StAstro"/>
+      </Item2>
+      <Item3>
+        <Filename Value="..\..\source\StAstroP.pas"/>
+        <UnitName Value="StAstroP"/>
+      </Item3>
+      <Item4>
+        <Filename Value="..\..\source\StBarC.pas"/>
+        <UnitName Value="StBarC"/>
+      </Item4>
+      <Item5>
+        <Filename Value="..\..\source\StBarPN.pas"/>
+        <UnitName Value="StBarPN"/>
+      </Item5>
+      <Item6>
+        <Filename Value="..\..\source\StBase.pas"/>
+        <UnitName Value="StBase"/>
+      </Item6>
+      <Item7>
+        <Filename Value="..\..\source\StBCD.pas"/>
+        <UnitName Value="StBCD"/>
+      </Item7>
+      <Item8>
+        <Filename Value="..\..\source\StBits.pas"/>
+        <UnitName Value="StBits"/>
+      </Item8>
+      <Item9>
+        <Filename Value="..\..\source\StColl.pas"/>
+        <UnitName Value="StColl"/>
+      </Item9>
+      <Item10>
+        <Filename Value="..\..\source\StConst.pas"/>
+        <UnitName Value="StConst"/>
+      </Item10>
+      <Item11>
+        <Filename Value="..\..\source\StCRC.pas"/>
+        <UnitName Value="StCRC"/>
+      </Item11>
+      <Item12>
+        <Filename Value="..\..\source\StDate.pas"/>
+        <UnitName Value="StDate"/>
+      </Item12>
+      <Item13>
+        <Filename Value="..\..\source\StDateSt.pas"/>
+        <UnitName Value="StDateSt"/>
+      </Item13>
+      <Item14>
+        <Filename Value="..\..\source\StDecMth.pas"/>
+        <UnitName Value="StDecMth"/>
+      </Item14>
+      <Item15>
+        <Filename Value="..\..\source\StDict.pas"/>
+        <UnitName Value="StDict"/>
+      </Item15>
+      <Item16>
+        <Filename Value="..\..\source\StDque.pas"/>
+        <UnitName Value="StDQue"/>
+      </Item16>
+      <Item17>
+        <Filename Value="..\..\source\StEclpse.pas"/>
+        <UnitName Value="StEclpse"/>
+      </Item17>
+      <Item18>
+        <Filename Value="..\..\source\StExpLog.pas"/>
+        <UnitName Value="StExpLog"/>
+      </Item18>
+      <Item19>
+        <Filename Value="..\..\source\StExpr.pas"/>
+        <UnitName Value="StExpr"/>
+      </Item19>
+      <Item20>
+        <Filename Value="..\..\source\StFin.pas"/>
+        <UnitName Value="StFIN"/>
+      </Item20>
+      <Item21>
+        <Filename Value="..\..\source\StFirst.pas"/>
+        <UnitName Value="StFirst"/>
+      </Item21>
+      <Item22>
+        <Filename Value="..\..\source\StGenLog.pas"/>
+        <UnitName Value="StGenLog"/>
+      </Item22>
+      <Item23>
+        <Filename Value="..\..\source\StHASH.pas"/>
+        <UnitName Value="StHASH"/>
+      </Item23>
+      <Item24>
+        <Filename Value="..\..\source\StIniStm.pas"/>
+        <UnitName Value="StIniStm"/>
+      </Item24>
+      <Item25>
+        <Filename Value="..\..\source\StJup.pas"/>
+        <UnitName Value="StJup"/>
+      </Item25>
+      <Item26>
+        <Filename Value="..\..\source\StJupSat.pas"/>
+        <UnitName Value="StJupsat"/>
+      </Item26>
+      <Item27>
+        <Filename Value="..\..\source\StLArr.pas"/>
+        <UnitName Value="StLArr"/>
+      </Item27>
+      <Item28>
+        <Filename Value="..\..\source\StList.pas"/>
+        <UnitName Value="StList"/>
+      </Item28>
+      <Item29>
+        <Filename Value="..\..\source\StMars.pas"/>
+        <UnitName Value="StMars"/>
+      </Item29>
+      <Item30>
+        <Filename Value="..\..\source\StMath.pas"/>
+        <UnitName Value="StMath"/>
+      </Item30>
+      <Item31>
+        <Filename Value="..\..\source\StMerc.pas"/>
+        <UnitName Value="StMerc"/>
+      </Item31>
+      <Item32>
+        <Filename Value="..\..\source\StMerge.pas"/>
+        <UnitName Value="StMerge"/>
+      </Item32>
+      <Item33>
+        <Filename Value="..\..\source\StMime.pas"/>
+        <UnitName Value="StMime"/>
+      </Item33>
+      <Item34>
+        <Filename Value="..\..\source\StMoney.pas"/>
+        <UnitName Value="StMoney"/>
+      </Item34>
+      <Item35>
+        <Filename Value="..\..\source\StNeptun.pas"/>
+        <UnitName Value="StNeptun"/>
+      </Item35>
+      <Item36>
+        <Filename Value="..\..\source\StNet.pas"/>
+        <UnitName Value="StNet"/>
+      </Item36>
+      <Item37>
+        <Filename Value="..\..\source\StNetApi.pas"/>
+        <UnitName Value="StNetAPI"/>
+      </Item37>
+      <Item38>
+        <Filename Value="..\..\source\StNetCon.pas"/>
+        <UnitName Value="StNetCon"/>
+      </Item38>
+      <Item39>
+        <Filename Value="..\..\source\StNetMsg.pas"/>
+        <UnitName Value="StNetMsg"/>
+      </Item39>
+      <Item40>
+        <Filename Value="..\..\source\StNetPfm.pas"/>
+        <UnitName Value="StNetPfm"/>
+      </Item40>
+      <Item41>
+        <Filename Value="..\..\source\StNTLog.pas"/>
+        <UnitName Value="StNTLog"/>
+      </Item41>
+      <Item42>
+        <Filename Value="..\..\source\StNVBits.pas"/>
+        <UnitName Value="StNVBits"/>
+      </Item42>
+      <Item43>
+        <Filename Value="..\..\source\StNVColl.pas"/>
+        <UnitName Value="StNVColl"/>
+      </Item43>
+      <Item44>
+        <Filename Value="..\..\source\StNVCont.pas"/>
+        <UnitName Value="StNVCont"/>
+      </Item44>
+      <Item45>
+        <Filename Value="..\..\source\StNVDict.pas"/>
+        <UnitName Value="StNVDict"/>
+      </Item45>
+      <Item46>
+        <Filename Value="..\..\source\StNVDQ.pas"/>
+        <UnitName Value="StNVDQ"/>
+      </Item46>
+      <Item47>
+        <Filename Value="..\..\source\StNVLAry.pas"/>
+        <UnitName Value="StNVLAry"/>
+      </Item47>
+      <Item48>
+        <Filename Value="..\..\source\StNVList.pas"/>
+        <UnitName Value="StNVList"/>
+      </Item48>
+      <Item49>
+        <Filename Value="..\..\source\StNVLMat.pas"/>
+        <UnitName Value="StNVLMat"/>
+      </Item49>
+      <Item50>
+        <Filename Value="..\..\source\StNVSCol.pas"/>
+        <UnitName Value="StNVSCol"/>
+      </Item50>
+      <Item51>
+        <Filename Value="..\..\source\StNVTree.pas"/>
+        <UnitName Value="StNVTree"/>
+      </Item51>
+      <Item52>
+        <Filename Value="..\..\source\StOStr.pas"/>
+        <UnitName Value="StOStr"/>
+      </Item52>
+      <Item53>
+        <Filename Value="..\..\source\StPluto.pas"/>
+        <UnitName Value="StPluto"/>
+      </Item53>
+      <Item54>
+        <Filename Value="..\..\source\StPQueue.pas"/>
+        <UnitName Value="StPQueue"/>
+      </Item54>
+      <Item55>
+        <Filename Value="..\..\source\StPtrns.pas"/>
+        <UnitName Value="StPtrns"/>
+      </Item55>
+      <Item56>
+        <Filename Value="..\..\source\StRandom.pas"/>
+        <UnitName Value="StRandom"/>
+      </Item56>
+      <Item57>
+        <Filename Value="..\..\source\StRegEx.pas"/>
+        <UnitName Value="StRegEx"/>
+      </Item57>
+      <Item58>
+        <Filename Value="..\..\source\StRegIni.pas"/>
+        <UnitName Value="StRegIni"/>
+      </Item58>
+      <Item59>
+        <Filename Value="..\..\source\StSaturn.pas"/>
+        <UnitName Value="StSaturn"/>
+      </Item59>
+      <Item60>
+        <Filename Value="..\..\source\StSort.pas"/>
+        <UnitName Value="StSort"/>
+      </Item60>
+      <Item61>
+        <Filename Value="..\..\source\StSpawn.pas"/>
+        <UnitName Value="StSpawn"/>
+      </Item61>
+      <Item62>
+        <Filename Value="..\..\source\StStat.pas"/>
+        <UnitName Value="StStat"/>
+      </Item62>
+      <Item63>
+        <Filename Value="..\..\source\StStrL.pas"/>
+        <UnitName Value="StStrL"/>
+      </Item63>
+      <Item64>
+        <Filename Value="..\..\source\StStrms.pas"/>
+        <UnitName Value="StStrms"/>
+      </Item64>
+      <Item65>
+        <Filename Value="..\..\source\StSystem.pas"/>
+        <UnitName Value="StSystem"/>
+      </Item65>
+      <Item66>
+        <Filename Value="..\..\source\StText.pas"/>
+        <UnitName Value="StText"/>
+      </Item66>
+      <Item67>
+        <Filename Value="..\..\source\StToHTML.pas"/>
+        <UnitName Value="StToHTML"/>
+      </Item67>
+      <Item68>
+        <Filename Value="..\..\source\StTree.pas"/>
+        <UnitName Value="StTree"/>
+      </Item68>
+      <Item69>
+        <Filename Value="..\..\source\StTxtDat.pas"/>
+        <UnitName Value="StTxtDat"/>
+      </Item69>
+      <Item70>
+        <Filename Value="..\..\source\StUranus.pas"/>
+        <UnitName Value="StUranus"/>
+      </Item70>
+      <Item71>
+        <Filename Value="..\..\source\StUtils.pas"/>
+        <UnitName Value="StUtils"/>
+      </Item71>
+      <Item72>
+        <Filename Value="..\..\source\StVArr.pas"/>
+        <UnitName Value="StVArr"/>
+      </Item72>
+      <Item73>
+        <Filename Value="..\..\source\StVenus.pas"/>
+        <UnitName Value="StVenus"/>
+      </Item73>
+      <Item74>
+        <Filename Value="..\..\source\StVInfo.pas"/>
+        <UnitName Value="StVInfo"/>
+      </Item74>
+      <Item75>
+        <Filename Value="..\..\source\StwmDCpy.pas"/>
+        <UnitName Value="StWmDCpy"/>
+      </Item75>
+      <Item76>
+        <Filename Value="win\graphics_delphi.pp"/>
+        <UnitName Value="graphics_delphi"/>
+      </Item76>
+      <Item77>
+        <Filename Value="system.hash.pp"/>
+        <UnitName Value="System.Hash"/>
+      </Item77>
+      <Item78>
+        <Filename Value="ansistrings.pp"/>
+        <UnitName Value="AnsiStrings"/>
+      </Item78>
+      <Item79>
+        <Filename Value="delphi.windows.pas"/>
+        <UnitName Value="Delphi.Windows"/>
+      </Item79>
+      <Item80>
+        <Filename Value="delphi.character.pp"/>
+        <UnitName Value="Delphi.Character"/>
+      </Item80>
+    </Files>
+    <RequiredPkgs Count="2">
+      <Item1>
+        <PackageName Value="mymetafilepkg"/>
+      </Item1>
+      <Item2>
+        <PackageName Value="LCL"/>
+      </Item2>
+    </RequiredPkgs>
+    <UsageOptions>
+      <UnitPath Value="$(PkgOutDir)"/>
+    </UsageOptions>
+    <PublishOptions>
+      <Version Value="2"/>
+      <UseFileFilters Value="True"/>
+    </PublishOptions>
+    <CustomOptions Items="ExternHelp" Version="2">
+      <_ExternHelp Items="Count"/>
+    </CustomOptions>
+  </Package>
+</CONFIG>

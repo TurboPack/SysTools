@@ -30,6 +30,9 @@
 {*********************************************************}
 
 {$I StDefine.inc}
+{$IFDEF FPC}
+  {$MODE Delphi}
+{$ENDIF}
 
 unit StPropEd;
 
@@ -37,8 +40,13 @@ interface
 
 uses
   Dialogs,
+{$IFnDEF FPC}
   DesignIntf,
   DesignEditors,
+{$ELSE}
+  PropEdits,
+  Delphi.PropEd,
+{$ENDIF}
   Forms,
   Controls;
 

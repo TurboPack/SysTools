@@ -1,5 +1,7 @@
 # TurboPack SysTools
 
+Provided FPC3.2.0 port, and Lazarus 2.0.10 package
+
 Updated for **10.3 Rio** / VER330 / PKG 260
 
 You can still access [10.2 Tokyo]() and [10.1 Berlin]() versions too.
@@ -43,6 +45,10 @@ TurboPack SysTools package names have the following form:
 * SysToolsCD.bpl   (C++Builder Designtime)
 * SysToolsDBCR.bpl (C++Builder data aware Runtime)
 * SysToolsDBCD.bpl (C++Builder data aware Designtime)
+
+### Lazarus
+* SysToolsDR.lpk   (Runtime)
+* SysToolsDD.lpk   (Designtime)
 
 ------
 

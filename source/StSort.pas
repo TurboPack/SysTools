@@ -168,7 +168,7 @@ type
     procedure sorGetMergeElementPtr(M : Integer);
     function  sorGetNextElementIndex : Integer;
     procedure sorMergeFileGroup;
-    procedure sorMoveElement(Src, Dest : Pointer);
+    procedure sorMoveElement(Src, Dest : Pointer);inline;
     procedure sorOpenMergeFiles;
     procedure sorPrimaryMerge;
     procedure sorRunSort(L, R : Integer);
@@ -239,6 +239,9 @@ procedure ArraySort(var A; RecLen, NumRecs : Cardinal;
 {======================================================================}
 
 implementation
+{$IFDEF FPC}
+  uses Delphi.Windows;
+{$ENDIF}
 
 const
   ecOutOfMemory = 8;
@@ -715,7 +718,7 @@ begin
   FileClose(sorOutFile);
 end;
 
-procedure TStSorter.sorMoveElement(Src, Dest : Pointer); assembler;
+procedure TStSorter.sorMoveElement(Src, Dest : Pointer); {$ifndef FPC} assembler; {$endif}
   {-Copy one record to another location, non-overlapping}
 begin
   Move(Src^, Dest^, FRecLen);

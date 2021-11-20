@@ -40,7 +40,11 @@ unit StNetCon;
 interface
 
 uses
-  Windows, Classes, StBase;
+  Windows, Classes, StBase
+{$IFDEF FPC}
+  , Delphi.Windows
+{$ENDIF}
+  ;
 
 type
   TStNetConnectOptions    = (coUseConnectDialog, coPersistentConnection,

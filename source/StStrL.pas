@@ -35,6 +35,10 @@
 
 unit StStrL;
 
+{$IFDEF FPC}
+  {$MODE Delphi}
+{$ENDIF}
+
 interface
 
 uses
@@ -331,7 +335,7 @@ function DeleteWithinL(const S, Delimiter : String) : String;
 function ExtractTokensL(const S, Delims: String;
                         QuoteChar  : Char;
                         AllowNulls : Boolean;
-                        Tokens     : TStrings) : Cardinal;
+                        Tokens     : TStrings) : Cardinal; overload;
 
 function IsChAlphaL(C : Char) : Boolean;
  {-Returns true if Ch is an alpha}
@@ -400,7 +404,11 @@ function MakeLetterSetL(const S : string) : Integer;
 implementation
 
 uses
-  Character;
+  Character
+{$ifdef FPC}
+  , Delphi.Character
+{$endif}
+  ;
 
   {-------- Numeric conversion -----------}
 

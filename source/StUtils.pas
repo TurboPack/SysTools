@@ -33,6 +33,11 @@
 
 {$I StDefine.inc}
 
+{$IFDEF FPC}
+  {$MODE Delphi}
+  {$ASMMODE intel}
+{$ENDIF}
+
 unit StUtils;
 
 interface

@@ -90,7 +90,11 @@ type
 implementation
 
 uses
-  SysUtils;
+  SysUtils
+  {$IFDEF FPC}
+    , Delphi.Windows
+  {$ENDIF}
+  ;
 
 procedure TStNetPerformance.QueryPerformance;
 var

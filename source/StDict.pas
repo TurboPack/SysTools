@@ -33,6 +33,10 @@
 
 {$I StDefine.inc}
 
+{$IFDEF FPC}
+  {$MODE Delphi}
+{$ENDIF}
+
 {Notes:
   Nodes stored in the dictionary must be of type TStDictNode.
 
@@ -191,7 +195,8 @@ function ELFHashStr(const S : string; Size : Integer) : Integer;
 implementation
 
 uses
-  System.Hash, Generics.Defaults;
+  System.Hash,
+  Generics.Defaults;
 
 {$IFDEF ThreadSafe}
 var

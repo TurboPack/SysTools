@@ -13,3 +13,7 @@ __history
 *.exe
 *.otares
 *.stat
+**/backup
+**/*Backup
+*.ppu
+*.txaPackage
