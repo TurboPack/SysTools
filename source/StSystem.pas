@@ -298,6 +298,9 @@ function GetLongPathName(lpszShortPath: PChar; lpszLongPath: PChar;
 *)
 
 implementation
+{$IFDEF FPC}
+uses Delphi.Windows;
+{$ENDIF}
 
 const
   FILE_ANY_ACCESS = 0;

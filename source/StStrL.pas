@@ -35,6 +35,10 @@
 
 unit StStrL;
 
+{$IFDEF FPC}
+  {$MODE Delphi}
+{$ENDIF}
+
 interface
 
 uses
@@ -400,7 +404,11 @@ function MakeLetterSetL(const S : string) : Integer;
 implementation
 
 uses
-  Character;
+  Character
+{$ifdef FPC}
+  , Delphi.Character
+{$endif}
+  ;
 
   {-------- Numeric conversion -----------}
 

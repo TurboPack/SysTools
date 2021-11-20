@@ -30,6 +30,9 @@
 {*********************************************************}
 
 {$I StDefine.inc}
+{$IFDEF FPC}
+  {$MODE Delphi}
+{$ENDIF}
 
 {$R StReg.r32}
 
@@ -39,8 +42,12 @@ interface
 
 uses
   Classes,
+{$IFnDEF FPC}
   DesignIntf,
   DesignEditors;
+{$ELSE}
+  PropEdits;
+{$ENDIF}
 
 procedure Register;
 

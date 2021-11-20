@@ -180,7 +180,11 @@ procedure ResetInternationalInfo;
 implementation
 
 uses
-  Character;
+  Character
+{$ifdef FPC}
+  , Delphi.Character
+{$endif}
+  ;
 
 const
   First2Months = 59;           {1600 was a leap year}

@@ -40,7 +40,11 @@ interface
 uses
   Windows,
   Graphics, Classes, SysUtils,
-  STStrL, StDate, STConst, STBase;
+  STStrL, StDate, STConst, STBase
+  {$IFDEF FPC}
+    , Delphi.Windows
+  {$ENDIF}
+  ;
 
 type
 {.Z+}

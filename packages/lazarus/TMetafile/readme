@@ -1,0 +1,30 @@
+TMetafile/TMetafile Canvas
+--------------------------
+
+TMetafile / TMetafileCanvas is a implementation of the Windows EnhMetafile API. 
+It is supposed to be Delphi Compatible.
+
+This components implement TMetafile/TMetafileCanvas using 
+Enhanced Metafiles (support for WMF was droped).
+
+The download contains the component, an installation package 
+and a demo application, that illustrates the features of the component. 
+
+BUGS
+----
+* Function Saveto* LoadFrom* are not implemented yet 
+* This only works on windows (uses windows API)
+
+CONTACT
+-------
+If you have any sugestions on how to make this multiplaform / patches please 
+let me know.
+
+ChangeLog
+---------
+v1.1 - 5/2/2007 - Bugfix
+v1.0 - 31/1/2007 - Initial Release 
+
+
+Luís Rodrigues
+lr@neei.uevora.pt

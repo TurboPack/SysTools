@@ -32,6 +32,7 @@
 {*********************************************************}
 
 {$I StDefine.inc}
+{$TYPEDADDRESS ON}
 
 unit StSpawn;
 
@@ -148,6 +149,9 @@ type
   end;
 
 implementation
+{$IFDEF FPC}
+  uses Delphi.Windows ;
+{$ENDIF}
 
 {-----------------------------------------------------------------------------}
 {                               WIN32  WAIT THREAD                            }

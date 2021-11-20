@@ -35,6 +35,11 @@
 
 unit StBase;
 
+{$IFDEF FPC}
+  {$MODE Delphi}
+  {$ASMMODE intel}
+{$ENDIF}
+
 interface
 
 uses
@@ -439,7 +444,11 @@ procedure RaiseStWin32ErrorEx(ExceptionClass : EStExceptionClass; Code : Integer
 implementation
 
 uses
-  Math, Character;
+  Math, Character
+{$ifdef FPC}
+  , Delphi.Character
+{$endif}
+  ;
 
 procedure RaiseStError(ExceptionClass : EStExceptionClass; Code : Integer);
 var
@@ -537,6 +546,7 @@ asm
 @1:
   mov eax,ecx
 end;
+
 
 {---primitives for converting strings to integers---}
 procedure ValLongInt(S : string; var LI : Integer; var ErrorCode : integer);

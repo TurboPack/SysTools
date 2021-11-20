@@ -133,6 +133,9 @@ type
   end;
 
 implementation
+{$IFDEF FPC}
+  uses Delphi.Windows;
+{$ENDIF}
 
 const
   { Defines for the READ flags for Eventlogging }

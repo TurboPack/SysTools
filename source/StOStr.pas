@@ -33,6 +33,9 @@
 {*********************************************************}
 
 {$I StDefine.inc}
+{$IFDEF FPC}
+  {$MODE Delphi}
+{$ENDIF}
 
 unit StOStr;
 

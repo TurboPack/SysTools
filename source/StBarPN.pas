@@ -135,6 +135,11 @@ type
 
 
 implementation
+{$IFDEF FPC}
+  uses mymetafile
+  , graphics_delphi
+  ;
+{$ENDIF}
 
 {*** TStPNBarCode ***}
 

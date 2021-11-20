@@ -269,6 +269,11 @@ type
 
 
 implementation
+{$IFDEF FPC}
+  uses mymetafile
+  , graphics_delphi
+  ;
+{$ENDIF}
 
 const
   {left and right codes for UPC_A}

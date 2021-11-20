@@ -33,12 +33,20 @@
 
 unit StAbout0;
 
+{$IFDEF FPC}
+  {$MODE Delphi}
+{$ENDIF}
+
 interface
 
 uses
   Windows,
+{$IFnDEF FPC}
   DesignIntf,
   DesignEditors,
+{$ELSE}
+  PropEdits,
+{$ENDIF}
   Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
   StdCtrls, ExtCtrls, StConst;
 
@@ -64,10 +72,14 @@ type
 
   TStVersionProperty = class(TStringProperty)
   public
-    function GetAttributes: TPropertyAttributes;
-      override;
-    procedure Edit;
-      override;
+    function GetAttributes: TPropertyAttributes;  override;
+    procedure Edit;override;
+
+ {$IFnDEF FPC}
+  {$R *.dfm}
+{$ELSE}
+  {$R *.lfm}
+{$ENDIF}
   end;
 
 implementation

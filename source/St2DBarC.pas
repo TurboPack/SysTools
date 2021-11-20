@@ -35,10 +35,18 @@
 
 unit St2DBarC;
 
+{$IFDEF FPC}
+  {$MODE Delphi}
+{$ENDIF}
+
 interface
 
 uses
+{$IFnDEF FPC}
   Windows,
+{$ELSE}
+  LCLIntf, LCLType, LMessages,
+{$ENDIF}
   Messages,
   SysUtils,
   Classes,
@@ -457,7 +465,14 @@ type
 implementation
 
 uses
-  System.Types, System.UITypes;
+{$IFDEF FPC}
+  Types
+  , mymetafile
+  , graphics_delphi
+{$ELSE}
+  System.Types
+{$ENDIF}
+, System.UITypes;
 
   { PDF417 types and constants }
 
@@ -1479,6 +1494,7 @@ begin
           FreeMem (Info, InfoSize);
         end;
       end;
+
     finally
       RenderBmp.Free;
     end;
@@ -1537,7 +1553,7 @@ begin
   end;
 end;
 
-procedure TStCustom2DBarcode.SetBackgroundColor (const v : TColor);
+procedure TStCustom2DBarcode.SetBackgroundColor (const v : Graphics.TColor);
 var
   OldBackgroundColor : TColor;
 
