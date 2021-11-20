@@ -339,16 +339,13 @@
         <UnitName Value="Delphi.Character"/>
       </Item80>
     </Files>
-    <RequiredPkgs Count="3">
+    <RequiredPkgs Count="2">
       <Item1>
-        <PackageName Value="HashLib4PascalPackage"/>
+        <PackageName Value="mymetafilepkg"/>
       </Item1>
       <Item2>
-        <PackageName Value="mymetafilepkg"/>
-      </Item2>
-      <Item3>
         <PackageName Value="LCL"/>
-      </Item3>
+      </Item2>
     </RequiredPkgs>
     <UsageOptions>
       <UnitPath Value="$(PkgOutDir)"/>
