@@ -6593,14 +6593,14 @@ begin
 
       A := nil;
       D := nil;
-      Result := _LookupAccountName(PChar(SystemName), Sid, nil, ALen, nil,
+      Result := _LookupAccountSid(PChar(SystemName), Sid, nil, ALen, nil,
                                     DLen, peUse);
       ErrorD := GetLastError;
       if ErrorD = ERROR_INSUFFICIENT_BUFFER then begin
         StNetApiBufferAllocate(ALen, A);
         StNetApiBufferAllocate(DLen, D);
         try
-          Result := _LookupAccountName(PChar(SystemName), Sid, A, ALen, D,
+          Result := _LookupAccountSid(PChar(SystemName), Sid, A, ALen, D,
                                         DLen, peUse);
           if Result then begin
             AccountName := StrPas(PChar(A));
