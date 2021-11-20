@@ -78,11 +78,11 @@ type
 
 implementation
 
-{$IFNDEF FPC}
+//{$IFnDEF FPC}
   {$R *.dfm}
-{$ELSE}
-  {$R *.lfm}
-{$ENDIF}
+//{$ELSE}
+//  {$R *.lfm}
+//{$ENDIF}
 
 {*** TEsVersionProperty ***}
 
