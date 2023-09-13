@@ -123,6 +123,12 @@
         <VerInfo_Locale>1033</VerInfo_Locale>
     </PropertyGroup>
     <ItemGroup>
+        <PackageImport Include="vclimg.bpi">
+            <BuildOrder>12</BuildOrder>
+        </PackageImport>
+        <PackageImport Include="vclwinx.bpi">
+            <BuildOrder>11</BuildOrder>
+        </PackageImport>
         <PackageImport Include="dbrtl.bpi">
             <BuildOrder>9</BuildOrder>
         </PackageImport>
@@ -275,6 +281,12 @@
                 <DeployFile LocalName="..\..\..\..\..\Public\Documents\Embarcadero\Studio\15.0\BPL\SysToolsDBCR.bpl" Configuration="Debug" Class="ProjectOutput"/>
                 <DeployFile LocalName="C:\Users\Public\Documents\Embarcadero\Studio\15.0\BPL\SysToolsDBCR.bpl" Configuration="Debug" Class="ProjectOutput"/>
                 <DeployFile LocalName="C:\Users\Public\Documents\Embarcadero\Studio\20.0\BPL\SysToolsDBCR260.bpl" Configuration="Release" Class="ProjectOutput"/>
+                <DeployFile LocalName="C:\Users\Public\Documents\Embarcadero\Studio\22.0\Bpl\Win64\SysToolsDBCR280.bpl" Configuration="Release" Class="ProjectOutput">
+                    <Platform Name="Win64">
+                        <RemoteName>SysToolsDBCR.bpl</RemoteName>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
                 <DeployClass Name="AdditionalDebugSymbols">
                     <Platform Name="OSX32">
                         <Operation>1</Operation>
