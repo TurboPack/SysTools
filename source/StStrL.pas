@@ -130,6 +130,7 @@ function PadL(const S : String; Len : Cardinal) : String;
   {-Pad a string on the right with spaces.}
 
 function LeftPadChL(const S : String; C : Char; Len : Integer) : String;
+function LeftPadCh(const S : ShortString; C : Char; Len : Integer) : String;
   {-Pad a string on the left with a specified character.}
 
 function LeftPadL(const S : String; Len : Cardinal) : String;
@@ -682,6 +683,11 @@ begin
     Result := S
   else
     Result := StringOfChar(C, Len - Length(S)) + S;
+end;
+
+function LeftPadCh(const S : ShortString; C : Char; Len : Integer) : String;
+begin
+  Result := string(LeftPadChL(string(S), C, Len));
 end;
 
 function LeftPadL(const S : String; Len : Cardinal) : String;
