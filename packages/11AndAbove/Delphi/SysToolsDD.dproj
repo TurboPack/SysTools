@@ -8,7 +8,7 @@
         <Platform Condition="'$(Platform)'==''">Win32</Platform>
         <ProjectGuid>{C8F4B873-2F36-4888-9666-59140D15FC89}</ProjectGuid>
         <ProjectName Condition="'$(ProjectName)'==''">SysToolsDD</ProjectName>
-        <ProjectVersion>20.1</ProjectVersion>
+        <ProjectVersion>20.2</ProjectVersion>
         <TargetedPlatforms>1</TargetedPlatforms>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Config)'=='Base' or '$(Base)'!=''">

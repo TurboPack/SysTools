@@ -8,7 +8,7 @@
         <Platform Condition="'$(Platform)'==''">Win32</Platform>
         <ProjectGuid>{A7C2257E-A11C-4672-A884-DB43F939536C}</ProjectGuid>
         <ProjectName Condition="'$(ProjectName)'==''">SysToolsDR</ProjectName>
-        <ProjectVersion>20.1</ProjectVersion>
+        <ProjectVersion>20.2</ProjectVersion>
         <TargetedPlatforms>3</TargetedPlatforms>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Config)'=='Base' or '$(Base)'!=''">
@@ -232,6 +232,7 @@
                 <Platform value="Win64">True</Platform>
                 <Platform value="Win64x">False</Platform>
                 <Platform value="iOSDevice64">False</Platform>
+                <Platform value="iOSSimARM64">False</Platform>
             </Platforms>
             <UnitTesting>
                 <TestProjectName>C:\Projects\EMBT\SysTools\Tests\SysToolsTests.dproj</TestProjectName>
