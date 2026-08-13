@@ -42,7 +42,8 @@ uses
   System.Classes,
   System.SysUtils,
   System.UITypes,
-  System.Types;
+  System.Types,
+  Vcl.Controls;
 
 // STBase ------
 type
@@ -276,7 +277,7 @@ type
     function GetTextExtents(AText : String) : TPointF; virtual; abstract;
   end;
 
-  TStBarcode = class
+  TStBarcode = class(TGraphicControl)
   protected
   const
     bcMaxBarCodeLen = 255;
@@ -347,11 +348,11 @@ type
       TEanMode = (Standard, Complement);
   {$SCOPEDENUMS OFF}
     class function EANChecksum(const ADigits : TStDigitArray; ALen : Integer; AMode : TEanMode) : integer; static;
-  protected
-    procedure Invalidate;
   public
-    constructor Create(AText : String);
+    constructor Create(AOwner: TComponent); override;
     procedure AfterConstruction; override;
+
+    procedure Invalidate; override;
 
     function GetCheckCharacters(const S : string; var C, K : Integer) : TStCheckResult; overload;
     function GetCheckCharacters(AType : TStBarCodeType; const S : string; var C, K : Integer) : TStCheckResult; overload;
@@ -1544,10 +1545,10 @@ begin
     IncrementBarPosn(bcBarInfo[I], bcNormalWidth, bcSpaceWidth, bcSupplementWidth);
 end;
 
-constructor TStBarcode.Create(AText : String);
+constructor TStBarcode.Create(AOwner: TComponent);
 begin
-  inherited Create;
-  Code := AText;
+  inherited Create(AOwner);
+  Code := '';
 end;
 
 procedure TStBarcode.AfterConstruction;
